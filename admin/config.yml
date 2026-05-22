@@ -68,6 +68,31 @@ collections:
                 widget: text
                 hint: "Qué incluye el menú."
 
+              - name: primeros
+                label: Primeros (opciones)
+                widget: string
+                hint: "Ej: Gazpacho · Sopa de picadillo · Ensalada"
+
+              - name: platosDelDia
+                label: Platos del día (por día)
+                label_singular: Día
+                widget: list
+                fields:
+                  - name: dia
+                    label: Día
+                    widget: string
+                    hint: "Ej: Lunes"
+                  - name: plato
+                    label: Plato
+                    widget: string
+                    hint: "Ej: Cocido"
+
+              - name: temporada
+                label: Especiales de temporada (opcional)
+                widget: string
+                required: false
+                hint: "Ej: En verano: Arroz a la cubana. Viernes Santo: Potaje de vigilia."
+
           # ── HORARIOS ────────────────────────────────────────────
           - name: horarios
             label: Horarios

@@ -52,6 +52,21 @@
 
   function renderMenuDia(m, nav) {
     if (m.disponible !== 'SI') return '';
+
+    const primeros = m.primeros
+      ? `<p class="edict-primeros"><strong>Primeros:</strong> ${m.primeros}</p>`
+      : '';
+
+    const platos = (m.platosDelDia && m.platosDelDia.length)
+      ? `<ul class="edict-platos">${m.platosDelDia.map(p =>
+          `<li><strong>${p.dia}:</strong> ${p.plato}</li>`
+        ).join('')}</ul>`
+      : '';
+
+    const temporada = m.temporada
+      ? `<p class="edict-temporada">${m.temporada}</p>`
+      : '';
+
     return `<div class="wrap" style="margin-bottom:36px">
   <div class="edict">
     <div class="edict-head">
@@ -62,6 +77,9 @@
     </div>
     <div class="edict-body">
       <p class="edict-condiciones">${m.condiciones}</p>
+      ${primeros}
+      ${platos}
+      ${temporada}
     </div>
     <div class="edict-foot">${nav.edictFoot}</div>
   </div>
@@ -78,19 +96,15 @@
 
     const cats = Object.entries(groups).map(([cat, list], idx) => {
       const sep = idx > 0 ? '<hr class="divider" style="margin:40px 0;" />' : '';
-      const itemsHtml = list.map(item => {
-        const desc    = (item.descripcion || '').trim();
-        const pairing = (item.maridaje    || '').trim();
-        return `<article class="carta-item">
+      const itemsHtml = list.map(item => `<article class="carta-item">
   <div class="check-row">
     <span class="check-name">${item.nombre}</span>
     <span class="check-leader" aria-hidden="true"></span>
     <span class="check-price">${item.precio}</span>
-  </div>` +
-  (desc    ? `\n  <p class="item-desc">${albayzin(desc)}</p>`  : '') +
-  (pairing ? `\n  <p class="item-maridaje">${pairing}</p>`     : '') +
-`\n</article>`;
-      }).join('');
+  </div>
+  <p class="item-desc">${albayzin(item.descripcion)}</p>
+  <p class="item-maridaje">${item.maridaje}</p>
+</article>`).join('');
 
       return `${sep}<div>
   <div class="categoria-head"><h2>${cat}</h2></div>
