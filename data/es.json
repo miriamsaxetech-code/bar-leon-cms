@@ -1,0 +1,84 @@
+{
+  "inicio": {
+    "titular": "Tres generaciones sin cambiar de receta.",
+    "subtitulo": "Plaza Nueva · Granada",
+    "avisoEspecial": ""
+  },
+  "menuDia": {
+    "disponible": "SI",
+    "dias": "Lunes, Martes, Jueves y Viernes (Solo Mediodía)",
+    "precio": "12,50€",
+    "condiciones": "Incluye primer plato, segundo y postre de la casa. Bebida NO incluida."
+  },
+  "horarios": [
+    {
+      "dia": "Lunes",
+      "estado": "ABIERTO",
+      "detalle": "Almuerzos y cenas"
+    },
+    {
+      "dia": "Martes",
+      "estado": "CERRADO TARDE",
+      "detalle": "Cerrado por la tarde"
+    },
+    {
+      "dia": "Miércoles",
+      "estado": "CERRADO",
+      "detalle": "Cerrado por descanso"
+    },
+    {
+      "dia": "Jueves",
+      "estado": "ABIERTO",
+      "detalle": "Almuerzos y cenas"
+    },
+    {
+      "dia": "Viernes",
+      "estado": "ABIERTO",
+      "detalle": "Almuerzos y cenas"
+    },
+    {
+      "dia": "Sábado",
+      "estado": "ABIERTO",
+      "detalle": "Almuerzos y cenas"
+    },
+    {
+      "dia": "Domingo",
+      "estado": "ABIERTO",
+      "detalle": "Almuerzos y cenas"
+    }
+  ],
+  "carta": [
+    {
+      "categoria": "LOS PLATOS DE SIEMPRE",
+      "nombre": "Tortilla \"Sacromonte\"",
+      "descripcion": "Receta centenaria del barrio gitano de Granada. Tortilla tradicional con mollejas, sesos y piñones. Patrimonio gastronómico local.",
+      "maridaje": "🍷 Sugerencia: Copa de Fontedei Prado Negro (D.O. Granada) — 3,40€",
+      "precio": "11,00€",
+      "disponible": "SI"
+    },
+    {
+      "categoria": "LOS PLATOS DE SIEMPRE",
+      "nombre": "Carne de Monte (Ciervo en adobo)",
+      "descripcion": "Trozos de ciervo de la Sierra Morena macerados en ajo, pimentón y hierbas de monte. Cocinados a fuego lento.",
+      "maridaje": "🍷 Sugerencia: Copa de Muñana Rojo (D.O. Granada) — 3,60€",
+      "precio": "15,00€",
+      "disponible": "SI"
+    },
+    {
+      "categoria": "LOS PLATOS DE SIEMPRE",
+      "nombre": "Habas con Jamón Ibérico 50%",
+      "descripcion": "Habas tiernas salteadas en aceite de oliva local con dados de jamón ibérico al 50%.",
+      "maridaje": "🥂 Sugerencia: Copa de Fino o Manzanilla de Jerez — 2,90€",
+      "precio": "14,00€",
+      "disponible": "SI"
+    },
+    {
+      "categoria": "LOS PLATOS DE SIEMPRE",
+      "nombre": "Riñones al Jerez",
+      "descripcion": "Riñones de ternera salteados con ajo y reducidos lentamente en salsa de vino de Jerez seco.",
+      "maridaje": "🍺 Sugerencia: Cerveza Alhambra Reserva 1925 — 3,30€",
+      "precio": "14,00€",
+      "disponible": "SI"
+    }
+  ]
+}

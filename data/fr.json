@@ -1,0 +1,84 @@
+{
+  "inicio": {
+    "titular": "Trois générations. La même recette.",
+    "subtitulo": "Plaza Nueva · Grenade",
+    "avisoEspecial": ""
+  },
+  "menuDia": {
+    "disponible": "SI",
+    "dias": "Lundi, Mardi, Jeudi et Vendredi (Déjeuner uniquement)",
+    "precio": "12,50€",
+    "condiciones": "Comprend une entrée, un plat et le dessert de la maison. Boissons non comprises."
+  },
+  "horarios": [
+    {
+      "dia": "Lundi",
+      "estado": "ABIERTO",
+      "detalle": "Déjeuner et dîner"
+    },
+    {
+      "dia": "Mardi",
+      "estado": "CERRADO TARDE",
+      "detalle": "Fermé l'après-midi"
+    },
+    {
+      "dia": "Mercredi",
+      "estado": "CERRADO",
+      "detalle": "Fermé"
+    },
+    {
+      "dia": "Jeudi",
+      "estado": "ABIERTO",
+      "detalle": "Déjeuner et dîner"
+    },
+    {
+      "dia": "Vendredi",
+      "estado": "ABIERTO",
+      "detalle": "Déjeuner et dîner"
+    },
+    {
+      "dia": "Samedi",
+      "estado": "ABIERTO",
+      "detalle": "Déjeuner et dîner"
+    },
+    {
+      "dia": "Dimanche",
+      "estado": "ABIERTO",
+      "detalle": "Déjeuner et dîner"
+    }
+  ],
+  "carta": [
+    {
+      "categoria": "LES PLATS TRADITIONNELS",
+      "nombre": "Omelette Sacromonte",
+      "descripcion": "Recette centenaire du quartier gitan de Grenade. Omelette traditionnelle aux ris de veau, cervelle et pignons. Un patrimoine gastronomique local.",
+      "maridaje": "🍷 Suggestion : Fontedei Prado Negro (D.O. Granada) — 3,40€",
+      "precio": "11,00€",
+      "disponible": "SI"
+    },
+    {
+      "categoria": "LES PLATS TRADITIONNELS",
+      "nombre": "Chevreuil de la Sierra en Adobo",
+      "descripcion": "Morceaux de chevreuil sauvage de la Sierra Morena, marinés à l'ail, au pimentón et aux herbes de montagne, mijotés lentement.",
+      "maridaje": "🍷 Suggestion : Muñana Rojo (D.O. Granada) — 3,60€",
+      "precio": "15,00€",
+      "disponible": "SI"
+    },
+    {
+      "categoria": "LES PLATS TRADITIONNELS",
+      "nombre": "Fèves au Jambon Ibérique",
+      "descripcion": "Fèves tendres sautées à l'huile d'olive locale avec des dés de jambon ibérique affiné à 50%.",
+      "maridaje": "🥂 Suggestion : Fino ou Manzanilla de Jerez — 2,90€",
+      "precio": "14,00€",
+      "disponible": "SI"
+    },
+    {
+      "categoria": "LES PLATS TRADITIONNELS",
+      "nombre": "Rognons de Veau au Xérès",
+      "descripcion": "Rognons de veau sautés à l'ail et mijotés dans une sauce intense au vin de Xérès sec.",
+      "maridaje": "🍺 Suggestion : Alhambra Reserva 1925 — 3,30€",
+      "precio": "14,00€",
+      "disponible": "SI"
+    }
+  ]
+}

@@ -1,0 +1,622 @@
+*, *::before, *::after {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+:root {
+  --bg:     #F6F3EC;
+  --ink:    #1C1A17;
+  --accent: #7A1C1C;
+  --muted:  #5C5752;
+  --faint:  rgba(122, 28, 28, 0.16);
+}
+
+html, body {
+  overflow-x: hidden;
+}
+
+body {
+  background: var(--bg);
+  color: var(--ink);
+  font-family: 'Inter', system-ui, sans-serif;
+  font-size: 16px;
+  line-height: 1.55;
+}
+
+/* ─── MASTHEAD RULE ─── */
+.masthead-rule {
+  height: 2px;
+  background: var(--accent);
+  width: 100%;
+}
+
+/* ─── LOADER ─── */
+#loader {
+  position: fixed;
+  inset: 0;
+  background: var(--bg);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 9999;
+  font-family: 'Playfair Display', Georgia, serif;
+  font-size: 1.5rem;
+  font-weight: 700;
+  color: var(--ink);
+  letter-spacing: 0.04em;
+  transition: opacity 0.35s ease;
+}
+
+#loader.fade-out {
+  opacity: 0;
+  pointer-events: none;
+}
+
+/* ─── LAYOUT ─── */
+.wrap {
+  max-width: 860px;
+  margin: 0 auto;
+  padding: 0 28px;
+}
+
+hr.divider {
+  border: none;
+  border-top: 1px solid var(--accent);
+  margin: 52px 0;
+}
+
+/* ─── TYPOGRAPHY ─── */
+h2 {
+  font-family: 'Playfair Display', Georgia, serif;
+  font-weight: 700;
+  line-height: 1.1;
+  font-size: 0.95rem;
+  text-align: left;
+  text-transform: uppercase;
+  letter-spacing: 0.15em;
+}
+
+/* ─── CTA BUTTON — full viewport width ─── */
+.cta-btn {
+  display: block;
+  width: 100%;
+  background: var(--ink);
+  color: var(--bg);
+  text-align: center;
+  font-family: 'Inter', system-ui, sans-serif;
+  font-weight: 600;
+  font-size: 0.9rem;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  text-decoration: none;
+  padding: 16px 28px;
+  border: none;
+  border-radius: 0;
+  cursor: pointer;
+  transition: background 0.2s ease;
+}
+
+.cta-btn:hover,
+.cta-btn:focus-visible {
+  background: #38352f;
+  outline: none;
+}
+
+/* ═══════════════════════════════════════
+   HOMEPAGE
+═══════════════════════════════════════ */
+
+#homepage {
+  padding-top: 28px;
+  padding-bottom: 0;
+}
+
+/* ─── SITE NAME ─── */
+.site-name {
+  font-family: 'Playfair Display', Georgia, serif;
+  font-weight: 700;
+  line-height: 1.0;
+  font-size: clamp(3.6rem, 11vw, 6.5rem);
+  color: var(--ink);
+}
+
+.site-location {
+  font-size: 0.7rem;
+  text-transform: uppercase;
+  letter-spacing: 0.22em;
+  color: var(--muted);
+  margin-top: 7px;
+  line-height: 1;
+}
+
+/* ─── SITE NAV ─── */
+.site-nav {
+  margin-top: 18px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  flex-wrap: nowrap;
+  gap: 12px;
+}
+
+.nav-primary {
+  display: flex;
+  gap: 18px;
+  flex-shrink: 0;
+}
+
+.nav-primary a {
+  font-family: 'Inter', system-ui, sans-serif;
+  font-size: 0.76rem;
+  text-transform: uppercase;
+  letter-spacing: 0.14em;
+  text-decoration: none;
+  color: var(--ink);
+  line-height: 1;
+}
+
+.nav-primary a:hover {
+  color: var(--accent);
+}
+
+.lang-selector {
+  display: flex;
+  align-items: center;
+  gap: 5px;
+  flex-shrink: 0;
+}
+
+.lang-selector a,
+.lang-selector .lang-active {
+  font-family: 'Inter', system-ui, sans-serif;
+  font-size: 0.7rem;
+  text-transform: uppercase;
+  letter-spacing: 0.14em;
+  line-height: 1;
+  color: var(--muted);
+  text-decoration: none;
+}
+
+.lang-selector a {
+  text-decoration: underline;
+  text-underline-offset: 3px;
+}
+
+.lang-selector a:hover {
+  color: var(--accent);
+}
+
+.lang-selector .lang-active {
+  font-weight: 600;
+  color: var(--ink);
+}
+
+.lang-selector .sep {
+  color: rgba(28, 26, 23, 0.25);
+  font-size: 0.65rem;
+  line-height: 1;
+}
+
+/* ─── TAGLINE ─── */
+.site-tagline {
+  font-family: 'Playfair Display', Georgia, serif;
+  font-size: 1.05rem;
+  font-weight: 700;
+  font-style: italic;
+  line-height: 1.4;
+  color: var(--ink);
+  margin-top: 18px;
+  max-width: 500px;
+}
+
+/* ─── AVISO ─── */
+.aviso {
+  font-size: 0.88rem;
+  color: var(--accent);
+  font-style: italic;
+  margin-top: 12px;
+  line-height: 1.5;
+}
+
+/* ─── HERO IMAGE ─── */
+.hero-frame {
+  width: 100%;
+  margin-top: 22px;
+  border: 1px solid var(--ink);
+  overflow: hidden;
+  line-height: 0;
+}
+
+.hero-frame img {
+  display: block;
+  width: 100%;
+  height: auto;
+  object-fit: cover;
+  aspect-ratio: 16 / 9;
+}
+
+.hero-frame--placeholder {
+  aspect-ratio: 16 / 9;
+  background: #E6E1D6;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  line-height: 1;
+  font-family: 'Playfair Display', Georgia, serif;
+  font-size: 1.2rem;
+  font-weight: 700;
+  color: var(--muted);
+  letter-spacing: 0.04em;
+}
+
+/* ─── HOMEPAGE FOOTER ─── */
+.homepage-footer {
+  margin-top: 20px;
+  padding: 14px 0 24px;
+  border-top: 1px solid rgba(28, 26, 23, 0.14);
+}
+
+.homepage-footer-inner {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  flex-wrap: wrap;
+  gap: 8px;
+}
+
+.homepage-footer .address {
+  font-size: 0.7rem;
+  text-transform: uppercase;
+  letter-spacing: 0.12em;
+  color: var(--muted);
+  line-height: 1.8;
+}
+
+.homepage-footer .phone-link {
+  font-size: 0.7rem;
+  text-transform: uppercase;
+  letter-spacing: 0.12em;
+  color: var(--muted);
+  text-decoration: none;
+  padding-top: 2px;
+}
+
+.homepage-footer .phone-link:hover {
+  color: var(--accent);
+}
+
+/* ═══════════════════════════════════════
+   CARTA PAGE
+═══════════════════════════════════════ */
+
+/* ─── CARTA HEADER ─── */
+#carta-header {
+  padding: 10px 0;
+  border-bottom: 1px solid rgba(28, 26, 23, 0.18);
+}
+
+.carta-header-inner {
+  display: flex;
+  align-items: center;
+}
+
+.carta-header-left {
+  flex: 1;
+}
+
+.carta-header-center {
+  flex: 0;
+  white-space: nowrap;
+  padding: 0 12px;
+}
+
+.carta-header-right {
+  flex: 1;
+  display: flex;
+  justify-content: flex-end;
+}
+
+.carta-back {
+  font-family: 'Inter', system-ui, sans-serif;
+  font-size: 0.74rem;
+  letter-spacing: 0.08em;
+  color: var(--muted);
+  text-decoration: none;
+  text-transform: uppercase;
+}
+
+.carta-back:hover {
+  color: var(--accent);
+}
+
+.carta-bar-name {
+  font-family: 'Playfair Display', Georgia, serif;
+  font-weight: 700;
+  font-size: 1.05rem;
+  line-height: 1;
+  color: var(--ink);
+}
+
+.carta-lang-selector {
+  display: flex;
+  align-items: center;
+  gap: 5px;
+}
+
+.carta-lang-selector a,
+.carta-lang-selector .lang-active {
+  font-family: 'Inter', system-ui, sans-serif;
+  font-size: 0.68rem;
+  text-transform: uppercase;
+  letter-spacing: 0.14em;
+  line-height: 1;
+  color: var(--muted);
+  text-decoration: none;
+}
+
+.carta-lang-selector a {
+  text-decoration: underline;
+  text-underline-offset: 2px;
+}
+
+.carta-lang-selector a:hover {
+  color: var(--accent);
+}
+
+.carta-lang-selector .lang-active {
+  font-weight: 600;
+  color: var(--ink);
+}
+
+.carta-lang-selector .sep {
+  color: rgba(28, 26, 23, 0.25);
+  font-size: 0.6rem;
+}
+
+/* ─── CARTA BODY ─── */
+#carta-body {
+  padding-top: 36px;
+  padding-bottom: 0;
+}
+
+/* ─── MENÚ DEL DÍA — EDICT ─── */
+.edict {
+  border: 2px solid var(--accent);
+}
+
+.edict-head {
+  border-bottom: 1px solid var(--accent);
+  padding: 18px 24px 14px;
+  text-align: center;
+}
+
+.edict-head h2 {
+  text-align: center;
+  font-size: 0.68rem;
+  letter-spacing: 0.2em;
+  color: var(--muted);
+  margin-bottom: 10px;
+}
+
+.edict-title {
+  font-family: 'Playfair Display', Georgia, serif;
+  font-weight: 700;
+  font-size: 1.3rem;
+  line-height: 1.1;
+  margin-bottom: 10px;
+}
+
+.edict-price {
+  display: block;
+  font-family: 'Courier New', Courier, monospace;
+  font-size: 1.8rem;
+  font-weight: 700;
+  color: var(--accent);
+  margin-bottom: 6px;
+}
+
+.edict-dias {
+  font-size: 0.78rem;
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+  color: var(--muted);
+}
+
+.edict-body {
+  padding: 14px 24px 16px;
+}
+
+.edict-condiciones {
+  font-size: 0.85rem;
+  color: var(--ink);
+  line-height: 1.6;
+}
+
+.edict-foot {
+  border-top: 1px solid var(--faint);
+  padding: 8px 24px;
+  text-align: right;
+  font-size: 0.7rem;
+  text-transform: uppercase;
+  letter-spacing: 0.12em;
+  color: var(--muted);
+}
+
+/* ─── CARTA ITEMS ─── */
+.categoria-head {
+  padding-bottom: 10px;
+  border-bottom: 2px solid var(--ink);
+}
+
+.categoria-head h2 {
+  font-size: 0.82rem;
+  letter-spacing: 0.2em;
+  color: var(--ink);
+  line-height: 1;
+}
+
+.carta-item {
+  padding: 11px 0;
+  border-bottom: 1px solid rgba(28, 26, 23, 0.14);
+}
+
+.carta-item:last-child {
+  border-bottom: none;
+}
+
+.check-row {
+  display: flex;
+  align-items: baseline;
+  margin-bottom: 4px;
+}
+
+.check-name {
+  font-family: 'Playfair Display', Georgia, serif;
+  font-weight: 700;
+  font-size: 1rem;
+  line-height: 1.25;
+  white-space: nowrap;
+  flex-shrink: 0;
+  color: var(--ink);
+  margin-right: 3px;
+}
+
+.check-leader {
+  flex: 1;
+  overflow: hidden;
+  height: 1.25em;
+  white-space: nowrap;
+  color: rgba(28, 26, 23, 0.3);
+  font-size: 0.82rem;
+  padding: 0 3px;
+}
+
+.check-leader::after {
+  content: " . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . .";
+}
+
+.check-price {
+  font-family: 'Playfair Display', Georgia, serif;
+  font-size: 1rem;
+  font-weight: 700;
+  white-space: nowrap;
+  flex-shrink: 0;
+  color: var(--ink);
+  margin-left: 3px;
+}
+
+.item-desc {
+  font-size: 0.84rem;
+  color: var(--muted);
+  line-height: 1.5;
+  margin-bottom: 5px;
+}
+
+.item-maridaje {
+  font-style: italic;
+  font-size: 0.8rem;
+  color: var(--muted);
+  margin-top: 3px;
+  line-height: 1.5;
+}
+
+/* ─── HORARIOS ─── */
+.section-label {
+  font-size: 0.7rem;
+  text-transform: uppercase;
+  letter-spacing: 0.18em;
+  color: var(--muted);
+  margin-bottom: 10px;
+}
+
+.horarios-grid {
+  display: grid;
+  grid-template-columns: 148px 1fr;
+  border: 1px solid var(--accent);
+}
+
+.h-dia,
+.h-det {
+  padding: 8px 14px;
+  font-size: 0.84rem;
+  border-bottom: 1px solid var(--faint);
+}
+
+.h-dia {
+  font-weight: 600;
+  border-right: 1px solid var(--faint);
+}
+
+.horarios-grid > div:nth-last-child(-n+2) {
+  border-bottom: none;
+}
+
+.h-cerrado {
+  font-weight: 700;
+  text-transform: uppercase;
+  color: var(--accent);
+  letter-spacing: 0.05em;
+  font-size: 0.78rem;
+}
+
+/* ─── CARTA FOOTER ─── */
+.carta-footer {
+  padding-top: 52px;
+}
+
+.carta-footer-address {
+  font-size: 0.7rem;
+  text-transform: uppercase;
+  letter-spacing: 0.1em;
+  color: var(--muted);
+  line-height: 1.65;
+  text-align: center;
+  margin-bottom: 14px;
+}
+
+.carta-brand {
+  font-family: 'Playfair Display', Georgia, serif;
+  font-size: 0.82rem;
+  color: var(--muted);
+  text-align: center;
+  margin-top: 10px;
+  letter-spacing: 0.04em;
+  padding-bottom: 28px;
+}
+
+/* ─── RESPONSIVE ─── */
+@media (max-width: 540px) {
+  .wrap { padding: 0 20px; }
+  .site-name { line-height: 0.96; }
+
+  .edict-head,
+  .edict-body,
+  .edict-foot { padding-left: 18px; padding-right: 18px; }
+
+  .horarios-grid { grid-template-columns: 108px 1fr; }
+  .h-dia, .h-det { padding: 8px 12px; font-size: 0.8rem; }
+
+  .carta-header-center { padding: 0 8px; }
+  .carta-bar-name { font-size: 0.95rem; }
+}
+
+@media (max-width: 420px) {
+  .check-row {
+    align-items: flex-start;
+  }
+  .check-name {
+    white-space: normal;
+    word-break: break-word;
+    flex-shrink: 1;
+    min-width: 0;
+  }
+  .check-leader {
+    display: none;
+  }
+}
+
+@media (max-width: 380px) {
+  .nav-primary { gap: 12px; }
+  .nav-primary a { font-size: 0.7rem; }
+}

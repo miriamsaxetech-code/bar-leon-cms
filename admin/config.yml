@@ -11,9 +11,9 @@ collections:
     label: Bar León
     files:
 
-      - name: data
-        label: Carta, Menú y Horarios
-        file: data.json
+      - name: data_es
+        label: Carta, Menú y Horarios (Español)
+        file: data/es.json
         format: json
         fields:
 
@@ -23,14 +23,14 @@ collections:
             widget: object
             fields:
               - name: titular
-                label: Titular principal
+                label: Frase principal
                 widget: string
-                hint: "Frase de cabecera. Ej: Tres generaciones sin cambiar de receta."
+                hint: "Una línea. Ej: Tres generaciones sin cambiar de receta."
 
-              - name: bajada
-                label: Descripción
-                widget: text
-                hint: "Texto bajo el titular. Máx. 2–3 líneas."
+              - name: subtitulo
+                label: Subtítulo institucional
+                widget: string
+                hint: "No modificar salvo cambio de ubicación. Ej: Plaza Nueva · Granada"
 
               - name: avisoEspecial
                 label: Aviso especial (opcional)
@@ -87,9 +87,9 @@ collections:
                   - CERRADO TARDE
 
               - name: detalle
-                label: Detalle visible
+                label: Texto visible
                 widget: string
-                hint: "Texto que aparece junto al estado. Ej: Almuerzos y cenas"
+                hint: "Ej: Almuerzos y cenas"
 
           # ── CARTA ───────────────────────────────────────────────
           - name: carta
@@ -108,18 +108,14 @@ collections:
                   - label: "De Nuestra Bodega"
                     value: "DE NUESTRA BODEGA"
 
-              - name: nombreES
-                label: Nombre en español
+              - name: nombre
+                label: Nombre del plato
                 widget: string
 
-              - name: nombreEN
-                label: Nombre en inglés
-                widget: string
-
-              - name: descripcionEN
-                label: Descripción en inglés
+              - name: descripcion
+                label: Descripción
                 widget: text
-                hint: "Para turistas. 2–3 frases."
+                hint: "2–3 frases. Lo que hace especial al plato."
 
               - name: maridaje
                 label: Sugerencia de maridaje

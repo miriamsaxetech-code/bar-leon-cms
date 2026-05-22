@@ -1,0 +1,84 @@
+{
+  "inicio": {
+    "titular": "Three generations. Same recipe.",
+    "subtitulo": "Plaza Nueva · Granada",
+    "avisoEspecial": ""
+  },
+  "menuDia": {
+    "disponible": "SI",
+    "dias": "Monday, Tuesday, Thursday and Friday (Lunch only)",
+    "precio": "12,50€",
+    "condiciones": "Includes first course, main course and house dessert. Drinks not included."
+  },
+  "horarios": [
+    {
+      "dia": "Monday",
+      "estado": "ABIERTO",
+      "detalle": "Lunch and dinner"
+    },
+    {
+      "dia": "Tuesday",
+      "estado": "CERRADO TARDE",
+      "detalle": "Closed in the afternoon"
+    },
+    {
+      "dia": "Wednesday",
+      "estado": "CERRADO",
+      "detalle": "Closed"
+    },
+    {
+      "dia": "Thursday",
+      "estado": "ABIERTO",
+      "detalle": "Lunch and dinner"
+    },
+    {
+      "dia": "Friday",
+      "estado": "ABIERTO",
+      "detalle": "Lunch and dinner"
+    },
+    {
+      "dia": "Saturday",
+      "estado": "ABIERTO",
+      "detalle": "Lunch and dinner"
+    },
+    {
+      "dia": "Sunday",
+      "estado": "ABIERTO",
+      "detalle": "Lunch and dinner"
+    }
+  ],
+  "carta": [
+    {
+      "categoria": "THE CLASSICS",
+      "nombre": "Sacromonte Omelette",
+      "descripcion": "A century-old recipe from Granada's gypsy quarter. Traditional omelette with sweetbreads, brains and pine nuts. Authentic local heritage.",
+      "maridaje": "🍷 Suggested: Fontedei Prado Negro (D.O. Granada) — 3,40€",
+      "precio": "11,00€",
+      "disponible": "SI"
+    },
+    {
+      "categoria": "THE CLASSICS",
+      "nombre": "Wild Sierra Venison in Adobo",
+      "descripcion": "Chunks of wild venison from the Sierra Morena, marinated in garlic, pimentón and mountain herbs, slow-cooked until tender.",
+      "maridaje": "🍷 Suggested: Muñana Rojo (D.O. Granada) — 3,60€",
+      "precio": "15,00€",
+      "disponible": "SI"
+    },
+    {
+      "categoria": "THE CLASSICS",
+      "nombre": "Broad Beans with Iberian Ham",
+      "descripcion": "Tender baby broad beans sautéed in local olive oil with rich cubes of 50% Iberian cured ham.",
+      "maridaje": "🥂 Suggested: Fino or Manzanilla de Jerez — 2,90€",
+      "precio": "14,00€",
+      "disponible": "SI"
+    },
+    {
+      "categoria": "THE CLASSICS",
+      "nombre": "Veal Kidneys in Sherry Sauce",
+      "descripcion": "Sautéed veal kidneys pan-flashed with garlic and slow-reduced in an intense dry Sherry wine sauce.",
+      "maridaje": "🍺 Suggested: Alhambra Reserva 1925 — 3,30€",
+      "precio": "14,00€",
+      "disponible": "SI"
+    }
+  ]
+}
