@@ -1,0 +1,5 @@
+User-agent: *
+Allow: /
+
+# Admin panel must not appear in search results
+Disallow: /admin/
