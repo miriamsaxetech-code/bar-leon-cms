@@ -6,78 +6,586 @@
   },
   "menuDia": {
     "disponible": "SI",
-    "dias": "Lunes, Martes, Jueves y Viernes (Solo Mediodía)",
-    "precio": "12,50€",
-    "condiciones": "Incluye primer plato, segundo y postre de la casa. Bebida NO incluida."
+    "dias": "Lunes, Martes, Jueves y Viernes · 13:00–16:00",
+    "precio": "12,50 €",
+    "condiciones": "Incluye primer plato, pan y postre de la casa. IVA incluido. Bebida no incluida."
   },
   "horarios": [
-    {
-      "dia": "Lunes",
-      "estado": "ABIERTO",
-      "detalle": "Almuerzos y cenas"
-    },
-    {
-      "dia": "Martes",
-      "estado": "CERRADO TARDE",
-      "detalle": "Cerrado por la tarde"
-    },
-    {
-      "dia": "Miércoles",
-      "estado": "CERRADO",
-      "detalle": "Cerrado por descanso"
-    },
-    {
-      "dia": "Jueves",
-      "estado": "ABIERTO",
-      "detalle": "Almuerzos y cenas"
-    },
-    {
-      "dia": "Viernes",
-      "estado": "ABIERTO",
-      "detalle": "Almuerzos y cenas"
-    },
-    {
-      "dia": "Sábado",
-      "estado": "ABIERTO",
-      "detalle": "Almuerzos y cenas"
-    },
-    {
-      "dia": "Domingo",
-      "estado": "ABIERTO",
-      "detalle": "Almuerzos y cenas"
-    }
+    { "dia": "Lunes",     "estado": "ABIERTO",      "detalle": "13:00–16:00 / 20:00–23:00" },
+    { "dia": "Martes",    "estado": "CERRADO TARDE", "detalle": "13:00–16:00 (solo mediodía)" },
+    { "dia": "Miércoles", "estado": "CERRADO",       "detalle": "Cerrado" },
+    { "dia": "Jueves",    "estado": "ABIERTO",       "detalle": "13:00–16:00 / 20:00–23:00" },
+    { "dia": "Viernes",   "estado": "ABIERTO",       "detalle": "13:00–16:00 / 20:30–23:30" },
+    { "dia": "Sábado",    "estado": "ABIERTO",       "detalle": "13:00–16:00 / 20:00–23:30" },
+    { "dia": "Domingo",   "estado": "ABIERTO",       "detalle": "13:00–16:00 / 20:00–23:00" }
   ],
   "carta": [
     {
-      "categoria": "LOS PLATOS DE SIEMPRE",
-      "nombre": "Tortilla \"Sacromonte\"",
-      "descripcion": "Receta centenaria del barrio gitano de Granada. Tortilla tradicional con mollejas, sesos y piñones. Patrimonio gastronómico local.",
-      "maridaje": "🍷 Sugerencia: Copa de Fontedei Prado Negro (D.O. Granada) — 3,40€",
-      "precio": "11,00€",
+      "categoria": "SABORES DE ANDALUCÍA",
+      "nombre": "Tortilla del Sacromonte",
+      "descripcion": "Tradición granadina. Tortilla con sesos, criadillas y jamón. Receta de siempre.",
+      "maridaje": "🥂 Sugerencia: Manzanilla — 3,50 €",
+      "precio": "10,00 €",
       "disponible": "SI"
     },
     {
-      "categoria": "LOS PLATOS DE SIEMPRE",
-      "nombre": "Carne de Monte (Ciervo en adobo)",
-      "descripcion": "Trozos de ciervo de la Sierra Morena macerados en ajo, pimentón y hierbas de monte. Cocinados a fuego lento.",
-      "maridaje": "🍷 Sugerencia: Copa de Muñana Rojo (D.O. Granada) — 3,60€",
-      "precio": "15,00€",
+      "categoria": "SABORES DE ANDALUCÍA",
+      "nombre": "Habas con jamón ibérico y huevo frito",
+      "descripcion": "Habas tiernas con jamón ibérico al 50% y huevo frito.",
+      "maridaje": "🍷 Sugerencia: Delirio (D.O. Granada) — 17,00 €",
+      "precio": "13,00 €",
       "disponible": "SI"
     },
     {
-      "categoria": "LOS PLATOS DE SIEMPRE",
-      "nombre": "Habas con Jamón Ibérico 50%",
-      "descripcion": "Habas tiernas salteadas en aceite de oliva local con dados de jamón ibérico al 50%.",
-      "maridaje": "🥂 Sugerencia: Copa de Fino o Manzanilla de Jerez — 2,90€",
-      "precio": "14,00€",
+      "categoria": "SABORES DE ANDALUCÍA",
+      "nombre": "Carne de monte (ciervo en adobo)",
+      "descripcion": "Ciervo en adobo tradicional. Guiso de caza con vino, laurel y especias.",
+      "maridaje": "🍷 Sugerencia: Muñana Rojo (D.O. Granada) — 19,00 €",
+      "precio": "Media 10,50 € / Ración 13,50 €",
       "disponible": "SI"
     },
     {
-      "categoria": "LOS PLATOS DE SIEMPRE",
+      "categoria": "SABORES DE ANDALUCÍA",
       "nombre": "Riñones al Jerez",
-      "descripcion": "Riñones de ternera salteados con ajo y reducidos lentamente en salsa de vino de Jerez seco.",
-      "maridaje": "🍺 Sugerencia: Cerveza Alhambra Reserva 1925 — 3,30€",
-      "precio": "14,00€",
+      "descripcion": "Riñones salteados en salsa de vino de Jerez. Casquería de siempre.",
+      "maridaje": "🥂 Sugerencia: Amontillado de Jerez — 4,00 €",
+      "precio": "Media 9,00 € / Ración 12,50 €",
+      "disponible": "SI"
+    },
+    {
+      "categoria": "SABORES DE ANDALUCÍA",
+      "nombre": "Callos",
+      "descripcion": "Guiso tradicional de callos con chorizo, morcilla, pimentón y garbanzos.",
+      "maridaje": "🍷 Sugerencia: Faustino Crianza (D.O. Rioja) — 18,00 €",
+      "precio": "Media 7,50 € / Ración 10,00 €",
+      "disponible": "SI"
+    },
+    {
+      "categoria": "SABORES DE ANDALUCÍA",
+      "nombre": "Cordobés (carne en salsa)",
+      "descripcion": "Carne de cerdo en salsa de vino y especias. Guiso tradicional andaluz.",
+      "maridaje": "🍷 Sugerencia: Castillo de Aza Crianza (D.O. Ribera del Duero) — 19,00 €",
+      "precio": "Media 9,00 € / Ración 12,50 €",
+      "disponible": "SI"
+    },
+    {
+      "categoria": "SABORES DE ANDALUCÍA",
+      "nombre": "Criadillas",
+      "descripcion": "Casquería tradicional, rebozada y frita.",
+      "maridaje": "🥂 Sugerencia: Fino de Jerez — 3,50 €",
+      "precio": "Media 7,50 € / Ración 10,00 €",
+      "disponible": "SI"
+    },
+    {
+      "categoria": "SABORES DE ANDALUCÍA",
+      "nombre": "Sesos",
+      "descripcion": "Sesos rebozados y fritos. Casquería clásica de la cocina granadina.",
+      "maridaje": "🍷 Sugerencia: D.O. Rueda Verdejo — 17,00 €",
+      "precio": "Media 7,50 € / Ración 10,00 €",
+      "disponible": "SI"
+    },
+    {
+      "categoria": "SOPAS Y PLATOS DE CUCHARA",
+      "nombre": "Gazpacho andaluz",
+      "descripcion": "Tomate, pepino, pimiento, ajo y pan. Servido frío.",
+      "maridaje": "",
+      "precio": "4,50 €",
+      "disponible": "SI"
+    },
+    {
+      "categoria": "SOPAS Y PLATOS DE CUCHARA",
+      "nombre": "Salmorejo",
+      "descripcion": "Crema fría de tomate y pan. Solo en temporada de verano.",
+      "maridaje": "",
+      "precio": "5,00 €",
+      "disponible": "SI"
+    },
+    {
+      "categoria": "SOPAS Y PLATOS DE CUCHARA",
+      "nombre": "Sopa de picadillo",
+      "descripcion": "Caldo de pollo con jamón, huevo, pan y hierbabuena.",
+      "maridaje": "",
+      "precio": "5,00 €",
+      "disponible": "SI"
+    },
+    {
+      "categoria": "SOPAS Y PLATOS DE CUCHARA",
+      "nombre": "Consomé al Jerez",
+      "descripcion": "Caldo de ave con vino de Jerez.",
+      "maridaje": "",
+      "precio": "5,00 €",
+      "disponible": "SI"
+    },
+    {
+      "categoria": "SOPAS Y PLATOS DE CUCHARA",
+      "nombre": "Sopa de ajos",
+      "descripcion": "Pan, ajo, pimentón, caldo y huevo. Plato de invierno.",
+      "maridaje": "",
+      "precio": "6,00 €",
+      "disponible": "SI"
+    },
+    {
+      "categoria": "SOPAS Y PLATOS DE CUCHARA",
+      "nombre": "Sopa de mariscos",
+      "descripcion": "Caldo de pescado con marisco, tomate, ajo y arroz.",
+      "maridaje": "",
+      "precio": "6,50 €",
+      "disponible": "SI"
+    },
+    {
+      "categoria": "SOPAS Y PLATOS DE CUCHARA",
+      "nombre": "Sopa sevillana",
+      "descripcion": "Caldo con pollo, jamón, arroz y verduras.",
+      "maridaje": "",
+      "precio": "7,00 €",
+      "disponible": "SI"
+    },
+    {
+      "categoria": "ENTRANTES Y RACIONES",
+      "nombre": "Tomate aliñao",
+      "descripcion": "Tomate con cebolleta, aceite de oliva y sal.",
+      "maridaje": "",
+      "precio": "7,50 €",
+      "disponible": "SI"
+    },
+    {
+      "categoria": "ENTRANTES Y RACIONES",
+      "nombre": "Ensaladilla rusa",
+      "descripcion": "Patata, zanahoria, guisantes, mayonesa y gambas.",
+      "maridaje": "",
+      "precio": "Media 5,50 € / Ración 8,00 €",
+      "disponible": "SI"
+    },
+    {
+      "categoria": "ENTRANTES Y RACIONES",
+      "nombre": "Ensalada de la casa",
+      "descripcion": "Ensalada fresca con productos de temporada.",
+      "maridaje": "",
+      "precio": "8,00 €",
+      "disponible": "SI"
+    },
+    {
+      "categoria": "ENTRANTES Y RACIONES",
+      "nombre": "Espárragos con mahonesa",
+      "descripcion": "Espárragos con salsa mahonesa.",
+      "maridaje": "",
+      "precio": "7,50 €",
+      "disponible": "SI"
+    },
+    {
+      "categoria": "ENTRANTES Y RACIONES",
+      "nombre": "Surtido de ibéricos",
+      "descripcion": "Selección de embutidos ibéricos.",
+      "maridaje": "🍷 Sugerencia: Calvente Guindalera (D.O. Granada) — 18,00 €",
+      "precio": "12,50 €",
+      "disponible": "SI"
+    },
+    {
+      "categoria": "ENTRANTES Y RACIONES",
+      "nombre": "Jamón cebo ibérico (50%)",
+      "descripcion": "Jamón ibérico de cebo, cortado en la casa. 100 g.",
+      "maridaje": "🥂 Sugerencia: Fino de Jerez — 3,50 €",
+      "precio": "14,00 €",
+      "disponible": "SI"
+    },
+    {
+      "categoria": "ENTRANTES Y RACIONES",
+      "nombre": "Queso curado",
+      "descripcion": "Queso curado de oveja o mezcla. 200 g.",
+      "maridaje": "",
+      "precio": "11,00 €",
+      "disponible": "SI"
+    },
+    {
+      "categoria": "ENTRANTES Y RACIONES",
+      "nombre": "Croquetas",
+      "descripcion": "Croquetas de jamón elaboradas en la casa.",
+      "maridaje": "",
+      "precio": "8,50 € (ración) / 1,80 € (unidad en barra)",
+      "disponible": "SI"
+    },
+    {
+      "categoria": "ENTRANTES Y RACIONES",
+      "nombre": "Champiñón",
+      "descripcion": "Champiñones salteados con ajo y perejil.",
+      "maridaje": "",
+      "precio": "Media 7,50 € / Ración 10,00 €",
+      "disponible": "SI"
+    },
+    {
+      "categoria": "ENTRANTES Y RACIONES",
+      "nombre": "Champiñones con gambas",
+      "descripcion": "Champiñones y gambas salteados con ajo y perejil.",
+      "maridaje": "",
+      "precio": "14,50 €",
+      "disponible": "SI"
+    },
+    {
+      "categoria": "ENTRANTES Y RACIONES",
+      "nombre": "Berenjenas fritas",
+      "descripcion": "Berenjenas en tempura, fritas en aceite de oliva.",
+      "maridaje": "",
+      "precio": "Media 8,00 € / Ración 11,00 €",
+      "disponible": "SI"
+    },
+    {
+      "categoria": "ENTRANTES Y RACIONES",
+      "nombre": "Pulpo a la vinagreta",
+      "descripcion": "Pulpo cocido con pimiento, cebolla, vinagre y aceite de oliva.",
+      "maridaje": "",
+      "precio": "Media 5,50 € / Ración 8,00 €",
+      "disponible": "SI"
+    },
+    {
+      "categoria": "ENTRANTES Y RACIONES",
+      "nombre": "Verduras salteadas",
+      "descripcion": "Verduras de temporada salteadas con ajo y aceite de oliva.",
+      "maridaje": "",
+      "precio": "7,00 €",
+      "disponible": "SI"
+    },
+    {
+      "categoria": "FRITURAS Y PESCADOS",
+      "nombre": "Calamares fritos",
+      "descripcion": "Calamares rebozados y fritos en aceite de oliva.",
+      "maridaje": "🍷 Sugerencia: Castillo de San Diego (V.T. Cádiz) — 17,50 €",
+      "precio": "Media 9,50 € / Ración 13,00 €",
+      "disponible": "SI"
+    },
+    {
+      "categoria": "FRITURAS Y PESCADOS",
+      "nombre": "Boquerones fritos",
+      "descripcion": "Boquerones frescos rebozados y fritos.",
+      "maridaje": "🥂 Sugerencia: Manzanilla — 3,50 €",
+      "precio": "Media 9,50 € / Ración 13,00 €",
+      "disponible": "SI"
+    },
+    {
+      "categoria": "FRITURAS Y PESCADOS",
+      "nombre": "Cazón frito en adobo",
+      "descripcion": "Cazón marinado en ajo, orégano y pimentón, rebozado y frito.",
+      "maridaje": "🥂 Sugerencia: Fino de Jerez — 3,50 €",
+      "precio": "Media 9,50 € / Ración 13,00 €",
+      "disponible": "SI"
+    },
+    {
+      "categoria": "FRITURAS Y PESCADOS",
+      "nombre": "Almejas",
+      "descripcion": "Almejas salteadas con ajo, perejil y vino blanco.",
+      "maridaje": "🍷 Sugerencia: D.O. Rueda Verdejo — 17,00 €",
+      "precio": "Media 9,50 € / Ración 13,00 €",
+      "disponible": "SI"
+    },
+    {
+      "categoria": "FRITURAS Y PESCADOS",
+      "nombre": "Gambas fritas",
+      "descripcion": "Gambas rebozadas y fritas en aceite de oliva.",
+      "maridaje": "",
+      "precio": "Media 10,50 € / Ración 14,00 €",
+      "disponible": "SI"
+    },
+    {
+      "categoria": "FRITURAS Y PESCADOS",
+      "nombre": "Gambas al pil-pil",
+      "descripcion": "Gambas salteadas con ajo, guindilla y aceite de oliva.",
+      "maridaje": "",
+      "precio": "Media 10,50 € / Ración 14,00 €",
+      "disponible": "SI"
+    },
+    {
+      "categoria": "FRITURAS Y PESCADOS",
+      "nombre": "Chopos fritos (puntillitas)",
+      "descripcion": "Puntillitas de calamar rebozadas y fritas.",
+      "maridaje": "",
+      "precio": "Media 10,50 € / Ración 14,00 €",
+      "disponible": "SI"
+    },
+    {
+      "categoria": "FRITURAS Y PESCADOS",
+      "nombre": "Fritura de pescado variado",
+      "descripcion": "Selección de pescados frescos rebozados y fritos. Según disponibilidad.",
+      "maridaje": "🍷 Sugerencia: Calvente (V.T. Granada) — 21,00 €",
+      "precio": "17,50 €",
+      "disponible": "SI"
+    },
+    {
+      "categoria": "FRITURAS Y PESCADOS",
+      "nombre": "Bacalao con tomate",
+      "descripcion": "Bacalao desalado con salsa de tomate, cebolla y pimiento.",
+      "maridaje": "",
+      "precio": "15,00 €",
+      "disponible": "SI"
+    },
+    {
+      "categoria": "FRITURAS Y PESCADOS",
+      "nombre": "Filete de pez espada (plancha)",
+      "descripcion": "Pez espada a la plancha con ajo, aceite de oliva y limón.",
+      "maridaje": "",
+      "precio": "15,00 €",
+      "disponible": "SI"
+    },
+    {
+      "categoria": "FRITURAS Y PESCADOS",
+      "nombre": "Calamares a la plancha",
+      "descripcion": "Calamares a la plancha con ajo, perejil y limón.",
+      "maridaje": "",
+      "precio": "16,00 €",
+      "disponible": "SI"
+    },
+    {
+      "categoria": "CARNES",
+      "nombre": "Pinchitos",
+      "descripcion": "Carne adobada en pinchos, elaborada en la casa.",
+      "maridaje": "🍺 Sugerencia: Alhambra Reserva 1925 — 3,20 €",
+      "precio": "4,80 € (unidad)",
+      "disponible": "SI"
+    },
+    {
+      "categoria": "CARNES",
+      "nombre": "Pollo",
+      "descripcion": "Pollo a la plancha o al horno. Según elaboración del día.",
+      "maridaje": "",
+      "precio": "9,00 €",
+      "disponible": "SI"
+    },
+    {
+      "categoria": "CARNES",
+      "nombre": "Lomo salteado",
+      "descripcion": "Lomo de cerdo salteado con ajo, pimiento y cebolla.",
+      "maridaje": "",
+      "precio": "Media 10,50 € / Ración 14,00 €",
+      "disponible": "SI"
+    },
+    {
+      "categoria": "CARNES",
+      "nombre": "Flamenquín",
+      "descripcion": "Lomo de cerdo relleno de jamón, rebozado y frito.",
+      "maridaje": "🍷 Sugerencia: Delirio (D.O. Granada) — 17,00 €",
+      "precio": "5,00 € (barra) / 14,00 € (restaurante)",
+      "disponible": "SI"
+    },
+    {
+      "categoria": "CARNES",
+      "nombre": "Escalope de ternera",
+      "descripcion": "Ternera empanada y frita. Con limón.",
+      "maridaje": "",
+      "precio": "12,50 €",
+      "disponible": "SI"
+    },
+    {
+      "categoria": "CARNES",
+      "nombre": "Ternera estofada",
+      "descripcion": "Ternera en salsa, estofada con verduras y vino.",
+      "maridaje": "🍷 Sugerencia: Alcorta Crianza (D.O. Rioja) — 18,00 €",
+      "precio": "12,50 €",
+      "disponible": "SI"
+    },
+    {
+      "categoria": "CARNES",
+      "nombre": "Chuletas de cordero",
+      "descripcion": "Chuletas de cordero a la plancha.",
+      "maridaje": "🍷 Sugerencia: Muñana Rojo (D.O. Granada) — 19,00 €",
+      "precio": "14,00 €",
+      "disponible": "SI"
+    },
+    {
+      "categoria": "CARNES",
+      "nombre": "Presa ibérica",
+      "descripcion": "Presa ibérica a la plancha.",
+      "maridaje": "🍷 Sugerencia: Señorío de Nevada (D.O. Granada) — 20,00 €",
+      "precio": "14,00 €",
+      "disponible": "SI"
+    },
+    {
+      "categoria": "CARNES",
+      "nombre": "San Jacobo",
+      "descripcion": "Jamón cocido y queso envueltos en lomo, rebozado y frito.",
+      "maridaje": "🍷 Sugerencia: Delirio (D.O. Granada) — 17,00 €",
+      "precio": "15,00 €",
+      "disponible": "SI"
+    },
+    {
+      "categoria": "CARNES",
+      "nombre": "Solomillo de cerdo",
+      "descripcion": "Solomillo de cerdo a la plancha.",
+      "maridaje": "🍷 Sugerencia: Fontedei Prado Negro (D.O. Granada) — 17,00 €",
+      "precio": "14,50 €",
+      "disponible": "SI"
+    },
+    {
+      "categoria": "CARNES",
+      "nombre": "Solomillo de cerdo a la pimienta",
+      "descripcion": "Solomillo de cerdo con salsa de pimienta.",
+      "maridaje": "🍷 Sugerencia: Muñana 3 Cepas (D.O. Granada) — 21,00 €",
+      "precio": "15,50 €",
+      "disponible": "SI"
+    },
+    {
+      "categoria": "CARNES",
+      "nombre": "Entrecot de ternera",
+      "descripcion": "Entrecot de ternera a la plancha.",
+      "maridaje": "🍷 Sugerencia: Marqués de Cáceres Reserva (D.O. Rioja) — 26,00 €",
+      "precio": "19,00 €",
+      "disponible": "SI"
+    },
+    {
+      "categoria": "CARNES",
+      "nombre": "Entrecot a la pimienta",
+      "descripcion": "Entrecot de ternera con salsa de pimienta.",
+      "maridaje": "🍷 Sugerencia: Marqués de Cáceres Reserva (D.O. Rioja) — 26,00 €",
+      "precio": "20,00 €",
+      "disponible": "SI"
+    },
+    {
+      "categoria": "HUEVOS Y TORTILLAS",
+      "nombre": "Pincho de tortilla de patatas",
+      "descripcion": "Tortilla de patatas elaborada en la casa.",
+      "maridaje": "",
+      "precio": "2,80 € (unidad)",
+      "disponible": "SI"
+    },
+    {
+      "categoria": "HUEVOS Y TORTILLAS",
+      "nombre": "Tortilla de jamón",
+      "descripcion": "Tortilla de patatas con jamón.",
+      "maridaje": "",
+      "precio": "6,50 €",
+      "disponible": "SI"
+    },
+    {
+      "categoria": "HUEVOS Y TORTILLAS",
+      "nombre": "Tortilla de patatas",
+      "descripcion": "Tortilla de patatas con o sin cebolla.",
+      "maridaje": "",
+      "precio": "8,50 €",
+      "disponible": "SI"
+    },
+    {
+      "categoria": "HUEVOS Y TORTILLAS",
+      "nombre": "Revuelto de espárragos",
+      "descripcion": "Huevos revueltos con espárragos.",
+      "maridaje": "",
+      "precio": "8,50 €",
+      "disponible": "SI"
+    },
+    {
+      "categoria": "HUEVOS Y TORTILLAS",
+      "nombre": "Revuelto de champiñón",
+      "descripcion": "Huevos revueltos con champiñones.",
+      "maridaje": "",
+      "precio": "8,50 €",
+      "disponible": "SI"
+    },
+    {
+      "categoria": "HUEVOS Y TORTILLAS",
+      "nombre": "Revuelto de gambas",
+      "descripcion": "Huevos revueltos con gambas.",
+      "maridaje": "",
+      "precio": "10,00 €",
+      "disponible": "SI"
+    },
+    {
+      "categoria": "HUEVOS Y TORTILLAS",
+      "nombre": "Huevos fritos con patatas y jamón ibérico",
+      "descripcion": "Huevos fritos con patatas y jamón ibérico al 50%.",
+      "maridaje": "",
+      "precio": "13,00 €",
+      "disponible": "SI"
+    },
+    {
+      "categoria": "ARROCES",
+      "nombre": "Paella mixta",
+      "descripcion": "Arroz con pollo, marisco y verduras. Por encargo, mínimo 2 raciones.",
+      "maridaje": "🍷 Sugerencia: Señorío de Nevada (D.O. Granada) — 20,00 €",
+      "precio": "14,00 € / ración",
+      "disponible": "SI"
+    },
+    {
+      "categoria": "ARROCES",
+      "nombre": "Paella de mariscos",
+      "descripcion": "Arroz con marisco y caldo de pescado. Por encargo, mínimo 2 raciones.",
+      "maridaje": "🍷 Sugerencia: Calvente (V.T. Granada) — 21,00 €",
+      "precio": "15,00 € / ración",
+      "disponible": "SI"
+    },
+    {
+      "categoria": "ARROCES",
+      "nombre": "Paella de verduras",
+      "descripcion": "Arroz con verduras de temporada. Por encargo, mínimo 2 raciones.",
+      "maridaje": "",
+      "precio": "14,00 € / ración",
+      "disponible": "SI"
+    },
+    {
+      "categoria": "POSTRES",
+      "nombre": "Fruta del tiempo",
+      "descripcion": "Fruta fresca de temporada.",
+      "maridaje": "",
+      "precio": "1,80 €",
+      "disponible": "SI"
+    },
+    {
+      "categoria": "POSTRES",
+      "nombre": "Flan de la casa",
+      "descripcion": "Flan casero con caramelo.",
+      "maridaje": "",
+      "precio": "4,00 €",
+      "disponible": "SI"
+    },
+    {
+      "categoria": "POSTRES",
+      "nombre": "Natillas de la casa",
+      "descripcion": "Natillas caseras con canela.",
+      "maridaje": "",
+      "precio": "4,00 €",
+      "disponible": "SI"
+    },
+    {
+      "categoria": "POSTRES",
+      "nombre": "Arroz con leche",
+      "descripcion": "Arroz con leche al estilo de la casa.",
+      "maridaje": "",
+      "precio": "4,00 €",
+      "disponible": "SI"
+    },
+    {
+      "categoria": "POSTRES",
+      "nombre": "Sorbete de limón",
+      "descripcion": "Sorbete de limón.",
+      "maridaje": "",
+      "precio": "4,00 €",
+      "disponible": "SI"
+    },
+    {
+      "categoria": "POSTRES",
+      "nombre": "Tarta Canadá",
+      "descripcion": "Tarta helada Contesa.",
+      "maridaje": "",
+      "precio": "4,80 €",
+      "disponible": "SI"
+    },
+    {
+      "categoria": "POSTRES",
+      "nombre": "Tarta de queso",
+      "descripcion": "Tarta de queso cremosa.",
+      "maridaje": "",
+      "precio": "5,00 €",
+      "disponible": "SI"
+    },
+    {
+      "categoria": "POSTRES",
+      "nombre": "Brownie",
+      "descripcion": "Brownie de chocolate.",
+      "maridaje": "",
+      "precio": "5,50 €",
+      "disponible": "SI"
+    },
+    {
+      "categoria": "POSTRES",
+      "nombre": "Tarta al whisky",
+      "descripcion": "Tarta de nata y whisky.",
+      "maridaje": "",
+      "precio": "5,50 €",
       "disponible": "SI"
     }
   ]

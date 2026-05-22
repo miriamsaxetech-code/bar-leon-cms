@@ -101,12 +101,22 @@ collections:
                 label: Categoría
                 widget: select
                 options:
-                  - label: "Para Abrir Boca"
-                    value: "PARA ABRIR BOCA"
-                  - label: "Los Platos de Siempre"
-                    value: "LOS PLATOS DE SIEMPRE"
-                  - label: "De Nuestra Bodega"
-                    value: "DE NUESTRA BODEGA"
+                  - label: "Sabores de Andalucía"
+                    value: "SABORES DE ANDALUCÍA"
+                  - label: "Sopas y platos de cuchara"
+                    value: "SOPAS Y PLATOS DE CUCHARA"
+                  - label: "Entrantes y raciones"
+                    value: "ENTRANTES Y RACIONES"
+                  - label: "Frituras y pescados"
+                    value: "FRITURAS Y PESCADOS"
+                  - label: "Carnes"
+                    value: "CARNES"
+                  - label: "Huevos y tortillas"
+                    value: "HUEVOS Y TORTILLAS"
+                  - label: "Arroces"
+                    value: "ARROCES"
+                  - label: "Postres"
+                    value: "POSTRES"
 
               - name: nombre
                 label: Nombre del plato
