@@ -1,0 +1,142 @@
+backend:
+  name: github
+  repo: miriamsaxetech-code/bar-leon-cms
+  branch: main
+
+media_folder: assets/images
+public_folder: assets/images
+
+collections:
+  - name: bar_leon
+    label: Bar León
+    files:
+
+      - name: data
+        label: Carta, Menú y Horarios
+        file: data.json
+        format: json
+        fields:
+
+          # ── INICIO ─────────────────────────────────────────────
+          - name: inicio
+            label: Página de Inicio
+            widget: object
+            fields:
+              - name: titular
+                label: Titular principal
+                widget: string
+                hint: "Frase de cabecera. Ej: Tres generaciones sin cambiar de receta."
+
+              - name: bajada
+                label: Descripción
+                widget: text
+                hint: "Texto bajo el titular. Máx. 2–3 líneas."
+
+              - name: avisoEspecial
+                label: Aviso especial (opcional)
+                widget: string
+                required: false
+                hint: "Dejar en blanco si no hay aviso activo."
+
+          # ── MENÚ DEL DÍA ────────────────────────────────────────
+          - name: menuDia
+            label: Menú del Día
+            widget: object
+            fields:
+              - name: disponible
+                label: ¿Disponible hoy?
+                widget: select
+                options:
+                  - label: "Sí — mostrar en web"
+                    value: "SI"
+                  - label: "No — ocultar en web"
+                    value: "NO"
+                default: "SI"
+
+              - name: dias
+                label: Días de servicio
+                widget: string
+                hint: "Ej: Lunes, Martes, Jueves y Viernes (Solo Mediodía)"
+
+              - name: precio
+                label: Precio
+                widget: string
+                hint: "Ej: 12,50€"
+
+              - name: condiciones
+                label: Condiciones
+                widget: text
+                hint: "Qué incluye el menú."
+
+          # ── HORARIOS ────────────────────────────────────────────
+          - name: horarios
+            label: Horarios
+            label_singular: Día
+            widget: list
+            fields:
+              - name: dia
+                label: Día
+                widget: string
+
+              - name: estado
+                label: Estado
+                widget: select
+                options:
+                  - ABIERTO
+                  - CERRADO
+                  - CERRADO TARDE
+
+              - name: detalle
+                label: Detalle visible
+                widget: string
+                hint: "Texto que aparece junto al estado. Ej: Almuerzos y cenas"
+
+          # ── CARTA ───────────────────────────────────────────────
+          - name: carta
+            label: Carta
+            label_singular: Plato
+            widget: list
+            fields:
+              - name: categoria
+                label: Categoría
+                widget: select
+                options:
+                  - label: "Para Abrir Boca"
+                    value: "PARA ABRIR BOCA"
+                  - label: "Los Platos de Siempre"
+                    value: "LOS PLATOS DE SIEMPRE"
+                  - label: "De Nuestra Bodega"
+                    value: "DE NUESTRA BODEGA"
+
+              - name: nombreES
+                label: Nombre en español
+                widget: string
+
+              - name: nombreEN
+                label: Nombre en inglés
+                widget: string
+
+              - name: descripcionEN
+                label: Descripción en inglés
+                widget: text
+                hint: "Para turistas. 2–3 frases."
+
+              - name: maridaje
+                label: Sugerencia de maridaje
+                widget: string
+                hint: "Ej: 🍷 Sugerencia: Copa de Fontedei Prado Negro (D.O. Granada) — 3,40€"
+
+              - name: precio
+                label: Precio
+                widget: string
+                hint: "Ej: 11,00€"
+
+              - name: disponible
+                label: ¿En carta hoy?
+                widget: select
+                options:
+                  - label: "Sí — visible en web"
+                    value: "SI"
+                  - label: "No — ocultar temporalmente"
+                    value: "NO"
+                default: "SI"
