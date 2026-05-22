@@ -2,6 +2,8 @@ backend:
   name: github
   repo: miriamsaxetech-code/bar-leon-cms
   branch: main
+  auth_type: pkce
+  app_id: REPLACE_WITH_GITHUB_CLIENT_ID
 
 media_folder: assets/images
 public_folder: assets/images
@@ -101,12 +103,32 @@ collections:
                 label: Categoría
                 widget: select
                 options:
-                  - label: "Para Abrir Boca"
-                    value: "PARA ABRIR BOCA"
-                  - label: "Los Platos de Siempre"
-                    value: "LOS PLATOS DE SIEMPRE"
-                  - label: "De Nuestra Bodega"
-                    value: "DE NUESTRA BODEGA"
+                  - label: "Sabores de Andalucía"
+                    value: "Sabores de Andalucía"
+                  - label: "Entrantes y Sopas"
+                    value: "Entrantes y Sopas"
+                  - label: "Frituras y Pescados"
+                    value: "Frituras y Pescados"
+                  - label: "Carnes"
+                    value: "Carnes"
+                  - label: "Huevos y Tortillas"
+                    value: "Huevos y Tortillas"
+                  - label: "Arroces"
+                    value: "Arroces"
+                  - label: "Postres"
+                    value: "Postres"
+                  - label: "Vinos de Granada"
+                    value: "Vinos de Granada"
+                  - label: "Rioja"
+                    value: "Rioja"
+                  - label: "Ribera del Duero"
+                    value: "Ribera del Duero"
+                  - label: "Blancos y Generosos"
+                    value: "Blancos y Generosos"
+                  - label: "Cervezas"
+                    value: "Cervezas"
+                  - label: "Bebidas y Aperitivos"
+                    value: "Bebidas y Aperitivos"
 
               - name: nombre
                 label: Nombre del plato
