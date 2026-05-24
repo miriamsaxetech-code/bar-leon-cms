@@ -1,4 +1,4 @@
-# Bar León — Legacy Decisions
+# Restaurante-Bar León — Legacy Decisions
 
 Elementos que sobrevivieron múltiples iteraciones del build.
 Son supervivientes: si reaparecen es porque funcionan o son necesarios.

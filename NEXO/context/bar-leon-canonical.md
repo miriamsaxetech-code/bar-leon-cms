@@ -1,4 +1,4 @@
-# Bar León — Canonical Context
+# Restaurante-Bar León — Canonical Context
 
 **Source of truth for all agents, prompts, and iterations.**
 **If any instruction contradicts this file: this file wins.**
@@ -7,7 +7,7 @@
 
 ## Identidad
 
-Bar León es un bar-restaurante tradicional en Plaza Nueva, Granada.
+Restaurante-Bar León es un bar-restaurante tradicional en Plaza Nueva, Granada.
 No es un concepto. No es una marca creada. Es un establecimiento real con continuidad familiar y memoria institucional local.
 
 - Ubicación: Plaza Nueva · Granada · Andalucía
@@ -15,7 +15,7 @@ No es un concepto. No es una marca creada. Es un establecimiento real con contin
 - Fundación implícita: múltiples generaciones (tagline: "Tres generaciones sin cambiar de receta.")
 - Categoría: cocina andaluza tradicional, clientela mixta (locales + visitantes no turísticos)
 
-Lo que Bar León comunica:
+Lo que Restaurante-Bar León comunica:
 - "Este sitio ya existe en la vida de la gente."
 - "Esto es Granada, no una simulación de Granada."
 - "Los turistas son bienvenidos, pero el sitio no está diseñado para turistas."
@@ -114,7 +114,7 @@ Todo estado del sitio debe incluir:
 
 ## Prohibiciones
 
-No convertir Bar León en:
+No convertir Restaurante-Bar León en:
 - local de brunch
 - café de startup
 - restaurante de lujo

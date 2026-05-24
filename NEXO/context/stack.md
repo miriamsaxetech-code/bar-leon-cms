@@ -1,4 +1,4 @@
-# Bar León — Stack & Arquitectura
+# Restaurante-Bar León — Stack & Arquitectura
 
 ---
 
