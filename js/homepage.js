@@ -83,6 +83,9 @@
       <p class="address">Plaza Nueva &middot; Granada &middot; Andaluc&iacute;a<br />Cocina Tradicional &middot; Tres Generaciones</p>
       <a href="${PHONE}" class="phone-link">${PHONE_DISPLAY}</a>
     </div>
+    <div class="owner-access">
+      <a href="/admin/" class="owner-link">Acceso propietario</a>
+    </div>
   </div>
 </div>`;
   }

@@ -123,8 +123,8 @@
     <span class="check-leader" aria-hidden="true"></span>
     <span class="check-price">${item.precio}</span>
   </div>
-  <p class="item-desc">${albayzin(item.descripcion)}</p>
-  <p class="item-maridaje">${item.maridaje}</p>
+  ${item.descripcion ? `<p class="item-desc">${albayzin(item.descripcion)}</p>` : ''}
+  ${item.maridaje ? `<p class="item-maridaje">${item.maridaje}</p>` : ''}
 </article>`).join('');
 
       return `<div class="accordion-item${idx === 0 ? ' is-open' : ''}">
@@ -181,6 +181,7 @@
   <a href="${PHONE}" class="cta-btn">${nav.llamar}</a>
   <div class="wrap">
     <p class="carta-brand">Bar Le&oacute;n</p>
+    <a href="/admin/" class="owner-link">Acceso propietario</a>
   </div>
 </footer>`;
   }
