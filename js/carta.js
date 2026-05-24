@@ -98,7 +98,6 @@
     });
 
     const cats = Object.entries(groups).map(([cat, list], idx) => {
-      const sep = idx > 0 ? '<hr class="divider" style="margin:40px 0;" />' : '';
       const itemsHtml = list.map(item => `<article class="carta-item">
   <div class="check-row">
     <span class="check-name">${item.nombre}</span>
@@ -109,13 +108,36 @@
   <p class="item-maridaje">${item.maridaje}</p>
 </article>`).join('');
 
-      return `${sep}<div>
-  <div class="categoria-head"><h2>${cat}</h2></div>
-  <div>${itemsHtml}</div>
+      return `<div class="accordion-item${idx === 0 ? ' is-open' : ''}">
+  <div class="categoria-head" role="button" tabindex="0" aria-expanded="${idx === 0 ? 'true' : 'false'}">
+    <h2>${cat}</h2>
+    <span class="accordion-icon" aria-hidden="true"></span>
+  </div>
+  <div class="accordion-body">${itemsHtml}</div>
 </div>`;
     });
 
-    return `<div class="wrap">${cats.join('')}</div>`;
+    return `<div class="wrap carta-accordion">${cats.join('')}</div>`;
+  }
+
+  function initAccordions(container) {
+    container.querySelectorAll('.accordion-item').forEach((item, idx) => {
+      const head = item.querySelector('.categoria-head');
+      const body = item.querySelector('.accordion-body');
+
+      if (idx === 0) body.style.maxHeight = body.scrollHeight + 'px';
+
+      head.addEventListener('click', () => {
+        const isOpen = item.classList.contains('is-open');
+        item.classList.toggle('is-open', !isOpen);
+        head.setAttribute('aria-expanded', String(!isOpen));
+        body.style.maxHeight = isOpen ? '0' : body.scrollHeight + 'px';
+      });
+
+      head.addEventListener('keydown', e => {
+        if (e.key === 'Enter' || e.key === ' ') { e.preventDefault(); head.click(); }
+      });
+    });
   }
 
   function renderHorarios(horarios, nav) {
@@ -175,6 +197,7 @@
         renderFooter(nav),
       ].join('\n');
 
+      initAccordions(app);
       header.style.display = 'block';
       app.style.display = 'block';
       loader.classList.add('fade-out');

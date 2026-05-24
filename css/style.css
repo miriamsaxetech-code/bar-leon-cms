@@ -443,10 +443,35 @@ h2 {
   color: var(--muted);
 }
 
-/* ─── CARTA ITEMS ─── */
+/* ─── CARTA ACCORDION ─── */
+.carta-accordion {
+  padding-top: 8px;
+}
+
+.accordion-item {
+  border-bottom: 1px solid rgba(28, 26, 23, 0.14);
+}
+
+.accordion-item:first-child {
+  border-top: 2px solid var(--ink);
+}
+
 .categoria-head {
-  padding-bottom: 10px;
-  border-bottom: 2px solid var(--ink);
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 16px 0;
+  cursor: pointer;
+  user-select: none;
+  border: none;
+  background: none;
+  width: 100%;
+  text-align: left;
+}
+
+.categoria-head:hover h2,
+.is-open .categoria-head h2 {
+  color: var(--accent);
 }
 
 .categoria-head h2 {
@@ -454,6 +479,50 @@ h2 {
   letter-spacing: 0.2em;
   color: var(--ink);
   line-height: 1;
+  transition: color 0.2s ease;
+}
+
+.accordion-icon {
+  flex-shrink: 0;
+  width: 16px;
+  height: 16px;
+  position: relative;
+  margin-left: 12px;
+}
+
+.accordion-icon::before,
+.accordion-icon::after {
+  content: '';
+  position: absolute;
+  background: var(--muted);
+  transition: opacity 0.25s ease, transform 0.25s ease;
+}
+
+.accordion-icon::before {
+  width: 12px;
+  height: 1.5px;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+}
+
+.accordion-icon::after {
+  width: 1.5px;
+  height: 12px;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+}
+
+.is-open .accordion-icon::after {
+  opacity: 0;
+}
+
+/* ─── CARTA ITEMS ─── */
+.accordion-body {
+  overflow: hidden;
+  max-height: 0;
+  transition: max-height 0.35s ease;
 }
 
 .carta-item {
