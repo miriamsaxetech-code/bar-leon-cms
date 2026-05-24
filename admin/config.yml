@@ -2,8 +2,8 @@ backend:
   name: github
   repo: miriamsaxetech-code/bar-leon-cms
   branch: main
-  client_id: Ov23lieTq9aZEP0a4XDD
-  auth_type: pkce
+  base_url: https://api.netlify.com
+  site_id: REPLACE_WITH_NETLIFY_SITE_ID
 
 media_folder: assets/images
 public_folder: assets/images
