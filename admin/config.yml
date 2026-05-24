@@ -1,8 +1,9 @@
 backend:
   name: github
-  client_id: Ov23lieTq9aZEP0a4XDD
   repo: miriamsaxetech-code/bar-leon-cms
   branch: main
+  client_id: Ov23lieTq9aZEP0a4XDD
+  auth_type: pkce
 
 media_folder: assets/images
 public_folder: assets/images
