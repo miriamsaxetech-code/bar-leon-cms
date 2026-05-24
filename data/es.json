@@ -8,15 +8,17 @@
     "disponible": "SI",
     "dias": "Lunes, Martes, Jueves y Viernes · 13:00–16:00",
     "precio": "12,50 €",
-    "condiciones": "Incluye primer plato, pan y postre de la casa. IVA incluido. Bebida no incluida.",
-    "primeros": "Gazpacho andaluz · Sopa de picadillo · Ensalada de la casa · Salmorejo (verano)",
+    "condiciones": "IVA incluido. Bebida no incluida.",
+    "primeros": "Ensalada de la casa · Entremeses variados · Salmorejo",
+    "segundos": "Filete de cerdo (empanado o plancha) · Secreto de cerdo · Filete de pescadilla · Calamares fritos · Filete de dorada · Pechuga de pollo",
     "platosDelDia": [
       { "dia": "Lunes",   "plato": "Cocido" },
       { "dia": "Martes",  "plato": "Macarrones" },
       { "dia": "Jueves",  "plato": "Cazuela de fideos" },
       { "dia": "Viernes", "plato": "Lentejas (o potaje de habichuelas)" }
     ],
-    "temporada": "En verano: Arroz a la cubana. Viernes Santo: Potaje de vigilia."
+    "postres": "Natillas de la casa · Arroz con leche · Helado · Fruta del tiempo",
+    "temporada": "Viernes en verano: Arroz a la cubana."
   },
   "horarios": [
     { "dia": "Lunes",     "estado": "ABIERTO",      "detalle": "13:00–16:00 / 20:00–23:00" },

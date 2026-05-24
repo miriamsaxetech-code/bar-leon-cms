@@ -7,9 +7,19 @@
 
   "menuDia": {
     "disponible": "SI",
-    "dias": "Lundi, Mardi, Jeudi et Vendredi (déjeuner uniquement)",
-    "precio": "12,50€",
-    "condiciones": "Comprend une entrée, un plat et le dessert de la maison. Boissons non comprises."
+    "dias": "Lundi, Mardi, Jeudi et Vendredi · 13:00–16:00",
+    "precio": "12,50 €",
+    "condiciones": "TVA comprise. Boissons non comprises.",
+    "primeros": "Salade maison · Entrées variées · Salmorejo",
+    "segundos": "Escalope de porc (panée ou grillée) · Secreto de cerdo · Filet de merlu · Calamars frits · Filet de daurade · Blanc de poulet",
+    "platosDelDia": [
+      { "dia": "Lundi",    "plato": "Cocido (pot-au-feu andalou)" },
+      { "dia": "Mardi",    "plato": "Macarrones (pâtes)" },
+      { "dia": "Jeudi",    "plato": "Cazuela de fideos (vermicelles en casserole)" },
+      { "dia": "Vendredi", "plato": "Lentejas (lentilles ou ragoût de haricots)" }
+    ],
+    "postres": "Natillas maison · Riz au lait · Glace · Fruit de saison",
+    "temporada": "Vendredis en été : Arroz a la cubana."
   },
 
   "horarios": [

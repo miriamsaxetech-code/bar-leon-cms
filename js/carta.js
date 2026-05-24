@@ -12,21 +12,27 @@
       volver: '← Bar León',
       menuDia: 'Menú del Día',
       edictHeader: 'Establecimiento Bar León · Granada',
-      edictFoot: 'Bar León · Cocina Tradicional Granadina'
+      edictFoot: 'Bar León · Cocina Tradicional Granadina',
+      primeros: 'Primeros', segundos: 'Segundos',
+      platoDia: 'Plato del día', postre: 'Postre'
     },
     en: {
       carta: 'Menu', horarios: 'Hours', llamar: 'Call',
       volver: '← Bar León',
       menuDia: 'Daily Menu',
       edictHeader: 'Establishment Bar León · Granada',
-      edictFoot: 'Bar León · Traditional Granada Cuisine'
+      edictFoot: 'Bar León · Traditional Granada Cuisine',
+      primeros: 'First course', segundos: 'Second course',
+      platoDia: 'Daily special', postre: 'Dessert'
     },
     fr: {
       carta: 'Carte', horarios: 'Horaires', llamar: 'Appeler',
       volver: '← Bar León',
       menuDia: 'Menu du Jour',
       edictHeader: 'Établissement Bar León · Grenade',
-      edictFoot: 'Bar León · Cuisine Traditionnelle de Grenade'
+      edictFoot: 'Bar León · Cuisine Traditionnelle de Grenade',
+      primeros: 'Entrées', segundos: 'Plats',
+      platoDia: 'Plat du jour', postre: 'Dessert'
     }
   };
 
@@ -53,21 +59,32 @@
   function renderMenuDia(m, nav) {
     if (m.disponible !== 'SI') return '';
 
+    function asList(str) {
+      return `<ul class="edict-platos">${str.split(' · ').map(s =>
+        `<li>${s.trim()}</li>`).join('')}</ul>`;
+    }
+
     const primeros = m.primeros
-      ? `<p class="edict-section-label">Primeros</p>
-<p class="edict-primeros">${m.primeros}</p>`
+      ? `<p class="edict-section-label">${nav.primeros}</p>${asList(m.primeros)}`
       : '';
 
-    const platos = (m.platosDelDia && m.platosDelDia.length)
-      ? `<p class="edict-section-label">Segundos</p>
+    const segundos = m.segundos
+      ? `<p class="edict-section-label">${nav.segundos}</p>${asList(m.segundos)}`
+      : '';
+
+    const platoDia = (m.platosDelDia && m.platosDelDia.length)
+      ? `<p class="edict-section-label">${nav.platoDia}</p>
 <ul class="edict-platos">${m.platosDelDia.map(p =>
           `<li><strong>${p.dia}:</strong> ${p.plato}</li>`
         ).join('')}</ul>`
       : '';
 
+    const postre = m.postres
+      ? `<p class="edict-section-label">${nav.postre}</p>${asList(m.postres)}`
+      : '';
+
     const temporada = m.temporada
-      ? `<p class="edict-section-label">Especiales de temporada</p>
-<p class="edict-temporada">${m.temporada}</p>`
+      ? `<p class="edict-temporada">${m.temporada}</p>`
       : '';
 
     return `<div class="wrap" style="margin-bottom:36px">
@@ -81,7 +98,9 @@
     <div class="edict-body">
       <p class="edict-condiciones">${m.condiciones}</p>
       ${primeros}
-      ${platos}
+      ${segundos}
+      ${platoDia}
+      ${postre}
       ${temporada}
     </div>
     <div class="edict-foot">${nav.edictFoot}</div>

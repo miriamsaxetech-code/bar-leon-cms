@@ -73,7 +73,18 @@ collections:
               - name: primeros
                 label: Primeros (opciones)
                 widget: string
-                hint: "Ej: Gazpacho · Sopa de picadillo · Ensalada"
+                hint: "Ej: Ensalada de la casa · Entremeses variados · Salmorejo"
+
+              - name: segundos
+                label: Segundos (opciones fijas)
+                widget: string
+                hint: "Ej: Filete de cerdo · Secreto · Calamares fritos"
+
+              - name: postres
+                label: Postre (opciones)
+                widget: string
+                required: false
+                hint: "Ej: Natillas · Arroz con leche · Helado · Fruta del tiempo"
 
               - name: platosDelDia
                 label: Platos del día (por día)

@@ -7,9 +7,19 @@
 
   "menuDia": {
     "disponible": "SI",
-    "dias": "Monday, Tuesday, Thursday and Friday (lunch only)",
-    "precio": "12,50€",
-    "condiciones": "Includes first course, main course and house dessert. Drinks not included."
+    "dias": "Monday, Tuesday, Thursday and Friday · 1:00–4:00 pm",
+    "precio": "12,50 €",
+    "condiciones": "VAT included. Drinks not included.",
+    "primeros": "House salad · Mixed starters · Salmorejo",
+    "segundos": "Pork steak (breaded or grilled) · Secreto de cerdo · Hake fillet · Fried squid · Sea bream fillet · Chicken breast",
+    "platosDelDia": [
+      { "dia": "Monday",    "plato": "Cocido (slow-cooked stew)" },
+      { "dia": "Tuesday",   "plato": "Macarrones (pasta)" },
+      { "dia": "Thursday",  "plato": "Cazuela de fideos (noodle casserole)" },
+      { "dia": "Friday",    "plato": "Lentejas (lentils or bean stew)" }
+    ],
+    "postres": "House natillas · Rice pudding · Ice cream · Seasonal fruit",
+    "temporada": "Fridays in summer: Arroz a la cubana."
   },
 
   "horarios": [
