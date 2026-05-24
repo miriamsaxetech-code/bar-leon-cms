@@ -54,17 +54,20 @@
     if (m.disponible !== 'SI') return '';
 
     const primeros = m.primeros
-      ? `<p class="edict-primeros"><strong>Primeros:</strong> ${m.primeros}</p>`
+      ? `<p class="edict-section-label">Primeros</p>
+<p class="edict-primeros">${m.primeros}</p>`
       : '';
 
     const platos = (m.platosDelDia && m.platosDelDia.length)
-      ? `<ul class="edict-platos">${m.platosDelDia.map(p =>
+      ? `<p class="edict-section-label">Segundos</p>
+<ul class="edict-platos">${m.platosDelDia.map(p =>
           `<li><strong>${p.dia}:</strong> ${p.plato}</li>`
         ).join('')}</ul>`
       : '';
 
     const temporada = m.temporada
-      ? `<p class="edict-temporada">${m.temporada}</p>`
+      ? `<p class="edict-section-label">Especiales de temporada</p>
+<p class="edict-temporada">${m.temporada}</p>`
       : '';
 
     return `<div class="wrap" style="margin-bottom:36px">

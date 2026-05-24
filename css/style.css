@@ -585,6 +585,143 @@ h2 {
   padding-bottom: 28px;
 }
 
+/* ─── SITE SINCE ─── */
+.site-since {
+  opacity: 0.75;
+}
+
+/* ─── HERO EDITORIAL (placeholder until real photo) ─── */
+.hero-editorial {
+  width: 100%;
+  margin-top: 22px;
+  border: 1px solid var(--ink);
+  min-height: 200px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: #E8E3D3;
+  position: relative;
+}
+
+.hero-editorial::before {
+  content: '';
+  position: absolute;
+  inset: 9px;
+  border: 1px solid rgba(28, 26, 23, 0.22);
+  pointer-events: none;
+}
+
+.hero-editorial-inner {
+  text-align: center;
+  padding: 44px 32px;
+}
+
+.hero-editorial-name {
+  font-family: 'Playfair Display', Georgia, serif;
+  font-size: clamp(1.1rem, 4vw, 1.9rem);
+  font-weight: 700;
+  letter-spacing: 0.04em;
+  color: var(--ink);
+  margin-bottom: 9px;
+}
+
+.hero-editorial-year {
+  font-family: 'Inter', system-ui, sans-serif;
+  font-size: 0.64rem;
+  text-transform: uppercase;
+  letter-spacing: 0.32em;
+  color: var(--muted);
+  margin-bottom: 22px;
+}
+
+.hero-editorial-rule {
+  border: none;
+  border-top: 1px solid rgba(28, 26, 23, 0.22);
+  width: 48px;
+  margin: 0 auto 22px;
+}
+
+.hero-editorial-desc {
+  font-size: 0.76rem;
+  text-transform: uppercase;
+  letter-spacing: 0.15em;
+  color: var(--muted);
+  line-height: 1.9;
+}
+
+/* ─── TRUST STRIP ─── */
+.trust-strip {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 4px;
+  margin-top: 10px;
+  padding: 9px 0;
+  border-top: 1px solid rgba(28, 26, 23, 0.1);
+  border-bottom: 1px solid rgba(28, 26, 23, 0.1);
+}
+
+.trust-item {
+  font-family: 'Inter', system-ui, sans-serif;
+  font-size: 0.7rem;
+  text-transform: uppercase;
+  letter-spacing: 0.13em;
+  color: var(--muted);
+  text-decoration: none;
+}
+
+.trust-item:hover {
+  color: var(--accent);
+}
+
+.trust-sep {
+  color: rgba(28, 26, 23, 0.25);
+  font-size: 0.65rem;
+}
+
+/* ─── EDICT BODY SECTIONS ─── */
+.edict-section-label {
+  font-family: 'Inter', system-ui, sans-serif;
+  font-size: 0.62rem;
+  text-transform: uppercase;
+  letter-spacing: 0.22em;
+  color: var(--accent);
+  font-weight: 600;
+  margin-top: 16px;
+  margin-bottom: 5px;
+}
+
+.edict-primeros {
+  font-size: 0.87rem;
+  color: var(--ink);
+  line-height: 1.6;
+}
+
+.edict-platos {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+
+.edict-platos li {
+  font-size: 0.87rem;
+  color: var(--ink);
+  padding: 4px 0;
+  border-bottom: 1px solid var(--faint);
+  line-height: 1.4;
+}
+
+.edict-platos li:last-child {
+  border-bottom: none;
+}
+
+.edict-temporada {
+  font-size: 0.84rem;
+  color: var(--muted);
+  font-style: italic;
+  line-height: 1.55;
+}
+
 /* ─── RESPONSIVE ─── */
 @media (max-width: 540px) {
   .wrap { padding: 0 20px; }
