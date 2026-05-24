@@ -1,5 +1,6 @@
 backend:
   name: github
+  client_id: Ov23lieTq9aZEP0a4XDD
   repo: miriamsaxetech-code/bar-leon-cms
   branch: main
 
