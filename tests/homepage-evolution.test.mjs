@@ -115,8 +115,6 @@ assert.match(lunch.html, /home-andalusia/);
 assert.match(lunch.html, /Sabores de Andalucía/);
 assert.match(lunch.html, /home-food-gallery/);
 assert.match(lunch.html, /bar-leon-plato-02\.webp/);
-assert.match(lunch.html, /bar-leon-plato-03\.webp/);
-assert.match(lunch.html, /bar-leon-plato-04\.webp/);
 assert.match(lunch.html, /loading="lazy"/);
 assert.match(lunch.html, /site-location__place/);
 assert.match(lunch.html, /site-location__since/);

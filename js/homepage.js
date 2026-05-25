@@ -310,7 +310,7 @@
   }
 
   function renderHomeFoodGallery(lang) {
-    const images = HOME_FOOD_IMAGES;
+    const image = HOME_FOOD_IMAGES[0];
     const captionSuffix = {
       es: 'Cocina y barra tradicional del León.',
       en: 'Traditional cooking and counter at Bar León.',
@@ -318,13 +318,9 @@
     }[lang];
     return `<section class="home-food-gallery editorial-snapshot" aria-label="${LABELS.andalusia[lang]}">
   <figure class="editorial-snapshot__figure">
-    <div class="editorial-snapshot__container">
-      <img class="editorial-snapshot__img" src="${WEB_IMAGE_BASE}${images[0].src}" alt="${images[0].alt[lang]}" loading="lazy" decoding="async">
-      <img class="editorial-snapshot__img editorial-snapshot__img--hidden" src="${WEB_IMAGE_BASE}${images[1].src}" alt="${images[1].alt[lang]}" loading="lazy" decoding="async">
-      <img class="editorial-snapshot__img editorial-snapshot__img--hidden" src="${WEB_IMAGE_BASE}${images[2].src}" alt="${images[2].alt[lang]}" loading="lazy" decoding="async">
-    </div>
+    <img class="editorial-snapshot__img" src="${WEB_IMAGE_BASE}${image.src}" alt="${image.alt[lang]}" width="800" height="500" loading="lazy" decoding="async">
     <figcaption class="editorial-snapshot__caption">
-      ${images[0].alt[lang]} &mdash; ${captionSuffix}
+      ${image.alt[lang]} &mdash; ${captionSuffix}
     </figcaption>
   </figure>
 </section>`;
