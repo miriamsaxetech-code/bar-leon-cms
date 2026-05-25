@@ -397,6 +397,81 @@ h2 {
   padding-bottom: 0;
 }
 
+/* ─── CARTA MODE SWITCH ─── */
+.menu-switch-wrap {
+  margin-bottom: 24px;
+}
+
+.menu-switch {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  border: 1px solid var(--ink);
+}
+
+.menu-switch-btn {
+  appearance: none;
+  background: transparent;
+  border: none;
+  border-right: 1px solid rgba(28, 26, 23, 0.22);
+  color: var(--ink);
+  cursor: pointer;
+  font-family: 'Inter', system-ui, sans-serif;
+  font-size: 0.68rem;
+  font-weight: 600;
+  letter-spacing: 0.11em;
+  line-height: 1.25;
+  min-height: 48px;
+  padding: 10px 8px;
+  text-align: center;
+  text-transform: uppercase;
+}
+
+.menu-switch-btn:last-child {
+  border-right: none;
+}
+
+.menu-switch-btn:hover,
+.menu-switch-btn:focus-visible {
+  color: var(--accent);
+  outline: none;
+}
+
+.menu-switch-btn.is-active {
+  background: var(--ink);
+  color: var(--bg);
+}
+
+.menu-panel {
+  animation: menuPanelIn 0.22s ease;
+}
+
+.menu-panel-inner {
+  margin-bottom: 36px;
+}
+
+.menu-panel-intro {
+  margin-bottom: 12px;
+}
+
+.menu-panel-copy {
+  color: var(--muted);
+  font-size: 0.88rem;
+  line-height: 1.55;
+  max-width: 560px;
+}
+
+@keyframes menuPanelIn {
+  from {
+    opacity: 0;
+    transform: translateY(6px);
+  }
+
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
 /* ─── MENÚ DEL DÍA — EDICT ─── */
 .edict {
   border: 2px solid var(--accent);
@@ -836,6 +911,19 @@ h2 {
   }
   .check-leader {
     display: none;
+  }
+
+  .menu-switch {
+    grid-template-columns: 1fr;
+  }
+
+  .menu-switch-btn {
+    border-right: none;
+    border-bottom: 1px solid rgba(28, 26, 23, 0.22);
+  }
+
+  .menu-switch-btn:last-child {
+    border-bottom: none;
   }
 }
 

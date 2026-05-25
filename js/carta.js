@@ -9,7 +9,12 @@
     seconds:    { es: 'Segundos',       en: 'Second course', fr: 'Plats'    },
     daily:      { es: 'Plato del día',  en: 'Daily special', fr: 'Plat du jour' },
     desserts:   { es: 'Postre',         en: 'Dessert',       fr: 'Dessert'  },
-    closed:     { es: 'Cerrado',        en: 'Closed',        fr: 'Fermé'    }
+    closed:     { es: 'Cerrado',        en: 'Closed',        fr: 'Fermé'    },
+    dailyMenu:  { es: 'Menú del Día',   en: 'Daily Menu',    fr: 'Menu du Jour' },
+    restaurant: { es: 'Carta Restaurante', en: 'Restaurant Menu', fr: 'Carte Restaurant' },
+    bar:        { es: 'Carta Barra',    en: 'Bar Menu',      fr: 'Carte Bar' },
+    barIntro:   { es: 'Para barra, vinos y bebidas. Sin ceremonia, que aquí se viene a gusto.', en: 'Bar, wines and drinks. Simple, direct, and easy.', fr: 'Bar, vins et boissons. Simple et direct.' },
+    restaurantIntro: { es: 'La carta de mesa, separada del menú del día.', en: 'The table menu, separate from the daily menu.', fr: 'La carte de table, séparée du menu du jour.' }
   };
 
   const DAY_NAMES = {
@@ -95,8 +100,7 @@
       ? ` · ${formatTimePeriod(dm.service_period, lang)}`
       : '';
 
-    return `<div class="wrap" style="margin-bottom:36px">
-  <div class="edict">
+    return `<div class="edict">
     <div class="edict-head">
       <h2>${t(nav.edict_header, lang)}</h2>
       <p class="edict-title">${t(nav.daily_menu, lang)}</p>
@@ -112,18 +116,20 @@
       ${seasonal}
     </div>
     <div class="edict-foot">${t(nav.edict_foot, lang)}</div>
-  </div>
 </div>`;
   }
 
-  function renderCarta(dishes, categories, lang) {
+  function renderCarta(dishes, categories, lang, service) {
     const available = dishes.filter(i => i.available !== false);
     const catMap = {};
-    categories.forEach(c => { catMap[c.id] = c; });
+    categories
+      .filter(c => (c.service || (c.type === 'food' ? 'restaurant' : 'bar')) === service)
+      .forEach(c => { catMap[c.id] = c; });
 
     const groups = {};
     const order  = [];
     available.forEach(i => {
+      if (!catMap[i.category_id]) return;
       if (!groups[i.category_id]) {
         groups[i.category_id] = [];
         order.push(i.category_id);
@@ -161,14 +167,17 @@
     return `<div class="wrap carta-accordion">${cats.join('')}</div>`;
   }
 
-  function renderWines(wines, beverages, categories, lang) {
+  function renderWines(wines, beverages, categories, lang, service) {
     if (!wines || !wines.length) return '';
     const catMap = {};
-    categories.forEach(c => { catMap[c.id] = c; });
+    categories
+      .filter(c => (c.service || (c.type === 'food' ? 'restaurant' : 'bar')) === service)
+      .forEach(c => { catMap[c.id] = c; });
 
     const groups = {};
     const order  = [];
     [...(wines || []), ...(beverages || [])].filter(w => w.available !== false).forEach(item => {
+      if (!catMap[item.category_id]) return;
       if (!groups[item.category_id]) {
         groups[item.category_id] = [];
         order.push(item.category_id);
@@ -208,6 +217,75 @@
     });
 
     return `<div class="wrap carta-accordion">${cats.join('')}</div>`;
+  }
+
+  function renderMenuSections(d, nav, lang) {
+    return `<div class="wrap menu-switch-wrap">
+  <div class="menu-switch" role="tablist" aria-label="${t(nav.menu, lang)}">
+    <button type="button" class="menu-switch-btn is-active" role="tab" aria-selected="true" aria-controls="panel-daily" data-panel="daily">${LABELS.dailyMenu[lang]}</button>
+    <button type="button" class="menu-switch-btn" role="tab" aria-selected="false" aria-controls="panel-restaurant" data-panel="restaurant">${LABELS.restaurant[lang]}</button>
+    <button type="button" class="menu-switch-btn" role="tab" aria-selected="false" aria-controls="panel-bar" data-panel="bar">${LABELS.bar[lang]}</button>
+  </div>
+</div>
+<section id="panel-daily" class="menu-panel is-active" role="tabpanel" data-panel="daily">
+  <div class="wrap menu-panel-inner">${renderMenuDia(d.daily_menu, nav, lang)}</div>
+</section>
+<section id="panel-restaurant" class="menu-panel" role="tabpanel" data-panel="restaurant" hidden>
+  <div class="wrap menu-panel-intro">
+    <p class="section-label">${LABELS.restaurant[lang]}</p>
+    <p class="menu-panel-copy">${LABELS.restaurantIntro[lang]}</p>
+  </div>
+  ${renderCarta(d.dishes, d.categories, lang, 'restaurant')}
+</section>
+<section id="panel-bar" class="menu-panel" role="tabpanel" data-panel="bar" hidden>
+  <div class="wrap menu-panel-intro">
+    <p class="section-label">${LABELS.bar[lang]}</p>
+    <p class="menu-panel-copy">${LABELS.barIntro[lang]}</p>
+  </div>
+  ${renderWines(d.wines, d.beverages, d.categories, lang, 'bar')}
+</section>`;
+  }
+
+  function refreshOpenAccordions(root) {
+    root.querySelectorAll('.accordion-item.is-open .accordion-body').forEach(body => {
+      body.style.maxHeight = body.scrollHeight + 'px';
+    });
+  }
+
+  function initMenuSwitch(container) {
+    const buttons = Array.from(container.querySelectorAll('.menu-switch-btn'));
+    const panels = Array.from(container.querySelectorAll('.menu-panel'));
+
+    function activate(button) {
+      const target = button.getAttribute('data-panel');
+
+      buttons.forEach(btn => {
+        const active = btn === button;
+        btn.classList.toggle('is-active', active);
+        btn.setAttribute('aria-selected', String(active));
+      });
+
+      panels.forEach(panel => {
+        const active = panel.getAttribute('data-panel') === target;
+        panel.classList.toggle('is-active', active);
+        panel.hidden = !active;
+        if (active) refreshOpenAccordions(panel);
+      });
+    }
+
+    buttons.forEach((button, index) => {
+      button.addEventListener('click', () => activate(button));
+      button.addEventListener('keydown', e => {
+        const last = buttons.length - 1;
+        let next = null;
+        if (e.key === 'ArrowRight') next = index === last ? 0 : index + 1;
+        if (e.key === 'ArrowLeft') next = index === 0 ? last : index - 1;
+        if (next === null) return;
+        e.preventDefault();
+        buttons[next].focus();
+        activate(buttons[next]);
+      });
+    });
   }
 
   function initAccordions(container) {
@@ -293,16 +371,14 @@
 </div>`;
 
       app.innerHTML = [
-        renderMenuDia(d.daily_menu, nav, lang),
-        renderCarta(d.dishes, d.categories, lang),
-        '<div class="wrap"><hr class="divider" /></div>',
-        renderWines(d.wines, d.beverages, d.categories, lang),
+        renderMenuSections(d, nav, lang),
         '<div class="wrap"><hr class="divider" /></div>',
         renderHorarios(d.hours, nav, lang),
         renderFooter(d, nav, lang),
       ].join('\n');
 
       initAccordions(app);
+      initMenuSwitch(app);
       header.style.display = 'block';
       app.style.display = 'block';
       loader.classList.add('fade-out');
