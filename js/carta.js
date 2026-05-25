@@ -10,9 +10,9 @@
     {
       src: 'bar-leon-plato-05.webp',
       alt: {
-        es: 'Carne de monte en adobo, guiso de caza de sierra',
-        en: 'Venison in marinade, mountain game stew',
-        fr: 'Chevreuil en marinade, ragoût de gibier de montagne',
+        es: 'Tomate aliñao con aceite de oliva y orégano',
+        en: 'Seasoned tomato salad with olive oil and oregano',
+        fr: "Salade de tomates assaisonnée à l'huile d'olive et origan",
       },
     },
     {
@@ -380,9 +380,9 @@
 
     const image = CARTA_ACCENT_IMAGES[0]; // bar-leon-plato-05.webp
     const captionSuffix = {
-      es: 'Carne de monte en adobo, guiso tradicional del León.',
-      en: 'Venison in marinade, traditional stew at Bar León.',
-      fr: 'Chevreuil en marinade, ragoût traditionnel du León.'
+      es: 'Tomate aliñao, un entrante fresco y tradicional en Bar León.',
+      en: 'Tomate aliñao, a fresh and traditional starter at Bar León.',
+      fr: 'Tomate aliñao, une entrée fraîche et traditionnelle au Bar León.'
     }[lang];
 
     return `<section class="tile-bg-section home-andalusia spotlight-andalucia" style="margin-top:0;">
