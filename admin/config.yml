@@ -18,97 +18,126 @@ collections:
         format: json
         fields:
 
+          # ── AVISO ESPECIAL — lo más urgente, arriba del todo ────
+          - name: venue
+            label: "⚠️ Aviso especial"
+            widget: object
+            collapsed: false
+            hint: "Aparece destacado en la portada. Dejar vacío si no hay aviso."
+            fields:
+              - name: notice
+                label: Aviso
+                widget: object
+                collapsed: false
+                fields:
+                  - name: es
+                    label: Texto del aviso
+                    widget: string
+                    required: false
+                    hint: "Ej: Cerrado por vacaciones del 1 al 15 de agosto. Vacío = sin aviso."
+
           # ── MENÚ DEL DÍA ────────────────────────────────────────
           - name: daily_menu
-            label: Menú del Día
+            label: "🍽️ Menú del día"
             widget: object
+            collapsed: false
             fields:
               - name: active
-                label: ¿Mostrar menú del día?
+                label: ¿Mostrar menú del día en la web?
                 widget: boolean
                 default: true
-                hint: "Desactivar oculta el menú del día en la web."
+                hint: "Desactivar para ocultar el menú del día (ej: festivos, verano)."
 
               - name: price
-                label: Precio
+                label: Precio del menú
                 widget: number
                 value_type: float
-                hint: "Ej: 12.5 (sin símbolo de moneda)"
-
-              - name: includes
-                label: Condiciones (ES)
-                widget: object
-                fields:
-                  - name: es
-                    label: Español
-                    widget: text
-                    hint: "Qué incluye el menú. Ej: IVA incluido. Bebida no incluida."
+                hint: "Solo el número. Ej: 12.5"
 
               - name: starters
-                label: Primeros (opciones)
+                label: Primeros (opciones del día)
                 widget: object
+                collapsed: false
                 fields:
                   - name: es
-                    label: Español
+                    label: Opciones de primeros
                     widget: string
-                    hint: "Separar con · (punto medio). Ej: Ensalada · Salmorejo"
+                    hint: "Separar con · Ej: Ensalada · Salmorejo · Entremeses"
 
               - name: seconds
-                label: Segundos (opciones fijas)
+                label: Segundos (opciones del día)
                 widget: object
+                collapsed: false
                 fields:
                   - name: es
-                    label: Español
+                    label: Opciones de segundos
                     widget: string
-                    hint: "Separar con · (punto medio)."
+                    hint: "Separar con · Ej: Filete · Calamares · Dorada"
 
               - name: mains
-                label: Platos del día (por día)
+                label: Plato especial por día
                 label_singular: Día
                 widget: list
+                summary: "{{fields.day}}: {{fields.name.es}}"
+                collapsed: false
                 fields:
                   - name: day
-                    label: Día (en inglés)
+                    label: Día
                     widget: select
                     options:
-                      - { label: "Lunes", value: "monday" }
-                      - { label: "Martes", value: "tuesday" }
-                      - { label: "Jueves", value: "thursday" }
+                      - { label: "Lunes",   value: "monday" }
+                      - { label: "Martes",  value: "tuesday" }
+                      - { label: "Jueves",  value: "thursday" }
                       - { label: "Viernes", value: "friday" }
                   - name: name
-                    label: Plato
+                    label: Nombre del plato
                     widget: object
+                    collapsed: false
                     fields:
                       - name: es
-                        label: Español
+                        label: Plato
                         widget: string
                         hint: "Ej: Cocido"
 
               - name: desserts
                 label: Postre (opciones)
                 widget: object
+                collapsed: false
                 fields:
                   - name: es
-                    label: Español
+                    label: Opciones de postre
                     widget: string
                     required: false
-                    hint: "Ej: Natillas · Arroz con leche · Helado · Fruta del tiempo"
+                    hint: "Ej: Natillas · Helado · Fruta del tiempo"
 
-              - name: seasonal
-                label: Especiales de temporada (opcional)
+              - name: includes
+                label: Condiciones del menú
                 widget: object
+                collapsed: true
                 fields:
                   - name: es
-                    label: Español
+                    label: Qué incluye
+                    widget: text
+                    hint: "Ej: IVA incluido. Bebida no incluida."
+
+              - name: seasonal
+                label: Nota de temporada (opcional)
+                widget: object
+                collapsed: true
+                fields:
+                  - name: es
+                    label: Nota
                     widget: string
                     required: false
                     hint: "Ej: Viernes en verano: Arroz a la cubana."
 
           # ── HORARIOS ────────────────────────────────────────────
           - name: hours
-            label: Horarios
+            label: "🕐 Horarios"
             label_singular: Día
             widget: list
+            summary: "{{fields.day}} — {{fields.status}}"
+            collapsed: false
             fields:
               - name: day
                 label: Día
@@ -126,15 +155,16 @@ collections:
                 label: Estado
                 widget: select
                 options:
-                  - { label: "Abierto",       value: "open" }
-                  - { label: "Cerrado",        value: "closed" }
-                  - { label: "Solo mediodía",  value: "partial" }
+                  - { label: "Abierto (comida y cena)", value: "open" }
+                  - { label: "Solo mediodía",            value: "partial" }
+                  - { label: "Cerrado",                  value: "closed" }
 
               - name: periods
                 label: Franjas horarias
                 label_singular: Franja
                 widget: list
                 required: false
+                summary: "{{fields.open}} – {{fields.close}}"
                 fields:
                   - name: open
                     label: Apertura
@@ -147,17 +177,34 @@ collections:
 
           # ── CARTA ───────────────────────────────────────────────
           - name: dishes
-            label: Carta (platos)
+            label: "📋 Carta (platos)"
             label_singular: Plato
             widget: list
+            summary: "{{fields.name.es}} · {{fields.price}}"
+            collapsed: true
             fields:
-              - name: id
-                label: ID (no modificar)
+              - name: available
+                label: ¿En carta hoy?
+                widget: boolean
+                default: true
+                hint: "Desactivar oculta el plato sin borrarlo."
+
+              - name: name
+                label: Nombre del plato
+                widget: object
+                collapsed: false
+                fields:
+                  - name: es
+                    label: Nombre
+                    widget: string
+
+              - name: price
+                label: Precio
                 widget: string
-                hint: "Identificador único. No cambiar una vez creado."
+                hint: "Ej: 11,00 € — o Media 7,50 € / Ración 10,00 €"
 
               - name: category_id
-                label: Categoría
+                label: Sección de la carta
                 widget: select
                 options:
                   - { label: "Sabores de Andalucía",      value: "andalusian-specialities" }
@@ -169,55 +216,28 @@ collections:
                   - { label: "Arroces",                     value: "rice" }
                   - { label: "Postres",                     value: "desserts" }
 
-              - name: name
-                label: Nombre del plato
-                widget: object
-                fields:
-                  - name: es
-                    label: Español
-                    widget: string
-
               - name: description
                 label: Descripción
                 widget: object
+                collapsed: true
                 fields:
                   - name: es
-                    label: Español
+                    label: Descripción del plato
                     widget: text
                     hint: "2–3 frases. Lo que hace especial al plato."
 
-              - name: price
-                label: Precio
-                widget: string
-                hint: "Ej: 11,00 € — o Media 7,50 € / Ración 10,00 €"
-
               - name: pairing
-                label: Sugerencia de maridaje
+                label: Maridaje (opcional)
                 widget: object
+                collapsed: true
                 fields:
                   - name: es
-                    label: Español
+                    label: Sugerencia
                     widget: string
                     required: false
-                    hint: "Ej: Manzanilla — 3,50 €. Dejar vacío si no aplica."
+                    hint: "Ej: Manzanilla — 3,50 €. Vacío si no aplica."
 
-              - name: available
-                label: ¿En carta hoy?
-                widget: boolean
-                default: true
-                hint: "Desactivar oculta el plato temporalmente."
-
-          # ── AVISO ESPECIAL ──────────────────────────────────────
-          - name: venue
-            label: Aviso especial
-            widget: object
-            fields:
-              - name: notice
-                label: Aviso en página de inicio
-                widget: object
-                fields:
-                  - name: es
-                    label: Español
-                    widget: string
-                    required: false
-                    hint: "Dejar en blanco si no hay aviso activo. Ej: Cerrado por vacaciones del 1 al 15 de agosto."
+              - name: id
+                label: ID interno
+                widget: string
+                hint: "⚠️ No modificar. Identificador técnico del plato."

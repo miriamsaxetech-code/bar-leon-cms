@@ -2,6 +2,7 @@
 <html>
 <head>
   <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <meta name="robots" content="noindex, nofollow" />
   <title>Bar León — Admin</title>
 </head>
@@ -9,27 +10,42 @@
   <script src="https://unpkg.com/decap-cms@^3.0.0/dist/decap-cms.js"></script>
   <script>
     // ── ESTILOS DEL PANEL DE PREVISUALIZACIÓN ──────────────────
-    CMS.registerPreviewStyle('/css/style.css');
     CMS.registerPreviewStyle([
-      'body { font-family: Georgia, serif; background: #F6F3EC; color: #1C1A17; padding: 24px 20px; max-width: 540px; margin: 0 auto; }',
-      '.pr-aviso { background: #7A1C1C; color: #F6F3EC; padding: 10px 16px; font-size: 0.85rem; margin-bottom: 20px; letter-spacing: 0.03em; }',
-      '.pr-section { font-size: 0.65rem; text-transform: uppercase; letter-spacing: 0.14em; color: #5C5752; border-top: 1px solid rgba(28,26,23,0.15); padding-top: 12px; margin: 20px 0 8px; }',
-      '.pr-menu { display: flex; justify-content: space-between; align-items: baseline; padding: 6px 0; }',
-      '.pr-menu-precio { font-family: "Courier New", monospace; color: #7A1C1C; font-size: 0.95rem; }',
-      '.pr-tag { display: inline-block; font-size: 0.65rem; text-transform: uppercase; letter-spacing: 0.08em; padding: 2px 7px; border-radius: 2px; vertical-align: middle; }',
-      '.pr-tag.activo { background: #d4edda; color: #155724; }',
-      '.pr-tag.oculto { background: #f8d7da; color: #721c24; }',
-      '.pr-plato { padding: 10px 0; border-bottom: 1px solid rgba(28,26,23,0.1); }',
-      '.pr-plato-nombre { font-size: 0.95rem; font-weight: bold; margin: 0 0 2px; display: flex; justify-content: space-between; align-items: center; gap: 8px; }',
+      'body { font-family: Georgia, serif; background: #F6F3EC; color: #1C1A17; padding: 16px; max-width: 480px; margin: 0 auto; font-size: 15px; }',
+      '.pr-aviso { background: #7A1C1C; color: #F6F3EC; padding: 10px 14px; font-size: 0.85rem; margin-bottom: 16px; letter-spacing: 0.03em; }',
+      '.pr-section { font-size: 0.6rem; text-transform: uppercase; letter-spacing: 0.14em; color: #5C5752; border-top: 2px solid #1C1A17; padding-top: 10px; margin: 20px 0 8px; }',
+      '.pr-menu-row { display: flex; justify-content: space-between; align-items: baseline; padding: 5px 0; border-bottom: 1px solid rgba(28,26,23,0.1); font-size: 0.9rem; }',
+      '.pr-menu-precio { font-family: "Courier New", monospace; color: #7A1C1C; font-weight: bold; }',
+      '.pr-tag { display: inline-block; font-size: 0.65rem; text-transform: uppercase; letter-spacing: 0.06em; padding: 3px 8px; border: 1px solid currentColor; vertical-align: middle; }',
+      '.pr-tag.activo { color: #1a6e33; }',
+      '.pr-tag.oculto { color: #7A1C1C; }',
+      '.pr-plato { padding: 9px 0; border-bottom: 1px solid rgba(28,26,23,0.1); }',
+      '.pr-plato-nombre { font-size: 0.95rem; font-weight: bold; margin: 0 0 2px; display: flex; justify-content: space-between; align-items: center; gap: 8px; flex-wrap: wrap; }',
       '.pr-plato-precio { font-family: "Courier New", monospace; font-size: 0.85rem; color: #7A1C1C; margin: 2px 0; }',
-      '.pr-plato-desc { font-size: 0.8rem; color: #5C5752; margin: 4px 0 2px; }',
-      '.pr-plato-maridaje { font-size: 0.75rem; color: #7A1C1C; margin: 0; }',
-      '.pr-horario { display: flex; justify-content: space-between; font-size: 0.8rem; padding: 4px 0; border-bottom: 1px solid rgba(28,26,23,0.08); }',
+      '.pr-plato-desc { font-size: 0.78rem; color: #5C5752; margin: 3px 0 2px; line-height: 1.4; }',
+      '.pr-plato-maridaje { font-size: 0.72rem; color: #7A1C1C; margin: 0; }',
+      '.pr-cat-label { font-size: 0.65rem; text-transform: uppercase; letter-spacing: 0.1em; color: #7A1C1C; margin: 14px 0 4px; font-family: "Courier New", monospace; }',
+      '.pr-horario { display: flex; justify-content: space-between; font-size: 0.85rem; padding: 5px 0; border-bottom: 1px solid rgba(28,26,23,0.08); }',
       '.pr-cerrado { color: #5C5752; font-style: italic; }',
+      '.pr-menu-platos { font-size: 0.82rem; color: #5C5752; margin: 3px 0; line-height: 1.5; }',
+      '.pr-ocultos-count { font-size: 0.78rem; color: #5C5752; font-style: italic; padding: 6px 0; }',
     ].join('\n'), { raw: true });
 
     // ── COMPONENTE DE PREVISUALIZACIÓN ─────────────────────────
     var h = CMS.h;
+
+    var DAY_ES = {
+      monday: 'Lunes', tuesday: 'Martes', wednesday: 'Miércoles',
+      thursday: 'Jueves', friday: 'Viernes', saturday: 'Sábado', sunday: 'Domingo'
+    };
+    var STATUS_ES = { open: 'Abierto', partial: 'Solo mediodía', closed: 'Cerrado' };
+
+    function getEs(obj) {
+      if (!obj) return '';
+      if (typeof obj === 'string') return obj;
+      if (obj.get) return obj.get('es') || '';
+      return obj.es || '';
+    }
 
     function tag(text, tipo) {
       return h('span', { className: 'pr-tag ' + tipo }, text);
@@ -40,92 +56,123 @@
     }
 
     function PreviewBarLeon(props) {
-      var entry   = props.entry;
-      var data    = entry.getIn(['data']);
+      var entry = props.entry;
+      var data  = entry.getIn(['data']);
       if (!data) return h('div', {}, 'Cargando...');
 
-      var inicio  = data.get('inicio') || CMS.Immutable.Map();
-      var menu    = data.get('menuDia') || CMS.Immutable.Map();
-      var horarios = data.get('horarios') || CMS.Immutable.List();
-      var carta   = data.get('carta') || CMS.Immutable.List();
+      // Universal schema field names
+      var venueData  = data.get('venue')       || CMS.Immutable.Map();
+      var menu       = data.get('daily_menu')  || CMS.Immutable.Map();
+      var hoursData  = data.get('hours')       || CMS.Immutable.List();
+      var dishesData = data.get('dishes')      || CMS.Immutable.List();
 
-      var aviso   = inicio.get ? inicio.get('avisoEspecial') : '';
-      var menuOn  = menu.get ? menu.get('disponible') === 'SI' : false;
-      var precio  = menu.get ? menu.get('precio') : '';
-      var dias    = menu.get ? menu.get('dias') : '';
+      // Aviso
+      var noticeObj  = venueData.get ? venueData.get('notice') : null;
+      var aviso = noticeObj
+        ? (noticeObj.get ? noticeObj.get('es') : (noticeObj.es || ''))
+        : '';
 
-      // Carta: separar disponibles de ocultos
-      var cartaArr = carta.toJS ? carta.toJS() : [];
-      var activos  = cartaArr.filter(function(p) { return p.disponible === 'SI'; });
-      var ocultos  = cartaArr.filter(function(p) { return p.disponible !== 'SI'; });
+      // Menú del día
+      var menuOn = menu.get ? menu.get('active') === true : false;
+      var precio = menu.get ? menu.get('price') : '';
+      var precioFmt = precio
+        ? String(Number(precio).toFixed(2)).replace('.', ',') + ' €'
+        : '';
 
-      // Agrupar activos por categoría
+      var starters  = menu.get ? getEs(menu.get('starters'))  : '';
+      var seconds   = menu.get ? getEs(menu.get('seconds'))   : '';
+      var desserts  = menu.get ? getEs(menu.get('desserts'))  : '';
+      var mainsRaw  = menu.get ? (menu.get('mains') || CMS.Immutable.List()) : CMS.Immutable.List();
+      var mainsArr  = mainsRaw.toJS ? mainsRaw.toJS() : [];
+
+      // Carta: separate activos from ocultos
+      var dishesArr = dishesData.toJS ? dishesData.toJS() : [];
+      var activos   = dishesArr.filter(function(p) { return p.available !== false; });
+      var ocultos   = dishesArr.filter(function(p) { return p.available === false; });
+
+      // Group activos by category
       var grupos = {};
+      var order  = [];
       activos.forEach(function(p) {
-        var cat = p.categoria || 'Sin categoría';
-        if (!grupos[cat]) grupos[cat] = [];
+        var cat = p.category_id || 'sin-categoria';
+        if (!grupos[cat]) { grupos[cat] = []; order.push(cat); }
         grupos[cat].push(p);
       });
 
+      // Hours
+      var hoursArr = hoursData.toJS ? hoursData.toJS() : [];
+
       return h('div', {},
         // Aviso
-        aviso ? h('div', { className: 'pr-aviso' }, '⚠️ ' + aviso) : null,
+        aviso ? h('div', { className: 'pr-aviso' }, '⚠️  ' + aviso) : null,
 
         // Menú del día
         seccion('Menú del día'),
-        h('div', { className: 'pr-menu' },
-          h('span', {}, menuOn ? (dias || '') : 'No disponible hoy'),
-          menuOn ? h('span', { className: 'pr-menu-precio' }, precio) : tag('Oculto', 'oculto')
+        h('div', { className: 'pr-menu-row' },
+          h('span', {}, menuOn ? 'Disponible hoy' : 'No disponible hoy'),
+          menuOn
+            ? h('span', { className: 'pr-menu-precio' }, precioFmt)
+            : tag('Oculto', 'oculto')
         ),
+        menuOn && starters ? h('p', { className: 'pr-menu-platos' }, '1º ' + starters) : null,
+        menuOn && seconds  ? h('p', { className: 'pr-menu-platos' }, '2º ' + seconds)  : null,
+        menuOn && desserts ? h('p', { className: 'pr-menu-platos' }, 'Postre: ' + desserts) : null,
+        menuOn && mainsArr.length ? h('div', {},
+          mainsArr.map(function(m, i) {
+            var dayName = DAY_ES[m.day] || m.day;
+            var platName = m.name ? (m.name.es || '') : '';
+            return h('p', { key: i, className: 'pr-menu-platos' }, dayName + ': ' + platName);
+          })
+        ) : null,
 
         // Carta activa por sección
         seccion('Carta — ' + activos.length + ' platos visibles'),
-        Object.keys(grupos).map(function(cat) {
+        order.map(function(cat) {
           return h('div', { key: cat },
-            h('p', { style: { fontSize: '0.7rem', textTransform: 'uppercase', letterSpacing: '0.1em', color: '#7A1C1C', margin: '14px 0 4px' } }, cat),
+            h('p', { className: 'pr-cat-label' }, cat.replace(/-/g, ' ')),
             grupos[cat].map(function(p, i) {
+              var nombre  = p.name ? (p.name.es || '') : '';
+              var precio  = p.price || '';
+              var desc    = p.description ? (p.description.es || '') : '';
+              var maridaj = p.pairing ? (p.pairing.es || '') : '';
               return h('div', { key: i, className: 'pr-plato' },
-                h('p', { className: 'pr-plato-nombre' },
-                  p.nombre,
-                  tag('Visible', 'activo')
-                ),
-                h('p', { className: 'pr-plato-precio' }, p.precio),
-                p.descripcion ? h('p', { className: 'pr-plato-desc' }, p.descripcion) : null,
-                p.maridaje    ? h('p', { className: 'pr-plato-maridaje' }, p.maridaje) : null
+                h('p', { className: 'pr-plato-nombre' }, nombre, tag('Visible', 'activo')),
+                h('p', { className: 'pr-plato-precio' }, precio),
+                desc    ? h('p', { className: 'pr-plato-desc' },    desc)    : null,
+                maridaj ? h('p', { className: 'pr-plato-maridaje' }, maridaj) : null
               );
             })
           );
         }),
 
-        // Platos ocultos
+        // Platos ocultos — count only, not expanded
         ocultos.length > 0
-          ? h('div', {},
-              seccion('Platos ocultos (' + ocultos.length + ')'),
-              ocultos.map(function(p, i) {
-                return h('div', { key: i, className: 'pr-plato' },
-                  h('p', { className: 'pr-plato-nombre' },
-                    p.nombre,
-                    tag('Oculto', 'oculto')
-                  ),
-                  h('p', { className: 'pr-plato-precio' }, p.precio)
-                );
-              })
-            )
+          ? h('p', { className: 'pr-ocultos-count' }, '⛔  ' + ocultos.length + ' plato(s) oculto(s): ' +
+              ocultos.map(function(p) { return p.name ? (p.name.es || '') : ''; }).join(', '))
           : null,
 
         // Horarios
         seccion('Horarios'),
-        horarios.toJS ? horarios.toJS().map(function(d, i) {
-          var cerrado = d.estado === 'CERRADO';
+        hoursArr.map(function(d, i) {
+          var cerrado = d.status === 'closed';
+          var dayName = DAY_ES[d.day] || d.day;
+          var detalle;
+          if (d.status === 'closed') {
+            detalle = 'Cerrado';
+          } else if (d.periods && d.periods.length) {
+            detalle = d.periods.map(function(p) { return p.open + '–' + p.close; }).join(' / ');
+          } else {
+            detalle = STATUS_ES[d.status] || d.status;
+          }
           return h('div', { key: i, className: 'pr-horario' },
-            h('span', {}, d.dia),
-            h('span', { className: cerrado ? 'pr-cerrado' : '' }, d.detalle || d.estado)
+            h('span', {}, dayName),
+            h('span', { className: cerrado ? 'pr-cerrado' : '' }, detalle)
           );
-        }) : null
+        })
       );
     }
 
-    CMS.registerPreviewTemplate('data_es', PreviewBarLeon);
+    CMS.registerPreviewTemplate('venue', PreviewBarLeon);
   </script>
 </body>
 </html>
