@@ -13,58 +13,91 @@
   <link rel="alternate" hreflang="x-default" href="/" />
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@700&family=Inter:wght@400;500;600&display=swap" rel="stylesheet" />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500&display=swap" rel="stylesheet" />
   <style>
+    @font-face {
+      font-family: 'Granaina Limpia';
+      src: url('/assets/fonts/granaina-limpia.otf') format('opentype');
+      font-display: swap;
+    }
+
     *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
     html, body {
       height: 100%;
-      background: #F6F3EC;
       font-family: 'Inter', system-ui, sans-serif;
     }
+
     body {
       display: flex;
       align-items: center;
       justify-content: center;
       min-height: 100vh;
+      background-color: #F6F3EC;
+      background-image: url('/assets/images/hero-leon.webp');
+      background-size: cover;
+      background-position: center;
+      background-repeat: no-repeat;
     }
+
+    /* Cream overlay so text stays legible */
+    body::before {
+      content: '';
+      position: fixed;
+      inset: 0;
+      background: rgba(246, 243, 236, 0.88);
+      pointer-events: none;
+    }
+
     .picker {
+      position: relative;
       display: flex;
       flex-direction: column;
       align-items: center;
-      gap: 24px;
-      padding: 48px 32px;
+      gap: 20px;
+      padding: 56px 40px;
       text-align: center;
+      max-width: 400px;
+      width: 100%;
     }
+
     .picker__logo {
-      height: 80px;
+      height: 88px;
       width: auto;
-      opacity: 0.85;
+      opacity: 0.9;
     }
+
     .picker__name {
-      font-family: 'Playfair Display', Georgia, serif;
-      font-size: 20px;
-      font-weight: 700;
+      font-family: 'Granaina Limpia', Georgia, serif;
+      font-size: 26px;
+      font-weight: normal;
       color: #1C1A17;
-      letter-spacing: 0.3px;
+      line-height: 1.15;
+      letter-spacing: 0.5px;
     }
+
     .picker__sub {
+      font-family: 'Inter', system-ui, sans-serif;
       font-size: 9px;
-      letter-spacing: 3px;
+      letter-spacing: 3.5px;
       color: #5C5752;
       text-transform: uppercase;
-      margin-top: -16px;
+      margin-top: -10px;
     }
+
     .picker__divider {
-      width: 40px;
+      width: 48px;
       height: 1px;
-      background: #C8C3BA;
+      background: #B8B3AA;
     }
+
     .picker__langs {
       display: flex;
-      gap: 10px;
+      gap: 8px;
     }
+
     .picker__btn {
-      padding: 11px 26px;
+      padding: 10px 28px;
       font-family: 'Inter', system-ui, sans-serif;
       font-size: 11px;
       font-weight: 500;
@@ -72,21 +105,25 @@
       text-transform: uppercase;
       color: #1C1A17;
       background: transparent;
-      border: 1px solid #1C1A17;
-      border-radius: 1px;
+      border: 1px solid rgba(28, 26, 23, 0.55);
       cursor: pointer;
       transition: background 0.15s ease, color 0.15s ease, border-color 0.15s ease;
+      white-space: nowrap;
     }
+
     .picker__btn:hover {
       background: #7A1C1C;
       color: #F6F3EC;
       border-color: #7A1C1C;
     }
+
     .picker__caption {
+      font-family: 'Inter', system-ui, sans-serif;
       font-size: 9px;
-      letter-spacing: 2px;
+      letter-spacing: 2.5px;
       color: #7A1C1C;
       text-transform: uppercase;
+      margin-top: -4px;
     }
   </style>
 </head>
