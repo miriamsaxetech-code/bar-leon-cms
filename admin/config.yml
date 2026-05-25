@@ -7,143 +7,193 @@ backend:
 media_folder: assets/images
 public_folder: assets/images
 
+# ─────────────────────────────────────────────────────────
+# CONTENIDO DEL RESTAURANTE — Bar León · Granada
+# ─────────────────────────────────────────────────────────
+
 collections:
   - name: bar_leon
-    label: Bar León
+    label: "Bar León"
     files:
 
+      # ══════════════════════════════════════════
+      # ARCHIVO PRINCIPAL: CONTENIDO EN ESPAÑOL
+      # ══════════════════════════════════════════
       - name: data_es
-        label: Carta, Menú y Horarios (Español)
+        label: "Contenido del restaurante"
         file: data/es.json
         format: json
         fields:
 
-          # ── INICIO ─────────────────────────────────────────────
+          # ── 1. AVISOS ──────────────────────────────────────────────
           - name: inicio
-            label: Página de Inicio
+            label: "Avisos y texto de inicio"
             widget: object
+            collapsed: false
+            summary: "Aviso activo: {{fields.avisoEspecial}}"
             fields:
-              - name: titular
-                label: Frase principal
-                widget: string
-                hint: "Una línea. Ej: Tres generaciones sin cambiar de receta."
-
-              - name: subtitulo
-                label: Subtítulo institucional
-                widget: string
-                hint: "No modificar salvo cambio de ubicación. Ej: Plaza Nueva · Granada"
 
               - name: avisoEspecial
-                label: Aviso especial (opcional)
+                label: "Aviso especial"
                 widget: string
                 required: false
-                hint: "Dejar en blanco si no hay aviso activo."
+                hint: "Aparece destacado en la web. Dejar vacío si no hay aviso activo. Ej: Cerrado por vacaciones del 14 al 21 de agosto."
 
-          # ── MENÚ DEL DÍA ────────────────────────────────────────
+              - name: titular
+                label: "Lema del local"
+                widget: string
+                hint: "Frase fija en la portada. No suele cambiar. Ej: Tres generaciones sin cambiar de receta."
+
+              - name: subtitulo
+                label: "Subtítulo (ubicación)"
+                widget: string
+                hint: "No modificar salvo cambio de dirección. Ej: Plaza Nueva · Granada"
+
+          # ── 2. MENÚ DEL DÍA ───────────────────────────────────────
           - name: menuDia
-            label: Menú del Día
+            label: "Menú del día"
             widget: object
+            collapsed: false
             fields:
+
               - name: disponible
-                label: ¿Disponible hoy?
+                label: "¿Hay menú hoy?"
                 widget: select
                 options:
-                  - label: "Sí — mostrar en web"
+                  - label: "Sí — mostrar en la web"
                     value: "SI"
-                  - label: "No — ocultar en web"
+                  - label: "No — ocultar de la web"
                     value: "NO"
                 default: "SI"
-
-              - name: dias
-                label: Días de servicio
-                widget: string
-                hint: "Ej: Lunes, Martes, Jueves y Viernes (Solo Mediodía)"
+                hint: "Cambia esto cuando el menú no esté disponible ese día."
 
               - name: precio
-                label: Precio
+                label: "Precio del menú"
                 widget: string
-                hint: "Ej: 12,50€"
+                hint: "Ej: 12,50 €"
+
+              - name: dias
+                label: "Días en que se sirve"
+                widget: string
+                hint: "Ej: Lunes, Martes, Jueves y Viernes · 13:00–16:00"
 
               - name: condiciones
-                label: Condiciones
+                label: "Qué incluye"
                 widget: text
-                hint: "Qué incluye el menú."
+                hint: "Ej: IVA incluido. Bebida no incluida."
 
               - name: primeros
-                label: Primeros (opciones)
+                label: "Primeros platos (opciones)"
                 widget: string
-                hint: "Ej: Ensalada de la casa · Entremeses variados · Salmorejo"
+                hint: "Separa con · entre opciones. Ej: Ensalada · Salmorejo · Entremeses"
 
               - name: segundos
-                label: Segundos (opciones fijas)
+                label: "Segundos platos (opciones)"
                 widget: string
-                hint: "Ej: Filete de cerdo · Secreto · Calamares fritos"
+                hint: "Separa con · entre opciones. Ej: Filete de cerdo · Calamares · Dorada"
 
               - name: postres
-                label: Postre (opciones)
+                label: "Postres (opciones)"
                 widget: string
                 required: false
-                hint: "Ej: Natillas · Arroz con leche · Helado · Fruta del tiempo"
+                hint: "Dejar vacío si no hay postre incluido. Ej: Natillas · Helado · Fruta"
 
               - name: platosDelDia
-                label: Platos del día (por día)
-                label_singular: Día
+                label: "Plato especial por día"
+                label_singular: "Día"
                 widget: list
+                summary: "{{fields.dia}}: {{fields.plato}}"
+                hint: "El plato que cambia cada día (ej: cocido los lunes)."
                 fields:
                   - name: dia
-                    label: Día
-                    widget: string
-                    hint: "Ej: Lunes"
+                    label: "Día"
+                    widget: select
+                    options:
+                      - Lunes
+                      - Martes
+                      - Miércoles
+                      - Jueves
+                      - Viernes
+                      - Sábado
+                      - Domingo
                   - name: plato
-                    label: Plato
+                    label: "Plato del día"
                     widget: string
-                    hint: "Ej: Cocido"
+                    hint: "Ej: Cocido · Lentejas · Macarrones"
 
               - name: temporada
-                label: Especiales de temporada (opcional)
+                label: "Nota de temporada (opcional)"
                 widget: string
                 required: false
-                hint: "Ej: En verano: Arroz a la cubana. Viernes Santo: Potaje de vigilia."
+                hint: "Dejar vacío si no hay nota. Ej: Viernes en verano: Arroz a la cubana."
 
-          # ── HORARIOS ────────────────────────────────────────────
+          # ── 3. HORARIOS ───────────────────────────────────────────
           - name: horarios
-            label: Horarios
-            label_singular: Día
+            label: "Horarios"
+            label_singular: "Día"
             widget: list
+            summary: "{{fields.dia}} — {{fields.estado}}: {{fields.detalle}}"
+            hint: "Modifica el estado (Abierto / Cerrado) y el texto de horario de cada día."
             fields:
+
               - name: dia
-                label: Día
+                label: "Día"
                 widget: string
+                hint: "Ej: Lunes"
 
               - name: estado
-                label: Estado
+                label: "Estado"
                 widget: select
                 options:
-                  - ABIERTO
-                  - CERRADO
-                  - CERRADO TARDE
+                  - label: "Abierto (comida y cena)"
+                    value: "ABIERTO"
+                  - label: "Solo mediodía (cerrado por la noche)"
+                    value: "CERRADO TARDE"
+                  - label: "Cerrado todo el día"
+                    value: "CERRADO"
 
               - name: detalle
-                label: Texto visible
+                label: "Horario visible"
                 widget: string
-                hint: "Ej: Almuerzos y cenas"
+                hint: "Texto que ve el cliente. Ej: 13:00–16:00 / 20:00–23:00"
 
-          # ── CARTA ───────────────────────────────────────────────
+          # ── 4. CARTA ──────────────────────────────────────────────
           - name: carta
-            label: Carta
-            label_singular: Plato
+            label: "Carta (todos los platos)"
+            label_singular: "Plato"
             widget: list
+            summary: "{{fields.disponible == 'SI' && '✅' || '⛔'}} {{fields.nombre}} — {{fields.precio}}"
+            hint: "Añade, edita u oculta platos. Los platos con '⛔' no se muestran en la web."
             fields:
-              - name: categoria
-                label: Categoría
+
+              - name: disponible
+                label: "¿En carta hoy?"
                 widget: select
                 options:
-                  - label: "Sabores de Andalucía"
+                  - label: "✅ Sí — visible en la web"
+                    value: "SI"
+                  - label: "⛔ No — ocultar temporalmente"
+                    value: "NO"
+                default: "SI"
+                hint: "Usa 'No' para quitar un plato sin borrarlo."
+
+              - name: nombre
+                label: "Nombre del plato"
+                widget: string
+                hint: "Ej: Tortilla del Sacromonte"
+
+              - name: categoria
+                label: "Sección de la carta"
+                widget: select
+                options:
+                  - label: "Sabores de Andalucía (especialidades)"
                     value: "SABORES DE ANDALUCÍA"
                   - label: "Sopas y platos de cuchara"
                     value: "SOPAS Y PLATOS DE CUCHARA"
                   - label: "Entrantes y raciones"
                     value: "ENTRANTES Y RACIONES"
+                  - label: "Tapas y raciones"
+                    value: "TAPAS Y RACIONES"
                   - label: "Frituras y pescados"
                     value: "FRITURAS Y PESCADOS"
                   - label: "Carnes"
@@ -154,32 +204,22 @@ collections:
                     value: "ARROCES"
                   - label: "Postres"
                     value: "POSTRES"
-
-              - name: nombre
-                label: Nombre del plato
-                widget: string
-
-              - name: descripcion
-                label: Descripción
-                widget: text
-                hint: "2–3 frases. Lo que hace especial al plato."
-
-              - name: maridaje
-                label: Sugerencia de maridaje
-                widget: string
-                hint: "Ej: 🍷 Sugerencia: Copa de Fontedei Prado Negro (D.O. Granada) — 3,40€"
+                  - label: "Vinos y bebidas"
+                    value: "VINOS Y BEBIDAS"
 
               - name: precio
-                label: Precio
+                label: "Precio"
                 widget: string
-                hint: "Ej: 11,00€"
+                hint: "Ej: 12,50 € · Ej con media: Media 7,50 € / Ración 10,00 €"
 
-              - name: disponible
-                label: ¿En carta hoy?
-                widget: select
-                options:
-                  - label: "Sí — visible en web"
-                    value: "SI"
-                  - label: "No — ocultar temporalmente"
-                    value: "NO"
-                default: "SI"
+              - name: descripcion
+                label: "Descripción del plato"
+                widget: text
+                required: false
+                hint: "1–2 frases. Lo que hace especial al plato. Dejar vacío si no hace falta."
+
+              - name: maridaje
+                label: "Sugerencia de maridaje (opcional)"
+                widget: string
+                required: false
+                hint: "Dejar vacío si no hay sugerencia. Ej: 🍷 Sugerencia: Muñana Rojo (D.O. Granada) — 19,00 €"
