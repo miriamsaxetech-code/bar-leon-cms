@@ -159,6 +159,8 @@ function renderPrecios(filter) {
   // Agrupar platos por tipo de categoría
   const categories  = state.categories || [];
   const dishes      = state.dishes || [];
+  const wines       = state.wines || [];
+  const beverages   = state.beverages || [];
 
   // Mapas rápidos
   const catMap = {};
@@ -177,7 +179,24 @@ function renderPrecios(filter) {
     const name = (d.name && d.name.es) ? d.name.es : d.id;
     if (q && !name.toLowerCase().includes(q)) return;
     const group = groups[type] || groups.food;
-    group.items.push({ ...d, _catName: cat ? cat.name.es : '' });
+    group.items.push({ ...d, _type: 'dish', _priceField: 'price', _catName: cat ? cat.name.es : '' });
+  });
+
+  wines.forEach(w => {
+    const name = typeof w.name === 'object' ? (w.name.es || w.id) : (w.name || w.id);
+    if (q && !name.toLowerCase().includes(q)) return;
+    groups.wine.items.push({
+      ...w,
+      name: { es: name },
+      _type: 'wine',
+      _priceField: w.price_bottle ? 'price_bottle' : 'price_glass',
+    });
+  });
+
+  beverages.forEach(b => {
+    const name = (b.name && b.name.es) ? b.name.es : b.id;
+    if (q && !name.toLowerCase().includes(q)) return;
+    groups.drink.items.push({ ...b, _type: 'beverage', _priceField: 'price' });
   });
 
   container.innerHTML = '';
@@ -202,9 +221,10 @@ function renderPrecios(filter) {
       const priceBtn = document.createElement('button');
       priceBtn.className = 'price-row__price';
       priceBtn.dataset.id = item.id;
-      priceBtn.dataset.type = 'dish';
+      priceBtn.dataset.type = item._type;
+      priceBtn.dataset.field = item._priceField;
       priceBtn.setAttribute('aria-label', `Editar precio de ${nameEl.textContent}`);
-      priceBtn.textContent = item.price || '—';
+      priceBtn.textContent = getPanelPriceDisplay(item);
 
       row.appendChild(nameEl);
       row.appendChild(priceBtn);
@@ -227,6 +247,8 @@ function bindPreciosEdit() {
     if (!btn || btn.tagName === 'INPUT') return;
 
     const dishId = btn.dataset.id;
+    const itemType = btn.dataset.type || 'dish';
+    const priceField = btn.dataset.field || 'price';
 
     const input = document.createElement('input');
     input.type = 'text';
@@ -241,16 +263,13 @@ function bindPreciosEdit() {
 
     function commit() {
       const newVal = input.value.trim() || btn.textContent.trim();
-      // Actualizar state
-      if (state && state.dishes) {
-        const dish = state.dishes.find(d => d.id === dishId);
-        if (dish) dish.price = newVal;
-      }
+      updatePanelPrice(itemType, dishId, priceField, newVal);
       // Restaurar botón
       const newBtn = document.createElement('button');
       newBtn.className = 'price-row__price';
       newBtn.dataset.id = dishId;
-      newBtn.dataset.type = 'dish';
+      newBtn.dataset.type = itemType;
+      newBtn.dataset.field = priceField;
       newBtn.setAttribute('aria-label', `Editar precio de ${dishId}`);
       newBtn.textContent = newVal;
       input.replaceWith(newBtn);
@@ -272,6 +291,38 @@ function bindPreciosEdit() {
       // Re-bind (el contenedor se reemplaza)
     });
   }
+}
+
+function getPanelPriceDisplay(item) {
+  if (item._type === 'wine') {
+    const label = item._priceField === 'price_bottle' ? 'Bot.' : 'Copa';
+    const value = item[item._priceField];
+    return value ? `${label} ${formatPanelEuro(value)}` : '—';
+  }
+  return item.price || '—';
+}
+
+function formatPanelEuro(value) {
+  if (typeof value === 'number') return value.toFixed(2).replace('.', ',') + ' €';
+  return value || '';
+}
+
+function parsePanelEuro(value) {
+  const normalized = String(value).replace(/[^\d,.]/g, '').replace(',', '.');
+  const parsed = Number.parseFloat(normalized);
+  return Number.isFinite(parsed) ? parsed : value;
+}
+
+function updatePanelPrice(type, id, field, value) {
+  if (!state) return;
+  const collections = {
+    dish: state.dishes || [],
+    wine: state.wines || [],
+    beverage: state.beverages || [],
+  };
+  const item = (collections[type] || []).find(entry => entry.id === id);
+  if (!item) return;
+  item[field] = type === 'wine' ? parsePanelEuro(value) : value;
 }
 
 // ══════════════════════════════════════════════════════════════
@@ -602,7 +653,7 @@ async function uploadCariocaImage(file, token) {
 function buildCariocaFromForm(imagePath) {
   return {
     id: `carioca-${Date.now()}`,
-    src: imagePath,
+    image: imagePath,
     caption: {
       es: document.getElementById('carioca-caption-es')?.value.trim() || '',
       en: document.getElementById('carioca-caption-en')?.value.trim() || '',

@@ -149,13 +149,13 @@
     },
     "starters": {
       "es": "Ensalada de la casa · Entremeses variados · Salmorejo",
-      "en": "House salad · Mixed starters · Salmorejo",
-      "fr": "Salade maison · Entrées variées · Salmorejo"
+      "en": "House salad · Assorted cold starters · Salmorejo (cold tomato cream)",
+      "fr": "Salade maison · Assortiment d'entrées froides · Salmorejo (crème froide de tomate)"
     },
     "seconds": {
       "es": "Filete de cerdo (empanado o plancha) · Secreto de cerdo · Filete de pescadilla · Calamares fritos · Filete de dorada · Pechuga de pollo",
-      "en": "Pork steak (breaded or grilled) · Secreto de cerdo · Hake fillet · Fried squid · Sea bream fillet · Chicken breast",
-      "fr": "Steak de porc (pané ou grillé) · Secreto de cerdo · Filet de merluche · Calmars frits · Filet de dorade · Blanc de poulet"
+      "en": "Pork loin steak (breaded or grilled) · Secreto pork cut · Hake fillet · Fried squid · Sea bream fillet · Chicken breast",
+      "fr": "Filet de porc (pané ou grillé) · Secreto de porc · Filet de merlu · Calmars frits · Filet de dorade · Blanc de poulet"
     },
     "mains": [
       { "day": "monday",   "name": { "es": "Cocido",                              "en": "Cocido (slow-cooked stew)",       "fr": "Cocido (ragoût espagnol)" } },
@@ -170,13 +170,13 @@
     },
     "seasonal": {
       "es": "Viernes en verano: Arroz a la cubana.",
-      "en": "Fridays in summer: Arroz a la cubana.",
-      "fr": "Vendredis en été : Arroz a la cubana."
+      "en": "Fridays in summer: Arroz a la cubana (rice with tomato, egg and banana).",
+      "fr": "Vendredis en été : Arroz a la cubana (riz avec tomate, œuf et banane)."
     }
   },
 
   "categories": [
-    { "id": "andalusian-specialities", "name": { "es": "Sabores de Andalucía",      "en": "Flavours of Andalusia",        "fr": "Saveurs d'Andalousie"      }, "type": "food", "service": "restaurant", "order": 1 },
+    { "id": "andalusian-specialities", "name": { "es": "Sabores de Andalucía",      "en": "Flavors of Andalusia",         "fr": "Saveurs d'Andalousie"      }, "type": "food", "service": "restaurant", "order": 1 },
     { "id": "soups-stews",             "name": { "es": "Sopas y platos de cuchara", "en": "Soups and stews",              "fr": "Soupes et plats mijotés"   }, "type": "food", "service": "restaurant", "order": 2 },
     { "id": "starters",                "name": { "es": "Entrantes y raciones",       "en": "Starters and sharing plates",  "fr": "Entrées et raciones"       }, "type": "food", "service": "restaurant", "order": 3 },
     { "id": "fried-fish",              "name": { "es": "Frituras y pescados",         "en": "Fried dishes and fish",        "fr": "Fritures et poissons"      }, "type": "food", "service": "restaurant", "order": 4 },
@@ -201,8 +201,8 @@
       "name": { "es": "Tortilla del Sacromonte", "en": "Sacromonte Omelette", "fr": "Omelette du Sacromonte" },
       "description": {
         "es": "Tradición granadina. Tortilla con sesos, criadillas y jamón. Receta de siempre.",
-        "en": "Granada's signature omelette, made with lamb brain, chorizo and vegetables. Named after the gypsy quarter.",
-        "fr": "L'omelette emblématique de Grenade, préparée avec cervelle d'agneau, chorizo et légumes."
+        "en": "A historic Granada omelette from Sacromonte, made with lamb brains, sweetbreads and ham. A local classic for curious eaters.",
+        "fr": "Omelette historique du Sacromonte, préparée avec cervelles d'agneau, animelles et jambon. Un classique grenadin pour curieux."
       },
       "price": "10,00 €",
       "pairing": { "es": "Manzanilla — 3,50 €", "en": "Manzanilla (dry sherry, Sanlúcar) — 3,50 €", "fr": "Manzanilla (xérès sec, Sanlúcar) — 3,50 €" },
@@ -221,7 +221,7 @@
       "price": "13,00 €",
       "pairing": { "es": "Delirio (D.O. Granada) — 17,00 €", "en": "Delirio (red wine, D.O. Granada) — 17,00 €", "fr": "Delirio (vin rouge, D.O. Granada) — 17,00 €" },
       "available": true,
-      "featured": false
+      "featured": "seasonal"
     },
     {
       "id": "carne-de-monte",
@@ -229,13 +229,13 @@
       "name": { "es": "Carne de monte (ciervo en adobo)", "en": "Venison in Marinade", "fr": "Chevreuil en marinade" },
       "description": {
         "es": "Ciervo en adobo tradicional. Guiso de caza con vino, laurel y especias.",
-        "en": "Slow-cooked venison in Andalusian adobo marinade. Half portion or full.",
-        "fr": "Chevreuil mijoté dans une marinade andalouse aux épices."
+        "en": "Venison marinated Andalusian-style, then slow-cooked with wine, bay leaf and spices. Available as half or full portion.",
+        "fr": "Chevreuil mariné à l'andalouse, puis mijoté avec vin, laurier et épices. En demi-portion ou portion."
       },
       "price": "Media 10,50 € / Ración 13,50 €",
       "pairing": { "es": "Muñana Rojo (D.O. Granada) — 19,00 €", "en": "Muñana Rojo (red wine, D.O. Granada) — 19,00 €", "fr": "Muñana Rojo (vin rouge, D.O. Granada) — 19,00 €" },
       "available": true,
-      "featured": false
+      "featured": "house"
     },
     {
       "id": "rinones-al-jerez",
@@ -243,13 +243,13 @@
       "name": { "es": "Riñones al Jerez", "en": "Kidneys in Sherry", "fr": "Rognons au Xérès" },
       "description": {
         "es": "Riñones salteados en salsa de vino de Jerez. Casquería de siempre.",
-        "en": "Lamb kidneys sautéed and finished with dry fino sherry.",
-        "fr": "Rognons d'agneau sautés et flambés au fino sec."
+        "en": "Lamb kidneys sautéed in a dry sherry sauce. Traditional Andalusian offal, direct and full-flavoured.",
+        "fr": "Rognons d'agneau sautés dans une sauce au xérès sec. Casquería andalouse traditionnelle, franche et savoureuse."
       },
       "price": "Media 9,00 € / Ración 12,50 €",
       "pairing": { "es": "Amontillado de Jerez — 4,00 €", "en": "Amontillado de Jerez (sherry) — 4,00 €", "fr": "Amontillado de Xérès (xérès) — 4,00 €" },
       "available": true,
-      "featured": false
+      "featured": "recommended"
     },
     {
       "id": "callos",
@@ -257,13 +257,13 @@
       "name": { "es": "Callos", "en": "Tripe Stew", "fr": "Tripes à l'andalouse" },
       "description": {
         "es": "Guiso tradicional de callos con chorizo, morcilla, pimentón y garbanzos.",
-        "en": "Slow-cooked tripe with chorizo and morcilla. A deeply flavourful Andalusian classic.",
-        "fr": "Tripes mijotées avec chorizo et boudin noir. Un plat robuste et savoureux."
+        "en": "Slow-cooked tripe stew with chorizo, morcilla, paprika and chickpeas. A robust Andalusian classic.",
+        "fr": "Tripes mijotées avec chorizo, boudin noir, paprika et pois chiches. Un classique andalou généreux."
       },
       "price": "Media 7,50 € / Ración 10,00 €",
       "pairing": { "es": "Faustino Crianza (D.O. Rioja) — 18,00 €", "en": "Faustino Crianza (red wine, D.O. Rioja) — 18,00 €", "fr": "Faustino Crianza (vin rouge, D.O. Rioja) — 18,00 €" },
       "available": true,
-      "featured": false
+      "featured": "house"
     },
     {
       "id": "cordobes",
@@ -271,8 +271,8 @@
       "name": { "es": "Cordobés (carne en salsa)", "en": "Córdoba-Style Stew", "fr": "Ragoût à la Cordouane" },
       "description": {
         "es": "Carne de cerdo en salsa de vino y especias. Guiso tradicional andaluz.",
-        "en": "Meat in Córdoba-style sauce. Half / Full.",
-        "fr": "Porc en sauce au vin et épices."
+        "en": "Pork in a Córdoba-style wine and spice sauce. Available as half or full portion.",
+        "fr": "Porc en sauce cordouane au vin et aux épices. En demi-portion ou portion."
       },
       "price": "Media 9,00 € / Ración 12,50 €",
       "pairing": { "es": "Castillo de Aza Crianza (D.O. Ribera del Duero) — 19,00 €", "en": "Castillo de Aza Crianza (red wine, D.O. Ribera del Duero) — 19,00 €", "fr": "Castillo de Aza Crianza (vin rouge, D.O. Ribera del Duero) — 19,00 €" },
@@ -285,8 +285,8 @@
       "name": { "es": "Criadillas", "en": "Fried Sweetbreads", "fr": "Animelles frites" },
       "description": {
         "es": "Casquería tradicional, rebozada y frita.",
-        "en": "A traditional Andalusian tapa. Lightly fried, subtly flavoured.",
-        "fr": "Une tapa traditionnelle andalouse. Légèrement frites, saveur subtile."
+        "en": "Traditional Andalusian offal, lightly battered and fried. A bold old-school bar tapa.",
+        "fr": "Casquería andalouse traditionnelle, légèrement panée et frite. Une tapa de comptoir à l'ancienne."
       },
       "price": "Media 7,50 € / Ración 10,00 €",
       "pairing": { "es": "Fino de Jerez — 3,50 €", "en": "Fino de Jerez (dry sherry) — 3,50 €", "fr": "Fino de Xérès (xérès sec) — 3,50 €" },
@@ -299,8 +299,8 @@
       "name": { "es": "Sesos", "en": "Fried Brains", "fr": "Cervelles frites" },
       "description": {
         "es": "Sesos rebozados y fritos. Casquería clásica de la cocina granadina.",
-        "en": "Lightly battered and fried lamb brains. Crisp outside, delicate inside. Serve with lemon.",
-        "fr": "Cervelles d'agneau légèrement panées et frites. Croustillantes dehors, délicates dedans."
+        "en": "Lightly battered lamb brains, fried until crisp outside and delicate inside. Served with lemon.",
+        "fr": "Cervelles d'agneau légèrement panées, croustillantes dehors et délicates dedans. Servies avec citron."
       },
       "price": "Media 7,50 € / Ración 10,00 €",
       "pairing": { "es": "D.O. Rueda Verdejo — 17,00 €", "en": "D.O. Rueda Verdejo (white wine) — 17,00 €", "fr": "D.O. Rueda Verdejo (vin blanc) — 17,00 €" },
@@ -314,8 +314,8 @@
       "name": { "es": "Gazpacho andaluz", "en": "Andalusian Gazpacho", "fr": "Gaspacho andalou" },
       "description": {
         "es": "Tomate, pepino, pimiento, ajo y pan. Servido frío.",
-        "en": "Traditional cold soup.",
-        "fr": "Tomate, concombre, poivron, ail et pain. Servi froid."
+        "en": "Cold Andalusian tomato soup with cucumber, pepper, garlic and bread. Served chilled.",
+        "fr": "Soupe froide andalouse à la tomate, concombre, poivron, ail et pain. Servie fraîche."
       },
       "price": "4,50 €",
       "pairing": { "es": "", "en": "", "fr": "" },
@@ -328,8 +328,8 @@
       "name": { "es": "Salmorejo", "en": "Salmorejo", "fr": "Salmorejo" },
       "description": {
         "es": "Crema fría de tomate y pan. Solo en temporada de verano.",
-        "en": "Córdoba-style tomato cream. With egg and ham.",
-        "fr": "Crème froide de tomate et pain. Saison estivale uniquement."
+        "en": "Cold Córdoba-style tomato and bread cream, usually served with egg and ham. Summer season only.",
+        "fr": "Crème froide de tomate et pain, façon Cordoue, généralement servie avec œuf et jambon. Saison estivale uniquement."
       },
       "price": "5,00 €",
       "pairing": { "es": "", "en": "", "fr": "" },
@@ -342,8 +342,8 @@
       "name": { "es": "Sopa de picadillo", "en": "Picadillo Soup", "fr": "Soupe picadillo" },
       "description": {
         "es": "Caldo de pollo con jamón, huevo, pan y hierbabuena.",
-        "en": "Chicken broth with ham, egg, bread and mint.",
-        "fr": "Bouillon de poulet, jambon, œuf, pain et menthe."
+        "en": "Clear chicken broth with ham, egg, bread and mint. A comforting Granada soup.",
+        "fr": "Bouillon clair de poulet avec jambon, œuf, pain et menthe. Une soupe grenadine réconfortante."
       },
       "price": "5,00 €",
       "pairing": { "es": "", "en": "", "fr": "" },
@@ -370,8 +370,8 @@
       "name": { "es": "Sopa de ajos", "en": "Garlic Soup", "fr": "Soupe à l'ail" },
       "description": {
         "es": "Pan, ajo, pimentón, caldo y huevo. Plato de invierno.",
-        "en": "Bread, garlic, paprika, broth and egg. Winter dish.",
-        "fr": "Pain, ail, paprika, bouillon et œuf. Plat d'hiver."
+        "en": "Rustic garlic soup with bread, paprika, broth and egg. A winter dish.",
+        "fr": "Soupe rustique à l'ail avec pain, paprika, bouillon et œuf. Plat d'hiver."
       },
       "price": "6,00 €",
       "pairing": { "es": "", "en": "", "fr": "" },
@@ -596,8 +596,8 @@
       "name": { "es": "Calamares fritos", "en": "Fried Squid", "fr": "Calmars frits" },
       "description": {
         "es": "Calamares rebozados y fritos en aceite de oliva.",
-        "en": "Andalusian style. Half / Full.",
-        "fr": "Calamars panés et frits à l'huile d'olive."
+        "en": "Squid, battered and fried Andalusian-style in olive oil. Available as half or full portion.",
+        "fr": "Calmars panés et frits à l'andalouse dans l'huile d'olive. En demi-portion ou portion."
       },
       "price": "Media 9,50 € / Ración 13,00 €",
       "pairing": { "es": "Castillo de San Diego (V.T. Cádiz) — 17,50 €", "en": "Castillo de San Diego (white wine) — 17,50 €", "fr": "Castillo de San Diego (vin blanc) — 17,50 €" },
@@ -610,8 +610,8 @@
       "name": { "es": "Boquerones fritos", "en": "Fried Fresh Anchovies", "fr": "Anchois frits" },
       "description": {
         "es": "Boquerones frescos rebozados y fritos.",
-        "en": "Andalusian style. Half / Full.",
-        "fr": "Anchois frais panés et frits."
+        "en": "Fresh anchovies, lightly battered and fried Andalusian-style. Available as half or full portion.",
+        "fr": "Anchois frais légèrement panés et frits à l'andalouse. En demi-portion ou portion."
       },
       "price": "Media 9,50 € / Ración 13,00 €",
       "pairing": { "es": "Manzanilla — 3,50 €", "en": "Manzanilla (dry sherry, Sanlúcar) — 3,50 €", "fr": "Manzanilla (xérès sec, Sanlúcar) — 3,50 €" },
@@ -624,8 +624,8 @@
       "name": { "es": "Cazón frito en adobo", "en": "Marinated Dogfish", "fr": "Chien de mer mariné frit" },
       "description": {
         "es": "Cazón marinado en ajo, orégano y pimentón, rebozado y frito.",
-        "en": "Marinated in garlic, oregano and paprika, breaded and fried.",
-        "fr": "Mariné à l'ail, origan et paprika, pané et frit."
+        "en": "Dogfish marinated with garlic, oregano and paprika, then battered and fried. An Andalusian coastal classic.",
+        "fr": "Chien de mer mariné à l'ail, origan et paprika, puis pané et frit. Un classique côtier andalou."
       },
       "price": "Media 9,50 € / Ración 13,00 €",
       "pairing": { "es": "Fino de Jerez — 3,50 €", "en": "Fino de Jerez (dry sherry) — 3,50 €", "fr": "Fino de Xérès (xérès sec) — 3,50 €" },
@@ -666,8 +666,8 @@
       "name": { "es": "Gambas al pil-pil", "en": "Prawns in Pil-Pil", "fr": "Crevettes au pil-pil" },
       "description": {
         "es": "Gambas salteadas con ajo, guindilla y aceite de oliva.",
-        "en": "Prawns with garlic and chilli in olive oil. Half / Full.",
-        "fr": "Crevettes sautées, ail, piment et huile d'olive."
+        "en": "Prawns sizzling with garlic, chilli and olive oil. Available as half or full portion.",
+        "fr": "Crevettes servies avec ail, piment et huile d'olive bien chaude. En demi-portion ou portion."
       },
       "price": "Media 10,50 € / Ración 14,00 €",
       "pairing": { "es": "", "en": "", "fr": "" },
@@ -680,8 +680,8 @@
       "name": { "es": "Chopos fritos (puntillitas)", "en": "Fried Baby Squid", "fr": "Puntillitas frites" },
       "description": {
         "es": "Puntillitas de calamar rebozadas y fritas.",
-        "en": "Baby squid breaded and fried.",
-        "fr": "Puntillitas de calamar panées et frites."
+        "en": "Small baby squid, battered and fried whole until golden.",
+        "fr": "Petits calamars panés et frits entiers jusqu'à être dorés."
       },
       "price": "Media 10,50 € / Ración 14,00 €",
       "pairing": { "es": "", "en": "", "fr": "" },
@@ -1255,13 +1255,13 @@
       "category_id": "bocadillos",
       "name": {
         "es": "Bocadillo “Junior”",
-        "en": "“Junior” sandwich (pork loin, ham, cheese, lettuce, mayo)",
-        "fr": "Sandwich « Junior » (longe de porc, jambon, fromage, laitue, mayo)"
+        "en": "“Junior” bocadillo (pork loin, ham, cheese, lettuce, mayo)",
+        "fr": "Bocadillo « Junior » (longe de porc, jambon, fromage, laitue, mayo)"
       },
       "description": {
         "es": "Lomo de cerdo a la plancha, jamón serrano, queso, lechuga y mayonesa. Nota: No se sirven bocadillos en el comedor.",
-        "en": "Grilled pork loin, Serrano ham, cheese, lettuce and mayonnaise. Note: Sandwiches are not served in the dining room.",
-        "fr": "Longe de porc grillée, jambon serrano, fromage, laitue et mayonnaise. Note : Les sandwichs ne sont pas servis en salle."
+        "en": "Spanish bocadillo with grilled pork loin, Serrano ham, cheese, lettuce and mayonnaise. Note: bocadillos are not served in the dining room.",
+        "fr": "Bocadillo espagnol avec longe de porc grillée, jambon serrano, fromage, laitue et mayonnaise. Note : les bocadillos ne sont pas servis en salle."
       },
       "price": "5,20 €",
       "pairing": { "es": "", "en": "", "fr": "" },
@@ -1291,13 +1291,13 @@
       "category_id": "bocadillos",
       "name": {
         "es": "Bocadillo Trifásico",
-        "en": "“Trifásico” sandwich (pork loin, ham, cheese, lettuce, mayo, egg)",
-        "fr": "Sandwich « Trifásico » (longe de porc, jambon, fromage, laitue, mayo, œuf)"
+        "en": "“Trifásico” bocadillo (pork loin, ham, cheese, lettuce, mayo, egg)",
+        "fr": "Bocadillo « Trifásico » (longe de porc, jambon, fromage, laitue, mayo, œuf)"
       },
       "description": {
         "es": "Lomo de cerdo a la plancha, jamón serrano, queso, lechuga, mayonesa y huevo frito. Nota: No se sirven bocadillos en el comedor.",
-        "en": "Grilled pork loin, Serrano ham, cheese, lettuce, mayonnaise and fried egg. Note: Sandwiches are not served in the dining room.",
-        "fr": "Longe de porc grillée, jambon serrano, fromage, laitue, mayonnaise et œuf au plat. Note : Les sandwichs ne sont pas servis en salle."
+        "en": "Spanish bocadillo with grilled pork loin, Serrano ham, cheese, lettuce, mayonnaise and fried egg. Note: bocadillos are not served in the dining room.",
+        "fr": "Bocadillo espagnol avec longe de porc grillée, jambon serrano, fromage, laitue, mayonnaise et œuf au plat. Note : les bocadillos ne sont pas servis en salle."
       },
       "price": "6,00 €",
       "pairing": { "es": "", "en": "", "fr": "" },
@@ -1376,7 +1376,7 @@
     "daily_menu":   { "es": "Menú del Día",   "en": "Daily Menu",   "fr": "Menu du Jour"  },
     "edict_header": { "es": "Bar León · Granada · Est. 1959", "en": "Bar León · Granada · Est. 1959", "fr": "Bar León · Grenade · Dep. 1959" },
     "edict_foot":   { "es": "Bar León · Cocina Tradicional Granadina", "en": "Bar León · Traditional Granada Cuisine", "fr": "Bar León · Cuisine Traditionnelle de Grenade" },
-    "whatsapp_btn": { "es": "Reservar por WhatsApp", "en": "Book via WhatsApp", "fr": "Réserver por WhatsApp" },
+    "whatsapp_btn": { "es": "Reservar por WhatsApp", "en": "Book via WhatsApp", "fr": "Réserver par WhatsApp" },
     "tab_daily":    { "es": "Menú del Día",   "en": "Daily Menu",   "fr": "Menu du Jour" },
     "tab_restaurant": { "es": "Carta Restaurante", "en": "Carta Restaurante", "fr": "Carta Restaurante" },
     "tab_bar":      { "es": "Carta Barra",     "en": "Carta Barra",        "fr": "Carta Barra" }

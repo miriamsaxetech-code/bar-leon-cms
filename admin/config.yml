@@ -540,4 +540,4 @@ collections:
                 options:
                   - { label: "Inicio (homepage)", value: "homepage" }
                   - { label: "Historia", value: "historia" }
-                  - { label: "Hemeroteca", value: "hemeroteca" }
+                  - { label: "Stories of León", value: "archive" }

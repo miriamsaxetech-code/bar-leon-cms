@@ -21,10 +21,10 @@
     badge_seasonal:    { es: 'Temporada',   en: 'Seasonal',       fr: 'Saison'             },
     badge_house:       { es: 'De la casa',  en: 'House special',  fr: 'Maison'             },
     soldout:           { es: 'Agotado hoy', en: 'Sold out today', fr: "Épuisé aujourd'hui" },
-    pairing:           { es: 'Recomendamos:', en: 'We recommend:', fr: 'Nous recommandons:' },
+    pairing:           { es: 'Marida con', en: 'Pairs with', fr: "S'accorde avec" },
     paraEmpezarTitle:  { es: 'Para empezar',              en: 'To start',                   fr: 'Pour commencer'           },
     paraEmpezarSub:    { es: 'La barra, antes de la mesa.', en: 'The bar, before the table.', fr: 'Le comptoir, avant la table.' },
-    whatsappFab:       { es: 'Reservar mesa', en: 'Book a table', fr: 'Réserver une table' },
+    whatsappFab:       { es: 'WhatsApp', en: 'WhatsApp', fr: 'WhatsApp' },
   };
 
   const DAY_NAMES = {
@@ -190,7 +190,7 @@
     });
     if (!matched) return '';
     const wineDisplayName = typeof matched.name === 'object' ? t(matched.name, lang) : matched.name;
-    return `<a class="pairing-chip" href="#" data-wine-id="${matched.id}" data-wine-name="${wineDisplayName}">🍷 ${LABELS.pairing[lang]} ${wineDisplayName}</a>`;
+    return `<a class="pairing-chip" href="#wine-${matched.id}" data-wine-id="${matched.id}" data-wine-name="${wineDisplayName}">${LABELS.pairing[lang]} ${wineDisplayName}</a>`;
   }
 
   function renderMenuDia(dm, nav, lang) {
@@ -579,6 +579,26 @@
     });
   }
 
+  function scrollToWine(container, wineId) {
+    if (!wineId) return;
+
+    const barBtn = container.querySelector('.menu-switch-btn[data-panel="bar"]');
+    if (barBtn) barBtn.click();
+
+    setTimeout(function() {
+      const wineEl = document.getElementById('wine-' + wineId);
+      if (!wineEl) return;
+      const accordion = wineEl.closest ? wineEl.closest('.accordion-item') : null;
+      if (accordion && !accordion.classList.contains('is-open')) {
+        const head = accordion.querySelector('.categoria-head');
+        if (head) head.click();
+      }
+      wineEl.scrollIntoView({ behavior: 'smooth', block: 'center' });
+      wineEl.classList.add('is-pairing-target');
+      setTimeout(function() { wineEl.classList.remove('is-pairing-target'); }, 1400);
+    }, 150);
+  }
+
   // ─── PAIRING CHIP CLICK DELEGATION ───────────────────────────────────────────
   function initPairingChips(container) {
     container.addEventListener('click', function(e) {
@@ -586,17 +606,7 @@
       if (!chip) return;
       e.preventDefault();
       const wineId = chip.getAttribute('data-wine-id');
-      if (!wineId) return;
-
-      // Switch to bar panel
-      const barBtn = container.querySelector('.menu-switch-btn[data-panel="bar"]');
-      if (barBtn) barBtn.click();
-
-      // Scroll to the wine row
-      setTimeout(function() {
-        const wineEl = document.getElementById('wine-' + wineId);
-        if (wineEl) wineEl.scrollIntoView({ behavior: 'smooth', block: 'center' });
-      }, 150);
+      scrollToWine(container, wineId);
     });
   }
 
@@ -656,17 +666,22 @@
 </footer>`;
   }
 
-  // ─── WHATSAPP FLOATING CTA ────────────────────────────────────────────────────
-  function injectWhatsAppFAB(d, lang) {
-    if (!d.contact || !d.contact.whatsapp) return;
-    const number = d.contact.whatsapp.replace(/\D/g, '');
-    if (!number) return;
+  // ─── MOBILE SERVICE CTA ───────────────────────────────────────────────────────
+  function injectMobileServiceCTA(d, lang) {
+    if (!d.contact) return;
+    const number = d.contact.whatsapp ? d.contact.whatsapp.replace(/\D/g, '') : '';
+    const inService = isNowServiceTime(d.hours);
     const fab = document.createElement('a');
-    fab.className = 'whatsapp-fab';
-    fab.href = 'https://wa.me/' + number;
-    fab.target = '_blank';
-    fab.rel = 'noopener';
-    fab.textContent = LABELS.whatsappFab[lang] || 'Reservar mesa';
+    fab.className = 'mobile-service-cta';
+    if (inService || !number) {
+      fab.href = d.contact.phone_link;
+      fab.textContent = t(d.nav && d.nav.call, lang) || 'Llamar';
+    } else {
+      fab.href = 'https://wa.me/' + number;
+      fab.target = '_blank';
+      fab.rel = 'noopener';
+      fab.textContent = LABELS.whatsappFab[lang] || 'WhatsApp';
+    }
     document.body.appendChild(fab);
   }
 
@@ -706,7 +721,7 @@
       initMenuSwitch(app);
       initPairingChips(app);
       injectLangBar(lang);
-      injectWhatsAppFAB(d, lang);
+      injectMobileServiceCTA(d, lang);
       header.style.display = 'block';
       app.style.display = 'block';
       loader.classList.add('fade-out');
@@ -717,6 +732,8 @@
           const el = document.getElementById('hours');
           if (el) el.scrollIntoView({ behavior: 'smooth' });
         }, 150);
+      } else if (window.location.hash.indexOf('#wine-') === 0) {
+        scrollToWine(app, window.location.hash.replace('#wine-', ''));
       }
     } catch (err) {
       const errMsg = {

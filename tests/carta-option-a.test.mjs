@@ -17,6 +17,12 @@ class ElementStub {
   querySelector() {
     return null;
   }
+
+  addEventListener() {}
+
+  setAttribute(name, value) {
+    this[name] = value;
+  }
 }
 
 const elements = {
@@ -27,9 +33,22 @@ const elements = {
 };
 
 const documentStub = {
+  body: new ElementStub('body'),
+  createElement() {
+    return new ElementStub();
+  },
   getElementById(id) {
     return elements[id] || new ElementStub(id);
   },
+};
+
+documentStub.body.firstChild = null;
+documentStub.body.insertBefore = function insertBefore(child) {
+  this.firstChild = child;
+  return child;
+};
+documentStub.body.appendChild = function appendChild(child) {
+  return child;
 };
 
 const venue = JSON.parse(await fs.readFile('data/venue.json', 'utf8'));
@@ -69,5 +88,8 @@ assert.match(html, /Carta Barra/);
 assert.match(html, /Sabores de Andalucía/);
 assert.match(html, /Vinos de Granada/);
 assert.match(html, /Cervezas/);
+assert.match(html, /pairing-chip/);
+assert.match(html, /Marida con/);
+assert.doesNotMatch(html, /🍷/);
 
 console.log('carta option A render OK');

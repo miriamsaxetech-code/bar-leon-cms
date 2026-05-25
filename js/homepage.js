@@ -4,6 +4,36 @@
   const HOME_LINKS  = { es: '/es/', en: '/en/', fr: '/fr/' };
   const CARTA_LINKS = { es: '/es/carta.html', en: '/en/menu.html', fr: '/fr/carte.html' };
 
+  const LABELS = {
+    dailyMenu:    { es: 'Menú del Día', en: 'Daily Menu', fr: 'Menu du Jour' },
+    dailyKicker:  { es: 'Hoy se mira primero', en: 'Start here today', fr: "Aujourd'hui, on commence ici" },
+    starters:     { es: 'Primeros', en: 'First course', fr: 'Entrées' },
+    seconds:      { es: 'Segundos', en: 'Second course', fr: 'Plats' },
+    daily:        { es: 'Plato del día', en: 'Daily special', fr: 'Plat du jour' },
+    desserts:     { es: 'Postre', en: 'Dessert', fr: 'Dessert' },
+    fullMenu:     { es: 'Ver carta completa', en: 'View full menu', fr: 'Voir la carte' },
+    andalusia:    { es: 'Sabores de Andalucía', en: 'Flavors of Andalusia', fr: "Saveurs d'Andalousie" },
+    andalusiaSub: { es: 'Platos de casa, guiso y barra granadina.', en: 'House dishes, stews, and Granada bar classics.', fr: 'Plats maison, mijotés et comptoir grenadin.' },
+    stories:      { es: 'Stories of León', en: 'Stories of León', fr: 'Stories of León' },
+    storiesSub:   { es: 'Archivo familiar y memoria de barra. Solo material real del León.', en: 'Family archive and bar memory. Only real León material.', fr: 'Archives familiales et mémoire du comptoir. Uniquement du matériel réel du León.' },
+    call:         { es: 'Llamar', en: 'Call', fr: 'Appeler' },
+    whatsapp:     { es: 'WhatsApp', en: 'WhatsApp', fr: 'WhatsApp' },
+    pairing:      { es: 'Marida con', en: 'Pairs with', fr: "S'accorde avec" },
+    recommended:  { es: 'Recomendado', en: 'Recommended', fr: 'Recommandé' },
+    seasonal:     { es: 'Temporada', en: 'Seasonal', fr: 'Saison' },
+    house:        { es: 'De la casa', en: 'House specialty', fr: 'Spécialité maison' },
+  };
+
+  const DAY_NAMES = {
+    monday:    { es: 'Lunes',     en: 'Monday',    fr: 'Lundi'    },
+    tuesday:   { es: 'Martes',    en: 'Tuesday',   fr: 'Mardi'    },
+    wednesday: { es: 'Miércoles', en: 'Wednesday', fr: 'Mercredi' },
+    thursday:  { es: 'Jueves',    en: 'Thursday',  fr: 'Jeudi'    },
+    friday:    { es: 'Viernes',   en: 'Friday',    fr: 'Vendredi' },
+    saturday:  { es: 'Sábado',    en: 'Saturday',  fr: 'Samedi'   },
+    sunday:    { es: 'Domingo',   en: 'Sunday',    fr: 'Dimanche' }
+  };
+
   function getLang() {
     const m = window.location.pathname.match(/\/(es|en|fr)\//);
     return m ? m[1] : 'es';
@@ -12,6 +42,26 @@
   function t(field, lang) {
     if (!field || typeof field === 'string') return field || '';
     return field[lang] || field.es || '';
+  }
+
+  function formatPrice(price) {
+    if (typeof price === 'number') return price.toFixed(2).replace('.', ',') + '&nbsp;€';
+    return (price || '').replace(/\s€/g, '&nbsp;€');
+  }
+
+  function formatPhoneDisplay(phone) {
+    const digits = (phone || '').replace(/\D/g, '');
+    if (digits === '34958225143') return '(+34) 958-22-51-43';
+    return phone || '';
+  }
+
+  function formatTimePeriod(period, lang) {
+    function fmt(value) {
+      if (lang !== 'fr') return value;
+      const parts = value.split(':');
+      return `${parts[0]}h${parts[1]}`;
+    }
+    return `${fmt(period.open)}–${fmt(period.close)}`;
   }
 
   // ─── SERVICE TIME HELPER ─────────────────────────────────────────────────────
@@ -48,6 +98,129 @@
     document.body.insertBefore(bar, document.body.firstChild);
   }
 
+  function renderBadge(dish, lang) {
+    const v = dish.featured;
+    if (!v || v === false) return '';
+    if (v === true || v === 'recommended') return `<span class="dish-badge dish-badge--recommended">${LABELS.recommended[lang]}</span>`;
+    if (v === 'seasonal') return `<span class="dish-badge dish-badge--seasonal">${LABELS.seasonal[lang]}</span>`;
+    if (v === 'house') return `<span class="dish-badge dish-badge--house">${LABELS.house[lang]}</span>`;
+    return '';
+  }
+
+  function findWineForPairing(pairingText, wines, lang) {
+    if (!pairingText) return null;
+    return (wines || []).filter(w => w.available !== false).find(w => {
+      const wineName = typeof w.name === 'object' ? t(w.name, lang) : (w.name || '');
+      return wineName && pairingText.toLowerCase().includes(wineName.toLowerCase());
+    }) || null;
+  }
+
+  function renderPairingChip(dish, wines, lang, cartaUrl) {
+    const pairingText = t(dish.pairing, lang);
+    const wine = findWineForPairing(pairingText, wines, lang);
+    if (!wine) return '';
+    const wineName = typeof wine.name === 'object' ? t(wine.name, lang) : wine.name;
+    return `<a class="pairing-chip" href="${cartaUrl}#wine-${wine.id}" data-wine-id="${wine.id}">${LABELS.pairing[lang]} ${wineName}</a>`;
+  }
+
+  function splitList(str) {
+    return (str || '').split(' · ').map(s => s.trim()).filter(Boolean);
+  }
+
+  function renderHomeDailyMenu(d, lang, cartaUrl) {
+    const dm = d.daily_menu;
+    if (!dm || !dm.active) return '';
+
+    const days = (dm.days || [])
+      .map(day => DAY_NAMES[day] ? DAY_NAMES[day][lang] : day)
+      .join(', ');
+    const period = dm.service_period ? formatTimePeriod(dm.service_period, lang) : '';
+
+    function renderList(label, values) {
+      if (!values.length) return '';
+      return `<div class="home-daily-menu__group">
+  <p>${label}</p>
+  <ul>${values.map(item => `<li>${item}</li>`).join('')}</ul>
+</div>`;
+    }
+
+    const mains = (dm.mains || []).map(item => {
+      const day = DAY_NAMES[item.day] ? DAY_NAMES[item.day][lang] : item.day;
+      return `<strong>${day}:</strong> ${t(item.name, lang)}`;
+    });
+
+    return `<section class="home-daily-menu" aria-labelledby="home-daily-title">
+  <div class="home-daily-menu__head">
+    <p class="section-label">${LABELS.dailyKicker[lang]}</p>
+    <div>
+      <h2 id="home-daily-title">${LABELS.dailyMenu[lang]}</h2>
+      <p class="home-daily-menu__meta">${days}${period ? ` · ${period}` : ''}</p>
+    </div>
+    <span class="home-daily-menu__price">${formatPrice(dm.price)}</span>
+  </div>
+  <div class="home-daily-menu__body">
+    ${renderList(LABELS.starters[lang], splitList(t(dm.starters, lang)))}
+    ${renderList(LABELS.seconds[lang], splitList(t(dm.seconds, lang)))}
+    ${renderList(LABELS.daily[lang], mains)}
+    ${renderList(LABELS.desserts[lang], splitList(t(dm.desserts, lang)))}
+  </div>
+  <div class="home-daily-menu__foot">
+    <p>${t(dm.includes, lang)}</p>
+    <a href="${cartaUrl}">${LABELS.fullMenu[lang]}</a>
+  </div>
+</section>`;
+  }
+
+  function renderHomeAndalusia(d, lang, cartaUrl) {
+    const dishes = (d.dishes || [])
+      .filter(dish => dish.available !== false && dish.category_id === 'andalusian-specialities')
+      .sort((a, b) => {
+        const rank = v => v === true || v === 'recommended' ? 0 : v === 'house' ? 1 : v === 'seasonal' ? 2 : 3;
+        return rank(a.featured) - rank(b.featured);
+      })
+      .slice(0, 5);
+    if (!dishes.length) return '';
+
+    return `<section class="home-andalusia" aria-labelledby="home-andalusia-title">
+  <div class="home-section-head">
+    <p class="section-label">${LABELS.andalusiaSub[lang]}</p>
+    <h2 id="home-andalusia-title">${LABELS.andalusia[lang]}</h2>
+  </div>
+  <div class="home-andalusia__list">
+    ${dishes.map(dish => `<article class="home-andalusia__item">
+      <div class="home-andalusia__main">
+        ${renderBadge(dish, lang)}
+        <h3>${t(dish.name, lang)}</h3>
+        <p>${t(dish.description, lang)}</p>
+        ${renderPairingChip(dish, d.wines, lang, cartaUrl)}
+      </div>
+      <span class="home-andalusia__price">${formatPrice(dish.price)}</span>
+    </article>`).join('')}
+  </div>
+  <a class="home-text-link" href="${cartaUrl}">${LABELS.fullMenu[lang]}</a>
+</section>`;
+  }
+
+  function renderStoriesArchive(d, lang) {
+    const item = (d.cariocas || []).find(entry => {
+      const context = entry.context || 'homepage';
+      return entry.active && (context === 'homepage' || context === 'archive' || context === 'historia' || context === 'stories') && (entry.image || entry.src);
+    });
+    if (!item) return '';
+    const image = item.image || item.src;
+    const caption = t(item.caption, lang);
+    return `<section class="stories-archive" aria-labelledby="stories-archive-title">
+  <div class="home-section-head">
+    <p class="section-label">${LABELS.storiesSub[lang]}</p>
+    <h2 id="stories-archive-title">${LABELS.stories[lang]}</h2>
+  </div>
+  <figure class="stories-archive__figure">
+    <img src="${image}" alt="${caption || LABELS.stories[lang]}" loading="lazy" onerror="this.closest('section').style.display='none'">
+    ${caption ? `<figcaption>${caption}</figcaption>` : ''}
+  </figure>
+</section>`;
+  }
+
   // ─── CARIOCA SLOT ─────────────────────────────────────────────────────────────
   function renderCariocaSlot(venue, lang) {
     const item = (venue.cariocas || []).find(c => c.active && c.context === 'homepage');
@@ -79,29 +252,29 @@
     return `<div class="social-strip">${links.join('<span class="social-sep"> · </span>')}</div>`;
   }
 
-  // ─── WHATSAPP FLOATING CTA ────────────────────────────────────────────────────
-  const WHATSAPP_FAB_LABEL = { es: 'Reservar mesa', en: 'Book a table', fr: 'Réserver une table' };
-
-  function injectWhatsAppFAB(d, lang) {
-    if (!d.contact || !d.contact.whatsapp) return;
-    const number = d.contact.whatsapp.replace(/\D/g, '');
-    if (!number) return;
+  // ─── MOBILE SERVICE CTA ───────────────────────────────────────────────────────
+  function injectMobileServiceCTA(d, lang) {
+    if (!d.contact) return;
+    const inService = isNowServiceTime(d.hours);
+    const number = d.contact.whatsapp ? d.contact.whatsapp.replace(/\D/g, '') : '';
     const fab = document.createElement('a');
-    fab.className = 'whatsapp-fab';
-    fab.href = 'https://wa.me/' + number;
-    fab.target = '_blank';
-    fab.rel = 'noopener';
-    fab.textContent = WHATSAPP_FAB_LABEL[lang] || 'Reservar mesa';
+    fab.className = 'mobile-service-cta';
+    if (inService || !number) {
+      fab.href = d.contact.phone_link;
+      fab.textContent = LABELS.call[lang];
+    } else {
+      fab.href = 'https://wa.me/' + number;
+      fab.target = '_blank';
+      fab.rel = 'noopener';
+      fab.textContent = LABELS.whatsapp[lang];
+    }
     document.body.appendChild(fab);
   }
 
   function render(d, lang) {
     const phoneLink    = d.contact.phone_link;
-    const phoneDisplay = d.contact.phone;
+    const phoneDisplay = formatPhoneDisplay(d.contact.phone);
     const cartaUrl     = CARTA_LINKS[lang];
-    const whatsapp     = d.contact.whatsapp ? d.contact.whatsapp.replace(/\D/g, '') : '';
-    const serviceMode  = d.service_mode || {};
-    const inService    = isNowServiceTime(d.hours);
     const nav          = d.nav;
 
     const notice = t(d.venue.notice, lang);
@@ -164,7 +337,7 @@
 </div>`;
 
     // ─── CALL CTA LOGIC ─────────────────────────────────────────────────────────
-    const phoneCtaHtml = `<a href="${phoneLink}" class="call-cta"><span class="call-label">${t(nav && nav.call, lang) || 'Llamar'}</span><span class="call-number">${phoneDisplay}</span></a>`;
+    const phoneCtaHtml = `<a href="${phoneLink}" class="call-cta"><span class="call-label">${t(nav && nav.call, lang) || 'Llamar'}</span></a>`;
     const callCta = phoneCtaHtml;
 
     const locationBlock = `
@@ -187,31 +360,16 @@
   </div>
 </section>`;
 
-    // ─── HISTORIA CARICATURE BLOCK ───────────────────────────────────────────────
-    const historiaCaricature = `
-<figure class="caricature-block">
-  <img src="/assets/images/cariocas/antonio-leon-mena-tarjeta-1959.jpg"
-       alt="Antonio León Mena — fundador del Bar León, 1959"
-       onerror="this.closest('figure').style.display='none'">
-  <figcaption>Fundado en 1959 · Antonio León Mena · Calle Pan, 3</figcaption>
-</figure>`;
-
-    // ─── HEMEROTECA CARICATURE BLOCK ─────────────────────────────────────────────
-    const hemerotecaCaricature = `
-<figure class="caricature-block caricature-block--wide">
-  <img src="/assets/images/cariocas/la-leonera-60-aniversario-paco-garcia.jpg"
-       alt="La Leonera — 60 aniversario, 1959-2019, por Paco García"
-       onerror="this.closest('figure').style.display='none'">
-  <figcaption>Tres generaciones · Paco García, 2019</figcaption>
-</figure>`;
-
     // ─── CARIOCA SLOT ─────────────────────────────────────────────────────────────
     const cariocaSlot = renderCariocaSlot(d, lang);
 
     return `<div class="wrap">
   ${logoBlock}
   <h1 class="site-name">${t(d.venue.name, lang)}</h1>
-  <p class="site-location">${addr.neighborhood} &middot; ${addr.city} <span class="site-since">&middot; ${since}</span></p>
+  <p class="site-location">
+    <span class="site-location__place">${addr.neighborhood} &middot; ${addr.city}</span>
+    <span class="site-location__since">${since}</span>
+  </p>
   <nav class="site-nav" aria-label="Navigation">
     <div class="nav-primary">
       <a href="${cartaUrl}">${t(d.nav.menu, lang)}</a>
@@ -227,12 +385,13 @@
     <cite>${t(d.venue.name, lang)} &middot; ${addr.street} &middot; ${addr.city}</cite>
   </div>
   ${aviso}
+  ${renderHomeDailyMenu(d, lang, cartaUrl)}
   ${hero}
-  ${historiaCaricature}
   ${trustStrip}
+  ${renderHomeAndalusia(d, lang, cartaUrl)}
   ${renderSocialLinks(d.social)}
   ${locationBlock}
-  ${hemerotecaCaricature}
+  ${renderStoriesArchive(d, lang)}
   ${cariocaSlot}
   <div class="homepage-footer">
     <div class="homepage-footer-inner">
@@ -258,6 +417,7 @@
 
       app.innerHTML = render(d, lang);
       injectLangBar(lang, HOME_LINKS);
+      injectMobileServiceCTA(d, lang);
       app.style.display = 'block';
       loader.classList.add('fade-out');
       setTimeout(() => { loader.style.display = 'none'; }, 380);
