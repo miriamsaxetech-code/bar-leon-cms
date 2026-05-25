@@ -95,11 +95,16 @@ assert.ok(html.indexOf('Viernes en verano') < html.indexOf('Viernes de Cuaresma'
 assert.ok(html.indexOf('Viernes de Cuaresma') < html.indexOf('Olla de San Antón'));
 assert.ok(html.indexOf('Olla de San Antón') < html.indexOf('Postre'));
 assert.match(html, /Sabores de Andalucía/);
+assert.match(html, /carta-accent-images/);
+assert.match(html, /bar-leon-plato-05\.webp/);
+assert.match(html, /bar-leon-plato-06\.webp/);
+assert.match(html, /loading="lazy"/);
 assert.match(html, /Vinos de Granada/);
 assert.match(html, /Cervezas/);
 assert.match(html, /pairing-chip/);
-assert.match(html, /vino granadino de altura|crianza de solera andaluza|salinidad de Sanlúcar/);
+assert.match(html, /vino de altura|crianza de solera andaluza|salinidad de Sanlúcar/);
 assert.match(html, /D\.O\. Granada|D\.O\. Jerez|D\.O\. Manzanilla-Sanlúcar/);
+assert.doesNotMatch(html, /vino granadino|local Granada|vin local de Grenade/);
 assert.doesNotMatch(html, /Marida con|Pairs with|S'accorde avec/);
 assert.doesNotMatch(html, /🍷/);
 

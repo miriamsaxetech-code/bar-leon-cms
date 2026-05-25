@@ -5,6 +5,25 @@
   const CARTA_LINKS = { es: '/es/carta.html', en: '/en/menu.html', fr: '/fr/carte.html' };
 
   const SABORES_CATEGORY_ID = 'andalusian-specialities';
+  const WEB_IMAGE_BASE = '../assets/images/web/';
+  const CARTA_ACCENT_IMAGES = [
+    {
+      src: 'bar-leon-plato-05.webp',
+      alt: {
+        es: 'Carne de monte en adobo, guiso de caza de sierra',
+        en: 'Venison in marinade, mountain game stew',
+        fr: 'Chevreuil en marinade, ragoût de gibier de montagne',
+      },
+    },
+    {
+      src: 'bar-leon-plato-06.webp',
+      alt: {
+        es: 'Cazuela de cocina tradicional servida en Bar León',
+        en: 'Traditional clay-pot dish served at Bar León',
+        fr: 'Cazuela traditionnelle servie au Bar León',
+      },
+    },
+  ];
 
   const LABELS = {
     starters:   { es: 'Primeros',       en: 'First course',  fr: 'Entrées'  },
@@ -196,9 +215,9 @@
 
     if (haystack.includes('granada')) {
       return {
-        es: 'vino granadino de altura',
-        en: 'local Granada wine beyond Rioja/Ribera',
-        fr: "vin local de Grenade, vin d'altitude",
+        es: 'vino de altura',
+        en: 'beyond Rioja/Ribera',
+        fr: "vin d'altitude",
       }[lang];
     }
     if (haystack.includes('manzanilla') || haystack.includes('sanlúcar')) {
@@ -253,7 +272,7 @@
     const note = wineCultureNote(wine, lang);
 
     if (lang === 'en' && /granada/i.test(region)) {
-      return `Try local Granada ${type || 'wine'} · beyond Rioja/Ribera · ${wineName} · ${region}`;
+      return `Try a local ${type || 'wine'} · ${note} · ${wineName} · ${region}`;
     }
     return [wineName, type, region, note].filter(Boolean).join(' · ');
   }
@@ -363,6 +382,11 @@
   <div class="wrap">
     <div class="spotlight-andalucia-inner">
       <h2 class="spotlight-andalucia__title">${catName}</h2>
+      <div class="carta-accent-images">
+        ${CARTA_ACCENT_IMAGES.map(image => `<figure class="carta-accent-images__item">
+          <img src="${WEB_IMAGE_BASE}${image.src}" alt="${image.alt[lang]}" loading="lazy" decoding="async">
+        </figure>`).join('')}
+      </div>
       ${cards}
     </div>
   </div>

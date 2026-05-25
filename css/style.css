@@ -1224,6 +1224,49 @@ h2 {
   margin-top: 18px;
 }
 
+.home-food-gallery {
+  display: flex;
+  gap: 10px;
+  margin-top: 28px;
+}
+
+.home-food-gallery__item {
+  border: 1px solid rgba(28, 26, 23, 0.18);
+  background: var(--tile-cream);
+  flex: 1 1 0;
+  margin: 0;
+  overflow: hidden;
+  transition: flex 0.32s ease, border-color 0.2s ease;
+}
+
+.home-food-gallery__item:hover,
+.home-food-gallery__item:focus-visible {
+  border-color: rgba(122, 28, 28, 0.36);
+  flex: 1.55 1 0;
+  outline: none;
+}
+
+.home-food-gallery__item img {
+  aspect-ratio: 4 / 3;
+  display: block;
+  height: 100%;
+  object-fit: cover;
+  transition: transform 0.32s ease;
+  width: 100%;
+}
+
+.home-food-gallery__item:hover img,
+.home-food-gallery__item:focus-visible img {
+  transform: scale(1.025);
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .home-food-gallery__item,
+  .home-food-gallery__item img {
+    transition: none;
+  }
+}
+
 .stories-archive__figure {
   border: 1px solid rgba(28, 26, 23, 0.24);
   background: var(--tile-cream);
@@ -1508,6 +1551,15 @@ h2 {
     margin-top: 34px;
     padding-top: 24px;
   }
+  .home-food-gallery {
+    display: grid;
+    grid-template-columns: 1fr;
+  }
+  .home-food-gallery__item,
+  .home-food-gallery__item:hover,
+  .home-food-gallery__item:focus-visible {
+    flex: none;
+  }
   .location-section {
     margin-top: 30px;
     padding-top: 20px;
@@ -1650,6 +1702,29 @@ h2 {
   grid-column: 2;
   grid-row: 1 / span 2;
   align-self: start;
+}
+
+.carta-accent-images {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 10px;
+  padding: 14px 0 18px;
+  border-bottom: 1px solid rgba(28, 26, 23, 0.12);
+}
+
+.carta-accent-images__item {
+  margin: 0;
+  overflow: hidden;
+  border: 1px solid rgba(28, 26, 23, 0.18);
+  background: var(--tile-cream);
+}
+
+.carta-accent-images__item img {
+  aspect-ratio: 5 / 3;
+  display: block;
+  height: 100%;
+  object-fit: cover;
+  width: 100%;
 }
 
 /* ─── DISH BADGES ─── */

@@ -1385,7 +1385,7 @@
   "cariocas": [
     {
       "id": "retrato-tres-generaciones",
-      "image": "/assets/images/header-leon.webp",
+      "image": "../assets/images/web/bar-leon-plato-01.webp",
       "caption": {
         "es": "Retrato de la casa: tres generaciones sosteniendo una barra granadina desde 1959.",
         "en": "House portrait: three generations keeping a Granada bar alive since 1959.",

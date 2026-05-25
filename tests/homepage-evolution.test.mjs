@@ -113,6 +113,11 @@ assert.match(lunch.html, /Olla de San Antón/);
 assert.match(lunch.html, /habas secas, habichuelas y cerdo de matanza/);
 assert.match(lunch.html, /home-andalusia/);
 assert.match(lunch.html, /Sabores de Andalucía/);
+assert.match(lunch.html, /home-food-gallery/);
+assert.match(lunch.html, /bar-leon-plato-02\.webp/);
+assert.match(lunch.html, /bar-leon-plato-03\.webp/);
+assert.match(lunch.html, /bar-leon-plato-04\.webp/);
+assert.match(lunch.html, /loading="lazy"/);
 assert.match(lunch.html, /site-location__place/);
 assert.match(lunch.html, /site-location__since/);
 assert.doesNotMatch(lunch.html, /class="call-number"/);
@@ -126,15 +131,16 @@ assert.ok(afterHours.body.children.some(el => el.className === 'mobile-service-c
 
 const withArchive = await renderHomepageAt('2026-05-25T13:30:00+02:00', 'es', { withArchive: true });
 assert.match(withArchive.html, /Stories of León/);
-assert.match(withArchive.html, /header-leon\.webp/);
+assert.match(withArchive.html, /bar-leon-plato-01\.webp/);
 assert.match(withArchive.html, /tres generaciones sosteniendo una barra granadina/);
 
 const english = await renderHomepageAt('2026-05-25T13:30:00+02:00', 'en');
 assert.match(english.html, /site-location__since">Since 1959/);
 assert.match(english.html, /class="call-label">Call<\/span>/);
-assert.match(english.html, /Try local Granada red wine/);
+assert.match(english.html, /Try a local red wine/);
 assert.match(english.html, /beyond Rioja\/Ribera/);
 assert.match(english.html, /D\.O\. Granada/);
+assert.doesNotMatch(english.html, /local Granada/);
 assert.doesNotMatch(english.html, /Pairs with/);
 
 const french = await renderHomepageAt('2026-05-25T13:30:00+02:00', 'fr');

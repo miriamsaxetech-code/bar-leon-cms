@@ -3,6 +3,34 @@
 
   const HOME_LINKS  = { es: '/es/', en: '/en/', fr: '/fr/' };
   const CARTA_LINKS = { es: '/es/carta.html', en: '/en/menu.html', fr: '/fr/carte.html' };
+  const WEB_IMAGE_BASE = '../assets/images/web/';
+
+  const HOME_FOOD_IMAGES = [
+    {
+      src: 'bar-leon-plato-02.webp',
+      alt: {
+        es: 'Cazuela tradicional servida en barro en Bar León',
+        en: 'Traditional clay-pot dish served at Bar León',
+        fr: 'Plat traditionnel servi en cazuela de terre cuite au Bar León',
+      },
+    },
+    {
+      src: 'bar-leon-plato-03.webp',
+      alt: {
+        es: 'Plato de arroz de la casa con copa de vino en la barra',
+        en: 'House rice dish with a glass of wine at the bar',
+        fr: 'Plat de riz maison avec un verre de vin au comptoir',
+      },
+    },
+    {
+      src: 'bar-leon-plato-04.webp',
+      alt: {
+        es: 'Habas con jamón y huevo, cocina granadina de temporada',
+        en: 'Broad beans with ham and egg, seasonal Granada cooking',
+        fr: 'Fèves au jambon et œuf, cuisine grenadine de saison',
+      },
+    },
+  ];
 
   const LABELS = {
     dailyMenu:    { es: 'Menú del Día', en: 'Daily Menu', fr: 'Menu du Jour' },
@@ -131,9 +159,9 @@
 
     if (haystack.includes('granada')) {
       return {
-        es: 'vino granadino de altura',
-        en: 'local Granada wine beyond Rioja/Ribera',
-        fr: "vin local de Grenade, vin d'altitude",
+        es: 'vino de altura',
+        en: 'beyond Rioja/Ribera',
+        fr: "vin d'altitude",
       }[lang];
     }
     if (haystack.includes('manzanilla') || haystack.includes('sanlúcar')) {
@@ -188,7 +216,7 @@
     const note = wineCultureNote(wine, lang);
 
     if (lang === 'en' && /granada/i.test(region)) {
-      return `Try local Granada ${type || 'wine'} · beyond Rioja/Ribera · ${wineName} · ${region}`;
+      return `Try a local ${type || 'wine'} · ${note} · ${wineName} · ${region}`;
     }
     return [wineName, type, region, note].filter(Boolean).join(' · ');
   }
@@ -276,6 +304,14 @@
     </article>`).join('')}
   </div>
   <a class="home-text-link" href="${cartaUrl}">${LABELS.fullMenu[lang]}</a>
+</section>`;
+  }
+
+  function renderHomeFoodGallery(lang) {
+    return `<section class="home-food-gallery" aria-label="${LABELS.andalusia[lang]}">
+  ${HOME_FOOD_IMAGES.map(image => `<figure class="home-food-gallery__item" tabindex="0">
+    <img src="${WEB_IMAGE_BASE}${image.src}" alt="${image.alt[lang]}" loading="lazy" decoding="async">
+  </figure>`).join('')}
 </section>`;
   }
 
@@ -467,6 +503,7 @@
   ${hero}
   ${trustStrip}
   ${renderHomeAndalusia(d, lang, cartaUrl)}
+  ${renderHomeFoodGallery(lang)}
   ${renderSocialLinks(d.social)}
   ${locationBlock}
   ${renderStoriesArchive(d, lang)}
