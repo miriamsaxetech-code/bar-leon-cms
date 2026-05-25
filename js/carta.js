@@ -281,8 +281,10 @@
 
     return `<section class="spotlight-andalucia">
   <div class="wrap">
-    <h2 class="spotlight-andalucia__title">${catName}</h2>
-    ${cards}
+    <div class="spotlight-andalucia-inner">
+      <h2 class="spotlight-andalucia__title">${catName}</h2>
+      ${cards}
+    </div>
   </div>
 </section>`;
   }

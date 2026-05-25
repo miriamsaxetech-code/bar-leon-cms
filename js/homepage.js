@@ -165,18 +165,7 @@
 
     // ─── CALL CTA LOGIC ─────────────────────────────────────────────────────────
     const phoneCtaHtml = `<a href="${phoneLink}" class="call-cta"><span class="call-label">${t(nav && nav.call, lang) || 'Llamar'}</span><span class="call-number">${phoneDisplay}</span></a>`;
-    let callCta;
-    if (serviceMode.restaurant_open === false) {
-      callCta = whatsapp
-        ? `<a href="https://wa.me/${whatsapp}">${t(nav && nav.whatsapp_btn, lang) || 'Reservar por WhatsApp'}</a>`
-        : phoneCtaHtml;
-    } else if (inService) {
-      callCta = phoneCtaHtml;
-    } else {
-      callCta = whatsapp
-        ? `<a href="https://wa.me/${whatsapp}">${t(nav && nav.whatsapp_btn, lang) || 'Reservar por WhatsApp'}</a>`
-        : phoneCtaHtml;
-    }
+    const callCta = phoneCtaHtml;
 
     const locationBlock = `
 <section class="location-section">
@@ -231,7 +220,12 @@
     </div>
     <div class="lang-selector" aria-label="Language">${langSelector(lang, HOME_LINKS)}</div>
   </nav>
-  <p class="site-tagline">${t(d.venue.tagline, lang)}</p>
+  <div class="azulejo-frame">
+    <blockquote>
+      "${t(d.venue.tagline, lang)}"
+    </blockquote>
+    <cite>${t(d.venue.name, lang)} &middot; ${addr.street} &middot; ${addr.city}</cite>
+  </div>
   ${aviso}
   ${hero}
   ${historiaCaricature}
@@ -264,7 +258,6 @@
 
       app.innerHTML = render(d, lang);
       injectLangBar(lang, HOME_LINKS);
-      injectWhatsAppFAB(d, lang);
       app.style.display = 'block';
       loader.classList.add('fade-out');
       setTimeout(() => { loader.style.display = 'none'; }, 380);
