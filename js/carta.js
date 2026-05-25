@@ -68,6 +68,47 @@
     return price || '';
   }
 
+  // Translates Spanish price annotation patterns into the current language.
+  // Patterns handled:
+  //   "Media X / Ración Y"          → Half X / Portion Y
+  //   "X (ración) / Y (unidad en barra)" → X (portion) / Y (unit at bar)
+  //   "X (unidad)"                  → X (each)
+  //   "X (barra) / Y (restaurante)" → X (bar) / Y (restaurant)
+  //   "X / ración"                  → X / portion
+  function localizePrice(str, lang) {
+    if (!str || lang === 'es') return str || '';
+
+    const TERMS = {
+      en: {
+        media:      'Half',
+        racion:     'Portion',
+        unidad:     'each',
+        barra:      'bar',
+        restaurante:'restaurant',
+        'unidad en barra': 'unit at bar',
+      },
+      fr: {
+        media:      'Demi',
+        racion:     'Portion',
+        unidad:     'unité',
+        barra:      'comptoir',
+        restaurante:'restaurant',
+        'unidad en barra': 'à l\'unité',
+      },
+    };
+    const T = TERMS[lang] || {};
+
+    return str
+      .replace(/^Media\s+(.+?)\s*\/\s*Raci[oó]n\s+(.+)$/i,
+        (_, h, f) => `${T.media} ${h.trim()} / ${T.racion} ${f.trim()}`)
+      .replace(/\(raci[oó]n\)\s*\/\s*(.+?)\(unidad en barra\)/i,
+        (_, mid) => `(${T.racion}) / ${mid}(${T['unidad en barra']})`)
+      .replace(/\(unidad\)/gi,       `(${T.unidad})`)
+      .replace(/\(barra\)/gi,        `(${T.barra})`)
+      .replace(/\(restaurante\)/gi,  `(${T.restaurante})`)
+      .replace(/\/\s*raci[oó]n\b/gi, `/ ${T.racion}`);
+  }
+
   function formatTimePeriod(period, lang) {
     const sep = lang === 'fr' ? 'h' : ':';
     function fmt(t) {
@@ -213,7 +254,7 @@
       const statusHtml = renderDishStatus(dish, lang);
       const descText = t(dish.description, lang);
       const pairingChip = renderPairingChip(dish, wines, lang);
-      const priceHtml = dish.status === 'soldout' ? '' : `<span class="check-price dish-price">${formatPrice(dish.price)}</span>`;
+      const priceHtml = dish.status === 'soldout' ? '' : `<span class="check-price dish-price">${localizePrice(formatPrice(dish.price), lang)}</span>`;
       return `<div class="spotlight-card${getDishStatusClass(dish)}">
   ${badge}
   <span class="check-name">${t(dish.name, lang)}</span>
@@ -271,7 +312,7 @@
     ${badge ? `<div>${badge}</div>` : ''}
     <span class="check-name">${t(item.name, lang)}</span>
     <span class="check-leader" aria-hidden="true"></span>
-    ${item.status === 'soldout' ? '' : `<span class="check-price dish-price">${formatPrice(item.price)}</span>`}
+    ${item.status === 'soldout' ? '' : `<span class="check-price dish-price">${localizePrice(formatPrice(item.price), lang)}</span>`}
   </div>
   ${t(item.description, lang) ? `<p class="item-desc">${t(item.description, lang)}</p>` : ''}
   ${statusHtml}
