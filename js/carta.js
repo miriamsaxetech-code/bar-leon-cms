@@ -137,6 +137,12 @@
       groups[i.category_id].push(i);
     });
 
+    order.sort((a, b) => {
+      const orderA = catMap[a] ? catMap[a].order : 999;
+      const orderB = catMap[b] ? catMap[b].order : 999;
+      return orderA - orderB;
+    });
+
     const cats = order.map((catId, idx) => {
       const cat  = catMap[catId];
       const name = cat ? t(cat.name, lang) : catId;
@@ -167,10 +173,11 @@
     return `<div class="wrap carta-accordion">${cats.join('')}</div>`;
   }
 
-  function renderWines(wines, beverages, categories, lang, service) {
+  function renderWines(wines, beverages, dishes, categories, lang, service) {
     const hasWines = Array.isArray(wines) && wines.length > 0;
     const hasBeverages = Array.isArray(beverages) && beverages.length > 0;
-    if (!hasWines && !hasBeverages) return '';
+    const hasDishes = Array.isArray(dishes) && dishes.length > 0;
+    if (!hasWines && !hasBeverages && !hasDishes) return '';
     const catMap = {};
     (categories || [])
       .filter(c => (c.service || (c.type === 'food' ? 'restaurant' : 'bar')) === service)
@@ -178,13 +185,19 @@
 
     const groups = {};
     const order  = [];
-    [...(wines || []), ...(beverages || [])].filter(w => w && w.available !== false).forEach(item => {
+    [...(wines || []), ...(beverages || []), ...(dishes || [])].filter(w => w && w.available !== false).forEach(item => {
       if (!catMap[item.category_id]) return;
       if (!groups[item.category_id]) {
         groups[item.category_id] = [];
         order.push(item.category_id);
       }
       groups[item.category_id].push(item);
+    });
+
+    order.sort((a, b) => {
+      const orderA = catMap[a] ? catMap[a].order : 999;
+      const orderB = catMap[b] ? catMap[b].order : 999;
+      return orderA - orderB;
     });
 
     const cats = order.map((catId, idx) => {
@@ -194,27 +207,57 @@
 
       const itemsHtml = list.map(item => {
         const nameStr = typeof item.name === 'object' ? t(item.name, lang) : item.name;
-        const price   = item.price_bottle
-          ? formatPrice(item.price_bottle)
-          : item.price_glass
-            ? formatPrice(item.price_glass)
-            : item.price || '';
+        
+        let priceStr = '';
+        if (item.price_glass && item.price_bottle) {
+          const glassLabels = { es: 'Copa', en: 'Glass', fr: 'Verre' };
+          const bottleLabels = { es: 'Bot.', en: 'Bot.', fr: 'Bout.' };
+          priceStr = `${glassLabels[lang]} ${formatPrice(item.price_glass)} / ${bottleLabels[lang]} ${formatPrice(item.price_bottle)}`;
+        } else if (item.price_bottle) {
+          priceStr = formatPrice(item.price_bottle);
+        } else if (item.price_glass) {
+          priceStr = formatPrice(item.price_glass);
+        } else {
+          priceStr = item.price || '';
+        }
+
+        const descText = t(item.description, lang);
+        let extraHtml = '';
+        if (item.region) {
+          extraHtml = `<p class="item-desc">${item.region}</p>`;
+        } else if (descText) {
+          extraHtml = `<p class="item-desc">${descText}</p>`;
+        }
+
         return `<article class="carta-item">
   <div class="check-row">
     <span class="check-name">${nameStr}${item.producer ? ` <span class="item-producer">${item.producer}</span>` : ''}</span>
     <span class="check-leader" aria-hidden="true"></span>
-    <span class="check-price">${price}</span>
+    <span class="check-price">${priceStr}</span>
   </div>
-  ${item.region ? `<p class="item-desc">${item.region}</p>` : ''}
+  ${extraHtml}
 </article>`;
       }).join('');
 
-      return `<div class="accordion-item">
-  <div class="categoria-head" role="button" tabindex="0" aria-expanded="false">
+      let warningHtml = '';
+      if (catId === 'bocadillos') {
+        const warnings = {
+          es: 'No se sirven bocadillos en el comedor',
+          en: 'Sandwiches are not served in the dining room',
+          fr: 'Les sandwichs ne sont pas servis en salle'
+        };
+        warningHtml = `<div class="bocadillos-warning">${warnings[lang]}</div>`;
+      }
+
+      return `<div class="accordion-item${idx === 0 ? ' is-open' : ''}">
+  <div class="categoria-head" role="button" tabindex="0" aria-expanded="${idx === 0 ? 'true' : 'false'}">
     <h2>${name}</h2>
     <span class="accordion-icon" aria-hidden="true"></span>
   </div>
-  <div class="accordion-body">${itemsHtml}</div>
+  <div class="accordion-body">
+    ${warningHtml}
+    ${itemsHtml}
+  </div>
 </div>`;
     });
 
@@ -244,7 +287,7 @@
     <p class="section-label">${LABELS.bar[lang]}</p>
     <p class="menu-panel-copy">${LABELS.barIntro[lang]}</p>
   </div>
-  ${renderWines(d.wines, d.beverages, d.categories, lang, 'bar')}
+  ${renderWines(d.wines, d.beverages, d.dishes, d.categories, lang, 'bar')}
 </section>`;
   }
 
