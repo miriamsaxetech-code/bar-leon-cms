@@ -176,31 +176,33 @@
   },
 
   "categories": [
-    { "id": "andalusian-specialities", "name": { "es": "Sabores de Andalucía",      "en": "Flavours of Andalusia",        "fr": "Saveurs d'Andalousie"      }, "type": "food", "order": 1 },
-    { "id": "soups-stews",             "name": { "es": "Sopas y platos de cuchara", "en": "Soups and stews",              "fr": "Soupes et plats mijotés"   }, "type": "food", "order": 2 },
-    { "id": "starters",                "name": { "es": "Entrantes y raciones",       "en": "Starters and sharing plates",  "fr": "Entrées et raciones"       }, "type": "food", "order": 3 },
-    { "id": "fried-fish",              "name": { "es": "Frituras y pescados",         "en": "Fried dishes and fish",        "fr": "Fritures et poissons"      }, "type": "food", "order": 4 },
-    { "id": "meats",                   "name": { "es": "Carnes",                      "en": "Meat dishes",                  "fr": "Viandes"                   }, "type": "food", "order": 5 },
-    { "id": "eggs-omelettes",          "name": { "es": "Huevos y tortillas",          "en": "Eggs and omelettes",           "fr": "Œufs et omelettes"         }, "type": "food", "order": 6 },
-    { "id": "rice",                    "name": { "es": "Arroces",                     "en": "Rice dishes",                  "fr": "Riz"                       }, "type": "food", "order": 7 },
-    { "id": "desserts",                "name": { "es": "Postres",                     "en": "Desserts",                     "fr": "Desserts"                  }, "type": "food", "order": 8 },
-    { "id": "granada-wines",           "name": { "es": "Vinos de Granada",            "en": "Granada Wines",                "fr": "Vins de Grenade"           }, "type": "wine", "order": 1 },
-    { "id": "rioja",                   "name": { "es": "Rioja",                       "en": "Rioja",                        "fr": "Rioja"                     }, "type": "wine", "order": 2 },
-    { "id": "ribera-del-duero",        "name": { "es": "Ribera del Duero",            "en": "Ribera del Duero",             "fr": "Ribera del Duero"          }, "type": "wine", "order": 3 },
-    { "id": "whites-fortified",        "name": { "es": "Blancos y generosos",         "en": "Whites and fortified",         "fr": "Blancs et fortifiés"       }, "type": "wine", "order": 4 },
-    { "id": "beer",                    "name": { "es": "Cervezas",                    "en": "Beer",                         "fr": "Bières"                    }, "type": "drink", "order": 1 },
-    { "id": "drinks",                  "name": { "es": "Bebidas y aperitivos",        "en": "Drinks and aperitifs",         "fr": "Boissons et apéritifs"     }, "type": "drink", "order": 2 }
+    { "id": "andalusian-specialities", "name": { "es": "Sabores de Andalucía",      "en": "Flavours of Andalusia",        "fr": "Saveurs d'Andalousie"      }, "type": "food", "service": "restaurant", "order": 1 },
+    { "id": "soups-stews",             "name": { "es": "Sopas y platos de cuchara", "en": "Soups and stews",              "fr": "Soupes et plats mijotés"   }, "type": "food", "service": "restaurant", "order": 2 },
+    { "id": "starters",                "name": { "es": "Entrantes y raciones",       "en": "Starters and sharing plates",  "fr": "Entrées et raciones"       }, "type": "food", "service": "restaurant", "order": 3 },
+    { "id": "fried-fish",              "name": { "es": "Frituras y pescados",         "en": "Fried dishes and fish",        "fr": "Fritures et poissons"      }, "type": "food", "service": "restaurant", "order": 4 },
+    { "id": "meats",                   "name": { "es": "Carnes",                      "en": "Meat dishes",                  "fr": "Viandes"                   }, "type": "food", "service": "restaurant", "order": 5 },
+    { "id": "eggs-omelettes",          "name": { "es": "Huevos y tortillas",          "en": "Eggs and omelettes",           "fr": "Œufs et omelettes"         }, "type": "food", "service": "restaurant", "order": 6 },
+    { "id": "rice",                    "name": { "es": "Arroces",                     "en": "Rice dishes",                  "fr": "Riz"                       }, "type": "food", "service": "restaurant", "order": 7 },
+    { "id": "desserts",                "name": { "es": "Postres",                     "en": "Desserts",                     "fr": "Desserts"                  }, "type": "food", "service": "restaurant", "order": 8 },
+    { "id": "bocadillos",              "name": { "es": "Bocadillos",                  "en": "Sandwiches",                   "fr": "Sandwichs"                 }, "type": "food", "service": "bar",        "order": 9 },
+    { "id": "granada-wines",           "name": { "es": "Vinos de Granada",            "en": "Granada Wines",                "fr": "Vins de Grenade"           }, "type": "wine", "service": "bar",        "order": 10 },
+    { "id": "rioja",                   "name": { "es": "Rioja",                       "en": "Rioja",                        "fr": "Rioja"                     }, "type": "wine", "service": "bar",        "order": 11 },
+    { "id": "ribera-del-duero",        "name": { "es": "Ribera del Duero",            "en": "Ribera del Duero",             "fr": "Ribera del Duero"          }, "type": "wine", "service": "bar",        "order": 12 },
+    { "id": "valdepenas",              "name": { "es": "Valdepeñas",                  "en": "Valdepeñas",                   "fr": "Valdepeñas"                }, "type": "wine", "service": "bar",        "order": 13 },
+    { "id": "whites-fortified",        "name": { "es": "Blancos y generosos",         "en": "Whites and fortified",         "fr": "Blancs et fortifiés"       }, "type": "wine", "service": "bar",        "order": 14 },
+    { "id": "beer",                    "name": { "es": "Cervezas",                    "en": "Beer",                         "fr": "Bières"                    }, "type": "drink", "service": "bar",       "order": 15 },
+    { "id": "drinks",                  "name": { "es": "Bebidas y aperitivos",        "en": "Drinks and aperitifs",         "fr": "Boissons et apéritifs"     }, "type": "drink", "service": "bar",       "order": 16 }
   ],
 
   "dishes": [
     {
       "id": "tortilla-sacromonte",
       "category_id": "andalusian-specialities",
-      "name": { "es": "Tortilla del Sacromonte", "en": "Sacromonte Omelette", "fr": "Tortilla del Sacromonte" },
+      "name": { "es": "Tortilla del Sacromonte", "en": "Tortilla del Sacromonte (Sacromonte Omelette)", "fr": "Tortilla del Sacromonte (Omelette du Sacromonte)" },
       "description": {
         "es": "Tradición granadina. Tortilla con sesos, criadillas y jamón. Receta de siempre.",
-        "en": "Granada tradition. Brains, sweetbreads, egg.",
-        "fr": "Tradition grenadine. Omelette aux abats et jambon."
+        "en": "Granada omelette made with brains, sweetbreads, eggs and ham. A historic recipe.",
+        "fr": "Omelette traditionnelle de Grenade préparée avec de la cervelle, des abats, des œufs et du jambon."
       },
       "price": "10,00 €",
       "pairing": { "es": "Manzanilla — 3,50 €", "en": "Manzanilla — 3,50 €", "fr": "Manzanilla — 3,50 €" },
@@ -224,11 +226,11 @@
     {
       "id": "carne-de-monte",
       "category_id": "andalusian-specialities",
-      "name": { "es": "Carne de monte (ciervo en adobo)", "en": "Wild Venison in Adobo", "fr": "Gibier en adobo" },
+      "name": { "es": "Carne de monte (ciervo en adobo)", "en": "Carne de monte (marinated venison)", "fr": "Carne de monte (cerf mariné)" },
       "description": {
         "es": "Ciervo en adobo tradicional. Guiso de caza con vino, laurel y especias.",
-        "en": "Marinated venison, Andalusian style. Half / Full.",
-        "fr": "Cerf en adobo traditionnel. Ragoût de chasse."
+        "en": "Traditional marinated venison. Game stew cooked with wine, bay leaves and spices.",
+        "fr": "Cerf mariné traditionnel. Ragoût de gibier cuisiné au vin, laurier et épices."
       },
       "price": "Media 10,50 € / Ración 13,50 €",
       "pairing": { "es": "Muñana Rojo (D.O. Granada) — 19,00 €", "en": "Muñana Rojo (D.O. Granada) — 19,00 €", "fr": "Muñana Rojo (D.O. Granada) — 19,00 €" },
@@ -252,11 +254,11 @@
     {
       "id": "callos",
       "category_id": "andalusian-specialities",
-      "name": { "es": "Callos", "en": "Tripe Stew", "fr": "Tripes" },
+      "name": { "es": "Callos", "en": "Callos (tripe stew)", "fr": "Callos (ragoût de tripes)" },
       "description": {
         "es": "Guiso tradicional de callos con chorizo, morcilla, pimentón y garbanzos.",
-        "en": "Traditional stew. Chorizo, paprika. Half / Full.",
-        "fr": "Ragoût traditionnel de tripes, chorizo et piment."
+        "en": "Traditional tripe stew with chorizo, morcilla (blood sausage), paprika and chickpeas.",
+        "fr": "Ragoût de tripes traditionnel avec chorizo, morcilla (boudin noir), paprika et pois chiches."
       },
       "price": "Media 7,50 € / Ración 10,00 €",
       "pairing": { "es": "Faustino Crianza (D.O. Rioja) — 18,00 €", "en": "Faustino Crianza (D.O. Rioja) — 18,00 €", "fr": "Faustino Crianza (D.O. Rioja) — 18,00 €" },
@@ -280,11 +282,11 @@
     {
       "id": "criadillas",
       "category_id": "andalusian-specialities",
-      "name": { "es": "Criadillas", "en": "Criadillas", "fr": "Criadillas" },
+      "name": { "es": "Criadillas", "en": "Criadillas (bull's testicles)", "fr": "Criadillas (testicules de taureau)" },
       "description": {
         "es": "Casquería tradicional, rebozada y frita.",
-        "en": "Breaded and fried. Half / Full.",
-        "fr": "Abats traditionnels, panés et frits."
+        "en": "Traditional offal, breaded and fried. Half / Full.",
+        "fr": "Abats traditionnels, panés et frits. Demi / Portion."
       },
       "price": "Media 7,50 € / Ración 10,00 €",
       "pairing": { "es": "Fino de Jerez — 3,50 €", "en": "Fino de Jerez — 3,50 €", "fr": "Fino de Xérès — 3,50 €" },
@@ -294,11 +296,11 @@
     {
       "id": "sesos",
       "category_id": "andalusian-specialities",
-      "name": { "es": "Sesos", "en": "Fried Brains", "fr": "Cervelle frite" },
+      "name": { "es": "Sesos", "en": "Sesos (lamb brains)", "fr": "Sesos (cervelle d'agneau)" },
       "description": {
         "es": "Sesos rebozados y fritos. Casquería clásica de la cocina granadina.",
-        "en": "Breaded and fried. Half / Full.",
-        "fr": "Cervelle panée et frite. Casquería classique."
+        "en": "Traditional breaded and fried brains. Classic Granada offal dish. Half / Full.",
+        "fr": "Cervelle panée et frite. Plat d'abats classique de Grenade. Demi / Portion."
       },
       "price": "Media 7,50 € / Ración 10,00 €",
       "pairing": { "es": "D.O. Rueda Verdejo — 17,00 €", "en": "D.O. Rueda Verdejo — 17,00 €", "fr": "D.O. Rueda Verdejo — 17,00 €" },
@@ -935,7 +937,7 @@
         "en": "House-made potato omelette.",
         "fr": "Tortilla de pommes de terre maison."
       },
-      "price": "2,80 € (unidad)",
+      "price": "3,50 €",
       "pairing": { "es": "", "en": "", "fr": "" },
       "available": true,
       "featured": false
@@ -1193,50 +1195,166 @@
       "pairing": { "es": "", "en": "", "fr": "" },
       "available": true,
       "featured": false
+    },
+    {
+      "id": "bocadillo-lomo-jamon-queso",
+      "category_id": "bocadillos",
+      "name": {
+        "es": "Bocadillo de lomo con jamón o queso",
+        "en": "Pork loin sandwich with ham or cheese",
+        "fr": "Sandwich de longe de porc avec jambon ou fromage"
+      },
+      "description": {
+        "es": "Lomo de cerdo a la plancha con jamón serrano o queso curado. Nota: No se sirven bocadillos en el comedor.",
+        "en": "Grilled pork loin with Serrano ham or cured cheese. Note: Sandwiches are not served in the dining room.",
+        "fr": "Longe de porc grillée avec jambon serrano ou fromage affiné. Note : Les sandwichs ne sont pas servis en salle."
+      },
+      "price": "4,00 €",
+      "pairing": { "es": "", "en": "", "fr": "" },
+      "available": true,
+      "featured": false
+    },
+    {
+      "id": "bocadillo-lomo-jamon-queso-doble",
+      "category_id": "bocadillos",
+      "name": {
+        "es": "Bocadillo de lomo con jamón y queso",
+        "en": "Pork loin sandwich with ham and cheese",
+        "fr": "Sandwich de longe de porc avec jambon et fromage"
+      },
+      "description": {
+        "es": "Lomo de cerdo a la plancha con jamón serrano y queso curado. Nota: No se sirven bocadillos en el comedor.",
+        "en": "Grilled pork loin with Serrano ham and cured cheese. Note: Sandwiches are not served in the dining room.",
+        "fr": "Longe de porc grillée avec jambon serrano et fromage affiné. Note : Les sandwichs ne sont pas servis en salle."
+      },
+      "price": "4,50 €",
+      "pairing": { "es": "", "en": "", "fr": "" },
+      "available": true,
+      "featured": false
+    },
+    {
+      "id": "bocadillo-jamon-queso",
+      "category_id": "bocadillos",
+      "name": {
+        "es": "Bocadillo de jamón o queso",
+        "en": "Serrano ham or cheese sandwich",
+        "fr": "Sandwich au jambon serrano ou fromage"
+      },
+      "description": {
+        "es": "Jamón serrano o queso curado de la casa. Nota: No se sirven bocadillos en el comedor.",
+        "en": "Serrano ham or cured cheese. Note: Sandwiches are not served in the dining room.",
+        "fr": "Jambon serrano ou fromage affiné de la maison. Note : Les sandwichs ne sont pas servis en salle."
+      },
+      "price": "3,80 €",
+      "pairing": { "es": "", "en": "", "fr": "" },
+      "available": true,
+      "featured": false
+    },
+    {
+      "id": "bocadillo-junior",
+      "category_id": "bocadillos",
+      "name": {
+        "es": "Bocadillo “Junior”",
+        "en": "“Junior” sandwich (pork loin, ham, cheese, lettuce, mayo)",
+        "fr": "Sandwich « Junior » (longe de porc, jambon, fromage, laitue, mayo)"
+      },
+      "description": {
+        "es": "Lomo de cerdo a la plancha, jamón serrano, queso, lechuga y mayonesa. Nota: No se sirven bocadillos en el comedor.",
+        "en": "Grilled pork loin, Serrano ham, cheese, lettuce and mayonnaise. Note: Sandwiches are not served in the dining room.",
+        "fr": "Longe de porc grillée, jambon serrano, fromage, laitue et mayonnaise. Note : Les sandwichs ne sont pas servis en salle."
+      },
+      "price": "5,20 €",
+      "pairing": { "es": "", "en": "", "fr": "" },
+      "available": true,
+      "featured": false
+    },
+    {
+      "id": "bocadillo-calamares",
+      "category_id": "bocadillos",
+      "name": {
+        "es": "Bocadillo de calamares",
+        "en": "Fried squid sandwich",
+        "fr": "Sandwich aux calmars frits"
+      },
+      "description": {
+        "es": "Calamares fritos al estilo andaluz. Nota: No se sirven bocadillos en el comedor.",
+        "en": "Andalusian style fried squid. Note: Sandwiches are not served in the dining room.",
+        "fr": "Calmars frits à l'andalouse. Note : Les sandwichs ne sont pas servis en salle."
+      },
+      "price": "5,00 €",
+      "pairing": { "es": "", "en": "", "fr": "" },
+      "available": true,
+      "featured": false
+    },
+    {
+      "id": "bocadillo-trifasico",
+      "category_id": "bocadillos",
+      "name": {
+        "es": "Bocadillo Trifásico",
+        "en": "“Trifásico” sandwich (pork loin, ham, cheese, lettuce, mayo, egg)",
+        "fr": "Sandwich « Trifásico » (longe de porc, jambon, fromage, laitue, mayo, œuf)"
+      },
+      "description": {
+        "es": "Lomo de cerdo a la plancha, jamón serrano, queso, lechuga, mayonesa y huevo frito. Nota: No se sirven bocadillos en el comedor.",
+        "en": "Grilled pork loin, Serrano ham, cheese, lettuce, mayonnaise and fried egg. Note: Sandwiches are not served in the dining room.",
+        "fr": "Longe de porc grillée, jambon serrano, fromage, laitue, mayonnaise et œuf au plat. Note : Les sandwichs ne sont pas servis en salle."
+      },
+      "price": "6,00 €",
+      "pairing": { "es": "", "en": "", "fr": "" },
+      "available": true,
+      "featured": false
     }
   ],
 
   "wines": [
-    { "id": "senorio-de-nevada",        "category_id": "granada-wines",    "name": "Señorío de Nevada",        "producer": "",             "region": "D.O. Granada — Valle de Lecrín", "type": "red",   "price_bottle": 20.00, "available": true },
-    { "id": "calvente-guindalera",       "category_id": "granada-wines",    "name": "Calvente Guindalera",       "producer": "Calvente",     "region": "D.O. Granada — Jete",             "type": "red",   "price_bottle": 18.00, "available": true },
-    { "id": "fontedei-prado-negro",      "category_id": "granada-wines",    "name": "Fontedei Prado Negro",      "producer": "Fontedei",     "region": "D.O. Granada",                    "type": "red",   "price_bottle": 17.00, "available": true },
-    { "id": "delirio-munana",            "category_id": "granada-wines",    "name": "Delirio",                   "producer": "Muñana",       "region": "D.O. Granada",                    "type": "red",   "price_bottle": 17.00, "available": true },
-    { "id": "munana-rojo",               "category_id": "granada-wines",    "name": "Muñana Rojo",               "producer": "Muñana",       "region": "D.O. Granada",                    "type": "red",   "price_bottle": 19.00, "available": true },
-    { "id": "munana-3-cepas",            "category_id": "granada-wines",    "name": "Muñana 3 Cepas",            "producer": "Muñana",       "region": "D.O. Granada",                    "type": "red",   "price_bottle": 21.00, "available": true },
-    { "id": "calvente-vigiriega",        "category_id": "granada-wines",    "name": "Calvente",                  "producer": "Calvente",     "region": "D.O. Granada",                    "type": "white", "price_bottle": 21.00, "available": true },
-    { "id": "munana-flamenco-semi",      "category_id": "granada-wines",    "name": "Muñana Flamenco Semi",      "producer": "Muñana",       "region": "D.O. Granada",                    "type": "white", "price_bottle": 18.00, "available": true },
-    { "id": "xateo",                     "category_id": "granada-wines",    "name": "Xateo",                     "producer": "",             "region": "D.O. Granada",                    "type": "white", "price_bottle": 18.00, "available": true },
-    { "id": "munana-rosado",             "category_id": "granada-wines",    "name": "Muñana Rosado",             "producer": "Muñana",       "region": "D.O. Granada",                    "type": "rose",  "price_bottle": 18.00, "available": true },
-    { "id": "antano-crianza",            "category_id": "rioja",            "name": "Antaño Crianza",            "producer": "",             "region": "D.O. Rioja",                      "type": "red",   "price_bottle": 17.00, "available": true },
-    { "id": "alcorta-crianza",           "category_id": "rioja",            "name": "Alcorta Crianza",           "producer": "Alcorta",      "region": "D.O. Rioja",                      "type": "red",   "price_bottle": 18.00, "available": true },
-    { "id": "faustino-crianza",          "category_id": "rioja",            "name": "Faustino Crianza",          "producer": "Faustino",     "region": "D.O. Rioja",                      "type": "red",   "price_bottle": 18.00, "available": true },
-    { "id": "marques-caceres-crianza",   "category_id": "rioja",            "name": "Marqués de Cáceres Crianza","producer": "Marqués de Cáceres", "region": "D.O. Rioja",               "type": "red",   "price_bottle": 19.00, "available": true },
-    { "id": "marques-caceres-reserva",   "category_id": "rioja",            "name": "Marqués de Cáceres Reserva","producer": "Marqués de Cáceres", "region": "D.O. Rioja",               "type": "red",   "price_bottle": 26.00, "available": true },
-    { "id": "valdesantos-roble",         "category_id": "ribera-del-duero", "name": "Valdesantos Roble",         "producer": "",             "region": "D.O. Ribera del Duero",           "type": "red",   "price_bottle": 17.00, "available": true },
-    { "id": "ribera-de-los-molinos",     "category_id": "ribera-del-duero", "name": "Ribera de los Molinos",     "producer": "",             "region": "D.O. Ribera del Duero",           "type": "red",   "price_bottle": 17.00, "available": true },
-    { "id": "yllera-ribera",             "category_id": "ribera-del-duero", "name": "Yllera",                    "producer": "Yllera",       "region": "D.O. Ribera del Duero",           "type": "red",   "price_bottle": 18.00, "available": true },
-    { "id": "protos-roble",              "category_id": "ribera-del-duero", "name": "Protos Roble",              "producer": "Protos",       "region": "D.O. Ribera del Duero",           "type": "red",   "price_bottle": 19.00, "available": true },
-    { "id": "castillo-de-aza-crianza",   "category_id": "ribera-del-duero", "name": "Castillo de Aza Crianza",   "producer": "",             "region": "D.O. Ribera del Duero",           "type": "red",   "price_bottle": 19.00, "available": true },
-    { "id": "do-rueda-verdejo",          "category_id": "whites-fortified", "name": "D.O. Rueda Verdejo",        "producer": "",             "region": "D.O. Rueda",                      "type": "white", "price_bottle": 17.00, "available": true },
-    { "id": "castillo-san-diego",        "category_id": "whites-fortified", "name": "Castillo de San Diego",     "producer": "Barbadillo",   "region": "V.T. Cádiz",                      "type": "white", "price_bottle": 17.50, "available": true },
-    { "id": "maestrante-semi",           "category_id": "whites-fortified", "name": "Maestrante Semi",           "producer": "Barbadillo",   "region": "V.T. Cádiz",                      "type": "white", "price_bottle": 17.50, "available": true },
-    { "id": "yllera-55-frizzante",       "category_id": "whites-fortified", "name": "Yllera 5.5 Frizzante",      "producer": "Yllera",       "region": "D.O. Rueda",                      "type": "white", "price_bottle": 19.00, "available": true },
-    { "id": "fino-jerez",               "category_id": "whites-fortified", "name": "Fino",                      "producer": "",             "region": "D.O. Jerez",                      "type": "sherry","price_glass": 3.50,   "available": true },
-    { "id": "manzanilla-casa-bernal",    "category_id": "whites-fortified", "name": "Manzanilla",                "producer": "Casa Bernal",  "region": "D.O. Manzanilla-Sanlúcar",        "type": "sherry","price_glass": 3.50,   "available": true },
+    { "id": "senorio-de-nevada",        "category_id": "granada-wines",    "name": "Señorío de Nevada",        "producer": "",             "region": "D.O. Granada — Valle de Lecrín", "type": "red",   "price_bottle": 20.00, "price_glass": 3.80, "available": true },
+    { "id": "calvente-guindalera",       "category_id": "granada-wines",    "name": "Calvente Guindalera",       "producer": "Calvente",     "region": "D.O. Granada — Jete",             "type": "red",   "price_bottle": 18.00, "price_glass": 3.50, "available": true },
+    { "id": "fontedei-prado-negro",      "category_id": "granada-wines",    "name": "Fontedei Prado Negro",      "producer": "Fontedei",     "region": "D.O. Granada",                    "type": "red",   "price_bottle": 17.00, "price_glass": 3.20, "available": true },
+    { "id": "delirio-munana",            "category_id": "granada-wines",    "name": "Delirio",                   "producer": "Muñana",       "region": "D.O. Granada",                    "type": "red",   "price_bottle": 17.00, "price_glass": 3.20, "available": true },
+    { "id": "munana-rojo",               "category_id": "granada-wines",    "name": "Muñana Rojo",               "producer": "Muñana",       "region": "D.O. Granada",                    "type": "red",   "price_bottle": 19.00, "price_glass": 3.50, "available": true },
+    { "id": "munana-3-cepas",            "category_id": "granada-wines",    "name": "Muñana 3 Cepas",            "producer": "Muñana",       "region": "D.O. Granada",                    "type": "red",   "price_bottle": 21.00,                      "available": true },
+    { "id": "calvente-vigiriega",        "category_id": "granada-wines",    "name": "Calvente",                  "producer": "Calvente",     "region": "D.O. Granada",                    "type": "white", "price_bottle": 21.00, "price_glass": 3.70, "available": true },
+    { "id": "munana-flamenco-semi",      "category_id": "granada-wines",    "name": "Muñana Flamenco Semi",      "producer": "Muñana",       "region": "D.O. Granada",                    "type": "white", "price_bottle": 18.00, "price_glass": 3.20, "available": true },
+    { "id": "xateo",                     "category_id": "granada-wines",    "name": "Xateo",                     "producer": "",             "region": "D.O. Granada",                    "type": "white", "price_bottle": 18.00,                      "available": true },
+    { "id": "munana-rosado",             "category_id": "granada-wines",    "name": "Muñana Rosado",             "producer": "Muñana",       "region": "D.O. Granada",                    "type": "rose",  "price_bottle": 18.00, "price_glass": 3.20, "available": true },
+    { "id": "antano-crianza",            "category_id": "rioja",            "name": "Antaño Crianza",            "producer": "",             "region": "D.O. Rioja",                      "type": "red",   "price_bottle": 17.00, "price_glass": 3.20, "available": true },
+    { "id": "alcorta-crianza",           "category_id": "rioja",            "name": "Alcorta Crianza",           "producer": "Alcorta",      "region": "D.O. Rioja",                      "type": "red",   "price_bottle": 18.00, "price_glass": 3.20, "available": true },
+    { "id": "faustino-crianza",          "category_id": "rioja",            "name": "Faustino Crianza",          "producer": "Faustino",     "region": "D.O. Rioja",                      "type": "red",   "price_bottle": 18.00, "price_glass": 3.20, "available": true },
+    { "id": "marques-caceres-crianza",   "category_id": "rioja",            "name": "Marqués de Cáceres Crianza","producer": "Marqués de Cáceres", "region": "D.O. Rioja",               "type": "red",   "price_bottle": 19.00, "price_glass": 3.20, "available": true },
+    { "id": "marques-caceres-reserva",   "category_id": "rioja",            "name": "Marqués de Cáceres Reserva","producer": "Marqués de Cáceres", "region": "D.O. Rioja",               "type": "red",   "price_bottle": 26.00,                      "available": true },
+    { "id": "valdesantos-roble",         "category_id": "ribera-del-duero", "name": "Valdesantos Roble",         "producer": "",             "region": "D.O. Ribera del Duero",           "type": "red",   "price_bottle": 17.00, "price_glass": 3.20, "available": true },
+    { "id": "ribera-de-los-molinos",     "category_id": "valdepenas",       "name": "Ribera de los Molinos",     "producer": "",             "region": "D.O. Valdepeñas",                 "type": "red",   "price_bottle": 7.50,                       "available": true },
+    { "id": "yllera-ribera",             "category_id": "ribera-del-duero", "name": "Yllera",                    "producer": "Yllera",       "region": "D.O. Ribera del Duero",           "type": "red",   "price_bottle": 18.00, "price_glass": 3.20, "available": true },
+    { "id": "protos-roble",              "category_id": "ribera-del-duero", "name": "Protos Roble",              "producer": "Protos",       "region": "D.O. Ribera del Duero",           "type": "red",   "price_bottle": 19.00, "price_glass": 3.20, "available": true },
+    { "id": "castillo-de-aza-crianza",   "category_id": "ribera-del-duero", "name": "Castillo de Aza Crianza",   "producer": "",             "region": "D.O. Ribera del Duero",           "type": "red",   "price_bottle": 19.00,                      "available": true },
+    { "id": "do-rueda-verdejo",          "category_id": "whites-fortified", "name": "D.O. Rueda Verdejo",        "producer": "",             "region": "D.O. Rueda",                      "type": "white", "price_bottle": 17.00, "price_glass": 3.20, "available": true },
+    { "id": "castillo-san-diego",        "category_id": "whites-fortified", "name": "Castillo de San Diego",     "producer": "Barbadillo",   "region": "V.T. Cádiz",                      "type": "white", "price_bottle": 17.50, "price_glass": 3.20, "available": true },
+    { "id": "maestrante-semi",           "category_id": "whites-fortified", "name": "Maestrante Semi",           "producer": "Barbadillo",   "region": "V.T. Cádiz",                      "type": "white", "price_bottle": 17.50, "price_glass": 3.20, "available": true },
+    { "id": "yllera-55-frizzante",       "category_id": "whites-fortified", "name": "Yllera 5.5 Frizzante",      "producer": "Yllera",       "region": "D.O. Rueda",                      "type": "white", "price_bottle": 19.00, "price_glass": 3.30, "available": true },
+    { "id": "fino-jerez",               "category_id": "whites-fortified", "name": "Fino",                      "producer": "",             "region": "D.O. Jerez",                      "type": "sherry","price_glass": 2.80,   "available": true },
+    { "id": "manzanilla-casa-bernal",    "category_id": "whites-fortified", "name": "Manzanilla",                "producer": "Casa Bernal",  "region": "D.O. Manzanilla-Sanlúcar",        "type": "sherry","price_glass": 2.80,   "available": true },
+    { "id": "vino-dulce",               "category_id": "whites-fortified", "name": "Vino Dulce",                "producer": "",             "region": "D.O. Jerez",                      "type": "sherry","price_glass": 2.60,   "available": true },
+    { "id": "solera-1947",              "category_id": "whites-fortified", "name": "Solera 1947 / Alfonso",     "producer": "",             "region": "D.O. Jerez",                      "type": "sherry","price_glass": 2.80,   "available": true },
     { "id": "amontillado",              "category_id": "whites-fortified", "name": "Amontillado",               "producer": "",             "region": "D.O. Jerez",                      "type": "sherry","price_glass": 4.00,   "available": true },
     { "id": "oloroso",                  "category_id": "whites-fortified", "name": "Oloroso",                   "producer": "",             "region": "D.O. Jerez",                      "type": "sherry","price_glass": 4.00,   "available": true },
     { "id": "pedro-ximenez",            "category_id": "whites-fortified", "name": "Pedro Ximénez",             "producer": "",             "region": "D.O. Jerez",                      "type": "sherry","price_glass": 4.50,   "available": true }
   ],
 
   "beverages": [
+    { "id": "cruzcampo-quinto",          "category_id": "beer",    "name": { "es": "Cruzcampo 1/5 Especial",   "en": "Cruzcampo 1/5 Especial",  "fr": "Cruzcampo 1/5 Especial" }, "price": "2,60 €", "available": true },
     { "id": "cruzcampo-tercio",          "category_id": "beer",    "name": { "es": "Cruzcampo 1/3",            "en": "Cruzcampo 1/3",           "fr": "Cruzcampo 1/3"          }, "price": "2,90 €", "available": true },
+    { "id": "radler-tercio",             "category_id": "beer",    "name": { "es": "Radler Cruzcampo 1/3",     "en": "Radler Cruzcampo 1/3",    "fr": "Radler Cruzcampo 1/3"   }, "price": "2,90 €", "available": true },
     { "id": "alhambra-especial-tercio",  "category_id": "beer",    "name": { "es": "Alhambra Especial 1/3",    "en": "Alhambra Especial 1/3",   "fr": "Alhambra Especial 1/3"  }, "price": "2,90 €", "available": true },
     { "id": "aguila-tercio",             "category_id": "beer",    "name": { "es": "Águila 1/3",               "en": "Águila 1/3",              "fr": "Águila 1/3"             }, "price": "2,90 €", "available": true },
+    { "id": "aguila-sin-filtrar-tercio",  "category_id": "beer",    "name": { "es": "Águila sin filtrar 1/3",   "en": "Unfiltered Águila 1/3",   "fr": "Águila non filtrée 1/3" }, "price": "3,20 €", "available": true },
     { "id": "heineken-tercio",           "category_id": "beer",    "name": { "es": "Heineken 1/3",             "en": "Heineken 1/3",            "fr": "Heineken 1/3"           }, "price": "3,20 €", "available": true },
     { "id": "alhambra-reserva-1925",     "category_id": "beer",    "name": { "es": "Alhambra Reserva 1925",    "en": "Alhambra Reserva 1925",   "fr": "Alhambra Reserva 1925"  }, "price": "3,20 €", "available": true },
     { "id": "voll-damm",                 "category_id": "beer",    "name": { "es": "Voll-Damm",                "en": "Voll-Damm",               "fr": "Voll-Damm"              }, "price": "3,20 €", "available": true },
+    { "id": "tostada-sin-alcohol-tercio", "category_id": "beer",    "name": { "es": "Tostada 0,0 (sin alcohol)","en": "Tostada 0.0 (alcohol free)","fr": "Tostada 0.0 (sans alcool)" }, "price": "2,90 €", "available": true },
     { "id": "jarra-cruzcampo",           "category_id": "beer",    "name": { "es": "Jarra 1/2L Cruzcampo",     "en": "Cruzcampo Half-Litre Jug","fr": "Cruzcampo demi-litre"   }, "price": "4,50 €", "available": true },
     { "id": "agua-mineral",              "category_id": "drinks",  "name": { "es": "Agua mineral 1/2L",        "en": "Still Water 1/2L",        "fr": "Eau minérale 1/2L"      }, "price": "1,90 €", "available": true },
+    { "id": "agua-grande",              "category_id": "drinks",  "name": { "es": "Agua mineral 1,25 L",       "en": "Still Water 1.25L",       "fr": "Eau minérale 1,25 L"    }, "price": "2,70 €", "available": true },
+    { "id": "gaseosa",                  "category_id": "drinks",  "name": { "es": "Gaseosa 1 L",              "en": "Soda water 1L",           "fr": "Limonade 1L"            }, "price": "2,90 €", "available": true },
     { "id": "refresco",                  "category_id": "drinks",  "name": { "es": "Coca-Cola / Fanta / Sprite","en": "Coca-Cola / Fanta / Sprite","fr": "Coca-Cola / Fanta / Sprite" }, "price": "2,60 €", "available": true },
     { "id": "zumo",                      "category_id": "drinks",  "name": { "es": "Zumo (piña, melocotón, tomate)", "en": "Juice (pineapple, peach, tomato)", "fr": "Jus (ananas, pêche, tomate)" }, "price": "2,60 €", "available": true },
     { "id": "aquarius-nestea",           "category_id": "drinks",  "name": { "es": "Aquarius / Nestea",        "en": "Aquarius / Nestea",       "fr": "Aquarius / Nestea"      }, "price": "2,70 €", "available": true },
