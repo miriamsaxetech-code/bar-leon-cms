@@ -214,12 +214,14 @@ h2 {
   font-size: clamp(2.6rem, 8vw, 4.5rem);
   color: var(--ink);
   letter-spacing: -0.01em;
+  text-align: center;
 }
 
 .site-location {
   display: flex;
   align-items: center;
-  flex-wrap: wrap;
+  justify-content: center;
+  flex-wrap: nowrap;
   gap: 4px 12px;
   font-size: 0.7rem;
   text-transform: uppercase;
@@ -227,6 +229,7 @@ h2 {
   color: var(--muted);
   margin-top: 7px;
   line-height: 1.45;
+  white-space: nowrap;
 }
 
 .site-location__place,
@@ -303,6 +306,7 @@ h2 {
 }
 
 /* ─── TAGLINE / TILE FRAME ─── */
+.azulejo-frame,
 .tile-frame {
   margin: 28px 0 32px;
   position: relative;
@@ -311,6 +315,7 @@ h2 {
   border: 2px solid var(--terracotta);
 }
 
+.azulejo-frame::before,
 .tile-frame::before {
   content: '';
   position: absolute;
@@ -319,6 +324,7 @@ h2 {
   pointer-events: none;
 }
 
+.azulejo-frame::after,
 .tile-frame::after {
   content: '◆ ◆';
   position: absolute;
@@ -331,6 +337,7 @@ h2 {
   pointer-events: none;
 }
 
+.azulejo-frame blockquote,
 .tile-frame blockquote {
   font-family: 'Playfair Display', Georgia, serif;
   font-size: 1.05rem;
@@ -343,8 +350,10 @@ h2 {
   margin: 0;
   position: relative;
   z-index: 2;
+  text-align: center;
 }
 
+.azulejo-frame cite,
 .tile-frame cite {
   display: block;
   margin-top: 12px;
@@ -356,6 +365,8 @@ h2 {
   font-weight: 600;
   position: relative;
   z-index: 2;
+  text-align: center;
+  white-space: nowrap;
 }
 
 /* ─── AVISO ─── */
@@ -1450,13 +1461,10 @@ h2 {
   .wrap { padding: 0 20px; }
   .site-name { line-height: 0.96; }
   .site-location {
-    align-items: flex-start;
-    gap: 2px 10px;
-    letter-spacing: 0.18em;
+    justify-content: center;
+    gap: 2px 8px;
+    letter-spacing: 0.16em;
     line-height: 1.55;
-  }
-  .site-location__since {
-    flex-basis: 100%;
   }
   #homepage { padding-top: 20px; }
   .site-logo-container { margin-bottom: 18px; }

@@ -470,7 +470,7 @@
   <p class="section-label">${locationTitle}</p>
   <div class="location-grid">
     <div class="location-map">
-      <iframe src="https://www.openstreetmap.org/export/embed.html?bbox=-3.6004%2C37.1763%2C-3.5964%2C37.1793&amp;layer=mapnik&amp;marker=37.17783%2C-3.59843" width="100%" height="250" style="border:0;" loading="lazy" aria-label="OpenStreetMap"></iframe>
+      <iframe src="https://www.openstreetmap.org/export/embed.html?bbox=-3.5985%2C37.1755%2C-3.5945%2C37.1785&amp;layer=mapnik&amp;marker=37.17698%2C-3.59653" width="100%" height="250" style="border:0;" loading="lazy" aria-label="OpenStreetMap"></iframe>
     </div>
     <div class="location-info">
       <p class="location-friends">"${friendsLabel}"</p>
