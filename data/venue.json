@@ -590,7 +590,49 @@
       "available": true,
       "featured": false
     },
+    {
+      "id": "entremeses-variados",
+      "category_id": "starters",
+      "name": { "es": "Entremeses variados", "en": "Assorted Cold Meats", "fr": "Assortiment de charcuteries" },
+      "description": {
+        "es": "Surtido de embutidos y fiambres fríos de la casa.",
+        "en": "Selection of cold cuts and cured meats.",
+        "fr": "Assortiment de charcuteries et viandes froides maison."
+      },
+      "price": "",
+      "pairing": { "es": "", "en": "", "fr": "" },
+      "available": true,
+      "featured": false
+    },
 
+    {
+      "id": "calamares-a-la-romana",
+      "category_id": "fried-fish",
+      "name": { "es": "Calamares a la romana", "en": "Calamares a la Romana", "fr": "Calmars à la romaine" },
+      "description": {
+        "es": "Calamares en anillas, rebozados con masa de tempura y fritos.",
+        "en": "Squid rings in tempura batter, fried until golden.",
+        "fr": "Anneaux de calmar en pâte à tempura, frits dorés."
+      },
+      "price": "",
+      "pairing": { "es": "", "en": "", "fr": "" },
+      "available": true,
+      "featured": false
+    },
+    {
+      "id": "filete-de-pescadilla",
+      "category_id": "fried-fish",
+      "name": { "es": "Filete de pescadilla", "en": "Fried Whiting Fillet", "fr": "Filet de merlan frit" },
+      "description": {
+        "es": "Filete de pescadilla rebozado y frito en aceite de oliva.",
+        "en": "Whiting fillet, battered and fried in olive oil.",
+        "fr": "Filet de merlan pané et frit dans l'huile d'olive."
+      },
+      "price": "",
+      "pairing": { "es": "", "en": "", "fr": "" },
+      "available": true,
+      "featured": false
+    },
     {
       "id": "calamares-fritos",
       "category_id": "fried-fish",
@@ -799,6 +841,34 @@
       },
       "price": "5,00 € (barra) / 14,00 € (restaurante)",
       "pairing": { "es": "Delirio (D.O. Granada) — 17,00 €", "en": "Delirio (red wine, D.O. Granada) — 17,00 €", "fr": "Delirio (vin rouge, D.O. Granada) — 17,00 €" },
+      "available": true,
+      "featured": false
+    },
+    {
+      "id": "filete-de-cerdo",
+      "category_id": "meats",
+      "name": { "es": "Filete de cerdo (empanado o plancha)", "en": "Pork Steak (breaded or grilled)", "fr": "Filet de porc (pané ou grillé)" },
+      "description": {
+        "es": "Filete de cerdo a elegir: empanado y frito, o a la plancha.",
+        "en": "Pork steak your way: breaded and fried, or char-grilled.",
+        "fr": "Filet de porc au choix : pané et frit, ou grillé."
+      },
+      "price": "",
+      "pairing": { "es": "", "en": "", "fr": "" },
+      "available": true,
+      "featured": false
+    },
+    {
+      "id": "secreto-de-cerdo",
+      "category_id": "meats",
+      "name": { "es": "Secreto de cerdo", "en": "Grilled Pork Secreto", "fr": "Secreto de porc grillé" },
+      "description": {
+        "es": "Corte ibérico entre la paleta y el lomo, muy jugoso a la plancha.",
+        "en": "Iberian pork secreto — a hidden cut between shoulder and loin, prized for its marbling.",
+        "fr": "Secreto ibérique — coupe cachée entre épaule et longe, très persillée, grillée."
+      },
+      "price": "",
+      "pairing": { "es": "", "en": "", "fr": "" },
       "available": true,
       "featured": false
     },
