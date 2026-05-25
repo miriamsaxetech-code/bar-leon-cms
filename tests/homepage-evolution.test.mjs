@@ -122,6 +122,10 @@ assert.ok(afterHours.body.children.some(el => el.className === 'mobile-service-c
 const english = await renderHomepageAt('2026-05-25T13:30:00+02:00', 'en');
 assert.match(english.html, /site-location__since">Since 1959/);
 assert.match(english.html, /class="call-label">Call<\/span>/);
+assert.match(english.html, /Try local Granada red wine/);
+assert.match(english.html, /beyond Rioja\/Ribera/);
+assert.match(english.html, /D\.O\. Granada/);
+assert.doesNotMatch(english.html, /Pairs with/);
 
 const french = await renderHomepageAt('2026-05-25T13:30:00+02:00', 'fr');
 assert.match(french.html, /site-location__since">Depuis 1959/);

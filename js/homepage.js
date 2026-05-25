@@ -18,7 +18,6 @@
     storiesSub:   { es: 'Archivo familiar y memoria de barra. Solo material real del León.', en: 'Family archive and bar memory. Only real León material.', fr: 'Archives familiales et mémoire du comptoir. Uniquement du matériel réel du León.' },
     call:         { es: 'Llamar', en: 'Call', fr: 'Appeler' },
     whatsapp:     { es: 'WhatsApp', en: 'WhatsApp', fr: 'WhatsApp' },
-    pairing:      { es: 'Marida con', en: 'Pairs with', fr: "S'accorde avec" },
     recommended:  { es: 'Recomendado', en: 'Recommended', fr: 'Recommandé' },
     seasonal:     { es: 'Temporada', en: 'Seasonal', fr: 'Saison' },
     house:        { es: 'De la casa', en: 'House specialty', fr: 'Spécialité maison' },
@@ -115,12 +114,90 @@
     }) || null;
   }
 
+  function wineTypeLabel(type, lang) {
+    const labels = {
+      red:    { es: 'tinto',    en: 'red wine',   fr: 'vin rouge' },
+      white:  { es: 'blanco',   en: 'white wine', fr: 'vin blanc' },
+      rose:   { es: 'rosado',   en: 'rosé',       fr: 'rosé' },
+      sherry: { es: 'generoso', en: 'sherry',     fr: 'xérès' },
+    };
+    return labels[type] ? labels[type][lang] : (type || '');
+  }
+
+  function wineCultureNote(wine, lang) {
+    const region = wine.region || '';
+    const name = typeof wine.name === 'object' ? t(wine.name, lang) : (wine.name || '');
+    const haystack = `${region} ${name} ${wine.category_id || ''}`.toLowerCase();
+
+    if (haystack.includes('granada')) {
+      return {
+        es: 'vino granadino de altura',
+        en: 'local Granada wine beyond Rioja/Ribera',
+        fr: "vin local de Grenade, vin d'altitude",
+      }[lang];
+    }
+    if (haystack.includes('manzanilla') || haystack.includes('sanlúcar')) {
+      return {
+        es: 'salinidad de Sanlúcar',
+        en: 'salty Sanlúcar character',
+        fr: 'salinité de Sanlúcar',
+      }[lang];
+    }
+    if (haystack.includes('jerez')) {
+      return {
+        es: 'crianza de solera andaluza',
+        en: 'Andalusian solera tradition',
+        fr: 'élevage andalou en solera',
+      }[lang];
+    }
+    if (haystack.includes('cádiz')) {
+      return {
+        es: 'blanco atlántico de Cádiz',
+        en: 'Atlantic white from Cádiz',
+        fr: 'blanc atlantique de Cadix',
+      }[lang];
+    }
+    if (haystack.includes('rueda')) {
+      return {
+        es: 'verdejo fresco de meseta',
+        en: 'fresh Verdejo from Castilla',
+        fr: 'verdejo frais de Castille',
+      }[lang];
+    }
+    if (haystack.includes('rioja')) {
+      return {
+        es: 'clásico riojano',
+        en: 'classic Rioja red',
+        fr: 'classique de la Rioja',
+      }[lang];
+    }
+    if (haystack.includes('ribera')) {
+      return {
+        es: 'tinto castellano',
+        en: 'classic Ribera red',
+        fr: 'rouge castillan',
+      }[lang];
+    }
+    return '';
+  }
+
+  function pairingChipText(wine, lang) {
+    const wineName = typeof wine.name === 'object' ? t(wine.name, lang) : wine.name;
+    const type = wineTypeLabel(wine.type, lang);
+    const region = wine.region || '';
+    const note = wineCultureNote(wine, lang);
+
+    if (lang === 'en' && /granada/i.test(region)) {
+      return `Try local Granada ${type || 'wine'} · beyond Rioja/Ribera · ${wineName} · ${region}`;
+    }
+    return [wineName, type, region, note].filter(Boolean).join(' · ');
+  }
+
   function renderPairingChip(dish, wines, lang, cartaUrl) {
     const pairingText = t(dish.pairing, lang);
     const wine = findWineForPairing(pairingText, wines, lang);
     if (!wine) return '';
-    const wineName = typeof wine.name === 'object' ? t(wine.name, lang) : wine.name;
-    return `<a class="pairing-chip" href="${cartaUrl}#wine-${wine.id}" data-wine-id="${wine.id}">${LABELS.pairing[lang]} ${wineName}</a>`;
+    return `<a class="pairing-chip" href="${cartaUrl}#wine-${wine.id}" data-wine-id="${wine.id}">${pairingChipText(wine, lang)}</a>`;
   }
 
   function splitList(str) {
