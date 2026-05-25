@@ -3,21 +3,123 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Bar León</title>
+  <title>Restaurante Bar León — Granada</title>
+  <link rel="icon" href="/assets/images/favicon.ico" sizes="any" />
+  <link rel="icon" href="/assets/images/favicon-16x16.png" type="image/png" sizes="16x16" />
+  <link rel="apple-touch-icon" href="/assets/images/apple-touch-icon.png" />
   <link rel="alternate" hreflang="es" href="/es/" />
   <link rel="alternate" hreflang="en" href="/en/" />
   <link rel="alternate" hreflang="fr" href="/fr/" />
   <link rel="alternate" hreflang="x-default" href="/" />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@700&family=Inter:wght@400;500;600&display=swap" rel="stylesheet" />
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    html, body {
+      height: 100%;
+      background: #F6F3EC;
+      font-family: 'Inter', system-ui, sans-serif;
+    }
+    body {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      min-height: 100vh;
+    }
+    .picker {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 24px;
+      padding: 48px 32px;
+      text-align: center;
+    }
+    .picker__logo {
+      height: 80px;
+      width: auto;
+      opacity: 0.85;
+    }
+    .picker__name {
+      font-family: 'Playfair Display', Georgia, serif;
+      font-size: 20px;
+      font-weight: 700;
+      color: #1C1A17;
+      letter-spacing: 0.3px;
+    }
+    .picker__sub {
+      font-size: 9px;
+      letter-spacing: 3px;
+      color: #5C5752;
+      text-transform: uppercase;
+      margin-top: -16px;
+    }
+    .picker__divider {
+      width: 40px;
+      height: 1px;
+      background: #C8C3BA;
+    }
+    .picker__langs {
+      display: flex;
+      gap: 10px;
+    }
+    .picker__btn {
+      padding: 11px 26px;
+      font-family: 'Inter', system-ui, sans-serif;
+      font-size: 11px;
+      font-weight: 500;
+      letter-spacing: 3px;
+      text-transform: uppercase;
+      color: #1C1A17;
+      background: transparent;
+      border: 1px solid #1C1A17;
+      border-radius: 1px;
+      cursor: pointer;
+      transition: background 0.15s ease, color 0.15s ease, border-color 0.15s ease;
+    }
+    .picker__btn:hover {
+      background: #7A1C1C;
+      color: #F6F3EC;
+      border-color: #7A1C1C;
+    }
+    .picker__caption {
+      font-size: 9px;
+      letter-spacing: 2px;
+      color: #7A1C1C;
+      text-transform: uppercase;
+    }
+  </style>
 </head>
 <body>
-<script>
-(function () {
-  var SUPPORTED = { es: true, en: true, fr: true };
-  var DEFAULT   = 'es';
-  var lang = (navigator.language || '').split('-')[0].toLowerCase();
-  if (!SUPPORTED[lang]) lang = DEFAULT;
-  window.location.replace('/' + lang + '/');
-}());
-</script>
+  <script>
+    (function () {
+      var saved = localStorage.getItem('lang');
+      if (saved === 'es' || saved === 'en' || saved === 'fr') {
+        location.replace('/' + saved + '/');
+      }
+    }());
+  </script>
+
+  <div class="picker">
+    <img class="picker__logo" src="/assets/images/lion-logo.svg" alt="Bar León" />
+    <div>
+      <div class="picker__name">Restaurante Bar León</div>
+      <div class="picker__sub">Albayzín &middot; Granada &middot; 1959</div>
+    </div>
+    <div class="picker__divider"></div>
+    <div class="picker__langs">
+      <button class="picker__btn" onclick="pick('es')">ES</button>
+      <button class="picker__btn" onclick="pick('en')">EN</button>
+      <button class="picker__btn" onclick="pick('fr')">FR</button>
+    </div>
+    <div class="picker__caption">Elige tu idioma</div>
+  </div>
+
+  <script>
+    function pick(lang) {
+      localStorage.setItem('lang', lang);
+      location.href = '/' + lang + '/';
+    }
+  </script>
 </body>
 </html>
