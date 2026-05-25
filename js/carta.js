@@ -846,6 +846,20 @@
     document.body.appendChild(fab);
   }
 
+  function initReveal(root) {
+    if (!window.IntersectionObserver) return;
+    const els = root.querySelectorAll('.editorial-snapshot, .caricature-block');
+    const io = new IntersectionObserver(function(entries) {
+      entries.forEach(function(e) {
+        if (e.isIntersecting) {
+          e.target.classList.add('is-visible');
+          io.unobserve(e.target);
+        }
+      });
+    }, { threshold: 0.1, rootMargin: '0px 0px -40px 0px' });
+    els.forEach(function(el) { el.classList.add('reveal'); io.observe(el); });
+  }
+
   async function init() {
     const lang      = getLang();
     const loader    = document.getElementById('loader');
@@ -881,6 +895,7 @@
       initAccordions(app);
       initMenuSwitch(app);
       initPairingChips(app);
+      initReveal(app);
       injectLangBar(lang);
       injectMobileServiceCTA(d, lang);
       header.style.display = 'block';

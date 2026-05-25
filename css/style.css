@@ -387,12 +387,23 @@ h2 {
   line-height: 0;
 }
 
+@keyframes kenBurns {
+  from { transform: scale(1)    translate(0,    0);    }
+  to   { transform: scale(1.06) translate(-1%, -0.8%); }
+}
+
 .hero-frame img {
   display: block;
   width: 100%;
   height: auto;
   object-fit: cover;
   aspect-ratio: 16 / 9;
+  animation: kenBurns 16s ease-in-out infinite alternate;
+  will-change: transform;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .hero-frame img { animation: none; }
 }
 
 .hero-frame--placeholder {
@@ -1939,6 +1950,7 @@ h2 {
   padding: 12px;
   margin: 0;
   box-shadow: 0 4px 12px rgba(28, 26, 23, 0.03);
+  overflow: hidden;
 }
 
 .editorial-snapshot__figure img {
@@ -1947,6 +1959,15 @@ h2 {
   height: auto;
   aspect-ratio: 16 / 10;
   object-fit: cover;
+  transition: transform 0.6s cubic-bezier(0.22, 1, 0.36, 1);
+}
+
+.editorial-snapshot__figure:hover img {
+  transform: scale(1.04);
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .editorial-snapshot__figure img { transition: none; }
 }
 
 .editorial-snapshot__caption {
@@ -1975,6 +1996,24 @@ h2 {
 
 .editorial-snapshot__img--hidden {
   display: none !important;
+}
+
+/* ─── SCROLL REVEAL ─── */
+@keyframes revealUp {
+  from { opacity: 0; transform: translateY(22px); }
+  to   { opacity: 1; transform: translateY(0);    }
+}
+
+.reveal {
+  opacity: 0;
+}
+
+.reveal.is-visible {
+  animation: revealUp 0.75s cubic-bezier(0.22, 1, 0.36, 1) forwards;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .reveal, .reveal.is-visible { opacity: 1; animation: none; }
 }
 
 .footer-separator {
