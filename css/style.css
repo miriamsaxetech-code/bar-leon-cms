@@ -766,7 +766,7 @@ h2 {
 }
 
 .carta-item {
-  padding: 11px 0;
+  padding: 14px 0;
   border-bottom: 1px solid rgba(28, 26, 23, 0.14);
 }
 
@@ -783,7 +783,7 @@ h2 {
 .check-name {
   font-family: 'Playfair Display', Georgia, serif;
   font-weight: 700;
-  font-size: 1rem;
+  font-size: 1.06rem;
   line-height: 1.25;
   white-space: nowrap;
   flex-shrink: 0;
@@ -807,7 +807,7 @@ h2 {
 
 .check-price {
   font-family: 'Playfair Display', Georgia, serif;
-  font-size: 1rem;
+  font-size: 1.04rem;
   font-weight: 700;
   white-space: nowrap;
   flex-shrink: 0;
@@ -816,10 +816,10 @@ h2 {
 }
 
 .item-desc {
-  font-size: 0.84rem;
+  font-size: 0.9rem;
   color: var(--muted);
-  line-height: 1.5;
-  margin-bottom: 5px;
+  line-height: 1.58;
+  margin-bottom: 7px;
 }
 
 .item-maridaje {
@@ -1199,16 +1199,16 @@ h2 {
 
 .home-andalusia__main h3 {
   font-family: 'Playfair Display', Georgia, serif;
-  font-size: 1.12rem;
+  font-size: 1.22rem;
   line-height: 1.2;
   margin-top: 2px;
 }
 
 .home-andalusia__main p {
   color: var(--muted);
-  font-size: 0.86rem;
-  line-height: 1.55;
-  margin-top: 5px;
+  font-size: 0.92rem;
+  line-height: 1.62;
+  margin-top: 7px;
 }
 
 .home-andalusia__price {
@@ -1226,8 +1226,8 @@ h2 {
 
 .home-food-gallery {
   display: flex;
-  gap: 10px;
-  margin-top: 28px;
+  gap: 14px;
+  margin: 38px 0 12px;
 }
 
 .home-food-gallery__item {
@@ -1707,8 +1707,8 @@ h2 {
 .carta-accent-images {
   display: grid;
   grid-template-columns: repeat(2, minmax(0, 1fr));
-  gap: 10px;
-  padding: 14px 0 18px;
+  gap: 14px;
+  padding: 22px 0 26px;
   border-bottom: 1px solid rgba(28, 26, 23, 0.12);
 }
 
