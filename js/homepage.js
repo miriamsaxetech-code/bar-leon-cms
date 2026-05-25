@@ -39,8 +39,15 @@
 
     const heroAlt = t(d.hero.alt, lang) || `${t(d.venue.full_name, lang)} — ${t(d.contact.address.city, lang) || d.contact.address.city}`;
 
-    const hero = `
-<div class="hero-editorial" role="img" aria-label="${heroAlt}">
+    const heroImg = d.hero && d.hero.image;
+    const hero = heroImg
+      ? `<figure class="hero-frame">
+  <picture>
+    <source srcset="${heroImg}" type="image/webp">
+    <img src="${heroImg.replace('.webp', '.png')}" alt="${heroAlt}" loading="lazy" decoding="async">
+  </picture>
+</figure>`
+      : `<div class="hero-editorial" role="img" aria-label="${heroAlt}">
   <div class="hero-editorial-inner">
     <p class="hero-editorial-name">${t(d.venue.full_name, lang)}</p>
     <p class="hero-editorial-year">${since}</p>

@@ -67,12 +67,12 @@
       "en": ["restaurant granada", "andalusian food", "traditional spanish restaurant", "albayzin granada"],
       "fr": ["restaurant grenade espagne", "cuisine andalouse", "bar leon grenade"]
     },
-    "canonical": "https://bar-leon.es",
-    "og_image":  "assets/images/hero-bg.jpg"
+    "canonical": "https://www.barleongrx.com",
+    "og_image":  "/assets/images/og.png"
   },
 
   "hero": {
-    "image":       "assets/images/hero-bg.jpg",
+    "image":       "/assets/images/hero-leon.webp",
     "alt": {
       "es": "Interior del Restaurante-Bar León en el Albayzín, Granada",
       "en": "Interior of Restaurante-Bar León in Granada's Albayzín",
