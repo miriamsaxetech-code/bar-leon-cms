@@ -225,6 +225,7 @@
       const day = DAY_NAMES[item.day] ? DAY_NAMES[item.day][lang] : item.day;
       return `<strong>${day}:</strong> ${t(item.name, lang)}`;
     });
+    const seasonal = splitList(t(dm.seasonal, lang)).map(note => `<em>${note}</em>`);
 
     return `<section class="home-daily-menu" aria-labelledby="home-daily-title">
   <div class="home-daily-menu__head">
@@ -238,7 +239,7 @@
   <div class="home-daily-menu__body">
     ${renderList(LABELS.starters[lang], splitList(t(dm.starters, lang)))}
     ${renderList(LABELS.seconds[lang], splitList(t(dm.seconds, lang)))}
-    ${renderList(LABELS.daily[lang], mains)}
+    ${renderList(LABELS.daily[lang], mains.concat(seasonal))}
     ${renderList(LABELS.desserts[lang], splitList(t(dm.desserts, lang)))}
   </div>
   <div class="home-daily-menu__foot">

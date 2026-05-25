@@ -82,6 +82,7 @@
       var starters  = menu.get ? getEs(menu.get('starters'))  : '';
       var seconds   = menu.get ? getEs(menu.get('seconds'))   : '';
       var desserts  = menu.get ? getEs(menu.get('desserts'))  : '';
+      var seasonal  = menu.get ? getEs(menu.get('seasonal'))  : '';
       var mainsRaw  = menu.get ? (menu.get('mains') || CMS.Immutable.List()) : CMS.Immutable.List();
       var mainsArr  = mainsRaw.toJS ? mainsRaw.toJS() : [];
 
@@ -116,7 +117,6 @@
         ),
         menuOn && starters ? h('p', { className: 'pr-menu-platos' }, '1º ' + starters) : null,
         menuOn && seconds  ? h('p', { className: 'pr-menu-platos' }, '2º ' + seconds)  : null,
-        menuOn && desserts ? h('p', { className: 'pr-menu-platos' }, 'Postre: ' + desserts) : null,
         menuOn && mainsArr.length ? h('div', {},
           mainsArr.map(function(m, i) {
             var dayName = DAY_ES[m.day] || m.day;
@@ -124,6 +124,8 @@
             return h('p', { key: i, className: 'pr-menu-platos' }, dayName + ': ' + platName);
           })
         ) : null,
+        menuOn && seasonal ? h('p', { className: 'pr-menu-platos' }, seasonal) : null,
+        menuOn && desserts ? h('p', { className: 'pr-menu-platos' }, 'Postre: ' + desserts) : null,
 
         // Carta activa por sección
         seccion('Carta — ' + activos.length + ' platos visibles'),

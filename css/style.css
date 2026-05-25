@@ -1145,6 +1145,10 @@ h2 {
   padding: 5px 0;
 }
 
+.home-daily-menu__group li em {
+  color: var(--muted);
+}
+
 .home-daily-menu__foot {
   display: flex;
   align-items: center;
@@ -1280,11 +1284,19 @@ h2 {
   border-bottom: none;
 }
 
+.edict-temporada-group {
+  margin: 7px 0 18px;
+}
+
 .edict-temporada {
   font-size: 0.84rem;
   color: var(--muted);
   font-style: italic;
   line-height: 1.55;
+}
+
+.edict-temporada + .edict-temporada {
+  margin-top: 3px;
 }
 
 /* ─── SITE LOGO HOME ─── */

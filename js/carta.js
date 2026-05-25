@@ -301,7 +301,8 @@
       : '';
 
     const seasonal = t(dm.seasonal, lang)
-      ? `<p class="edict-temporada">${t(dm.seasonal, lang)}</p>`
+      ? `<div class="edict-temporada-group">${t(dm.seasonal, lang).split(' · ').map(note =>
+          `<p class="edict-temporada">${note.trim()}</p>`).join('')}</div>`
       : '';
 
     const daysStr = (dm.days || [])
@@ -323,8 +324,8 @@
       ${starters}
       ${seconds}
       ${mains}
-      ${desserts}
       ${seasonal}
+      ${desserts}
     </div>
     <div class="edict-foot">${t(nav.edict_foot, lang)}</div>
 </div>`;

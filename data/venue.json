@@ -169,9 +169,9 @@
       "fr": "Natillas maison · Riz au lait · Glace · Fruit de saison"
     },
     "seasonal": {
-      "es": "Viernes en verano: Arroz a la cubana.",
-      "en": "Fridays in summer: Arroz a la cubana (rice with tomato, egg and banana).",
-      "fr": "Vendredis en été : Arroz a la cubana (riz avec tomate, œuf et banane)."
+      "es": "Viernes en verano: Arroz a la cubana. · Viernes de Cuaresma: Potaje de vigilia, con garbanzos y bacalao; plato sin carne de la tradición de vigilia. · En enero, por San Antón: Olla de San Antón, guiso granadino de habas secas, habichuelas y cerdo de matanza, con su pringá, remojón y encurtidos.",
+      "en": "Fridays in summer: Arroz a la cubana (rice with tomato, fried egg and banana). · Lent Fridays: potaje de vigilia, a chickpea and salt cod stew from the meatless vigil tradition. · In January, around San Antón: Olla de San Antón, a Granada stew of dried broad beans, white beans and winter pork cuts, served with pringá, remojón and pickles.",
+      "fr": "Vendredis en été : Arroz a la cubana (riz avec tomate, œuf au plat et banane). · Vendredis de Carême : potaje de vigilia, ragoût de pois chiches et morue issu de la tradition de vigile sans viande. · En janvier, autour de San Antón : Olla de San Antón, ragoût grenadin de fèves sèches, haricots blancs et morceaux de porc de saison, servi avec pringá, remojón et pickles."
     }
   },
 
@@ -228,9 +228,9 @@
       "category_id": "andalusian-specialities",
       "name": { "es": "Carne de monte (ciervo en adobo)", "en": "Venison in Marinade", "fr": "Chevreuil en marinade" },
       "description": {
-        "es": "Ciervo en adobo tradicional. Guiso de caza con vino, laurel y especias.",
-        "en": "Venison marinated Andalusian-style, then slow-cooked with wine, bay leaf and spices. Available as half or full portion.",
-        "fr": "Chevreuil mariné à l'andalouse, puis mijoté avec vin, laurier et épices. En demi-portion ou portion."
+        "es": "Ciervo en adobo tradicional. Carne de caza típica de zonas de sierra como Jaén, especial por su sabor profundo y suavizada con vino, laurel y especias.",
+        "en": "Venison in a traditional marinade. Game meat typical of mountain areas such as Jaén, prized for its deep flavour and softened with wine, bay leaf and spices. Available as half or full portion.",
+        "fr": "Chevreuil en marinade traditionnelle. Gibier typique des zones de montagne comme Jaén, apprécié pour sa saveur profonde et adouci avec vin, laurier et épices. En demi-portion ou portion."
       },
       "price": "Media 10,50 € / Ración 13,50 €",
       "pairing": { "es": "Muñana Rojo (D.O. Granada) — 19,00 €", "en": "Muñana Rojo (red wine, D.O. Granada) — 19,00 €", "fr": "Muñana Rojo (vin rouge, D.O. Granada) — 19,00 €" },
