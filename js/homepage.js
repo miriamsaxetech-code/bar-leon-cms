@@ -64,6 +64,21 @@
   `;
   }
 
+  // ─── SOCIAL MEDIA LINKS ───────────────────────────────────────────────────────
+  function renderSocialLinks(social) {
+    const platforms = [
+      { key: 'instagram',   label: 'Instagram'   },
+      { key: 'facebook',    label: 'Facebook'    },
+      { key: 'tripadvisor', label: 'TripAdvisor' },
+      { key: 'x',          label: 'X'           },
+    ];
+    const links = platforms
+      .filter(p => social && social[p.key])
+      .map(p => `<a class="social-link" href="${social[p.key]}" target="_blank" rel="noopener">${p.label}</a>`);
+    if (!links.length) return '';
+    return `<div class="social-strip">${links.join('<span class="social-sep"> · </span>')}</div>`;
+  }
+
   // ─── WHATSAPP FLOATING CTA ────────────────────────────────────────────────────
   const WHATSAPP_FAB_LABEL = { es: 'Reservar mesa', en: 'Book a table', fr: 'Réserver une table' };
 
@@ -149,17 +164,18 @@
 </div>`;
 
     // ─── CALL CTA LOGIC ─────────────────────────────────────────────────────────
+    const phoneCtaHtml = `<a href="${phoneLink}" class="call-cta"><span class="call-label">${t(nav && nav.call, lang) || 'Llamar'}</span><span class="call-number">${phoneDisplay}</span></a>`;
     let callCta;
     if (serviceMode.restaurant_open === false) {
       callCta = whatsapp
         ? `<a href="https://wa.me/${whatsapp}">${t(nav && nav.whatsapp_btn, lang) || 'Reservar por WhatsApp'}</a>`
-        : `<a href="${phoneLink}">${t(nav && nav.call, lang) || 'Llamar'}</a>`;
+        : phoneCtaHtml;
     } else if (inService) {
-      callCta = `<a href="${phoneLink}">${t(nav && nav.call, lang) || 'Llamar'}</a>`;
+      callCta = phoneCtaHtml;
     } else {
       callCta = whatsapp
         ? `<a href="https://wa.me/${whatsapp}">${t(nav && nav.whatsapp_btn, lang) || 'Reservar por WhatsApp'}</a>`
-        : `<a href="${phoneLink}">${t(nav && nav.call, lang) || 'Llamar'}</a>`;
+        : phoneCtaHtml;
     }
 
     const locationBlock = `
@@ -220,6 +236,7 @@
   ${hero}
   ${historiaCaricature}
   ${trustStrip}
+  ${renderSocialLinks(d.social)}
   ${locationBlock}
   ${hemerotecaCaricature}
   ${cariocaSlot}

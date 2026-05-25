@@ -755,6 +755,15 @@ h2 {
   line-height: 1.5;
 }
 
+.price-note {
+  font-family: 'Inter', system-ui, sans-serif;
+  font-size: 0.78rem;
+  color: var(--muted);
+  margin-top: 1px;
+  margin-bottom: 4px;
+  letter-spacing: 0.01em;
+}
+
 /* ─── HORARIOS ─── */
 .section-label {
   font-size: 0.7rem;
@@ -915,6 +924,64 @@ h2 {
 .trust-sep {
   color: rgba(28, 26, 23, 0.25);
   font-size: 0.65rem;
+}
+
+/* ─── SOCIAL STRIP ─── */
+.social-strip {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 4px;
+  padding: 9px 0;
+  border-bottom: 1px solid rgba(28, 26, 23, 0.1);
+  margin-bottom: 0;
+}
+
+.social-link {
+  font-family: 'Inter', system-ui, sans-serif;
+  font-size: 0.7rem;
+  text-transform: uppercase;
+  letter-spacing: 0.13em;
+  color: var(--muted);
+  text-decoration: none;
+}
+
+.social-link:hover {
+  color: var(--accent);
+}
+
+.social-sep {
+  color: rgba(28, 26, 23, 0.25);
+  font-size: 0.65rem;
+}
+
+/* ─── CALL CTA WITH NUMBER ─── */
+.call-cta {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  text-decoration: none;
+  line-height: 1.2;
+}
+
+.call-label {
+  font-family: 'Inter', system-ui, sans-serif;
+  font-size: 0.76rem;
+  text-transform: uppercase;
+  letter-spacing: 0.14em;
+  color: var(--ink);
+}
+
+.call-cta:hover .call-label {
+  color: var(--accent);
+}
+
+.call-number {
+  font-family: 'Inter', system-ui, sans-serif;
+  font-size: 0.64rem;
+  letter-spacing: 0.04em;
+  color: var(--muted);
+  margin-top: 1px;
 }
 
 /* ─── EDICT BODY SECTIONS ─── */

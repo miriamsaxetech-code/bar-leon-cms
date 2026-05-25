@@ -75,38 +75,48 @@
   //   "X (unidad)"                  → X (each)
   //   "X (barra) / Y (restaurante)" → X (bar) / Y (restaurant)
   //   "X / ración"                  → X / portion
-  function localizePrice(str, lang) {
-    if (!str || lang === 'es') return str || '';
+  // Parses a dish price string. Returns:
+  //   { type: 'simple',   display: '10,00 €' }
+  //   { type: 'portions', label: 'Ración*', note: '½ 7,50 € · Ración 10,00 €' }
+  function parseDishPrice(str, lang) {
+    if (!str) return { type: 'simple', display: '' };
 
-    const TERMS = {
-      en: {
-        media:      'Half',
-        racion:     'Portion',
-        unidad:     'each',
-        barra:      'bar',
-        restaurante:'restaurant',
-        'unidad en barra': 'unit at bar',
-      },
-      fr: {
-        media:      'Demi',
-        racion:     'Portion',
-        unidad:     'unité',
-        barra:      'comptoir',
-        restaurante:'restaurant',
-        'unidad en barra': 'à l\'unité',
-      },
+    const PORTION_TERMS = {
+      es: { label: 'Ración*', half: 'Media',    full: 'Ración'   },
+      en: { label: 'Portion*', half: '½',       full: 'Portion'  },
+      fr: { label: 'Portion*', half: '½',       full: 'Portion'  },
     };
-    const T = TERMS[lang] || {};
+    const INLINE_TERMS = {
+      en: { racion: 'Portion', unidad: 'each', barra: 'bar', restaurante: 'restaurant', 'unidad en barra': 'unit at bar' },
+      fr: { racion: 'Portion', unidad: 'unité', barra: 'comptoir', restaurante: 'restaurant', 'unidad en barra': "à l'unité" },
+    };
 
-    return str
-      .replace(/^Media\s+(.+?)\s*\/\s*Raci[oó]n\s+(.+)$/i,
-        (_, h, f) => `${T.media} ${h.trim()} / ${T.racion} ${f.trim()}`)
-      .replace(/\(raci[oó]n\)\s*\/\s*(.+?)\(unidad en barra\)/i,
-        (_, mid) => `(${T.racion}) / ${mid}(${T['unidad en barra']})`)
-      .replace(/\(unidad\)/gi,       `(${T.unidad})`)
-      .replace(/\(barra\)/gi,        `(${T.barra})`)
-      .replace(/\(restaurante\)/gi,  `(${T.restaurante})`)
-      .replace(/\/\s*raci[oó]n\b/gi, `/ ${T.racion}`);
+    const m = str.match(/^Media\s+(.+?)\s*\/\s*Raci[oó]n\s+(.+)$/i);
+    if (m) {
+      const T = PORTION_TERMS[lang] || PORTION_TERMS.es;
+      const half = m[1].trim();
+      const full = m[2].trim();
+      return {
+        type:  'portions',
+        label: T.label,
+        note:  `${T.half} ${half} · ${T.full} ${full}`,
+      };
+    }
+
+    // For other annotation patterns, do inline substitution as before
+    if (lang !== 'es') {
+      const T = INLINE_TERMS[lang] || {};
+      const localized = str
+        .replace(/\(raci[oó]n\)\s*\/\s*(.+?)\(unidad en barra\)/i,
+          (_, mid) => `(${T.racion}) / ${mid}(${T['unidad en barra']})`)
+        .replace(/\(unidad\)/gi,       `(${T.unidad})`)
+        .replace(/\(barra\)/gi,        `(${T.barra})`)
+        .replace(/\(restaurante\)/gi,  `(${T.restaurante})`)
+        .replace(/\/\s*raci[oó]n\b/gi, `/ ${T.racion}`);
+      return { type: 'simple', display: localized };
+    }
+
+    return { type: 'simple', display: str };
   }
 
   function formatTimePeriod(period, lang) {
@@ -254,12 +264,16 @@
       const statusHtml = renderDishStatus(dish, lang);
       const descText = t(dish.description, lang);
       const pairingChip = renderPairingChip(dish, wines, lang);
-      const priceHtml = dish.status === 'soldout' ? '' : `<span class="check-price dish-price">${localizePrice(formatPrice(dish.price), lang)}</span>`;
+      const parsed = parseDishPrice(formatPrice(dish.price), lang);
+      const priceHtml = dish.status === 'soldout' ? '' : `<span class="check-price dish-price">${parsed.label || parsed.display}</span>`;
+      const priceNote = (dish.status !== 'soldout' && parsed.type === 'portions')
+        ? `<p class="price-note">${parsed.note}</p>` : '';
       return `<div class="spotlight-card${getDishStatusClass(dish)}">
   ${badge}
   <span class="check-name">${t(dish.name, lang)}</span>
   ${descText ? `<p class="item-desc">${descText}</p>` : ''}
   ${priceHtml}
+  ${priceNote}
   ${statusHtml}
   ${pairingChip}
 </div>`;
@@ -307,13 +321,18 @@
         const badge = renderBadge(item, lang);
         const statusHtml = renderDishStatus(item, lang);
         const pairingChip = renderPairingChip(item, wines, lang);
+        const parsed = parseDishPrice(formatPrice(item.price), lang);
+        const priceCell = item.status === 'soldout' ? '' : `<span class="check-price dish-price">${parsed.label || parsed.display}</span>`;
+        const priceNote = (item.status !== 'soldout' && parsed.type === 'portions')
+          ? `<p class="price-note">${parsed.note}</p>` : '';
         return `<article class="carta-item${getDishStatusClass(item)}">
   <div class="check-row">
     ${badge ? `<div>${badge}</div>` : ''}
     <span class="check-name">${t(item.name, lang)}</span>
     <span class="check-leader" aria-hidden="true"></span>
-    ${item.status === 'soldout' ? '' : `<span class="check-price dish-price">${localizePrice(formatPrice(item.price), lang)}</span>`}
+    ${priceCell}
   </div>
+  ${priceNote}
   ${t(item.description, lang) ? `<p class="item-desc">${t(item.description, lang)}</p>` : ''}
   ${statusHtml}
   ${pairingChip}
