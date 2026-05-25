@@ -222,9 +222,9 @@
     }
     if (haystack.includes('manzanilla') || haystack.includes('sanlúcar')) {
       return {
-        es: 'salinidad de Sanlúcar',
-        en: 'salty Sanlúcar character',
-        fr: 'salinité de Sanlúcar',
+        es: 'salitre de Cádiz',
+        en: 'Cádiz saltiness',
+        fr: 'salinité de Cadix',
       }[lang];
     }
     if (haystack.includes('jerez')) {

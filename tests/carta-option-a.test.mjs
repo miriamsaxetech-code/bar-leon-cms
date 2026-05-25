@@ -101,7 +101,7 @@ assert.match(html, /loading="lazy"/);
 assert.match(html, /Vinos de Granada/);
 assert.match(html, /Cervezas/);
 assert.match(html, /pairing-chip/);
-assert.match(html, /vino de altura|crianza de solera andaluza|salinidad de Sanlúcar/);
+assert.match(html, /vino de altura|crianza de solera andaluza|salitre de Cádiz/);
 assert.match(html, /D\.O\. Granada|D\.O\. Jerez|D\.O\. Manzanilla-Sanlúcar/);
 assert.doesNotMatch(html, /vino granadino|local Granada|vin local de Grenade/);
 assert.doesNotMatch(html, /Marida con|Pairs with|S'accorde avec/);
