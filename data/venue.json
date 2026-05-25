@@ -191,7 +191,8 @@
     { "id": "valdepenas",              "name": { "es": "Valdepeñas",                  "en": "Valdepeñas",                   "fr": "Valdepeñas"                }, "type": "wine", "service": "bar",        "order": 13 },
     { "id": "whites-fortified",        "name": { "es": "Blancos y generosos",         "en": "Whites and fortified",         "fr": "Blancs et fortifiés"       }, "type": "wine", "service": "bar",        "order": 14 },
     { "id": "beer",                    "name": { "es": "Cervezas",                    "en": "Beer",                         "fr": "Bières"                    }, "type": "drink", "service": "bar",       "order": 15 },
-    { "id": "drinks",                  "name": { "es": "Bebidas y aperitivos",        "en": "Drinks and aperitifs",         "fr": "Boissons et apéritifs"     }, "type": "drink", "service": "bar",       "order": 16 }
+    { "id": "drinks",                  "name": { "es": "Aperitivos y licores",        "en": "Aperitifs and spirits",         "fr": "Apéritifs et spiritueux"     }, "type": "drink", "service": "bar",       "order": 16 },
+    { "id": "soft-drinks",             "name": { "es": "Refrescos y aguas",           "en": "Soft drinks and waters",        "fr": "Boissons sans alcool et eaux" }, "type": "drink", "service": "bar",       "order": 17 }
   ],
 
   "dishes": [
@@ -1352,12 +1353,12 @@
     { "id": "voll-damm",                 "category_id": "beer",    "name": { "es": "Voll-Damm",                "en": "Voll-Damm",               "fr": "Voll-Damm"              }, "price": "3,20 €", "available": true },
     { "id": "tostada-sin-alcohol-tercio", "category_id": "beer",    "name": { "es": "Tostada 0,0 (sin alcohol)","en": "Tostada 0.0 (alcohol free)","fr": "Tostada 0.0 (sans alcool)" }, "price": "2,90 €", "available": true },
     { "id": "jarra-cruzcampo",           "category_id": "beer",    "name": { "es": "Jarra 1/2L Cruzcampo",     "en": "Cruzcampo Half-Litre Jug","fr": "Cruzcampo demi-litre"   }, "price": "4,50 €", "available": true },
-    { "id": "agua-mineral",              "category_id": "drinks",  "name": { "es": "Agua mineral 1/2L",        "en": "Still Water 1/2L",        "fr": "Eau minérale 1/2L"      }, "price": "1,90 €", "available": true },
-    { "id": "agua-grande",              "category_id": "drinks",  "name": { "es": "Agua mineral 1,25 L",       "en": "Still Water 1.25L",       "fr": "Eau minérale 1,25 L"    }, "price": "2,70 €", "available": true },
-    { "id": "gaseosa",                  "category_id": "drinks",  "name": { "es": "Gaseosa 1 L",              "en": "Soda water 1L",           "fr": "Limonade 1L"            }, "price": "2,90 €", "available": true },
-    { "id": "refresco",                  "category_id": "drinks",  "name": { "es": "Coca-Cola / Fanta / Sprite","en": "Coca-Cola / Fanta / Sprite","fr": "Coca-Cola / Fanta / Sprite" }, "price": "2,60 €", "available": true },
-    { "id": "zumo",                      "category_id": "drinks",  "name": { "es": "Zumo (piña, melocotón, tomate)", "en": "Juice (pineapple, peach, tomato)", "fr": "Jus (ananas, pêche, tomate)" }, "price": "2,60 €", "available": true },
-    { "id": "aquarius-nestea",           "category_id": "drinks",  "name": { "es": "Aquarius / Nestea",        "en": "Aquarius / Nestea",       "fr": "Aquarius / Nestea"      }, "price": "2,70 €", "available": true },
+    { "id": "agua-mineral",              "category_id": "soft-drinks",  "name": { "es": "Agua mineral 1/2L",        "en": "Still Water 1/2L",        "fr": "Eau minérale 1/2L"      }, "price": "1,90 €", "available": true },
+    { "id": "agua-grande",              "category_id": "soft-drinks",  "name": { "es": "Agua mineral 1,25 L",       "en": "Still Water 1.25L",       "fr": "Eau minérale 1,25 L"    }, "price": "2,70 €", "available": true },
+    { "id": "gaseosa",                  "category_id": "soft-drinks",  "name": { "es": "Gaseosa 1 L",              "en": "Soda water 1L",           "fr": "Limonade 1L"            }, "price": "2,90 €", "available": true },
+    { "id": "refresco",                  "category_id": "soft-drinks",  "name": { "es": "Coca-Cola / Fanta / Sprite","en": "Coca-Cola / Fanta / Sprite","fr": "Coca-Cola / Fanta / Sprite" }, "price": "2,60 €", "available": true },
+    { "id": "zumo",                      "category_id": "soft-drinks",  "name": { "es": "Zumo (piña, melocotón, tomate)", "en": "Juice (pineapple, peach, tomato)", "fr": "Jus (ananas, pêche, tomate)" }, "price": "2,60 €", "available": true },
+    { "id": "aquarius-nestea",           "category_id": "soft-drinks",  "name": { "es": "Aquarius / Nestea",        "en": "Aquarius / Nestea",       "fr": "Aquarius / Nestea"      }, "price": "2,70 €", "available": true },
     { "id": "tinto-de-verano",           "category_id": "drinks",  "name": { "es": "Tinto de verano",          "en": "Tinto de Verano",         "fr": "Tinto de Verano"        }, "price": "2,60 €", "available": true },
     { "id": "vermuth",                   "category_id": "drinks",  "name": { "es": "Vermuth",                  "en": "Vermouth",                "fr": "Vermouth"               }, "price": "2,70 €", "available": true },
     { "id": "sidra",                     "category_id": "drinks",  "name": { "es": "Sidra (Ladrón de Manzanas)","en": "Cider (Ladrón de Manzanas)","fr": "Cidre (Ladrón de Manzanas)" }, "price": "2,70 €", "available": true },

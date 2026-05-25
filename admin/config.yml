@@ -199,7 +199,7 @@ collections:
             fields:
               - { name: available, label: "¿Disponible?", widget: boolean, default: true }
               - { name: id, label: "ID interno", widget: string }
-              - { name: category_id, label: "Categoría", widget: select, options: ["beer", "drinks"] }
+              - { name: category_id, label: "Categoría", widget: select, options: ["beer", "drinks", "soft-drinks"] }
               - name: name
                 label: "Nombre"
                 widget: object
