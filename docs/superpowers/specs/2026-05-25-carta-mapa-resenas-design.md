@@ -15,6 +15,17 @@ Se usarán las fuentes locales del proyecto:
 
 Playfair e Inter seguirán como apoyo si la lectura o los idiomas EN/FR lo piden. La prioridad es que el sitio parezca más Granada real y menos plantilla genérica.
 
+## Logo
+
+El león tendrá más presencia en la home con efecto wow sobrio:
+
+- Logo grande como emblema editorial, en tinta negra o granate, integrado con el nombre "Restaurante Bar León".
+- Aparición suave al cargar: fade y escala breve, sin 3D, brillos ni efectos de plantilla.
+- Uso como marca de agua en Menú del día, con opacidad baja para no competir con el contenido.
+- Sello pequeño en la cabecera de carta.
+
+El logo debe sentirse como una marca antigua del local, no como decoración turística.
+
 ## Home
 
 La home añadirá un bloque de ubicación con mapa embebido y enlaces claros a Google Maps. Junto al mapa irá una llamada a reseña positiva, con copy cercano y breve. El texto evitará explicaciones largas y no caerá en caricatura turística.
