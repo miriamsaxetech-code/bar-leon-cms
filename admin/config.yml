@@ -3,6 +3,8 @@ backend:
   repo: miriamsaxetech-code/bar-leon-cms
   branch: main
   base_url: https://bar-leon-cms.pages.dev
+  auth_endpoint: auth
+  site_domain: bar-leon-cms.pages.dev
 
 media_folder: assets/images
 public_folder: assets/images
