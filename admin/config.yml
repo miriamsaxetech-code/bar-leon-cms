@@ -115,6 +115,15 @@ collections:
             collapsed: true
             fields:
               - { name: available, label: "¿En carta hoy?", widget: boolean, default: true }
+              - label: "Estado"
+                name: "status"
+                widget: "select"
+                required: false
+                default: "available"
+                options:
+                  - { label: "Disponible", value: "available" }
+                  - { label: "Agotado hoy", value: "soldout" }
+                  - { label: "Solo de temporada", value: "seasonal" }
               - name: name
                 label: Nombre del plato
                 widget: object
@@ -153,7 +162,16 @@ collections:
                   - { name: en, label: "Sugerencia (EN)", widget: string, required: false }
                   - { name: fr, label: "Sugerencia (FR)", widget: string, required: false }
               - { name: id, label: "ID interno", widget: string }
-              - { name: featured, label: "¿Destacado?", widget: boolean, default: false }
+              - label: "Destacado"
+                name: "featured"
+                widget: "select"
+                required: false
+                default: false
+                options:
+                  - { label: "No destacado", value: false }
+                  - { label: "⭐ Recomendado", value: "recommended" }
+                  - { label: "🌿 Temporada", value: "seasonal" }
+                  - { label: "🦁 De la casa", value: "house" }
 
           # ── CARTA VINOS ─────────────────────────────────────────
           - name: wines
@@ -304,6 +322,14 @@ collections:
                 label: "Idiomas activos"
                 widget: list
                 default: ["es", "en", "fr"]
+              - label: "Modo de servicio"
+                name: "service_mode"
+                widget: "object"
+                required: false
+                fields:
+                  - { label: "Menú del día activo", name: "menu_del_dia", widget: "boolean", default: true }
+                  - { label: "Restaurante abierto", name: "restaurant_open", widget: "boolean", default: true }
+                  - { label: "Barra abierta", name: "bar_open", widget: "boolean", default: true }
 
           # ── CONTACTO ────────────────────────────────────────────
           - name: contact
@@ -487,3 +513,33 @@ collections:
                   - { name: es, label: "ES", widget: string }
                   - { name: en, label: "EN", widget: string }
                   - { name: fr, label: "FR", widget: string }
+
+          # ── CARIOCAS ────────────────────────────────────────────
+          - name: cariocas
+            label: "🎭 Cariocas"
+            label_singular: Carioca
+            widget: list
+            collapsed: true
+            summary: "{{fields.id}}"
+            fields:
+              - { label: "ID", name: "id", widget: "string" }
+              - label: "Imagen"
+                name: "image"
+                widget: "image"
+                media_folder: "/assets/images/cariocas"
+              - label: "Texto (ES)"
+                name: "caption"
+                widget: "object"
+                fields:
+                  - { label: "Español", name: "es", widget: "string" }
+                  - { label: "English", name: "en", widget: "string", required: false }
+                  - { label: "Français", name: "fr", widget: "string", required: false }
+              - { label: "Activa", name: "active", widget: "boolean", default: false }
+              - label: "Contexto"
+                name: "context"
+                widget: "select"
+                default: "homepage"
+                options:
+                  - { label: "Inicio (homepage)", value: "homepage" }
+                  - { label: "Historia", value: "historia" }
+                  - { label: "Hemeroteca", value: "hemeroteca" }
