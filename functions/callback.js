@@ -1,11 +1,14 @@
 // Cloudflare Pages Function — GitHub OAuth token exchange
 // GitHub redirects here after login. We exchange the code for a token,
-// then post it back to the CMS window via postMessage.
+// then either:
+//   (a) post it back to the CMS window via postMessage (Decap CMS popup flow), or
+//   (b) redirect to ?return= URL with token in fragment (panel redirect flow)
 // Requires env vars: GITHUB_CLIENT_ID, GITHUB_CLIENT_SECRET
 
 export async function onRequest(context) {
   const url = new URL(context.request.url);
   const code = url.searchParams.get('code');
+  const stateParam = url.searchParams.get('state') || '';
 
   if (!code) {
     return new Response('Missing authorization code', { status: 400 });
@@ -33,7 +36,25 @@ export async function onRequest(context) {
     );
   }
 
-  const content = JSON.stringify({ token: data.access_token, provider: 'github' });
+  const token = data.access_token;
+
+  // Panel redirect flow: state contains "return:/panel/" or similar
+  // We redirect to the return URL with the token in the URL fragment.
+  let returnUrl = null;
+  if (stateParam.startsWith('return:')) {
+    returnUrl = stateParam.slice('return:'.length);
+  }
+
+  if (returnUrl) {
+    // Basic safety check: only allow same-origin relative paths
+    if (returnUrl.startsWith('/') && !returnUrl.startsWith('//')) {
+      const redirectTarget = `${returnUrl}#token=${encodeURIComponent(token)}`;
+      return Response.redirect(redirectTarget, 302);
+    }
+  }
+
+  // Decap CMS popup flow (default): postMessage back to opener
+  const content = JSON.stringify({ token, provider: 'github' });
 
   const html = `<!DOCTYPE html>
 <html>
