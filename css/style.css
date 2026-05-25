@@ -145,7 +145,8 @@ body {
   padding: 0 28px;
 }
 
-hr.divider {
+hr.divider,
+.warm-divider {
   border: none;
   height: 8px;
   background: repeating-linear-gradient(
@@ -300,8 +301,8 @@ h2 {
   line-height: 1;
 }
 
-/* ─── TAGLINE / AZULEJO FRAME ─── */
-.azulejo-frame {
+/* ─── TAGLINE / TILE FRAME ─── */
+.tile-frame {
   margin: 28px 0 32px;
   position: relative;
   padding: 24px 28px;
@@ -309,7 +310,7 @@ h2 {
   border: 2px solid var(--terracotta);
 }
 
-.azulejo-frame::before {
+.tile-frame::before {
   content: '';
   position: absolute;
   inset: 4px;
@@ -317,7 +318,7 @@ h2 {
   pointer-events: none;
 }
 
-.azulejo-frame::after {
+.tile-frame::after {
   content: '◆ ◆';
   position: absolute;
   bottom: 6px;
@@ -329,7 +330,7 @@ h2 {
   pointer-events: none;
 }
 
-.azulejo-frame blockquote {
+.tile-frame blockquote {
   font-family: 'Playfair Display', Georgia, serif;
   font-size: 1.05rem;
   line-height: 1.6;
@@ -343,7 +344,7 @@ h2 {
   z-index: 2;
 }
 
-.azulejo-frame cite {
+.tile-frame cite {
   display: block;
   margin-top: 12px;
   font-size: 0.72rem;
@@ -1073,10 +1074,9 @@ h2 {
 }
 
 .home-daily-menu {
-  margin: 30px 0 34px;
-  border-top: 2px solid var(--ink);
-  border-bottom: 1px solid rgba(28, 26, 23, 0.2);
-  padding: 18px 0 16px;
+  border: none;
+  padding: 0;
+  margin: 0;
 }
 
 .home-daily-menu__head {
@@ -1515,16 +1515,14 @@ h2 {
     flex-wrap: nowrap;
     width: 100%;
   }
-  .azulejo-frame {
+  .tile-frame {
     margin: 20px 0 24px;
     padding: 20px;
   }
-  .azulejo-frame blockquote {
+  .tile-frame blockquote {
     font-size: 0.96rem;
   }
-  .home-daily-menu {
-    margin: 24px 0 28px;
-  }
+
   .home-daily-menu__head,
   .home-andalusia__item,
   .spotlight-card {
@@ -1821,3 +1819,96 @@ h2 {
 .carioca-slot__card { max-width: 440px; width: 100%; }
 .carioca-slot__card img { width: 100%; border-radius: 6px; display: block; }
 .carioca-slot__card figcaption { font-size: 0.8rem; color: var(--muted); margin-top: 0.5rem; text-align: center; font-style: italic; }
+
+/* === BAR LEÓN AZULEJERÍA CÁLIDA === */
+
+/* 1. Patrón geométrico sutil de rombos de azulejo */
+.tile-bg-section {
+  background-color: var(--tile-cream);
+  background-image:
+    repeating-linear-gradient(
+      45deg,
+      rgba(168, 67, 42, 0.05) 0px, rgba(168, 67, 42, 0.05) 1px,
+      transparent 1px, transparent 24px
+    ),
+    repeating-linear-gradient(
+      -45deg,
+      rgba(168, 67, 42, 0.05) 0px, rgba(168, 67, 42, 0.05) 1px,
+      transparent 1px, transparent 24px
+    );
+  padding: 36px 28px;
+  border-top: 1px solid rgba(168, 67, 42, 0.2);
+  border-bottom: 1px solid rgba(168, 67, 42, 0.2);
+  margin: 46px 0;
+}
+
+/* 2. Marco tradicional de azulejo */
+.tile-frame {
+  position: relative;
+  padding: 32px 28px;
+  background: var(--tile-cream);
+  border: 2px solid var(--terracotta);
+  margin: 36px 0 40px;
+}
+
+.tile-frame::before {
+  content: '';
+  position: absolute;
+  inset: 4px;
+  border: 1px solid var(--ocre);
+  pointer-events: none;
+}
+
+.tile-frame::after {
+  content: '◆ ◆';
+  position: absolute;
+  bottom: 8px;
+  right: 14px;
+  font-size: 0.52rem;
+  color: var(--terracotta);
+  letter-spacing: 4px;
+  opacity: 0.65;
+  pointer-events: none;
+}
+
+/* 3. Tarjeta tradicional editorial */
+.tile-card {
+  background: var(--bg);
+  border: 1px solid rgba(28, 26, 23, 0.12);
+  padding: 28px 24px;
+  box-shadow: 0 4px 12px rgba(28, 26, 23, 0.03);
+}
+
+/* 4. Divisor de secciones con personalidad */
+.warm-divider {
+  border: none;
+  height: 8px;
+  background: repeating-linear-gradient(
+    90deg,
+    var(--terracotta) 0px, var(--terracotta) 12px,
+    var(--ocre)       12px, var(--ocre)       24px,
+    var(--tile-dark)  24px, var(--tile-dark)  26px,
+    var(--ocre)       26px, var(--ocre)       38px,
+    var(--terracotta) 38px, var(--terracotta) 50px
+  );
+  width: 100%;
+  margin: 44px 0;
+}
+
+@media (max-width: 540px) {
+  .tile-bg-section {
+    padding: 24px 16px;
+    margin: 34px 0;
+  }
+  .tile-frame {
+    margin: 24px 0 28px;
+    padding: 24px 20px;
+  }
+  .tile-card {
+    padding: 20px 16px;
+  }
+  .warm-divider {
+    margin: 34px 0;
+  }
+}
+

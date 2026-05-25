@@ -255,7 +255,7 @@
     });
     const seasonal = splitList(t(dm.seasonal, lang)).map(note => `<em>${note}</em>`);
 
-    return `<section class="home-daily-menu" aria-labelledby="home-daily-title">
+    return `<section class="tile-frame home-daily-menu" aria-labelledby="home-daily-title">
   <div class="home-daily-menu__head">
     <p class="section-label">${LABELS.dailyKicker[lang]}</p>
     <div>
@@ -287,23 +287,25 @@
       .slice(0, 5);
     if (!dishes.length) return '';
 
-    return `<section class="home-andalusia" aria-labelledby="home-andalusia-title">
-  <div class="home-section-head">
-    <p class="section-label">${LABELS.andalusiaSub[lang]}</p>
-    <h2 id="home-andalusia-title">${LABELS.andalusia[lang]}</h2>
+    return `<section class="tile-bg-section" aria-labelledby="home-andalusia-title">
+  <div class="tile-card">
+    <div class="home-section-head">
+      <p class="section-label">${LABELS.andalusiaSub[lang]}</p>
+      <h2 id="home-andalusia-title">${LABELS.andalusia[lang]}</h2>
+    </div>
+    <div class="home-andalusia__list">
+      ${dishes.map(dish => `<article class="home-andalusia__item">
+        <div class="home-andalusia__main">
+          ${renderBadge(dish, lang)}
+          <h3>${t(dish.name, lang)}</h3>
+          <p>${t(dish.description, lang)}</p>
+          ${renderPairingChip(dish, d.wines, lang, cartaUrl)}
+        </div>
+        <span class="home-andalusia__price">${formatPrice(dish.price)}</span>
+      </article>`).join('')}
+    </div>
+    <a class="home-text-link" href="${cartaUrl}">${LABELS.fullMenu[lang]}</a>
   </div>
-  <div class="home-andalusia__list">
-    ${dishes.map(dish => `<article class="home-andalusia__item">
-      <div class="home-andalusia__main">
-        ${renderBadge(dish, lang)}
-        <h3>${t(dish.name, lang)}</h3>
-        <p>${t(dish.description, lang)}</p>
-        ${renderPairingChip(dish, d.wines, lang, cartaUrl)}
-      </div>
-      <span class="home-andalusia__price">${formatPrice(dish.price)}</span>
-    </article>`).join('')}
-  </div>
-  <a class="home-text-link" href="${cartaUrl}">${LABELS.fullMenu[lang]}</a>
 </section>`;
   }
 
@@ -492,7 +494,7 @@
     </div>
     <div class="lang-selector" aria-label="Language">${langSelector(lang, HOME_LINKS)}</div>
   </nav>
-  <div class="azulejo-frame">
+  <div class="tile-frame">
     <blockquote>
       "${t(d.venue.tagline, lang)}"
     </blockquote>
