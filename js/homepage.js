@@ -1,28 +1,17 @@
 (function () {
   'use strict';
 
-  const PHONE         = 'tel:+34958225143';
-  const PHONE_DISPLAY = '+34 958 22 51 43';
-
   const HOME_LINKS  = { es: '/es/', en: '/en/', fr: '/fr/' };
   const CARTA_LINKS = { es: '/es/carta.html', en: '/en/menu.html', fr: '/fr/carte.html' };
-
-  const NAV = {
-    es: { carta: 'Carta',  horarios: 'Horarios', llamar: 'Llamar'  },
-    en: { carta: 'Menu',   horarios: 'Hours',    llamar: 'Call'    },
-    fr: { carta: 'Carte',  horarios: 'Horaires', llamar: 'Appeler' }
-  };
 
   function getLang() {
     const m = window.location.pathname.match(/\/(es|en|fr)\//);
     return m ? m[1] : 'es';
   }
 
-  function albayzin(str) {
-    if (!str) return str;
-    return str.replace(/albay[cz][íi]n/gi, m =>
-      m[0] === m[0].toUpperCase() ? 'Albayzín' : 'albayzín'
-    );
+  function t(field, lang) {
+    if (!field || typeof field === 'string') return field || '';
+    return field[lang] || field.es || '';
   }
 
   function langSelector(lang, links) {
@@ -34,25 +23,29 @@
   }
 
   function render(d, lang) {
-    const nav  = NAV[lang];
-    const aviso = d.inicio.avisoEspecial
-      ? `<p class="aviso">${d.inicio.avisoEspecial}</p>`
-      : '';
+    const phoneLink    = d.contact.phone_link;
+    const phoneDisplay = d.contact.phone;
+    const cartaUrl     = CARTA_LINKS[lang];
+
+    const notice = t(d.venue.notice, lang);
+    const aviso  = notice ? `<p class="aviso">${notice}</p>` : '';
 
     const since = { es: 'Desde 1959', en: 'Since 1959', fr: 'Depuis 1959' }[lang];
     const directionsLabel = { es: 'Cómo llegar', en: 'Get directions', fr: 'Itinéraire' }[lang];
     const reviewsLabel    = { es: 'Reseñas en Google', en: 'Google reviews', fr: 'Avis Google' }[lang];
 
-    const mapsUrl    = 'https://maps.google.com/?q=Restaurante+Bar+León+Plaza+Nueva+Granada';
-    const reviewsUrl = 'https://www.google.com/search?q=Bar+León+Granada+opiniones';
+    const mapsUrl    = d.social.google_maps;
+    const reviewsUrl = d.social.google_reviews;
+
+    const heroAlt = t(d.hero.alt, lang) || `${t(d.venue.full_name, lang)} — ${t(d.contact.address.city, lang) || d.contact.address.city}`;
 
     const hero = `
-<div class="hero-editorial" role="img" aria-label="Bar León — Plaza Nueva, Granada">
+<div class="hero-editorial" role="img" aria-label="${heroAlt}">
   <div class="hero-editorial-inner">
-    <p class="hero-editorial-name">Restaurante-Bar Le&oacute;n</p>
+    <p class="hero-editorial-name">${t(d.venue.full_name, lang)}</p>
     <p class="hero-editorial-year">${since}</p>
     <hr class="hero-editorial-rule">
-    <p class="hero-editorial-desc">Cocina tradicional andaluza<br>Plaza Nueva &middot; Granada</p>
+    <p class="hero-editorial-desc">${t(d.venue.cuisine, lang)}<br>${d.contact.address.neighborhood} &middot; ${d.contact.address.city}</p>
   </div>
 </div>`;
 
@@ -63,25 +56,27 @@
   <a href="${reviewsUrl}" target="_blank" rel="noopener" class="trust-item">★ ${reviewsLabel}</a>
 </div>`;
 
+    const addr = d.contact.address;
+
     return `<div class="wrap">
-  <h1 class="site-name">Bar Le&oacute;n</h1>
-  <p class="site-location">${d.inicio.subtitulo} <span class="site-since">&middot; ${since}</span></p>
+  <h1 class="site-name">${t(d.venue.name, lang)}</h1>
+  <p class="site-location">${addr.neighborhood} &middot; ${addr.city} <span class="site-since">&middot; ${since}</span></p>
   <nav class="site-nav" aria-label="Navigation">
     <div class="nav-primary">
-      <a href="${CARTA_LINKS[lang]}">${nav.carta}</a>
-      <a href="${CARTA_LINKS[lang]}#horarios">${nav.horarios}</a>
-      <a href="${PHONE}">${nav.llamar}</a>
+      <a href="${cartaUrl}">${t(d.nav.menu, lang)}</a>
+      <a href="${cartaUrl}#hours">${t(d.nav.hours, lang)}</a>
+      <a href="${phoneLink}">${t(d.nav.call, lang)}</a>
     </div>
     <div class="lang-selector" aria-label="Language">${langSelector(lang, HOME_LINKS)}</div>
   </nav>
-  <p class="site-tagline">${albayzin(d.inicio.titular)}</p>
+  <p class="site-tagline">${t(d.venue.tagline, lang)}</p>
   ${aviso}
   ${hero}
   ${trustStrip}
   <div class="homepage-footer">
     <div class="homepage-footer-inner">
-      <p class="address">Plaza Nueva &middot; Granada &middot; Andaluc&iacute;a<br />Cocina Tradicional &middot; Tres Generaciones</p>
-      <a href="${PHONE}" class="phone-link">${PHONE_DISPLAY}</a>
+      <p class="address">${addr.neighborhood} &middot; ${addr.city} &middot; ${addr.region}<br>${t(d.venue.cuisine_tag, lang)}</p>
+      <a href="${phoneLink}" class="phone-link">${phoneDisplay}</a>
     </div>
     <div class="owner-access">
       <a href="/admin/" class="owner-link">Acceso propietario</a>
@@ -96,7 +91,7 @@
     const app    = document.getElementById('homepage');
 
     try {
-      const res = await fetch(`../data/${lang}.json`);
+      const res = await fetch('../data/venue.json');
       if (!res.ok) throw new Error('HTTP ' + res.status);
       const d = await res.json();
 

@@ -1,0 +1,1262 @@
+{
+  "_schema": "nexo-horeca-universal-venue-v1",
+
+  "venue": {
+    "slug": "bar-leon",
+    "name":      { "es": "Bar León",             "en": "Bar León",            "fr": "Bar León" },
+    "full_name": { "es": "Restaurante-Bar León",  "en": "Restaurante-Bar León","fr": "Restaurante-Bar León" },
+    "tagline": {
+      "es": "Tres generaciones sin cambiar de receta.",
+      "en": "Three generations. Same recipe.",
+      "fr": "Trois générations. La même recette."
+    },
+    "founding_year": 1959,
+    "cuisine": {
+      "es": "Cocina tradicional andaluza",
+      "en": "Traditional Andalusian cooking",
+      "fr": "Cuisine traditionnelle andalouse"
+    },
+    "cuisine_tag": {
+      "es": "Cocina Tradicional · Tres Generaciones",
+      "en": "Traditional Cooking · Three Generations",
+      "fr": "Cuisine Traditionnelle · Trois Générations"
+    },
+    "notice": { "es": "", "en": "", "fr": "" },
+    "currency": "EUR",
+    "primary_language": "es",
+    "active_languages": ["es", "en", "fr"]
+  },
+
+  "contact": {
+    "address": {
+      "street":       "C. Pan, 1",
+      "neighborhood": "Albayzín",
+      "postal_code":  "18010",
+      "city":         "Granada",
+      "region":       "Andalucía",
+      "country":      "ES"
+    },
+    "phone":      "+34 958 22 51 43",
+    "phone_link": "tel:+34958225143",
+    "email":      "",
+    "whatsapp":   "+34 696 948 630"
+  },
+
+  "social": {
+    "instagram":      "",
+    "facebook":       "",
+    "tripadvisor":    "",
+    "google_maps":    "https://maps.google.com/?q=Restaurante+Bar+León+Plaza+Nueva+Granada",
+    "google_reviews": "https://www.google.com/search?q=Bar+León+Granada+opiniones",
+    "x":              ""
+  },
+
+  "seo": {
+    "title": {
+      "es": "Bar León — Cocina Tradicional Granadina desde 1959",
+      "en": "Bar León — Traditional Andalusian Restaurant, Granada",
+      "fr": "Bar León — Restaurant Traditionnel Andalou, Grenade"
+    },
+    "description": {
+      "es": "Restaurante-Bar León en el Albayzín de Granada. Cocina tradicional andaluza desde 1959. Tres generaciones. Menú del día y carta completa.",
+      "en": "Bar León in Granada's Albayzín. Traditional Andalusian cooking since 1959. Three generations. Daily menu and full à la carte.",
+      "fr": "Bar León dans l'Albayzín de Grenade. Cuisine traditionnelle andalouse depuis 1959. Trois générations. Menu du jour et carte complète."
+    },
+    "keywords": {
+      "es": ["bar granada", "restaurante albayzin", "cocina tradicional granada", "menú del día granada", "bar leon"],
+      "en": ["restaurant granada", "andalusian food", "traditional spanish restaurant", "albayzin granada"],
+      "fr": ["restaurant grenade espagne", "cuisine andalouse", "bar leon grenade"]
+    },
+    "canonical": "https://bar-leon.es",
+    "og_image":  "assets/images/hero-bg.jpg"
+  },
+
+  "hero": {
+    "image":       "assets/images/hero-bg.jpg",
+    "alt": {
+      "es": "Interior del Restaurante-Bar León en el Albayzín, Granada",
+      "en": "Interior of Restaurante-Bar León in Granada's Albayzín",
+      "fr": "Intérieur du Restaurante-Bar León dans l'Albayzín de Grenade"
+    },
+    "focal_point": "center"
+  },
+
+  "hours": [
+    {
+      "day": "monday",
+      "status": "open",
+      "periods": [
+        { "open": "13:00", "close": "16:00" },
+        { "open": "20:00", "close": "23:00" }
+      ]
+    },
+    {
+      "day": "tuesday",
+      "status": "partial",
+      "periods": [
+        { "open": "13:00", "close": "16:00" }
+      ],
+      "note": { "es": "Solo mediodía", "en": "Lunch only", "fr": "Déjeuner uniquement" }
+    },
+    {
+      "day": "wednesday",
+      "status": "closed",
+      "periods": []
+    },
+    {
+      "day": "thursday",
+      "status": "open",
+      "periods": [
+        { "open": "13:00", "close": "16:00" },
+        { "open": "20:00", "close": "23:00" }
+      ]
+    },
+    {
+      "day": "friday",
+      "status": "open",
+      "periods": [
+        { "open": "13:00", "close": "16:00" },
+        { "open": "20:30", "close": "23:30" }
+      ]
+    },
+    {
+      "day": "saturday",
+      "status": "open",
+      "periods": [
+        { "open": "13:00", "close": "16:00" },
+        { "open": "20:00", "close": "23:30" }
+      ]
+    },
+    {
+      "day": "sunday",
+      "status": "open",
+      "periods": [
+        { "open": "13:00", "close": "16:00" },
+        { "open": "20:00", "close": "23:00" }
+      ]
+    }
+  ],
+
+  "daily_menu": {
+    "active": true,
+    "price": 12.50,
+    "days": ["monday", "tuesday", "thursday", "friday"],
+    "service_period": { "open": "13:00", "close": "16:00" },
+    "includes": {
+      "es": "IVA incluido. Bebida no incluida.",
+      "en": "VAT included. Drinks not included.",
+      "fr": "TVA incluse. Boissons non comprises."
+    },
+    "starters": {
+      "es": "Ensalada de la casa · Entremeses variados · Salmorejo",
+      "en": "House salad · Mixed starters · Salmorejo",
+      "fr": "Salade maison · Entrées variées · Salmorejo"
+    },
+    "seconds": {
+      "es": "Filete de cerdo (empanado o plancha) · Secreto de cerdo · Filete de pescadilla · Calamares fritos · Filete de dorada · Pechuga de pollo",
+      "en": "Pork steak (breaded or grilled) · Secreto de cerdo · Hake fillet · Fried squid · Sea bream fillet · Chicken breast",
+      "fr": "Steak de porc (pané ou grillé) · Secreto de cerdo · Filet de merluche · Calmars frits · Filet de dorade · Blanc de poulet"
+    },
+    "mains": [
+      { "day": "monday",   "name": { "es": "Cocido",                              "en": "Cocido (slow-cooked stew)",       "fr": "Cocido (ragoût espagnol)" } },
+      { "day": "tuesday",  "name": { "es": "Macarrones",                           "en": "Macarrones (pasta)",              "fr": "Macaronis" } },
+      { "day": "thursday", "name": { "es": "Cazuela de fideos",                    "en": "Cazuela de fideos (noodle casserole)", "fr": "Cazuela de fideos" } },
+      { "day": "friday",   "name": { "es": "Lentejas (o potaje de habichuelas)",   "en": "Lentejas (lentils or bean stew)", "fr": "Lentilles (ou potaje)" } }
+    ],
+    "desserts": {
+      "es": "Natillas de la casa · Arroz con leche · Helado · Fruta del tiempo",
+      "en": "House natillas · Rice pudding · Ice cream · Seasonal fruit",
+      "fr": "Natillas maison · Riz au lait · Glace · Fruit de saison"
+    },
+    "seasonal": {
+      "es": "Viernes en verano: Arroz a la cubana.",
+      "en": "Fridays in summer: Arroz a la cubana.",
+      "fr": "Vendredis en été : Arroz a la cubana."
+    }
+  },
+
+  "categories": [
+    { "id": "andalusian-specialities", "name": { "es": "Sabores de Andalucía",      "en": "Flavours of Andalusia",        "fr": "Saveurs d'Andalousie"      }, "type": "food", "order": 1 },
+    { "id": "soups-stews",             "name": { "es": "Sopas y platos de cuchara", "en": "Soups and stews",              "fr": "Soupes et plats mijotés"   }, "type": "food", "order": 2 },
+    { "id": "starters",                "name": { "es": "Entrantes y raciones",       "en": "Starters and sharing plates",  "fr": "Entrées et raciones"       }, "type": "food", "order": 3 },
+    { "id": "fried-fish",              "name": { "es": "Frituras y pescados",         "en": "Fried dishes and fish",        "fr": "Fritures et poissons"      }, "type": "food", "order": 4 },
+    { "id": "meats",                   "name": { "es": "Carnes",                      "en": "Meat dishes",                  "fr": "Viandes"                   }, "type": "food", "order": 5 },
+    { "id": "eggs-omelettes",          "name": { "es": "Huevos y tortillas",          "en": "Eggs and omelettes",           "fr": "Œufs et omelettes"         }, "type": "food", "order": 6 },
+    { "id": "rice",                    "name": { "es": "Arroces",                     "en": "Rice dishes",                  "fr": "Riz"                       }, "type": "food", "order": 7 },
+    { "id": "desserts",                "name": { "es": "Postres",                     "en": "Desserts",                     "fr": "Desserts"                  }, "type": "food", "order": 8 },
+    { "id": "granada-wines",           "name": { "es": "Vinos de Granada",            "en": "Granada Wines",                "fr": "Vins de Grenade"           }, "type": "wine", "order": 1 },
+    { "id": "rioja",                   "name": { "es": "Rioja",                       "en": "Rioja",                        "fr": "Rioja"                     }, "type": "wine", "order": 2 },
+    { "id": "ribera-del-duero",        "name": { "es": "Ribera del Duero",            "en": "Ribera del Duero",             "fr": "Ribera del Duero"          }, "type": "wine", "order": 3 },
+    { "id": "whites-fortified",        "name": { "es": "Blancos y generosos",         "en": "Whites and fortified",         "fr": "Blancs et fortifiés"       }, "type": "wine", "order": 4 },
+    { "id": "beer",                    "name": { "es": "Cervezas",                    "en": "Beer",                         "fr": "Bières"                    }, "type": "drink", "order": 1 },
+    { "id": "drinks",                  "name": { "es": "Bebidas y aperitivos",        "en": "Drinks and aperitifs",         "fr": "Boissons et apéritifs"     }, "type": "drink", "order": 2 }
+  ],
+
+  "dishes": [
+    {
+      "id": "tortilla-sacromonte",
+      "category_id": "andalusian-specialities",
+      "name": { "es": "Tortilla del Sacromonte", "en": "Sacromonte Omelette", "fr": "Tortilla del Sacromonte" },
+      "description": {
+        "es": "Tradición granadina. Tortilla con sesos, criadillas y jamón. Receta de siempre.",
+        "en": "Granada tradition. Brains, sweetbreads, egg.",
+        "fr": "Tradition grenadine. Omelette aux abats et jambon."
+      },
+      "price": "10,00 €",
+      "pairing": { "es": "Manzanilla — 3,50 €", "en": "Manzanilla — 3,50 €", "fr": "Manzanilla — 3,50 €" },
+      "available": true,
+      "featured": true
+    },
+    {
+      "id": "habas-jamon-iberico",
+      "category_id": "andalusian-specialities",
+      "name": { "es": "Habas con jamón ibérico y huevo frito", "en": "Broad Beans with Iberian Ham and Fried Egg", "fr": "Fèves avec jambon ibérique et œuf au plat" },
+      "description": {
+        "es": "Habas tiernas con jamón ibérico al 50% y huevo frito.",
+        "en": "Tender broad beans, 50% Iberian ham, fried egg.",
+        "fr": "Fèves tendres, jambon ibérique 50%, œuf au plat."
+      },
+      "price": "13,00 €",
+      "pairing": { "es": "Delirio (D.O. Granada) — 17,00 €", "en": "Delirio (D.O. Granada) — 17,00 €", "fr": "Delirio (D.O. Granada) — 17,00 €" },
+      "available": true,
+      "featured": false
+    },
+    {
+      "id": "carne-de-monte",
+      "category_id": "andalusian-specialities",
+      "name": { "es": "Carne de monte (ciervo en adobo)", "en": "Wild Venison in Adobo", "fr": "Gibier en adobo" },
+      "description": {
+        "es": "Ciervo en adobo tradicional. Guiso de caza con vino, laurel y especias.",
+        "en": "Marinated venison, Andalusian style. Half / Full.",
+        "fr": "Cerf en adobo traditionnel. Ragoût de chasse."
+      },
+      "price": "Media 10,50 € / Ración 13,50 €",
+      "pairing": { "es": "Muñana Rojo (D.O. Granada) — 19,00 €", "en": "Muñana Rojo (D.O. Granada) — 19,00 €", "fr": "Muñana Rojo (D.O. Granada) — 19,00 €" },
+      "available": true,
+      "featured": false
+    },
+    {
+      "id": "rinones-al-jerez",
+      "category_id": "andalusian-specialities",
+      "name": { "es": "Riñones al Jerez", "en": "Kidneys in Sherry", "fr": "Rognons au Xérès" },
+      "description": {
+        "es": "Riñones salteados en salsa de vino de Jerez. Casquería de siempre.",
+        "en": "Sautéed kidneys in dry Sherry sauce. Half / Full.",
+        "fr": "Rognons sautés à la sauce de Xérès."
+      },
+      "price": "Media 9,00 € / Ración 12,50 €",
+      "pairing": { "es": "Amontillado de Jerez — 4,00 €", "en": "Amontillado de Jerez — 4,00 €", "fr": "Amontillado de Xérès — 4,00 €" },
+      "available": true,
+      "featured": false
+    },
+    {
+      "id": "callos",
+      "category_id": "andalusian-specialities",
+      "name": { "es": "Callos", "en": "Tripe Stew", "fr": "Tripes" },
+      "description": {
+        "es": "Guiso tradicional de callos con chorizo, morcilla, pimentón y garbanzos.",
+        "en": "Traditional stew. Chorizo, paprika. Half / Full.",
+        "fr": "Ragoût traditionnel de tripes, chorizo et piment."
+      },
+      "price": "Media 7,50 € / Ración 10,00 €",
+      "pairing": { "es": "Faustino Crianza (D.O. Rioja) — 18,00 €", "en": "Faustino Crianza (D.O. Rioja) — 18,00 €", "fr": "Faustino Crianza (D.O. Rioja) — 18,00 €" },
+      "available": true,
+      "featured": false
+    },
+    {
+      "id": "cordobes",
+      "category_id": "andalusian-specialities",
+      "name": { "es": "Cordobés (carne en salsa)", "en": "Córdoba-Style Stew", "fr": "Ragoût à la Cordouane" },
+      "description": {
+        "es": "Carne de cerdo en salsa de vino y especias. Guiso tradicional andaluz.",
+        "en": "Meat in Córdoba-style sauce. Half / Full.",
+        "fr": "Porc en sauce au vin et épices."
+      },
+      "price": "Media 9,00 € / Ración 12,50 €",
+      "pairing": { "es": "Castillo de Aza Crianza (D.O. Ribera del Duero) — 19,00 €", "en": "Castillo de Aza Crianza (D.O. Ribera del Duero) — 19,00 €", "fr": "Castillo de Aza Crianza — 19,00 €" },
+      "available": true,
+      "featured": false
+    },
+    {
+      "id": "criadillas",
+      "category_id": "andalusian-specialities",
+      "name": { "es": "Criadillas", "en": "Criadillas", "fr": "Criadillas" },
+      "description": {
+        "es": "Casquería tradicional, rebozada y frita.",
+        "en": "Breaded and fried. Half / Full.",
+        "fr": "Abats traditionnels, panés et frits."
+      },
+      "price": "Media 7,50 € / Ración 10,00 €",
+      "pairing": { "es": "Fino de Jerez — 3,50 €", "en": "Fino de Jerez — 3,50 €", "fr": "Fino de Xérès — 3,50 €" },
+      "available": true,
+      "featured": false
+    },
+    {
+      "id": "sesos",
+      "category_id": "andalusian-specialities",
+      "name": { "es": "Sesos", "en": "Fried Brains", "fr": "Cervelle frite" },
+      "description": {
+        "es": "Sesos rebozados y fritos. Casquería clásica de la cocina granadina.",
+        "en": "Breaded and fried. Half / Full.",
+        "fr": "Cervelle panée et frite. Casquería classique."
+      },
+      "price": "Media 7,50 € / Ración 10,00 €",
+      "pairing": { "es": "D.O. Rueda Verdejo — 17,00 €", "en": "D.O. Rueda Verdejo — 17,00 €", "fr": "D.O. Rueda Verdejo — 17,00 €" },
+      "available": true,
+      "featured": false
+    },
+
+    {
+      "id": "gazpacho-andaluz",
+      "category_id": "soups-stews",
+      "name": { "es": "Gazpacho andaluz", "en": "Andalusian Gazpacho", "fr": "Gaspacho andalou" },
+      "description": {
+        "es": "Tomate, pepino, pimiento, ajo y pan. Servido frío.",
+        "en": "Traditional cold soup.",
+        "fr": "Tomate, concombre, poivron, ail et pain. Servi froid."
+      },
+      "price": "4,50 €",
+      "pairing": { "es": "", "en": "", "fr": "" },
+      "available": true,
+      "featured": false
+    },
+    {
+      "id": "salmorejo",
+      "category_id": "soups-stews",
+      "name": { "es": "Salmorejo", "en": "Salmorejo", "fr": "Salmorejo" },
+      "description": {
+        "es": "Crema fría de tomate y pan. Solo en temporada de verano.",
+        "en": "Córdoba-style tomato cream. With egg and ham.",
+        "fr": "Crème froide de tomate et pain. Saison estivale uniquement."
+      },
+      "price": "5,00 €",
+      "pairing": { "es": "", "en": "", "fr": "" },
+      "available": true,
+      "featured": false
+    },
+    {
+      "id": "sopa-de-picadillo",
+      "category_id": "soups-stews",
+      "name": { "es": "Sopa de picadillo", "en": "Picadillo Soup", "fr": "Soupe picadillo" },
+      "description": {
+        "es": "Caldo de pollo con jamón, huevo, pan y hierbabuena.",
+        "en": "Chicken broth with ham, egg, bread and mint.",
+        "fr": "Bouillon de poulet, jambon, œuf, pain et menthe."
+      },
+      "price": "5,00 €",
+      "pairing": { "es": "", "en": "", "fr": "" },
+      "available": true,
+      "featured": false
+    },
+    {
+      "id": "consome-al-jerez",
+      "category_id": "soups-stews",
+      "name": { "es": "Consomé al Jerez", "en": "Sherry Consommé", "fr": "Consommé au Xérès" },
+      "description": {
+        "es": "Caldo de ave con vino de Jerez.",
+        "en": "Poultry broth with Sherry wine.",
+        "fr": "Bouillon de volaille au vin de Xérès."
+      },
+      "price": "5,00 €",
+      "pairing": { "es": "", "en": "", "fr": "" },
+      "available": true,
+      "featured": false
+    },
+    {
+      "id": "sopa-de-ajos",
+      "category_id": "soups-stews",
+      "name": { "es": "Sopa de ajos", "en": "Garlic Soup", "fr": "Soupe à l'ail" },
+      "description": {
+        "es": "Pan, ajo, pimentón, caldo y huevo. Plato de invierno.",
+        "en": "Bread, garlic, paprika, broth and egg. Winter dish.",
+        "fr": "Pain, ail, paprika, bouillon et œuf. Plat d'hiver."
+      },
+      "price": "6,00 €",
+      "pairing": { "es": "", "en": "", "fr": "" },
+      "available": true,
+      "featured": false
+    },
+    {
+      "id": "sopa-de-mariscos",
+      "category_id": "soups-stews",
+      "name": { "es": "Sopa de mariscos", "en": "Seafood Soup", "fr": "Soupe de fruits de mer" },
+      "description": {
+        "es": "Caldo de pescado con marisco, tomate, ajo y arroz.",
+        "en": "Fish broth with seafood, tomato, garlic and rice.",
+        "fr": "Bouillon de poisson, fruits de mer, tomate, ail et riz."
+      },
+      "price": "6,50 €",
+      "pairing": { "es": "", "en": "", "fr": "" },
+      "available": true,
+      "featured": false
+    },
+    {
+      "id": "sopa-sevillana",
+      "category_id": "soups-stews",
+      "name": { "es": "Sopa sevillana", "en": "Sevillian Soup", "fr": "Soupe sévillane" },
+      "description": {
+        "es": "Caldo con pollo, jamón, arroz y verduras.",
+        "en": "Broth with chicken, ham, rice and vegetables.",
+        "fr": "Bouillon avec poulet, jambon, riz et légumes."
+      },
+      "price": "7,00 €",
+      "pairing": { "es": "", "en": "", "fr": "" },
+      "available": true,
+      "featured": false
+    },
+
+    {
+      "id": "tomate-alinao",
+      "category_id": "starters",
+      "name": { "es": "Tomate aliñao", "en": "Dressed Tomato", "fr": "Tomate assaisonnée" },
+      "description": {
+        "es": "Tomate con cebolleta, aceite de oliva y sal.",
+        "en": "Tomato with spring onion, olive oil and salt.",
+        "fr": "Tomate, oignon nouveau, huile d'olive et sel."
+      },
+      "price": "7,50 €",
+      "pairing": { "es": "", "en": "", "fr": "" },
+      "available": true,
+      "featured": false
+    },
+    {
+      "id": "ensaladilla-rusa",
+      "category_id": "starters",
+      "name": { "es": "Ensaladilla rusa", "en": "Russian Salad", "fr": "Salade russe" },
+      "description": {
+        "es": "Patata, zanahoria, guisantes, mayonesa y gambas.",
+        "en": "Potato, carrot, peas, mayonnaise and prawns.",
+        "fr": "Pomme de terre, carotte, petits pois, mayonnaise et crevettes."
+      },
+      "price": "Media 5,50 € / Ración 8,00 €",
+      "pairing": { "es": "", "en": "", "fr": "" },
+      "available": true,
+      "featured": false
+    },
+    {
+      "id": "ensalada-de-la-casa",
+      "category_id": "starters",
+      "name": { "es": "Ensalada de la casa", "en": "House Salad", "fr": "Salade maison" },
+      "description": {
+        "es": "Ensalada fresca con productos de temporada.",
+        "en": "Fresh salad with seasonal produce.",
+        "fr": "Salade fraîche de saison."
+      },
+      "price": "8,00 €",
+      "pairing": { "es": "", "en": "", "fr": "" },
+      "available": true,
+      "featured": false
+    },
+    {
+      "id": "esparragos-con-mahonesa",
+      "category_id": "starters",
+      "name": { "es": "Espárragos con mahonesa", "en": "Asparagus with Mayonnaise", "fr": "Asperges avec mayonnaise" },
+      "description": {
+        "es": "Espárragos con salsa mahonesa.",
+        "en": "Asparagus with mayonnaise.",
+        "fr": "Asperges à la mayonnaise."
+      },
+      "price": "7,50 €",
+      "pairing": { "es": "", "en": "", "fr": "" },
+      "available": true,
+      "featured": false
+    },
+    {
+      "id": "surtido-de-ibericos",
+      "category_id": "starters",
+      "name": { "es": "Surtido de ibéricos", "en": "Iberian Cold Cuts Board", "fr": "Sélection de charcuteries ibériques" },
+      "description": {
+        "es": "Selección de embutidos ibéricos.",
+        "en": "Selection of Iberian charcuterie.",
+        "fr": "Sélection de charcuteries ibériques."
+      },
+      "price": "12,50 €",
+      "pairing": { "es": "Calvente Guindalera (D.O. Granada) — 18,00 €", "en": "Calvente Guindalera (D.O. Granada) — 18,00 €", "fr": "Calvente Guindalera (D.O. Granada) — 18,00 €" },
+      "available": true,
+      "featured": false
+    },
+    {
+      "id": "jamon-cebo-iberico",
+      "category_id": "starters",
+      "name": { "es": "Jamón cebo ibérico (50%)", "en": "Iberian Ham 50%", "fr": "Jambon ibérique cebo 50%" },
+      "description": {
+        "es": "Jamón ibérico de cebo, cortado en la casa. 100 g.",
+        "en": "Sliced to order. 100 g.",
+        "fr": "Jambon ibérique de cebo, tranché à la maison. 100 g."
+      },
+      "price": "14,00 €",
+      "pairing": { "es": "Fino de Jerez — 3,50 €", "en": "Fino de Jerez — 3,50 €", "fr": "Fino de Xérès — 3,50 €" },
+      "available": true,
+      "featured": false
+    },
+    {
+      "id": "queso-curado",
+      "category_id": "starters",
+      "name": { "es": "Queso curado", "en": "Aged Cheese", "fr": "Fromage affiné" },
+      "description": {
+        "es": "Queso curado de oveja o mezcla. 200 g.",
+        "en": "Aged sheep's or mixed cheese. 200 g.",
+        "fr": "Fromage affiné de brebis ou mélange. 200 g."
+      },
+      "price": "11,00 €",
+      "pairing": { "es": "", "en": "", "fr": "" },
+      "available": true,
+      "featured": false
+    },
+    {
+      "id": "croquetas",
+      "category_id": "starters",
+      "name": { "es": "Croquetas", "en": "Croquetas", "fr": "Croquettes" },
+      "description": {
+        "es": "Croquetas de jamón elaboradas en la casa.",
+        "en": "House-made ham croquetas.",
+        "fr": "Croquettes maison au jambon."
+      },
+      "price": "8,50 € (ración) / 1,80 € (unidad en barra)",
+      "pairing": { "es": "", "en": "", "fr": "" },
+      "available": true,
+      "featured": false
+    },
+    {
+      "id": "champinon",
+      "category_id": "starters",
+      "name": { "es": "Champiñón", "en": "Sautéed Mushrooms", "fr": "Champignons sautés" },
+      "description": {
+        "es": "Champiñones salteados con ajo y perejil.",
+        "en": "Mushrooms sautéed with garlic and parsley.",
+        "fr": "Champignons sautés à l'ail et au persil."
+      },
+      "price": "Media 7,50 € / Ración 10,00 €",
+      "pairing": { "es": "", "en": "", "fr": "" },
+      "available": true,
+      "featured": false
+    },
+    {
+      "id": "champinones-con-gambas",
+      "category_id": "starters",
+      "name": { "es": "Champiñones con gambas", "en": "Mushrooms with Prawns", "fr": "Champignons aux crevettes" },
+      "description": {
+        "es": "Champiñones y gambas salteados con ajo y perejil.",
+        "en": "Mushrooms and prawns sautéed with garlic and parsley.",
+        "fr": "Champignons et crevettes sautés à l'ail et au persil."
+      },
+      "price": "14,50 €",
+      "pairing": { "es": "", "en": "", "fr": "" },
+      "available": true,
+      "featured": false
+    },
+    {
+      "id": "berenjenas-fritas",
+      "category_id": "starters",
+      "name": { "es": "Berenjenas fritas", "en": "Fried Aubergine", "fr": "Aubergines frites" },
+      "description": {
+        "es": "Berenjenas en tempura, fritas en aceite de oliva.",
+        "en": "Aubergine in tempura batter, fried in olive oil.",
+        "fr": "Aubergines en tempura, frites à l'huile d'olive."
+      },
+      "price": "Media 8,00 € / Ración 11,00 €",
+      "pairing": { "es": "", "en": "", "fr": "" },
+      "available": true,
+      "featured": false
+    },
+    {
+      "id": "pulpo-a-la-vinagreta",
+      "category_id": "starters",
+      "name": { "es": "Pulpo a la vinagreta", "en": "Octopus in Vinaigrette", "fr": "Poulpe à la vinaigrette" },
+      "description": {
+        "es": "Pulpo cocido con pimiento, cebolla, vinagre y aceite de oliva.",
+        "en": "Cooked octopus with pepper, onion, vinegar and olive oil.",
+        "fr": "Poulpe cuit, poivron, oignon, vinaigre et huile d'olive."
+      },
+      "price": "Media 5,50 € / Ración 8,00 €",
+      "pairing": { "es": "", "en": "", "fr": "" },
+      "available": true,
+      "featured": false
+    },
+    {
+      "id": "verduras-salteadas",
+      "category_id": "starters",
+      "name": { "es": "Verduras salteadas", "en": "Sautéed Vegetables", "fr": "Légumes sautés" },
+      "description": {
+        "es": "Verduras de temporada salteadas con ajo y aceite de oliva.",
+        "en": "Seasonal vegetables sautéed with garlic and olive oil.",
+        "fr": "Légumes de saison sautés à l'ail et à l'huile d'olive."
+      },
+      "price": "7,00 €",
+      "pairing": { "es": "", "en": "", "fr": "" },
+      "available": true,
+      "featured": false
+    },
+
+    {
+      "id": "calamares-fritos",
+      "category_id": "fried-fish",
+      "name": { "es": "Calamares fritos", "en": "Fried Squid", "fr": "Calmars frits" },
+      "description": {
+        "es": "Calamares rebozados y fritos en aceite de oliva.",
+        "en": "Andalusian style. Half / Full.",
+        "fr": "Calamars panés et frits à l'huile d'olive."
+      },
+      "price": "Media 9,50 € / Ración 13,00 €",
+      "pairing": { "es": "Castillo de San Diego (V.T. Cádiz) — 17,50 €", "en": "Castillo de San Diego — 17,50 €", "fr": "Castillo de San Diego — 17,50 €" },
+      "available": true,
+      "featured": false
+    },
+    {
+      "id": "boquerones-fritos",
+      "category_id": "fried-fish",
+      "name": { "es": "Boquerones fritos", "en": "Fried Fresh Anchovies", "fr": "Anchois frits" },
+      "description": {
+        "es": "Boquerones frescos rebozados y fritos.",
+        "en": "Andalusian style. Half / Full.",
+        "fr": "Anchois frais panés et frits."
+      },
+      "price": "Media 9,50 € / Ración 13,00 €",
+      "pairing": { "es": "Manzanilla — 3,50 €", "en": "Manzanilla — 3,50 €", "fr": "Manzanilla — 3,50 €" },
+      "available": true,
+      "featured": false
+    },
+    {
+      "id": "cazon-frito-en-adobo",
+      "category_id": "fried-fish",
+      "name": { "es": "Cazón frito en adobo", "en": "Marinated Dogfish", "fr": "Chien de mer mariné frit" },
+      "description": {
+        "es": "Cazón marinado en ajo, orégano y pimentón, rebozado y frito.",
+        "en": "Marinated in garlic, oregano and paprika, breaded and fried.",
+        "fr": "Mariné à l'ail, origan et paprika, pané et frit."
+      },
+      "price": "Media 9,50 € / Ración 13,00 €",
+      "pairing": { "es": "Fino de Jerez — 3,50 €", "en": "Fino de Jerez — 3,50 €", "fr": "Fino de Xérès — 3,50 €" },
+      "available": true,
+      "featured": false
+    },
+    {
+      "id": "almejas",
+      "category_id": "fried-fish",
+      "name": { "es": "Almejas", "en": "Clams", "fr": "Palourdes" },
+      "description": {
+        "es": "Almejas salteadas con ajo, perejil y vino blanco.",
+        "en": "Clams sautéed with garlic, parsley and white wine.",
+        "fr": "Palourdes sautées à l'ail, persil et vin blanc."
+      },
+      "price": "Media 9,50 € / Ración 13,00 €",
+      "pairing": { "es": "D.O. Rueda Verdejo — 17,00 €", "en": "D.O. Rueda Verdejo — 17,00 €", "fr": "D.O. Rueda Verdejo — 17,00 €" },
+      "available": true,
+      "featured": false
+    },
+    {
+      "id": "gambas-fritas",
+      "category_id": "fried-fish",
+      "name": { "es": "Gambas fritas", "en": "Fried Prawns", "fr": "Crevettes frites" },
+      "description": {
+        "es": "Gambas rebozadas y fritas en aceite de oliva.",
+        "en": "Prawns breaded and fried in olive oil.",
+        "fr": "Crevettes panées et frites à l'huile d'olive."
+      },
+      "price": "Media 10,50 € / Ración 14,00 €",
+      "pairing": { "es": "", "en": "", "fr": "" },
+      "available": true,
+      "featured": false
+    },
+    {
+      "id": "gambas-al-pil-pil",
+      "category_id": "fried-fish",
+      "name": { "es": "Gambas al pil-pil", "en": "Prawns in Pil-Pil", "fr": "Crevettes au pil-pil" },
+      "description": {
+        "es": "Gambas salteadas con ajo, guindilla y aceite de oliva.",
+        "en": "Prawns with garlic and chilli in olive oil. Half / Full.",
+        "fr": "Crevettes sautées, ail, piment et huile d'olive."
+      },
+      "price": "Media 10,50 € / Ración 14,00 €",
+      "pairing": { "es": "", "en": "", "fr": "" },
+      "available": true,
+      "featured": false
+    },
+    {
+      "id": "chopos-fritos",
+      "category_id": "fried-fish",
+      "name": { "es": "Chopos fritos (puntillitas)", "en": "Fried Baby Squid", "fr": "Puntillitas frites" },
+      "description": {
+        "es": "Puntillitas de calamar rebozadas y fritas.",
+        "en": "Baby squid breaded and fried.",
+        "fr": "Puntillitas de calamar panées et frites."
+      },
+      "price": "Media 10,50 € / Ración 14,00 €",
+      "pairing": { "es": "", "en": "", "fr": "" },
+      "available": true,
+      "featured": false
+    },
+    {
+      "id": "fritura-de-pescado-variado",
+      "category_id": "fried-fish",
+      "name": { "es": "Fritura de pescado variado", "en": "Mixed Fried Fish", "fr": "Friture de poissons variés" },
+      "description": {
+        "es": "Selección de pescados frescos rebozados y fritos. Según disponibilidad.",
+        "en": "Selection of fresh fish, breaded and fried. Subject to availability.",
+        "fr": "Sélection de poissons frais panés et frits. Selon disponibilité."
+      },
+      "price": "17,50 €",
+      "pairing": { "es": "Calvente (V.T. Granada) — 21,00 €", "en": "Calvente (V.T. Granada) — 21,00 €", "fr": "Calvente (V.T. Granada) — 21,00 €" },
+      "available": true,
+      "featured": false
+    },
+    {
+      "id": "bacalao-con-tomate",
+      "category_id": "fried-fish",
+      "name": { "es": "Bacalao con tomate", "en": "Salt Cod with Tomato", "fr": "Morue à la tomate" },
+      "description": {
+        "es": "Bacalao desalado con salsa de tomate, cebolla y pimiento.",
+        "en": "Desalted cod with tomato sauce, onion and pepper.",
+        "fr": "Morue dessalée, sauce tomate, oignon et poivron."
+      },
+      "price": "15,00 €",
+      "pairing": { "es": "", "en": "", "fr": "" },
+      "available": true,
+      "featured": false
+    },
+    {
+      "id": "filete-pez-espada",
+      "category_id": "fried-fish",
+      "name": { "es": "Filete de pez espada (plancha)", "en": "Grilled Swordfish Steak", "fr": "Filet d'espadon grillé" },
+      "description": {
+        "es": "Pez espada a la plancha con ajo, aceite de oliva y limón.",
+        "en": "Grilled swordfish with garlic, olive oil and lemon.",
+        "fr": "Espadon grillé, ail, huile d'olive et citron."
+      },
+      "price": "15,00 €",
+      "pairing": { "es": "", "en": "", "fr": "" },
+      "available": true,
+      "featured": false
+    },
+    {
+      "id": "calamares-a-la-plancha",
+      "category_id": "fried-fish",
+      "name": { "es": "Calamares a la plancha", "en": "Grilled Squid", "fr": "Calmars grillés" },
+      "description": {
+        "es": "Calamares a la plancha con ajo, perejil y limón.",
+        "en": "Grilled squid with garlic, parsley and lemon.",
+        "fr": "Calmars grillés, ail, persil et citron."
+      },
+      "price": "16,00 €",
+      "pairing": { "es": "", "en": "", "fr": "" },
+      "available": true,
+      "featured": false
+    },
+
+    {
+      "id": "pinchitos",
+      "category_id": "meats",
+      "name": { "es": "Pinchitos", "en": "Pinchitos", "fr": "Pinchitos" },
+      "description": {
+        "es": "Carne adobada en pinchos, elaborada en la casa.",
+        "en": "House-marinated meat skewers.",
+        "fr": "Brochettes de viande marinée maison."
+      },
+      "price": "4,80 € (unidad)",
+      "pairing": { "es": "Alhambra Reserva 1925 — 3,20 €", "en": "Alhambra Reserva 1925 — 3,20 €", "fr": "Alhambra Reserva 1925 — 3,20 €" },
+      "available": true,
+      "featured": false
+    },
+    {
+      "id": "pollo",
+      "category_id": "meats",
+      "name": { "es": "Pollo", "en": "Chicken", "fr": "Poulet" },
+      "description": {
+        "es": "Pollo a la plancha o al horno. Según elaboración del día.",
+        "en": "Grilled or roast chicken. As prepared on the day.",
+        "fr": "Poulet grillé ou au four. Selon préparation du jour."
+      },
+      "price": "9,00 €",
+      "pairing": { "es": "", "en": "", "fr": "" },
+      "available": true,
+      "featured": false
+    },
+    {
+      "id": "lomo-salteado",
+      "category_id": "meats",
+      "name": { "es": "Lomo salteado", "en": "Sautéed Pork Loin", "fr": "Longe de porc sautée" },
+      "description": {
+        "es": "Lomo de cerdo salteado con ajo, pimiento y cebolla.",
+        "en": "Pork loin sautéed with garlic, pepper and onion.",
+        "fr": "Longe de porc sautée, ail, poivron et oignon."
+      },
+      "price": "Media 10,50 € / Ración 14,00 €",
+      "pairing": { "es": "", "en": "", "fr": "" },
+      "available": true,
+      "featured": false
+    },
+    {
+      "id": "flamenquin",
+      "category_id": "meats",
+      "name": { "es": "Flamenquín", "en": "Flamenquín", "fr": "Flamenquín" },
+      "description": {
+        "es": "Lomo de cerdo relleno de jamón, rebozado y frito.",
+        "en": "Pork loin stuffed with ham, breaded and fried.",
+        "fr": "Longe de porc farcie au jambon, panée et frite."
+      },
+      "price": "5,00 € (barra) / 14,00 € (restaurante)",
+      "pairing": { "es": "Delirio (D.O. Granada) — 17,00 €", "en": "Delirio (D.O. Granada) — 17,00 €", "fr": "Delirio (D.O. Granada) — 17,00 €" },
+      "available": true,
+      "featured": false
+    },
+    {
+      "id": "escalope-de-ternera",
+      "category_id": "meats",
+      "name": { "es": "Escalope de ternera", "en": "Veal Escalope", "fr": "Escalope de veau" },
+      "description": {
+        "es": "Ternera empanada y frita. Con limón.",
+        "en": "Breaded and fried veal. With lemon.",
+        "fr": "Veau pané et frit. Avec citron."
+      },
+      "price": "12,50 €",
+      "pairing": { "es": "", "en": "", "fr": "" },
+      "available": true,
+      "featured": false
+    },
+    {
+      "id": "ternera-estofada",
+      "category_id": "meats",
+      "name": { "es": "Ternera estofada", "en": "Braised Veal", "fr": "Veau braisé" },
+      "description": {
+        "es": "Ternera en salsa, estofada con verduras y vino.",
+        "en": "Veal braised in sauce with vegetables and wine.",
+        "fr": "Veau braisé en sauce, légumes et vin."
+      },
+      "price": "12,50 €",
+      "pairing": { "es": "Alcorta Crianza (D.O. Rioja) — 18,00 €", "en": "Alcorta Crianza (D.O. Rioja) — 18,00 €", "fr": "Alcorta Crianza (D.O. Rioja) — 18,00 €" },
+      "available": true,
+      "featured": false
+    },
+    {
+      "id": "chuletas-de-cordero",
+      "category_id": "meats",
+      "name": { "es": "Chuletas de cordero", "en": "Lamb Chops", "fr": "Côtelettes d'agneau" },
+      "description": {
+        "es": "Chuletas de cordero a la plancha.",
+        "en": "Chargrilled lamb chops.",
+        "fr": "Côtelettes d'agneau grillées."
+      },
+      "price": "14,00 €",
+      "pairing": { "es": "Muñana Rojo (D.O. Granada) — 19,00 €", "en": "Muñana Rojo (D.O. Granada) — 19,00 €", "fr": "Muñana Rojo (D.O. Granada) — 19,00 €" },
+      "available": true,
+      "featured": false
+    },
+    {
+      "id": "presa-iberica",
+      "category_id": "meats",
+      "name": { "es": "Presa ibérica", "en": "Grilled Iberian Presa", "fr": "Presa ibérique" },
+      "description": {
+        "es": "Presa ibérica a la plancha.",
+        "en": "Select Iberian pork cut, grilled.",
+        "fr": "Presa ibérique grillée."
+      },
+      "price": "14,00 €",
+      "pairing": { "es": "Señorío de Nevada (D.O. Granada) — 20,00 €", "en": "Señorío de Nevada (D.O. Granada) — 20,00 €", "fr": "Señorío de Nevada (D.O. Granada) — 20,00 €" },
+      "available": true,
+      "featured": false
+    },
+    {
+      "id": "san-jacobo",
+      "category_id": "meats",
+      "name": { "es": "San Jacobo", "en": "San Jacobo", "fr": "San Jacobo" },
+      "description": {
+        "es": "Jamón cocido y queso envueltos en lomo, rebozado y frito.",
+        "en": "Cooked ham and cheese wrapped in pork loin, breaded and fried.",
+        "fr": "Jambon cuit et fromage enveloppés dans du lomo, pané et frit."
+      },
+      "price": "15,00 €",
+      "pairing": { "es": "Delirio (D.O. Granada) — 17,00 €", "en": "Delirio (D.O. Granada) — 17,00 €", "fr": "Delirio (D.O. Granada) — 17,00 €" },
+      "available": true,
+      "featured": false
+    },
+    {
+      "id": "solomillo-de-cerdo",
+      "category_id": "meats",
+      "name": { "es": "Solomillo de cerdo", "en": "Pork Tenderloin", "fr": "Filet de porc" },
+      "description": {
+        "es": "Solomillo de cerdo a la plancha.",
+        "en": "Grilled pork tenderloin.",
+        "fr": "Filet de porc grillé."
+      },
+      "price": "14,50 €",
+      "pairing": { "es": "Fontedei Prado Negro (D.O. Granada) — 17,00 €", "en": "Fontedei Prado Negro (D.O. Granada) — 17,00 €", "fr": "Fontedei Prado Negro (D.O. Granada) — 17,00 €" },
+      "available": true,
+      "featured": false
+    },
+    {
+      "id": "solomillo-a-la-pimienta",
+      "category_id": "meats",
+      "name": { "es": "Solomillo de cerdo a la pimienta", "en": "Pork Tenderloin in Pepper Sauce", "fr": "Filet de porc au poivre" },
+      "description": {
+        "es": "Solomillo de cerdo con salsa de pimienta.",
+        "en": "Pork tenderloin with pepper sauce.",
+        "fr": "Filet de porc à la sauce poivre."
+      },
+      "price": "15,50 €",
+      "pairing": { "es": "Muñana 3 Cepas (D.O. Granada) — 21,00 €", "en": "Muñana 3 Cepas (D.O. Granada) — 21,00 €", "fr": "Muñana 3 Cepas (D.O. Granada) — 21,00 €" },
+      "available": true,
+      "featured": false
+    },
+    {
+      "id": "entrecot-de-ternera",
+      "category_id": "meats",
+      "name": { "es": "Entrecot de ternera", "en": "Veal Entrecôte", "fr": "Entrecôte de veau" },
+      "description": {
+        "es": "Entrecot de ternera a la plancha.",
+        "en": "Grilled veal entrecôte.",
+        "fr": "Entrecôte de veau grillée."
+      },
+      "price": "19,00 €",
+      "pairing": { "es": "Marqués de Cáceres Reserva (D.O. Rioja) — 26,00 €", "en": "Marqués de Cáceres Reserva (D.O. Rioja) — 26,00 €", "fr": "Marqués de Cáceres Reserva (D.O. Rioja) — 26,00 €" },
+      "available": true,
+      "featured": false
+    },
+    {
+      "id": "entrecot-a-la-pimienta",
+      "category_id": "meats",
+      "name": { "es": "Entrecot a la pimienta", "en": "Entrecôte in Pepper Sauce", "fr": "Entrecôte au poivre" },
+      "description": {
+        "es": "Entrecot de ternera con salsa de pimienta.",
+        "en": "Veal entrecôte with pepper sauce.",
+        "fr": "Entrecôte de veau à la sauce poivre."
+      },
+      "price": "20,00 €",
+      "pairing": { "es": "Marqués de Cáceres Reserva (D.O. Rioja) — 26,00 €", "en": "Marqués de Cáceres Reserva (D.O. Rioja) — 26,00 €", "fr": "Marqués de Cáceres Reserva (D.O. Rioja) — 26,00 €" },
+      "available": true,
+      "featured": false
+    },
+
+    {
+      "id": "pincho-de-tortilla",
+      "category_id": "eggs-omelettes",
+      "name": { "es": "Pincho de tortilla de patatas", "en": "Potato Omelette Slice", "fr": "Tranche de tortilla" },
+      "description": {
+        "es": "Tortilla de patatas elaborada en la casa.",
+        "en": "House-made potato omelette.",
+        "fr": "Tortilla de pommes de terre maison."
+      },
+      "price": "2,80 € (unidad)",
+      "pairing": { "es": "", "en": "", "fr": "" },
+      "available": true,
+      "featured": false
+    },
+    {
+      "id": "tortilla-de-jamon",
+      "category_id": "eggs-omelettes",
+      "name": { "es": "Tortilla de jamón", "en": "Ham Omelette", "fr": "Omelette au jambon" },
+      "description": {
+        "es": "Tortilla de patatas con jamón.",
+        "en": "Potato omelette with ham.",
+        "fr": "Tortilla de pommes de terre au jambon."
+      },
+      "price": "6,50 €",
+      "pairing": { "es": "", "en": "", "fr": "" },
+      "available": true,
+      "featured": false
+    },
+    {
+      "id": "tortilla-de-patatas",
+      "category_id": "eggs-omelettes",
+      "name": { "es": "Tortilla de patatas", "en": "Spanish Omelette", "fr": "Tortilla espagnole" },
+      "description": {
+        "es": "Tortilla de patatas con o sin cebolla.",
+        "en": "With or without onion.",
+        "fr": "Avec ou sans oignon."
+      },
+      "price": "8,50 €",
+      "pairing": { "es": "", "en": "", "fr": "" },
+      "available": true,
+      "featured": false
+    },
+    {
+      "id": "revuelto-de-esparragos",
+      "category_id": "eggs-omelettes",
+      "name": { "es": "Revuelto de espárragos", "en": "Scrambled Eggs with Asparagus", "fr": "Œufs brouillés aux asperges" },
+      "description": {
+        "es": "Huevos revueltos con espárragos.",
+        "en": "Scrambled eggs with asparagus.",
+        "fr": "Œufs brouillés aux asperges."
+      },
+      "price": "8,50 €",
+      "pairing": { "es": "", "en": "", "fr": "" },
+      "available": true,
+      "featured": false
+    },
+    {
+      "id": "revuelto-de-champinon",
+      "category_id": "eggs-omelettes",
+      "name": { "es": "Revuelto de champiñón", "en": "Scrambled Eggs with Mushrooms", "fr": "Œufs brouillés aux champignons" },
+      "description": {
+        "es": "Huevos revueltos con champiñones.",
+        "en": "Scrambled eggs with mushrooms.",
+        "fr": "Œufs brouillés aux champignons."
+      },
+      "price": "8,50 €",
+      "pairing": { "es": "", "en": "", "fr": "" },
+      "available": true,
+      "featured": false
+    },
+    {
+      "id": "revuelto-de-gambas",
+      "category_id": "eggs-omelettes",
+      "name": { "es": "Revuelto de gambas", "en": "Scrambled Eggs with Prawns", "fr": "Œufs brouillés aux crevettes" },
+      "description": {
+        "es": "Huevos revueltos con gambas.",
+        "en": "Scrambled eggs with prawns.",
+        "fr": "Œufs brouillés aux crevettes."
+      },
+      "price": "10,00 €",
+      "pairing": { "es": "", "en": "", "fr": "" },
+      "available": true,
+      "featured": false
+    },
+    {
+      "id": "huevos-fritos-con-jamon",
+      "category_id": "eggs-omelettes",
+      "name": { "es": "Huevos fritos con patatas y jamón ibérico", "en": "Fried Eggs with Potatoes and Iberian Ham", "fr": "Œufs frits, pommes de terre et jambon ibérique" },
+      "description": {
+        "es": "Huevos fritos con patatas y jamón ibérico al 50%.",
+        "en": "Fried eggs with potatoes and 50% Iberian ham.",
+        "fr": "Œufs frits, pommes de terre et jambon ibérique 50%."
+      },
+      "price": "13,00 €",
+      "pairing": { "es": "", "en": "", "fr": "" },
+      "available": true,
+      "featured": false
+    },
+
+    {
+      "id": "paella-mixta",
+      "category_id": "rice",
+      "name": { "es": "Paella mixta", "en": "Mixed Paella", "fr": "Paella mixte" },
+      "description": {
+        "es": "Arroz con pollo, marisco y verduras. Por encargo, mínimo 2 raciones.",
+        "en": "Minimum 2 people. On request.",
+        "fr": "Riz au poulet, fruits de mer et légumes. Sur commande, minimum 2 rations."
+      },
+      "price": "14,00 € / ración",
+      "pairing": { "es": "Señorío de Nevada (D.O. Granada) — 20,00 €", "en": "Señorío de Nevada (D.O. Granada) — 20,00 €", "fr": "Señorío de Nevada (D.O. Granada) — 20,00 €" },
+      "available": true,
+      "featured": false
+    },
+    {
+      "id": "paella-de-mariscos",
+      "category_id": "rice",
+      "name": { "es": "Paella de mariscos", "en": "Seafood Paella", "fr": "Paella aux fruits de mer" },
+      "description": {
+        "es": "Arroz con marisco y caldo de pescado. Por encargo, mínimo 2 raciones.",
+        "en": "Minimum 2 people. On request.",
+        "fr": "Riz aux fruits de mer et bouillon de poisson. Sur commande, minimum 2 rations."
+      },
+      "price": "15,00 € / ración",
+      "pairing": { "es": "Calvente (V.T. Granada) — 21,00 €", "en": "Calvente (V.T. Granada) — 21,00 €", "fr": "Calvente (V.T. Granada) — 21,00 €" },
+      "available": true,
+      "featured": false
+    },
+    {
+      "id": "paella-de-verduras",
+      "category_id": "rice",
+      "name": { "es": "Paella de verduras", "en": "Vegetable Paella", "fr": "Paella aux légumes" },
+      "description": {
+        "es": "Arroz con verduras de temporada. Por encargo, mínimo 2 raciones.",
+        "en": "Seasonal vegetables. Minimum 2 people. On request.",
+        "fr": "Riz aux légumes de saison. Sur commande, minimum 2 rations."
+      },
+      "price": "14,00 € / ración",
+      "pairing": { "es": "", "en": "", "fr": "" },
+      "available": true,
+      "featured": false
+    },
+
+    {
+      "id": "fruta-del-tiempo",
+      "category_id": "desserts",
+      "name": { "es": "Fruta del tiempo", "en": "Seasonal Fruit", "fr": "Fruit de saison" },
+      "description": {
+        "es": "Fruta fresca de temporada.",
+        "en": "Fresh seasonal fruit.",
+        "fr": "Fruit frais de saison."
+      },
+      "price": "1,80 €",
+      "pairing": { "es": "", "en": "", "fr": "" },
+      "available": true,
+      "featured": false
+    },
+    {
+      "id": "flan-de-la-casa",
+      "category_id": "desserts",
+      "name": { "es": "Flan de la casa", "en": "House Flan", "fr": "Flan maison" },
+      "description": {
+        "es": "Flan casero con caramelo.",
+        "en": "Homemade caramel flan.",
+        "fr": "Flan caramel maison."
+      },
+      "price": "4,00 €",
+      "pairing": { "es": "", "en": "", "fr": "" },
+      "available": true,
+      "featured": false
+    },
+    {
+      "id": "natillas-de-la-casa",
+      "category_id": "desserts",
+      "name": { "es": "Natillas de la casa", "en": "House Natillas", "fr": "Natillas maison" },
+      "description": {
+        "es": "Natillas caseras con canela.",
+        "en": "Homemade custard cream with cinnamon.",
+        "fr": "Crème anglaise maison à la cannelle."
+      },
+      "price": "4,00 €",
+      "pairing": { "es": "", "en": "", "fr": "" },
+      "available": true,
+      "featured": false
+    },
+    {
+      "id": "arroz-con-leche",
+      "category_id": "desserts",
+      "name": { "es": "Arroz con leche", "en": "Rice Pudding", "fr": "Riz au lait" },
+      "description": {
+        "es": "Arroz con leche al estilo de la casa.",
+        "en": "House-style rice pudding.",
+        "fr": "Riz au lait à la façon de la maison."
+      },
+      "price": "4,00 €",
+      "pairing": { "es": "", "en": "", "fr": "" },
+      "available": true,
+      "featured": false
+    },
+    {
+      "id": "sorbete-de-limon",
+      "category_id": "desserts",
+      "name": { "es": "Sorbete de limón", "en": "Lemon Sorbet", "fr": "Sorbet citron" },
+      "description": {
+        "es": "Sorbete de limón.",
+        "en": "Lemon sorbet.",
+        "fr": "Sorbet au citron."
+      },
+      "price": "4,00 €",
+      "pairing": { "es": "", "en": "", "fr": "" },
+      "available": true,
+      "featured": false
+    },
+    {
+      "id": "tarta-canada",
+      "category_id": "desserts",
+      "name": { "es": "Tarta Canadá", "en": "Tarta Canadá", "fr": "Tarta Canadá" },
+      "description": {
+        "es": "Tarta helada Contesa.",
+        "en": "Contesa ice cream cake.",
+        "fr": "Gâteau glacé Contesa."
+      },
+      "price": "4,80 €",
+      "pairing": { "es": "", "en": "", "fr": "" },
+      "available": true,
+      "featured": false
+    },
+    {
+      "id": "tarta-de-queso",
+      "category_id": "desserts",
+      "name": { "es": "Tarta de queso", "en": "Cheesecake", "fr": "Gâteau au fromage" },
+      "description": {
+        "es": "Tarta de queso cremosa.",
+        "en": "Creamy cheesecake.",
+        "fr": "Gâteau au fromage crémeux."
+      },
+      "price": "5,00 €",
+      "pairing": { "es": "", "en": "", "fr": "" },
+      "available": true,
+      "featured": false
+    },
+    {
+      "id": "brownie",
+      "category_id": "desserts",
+      "name": { "es": "Brownie", "en": "Brownie", "fr": "Brownie" },
+      "description": {
+        "es": "Brownie de chocolate.",
+        "en": "Chocolate brownie.",
+        "fr": "Brownie au chocolat."
+      },
+      "price": "5,50 €",
+      "pairing": { "es": "", "en": "", "fr": "" },
+      "available": true,
+      "featured": false
+    },
+    {
+      "id": "tarta-al-whisky",
+      "category_id": "desserts",
+      "name": { "es": "Tarta al whisky", "en": "Whisky Cake", "fr": "Gâteau au whisky" },
+      "description": {
+        "es": "Tarta de nata y whisky.",
+        "en": "Cream and whisky cake.",
+        "fr": "Gâteau à la crème et au whisky."
+      },
+      "price": "5,50 €",
+      "pairing": { "es": "", "en": "", "fr": "" },
+      "available": true,
+      "featured": false
+    }
+  ],
+
+  "wines": [
+    { "id": "senorio-de-nevada",        "category_id": "granada-wines",    "name": "Señorío de Nevada",        "producer": "",             "region": "D.O. Granada — Valle de Lecrín", "type": "red",   "price_bottle": 20.00, "available": true },
+    { "id": "calvente-guindalera",       "category_id": "granada-wines",    "name": "Calvente Guindalera",       "producer": "Calvente",     "region": "D.O. Granada — Jete",             "type": "red",   "price_bottle": 18.00, "available": true },
+    { "id": "fontedei-prado-negro",      "category_id": "granada-wines",    "name": "Fontedei Prado Negro",      "producer": "Fontedei",     "region": "D.O. Granada",                    "type": "red",   "price_bottle": 17.00, "available": true },
+    { "id": "delirio-munana",            "category_id": "granada-wines",    "name": "Delirio",                   "producer": "Muñana",       "region": "D.O. Granada",                    "type": "red",   "price_bottle": 17.00, "available": true },
+    { "id": "munana-rojo",               "category_id": "granada-wines",    "name": "Muñana Rojo",               "producer": "Muñana",       "region": "D.O. Granada",                    "type": "red",   "price_bottle": 19.00, "available": true },
+    { "id": "munana-3-cepas",            "category_id": "granada-wines",    "name": "Muñana 3 Cepas",            "producer": "Muñana",       "region": "D.O. Granada",                    "type": "red",   "price_bottle": 21.00, "available": true },
+    { "id": "calvente-vigiriega",        "category_id": "granada-wines",    "name": "Calvente",                  "producer": "Calvente",     "region": "D.O. Granada",                    "type": "white", "price_bottle": 21.00, "available": true },
+    { "id": "munana-flamenco-semi",      "category_id": "granada-wines",    "name": "Muñana Flamenco Semi",      "producer": "Muñana",       "region": "D.O. Granada",                    "type": "white", "price_bottle": 18.00, "available": true },
+    { "id": "xateo",                     "category_id": "granada-wines",    "name": "Xateo",                     "producer": "",             "region": "D.O. Granada",                    "type": "white", "price_bottle": 18.00, "available": true },
+    { "id": "munana-rosado",             "category_id": "granada-wines",    "name": "Muñana Rosado",             "producer": "Muñana",       "region": "D.O. Granada",                    "type": "rose",  "price_bottle": 18.00, "available": true },
+    { "id": "antano-crianza",            "category_id": "rioja",            "name": "Antaño Crianza",            "producer": "",             "region": "D.O. Rioja",                      "type": "red",   "price_bottle": 17.00, "available": true },
+    { "id": "alcorta-crianza",           "category_id": "rioja",            "name": "Alcorta Crianza",           "producer": "Alcorta",      "region": "D.O. Rioja",                      "type": "red",   "price_bottle": 18.00, "available": true },
+    { "id": "faustino-crianza",          "category_id": "rioja",            "name": "Faustino Crianza",          "producer": "Faustino",     "region": "D.O. Rioja",                      "type": "red",   "price_bottle": 18.00, "available": true },
+    { "id": "marques-caceres-crianza",   "category_id": "rioja",            "name": "Marqués de Cáceres Crianza","producer": "Marqués de Cáceres", "region": "D.O. Rioja",               "type": "red",   "price_bottle": 19.00, "available": true },
+    { "id": "marques-caceres-reserva",   "category_id": "rioja",            "name": "Marqués de Cáceres Reserva","producer": "Marqués de Cáceres", "region": "D.O. Rioja",               "type": "red",   "price_bottle": 26.00, "available": true },
+    { "id": "valdesantos-roble",         "category_id": "ribera-del-duero", "name": "Valdesantos Roble",         "producer": "",             "region": "D.O. Ribera del Duero",           "type": "red",   "price_bottle": 17.00, "available": true },
+    { "id": "ribera-de-los-molinos",     "category_id": "ribera-del-duero", "name": "Ribera de los Molinos",     "producer": "",             "region": "D.O. Ribera del Duero",           "type": "red",   "price_bottle": 17.00, "available": true },
+    { "id": "yllera-ribera",             "category_id": "ribera-del-duero", "name": "Yllera",                    "producer": "Yllera",       "region": "D.O. Ribera del Duero",           "type": "red",   "price_bottle": 18.00, "available": true },
+    { "id": "protos-roble",              "category_id": "ribera-del-duero", "name": "Protos Roble",              "producer": "Protos",       "region": "D.O. Ribera del Duero",           "type": "red",   "price_bottle": 19.00, "available": true },
+    { "id": "castillo-de-aza-crianza",   "category_id": "ribera-del-duero", "name": "Castillo de Aza Crianza",   "producer": "",             "region": "D.O. Ribera del Duero",           "type": "red",   "price_bottle": 19.00, "available": true },
+    { "id": "do-rueda-verdejo",          "category_id": "whites-fortified", "name": "D.O. Rueda Verdejo",        "producer": "",             "region": "D.O. Rueda",                      "type": "white", "price_bottle": 17.00, "available": true },
+    { "id": "castillo-san-diego",        "category_id": "whites-fortified", "name": "Castillo de San Diego",     "producer": "Barbadillo",   "region": "V.T. Cádiz",                      "type": "white", "price_bottle": 17.50, "available": true },
+    { "id": "maestrante-semi",           "category_id": "whites-fortified", "name": "Maestrante Semi",           "producer": "Barbadillo",   "region": "V.T. Cádiz",                      "type": "white", "price_bottle": 17.50, "available": true },
+    { "id": "yllera-55-frizzante",       "category_id": "whites-fortified", "name": "Yllera 5.5 Frizzante",      "producer": "Yllera",       "region": "D.O. Rueda",                      "type": "white", "price_bottle": 19.00, "available": true },
+    { "id": "fino-jerez",               "category_id": "whites-fortified", "name": "Fino",                      "producer": "",             "region": "D.O. Jerez",                      "type": "sherry","price_glass": 3.50,   "available": true },
+    { "id": "manzanilla-casa-bernal",    "category_id": "whites-fortified", "name": "Manzanilla",                "producer": "Casa Bernal",  "region": "D.O. Manzanilla-Sanlúcar",        "type": "sherry","price_glass": 3.50,   "available": true },
+    { "id": "amontillado",              "category_id": "whites-fortified", "name": "Amontillado",               "producer": "",             "region": "D.O. Jerez",                      "type": "sherry","price_glass": 4.00,   "available": true },
+    { "id": "oloroso",                  "category_id": "whites-fortified", "name": "Oloroso",                   "producer": "",             "region": "D.O. Jerez",                      "type": "sherry","price_glass": 4.00,   "available": true },
+    { "id": "pedro-ximenez",            "category_id": "whites-fortified", "name": "Pedro Ximénez",             "producer": "",             "region": "D.O. Jerez",                      "type": "sherry","price_glass": 4.50,   "available": true }
+  ],
+
+  "beverages": [
+    { "id": "cruzcampo-tercio",          "category_id": "beer",    "name": { "es": "Cruzcampo 1/3",            "en": "Cruzcampo 1/3",           "fr": "Cruzcampo 1/3"          }, "price": "2,90 €", "available": true },
+    { "id": "alhambra-especial-tercio",  "category_id": "beer",    "name": { "es": "Alhambra Especial 1/3",    "en": "Alhambra Especial 1/3",   "fr": "Alhambra Especial 1/3"  }, "price": "2,90 €", "available": true },
+    { "id": "aguila-tercio",             "category_id": "beer",    "name": { "es": "Águila 1/3",               "en": "Águila 1/3",              "fr": "Águila 1/3"             }, "price": "2,90 €", "available": true },
+    { "id": "heineken-tercio",           "category_id": "beer",    "name": { "es": "Heineken 1/3",             "en": "Heineken 1/3",            "fr": "Heineken 1/3"           }, "price": "3,20 €", "available": true },
+    { "id": "alhambra-reserva-1925",     "category_id": "beer",    "name": { "es": "Alhambra Reserva 1925",    "en": "Alhambra Reserva 1925",   "fr": "Alhambra Reserva 1925"  }, "price": "3,20 €", "available": true },
+    { "id": "voll-damm",                 "category_id": "beer",    "name": { "es": "Voll-Damm",                "en": "Voll-Damm",               "fr": "Voll-Damm"              }, "price": "3,20 €", "available": true },
+    { "id": "jarra-cruzcampo",           "category_id": "beer",    "name": { "es": "Jarra 1/2L Cruzcampo",     "en": "Cruzcampo Half-Litre Jug","fr": "Cruzcampo demi-litre"   }, "price": "4,50 €", "available": true },
+    { "id": "agua-mineral",              "category_id": "drinks",  "name": { "es": "Agua mineral 1/2L",        "en": "Still Water 1/2L",        "fr": "Eau minérale 1/2L"      }, "price": "1,90 €", "available": true },
+    { "id": "refresco",                  "category_id": "drinks",  "name": { "es": "Coca-Cola / Fanta / Sprite","en": "Coca-Cola / Fanta / Sprite","fr": "Coca-Cola / Fanta / Sprite" }, "price": "2,60 €", "available": true },
+    { "id": "zumo",                      "category_id": "drinks",  "name": { "es": "Zumo (piña, melocotón, tomate)", "en": "Juice (pineapple, peach, tomato)", "fr": "Jus (ananas, pêche, tomate)" }, "price": "2,60 €", "available": true },
+    { "id": "aquarius-nestea",           "category_id": "drinks",  "name": { "es": "Aquarius / Nestea",        "en": "Aquarius / Nestea",       "fr": "Aquarius / Nestea"      }, "price": "2,70 €", "available": true },
+    { "id": "tinto-de-verano",           "category_id": "drinks",  "name": { "es": "Tinto de verano",          "en": "Tinto de Verano",         "fr": "Tinto de Verano"        }, "price": "2,60 €", "available": true },
+    { "id": "vermuth",                   "category_id": "drinks",  "name": { "es": "Vermuth",                  "en": "Vermouth",                "fr": "Vermouth"               }, "price": "2,70 €", "available": true },
+    { "id": "sidra",                     "category_id": "drinks",  "name": { "es": "Sidra (Ladrón de Manzanas)","en": "Cider (Ladrón de Manzanas)","fr": "Cidre (Ladrón de Manzanas)" }, "price": "2,70 €", "available": true },
+    { "id": "martini",                   "category_id": "drinks",  "name": { "es": "Martini (rojo o blanco)",  "en": "Martini (red or white)",  "fr": "Martini (rouge ou blanc)" }, "price": "2,90 €", "available": true },
+    { "id": "brandy-veterano",           "category_id": "drinks",  "name": { "es": "Brandy Veterano",          "en": "Brandy Veterano",         "fr": "Brandy Veterano"        }, "price": "3,00 €", "available": true },
+    { "id": "brandy-magno",              "category_id": "drinks",  "name": { "es": "Brandy Magno",             "en": "Brandy Magno",            "fr": "Brandy Magno"           }, "price": "3,50 €", "available": true },
+    { "id": "cardenal-mendoza",          "category_id": "drinks",  "name": { "es": "Cardenal Mendoza",         "en": "Cardenal Mendoza",        "fr": "Cardenal Mendoza"       }, "price": "6,00 €", "available": true },
+    { "id": "sangria",                   "category_id": "drinks",  "name": { "es": "Sangría",                  "en": "Sangría",                 "fr": "Sangría"                }, "price": "14,00 € (litro) / 3,20 € (copa)", "available": true }
+  ],
+
+  "nav": {
+    "menu":         { "es": "Carta",          "en": "Menu",         "fr": "Carte"          },
+    "hours":        { "es": "Horarios",       "en": "Hours",        "fr": "Horaires"       },
+    "call":         { "es": "Llamar",         "en": "Call",         "fr": "Appeler"        },
+    "back":         { "es": "← Bar León",     "en": "← Bar León",  "fr": "← Bar León"    },
+    "daily_menu":   { "es": "Menú del Día",   "en": "Daily Menu",   "fr": "Menu du Jour"  },
+    "edict_header": { "es": "Bar León · Granada · Est. 1959", "en": "Bar León · Granada · Est. 1959", "fr": "Bar León · Grenade · Dep. 1959" },
+    "edict_foot":   { "es": "Bar León · Cocina Tradicional Granadina", "en": "Bar León · Traditional Granada Cuisine", "fr": "Bar León · Cuisine Traditionnelle de Grenade" }
+  }
+}
