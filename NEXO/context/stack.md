@@ -54,18 +54,24 @@ GitHub repo (miriamsaxetech-code/bar-leon-cms)
 - Versión: 3.0.0 desde `https://unpkg.com/decap-cms@3.0.0/dist/decap-cms.js`
 - Backend: GitHub (`miriamsaxetech-code/bar-leon-cms`, rama `main`)
 - Autenticación: GitHub OAuth
-- Archivos editables: `data/es.json`, `data/en.json`, `data/fr.json`
+- Archivos editables: `data/es.json` (ES canónico; traducciones EN/FR se editan en los JSON correspondientes directamente en el repo)
 
 **Campos CMS disponibles:**
 - Inicio: titular, subtítulo, aviso especial (opcional)
-- Menú del día: disponible (SI/NO), días, precio, condiciones
+- Menú del día: disponible (SI/NO), días, precio, condiciones, primeros, platosDelDia, temporada
 - Horarios: día · estado (ABIERTO/CERRADO/CERRADO TARDE) · texto visible
 - Carta: categoría · nombre · descripción · maridaje · precio · disponible (SI/NO)
 
-**Categorías de carta definidas en CMS:**
-- PARA ABRIR BOCA
-- LOS PLATOS DE SIEMPRE
-- DE NUESTRA BODEGA
+**Categorías de carta definidas en CMS (según es.json):**
+- SABORES DE ANDALUCÍA
+- SOPAS Y PLATOS DE CUCHARA
+- ENTRANTES Y RACIONES
+- FRITURAS Y PESCADOS
+- CARNES
+- HUEVOS Y TORTILLAS
+- ARROCES
+- POSTRES
+
 
 ---
 

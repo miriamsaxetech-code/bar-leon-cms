@@ -134,16 +134,22 @@ Evitar siempre:
 ## Carta actual (datos reales, es.json)
 
 **Categorías activas:**
-- LOS PLATOS DE SIEMPRE
-- PARA ABRIR BOCA
-- DE NUESTRA BODEGA
+- SABORES DE ANDALUCÍA
+- SOPAS Y PLATOS DE CUCHARA
+- ENTRANTES Y RACIONES
+- FRITURAS Y PESCADOS
+- CARNES
+- HUEVOS Y TORTILLAS
+- ARROCES
+- POSTRES
 
-**Platos activos:**
-- Tortilla "Sacromonte" — 11,00€
-- Carne de Monte (Ciervo en adobo) — 15,00€
-- Habas con Jamón Ibérico 50% — 14,00€
-- Riñones al Jerez — 14,00€
+**Platos activos (ejemplos representativos):**
+- Tortilla del Sacromonte — 10,00 €
+- Habas con jamón ibérico y huevo frito — 13,00 €
+- Carne de monte (ciervo en adobo) — Media 10,50 € / Ración 13,50 €
+- Riñones al Jerez — Media 9,00 € / Ración 12,50 €
 
-**Menú del día:** 12,50€ · Lun/Mar/Jue/Vie (solo mediodía) · primer plato + segundo + postre · bebida no incluida
+**Menú del día:** 12,50 € · Lun/Mar/Jue/Vie (solo mediodía) · primer plato (gazpacho, sopa de picadillo, salmorejo...) + plato del día (lunes cocido, martes macarrones...) + postre de la casa. IVA incluido. Bebida no incluida.
 
-**Maridajes:** vinos D.O. Granada (Fontedei Prado Negro, Muñana Rojo), Fino/Manzanilla de Jerez, Alhambra Reserva 1925.
+**Maridajes:** vinos D.O. Granada (Fontedei Prado Negro, Muñana, Delirio, Calvente), Fino/Manzanilla de Jerez, Alhambra Reserva 1925.
+

@@ -24,15 +24,18 @@ X-Frame-Options: SAMEORIGIN
 Referrer-Policy: strict-origin-when-cross-origin
 Permissions-Policy: camera=(), microphone=(), geolocation=(), payment=()
 Strict-Transport-Security: max-age=31536000; includeSubDomains
-Content-Security-Policy: default-src 'self'; script-src 'self' 'unsafe-inline'; style-src 'self' 'unsafe-inline'; img-src 'self' data: blob:; font-src 'self'; connect-src 'self'; frame-ancestors 'none'
+Content-Security-Policy: default-src 'self'; script-src 'self' 'unsafe-inline'; style-src 'self' 'unsafe-inline' https://fonts.googleapis.com; img-src 'self' data: blob:; font-src 'self' https://fonts.gstatic.com; connect-src 'self'; frame-ancestors 'none'
 ```
 
 **Rutas admin (`/admin/*`):**
-CSP más permisiva para soportar Decap CMS (unpkg CDN, GitHub OAuth, GitHub API).
+CSP más permisiva para soportar Decap CMS (unpkg CDN, GitHub OAuth, GitHub API, Google Fonts).
 ```
-script-src 'self' 'unsafe-inline' 'unsafe-eval' https://unpkg.com
-connect-src 'self' https://api.github.com https://raw.githubusercontent.com https://github.com https://unpkg.com
-frame-src https://github.com
+X-Content-Type-Options: nosniff
+X-Frame-Options: SAMEORIGIN
+Referrer-Policy: strict-origin-when-cross-origin
+Permissions-Policy: camera=(), microphone=(), geolocation=(), payment=()
+Strict-Transport-Security: max-age=31536000; includeSubDomains
+Content-Security-Policy: default-src 'self'; script-src 'self' 'unsafe-inline' 'unsafe-eval' https://unpkg.com; style-src 'self' 'unsafe-inline' https://unpkg.com https://fonts.googleapis.com; img-src 'self' data: blob: https:; font-src 'self' https://unpkg.com https://fonts.gstatic.com; connect-src 'self' https://api.github.com https://raw.githubusercontent.com https://github.com https://unpkg.com; frame-src https://github.com; frame-ancestors 'none'
 ```
 
 ---
