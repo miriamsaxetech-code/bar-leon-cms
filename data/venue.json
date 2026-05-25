@@ -198,16 +198,16 @@
     {
       "id": "tortilla-sacromonte",
       "category_id": "andalusian-specialities",
-      "name": { "es": "Tortilla del Sacromonte", "en": "Tortilla del Sacromonte (Sacromonte Omelette)", "fr": "Tortilla del Sacromonte (Omelette du Sacromonte)" },
+      "name": { "es": "Tortilla del Sacromonte", "en": "Sacromonte Omelette", "fr": "Omelette du Sacromonte" },
       "description": {
         "es": "Tradición granadina. Tortilla con sesos, criadillas y jamón. Receta de siempre.",
-        "en": "Granada omelette made with brains, sweetbreads, eggs and ham. A historic recipe.",
-        "fr": "Omelette traditionnelle de Grenade préparée avec de la cervelle, des abats, des œufs et du jambon."
+        "en": "Granada's signature omelette, made with lamb brain, chorizo and vegetables. Named after the gypsy quarter.",
+        "fr": "L'omelette emblématique de Grenade, préparée avec cervelle d'agneau, chorizo et légumes."
       },
       "price": "10,00 €",
       "pairing": { "es": "Manzanilla — 3,50 €", "en": "Manzanilla — 3,50 €", "fr": "Manzanilla — 3,50 €" },
       "available": true,
-      "featured": true
+      "featured": "recommended"
     },
     {
       "id": "habas-jamon-iberico",
@@ -226,11 +226,11 @@
     {
       "id": "carne-de-monte",
       "category_id": "andalusian-specialities",
-      "name": { "es": "Carne de monte (ciervo en adobo)", "en": "Carne de monte (marinated venison)", "fr": "Carne de monte (cerf mariné)" },
+      "name": { "es": "Carne de monte (ciervo en adobo)", "en": "Venison in Marinade", "fr": "Chevreuil en marinade" },
       "description": {
         "es": "Ciervo en adobo tradicional. Guiso de caza con vino, laurel y especias.",
-        "en": "Traditional marinated venison. Game stew cooked with wine, bay leaves and spices.",
-        "fr": "Cerf mariné traditionnel. Ragoût de gibier cuisiné au vin, laurier et épices."
+        "en": "Slow-cooked venison in Andalusian adobo marinade. Half portion or full.",
+        "fr": "Chevreuil mijoté dans une marinade andalouse aux épices."
       },
       "price": "Media 10,50 € / Ración 13,50 €",
       "pairing": { "es": "Muñana Rojo (D.O. Granada) — 19,00 €", "en": "Muñana Rojo (D.O. Granada) — 19,00 €", "fr": "Muñana Rojo (D.O. Granada) — 19,00 €" },
@@ -243,8 +243,8 @@
       "name": { "es": "Riñones al Jerez", "en": "Kidneys in Sherry", "fr": "Rognons au Xérès" },
       "description": {
         "es": "Riñones salteados en salsa de vino de Jerez. Casquería de siempre.",
-        "en": "Sautéed kidneys in dry Sherry sauce. Half / Full.",
-        "fr": "Rognons sautés à la sauce de Xérès."
+        "en": "Lamb kidneys sautéed and finished with dry fino sherry.",
+        "fr": "Rognons d'agneau sautés et flambés au fino sec."
       },
       "price": "Media 9,00 € / Ración 12,50 €",
       "pairing": { "es": "Amontillado de Jerez — 4,00 €", "en": "Amontillado de Jerez — 4,00 €", "fr": "Amontillado de Xérès — 4,00 €" },
@@ -254,11 +254,11 @@
     {
       "id": "callos",
       "category_id": "andalusian-specialities",
-      "name": { "es": "Callos", "en": "Callos (tripe stew)", "fr": "Callos (ragoût de tripes)" },
+      "name": { "es": "Callos", "en": "Tripe Stew", "fr": "Tripes à l'andalouse" },
       "description": {
         "es": "Guiso tradicional de callos con chorizo, morcilla, pimentón y garbanzos.",
-        "en": "Traditional tripe stew with chorizo, morcilla (blood sausage), paprika and chickpeas.",
-        "fr": "Ragoût de tripes traditionnel avec chorizo, morcilla (boudin noir), paprika et pois chiches."
+        "en": "Slow-cooked tripe with chorizo and morcilla. A deeply flavourful Andalusian classic.",
+        "fr": "Tripes mijotées avec chorizo et boudin noir. Un plat robuste et savoureux."
       },
       "price": "Media 7,50 € / Ración 10,00 €",
       "pairing": { "es": "Faustino Crianza (D.O. Rioja) — 18,00 €", "en": "Faustino Crianza (D.O. Rioja) — 18,00 €", "fr": "Faustino Crianza (D.O. Rioja) — 18,00 €" },
@@ -282,11 +282,11 @@
     {
       "id": "criadillas",
       "category_id": "andalusian-specialities",
-      "name": { "es": "Criadillas", "en": "Criadillas (bull's testicles)", "fr": "Criadillas (testicules de taureau)" },
+      "name": { "es": "Criadillas", "en": "Fried Sweetbreads", "fr": "Animelles frites" },
       "description": {
         "es": "Casquería tradicional, rebozada y frita.",
-        "en": "Traditional offal, breaded and fried. Half / Full.",
-        "fr": "Abats traditionnels, panés et frits. Demi / Portion."
+        "en": "A traditional Andalusian tapa. Lightly fried, subtly flavoured.",
+        "fr": "Une tapa traditionnelle andalouse. Légèrement frites, saveur subtile."
       },
       "price": "Media 7,50 € / Ración 10,00 €",
       "pairing": { "es": "Fino de Jerez — 3,50 €", "en": "Fino de Jerez — 3,50 €", "fr": "Fino de Xérès — 3,50 €" },
@@ -296,11 +296,11 @@
     {
       "id": "sesos",
       "category_id": "andalusian-specialities",
-      "name": { "es": "Sesos", "en": "Sesos (lamb brains)", "fr": "Sesos (cervelle d'agneau)" },
+      "name": { "es": "Sesos", "en": "Fried Brains", "fr": "Cervelles frites" },
       "description": {
         "es": "Sesos rebozados y fritos. Casquería clásica de la cocina granadina.",
-        "en": "Traditional breaded and fried brains. Classic Granada offal dish. Half / Full.",
-        "fr": "Cervelle panée et frite. Plat d'abats classique de Grenade. Demi / Portion."
+        "en": "Lightly battered and fried lamb brains. Crisp outside, delicate inside. Serve with lemon.",
+        "fr": "Cervelles d'agneau légèrement panées et frites. Croustillantes dehors, délicates dedans."
       },
       "price": "Media 7,50 € / Ración 10,00 €",
       "pairing": { "es": "D.O. Rueda Verdejo — 17,00 €", "en": "D.O. Rueda Verdejo — 17,00 €", "fr": "D.O. Rueda Verdejo — 17,00 €" },
@@ -793,8 +793,8 @@
       "name": { "es": "Flamenquín", "en": "Flamenquín", "fr": "Flamenquín" },
       "description": {
         "es": "Lomo de cerdo relleno de jamón, rebozado y frito.",
-        "en": "Pork loin stuffed with ham, breaded and fried.",
-        "fr": "Longe de porc farcie au jambon, panée et frite."
+        "en": "Rolled pork loin wrapped in ham, breaded and fried. A classic from Córdoba.",
+        "fr": "Rouleau de longe de porc enveloppé dans du jambon, pané et frit. Spécialité de Córdoba."
       },
       "price": "5,00 € (barra) / 14,00 € (restaurante)",
       "pairing": { "es": "Delirio (D.O. Granada) — 17,00 €", "en": "Delirio (D.O. Granada) — 17,00 €", "fr": "Delirio (D.O. Granada) — 17,00 €" },
@@ -1380,5 +1380,13 @@
     "tab_daily":    { "es": "Menú del Día",   "en": "Daily Menu",   "fr": "Menu du Jour" },
     "tab_restaurant": { "es": "Carta Restaurante", "en": "Carta Restaurante", "fr": "Carta Restaurante" },
     "tab_bar":      { "es": "Carta Barra",     "en": "Carta Barra",        "fr": "Carta Barra" }
+  },
+
+  "cariocas": [],
+
+  "service_mode": {
+    "menu_del_dia": true,
+    "restaurant_open": true,
+    "bar_open": true
   }
 }
