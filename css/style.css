@@ -51,9 +51,9 @@ html, body {
 body {
   background: var(--bg);
   color: var(--ink);
-  font-family: 'Inter', system-ui, sans-serif;
-  font-size: 16px;
-  line-height: 1.55;
+  font-family: Georgia, serif;
+  font-size: 15px;
+  line-height: 1.6;
 }
 
 /* ─── MASTHEAD RULE ─── */
@@ -73,7 +73,7 @@ body {
 
 .lang-bar__link,
 .lang-bar__active {
-  font-family: 'Inter', system-ui, sans-serif;
+  font-family: system-ui, -apple-system, sans-serif;
   font-size: 0.68rem;
   text-transform: uppercase;
   letter-spacing: 0.16em;
@@ -178,7 +178,7 @@ h2 {
   background: var(--ink);
   color: var(--bg);
   text-align: center;
-  font-family: 'Inter', system-ui, sans-serif;
+  font-family: system-ui, -apple-system, sans-serif;
   font-weight: 600;
   font-size: 0.9rem;
   letter-spacing: 0.12em;
@@ -210,9 +210,10 @@ h2 {
 .site-name {
   font-family: 'Granaina Limpia', 'Playfair Display', Georgia, serif;
   font-weight: 700;
-  line-height: 1.0;
-  font-size: clamp(3.6rem, 11vw, 6.5rem);
+  line-height: 1.05;
+  font-size: clamp(2.6rem, 8vw, 4.5rem);
   color: var(--ink);
+  letter-spacing: -0.01em;
 }
 
 .site-location {
@@ -250,7 +251,7 @@ h2 {
 }
 
 .nav-primary a {
-  font-family: 'Inter', system-ui, sans-serif;
+  font-family: system-ui, -apple-system, sans-serif;
   font-size: 0.76rem;
   text-transform: uppercase;
   letter-spacing: 0.14em;
@@ -272,7 +273,7 @@ h2 {
 
 .lang-selector a,
 .lang-selector .lang-active {
-  font-family: 'Inter', system-ui, sans-serif;
+  font-family: system-ui, -apple-system, sans-serif;
   font-size: 0.7rem;
   text-transform: uppercase;
   letter-spacing: 0.14em;
@@ -482,7 +483,7 @@ h2 {
 }
 
 .carta-back {
-  font-family: 'Inter', system-ui, sans-serif;
+  font-family: system-ui, -apple-system, sans-serif;
   font-size: 0.74rem;
   letter-spacing: 0.08em;
   color: var(--muted);
@@ -510,7 +511,7 @@ h2 {
 
 .carta-lang-selector a,
 .carta-lang-selector .lang-active {
-  font-family: 'Inter', system-ui, sans-serif;
+  font-family: system-ui, -apple-system, sans-serif;
   font-size: 0.68rem;
   text-transform: uppercase;
   letter-spacing: 0.14em;
@@ -562,7 +563,7 @@ h2 {
   border-right: 1px solid rgba(28, 26, 23, 0.22);
   color: var(--ink);
   cursor: pointer;
-  font-family: 'Inter', system-ui, sans-serif;
+  font-family: system-ui, -apple-system, sans-serif;
   font-size: 0.68rem;
   font-weight: 600;
   letter-spacing: 0.11em;
@@ -832,7 +833,7 @@ h2 {
 }
 
 .price-note {
-  font-family: 'Inter', system-ui, sans-serif;
+  font-family: system-ui, -apple-system, sans-serif;
   font-size: 0.78rem;
   color: var(--muted);
   margin-top: 1px;
@@ -986,7 +987,7 @@ h2 {
 }
 
 .trust-item {
-  font-family: 'Inter', system-ui, sans-serif;
+  font-family: system-ui, -apple-system, sans-serif;
   font-size: 0.7rem;
   text-transform: uppercase;
   letter-spacing: 0.13em;
@@ -1015,7 +1016,7 @@ h2 {
 }
 
 .social-link {
-  font-family: 'Inter', system-ui, sans-serif;
+  font-family: system-ui, -apple-system, sans-serif;
   font-size: 0.7rem;
   text-transform: uppercase;
   letter-spacing: 0.13em;
@@ -1041,7 +1042,7 @@ h2 {
 }
 
 .call-label {
-  font-family: 'Inter', system-ui, sans-serif;
+  font-family: system-ui, -apple-system, sans-serif;
   font-size: 0.76rem;
   text-transform: uppercase;
   letter-spacing: 0.14em;
@@ -1053,7 +1054,7 @@ h2 {
 }
 
 .call-number {
-  font-family: 'Inter', system-ui, sans-serif;
+  font-family: system-ui, -apple-system, sans-serif;
   font-size: 0.64rem;
   letter-spacing: 0.04em;
   color: var(--muted);
@@ -1293,7 +1294,7 @@ h2 {
 
 /* ─── EDICT BODY SECTIONS ─── */
 .edict-section-label {
-  font-family: 'Inter', system-ui, sans-serif;
+  font-family: system-ui, -apple-system, sans-serif;
   font-size: 0.62rem;
   text-transform: uppercase;
   letter-spacing: 0.22em;
@@ -1450,7 +1451,7 @@ h2 {
 }
 
 .location-link {
-  font-family: 'Inter', system-ui, sans-serif;
+  font-family: system-ui, -apple-system, sans-serif;
   font-size: 0.72rem;
   font-weight: 600;
   text-transform: uppercase;
@@ -1910,5 +1911,63 @@ h2 {
   .warm-divider {
     margin: 34px 0;
   }
+}
+
+/* ─── EDITORIAL SNAPSHOT ─── */
+.editorial-snapshot {
+  margin: 44px 0;
+}
+
+.editorial-snapshot__figure {
+  border: 1px solid rgba(28, 26, 23, 0.22);
+  background: var(--tile-cream);
+  padding: 12px;
+  margin: 0;
+  box-shadow: 0 4px 12px rgba(28, 26, 23, 0.03);
+}
+
+.editorial-snapshot__figure img {
+  display: block;
+  width: 100%;
+  height: auto;
+  aspect-ratio: 16 / 10;
+  object-fit: cover;
+}
+
+.editorial-snapshot__caption {
+  font-family: 'Playfair Display', Georgia, serif;
+  font-size: 0.8rem;
+  font-style: italic;
+  line-height: 1.5;
+  color: var(--muted);
+  margin-top: 12px;
+  padding-top: 8px;
+  border-top: 1px solid rgba(28, 26, 23, 0.12);
+  text-align: center;
+}
+
+@media (max-width: 540px) {
+  .editorial-snapshot {
+    margin: 34px 0;
+  }
+  .editorial-snapshot__figure {
+    padding: 8px;
+  }
+  .editorial-snapshot__caption {
+    font-size: 0.74rem;
+  }
+}
+
+.editorial-snapshot__img--hidden {
+  display: none !important;
+}
+
+.footer-separator {
+  text-align: center;
+  font-size: 0.85rem;
+  color: var(--terracotta);
+  opacity: 0.65;
+  margin: 36px 0 12px;
+  letter-spacing: 0.15em;
 }
 

@@ -287,7 +287,7 @@
       .slice(0, 5);
     if (!dishes.length) return '';
 
-    return `<section class="tile-bg-section" aria-labelledby="home-andalusia-title">
+    return `<section class="tile-bg-section home-andalusia" aria-labelledby="home-andalusia-title">
   <div class="tile-card">
     <div class="home-section-head">
       <p class="section-label">${LABELS.andalusiaSub[lang]}</p>
@@ -310,10 +310,23 @@
   }
 
   function renderHomeFoodGallery(lang) {
-    return `<section class="home-food-gallery" aria-label="${LABELS.andalusia[lang]}">
-  ${HOME_FOOD_IMAGES.map(image => `<figure class="home-food-gallery__item" tabindex="0">
-    <img src="${WEB_IMAGE_BASE}${image.src}" alt="${image.alt[lang]}" loading="lazy" decoding="async">
-  </figure>`).join('')}
+    const images = HOME_FOOD_IMAGES;
+    const captionSuffix = {
+      es: 'Cocina y barra tradicional del León.',
+      en: 'Traditional cooking and counter at Bar León.',
+      fr: 'Cuisine traditionnelle et comptoir du León.'
+    }[lang];
+    return `<section class="home-food-gallery editorial-snapshot" aria-label="${LABELS.andalusia[lang]}">
+  <figure class="editorial-snapshot__figure">
+    <div class="editorial-snapshot__container">
+      <img class="editorial-snapshot__img" src="${WEB_IMAGE_BASE}${images[0].src}" alt="${images[0].alt[lang]}" loading="lazy" decoding="async">
+      <img class="editorial-snapshot__img editorial-snapshot__img--hidden" src="${WEB_IMAGE_BASE}${images[1].src}" alt="${images[1].alt[lang]}" loading="lazy" decoding="async">
+      <img class="editorial-snapshot__img editorial-snapshot__img--hidden" src="${WEB_IMAGE_BASE}${images[2].src}" alt="${images[2].alt[lang]}" loading="lazy" decoding="async">
+    </div>
+    <figcaption class="editorial-snapshot__caption">
+      ${images[0].alt[lang]} &mdash; ${captionSuffix}
+    </figcaption>
+  </figure>
 </section>`;
   }
 
@@ -510,6 +523,7 @@
   ${locationBlock}
   ${renderStoriesArchive(d, lang)}
   ${cariocaSlot}
+  <div class="footer-separator">❖</div>
   <div class="homepage-footer">
     <div class="homepage-footer-inner">
       <p class="address">${addr.neighborhood} &middot; ${addr.city} &middot; ${addr.region}<br>${t(d.venue.cuisine_tag, lang)}</p>
