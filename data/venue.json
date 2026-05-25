@@ -205,7 +205,7 @@
         "fr": "L'omelette emblématique de Grenade, préparée avec cervelle d'agneau, chorizo et légumes."
       },
       "price": "10,00 €",
-      "pairing": { "es": "Manzanilla — 3,50 €", "en": "Manzanilla — 3,50 €", "fr": "Manzanilla — 3,50 €" },
+      "pairing": { "es": "Manzanilla — 3,50 €", "en": "Manzanilla (dry sherry, Sanlúcar) — 3,50 €", "fr": "Manzanilla (xérès sec, Sanlúcar) — 3,50 €" },
       "available": true,
       "featured": "recommended"
     },
@@ -219,7 +219,7 @@
         "fr": "Fèves tendres, jambon ibérique 50%, œuf au plat."
       },
       "price": "13,00 €",
-      "pairing": { "es": "Delirio (D.O. Granada) — 17,00 €", "en": "Delirio (D.O. Granada) — 17,00 €", "fr": "Delirio (D.O. Granada) — 17,00 €" },
+      "pairing": { "es": "Delirio (D.O. Granada) — 17,00 €", "en": "Delirio (red wine, D.O. Granada) — 17,00 €", "fr": "Delirio (vin rouge, D.O. Granada) — 17,00 €" },
       "available": true,
       "featured": false
     },
@@ -233,7 +233,7 @@
         "fr": "Chevreuil mijoté dans une marinade andalouse aux épices."
       },
       "price": "Media 10,50 € / Ración 13,50 €",
-      "pairing": { "es": "Muñana Rojo (D.O. Granada) — 19,00 €", "en": "Muñana Rojo (D.O. Granada) — 19,00 €", "fr": "Muñana Rojo (D.O. Granada) — 19,00 €" },
+      "pairing": { "es": "Muñana Rojo (D.O. Granada) — 19,00 €", "en": "Muñana Rojo (red wine, D.O. Granada) — 19,00 €", "fr": "Muñana Rojo (vin rouge, D.O. Granada) — 19,00 €" },
       "available": true,
       "featured": false
     },
@@ -247,7 +247,7 @@
         "fr": "Rognons d'agneau sautés et flambés au fino sec."
       },
       "price": "Media 9,00 € / Ración 12,50 €",
-      "pairing": { "es": "Amontillado de Jerez — 4,00 €", "en": "Amontillado de Jerez — 4,00 €", "fr": "Amontillado de Xérès — 4,00 €" },
+      "pairing": { "es": "Amontillado de Jerez — 4,00 €", "en": "Amontillado de Jerez (sherry) — 4,00 €", "fr": "Amontillado de Xérès (xérès) — 4,00 €" },
       "available": true,
       "featured": false
     },
@@ -261,7 +261,7 @@
         "fr": "Tripes mijotées avec chorizo et boudin noir. Un plat robuste et savoureux."
       },
       "price": "Media 7,50 € / Ración 10,00 €",
-      "pairing": { "es": "Faustino Crianza (D.O. Rioja) — 18,00 €", "en": "Faustino Crianza (D.O. Rioja) — 18,00 €", "fr": "Faustino Crianza (D.O. Rioja) — 18,00 €" },
+      "pairing": { "es": "Faustino Crianza (D.O. Rioja) — 18,00 €", "en": "Faustino Crianza (red wine, D.O. Rioja) — 18,00 €", "fr": "Faustino Crianza (vin rouge, D.O. Rioja) — 18,00 €" },
       "available": true,
       "featured": false
     },
@@ -275,7 +275,7 @@
         "fr": "Porc en sauce au vin et épices."
       },
       "price": "Media 9,00 € / Ración 12,50 €",
-      "pairing": { "es": "Castillo de Aza Crianza (D.O. Ribera del Duero) — 19,00 €", "en": "Castillo de Aza Crianza (D.O. Ribera del Duero) — 19,00 €", "fr": "Castillo de Aza Crianza — 19,00 €" },
+      "pairing": { "es": "Castillo de Aza Crianza (D.O. Ribera del Duero) — 19,00 €", "en": "Castillo de Aza Crianza (red wine, D.O. Ribera del Duero) — 19,00 €", "fr": "Castillo de Aza Crianza (vin rouge, D.O. Ribera del Duero) — 19,00 €" },
       "available": true,
       "featured": false
     },
@@ -289,7 +289,7 @@
         "fr": "Une tapa traditionnelle andalouse. Légèrement frites, saveur subtile."
       },
       "price": "Media 7,50 € / Ración 10,00 €",
-      "pairing": { "es": "Fino de Jerez — 3,50 €", "en": "Fino de Jerez — 3,50 €", "fr": "Fino de Xérès — 3,50 €" },
+      "pairing": { "es": "Fino de Jerez — 3,50 €", "en": "Fino de Jerez (dry sherry) — 3,50 €", "fr": "Fino de Xérès (xérès sec) — 3,50 €" },
       "available": true,
       "featured": false
     },
@@ -303,7 +303,7 @@
         "fr": "Cervelles d'agneau légèrement panées et frites. Croustillantes dehors, délicates dedans."
       },
       "price": "Media 7,50 € / Ración 10,00 €",
-      "pairing": { "es": "D.O. Rueda Verdejo — 17,00 €", "en": "D.O. Rueda Verdejo — 17,00 €", "fr": "D.O. Rueda Verdejo — 17,00 €" },
+      "pairing": { "es": "D.O. Rueda Verdejo — 17,00 €", "en": "D.O. Rueda Verdejo (white wine) — 17,00 €", "fr": "D.O. Rueda Verdejo (vin blanc) — 17,00 €" },
       "available": true,
       "featured": false
     },
@@ -360,7 +360,7 @@
         "fr": "Bouillon de volaille au vin de Xérès."
       },
       "price": "5,00 €",
-      "pairing": { "es": "", "en": "", "fr": "" },
+      "pairing": { "es": "Alfonso (oloroso, D.O. Jerez) — 2,80 €", "en": "Alfonso (oloroso sherry, D.O. Jerez) — 2,80 €", "fr": "Alfonso (xérès oloroso, D.O. Jerez) — 2,80 €" },
       "available": true,
       "featured": false
     },
@@ -473,7 +473,7 @@
         "fr": "Sélection de charcuteries ibériques."
       },
       "price": "12,50 €",
-      "pairing": { "es": "Calvente Guindalera (D.O. Granada) — 18,00 €", "en": "Calvente Guindalera (D.O. Granada) — 18,00 €", "fr": "Calvente Guindalera (D.O. Granada) — 18,00 €" },
+      "pairing": { "es": "Calvente Guindalera (D.O. Granada) — 18,00 €", "en": "Calvente Guindalera (red wine, D.O. Granada) — 18,00 €", "fr": "Calvente Guindalera (vin rouge, D.O. Granada) — 18,00 €" },
       "available": true,
       "featured": false
     },
@@ -487,7 +487,7 @@
         "fr": "Jambon ibérique de cebo, tranché à la maison. 100 g."
       },
       "price": "14,00 €",
-      "pairing": { "es": "Fino de Jerez — 3,50 €", "en": "Fino de Jerez — 3,50 €", "fr": "Fino de Xérès — 3,50 €" },
+      "pairing": { "es": "Fino de Jerez — 3,50 €", "en": "Fino de Jerez (dry sherry) — 3,50 €", "fr": "Fino de Xérès (xérès sec) — 3,50 €" },
       "available": true,
       "featured": false
     },
@@ -501,7 +501,7 @@
         "fr": "Fromage affiné de brebis ou mélange. 200 g."
       },
       "price": "11,00 €",
-      "pairing": { "es": "", "en": "", "fr": "" },
+      "pairing": { "es": "Alfonso (oloroso, D.O. Jerez) — 2,80 €", "en": "Alfonso (oloroso sherry, D.O. Jerez) — 2,80 €", "fr": "Alfonso (xérès oloroso, D.O. Jerez) — 2,80 €" },
       "available": true,
       "featured": false
     },
@@ -515,7 +515,7 @@
         "fr": "Croquettes maison au jambon."
       },
       "price": "8,50 € (ración) / 1,80 € (unidad en barra)",
-      "pairing": { "es": "", "en": "", "fr": "" },
+      "pairing": { "es": "Alfonso (oloroso, D.O. Jerez) — 2,80 €", "en": "Alfonso (oloroso sherry, D.O. Jerez) — 2,80 €", "fr": "Alfonso (xérès oloroso, D.O. Jerez) — 2,80 €" },
       "available": true,
       "featured": false
     },
@@ -529,7 +529,7 @@
         "fr": "Champignons sautés à l'ail et au persil."
       },
       "price": "Media 7,50 € / Ración 10,00 €",
-      "pairing": { "es": "", "en": "", "fr": "" },
+      "pairing": { "es": "Alfonso (oloroso, D.O. Jerez) — 2,80 €", "en": "Alfonso (oloroso sherry, D.O. Jerez) — 2,80 €", "fr": "Alfonso (xérès oloroso, D.O. Jerez) — 2,80 €" },
       "available": true,
       "featured": false
     },
@@ -543,7 +543,7 @@
         "fr": "Champignons et crevettes sautés à l'ail et au persil."
       },
       "price": "14,50 €",
-      "pairing": { "es": "", "en": "", "fr": "" },
+      "pairing": { "es": "Alfonso (oloroso, D.O. Jerez) — 2,80 €", "en": "Alfonso (oloroso sherry, D.O. Jerez) — 2,80 €", "fr": "Alfonso (xérès oloroso, D.O. Jerez) — 2,80 €" },
       "available": true,
       "featured": false
     },
@@ -600,7 +600,7 @@
         "fr": "Calamars panés et frits à l'huile d'olive."
       },
       "price": "Media 9,50 € / Ración 13,00 €",
-      "pairing": { "es": "Castillo de San Diego (V.T. Cádiz) — 17,50 €", "en": "Castillo de San Diego — 17,50 €", "fr": "Castillo de San Diego — 17,50 €" },
+      "pairing": { "es": "Castillo de San Diego (V.T. Cádiz) — 17,50 €", "en": "Castillo de San Diego (white wine) — 17,50 €", "fr": "Castillo de San Diego (vin blanc) — 17,50 €" },
       "available": true,
       "featured": false
     },
@@ -614,7 +614,7 @@
         "fr": "Anchois frais panés et frits."
       },
       "price": "Media 9,50 € / Ración 13,00 €",
-      "pairing": { "es": "Manzanilla — 3,50 €", "en": "Manzanilla — 3,50 €", "fr": "Manzanilla — 3,50 €" },
+      "pairing": { "es": "Manzanilla — 3,50 €", "en": "Manzanilla (dry sherry, Sanlúcar) — 3,50 €", "fr": "Manzanilla (xérès sec, Sanlúcar) — 3,50 €" },
       "available": true,
       "featured": false
     },
@@ -628,7 +628,7 @@
         "fr": "Mariné à l'ail, origan et paprika, pané et frit."
       },
       "price": "Media 9,50 € / Ración 13,00 €",
-      "pairing": { "es": "Fino de Jerez — 3,50 €", "en": "Fino de Jerez — 3,50 €", "fr": "Fino de Xérès — 3,50 €" },
+      "pairing": { "es": "Fino de Jerez — 3,50 €", "en": "Fino de Jerez (dry sherry) — 3,50 €", "fr": "Fino de Xérès (xérès sec) — 3,50 €" },
       "available": true,
       "featured": false
     },
@@ -642,7 +642,7 @@
         "fr": "Palourdes sautées à l'ail, persil et vin blanc."
       },
       "price": "Media 9,50 € / Ración 13,00 €",
-      "pairing": { "es": "D.O. Rueda Verdejo — 17,00 €", "en": "D.O. Rueda Verdejo — 17,00 €", "fr": "D.O. Rueda Verdejo — 17,00 €" },
+      "pairing": { "es": "D.O. Rueda Verdejo — 17,00 €", "en": "D.O. Rueda Verdejo (white wine) — 17,00 €", "fr": "D.O. Rueda Verdejo (vin blanc) — 17,00 €" },
       "available": true,
       "featured": false
     },
@@ -698,7 +698,7 @@
         "fr": "Sélection de poissons frais panés et frits. Selon disponibilité."
       },
       "price": "17,50 €",
-      "pairing": { "es": "Calvente (V.T. Granada) — 21,00 €", "en": "Calvente (V.T. Granada) — 21,00 €", "fr": "Calvente (V.T. Granada) — 21,00 €" },
+      "pairing": { "es": "Calvente (V.T. Granada) — 21,00 €", "en": "Calvente (white wine, V.T. Granada) — 21,00 €", "fr": "Calvente (vin blanc, V.T. Granada) — 21,00 €" },
       "available": true,
       "featured": false
     },
@@ -755,7 +755,7 @@
         "fr": "Brochettes de viande marinée maison."
       },
       "price": "4,80 € (unidad)",
-      "pairing": { "es": "Alhambra Reserva 1925 — 3,20 €", "en": "Alhambra Reserva 1925 — 3,20 €", "fr": "Alhambra Reserva 1925 — 3,20 €" },
+      "pairing": { "es": "Alhambra Reserva 1925 — 3,20 €", "en": "Alhambra Reserva 1925 (craft lager) — 3,20 €", "fr": "Alhambra Reserva 1925 (lager artisanale) — 3,20 €" },
       "available": true,
       "featured": false
     },
@@ -797,7 +797,7 @@
         "fr": "Rouleau de longe de porc enveloppé dans du jambon, pané et frit. Spécialité de Córdoba."
       },
       "price": "5,00 € (barra) / 14,00 € (restaurante)",
-      "pairing": { "es": "Delirio (D.O. Granada) — 17,00 €", "en": "Delirio (D.O. Granada) — 17,00 €", "fr": "Delirio (D.O. Granada) — 17,00 €" },
+      "pairing": { "es": "Delirio (D.O. Granada) — 17,00 €", "en": "Delirio (red wine, D.O. Granada) — 17,00 €", "fr": "Delirio (vin rouge, D.O. Granada) — 17,00 €" },
       "available": true,
       "featured": false
     },
@@ -825,7 +825,7 @@
         "fr": "Veau braisé en sauce, légumes et vin."
       },
       "price": "12,50 €",
-      "pairing": { "es": "Alcorta Crianza (D.O. Rioja) — 18,00 €", "en": "Alcorta Crianza (D.O. Rioja) — 18,00 €", "fr": "Alcorta Crianza (D.O. Rioja) — 18,00 €" },
+      "pairing": { "es": "Alcorta Crianza (D.O. Rioja) — 18,00 €", "en": "Alcorta Crianza (red wine, D.O. Rioja) — 18,00 €", "fr": "Alcorta Crianza (vin rouge, D.O. Rioja) — 18,00 €" },
       "available": true,
       "featured": false
     },
@@ -839,7 +839,7 @@
         "fr": "Côtelettes d'agneau grillées."
       },
       "price": "14,00 €",
-      "pairing": { "es": "Muñana Rojo (D.O. Granada) — 19,00 €", "en": "Muñana Rojo (D.O. Granada) — 19,00 €", "fr": "Muñana Rojo (D.O. Granada) — 19,00 €" },
+      "pairing": { "es": "Muñana Rojo (D.O. Granada) — 19,00 €", "en": "Muñana Rojo (red wine, D.O. Granada) — 19,00 €", "fr": "Muñana Rojo (vin rouge, D.O. Granada) — 19,00 €" },
       "available": true,
       "featured": false
     },
@@ -853,7 +853,7 @@
         "fr": "Presa ibérique grillée."
       },
       "price": "14,00 €",
-      "pairing": { "es": "Señorío de Nevada (D.O. Granada) — 20,00 €", "en": "Señorío de Nevada (D.O. Granada) — 20,00 €", "fr": "Señorío de Nevada (D.O. Granada) — 20,00 €" },
+      "pairing": { "es": "Señorío de Nevada (D.O. Granada) — 20,00 €", "en": "Señorío de Nevada (red wine, D.O. Granada) — 20,00 €", "fr": "Señorío de Nevada (vin rouge, D.O. Granada) — 20,00 €" },
       "available": true,
       "featured": false
     },
@@ -867,7 +867,7 @@
         "fr": "Jambon cuit et fromage enveloppés dans du lomo, pané et frit."
       },
       "price": "15,00 €",
-      "pairing": { "es": "Delirio (D.O. Granada) — 17,00 €", "en": "Delirio (D.O. Granada) — 17,00 €", "fr": "Delirio (D.O. Granada) — 17,00 €" },
+      "pairing": { "es": "Delirio (D.O. Granada) — 17,00 €", "en": "Delirio (red wine, D.O. Granada) — 17,00 €", "fr": "Delirio (vin rouge, D.O. Granada) — 17,00 €" },
       "available": true,
       "featured": false
     },
@@ -881,7 +881,7 @@
         "fr": "Filet de porc grillé."
       },
       "price": "14,50 €",
-      "pairing": { "es": "Fontedei Prado Negro (D.O. Granada) — 17,00 €", "en": "Fontedei Prado Negro (D.O. Granada) — 17,00 €", "fr": "Fontedei Prado Negro (D.O. Granada) — 17,00 €" },
+      "pairing": { "es": "Fontedei Prado Negro (D.O. Granada) — 17,00 €", "en": "Fontedei Prado Negro (red wine, D.O. Granada) — 17,00 €", "fr": "Fontedei Prado Negro (vin rouge, D.O. Granada) — 17,00 €" },
       "available": true,
       "featured": false
     },
@@ -895,7 +895,7 @@
         "fr": "Filet de porc à la sauce poivre."
       },
       "price": "15,50 €",
-      "pairing": { "es": "Muñana 3 Cepas (D.O. Granada) — 21,00 €", "en": "Muñana 3 Cepas (D.O. Granada) — 21,00 €", "fr": "Muñana 3 Cepas (D.O. Granada) — 21,00 €" },
+      "pairing": { "es": "Muñana 3 Cepas (D.O. Granada) — 21,00 €", "en": "Muñana 3 Cepas (red wine, D.O. Granada) — 21,00 €", "fr": "Muñana 3 Cepas (vin rouge, D.O. Granada) — 21,00 €" },
       "available": true,
       "featured": false
     },
@@ -909,7 +909,7 @@
         "fr": "Entrecôte de veau grillée."
       },
       "price": "19,00 €",
-      "pairing": { "es": "Marqués de Cáceres Reserva (D.O. Rioja) — 26,00 €", "en": "Marqués de Cáceres Reserva (D.O. Rioja) — 26,00 €", "fr": "Marqués de Cáceres Reserva (D.O. Rioja) — 26,00 €" },
+      "pairing": { "es": "Marqués de Cáceres Reserva (D.O. Rioja) — 26,00 €", "en": "Marqués de Cáceres Reserva (red wine, D.O. Rioja) — 26,00 €", "fr": "Marqués de Cáceres Reserva (vin rouge, D.O. Rioja) — 26,00 €" },
       "available": true,
       "featured": false
     },
@@ -923,7 +923,7 @@
         "fr": "Entrecôte de veau à la sauce poivre."
       },
       "price": "20,00 €",
-      "pairing": { "es": "Marqués de Cáceres Reserva (D.O. Rioja) — 26,00 €", "en": "Marqués de Cáceres Reserva (D.O. Rioja) — 26,00 €", "fr": "Marqués de Cáceres Reserva (D.O. Rioja) — 26,00 €" },
+      "pairing": { "es": "Marqués de Cáceres Reserva (D.O. Rioja) — 26,00 €", "en": "Marqués de Cáceres Reserva (red wine, D.O. Rioja) — 26,00 €", "fr": "Marqués de Cáceres Reserva (vin rouge, D.O. Rioja) — 26,00 €" },
       "available": true,
       "featured": false
     },
@@ -1037,7 +1037,7 @@
         "fr": "Riz au poulet, fruits de mer et légumes. Sur commande, minimum 2 rations."
       },
       "price": "14,00 € / ración",
-      "pairing": { "es": "Señorío de Nevada (D.O. Granada) — 20,00 €", "en": "Señorío de Nevada (D.O. Granada) — 20,00 €", "fr": "Señorío de Nevada (D.O. Granada) — 20,00 €" },
+      "pairing": { "es": "Señorío de Nevada (D.O. Granada) — 20,00 €", "en": "Señorío de Nevada (red wine, D.O. Granada) — 20,00 €", "fr": "Señorío de Nevada (vin rouge, D.O. Granada) — 20,00 €" },
       "available": true,
       "featured": false
     },
@@ -1051,7 +1051,7 @@
         "fr": "Riz aux fruits de mer et bouillon de poisson. Sur commande, minimum 2 rations."
       },
       "price": "15,00 € / ración",
-      "pairing": { "es": "Calvente (V.T. Granada) — 21,00 €", "en": "Calvente (V.T. Granada) — 21,00 €", "fr": "Calvente (V.T. Granada) — 21,00 €" },
+      "pairing": { "es": "Calvente (V.T. Granada) — 21,00 €", "en": "Calvente (white wine, V.T. Granada) — 21,00 €", "fr": "Calvente (vin blanc, V.T. Granada) — 21,00 €" },
       "available": true,
       "featured": false
     },
