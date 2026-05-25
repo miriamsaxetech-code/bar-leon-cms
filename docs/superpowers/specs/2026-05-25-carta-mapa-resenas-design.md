@@ -4,6 +4,17 @@
 
 Reordenar la experiencia para que el visitante entienda rápido tres cosas: cómo llegar, cómo dejar una reseña positiva y qué carta quiere consultar. El tono debe ser granadino, con malafollá amable, gracia y salero, bajo el lema: "No se sienta cliente, somos amigos".
 
+El nombre visible del local será "Restaurante Bar León".
+
+## Tipografía
+
+Se usarán las fuentes locales del proyecto:
+
+- `Granaina Limpia` para el nombre principal y titulares donde convenga legibilidad.
+- `Granaina Sucia` para detalles con sabor de pizarra o acento puntual, nunca para textos largos ni precios pequeños.
+
+Playfair e Inter seguirán como apoyo si la lectura o los idiomas EN/FR lo piden. La prioridad es que el sitio parezca más Granada real y menos plantilla genérica.
+
 ## Home
 
 La home añadirá un bloque de ubicación con mapa embebido y enlaces claros a Google Maps. Junto al mapa irá una llamada a reseña positiva, con copy cercano y breve. El texto evitará explicaciones largas y no caerá en caricatura turística.
