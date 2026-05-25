@@ -16,7 +16,15 @@
     restaurant: { es: 'Carta Restaurante', en: 'Restaurant Menu', fr: 'Carte Restaurant' },
     bar:        { es: 'Carta Barra',    en: 'Bar Menu',      fr: 'Carte Bar' },
     barIntro:   { es: 'Para barra, vinos y bebidas. Sin ceremonia, que aquí se viene a gusto.', en: 'Bar, wines and drinks. Simple, direct, and easy.', fr: 'Bar, vins et boissons. Simple et direct.' },
-    restaurantIntro: { es: 'La carta de mesa, separada del menú del día.', en: 'The table menu, separate from the daily menu.', fr: 'La carte de table, séparée du menu du jour.' }
+    restaurantIntro: { es: 'La carta de mesa, separada del menú del día.', en: 'The table menu, separate from the daily menu.', fr: 'La carte de table, séparée du menu du jour.' },
+    badge_recommended: { es: 'Recomendado', en: 'Recommended',   fr: 'Recommandé'         },
+    badge_seasonal:    { es: 'Temporada',   en: 'Seasonal',       fr: 'Saison'             },
+    badge_house:       { es: 'De la casa',  en: 'House special',  fr: 'Maison'             },
+    soldout:           { es: 'Agotado hoy', en: 'Sold out today', fr: "Épuisé aujourd'hui" },
+    pairing:           { es: 'Recomendamos:', en: 'We recommend:', fr: 'Nous recommandons:' },
+    paraEmpezarTitle:  { es: 'Para empezar',              en: 'To start',                   fr: 'Pour commencer'           },
+    paraEmpezarSub:    { es: 'La barra, antes de la mesa.', en: 'The bar, before the table.', fr: 'Le comptoir, avant la table.' },
+    whatsappFab:       { es: 'Reservar mesa', en: 'Book a table', fr: 'Réserver une table' },
   };
 
   const DAY_NAMES = {
@@ -77,13 +85,25 @@
     ).join('<span class="sep"> · </span>');
   }
 
+  function injectLangBar(lang) {
+    const bar = document.createElement('div');
+    bar.className = 'lang-bar';
+    bar.setAttribute('aria-label', 'Language / Idioma / Langue');
+    bar.innerHTML = ['es', 'en', 'fr'].map(l =>
+      l === lang
+        ? `<span class="lang-bar__active">${l.toUpperCase()}</span>`
+        : `<a class="lang-bar__link" href="${CARTA_LINKS[l]}">${l.toUpperCase()}</a>`
+    ).join('<span class="lang-bar__sep">·</span>');
+    document.body.insertBefore(bar, document.body.firstChild);
+  }
+
   // ─── BADGE HELPER ─────────────────────────────────────────────────────────────
-  function renderBadge(dish) {
+  function renderBadge(dish, lang) {
     const v = dish.featured;
     if (!v || v === false) return '';
-    if (v === true || v === 'recommended') return '<span class="dish-badge dish-badge--recommended">Recomendado</span>';
-    if (v === 'seasonal') return '<span class="dish-badge dish-badge--seasonal">Temporada</span>';
-    if (v === 'house') return '<span class="dish-badge dish-badge--house">De la casa</span>';
+    if (v === true || v === 'recommended') return `<span class="dish-badge dish-badge--recommended">${LABELS.badge_recommended[lang]}</span>`;
+    if (v === 'seasonal') return `<span class="dish-badge dish-badge--seasonal">${LABELS.badge_seasonal[lang]}</span>`;
+    if (v === 'house') return `<span class="dish-badge dish-badge--house">${LABELS.badge_house[lang]}</span>`;
     return '';
   }
 
@@ -92,13 +112,13 @@
     return dish.status === 'soldout' ? ' dish--soldout' : '';
   }
 
-  function renderDishStatus(dish) {
+  function renderDishStatus(dish, lang) {
     if (dish.status === 'soldout') {
-      return '<span class="dish-status">Agotado hoy</span>';
+      return `<span class="dish-status">${LABELS.soldout[lang]}</span>`;
     }
     if (dish.status === 'seasonal') {
-      const badge = renderBadge(dish);
-      if (!badge) return '<span class="dish-badge dish-badge--seasonal">Temporada</span>';
+      const badge = renderBadge(dish, lang);
+      if (!badge) return `<span class="dish-badge dish-badge--seasonal">${LABELS.badge_seasonal[lang]}</span>`;
     }
     return '';
   }
@@ -119,7 +139,7 @@
     });
     if (!matched) return '';
     const wineDisplayName = typeof matched.name === 'object' ? t(matched.name, lang) : matched.name;
-    return `<a class="pairing-chip" href="#" data-wine-id="${matched.id}" data-wine-name="${wineDisplayName}">🍷 Marida con: ${wineDisplayName}</a>`;
+    return `<a class="pairing-chip" href="#" data-wine-id="${matched.id}" data-wine-name="${wineDisplayName}">🍷 ${LABELS.pairing[lang]} ${wineDisplayName}</a>`;
   }
 
   function renderMenuDia(dm, nav, lang) {
@@ -189,8 +209,8 @@
     if (!spotlightDishes.length) return '';
 
     const cards = spotlightDishes.map(dish => {
-      const badge = renderBadge(dish);
-      const statusHtml = renderDishStatus(dish);
+      const badge = renderBadge(dish, lang);
+      const statusHtml = renderDishStatus(dish, lang);
       const descText = t(dish.description, lang);
       const pairingChip = renderPairingChip(dish, wines, lang);
       const priceHtml = dish.status === 'soldout' ? '' : `<span class="check-price dish-price">${formatPrice(dish.price)}</span>`;
@@ -243,8 +263,8 @@
       const list = groups[catId];
 
       const itemsHtml = list.map(item => {
-        const badge = renderBadge(item);
-        const statusHtml = renderDishStatus(item);
+        const badge = renderBadge(item, lang);
+        const statusHtml = renderDishStatus(item, lang);
         const pairingChip = renderPairingChip(item, wines, lang);
         return `<article class="carta-item${getDishStatusClass(item)}">
   <div class="check-row">
@@ -305,8 +325,8 @@
     }).join('');
 
     return `<div class="para-empezar">
-  <h3 class="para-empezar__title">Para empezar</h3>
-  <p class="para-empezar__sub">La barra, antes de la mesa.</p>
+  <h3 class="para-empezar__title">${LABELS.paraEmpezarTitle[lang]}</h3>
+  <p class="para-empezar__sub">${LABELS.paraEmpezarSub[lang]}</p>
   <div class="para-empezar__strip">
     ${items}
   </div>
@@ -575,7 +595,7 @@
   }
 
   // ─── WHATSAPP FLOATING CTA ────────────────────────────────────────────────────
-  function injectWhatsAppFAB(d) {
+  function injectWhatsAppFAB(d, lang) {
     if (!d.contact || !d.contact.whatsapp) return;
     const number = d.contact.whatsapp.replace(/\D/g, '');
     if (!number) return;
@@ -584,7 +604,7 @@
     fab.href = 'https://wa.me/' + number;
     fab.target = '_blank';
     fab.rel = 'noopener';
-    fab.textContent = 'Reservar mesa';
+    fab.textContent = LABELS.whatsappFab[lang] || 'Reservar mesa';
     document.body.appendChild(fab);
   }
 
@@ -623,7 +643,8 @@
       initAccordions(app);
       initMenuSwitch(app);
       initPairingChips(app);
-      injectWhatsAppFAB(d);
+      injectLangBar(lang);
+      injectWhatsAppFAB(d, lang);
       header.style.display = 'block';
       app.style.display = 'block';
       loader.classList.add('fade-out');

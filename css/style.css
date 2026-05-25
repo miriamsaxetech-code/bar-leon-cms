@@ -52,6 +52,52 @@ body {
 }
 
 /* ─── MASTHEAD RULE ─── */
+/* ─── LANGUAGE BAR ─── */
+.lang-bar {
+  position: sticky;
+  top: 0;
+  z-index: 200;
+  background: var(--ink);
+  display: flex;
+  align-items: center;
+  justify-content: flex-end;
+  gap: 0;
+  padding: 0 24px;
+  height: 34px;
+}
+
+.lang-bar__link,
+.lang-bar__active {
+  font-family: 'Inter', system-ui, sans-serif;
+  font-size: 0.68rem;
+  text-transform: uppercase;
+  letter-spacing: 0.16em;
+  line-height: 1;
+  padding: 10px 8px;
+  text-decoration: none;
+  color: rgba(246, 243, 236, 0.6);
+}
+
+.lang-bar__link {
+  color: rgba(246, 243, 236, 0.6);
+  transition: color 0.15s;
+}
+
+.lang-bar__link:hover {
+  color: var(--bg);
+}
+
+.lang-bar__active {
+  color: var(--bg);
+  font-weight: 600;
+}
+
+.lang-bar__sep {
+  color: rgba(246, 243, 236, 0.25);
+  font-size: 0.6rem;
+  padding: 0 2px;
+}
+
 .masthead-rule {
   height: 2px;
   background: var(--accent);
@@ -993,6 +1039,12 @@ h2 {
   border: 1px solid var(--ink);
   background: #E8E3D3;
   line-height: 0;
+  overflow: hidden;
+}
+
+.location-map iframe {
+  filter: sepia(0.22) saturate(0.85) brightness(1.03) contrast(0.96);
+  display: block;
 }
 
 .location-info {

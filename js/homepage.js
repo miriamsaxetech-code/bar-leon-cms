@@ -36,6 +36,18 @@
     ).join('<span class="sep"> · </span>');
   }
 
+  function injectLangBar(lang, links) {
+    const bar = document.createElement('div');
+    bar.className = 'lang-bar';
+    bar.setAttribute('aria-label', 'Language / Idioma / Langue');
+    bar.innerHTML = ['es', 'en', 'fr'].map(l =>
+      l === lang
+        ? `<span class="lang-bar__active">${l.toUpperCase()}</span>`
+        : `<a class="lang-bar__link" href="${links[l]}">${l.toUpperCase()}</a>`
+    ).join('<span class="lang-bar__sep">·</span>');
+    document.body.insertBefore(bar, document.body.firstChild);
+  }
+
   // ─── CARIOCA SLOT ─────────────────────────────────────────────────────────────
   function renderCariocaSlot(venue, lang) {
     const item = (venue.cariocas || []).find(c => c.active && c.context === 'homepage');
@@ -53,7 +65,9 @@
   }
 
   // ─── WHATSAPP FLOATING CTA ────────────────────────────────────────────────────
-  function injectWhatsAppFAB(d) {
+  const WHATSAPP_FAB_LABEL = { es: 'Reservar mesa', en: 'Book a table', fr: 'Réserver une table' };
+
+  function injectWhatsAppFAB(d, lang) {
     if (!d.contact || !d.contact.whatsapp) return;
     const number = d.contact.whatsapp.replace(/\D/g, '');
     if (!number) return;
@@ -62,7 +76,7 @@
     fab.href = 'https://wa.me/' + number;
     fab.target = '_blank';
     fab.rel = 'noopener';
-    fab.textContent = 'Reservar mesa';
+    fab.textContent = WHATSAPP_FAB_LABEL[lang] || 'Reservar mesa';
     document.body.appendChild(fab);
   }
 
@@ -153,7 +167,7 @@
   <p class="section-label">${locationTitle}</p>
   <div class="location-grid">
     <div class="location-map">
-      <iframe src="https://maps.google.com/maps?q=Restaurante%20Bar%20Le%C3%B3n,%20Calle%20Pan,%201,%20Granada&t=&z=17&ie=UTF8&iwloc=&output=embed" width="100%" height="250" style="border:0;" allowfullscreen="" loading="lazy" aria-label="Google Maps"></iframe>
+      <iframe src="https://www.openstreetmap.org/export/embed.html?bbox=-3.6004%2C37.1763%2C-3.5964%2C37.1793&amp;layer=mapnik&amp;marker=37.17783%2C-3.59843" width="100%" height="250" style="border:0;" loading="lazy" aria-label="OpenStreetMap"></iframe>
     </div>
     <div class="location-info">
       <p class="location-friends">"${friendsLabel}"</p>
@@ -232,7 +246,8 @@
       const d = await res.json();
 
       app.innerHTML = render(d, lang);
-      injectWhatsAppFAB(d);
+      injectLangBar(lang, HOME_LINKS);
+      injectWhatsAppFAB(d, lang);
       app.style.display = 'block';
       loader.classList.add('fade-out');
       setTimeout(() => { loader.style.display = 'none'; }, 380);
