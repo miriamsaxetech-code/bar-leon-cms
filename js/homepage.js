@@ -120,7 +120,7 @@
     const mapCopy = {
       es: 'Estamos en calle Pan, al lado de Plaza Nueva. Si se pierde aquí, ya es por gusto.',
       en: 'We are on Calle Pan, right next to Plaza Nueva. If you get lost, it is by choice.',
-      fr: 'Nous sommes situés rue Pan, juste à côté de Plaza Nueva. Si vous vous perdez, c'est que vous le voulez bien.'
+      fr: "Nous sommes situés rue Pan, juste à côté de Plaza Nueva. Si vous vous perdez, c'est que vous le voulez bien."
     }[lang];
 
     const reviewCopy = {
