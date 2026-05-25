@@ -2,8 +2,7 @@ backend:
   name: github
   repo: miriamsaxetech-code/bar-leon-cms
   branch: main
-  auth_type: pkce
-  client_id: Ov23lieTq9aZEP0a4XDD
+  base_url: https://bar-leon-cms.pages.dev
 
 media_folder: assets/images
 public_folder: assets/images
