@@ -166,9 +166,7 @@ collections:
                 name: "featured"
                 widget: "select"
                 required: false
-                default: false
                 options:
-                  - { label: "No destacado", value: false }
                   - { label: "⭐ Recomendado", value: "recommended" }
                   - { label: "🌿 Temporada", value: "seasonal" }
                   - { label: "🦁 De la casa", value: "house" }
