@@ -1,0 +1,7 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 900 900" role="img" aria-label="Placeholder galeria">
+  <rect width="900" height="900" fill="#f4f2ed"/>
+  <rect x="50" y="50" width="800" height="800" fill="none" stroke="#c9c4b8" stroke-width="2"/>
+  <line x1="50" y1="50" x2="850" y2="850" stroke="#c9c4b8" stroke-width="2"/>
+  <line x1="850" y1="50" x2="50" y2="850" stroke="#c9c4b8" stroke-width="2"/>
+  <text x="450" y="470" fill="#676356" font-size="34" text-anchor="middle" font-family="sans-serif">Galeria</text>
+</svg>

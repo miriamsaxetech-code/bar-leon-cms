@@ -44,7 +44,7 @@
       ? `<figure class="hero-frame">
   <picture>
     <source srcset="${heroImg}" type="image/webp">
-    <img src="${heroImg.replace('.webp', '.png')}" alt="${heroAlt}" loading="lazy" decoding="async">
+    <img src="${heroImg.replace('.webp', '.png')}" alt="${heroAlt}" fetchpriority="high" decoding="async">
   </picture>
 </figure>`
       : `<div class="hero-editorial" role="img" aria-label="${heroAlt}">
@@ -65,7 +65,49 @@
 
     const addr = d.contact.address;
 
+    // Ubicación & Reseñas variables de idioma
+    const locationTitle = { es: 'Ubicación', en: 'Location', fr: 'Emplacement' }[lang];
+    const friendsLabel  = { es: 'No se sienta cliente, somos amigos', en: "Don't feel like a customer, we are friends", fr: 'Ne vous sentez pas client, nous sommes des amis' }[lang];
+    
+    const mapCopy = {
+      es: 'Estamos en calle Pan, al lado de Plaza Nueva. Si se pierde aquí, ya es por gusto.',
+      en: 'We are on Calle Pan, right next to Plaza Nueva. If you get lost, it is by choice.',
+      fr: 'Nous sommes situés rue Pan, juste à côté de Plaza Nueva. Si vous vous perdez, c’est que vous le voulez bien.'
+    }[lang];
+
+    const reviewCopy = {
+      es: 'Si ha comido a gusto, déjenos una reseña buena. Si no, nos lo dice en la barra y lo arreglamos como personas.',
+      en: 'If you enjoyed your meal, please leave us a good review. If not, tell us at the bar and we will make it right.',
+      fr: 'Si vous avez aimé, laissez-nous un avis positif. Sinon, dites-le nous au comptoir et nous le réglerons ensemble.'
+    }[lang];
+
+    const logoBlock = `
+<div class="site-logo-container">
+  <img src="../assets/images/lion-logo.svg" class="site-logo" alt="" />
+</div>`;
+
+    const locationBlock = `
+<section class="location-section">
+  <p class="section-label">${locationTitle}</p>
+  <div class="location-grid">
+    <div class="location-map">
+      <iframe src="https://maps.google.com/maps?q=Restaurante%20Bar%20Le%C3%B3n,%20Calle%20Pan,%201,%20Granada&t=&z=17&ie=UTF8&iwloc=&output=embed" width="100%" height="250" style="border:0;" allowfullscreen="" loading="lazy" aria-label="Google Maps"></iframe>
+    </div>
+    <div class="location-info">
+      <p class="location-friends">“${friendsLabel}”</p>
+      <p class="location-copy">${mapCopy}</p>
+      <a href="${mapsUrl}" target="_blank" rel="noopener" class="location-link">↗ ${directionsLabel}</a>
+      
+      <hr class="location-sep" />
+      
+      <p class="review-copy">${reviewCopy}</p>
+      <a href="${reviewsUrl}" target="_blank" rel="noopener" class="location-link">★ ${reviewsLabel}</a>
+    </div>
+  </div>
+</section>`;
+
     return `<div class="wrap">
+  ${logoBlock}
   <h1 class="site-name">${t(d.venue.name, lang)}</h1>
   <p class="site-location">${addr.neighborhood} &middot; ${addr.city} <span class="site-since">&middot; ${since}</span></p>
   <nav class="site-nav" aria-label="Navigation">
@@ -80,6 +122,7 @@
   ${aviso}
   ${hero}
   ${trustStrip}
+  ${locationBlock}
   <div class="homepage-footer">
     <div class="homepage-footer-inner">
       <p class="address">${addr.neighborhood} &middot; ${addr.city} &middot; ${addr.region}<br>${t(d.venue.cuisine_tag, lang)}</p>
@@ -107,7 +150,12 @@
       loader.classList.add('fade-out');
       setTimeout(() => { loader.style.display = 'none'; }, 380);
     } catch (err) {
-      loader.innerHTML = '<span style="color:#7A1C1C;font-family:Georgia,serif;font-size:0.9rem;padding:0 24px;text-align:center;display:block;">Error al cargar. Por favor, recarga la p&aacute;gina.</span>';
+      const errMsg = {
+        es: 'Error al cargar. Por favor, recarga la p&aacute;gina.',
+        en: 'Error loading page. Please reload.',
+        fr: 'Erreur de chargement. Veuillez recharger la page.'
+      }[lang] || 'Error al cargar. Por favor, recarga la p&aacute;gina.';
+      loader.innerHTML = `<span style="color:#7A1C1C;font-family:Georgia,serif;font-size:0.9rem;padding:0 24px;text-align:center;display:block;">${errMsg}</span>`;
       console.error('Bar León:', err);
     }
   }

@@ -120,9 +120,9 @@
   }
 
   function renderCarta(dishes, categories, lang, service) {
-    const available = dishes.filter(i => i.available !== false);
+    const available = (dishes || []).filter(i => i.available !== false);
     const catMap = {};
-    categories
+    (categories || [])
       .filter(c => (c.service || (c.type === 'food' ? 'restaurant' : 'bar')) === service)
       .forEach(c => { catMap[c.id] = c; });
 
@@ -168,15 +168,17 @@
   }
 
   function renderWines(wines, beverages, categories, lang, service) {
-    if (!wines || !wines.length) return '';
+    const hasWines = Array.isArray(wines) && wines.length > 0;
+    const hasBeverages = Array.isArray(beverages) && beverages.length > 0;
+    if (!hasWines && !hasBeverages) return '';
     const catMap = {};
-    categories
+    (categories || [])
       .filter(c => (c.service || (c.type === 'food' ? 'restaurant' : 'bar')) === service)
       .forEach(c => { catMap[c.id] = c; });
 
     const groups = {};
     const order  = [];
-    [...(wines || []), ...(beverages || [])].filter(w => w.available !== false).forEach(item => {
+    [...(wines || []), ...(beverages || [])].filter(w => w && w.available !== false).forEach(item => {
       if (!catMap[item.category_id]) return;
       if (!groups[item.category_id]) {
         groups[item.category_id] = [];
@@ -363,7 +365,8 @@
       headerNav.innerHTML = `<div class="carta-header-left">
   <a href="${HOME_LINKS[lang]}" class="carta-back">${t(nav.back, lang)}</a>
 </div>
-<div class="carta-header-center">
+<div class="carta-header-center" style="display: flex; align-items: center; gap: 8px; justify-content: center;">
+  <img src="../assets/images/lion-logo.svg" class="header-logo" alt="" />
   <span class="carta-bar-name">${t(d.venue.name, lang)}</span>
 </div>
 <div class="carta-header-right">
@@ -391,7 +394,12 @@
         }, 150);
       }
     } catch (err) {
-      loader.innerHTML = '<span style="color:#7A1C1C;font-family:Georgia,serif;font-size:0.9rem;padding:0 24px;text-align:center;display:block;">Error al cargar. Por favor, recarga la p&aacute;gina.</span>';
+      const errMsg = {
+        es: 'Error al cargar. Por favor, recarga la p&aacute;gina.',
+        en: 'Error loading page. Please reload.',
+        fr: 'Erreur de chargement. Veuillez recharger la page.'
+      }[lang] || 'Error al cargar. Por favor, recarga la p&aacute;gina.';
+      loader.innerHTML = `<span style="color:#7A1C1C;font-family:Georgia,serif;font-size:0.9rem;padding:0 24px;text-align:center;display:block;">${errMsg}</span>`;
       console.error('Bar León:', err);
     }
   }

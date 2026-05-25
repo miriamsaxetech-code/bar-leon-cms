@@ -6,9 +6,9 @@
     "name":      { "es": "Bar León",             "en": "Bar León",            "fr": "Bar León" },
     "full_name": { "es": "Restaurante-Bar León",  "en": "Restaurante-Bar León","fr": "Restaurante-Bar León" },
     "tagline": {
-      "es": "Tres generaciones sin cambiar de receta.",
-      "en": "Three generations. Same recipe.",
-      "fr": "Trois générations. La même recette."
+      "es": "No se sienta cliente, somos amigos. Barra granadina de verdad desde 1959.",
+      "en": "Don't feel like a customer, we are friends. Authentic Granada bar since 1959.",
+      "fr": "Ne vous sentez pas client, nous sommes des amis. Bar authentique de Grenade depuis 1959."
     },
     "founding_year": 1959,
     "cuisine": {
@@ -1257,6 +1257,10 @@
     "back":         { "es": "← Bar León",     "en": "← Bar León",  "fr": "← Bar León"    },
     "daily_menu":   { "es": "Menú del Día",   "en": "Daily Menu",   "fr": "Menu du Jour"  },
     "edict_header": { "es": "Bar León · Granada · Est. 1959", "en": "Bar León · Granada · Est. 1959", "fr": "Bar León · Grenade · Dep. 1959" },
-    "edict_foot":   { "es": "Bar León · Cocina Tradicional Granadina", "en": "Bar León · Traditional Granada Cuisine", "fr": "Bar León · Cuisine Traditionnelle de Grenade" }
+    "edict_foot":   { "es": "Bar León · Cocina Tradicional Granadina", "en": "Bar León · Traditional Granada Cuisine", "fr": "Bar León · Cuisine Traditionnelle de Grenade" },
+    "whatsapp_btn": { "es": "Reservar por WhatsApp", "en": "Book via WhatsApp", "fr": "Réserver por WhatsApp" },
+    "tab_daily":    { "es": "Menú del Día",   "en": "Daily Menu",   "fr": "Menu du Jour" },
+    "tab_restaurant": { "es": "Carta Restaurante", "en": "Carta Restaurante", "fr": "Carta Restaurante" },
+    "tab_bar":      { "es": "Carta Barra",     "en": "Carta Barra",        "fr": "Carta Barra" }
   }
 }

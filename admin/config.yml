@@ -18,23 +18,160 @@ collections:
         format: json
         fields:
 
-          # ── AVISO ESPECIAL — lo más urgente, arriba del todo ────
+          # ── SCHEMA VERSION — HIDDEN ─────────────────────────────
+          - name: _schema
+            widget: hidden
+            default: "nexo-horeca-universal-venue-v1"
+
+          # ── INFORMACIÓN DEL LOCAL ───────────────────────────────
           - name: venue
-            label: "⚠️ Aviso especial"
+            label: "🏢 Información del local"
             widget: object
             collapsed: false
-            hint: "Aparece destacado en la portada. Dejar vacío si no hay aviso."
             fields:
-              - name: notice
-                label: Aviso
+              - name: slug
+                label: "Slug"
+                widget: string
+                default: "bar-leon"
+              - name: name
+                label: "Nombre del local"
                 widget: object
-                collapsed: false
                 fields:
-                  - name: es
-                    label: Texto del aviso
-                    widget: string
-                    required: false
-                    hint: "Ej: Cerrado por vacaciones del 1 al 15 de agosto. Vacío = sin aviso."
+                  - { name: es, label: "Nombre (ES)", widget: string }
+                  - { name: en, label: "Nombre (EN)", widget: string }
+                  - { name: fr, label: "Nombre (FR)", widget: string }
+              - name: full_name
+                label: "Nombre completo"
+                widget: object
+                fields:
+                  - { name: es, label: "Nombre completo (ES)", widget: string }
+                  - { name: en, label: "Nombre completo (EN)", widget: string }
+                  - { name: fr, label: "Nombre completo (FR)", widget: string }
+              - name: tagline
+                label: "Lema / Subtítulo"
+                widget: object
+                fields:
+                  - { name: es, label: "Lema (ES)", widget: string }
+                  - { name: en, label: "Lema (EN)", widget: string }
+                  - { name: fr, label: "Lema (FR)", widget: string }
+              - name: founding_year
+                label: "Año de fundación"
+                widget: number
+                value_type: int
+              - name: cuisine
+                label: "Cocina"
+                widget: object
+                fields:
+                  - { name: es, label: "Cocina (ES)", widget: string }
+                  - { name: en, label: "Cocina (EN)", widget: string }
+                  - { name: fr, label: "Cocina (FR)", widget: string }
+              - name: cuisine_tag
+                label: "Etiqueta de cocina"
+                widget: object
+                fields:
+                  - { name: es, label: "Etiqueta (ES)", widget: string }
+                  - { name: en, label: "Etiqueta (EN)", widget: string }
+                  - { name: fr, label: "Etiqueta (FR)", widget: string }
+              - name: notice
+                label: "⚠️ Aviso especial"
+                widget: object
+                collapsed: true
+                fields:
+                  - { name: es, label: "Aviso (ES)", widget: string, required: false }
+                  - { name: en, label: "Aviso (EN)", widget: string, required: false }
+                  - { name: fr, label: "Aviso (FR)", widget: string, required: false }
+              - name: currency
+                label: "Moneda"
+                widget: string
+                default: "EUR"
+              - name: primary_language
+                label: "Idioma principal"
+                widget: string
+                default: "es"
+              - name: active_languages
+                label: "Idiomas activos"
+                widget: list
+                default: ["es", "en", "fr"]
+
+          # ── CONTACTO ────────────────────────────────────────────
+          - name: contact
+            label: "📞 Contacto"
+            widget: object
+            collapsed: true
+            fields:
+              - name: address
+                label: "Dirección física"
+                widget: object
+                fields:
+                  - { name: street, label: "Calle y número", widget: string }
+                  - { name: neighborhood, label: "Barrio (ej: Albayzín)", widget: string }
+                  - { name: postal_code, label: "Código postal", widget: string }
+                  - { name: city, label: "Ciudad", widget: string }
+                  - { name: region, label: "Región (ej: Andalucía)", widget: string }
+                  - { name: country, label: "País (código)", widget: string }
+              - { name: phone, label: "Teléfono", widget: string }
+              - { name: phone_link, label: "Enlace telefónico (tel:)", widget: string }
+              - { name: email, label: "Email (opcional)", widget: string, required: false }
+              - { name: whatsapp, label: "WhatsApp", widget: string }
+
+          # ── REDES SOCIALES ──────────────────────────────────────
+          - name: social
+            label: "🌐 Redes Sociales y Enlaces"
+            widget: object
+            collapsed: true
+            fields:
+              - { name: instagram, label: "Instagram", widget: string, required: false }
+              - { name: facebook, label: "Facebook", widget: string, required: false }
+              - { name: tripadvisor, label: "TripAdvisor", widget: string, required: false }
+              - { name: google_maps, label: "Google Maps Link", widget: string }
+              - { name: google_reviews, label: "Google Reviews Link", widget: string }
+              - { name: x, label: "Twitter / X", widget: string, required: false }
+
+          # ── SEO ─────────────────────────────────────────────────
+          - name: seo
+            label: "🔍 SEO y Metadatos"
+            widget: object
+            collapsed: true
+            fields:
+              - name: title
+                label: "Título de la web"
+                widget: object
+                fields:
+                  - { name: es, label: "Título (ES)", widget: string }
+                  - { name: en, label: "Título (EN)", widget: string }
+                  - { name: fr, label: "Título (FR)", widget: string }
+              - name: description
+                label: "Descripción de la web"
+                widget: object
+                fields:
+                  - { name: es, label: "Descripción (ES)", widget: text }
+                  - { name: en, label: "Descripción (EN)", widget: text }
+                  - { name: fr, label: "Descripción (FR)", widget: text }
+              - name: keywords
+                label: "Palabras clave"
+                widget: object
+                fields:
+                  - { name: es, label: "Keywords (ES)", widget: list }
+                  - { name: en, label: "Keywords (EN)", widget: list }
+                  - { name: fr, label: "Keywords (FR)", widget: list }
+              - { name: canonical, label: "URL Canónica", widget: string }
+              - { name: og_image, label: "Imagen OpenGraph (Redes)", widget: image }
+
+          # ── HERO ────────────────────────────────────────────────
+          - name: hero
+            label: "🖼️ Imagen de cabecera (Hero)"
+            widget: object
+            collapsed: true
+            fields:
+              - { name: image, label: "Imagen", widget: image }
+              - name: alt
+                label: "Texto alternativo (alt)"
+                widget: object
+                fields:
+                  - { name: es, label: "Alt (ES)", widget: string }
+                  - { name: en, label: "Alt (EN)", widget: string }
+                  - { name: fr, label: "Alt (FR)", widget: string }
+              - { name: focal_point, label: "Foco de imagen", widget: string, default: "center" }
 
           # ── MENÚ DEL DÍA ────────────────────────────────────────
           - name: daily_menu
@@ -46,40 +183,39 @@ collections:
                 label: ¿Mostrar menú del día en la web?
                 widget: boolean
                 default: true
-                hint: "Desactivar para ocultar el menú del día (ej: festivos, verano)."
-
               - name: price
                 label: Precio del menú
                 widget: number
                 value_type: float
-                hint: "Solo el número. Ej: 12.5"
-
+              - name: days
+                label: Días de servicio (internal values)
+                widget: list
+                default: ["monday", "tuesday", "thursday", "friday"]
+              - name: service_period
+                label: Horario de servicio
+                widget: object
+                fields:
+                  - { name: open, label: "Apertura", widget: string }
+                  - { name: close, label: "Cierre", widget: string }
               - name: starters
                 label: Primeros (opciones del día)
                 widget: object
-                collapsed: false
                 fields:
-                  - name: es
-                    label: Opciones de primeros
-                    widget: string
-                    hint: "Separar con · Ej: Ensalada · Salmorejo · Entremeses"
-
+                  - { name: es, label: "Primeros (ES)", widget: string }
+                  - { name: en, label: "Primeros (EN)", widget: string, required: false }
+                  - { name: fr, label: "Primeros (FR)", widget: string, required: false }
               - name: seconds
                 label: Segundos (opciones del día)
                 widget: object
-                collapsed: false
                 fields:
-                  - name: es
-                    label: Opciones de segundos
-                    widget: string
-                    hint: "Separar con · Ej: Filete · Calamares · Dorada"
-
+                  - { name: es, label: "Segundos (ES)", widget: string }
+                  - { name: en, label: "Segundos (EN)", widget: string, required: false }
+                  - { name: fr, label: "Segundos (FR)", widget: string, required: false }
               - name: mains
                 label: Plato especial por día
                 label_singular: Día
                 widget: list
                 summary: "{{fields.day}}: {{fields.name.es}}"
-                collapsed: false
                 fields:
                   - name: day
                     label: Día
@@ -92,44 +228,33 @@ collections:
                   - name: name
                     label: Nombre del plato
                     widget: object
-                    collapsed: false
                     fields:
-                      - name: es
-                        label: Plato
-                        widget: string
-                        hint: "Ej: Cocido"
-
+                      - { name: es, label: "Plato (ES)", widget: string }
+                      - { name: en, label: "Plato (EN)", widget: string, required: false }
+                      - { name: fr, label: "Plato (FR)", widget: string, required: false }
               - name: desserts
                 label: Postre (opciones)
                 widget: object
-                collapsed: false
                 fields:
-                  - name: es
-                    label: Opciones de postre
-                    widget: string
-                    required: false
-                    hint: "Ej: Natillas · Helado · Fruta del tiempo"
-
+                  - { name: es, label: "Postre (ES)", widget: string }
+                  - { name: en, label: "Postre (EN)", widget: string, required: false }
+                  - { name: fr, label: "Postre (FR)", widget: string, required: false }
               - name: includes
                 label: Condiciones del menú
                 widget: object
                 collapsed: true
                 fields:
-                  - name: es
-                    label: Qué incluye
-                    widget: text
-                    hint: "Ej: IVA incluido. Bebida no incluida."
-
+                  - { name: es, label: "Incluye (ES)", widget: text }
+                  - { name: en, label: "Includes (EN)", widget: text, required: false }
+                  - { name: fr, label: "Inclus (FR)", widget: text, required: false }
               - name: seasonal
                 label: Nota de temporada (opcional)
                 widget: object
                 collapsed: true
                 fields:
-                  - name: es
-                    label: Nota
-                    widget: string
-                    required: false
-                    hint: "Ej: Viernes en verano: Arroz a la cubana."
+                  - { name: es, label: "Nota (ES)", widget: string, required: false }
+                  - { name: en, label: "Nota (EN)", widget: string, required: false }
+                  - { name: fr, label: "Nota (FR)", widget: string, required: false }
 
           # ── HORARIOS ────────────────────────────────────────────
           - name: hours
@@ -137,7 +262,6 @@ collections:
             label_singular: Día
             widget: list
             summary: "{{fields.day}} — {{fields.status}}"
-            collapsed: false
             fields:
               - name: day
                 label: Día
@@ -150,7 +274,6 @@ collections:
                   - { label: "Viernes",   value: "friday" }
                   - { label: "Sábado",    value: "saturday" }
                   - { label: "Domingo",   value: "sunday" }
-
               - name: status
                 label: Estado
                 widget: select
@@ -158,7 +281,6 @@ collections:
                   - { label: "Abierto (comida y cena)", value: "open" }
                   - { label: "Solo mediodía",            value: "partial" }
                   - { label: "Cerrado",                  value: "closed" }
-
               - name: periods
                 label: Franjas horarias
                 label_singular: Franja
@@ -166,16 +288,36 @@ collections:
                 required: false
                 summary: "{{fields.open}} – {{fields.close}}"
                 fields:
-                  - name: open
-                    label: Apertura
-                    widget: string
-                    hint: "Ej: 13:00"
-                  - name: close
-                    label: Cierre
-                    widget: string
-                    hint: "Ej: 16:00"
+                  - { name: open, label: "Apertura", widget: string }
+                  - { name: close, label: "Cierre", widget: string }
+              - name: note
+                label: Nota específica
+                widget: object
+                collapsed: true
+                fields:
+                  - { name: es, label: "Nota (ES)", widget: string, required: false }
+                  - { name: en, label: "Nota (EN)", widget: string, required: false }
+                  - { name: fr, label: "Nota (FR)", widget: string, required: false }
 
-          # ── CARTA ───────────────────────────────────────────────
+          # ── CATEGORÍAS CARTA ────────────────────────────────────
+          - name: categories
+            label: "📁 Categorías de la carta"
+            widget: list
+            collapsed: true
+            summary: "{{fields.id}} ({{fields.type}})"
+            fields:
+              - { name: id, label: "ID de la categoría", widget: string }
+              - name: name
+                label: "Nombre visible"
+                widget: object
+                fields:
+                  - { name: es, label: "Nombre (ES)", widget: string }
+                  - { name: en, label: "Nombre (EN)", widget: string }
+                  - { name: fr, label: "Nombre (FR)", widget: string }
+              - { name: type, label: "Tipo (food / wine / drink)", widget: select, options: ["food", "wine", "drink"] }
+              - { name: order, label: "Orden", widget: number, value_type: int }
+
+          # ── CARTA PLATOS ────────────────────────────────────────
           - name: dishes
             label: "📋 Carta (platos)"
             label_singular: Plato
@@ -183,26 +325,15 @@ collections:
             summary: "{{fields.name.es}} · {{fields.price}}"
             collapsed: true
             fields:
-              - name: available
-                label: ¿En carta hoy?
-                widget: boolean
-                default: true
-                hint: "Desactivar oculta el plato sin borrarlo."
-
+              - { name: available, label: "¿En carta hoy?", widget: boolean, default: true }
               - name: name
                 label: Nombre del plato
                 widget: object
-                collapsed: false
                 fields:
-                  - name: es
-                    label: Nombre
-                    widget: string
-
-              - name: price
-                label: Precio
-                widget: string
-                hint: "Ej: 11,00 € — o Media 7,50 € / Ración 10,00 €"
-
+                  - { name: es, label: "Nombre (ES)", widget: string }
+                  - { name: en, label: "Nombre (EN)", widget: string, required: false }
+                  - { name: fr, label: "Nombre (FR)", widget: string, required: false }
+              - { name: price, label: "Precio", widget: string }
               - name: category_id
                 label: Sección de la carta
                 widget: select
@@ -215,29 +346,141 @@ collections:
                   - { label: "Huevos y tortillas",          value: "eggs-omelettes" }
                   - { label: "Arroces",                     value: "rice" }
                   - { label: "Postres",                     value: "desserts" }
-
               - name: description
                 label: Descripción
                 widget: object
                 collapsed: true
                 fields:
-                  - name: es
-                    label: Descripción del plato
-                    widget: text
-                    hint: "2–3 frases. Lo que hace especial al plato."
-
+                  - { name: es, label: "Descripción (ES)", widget: text }
+                  - { name: en, label: "Descripción (EN)", widget: text, required: false }
+                  - { name: fr, label: "Descripción (FR)", widget: text, required: false }
               - name: pairing
                 label: Maridaje (opcional)
                 widget: object
                 collapsed: true
                 fields:
-                  - name: es
-                    label: Sugerencia
-                    widget: string
-                    required: false
-                    hint: "Ej: Manzanilla — 3,50 €. Vacío si no aplica."
+                  - { name: es, label: "Sugerencia (ES)", widget: string, required: false }
+                  - { name: en, label: "Sugerencia (EN)", widget: string, required: false }
+                  - { name: fr, label: "Sugerencia (FR)", widget: string, required: false }
+              - { name: id, label: "ID interno", widget: string }
+              - { name: featured, label: "¿Destacado?", widget: boolean, default: false }
 
-              - name: id
-                label: ID interno
-                widget: string
-                hint: "⚠️ No modificar. Identificador técnico del plato."
+          # ── CARTA VINOS ─────────────────────────────────────────
+          - name: wines
+            label: "🍷 Carta de Vinos"
+            widget: list
+            collapsed: true
+            summary: "{{fields.name}} · {{fields.price_bottle}}€"
+            fields:
+              - { name: available, label: "¿Disponible?", widget: boolean, default: true }
+              - { name: id, label: "ID interno", widget: string }
+              - { name: category_id, label: "Categoría", widget: select, options: ["granada-wines", "rioja", "ribera-del-duero", "whites-fortified"] }
+              - { name: name, label: "Nombre del vino", widget: string }
+              - { name: producer, label: "Productor / Bodega (opcional)", widget: string, required: false }
+              - { name: region, label: "Región / Denominación", widget: string }
+              - { name: type, label: "Tipo", widget: select, options: ["red", "white", "rose", "sherry"] }
+              - { name: price_bottle, label: "Precio por botella", widget: number, value_type: float, required: false }
+              - { name: price_glass, label: "Precio por copa (opcional)", widget: number, value_type: float, required: false }
+
+          # ── CERVEZAS Y BEBIDAS ──────────────────────────────────
+          - name: beverages
+            label: "🍺 Cervezas y Refrescos"
+            widget: list
+            collapsed: true
+            summary: "{{fields.name.es}} · {{fields.price}}"
+            fields:
+              - { name: available, label: "¿Disponible?", widget: boolean, default: true }
+              - { name: id, label: "ID interno", widget: string }
+              - { name: category_id, label: "Categoría", widget: select, options: ["beer", "drinks"] }
+              - name: name
+                label: "Nombre"
+                widget: object
+                fields:
+                  - { name: es, label: "Nombre (ES)", widget: string }
+                  - { name: en, label: "Nombre (EN)", widget: string, required: false }
+                  - { name: fr, label: "Nombre (FR)", widget: string, required: false }
+              - { name: price, label: "Precio", widget: string }
+
+          # ── TEXTOS NAVEGACIÓN ───────────────────────────────────
+          - name: nav
+            label: "⚓ Textos de Navegación y Botones"
+            widget: object
+            collapsed: true
+            fields:
+              - name: menu
+                label: "Carta"
+                widget: object
+                fields:
+                  - { name: es, label: "ES", widget: string }
+                  - { name: en, label: "EN", widget: string }
+                  - { name: fr, label: "FR", widget: string }
+              - name: hours
+                label: "Horarios"
+                widget: object
+                fields:
+                  - { name: es, label: "ES", widget: string }
+                  - { name: en, label: "EN", widget: string }
+                  - { name: fr, label: "FR", widget: string }
+              - name: call
+                label: "Llamar"
+                widget: object
+                fields:
+                  - { name: es, label: "ES", widget: string }
+                  - { name: en, label: "EN", widget: string }
+                  - { name: fr, label: "FR", widget: string }
+              - name: back
+                label: "Volver (ej: ← Bar León)"
+                widget: object
+                fields:
+                  - { name: es, label: "ES", widget: string }
+                  - { name: en, label: "EN", widget: string }
+                  - { name: fr, label: "FR", widget: string }
+              - name: daily_menu
+                label: "Menú del día"
+                widget: object
+                fields:
+                  - { name: es, label: "ES", widget: string }
+                  - { name: en, label: "EN", widget: string }
+                  - { name: fr, label: "FR", widget: string }
+              - name: edict_header
+                label: "Cabecera edicto menú"
+                widget: object
+                fields:
+                  - { name: es, label: "ES", widget: string }
+                  - { name: en, label: "EN", widget: string }
+                  - { name: fr, label: "FR", widget: string }
+              - name: edict_foot
+                label: "Pie de página edicto menú"
+                widget: object
+                fields:
+                  - { name: es, label: "ES", widget: string }
+                  - { name: en, label: "EN", widget: string }
+                  - { name: fr, label: "FR", widget: string }
+              - name: whatsapp_btn
+                label: "Botón reservar WhatsApp"
+                widget: object
+                fields:
+                  - { name: es, label: "ES", widget: string }
+                  - { name: en, label: "EN", widget: string }
+                  - { name: fr, label: "FR", widget: string }
+              - name: tab_daily
+                label: "Pestaña Menú del Día"
+                widget: object
+                fields:
+                  - { name: es, label: "ES", widget: string }
+                  - { name: en, label: "EN", widget: string }
+                  - { name: fr, label: "FR", widget: string }
+              - name: tab_restaurant
+                label: "Pestaña Carta Restaurante"
+                widget: object
+                fields:
+                  - { name: es, label: "ES", widget: string }
+                  - { name: en, label: "EN", widget: string }
+                  - { name: fr, label: "FR", widget: string }
+              - name: tab_bar
+                label: "Pestaña Carta Barra"
+                widget: object
+                fields:
+                  - { name: es, label: "ES", widget: string }
+                  - { name: en, label: "EN", widget: string }
+                  - { name: fr, label: "FR", widget: string }
