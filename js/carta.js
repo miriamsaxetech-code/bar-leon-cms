@@ -4,6 +4,8 @@
   const HOME_LINKS  = { es: '/es/', en: '/en/', fr: '/fr/' };
   const CARTA_LINKS = { es: '/es/carta.html', en: '/en/menu.html', fr: '/fr/carte.html' };
 
+  const SABORES_CATEGORY_ID = 'andalusian-specialities';
+
   const LABELS = {
     starters:   { es: 'Primeros',       en: 'First course',  fr: 'Entrées'  },
     seconds:    { es: 'Segundos',       en: 'Second course', fr: 'Plats'    },
@@ -26,6 +28,20 @@
     saturday:  { es: 'Sábado',    en: 'Saturday',  fr: 'Samedi'   },
     sunday:    { es: 'Domingo',   en: 'Sunday',    fr: 'Dimanche' }
   };
+
+  // ─── SERVICE TIME HELPER ─────────────────────────────────────────────────────
+  function isNowServiceTime(hours) {
+    const now = new Date();
+    const dayKeys = ['sunday','monday','tuesday','wednesday','thursday','friday','saturday'];
+    const todayKey = dayKeys[now.getDay()];
+    const todayEntry = (hours || []).find(h => h.day === todayKey);
+    if (!todayEntry || todayEntry.status === 'closed' || !todayEntry.periods || !todayEntry.periods.length) return false;
+    const nowMins = now.getHours() * 60 + now.getMinutes();
+    return todayEntry.periods.some(function(p) {
+      const parts = function(str) { const s = str.split(':'); return parseInt(s[0], 10) * 60 + parseInt(s[1], 10); };
+      return nowMins >= parts(p.open) && nowMins < parts(p.close);
+    });
+  }
 
   function getLang() {
     const m = window.location.pathname.match(/\/(es|en|fr)\//);
@@ -59,6 +75,51 @@
         ? `<span class="lang-active">${l.toUpperCase()}</span>`
         : `<a href="${CARTA_LINKS[l]}">${l.toUpperCase()}</a>`
     ).join('<span class="sep"> · </span>');
+  }
+
+  // ─── BADGE HELPER ─────────────────────────────────────────────────────────────
+  function renderBadge(dish) {
+    const v = dish.featured;
+    if (!v || v === false) return '';
+    if (v === true || v === 'recommended') return '<span class="dish-badge dish-badge--recommended">Recomendado</span>';
+    if (v === 'seasonal') return '<span class="dish-badge dish-badge--seasonal">Temporada</span>';
+    if (v === 'house') return '<span class="dish-badge dish-badge--house">De la casa</span>';
+    return '';
+  }
+
+  // ─── STATUS HELPER ────────────────────────────────────────────────────────────
+  function getDishStatusClass(dish) {
+    return dish.status === 'soldout' ? ' dish--soldout' : '';
+  }
+
+  function renderDishStatus(dish) {
+    if (dish.status === 'soldout') {
+      return '<span class="dish-status">Agotado hoy</span>';
+    }
+    if (dish.status === 'seasonal') {
+      const badge = renderBadge(dish);
+      if (!badge) return '<span class="dish-badge dish-badge--seasonal">Temporada</span>';
+    }
+    return '';
+  }
+
+  function renderPriceSpan(dish, priceStr) {
+    if (dish.status === 'soldout') return '';
+    return `<span class="check-price dish-price">${priceStr}</span>`;
+  }
+
+  // ─── PAIRING CHIP HELPER ──────────────────────────────────────────────────────
+  function renderPairingChip(dish, wines, lang) {
+    const pairingText = t(dish.pairing, lang);
+    if (!pairingText) return '';
+    const availableWines = (wines || []).filter(w => w.available !== false);
+    const matched = availableWines.find(w => {
+      const wineName = typeof w.name === 'object' ? t(w.name, lang) : (w.name || '');
+      return pairingText.toLowerCase().includes(wineName.toLowerCase());
+    });
+    if (!matched) return '';
+    const wineDisplayName = typeof matched.name === 'object' ? t(matched.name, lang) : matched.name;
+    return `<a class="pairing-chip" href="#" data-wine-id="${matched.id}" data-wine-name="${wineDisplayName}">🍷 Marida con: ${wineDisplayName}</a>`;
   }
 
   function renderMenuDia(dm, nav, lang) {
@@ -119,11 +180,44 @@
 </div>`;
   }
 
-  function renderCarta(dishes, categories, lang, service) {
+  // ─── SPOTLIGHT: SABORES DE ANDALUCÍA ─────────────────────────────────────────
+  function renderSpotlightAndalucia(dishes, categories, wines, lang) {
+    const cat = (categories || []).find(c => c.id === SABORES_CATEGORY_ID);
+    if (!cat) return '';
+    const catName = t(cat.name, lang);
+    const spotlightDishes = (dishes || []).filter(d => d.available !== false && d.category_id === SABORES_CATEGORY_ID);
+    if (!spotlightDishes.length) return '';
+
+    const cards = spotlightDishes.map(dish => {
+      const badge = renderBadge(dish);
+      const statusHtml = renderDishStatus(dish);
+      const descText = t(dish.description, lang);
+      const pairingChip = renderPairingChip(dish, wines, lang);
+      const priceHtml = dish.status === 'soldout' ? '' : `<span class="check-price dish-price">${formatPrice(dish.price)}</span>`;
+      return `<div class="spotlight-card${getDishStatusClass(dish)}">
+  ${badge}
+  <span class="check-name">${t(dish.name, lang)}</span>
+  ${descText ? `<p class="item-desc">${descText}</p>` : ''}
+  ${priceHtml}
+  ${statusHtml}
+  ${pairingChip}
+</div>`;
+    }).join('');
+
+    return `<section class="spotlight-andalucia">
+  <div class="wrap">
+    <h2 class="spotlight-andalucia__title">${catName}</h2>
+    ${cards}
+  </div>
+</section>`;
+  }
+
+  function renderCarta(dishes, categories, wines, lang, service) {
     const available = (dishes || []).filter(i => i.available !== false);
     const catMap = {};
     (categories || [])
       .filter(c => (c.service || (c.type === 'food' ? 'restaurant' : 'bar')) === service)
+      .filter(c => c.id !== SABORES_CATEGORY_ID)
       .forEach(c => { catMap[c.id] = c; });
 
     const groups = {};
@@ -149,15 +243,19 @@
       const list = groups[catId];
 
       const itemsHtml = list.map(item => {
-        const pairing = t(item.pairing, lang);
-        return `<article class="carta-item">
+        const badge = renderBadge(item);
+        const statusHtml = renderDishStatus(item);
+        const pairingChip = renderPairingChip(item, wines, lang);
+        return `<article class="carta-item${getDishStatusClass(item)}">
   <div class="check-row">
+    ${badge ? `<div>${badge}</div>` : ''}
     <span class="check-name">${t(item.name, lang)}</span>
     <span class="check-leader" aria-hidden="true"></span>
-    <span class="check-price">${formatPrice(item.price)}</span>
+    ${item.status === 'soldout' ? '' : `<span class="check-price dish-price">${formatPrice(item.price)}</span>`}
   </div>
   ${t(item.description, lang) ? `<p class="item-desc">${t(item.description, lang)}</p>` : ''}
-  ${pairing ? `<p class="item-maridaje">${pairing}</p>` : ''}
+  ${statusHtml}
+  ${pairingChip}
 </article>`;
       }).join('');
 
@@ -171,6 +269,48 @@
     });
 
     return `<div class="wrap carta-accordion">${cats.join('')}</div>`;
+  }
+
+  // ─── PARA EMPEZAR BLOCK ───────────────────────────────────────────────────────
+  function renderParaEmpezar(wines, beverages, lang) {
+    const PARA_EMPEZAR_NAMES = ['fino', 'manzanilla', 'vermut', 'alhambra reserva'];
+    const allItems = [...(wines || []), ...(beverages || [])].filter(i => i.available !== false);
+    const matched = [];
+    PARA_EMPEZAR_NAMES.forEach(function(needle) {
+      if (matched.length >= 5) return;
+      const found = allItems.find(function(item) {
+        const name = typeof item.name === 'object' ? t(item.name, lang) : (item.name || '');
+        return name.toLowerCase().includes(needle.toLowerCase());
+      });
+      if (found && !matched.find(m => m.id === found.id)) {
+        matched.push(found);
+      }
+    });
+    if (!matched.length) return '';
+
+    const items = matched.map(function(item) {
+      const name = typeof item.name === 'object' ? t(item.name, lang) : (item.name || '');
+      let priceStr = '';
+      if (item.price_glass) {
+        priceStr = formatPrice(item.price_glass);
+      } else if (item.price_bottle) {
+        priceStr = formatPrice(item.price_bottle);
+      } else {
+        priceStr = item.price || '';
+      }
+      return `<div class="para-empezar__item">
+  <span class="para-empezar__name">${name}</span>
+  <span class="para-empezar__price">${priceStr}</span>
+</div>`;
+    }).join('');
+
+    return `<div class="para-empezar">
+  <h3 class="para-empezar__title">Para empezar</h3>
+  <p class="para-empezar__sub">La barra, antes de la mesa.</p>
+  <div class="para-empezar__strip">
+    ${items}
+  </div>
+</div>`;
   }
 
   function renderWines(wines, beverages, dishes, categories, lang, service) {
@@ -207,7 +347,7 @@
 
       const itemsHtml = list.map(item => {
         const nameStr = typeof item.name === 'object' ? t(item.name, lang) : item.name;
-        
+
         let priceStr = '';
         if (item.price_glass && item.price_bottle) {
           const glassLabels = { es: 'Copa', en: 'Glass', fr: 'Verre' };
@@ -229,7 +369,7 @@
           extraHtml = `<p class="item-desc">${descText}</p>`;
         }
 
-        return `<article class="carta-item">
+        return `<article class="carta-item" id="wine-${item.id}">
   <div class="check-row">
     <span class="check-name">${nameStr}${item.producer ? ` <span class="item-producer">${item.producer}</span>` : ''}</span>
     <span class="check-leader" aria-hidden="true"></span>
@@ -265,6 +405,8 @@
   }
 
   function renderMenuSections(d, nav, lang) {
+    const serviceMode = d.service_mode || {};
+
     return `<div class="wrap menu-switch-wrap">
   <div class="menu-switch" role="tablist" aria-label="${t(nav.menu, lang)}">
     <button type="button" class="menu-switch-btn is-active" role="tab" aria-selected="true" aria-controls="panel-daily" data-panel="daily">${LABELS.dailyMenu[lang]}</button>
@@ -280,13 +422,15 @@
     <p class="section-label">${LABELS.restaurant[lang]}</p>
     <p class="menu-panel-copy">${LABELS.restaurantIntro[lang]}</p>
   </div>
-  ${renderCarta(d.dishes, d.categories, lang, 'restaurant')}
+  ${renderSpotlightAndalucia(d.dishes, d.categories, d.wines, lang)}
+  ${renderCarta(d.dishes, d.categories, d.wines, lang, 'restaurant')}
 </section>
 <section id="panel-bar" class="menu-panel" role="tabpanel" data-panel="bar" hidden>
   <div class="wrap menu-panel-intro">
     <p class="section-label">${LABELS.bar[lang]}</p>
     <p class="menu-panel-copy">${LABELS.barIntro[lang]}</p>
   </div>
+  <div class="wrap">${renderParaEmpezar(d.wines, d.beverages, lang)}</div>
   ${renderWines(d.wines, d.beverages, d.dishes, d.categories, lang, 'bar')}
 </section>`;
   }
@@ -353,6 +497,27 @@
     });
   }
 
+  // ─── PAIRING CHIP CLICK DELEGATION ───────────────────────────────────────────
+  function initPairingChips(container) {
+    container.addEventListener('click', function(e) {
+      const chip = e.target.closest('.pairing-chip');
+      if (!chip) return;
+      e.preventDefault();
+      const wineId = chip.getAttribute('data-wine-id');
+      if (!wineId) return;
+
+      // Switch to bar panel
+      const barBtn = container.querySelector('.menu-switch-btn[data-panel="bar"]');
+      if (barBtn) barBtn.click();
+
+      // Scroll to the wine row
+      setTimeout(function() {
+        const wineEl = document.getElementById('wine-' + wineId);
+        if (wineEl) wineEl.scrollIntoView({ behavior: 'smooth', block: 'center' });
+      }, 150);
+    });
+  }
+
   function renderHorarios(hours, nav, lang) {
     const cells = hours.map(h => {
       const closed  = h.status === 'closed' || h.status === 'partial';
@@ -379,16 +544,48 @@
 
   function renderFooter(d, nav, lang) {
     const addr = d.contact.address;
+    const serviceMode = d.service_mode || {};
+    const inService = isNowServiceTime(d.hours);
+    const whatsapp = d.contact.whatsapp ? d.contact.whatsapp.replace(/\D/g, '') : '';
+
+    let ctaHtml;
+    if (serviceMode.restaurant_open === false) {
+      ctaHtml = whatsapp
+        ? `<a href="https://wa.me/${whatsapp}" class="cta-btn">${t(nav.whatsapp_btn, lang) || 'Reservar por WhatsApp'}</a>`
+        : '';
+    } else if (inService) {
+      ctaHtml = `<a href="${d.contact.phone_link}" class="cta-btn">${t(nav.call, lang)}</a>`;
+    } else {
+      ctaHtml = whatsapp
+        ? `<a href="https://wa.me/${whatsapp}" class="cta-btn">${t(nav.whatsapp_btn, lang) || 'Reservar por WhatsApp'}</a>
+<a href="${d.contact.phone_link}" class="cta-btn cta-btn--secondary">${t(nav.call, lang)}</a>`
+        : `<a href="${d.contact.phone_link}" class="cta-btn">${t(nav.call, lang)}</a>`;
+    }
+
     return `<footer class="carta-footer">
   <div class="wrap">
     <p class="carta-footer-address">${addr.neighborhood} &middot; ${addr.city} &middot; ${addr.region}<br>${t(d.venue.cuisine_tag, lang)}</p>
   </div>
-  <a href="${d.contact.phone_link}" class="cta-btn">${t(nav.call, lang)}</a>
+  ${ctaHtml}
   <div class="wrap">
     <p class="carta-brand">${t(d.venue.name, lang)}</p>
     <a href="/admin/" class="owner-link">Acceso propietario</a>
   </div>
 </footer>`;
+  }
+
+  // ─── WHATSAPP FLOATING CTA ────────────────────────────────────────────────────
+  function injectWhatsAppFAB(d) {
+    if (!d.contact || !d.contact.whatsapp) return;
+    const number = d.contact.whatsapp.replace(/\D/g, '');
+    if (!number) return;
+    const fab = document.createElement('a');
+    fab.className = 'whatsapp-fab';
+    fab.href = 'https://wa.me/' + number;
+    fab.target = '_blank';
+    fab.rel = 'noopener';
+    fab.textContent = 'Reservar mesa';
+    document.body.appendChild(fab);
   }
 
   async function init() {
@@ -425,6 +622,8 @@
 
       initAccordions(app);
       initMenuSwitch(app);
+      initPairingChips(app);
+      injectWhatsAppFAB(d);
       header.style.display = 'block';
       app.style.display = 'block';
       loader.classList.add('fade-out');
