@@ -38,7 +38,7 @@ class ElementStub {
   }
 }
 
-async function renderHomepageAt(dateIso, lang = 'es') {
+async function renderHomepageAt(dateIso, lang = 'es', options = {}) {
   const elements = {
     loader: new ElementStub('div', 'loader'),
     homepage: new ElementStub('main', 'homepage'),
@@ -63,7 +63,7 @@ async function renderHomepageAt(dateIso, lang = 'es') {
   };
 
   const venue = JSON.parse(await fs.readFile('data/venue.json', 'utf8'));
-  venue.cariocas = [];
+  if (!options.withArchive) venue.cariocas = [];
   const source = await fs.readFile('js/homepage.js', 'utf8');
   const fixedNow = new Date(dateIso);
 
@@ -123,6 +123,11 @@ assert.ok(lunch.body.children.some(el => el.className === 'mobile-service-cta' &
 
 const afterHours = await renderHomepageAt('2026-05-25T18:30:00+02:00');
 assert.ok(afterHours.body.children.some(el => el.className === 'mobile-service-cta' && el.href === 'https://wa.me/34696948630'));
+
+const withArchive = await renderHomepageAt('2026-05-25T13:30:00+02:00', 'es', { withArchive: true });
+assert.match(withArchive.html, /Stories of León/);
+assert.match(withArchive.html, /header-leon\.webp/);
+assert.match(withArchive.html, /tres generaciones sosteniendo una barra granadina/);
 
 const english = await renderHomepageAt('2026-05-25T13:30:00+02:00', 'en');
 assert.match(english.html, /site-location__since">Since 1959/);
