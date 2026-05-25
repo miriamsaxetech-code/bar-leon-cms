@@ -331,7 +331,7 @@
       ? ` · ${formatTimePeriod(dm.service_period, lang)}`
       : '';
 
-    return `<div class="edict">
+    return `<div class="tile-frame edict">
     <div class="edict-head">
       <h2>${t(nav.edict_header, lang)}</h2>
       <p class="edict-title">${t(nav.daily_menu, lang)}</p>
@@ -378,15 +378,28 @@
 </div>`;
     }).join('');
 
-    return `<section class="spotlight-andalucia">
-  <div class="wrap">
-    <div class="spotlight-andalucia-inner">
-      <h2 class="spotlight-andalucia__title">${catName}</h2>
-      <div class="carta-accent-images">
-        ${CARTA_ACCENT_IMAGES.map(image => `<figure class="carta-accent-images__item">
-          <img src="${WEB_IMAGE_BASE}${image.src}" alt="${image.alt[lang]}" loading="lazy" decoding="async">
-        </figure>`).join('')}
-      </div>
+    const image = CARTA_ACCENT_IMAGES[0]; // bar-leon-plato-05.webp
+    const captionSuffix = {
+      es: 'Carne de monte en adobo, guiso tradicional del León.',
+      en: 'Venison in marinade, traditional stew at Bar León.',
+      fr: 'Chevreuil en marinade, ragoût traditionnel du León.'
+    }[lang];
+
+    return `<section class="tile-bg-section home-andalusia spotlight-andalucia" style="margin-top:0;">
+  <div class="tile-card">
+    <div class="home-section-head">
+      <p class="section-label">${LABELS.restaurantIntro[lang]}</p>
+      <h2 id="home-andalusia-title" class="spotlight-andalucia__title" style="border-bottom:none;padding-bottom:0;margin-bottom:0;">${catName}</h2>
+    </div>
+    <div class="carta-accent-images editorial-snapshot" style="margin: 20px 0;">
+      <figure class="editorial-snapshot__figure" style="box-shadow:none;border-color:rgba(28,26,23,0.12);padding:8px;">
+        <img class="editorial-snapshot__img" src="${WEB_IMAGE_BASE}${image.src}" alt="${image.alt[lang]}" width="800" height="500" loading="lazy" decoding="async">
+        <figcaption class="editorial-snapshot__caption" style="font-size:0.75rem;margin-top:8px;padding-top:6px;">
+          ${image.alt[lang]} &mdash; ${captionSuffix}
+        </figcaption>
+      </figure>
+    </div>
+    <div class="spotlight-andalucia-inner" style="border-top:none;">
       ${cards}
     </div>
   </div>

@@ -97,7 +97,6 @@ assert.ok(html.indexOf('Olla de San Antón') < html.indexOf('Postre'));
 assert.match(html, /Sabores de Andalucía/);
 assert.match(html, /carta-accent-images/);
 assert.match(html, /bar-leon-plato-05\.webp/);
-assert.match(html, /bar-leon-plato-06\.webp/);
 assert.match(html, /loading="lazy"/);
 assert.match(html, /Vinos de Granada/);
 assert.match(html, /Cervezas/);
