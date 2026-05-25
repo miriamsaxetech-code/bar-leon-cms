@@ -603,6 +603,48 @@
     return `<div class="wrap carta-accordion">${cats.join('')}</div>`;
   }
 
+  function renderBarSnapshot(lang) {
+    const altText = {
+      es: 'Tapa de arroz de la casa con copa de vino oloroso Alfonso en la barra',
+      en: 'House rice tapa with a glass of Alfonso oloroso sherry at the bar',
+      fr: 'Tapa de riz maison avec un verre de xérès oloroso Alfonso au comptoir'
+    }[lang];
+    const caption = {
+      es: 'El rito de la barra: tapa de arroz con un oloroso Alfonso.',
+      en: 'The bar ritual: rice tapa paired with Alfonso oloroso sherry.',
+      fr: 'Le rituel du comptoir : tapa de riz accompagnée de xérès oloroso Alfonso.'
+    }[lang];
+    return `<div class="wrap editorial-snapshot" style="margin: 24px auto;">
+  <figure class="editorial-snapshot__figure" style="box-shadow:none;border-color:rgba(28,26,23,0.12);padding:8px;">
+    <img class="editorial-snapshot__img" src="${WEB_IMAGE_BASE}bar-leon-plato-03.webp" alt="${altText}" width="800" height="500" loading="lazy" decoding="async">
+    <figcaption class="editorial-snapshot__caption" style="font-size:0.75rem;margin-top:8px;padding-top:6px;">
+      ${caption}
+    </figcaption>
+  </figure>
+</div>`;
+  }
+
+  function renderRestaurantSnapshot(lang) {
+    const altText = {
+      es: 'Habas con jamón ibérico y huevo frito, cocina granadina de temporada',
+      en: 'Broad beans with Iberian ham and fried egg, seasonal Granada cooking',
+      fr: 'Fèves au jambon ibérique et œuf au plat, cuisine grenadine de saison'
+    }[lang];
+    const caption = {
+      es: 'Habas con jamón y huevo frito, un clásico de la cocina granadina.',
+      en: 'Broad beans with ham and fried egg, a classic of Granada cuisine.',
+      fr: 'Fèves au jambon et œuf au plat, un classique de la cuisine de Grenade.'
+    }[lang];
+    return `<div class="wrap editorial-snapshot" style="margin: 32px auto;">
+  <figure class="editorial-snapshot__figure" style="box-shadow:none;border-color:rgba(28,26,23,0.12);padding:8px;">
+    <img class="editorial-snapshot__img" src="${WEB_IMAGE_BASE}bar-leon-plato-04.webp" alt="${altText}" width="800" height="500" loading="lazy" decoding="async">
+    <figcaption class="editorial-snapshot__caption" style="font-size:0.75rem;margin-top:8px;padding-top:6px;">
+      ${caption}
+    </figcaption>
+  </figure>
+</div>`;
+  }
+
   function renderMenuSections(d, nav, lang) {
     const serviceMode = d.service_mode || {};
 
@@ -623,6 +665,7 @@
   </div>
   ${renderSpotlightAndalucia(d.dishes, d.categories, d.wines, lang)}
   ${renderCarta(d.dishes, d.categories, d.wines, lang, 'restaurant')}
+  ${renderRestaurantSnapshot(lang)}
 </section>
 <section id="panel-bar" class="menu-panel" role="tabpanel" data-panel="bar" hidden>
   <div class="wrap menu-panel-intro">
@@ -630,6 +673,7 @@
     <p class="menu-panel-copy">${LABELS.barIntro[lang]}</p>
   </div>
   <div class="wrap">${renderParaEmpezar(d.wines, d.beverages, lang)}</div>
+  ${renderBarSnapshot(lang)}
   ${renderWines(d.wines, d.beverages, d.dishes, d.categories, lang, 'bar')}
 </section>`;
   }
