@@ -1,21 +1,30 @@
 # Bar León — Security Headers (Cloudflare Pages)
-# Applies to all routes unless overridden below.
+# CSP is NOT set globally to avoid header conflicts.
+# It is defined per path group so each route gets exactly one CSP.
 
+# ── GLOBAL — structural headers only (no CSP here) ─────────────────────────
 /*
   X-Content-Type-Options: nosniff
   X-Frame-Options: SAMEORIGIN
   Referrer-Policy: strict-origin-when-cross-origin
   Permissions-Policy: camera=(), microphone=(), geolocation=(), payment=()
   Strict-Transport-Security: max-age=31536000; includeSubDomains
+
+# ── PUBLIC SITE — strict CSP ────────────────────────────────────────────────
+/index.html
+  Content-Security-Policy: default-src 'self'; script-src 'self' 'unsafe-inline'; style-src 'self' 'unsafe-inline'; img-src 'self' data: blob:; connect-src 'self'; frame-ancestors 'none'
+
+/es/*
   Content-Security-Policy: default-src 'self'; script-src 'self' 'unsafe-inline'; style-src 'self' 'unsafe-inline' https://fonts.googleapis.com; img-src 'self' data: blob:; font-src 'self' https://fonts.gstatic.com; connect-src 'self'; frame-ancestors 'none'
 
-# Admin: Sveltia CMS needs GitHub, unpkg CDN, and OAuth flow.
+/en/*
+  Content-Security-Policy: default-src 'self'; script-src 'self' 'unsafe-inline'; style-src 'self' 'unsafe-inline' https://fonts.googleapis.com; img-src 'self' data: blob:; font-src 'self' https://fonts.gstatic.com; connect-src 'self'; frame-ancestors 'none'
+
+/fr/*
+  Content-Security-Policy: default-src 'self'; script-src 'self' 'unsafe-inline'; style-src 'self' 'unsafe-inline' https://fonts.googleapis.com; img-src 'self' data: blob:; font-src 'self' https://fonts.gstatic.com; connect-src 'self'; frame-ancestors 'none'
+
+# ── ADMIN — permissive CSP for Sveltia CMS ─────────────────────────────────
 /admin/*
   X-Robots-Tag: noindex, nofollow
   Cache-Control: no-store
-  X-Content-Type-Options: nosniff
-  X-Frame-Options: SAMEORIGIN
-  Referrer-Policy: strict-origin-when-cross-origin
-  Permissions-Policy: camera=(), microphone=(), geolocation=(), payment=()
-  Strict-Transport-Security: max-age=31536000; includeSubDomains
   Content-Security-Policy: default-src 'self'; script-src 'self' 'unsafe-inline' 'unsafe-eval' https://unpkg.com; style-src 'self' 'unsafe-inline' https://unpkg.com https://fonts.googleapis.com; img-src 'self' data: blob: https:; font-src 'self' https://unpkg.com https://fonts.gstatic.com; connect-src 'self' https://api.github.com https://raw.githubusercontent.com https://github.com https://unpkg.com; frame-src https://github.com; frame-ancestors 'none'
