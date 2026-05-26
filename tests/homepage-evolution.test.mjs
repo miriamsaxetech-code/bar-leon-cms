@@ -137,7 +137,7 @@ assert.match(english.html, /site-location__since">Since 1959/);
 assert.match(english.html, /class="call-label">Call<\/span>/);
 assert.match(english.html, /Try a local red wine/);
 assert.match(english.html, /beyond Rioja\/Ribera/);
-assert.match(english.html, /D\.O\. Granada/);
+assert.match(english.html, /D\.O\.P\.\s*Granada|D\.O\.\s*Granada/);
 assert.doesNotMatch(english.html, /local Granada/);
 assert.doesNotMatch(english.html, /Pairs with/);
 

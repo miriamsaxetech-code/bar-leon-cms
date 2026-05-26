@@ -75,7 +75,7 @@ await new Promise(resolve => setImmediate(resolve));
 
 const html = elements['carta-body'].innerHTML;
 
-assert.match(html, /class="menu-switch"/);
+assert.match(html, /class="menu-switch/);
 assert.match(html, /data-panel="daily"/);
 assert.match(html, /data-panel="restaurant"/);
 assert.match(html, /data-panel="bar"/);
@@ -97,6 +97,8 @@ assert.ok(html.indexOf('Olla de San Antón') < html.indexOf('Postre'));
 assert.match(html, /Sabores de Andalucía/);
 assert.match(html, /carta-accent-images/);
 assert.match(html, /bar-leon-plato-05\.webp/);
+assert.match(html, /bar-leon-plato-03\.webp/);
+assert.match(html, /bar-leon-plato-04\.webp/);
 assert.match(html, /loading="lazy"/);
 assert.match(html, /Vinos de Granada/);
 assert.match(html, /Cervezas/);

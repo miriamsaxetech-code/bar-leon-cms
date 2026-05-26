@@ -34,8 +34,10 @@
     dailyMenu:  { es: 'Menú del Día',   en: 'Daily Menu',    fr: 'Menu du Jour' },
     restaurant: { es: 'Carta Restaurante', en: 'Restaurant Menu', fr: 'Carte Restaurant' },
     bar:        { es: 'Carta Barra',    en: 'Bar Menu',      fr: 'Carte Bar' },
-    barIntro:   { es: 'Para barra, vinos y bebidas. Sin ceremonia, que aquí se viene a gusto.', en: 'Bar, wines and drinks. Simple, direct, and easy.', fr: 'Bar, vins et boissons. Simple et direct.' },
+    barIntro:   { es: 'Para barra, cervezas y bebidas. Sin ceremonia, que aquí se viene a gusto.', en: 'Beers, spirits, and soft drinks. Simple, direct, and easy.', fr: 'Bières, spiritueux et boissons. Simple et direct.' },
     restaurantIntro: { es: 'La carta de mesa, separada del menú del día.', en: 'The table menu, separate from the daily menu.', fr: 'La carte de table, séparée du menu du jour.' },
+    wines:      { es: 'La Bodega',      en: 'The Cellar',    fr: 'La Cave' },
+    winesIntro: { es: 'Nuestra selección de vinos. D.O. Granada por delante, acompañados de los grandes clásicos de la península.', en: 'Our wine selection. Local D.O. Granada first, alongside classic Spanish appellations.', fr: 'Notre sélection de vins. Les vins de Grenade en priorité, accompagnés des grands classiques espagnols.' },
     badge_recommended: { es: 'Recomendado', en: 'Recommended',   fr: 'Recommandé'         },
     badge_seasonal:    { es: 'Temporada',   en: 'Seasonal',       fr: 'Saison'             },
     badge_house:       { es: 'De la casa',  en: 'House special',  fr: 'Maison'             },
@@ -209,7 +211,7 @@
   }
 
   function wineCultureNote(wine, lang) {
-    const region = wine.region || '';
+    const region = typeof wine.region === 'object' ? t(wine.region, lang) : (wine.region || '');
     const name = typeof wine.name === 'object' ? t(wine.name, lang) : (wine.name || '');
     const haystack = `${region} ${name} ${wine.category_id || ''}`.toLowerCase();
 
@@ -268,7 +270,7 @@
   function pairingChipText(wine, lang) {
     const wineName = typeof wine.name === 'object' ? t(wine.name, lang) : wine.name;
     const type = wineTypeLabel(wine.type, lang);
-    const region = wine.region || '';
+    const region = typeof wine.region === 'object' ? t(wine.region, lang) : (wine.region || '');
     const note = wineCultureNote(wine, lang);
 
     if (lang === 'en' && /granada/i.test(region)) {
@@ -512,7 +514,7 @@
 </div>`;
   }
 
-  function renderWines(wines, beverages, dishes, categories, lang, service) {
+  function renderWines(wines, beverages, dishes, categories, lang, service, excludeType, includeType) {
     const hasWines = Array.isArray(wines) && wines.length > 0;
     const hasBeverages = Array.isArray(beverages) && beverages.length > 0;
     const hasDishes = Array.isArray(dishes) && dishes.length > 0;
@@ -520,6 +522,11 @@
     const catMap = {};
     (categories || [])
       .filter(c => (c.service || (c.type === 'food' ? 'restaurant' : 'bar')) === service)
+      .filter(c => {
+        if (excludeType && c.type === excludeType) return false;
+        if (includeType && c.type !== includeType) return false;
+        return true;
+      })
       .forEach(c => { catMap[c.id] = c; });
 
     const groups = {};
@@ -561,11 +568,11 @@
         }
 
         const descText = t(item.description, lang);
+        const regionStr = typeof item.region === 'object' ? t(item.region, lang) : item.region;
         let extraHtml = '';
-        if (item.region) {
-          extraHtml = `<p class="item-desc">${item.region}</p>`;
-        } else if (descText) {
-          extraHtml = `<p class="item-desc">${descText}</p>`;
+        if (regionStr || descText) {
+          const parts = [regionStr, descText].filter(Boolean);
+          extraHtml = `<p class="item-desc">${parts.join(' · ')}</p>`;
         }
 
         return `<article class="carta-item" id="wine-${item.id}">
@@ -649,10 +656,11 @@
     const serviceMode = d.service_mode || {};
 
     return `<div class="wrap menu-switch-wrap">
-  <div class="menu-switch" role="tablist" aria-label="${t(nav.menu, lang)}">
+  <div class="menu-switch menu-switch--four" role="tablist" aria-label="${t(nav.menu, lang)}">
     <button type="button" class="menu-switch-btn is-active" role="tab" aria-selected="true" aria-controls="panel-daily" data-panel="daily">${LABELS.dailyMenu[lang]}</button>
     <button type="button" class="menu-switch-btn" role="tab" aria-selected="false" aria-controls="panel-restaurant" data-panel="restaurant">${LABELS.restaurant[lang]}</button>
     <button type="button" class="menu-switch-btn" role="tab" aria-selected="false" aria-controls="panel-bar" data-panel="bar">${LABELS.bar[lang]}</button>
+    <button type="button" class="menu-switch-btn" role="tab" aria-selected="false" aria-controls="panel-wines" data-panel="wines">${LABELS.wines[lang]}</button>
   </div>
 </div>
 <section id="panel-daily" class="menu-panel is-active" role="tabpanel" data-panel="daily">
@@ -674,7 +682,14 @@
   </div>
   <div class="wrap">${renderParaEmpezar(d.wines, d.beverages, lang)}</div>
   ${renderBarSnapshot(lang)}
-  ${renderWines(d.wines, d.beverages, d.dishes, d.categories, lang, 'bar')}
+  ${renderWines(null, d.beverages, d.dishes, d.categories, lang, 'bar', 'wine', null)}
+</section>
+<section id="panel-wines" class="menu-panel" role="tabpanel" data-panel="wines" hidden>
+  <div class="wrap menu-panel-intro">
+    <p class="section-label">${LABELS.wines[lang]}</p>
+    <p class="menu-panel-copy">${LABELS.winesIntro[lang]}</p>
+  </div>
+  ${renderWines(d.wines, null, null, d.categories, lang, 'bar', null, 'wine')}
 </section>`;
   }
 
@@ -743,8 +758,8 @@
   function scrollToWine(container, wineId) {
     if (!wineId) return;
 
-    const barBtn = container.querySelector('.menu-switch-btn[data-panel="bar"]');
-    if (barBtn) barBtn.click();
+    const wineBtn = container.querySelector('.menu-switch-btn[data-panel="wines"]');
+    if (wineBtn) wineBtn.click();
 
     setTimeout(function() {
       const wineEl = document.getElementById('wine-' + wineId);

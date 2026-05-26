@@ -153,7 +153,7 @@
   }
 
   function wineCultureNote(wine, lang) {
-    const region = wine.region || '';
+    const region = typeof wine.region === 'object' ? t(wine.region, lang) : (wine.region || '');
     const name = typeof wine.name === 'object' ? t(wine.name, lang) : (wine.name || '');
     const haystack = `${region} ${name} ${wine.category_id || ''}`.toLowerCase();
 
@@ -212,7 +212,7 @@
   function pairingChipText(wine, lang) {
     const wineName = typeof wine.name === 'object' ? t(wine.name, lang) : wine.name;
     const type = wineTypeLabel(wine.type, lang);
-    const region = wine.region || '';
+    const region = typeof wine.region === 'object' ? t(wine.region, lang) : (wine.region || '');
     const note = wineCultureNote(wine, lang);
 
     if (lang === 'en' && /granada/i.test(region)) {
@@ -241,11 +241,17 @@
       .join(', ');
     const period = dm.service_period ? formatTimePeriod(dm.service_period, lang) : '';
 
-    function renderList(label, values) {
+    function renderAccordionGroup(label, values, open) {
       if (!values.length) return '';
-      return `<div class="home-daily-menu__group">
-  <p>${label}</p>
-  <ul>${values.map(item => `<li>${item}</li>`).join('')}</ul>
+      const items = values.map(item => `<li>${item}</li>`).join('');
+      return `<div class="accordion-item${open ? ' is-open' : ''}">
+  <button class="dm-section-head" aria-expanded="${open ? 'true' : 'false'}">
+    <span>${label}</span>
+    <span class="accordion-icon" aria-hidden="true"></span>
+  </button>
+  <div class="accordion-body">
+    <ul class="home-daily-menu__group-list">${items}</ul>
+  </div>
 </div>`;
     }
 
@@ -265,10 +271,10 @@
     <span class="home-daily-menu__price">${formatPrice(dm.price)}</span>
   </div>
   <div class="home-daily-menu__body">
-    ${renderList(LABELS.starters[lang], splitList(t(dm.starters, lang)))}
-    ${renderList(LABELS.seconds[lang], splitList(t(dm.seconds, lang)))}
-    ${renderList(LABELS.daily[lang], mains.concat(seasonal))}
-    ${renderList(LABELS.desserts[lang], splitList(t(dm.desserts, lang)))}
+    ${renderAccordionGroup(LABELS.starters[lang], splitList(t(dm.starters, lang)), true)}
+    ${renderAccordionGroup(LABELS.seconds[lang], splitList(t(dm.seconds, lang)), false)}
+    ${renderAccordionGroup(LABELS.daily[lang], mains.concat(seasonal), false)}
+    ${renderAccordionGroup(LABELS.desserts[lang], splitList(t(dm.desserts, lang)), false)}
   </div>
   <div class="home-daily-menu__foot">
     <p>${t(dm.includes, lang)}</p>
@@ -532,6 +538,32 @@
 </div>`;
   }
 
+  function initDailyMenuAccordion(root) {
+    root.querySelectorAll('.home-daily-menu .accordion-item').forEach(function(item) {
+      const btn  = item.querySelector('.dm-section-head');
+      const body = item.querySelector('.accordion-body');
+      if (!btn || !body) return;
+
+      if (item.classList.contains('is-open')) {
+        body.style.maxHeight = body.scrollHeight + 'px';
+      }
+
+      btn.addEventListener('click', function() {
+        const isOpen = item.classList.contains('is-open');
+        root.querySelectorAll('.home-daily-menu .accordion-item.is-open').forEach(function(other) {
+          other.classList.remove('is-open');
+          other.querySelector('.accordion-body').style.maxHeight = '0';
+          other.querySelector('.dm-section-head').setAttribute('aria-expanded', 'false');
+        });
+        if (!isOpen) {
+          item.classList.add('is-open');
+          body.style.maxHeight = body.scrollHeight + 'px';
+          btn.setAttribute('aria-expanded', 'true');
+        }
+      });
+    });
+  }
+
   function initReveal(root) {
     if (!window.IntersectionObserver) return;
     const els = root.querySelectorAll(
@@ -561,6 +593,7 @@
       app.innerHTML = render(d, lang);
       injectLangBar(lang, HOME_LINKS);
       injectMobileServiceCTA(d, lang);
+      initDailyMenuAccordion(app);
       app.style.display = 'block';
       loader.classList.add('fade-out');
       setTimeout(() => { loader.style.display = 'none'; }, 380);
