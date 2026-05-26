@@ -76,6 +76,50 @@
     return (price || '').replace(/\s€/g, '&nbsp;€');
   }
 
+  function parseDishPrice(str, lang) {
+    if (!str) return { type: 'simple', display: '' };
+    
+    // Normalize non-breaking spaces for regex matching
+    const cleanStr = str.replace(/&nbsp;/g, ' ').replace(/\u00a0/g, ' ');
+
+    const PORTION_TERMS = {
+      es: { label: 'Ración*', half: 'Media',    full: 'Ración'   },
+      en: { label: 'Portion*', half: '½',       full: 'Portion'  },
+      fr: { label: 'Portion*', half: '½',       full: 'Portion'  },
+    };
+    const INLINE_TERMS = {
+      en: { racion: 'Portion', unidad: 'each', barra: 'bar', restaurante: 'restaurant', 'unidad en barra': 'unit at bar' },
+      fr: { racion: 'Portion', unidad: 'unité', barra: 'comptoir', restaurante: 'restaurant', 'unidad en barra': "à l'unité" },
+    };
+
+    const m = cleanStr.match(/^Media\s+(.+?)\s*\/\s*Raci[oó]n\s+(.+)$/i);
+    if (m) {
+      const T = PORTION_TERMS[lang] || PORTION_TERMS.es;
+      const half = m[1].trim().replace(/\s/g, '&nbsp;');
+      const full = m[2].trim().replace(/\s/g, '&nbsp;');
+      return {
+        type:  'portions',
+        label: T.label,
+        note:  `${T.half} ${half} · ${T.full} ${full}`,
+      };
+    }
+
+    if (lang !== 'es') {
+      const T = INLINE_TERMS[lang] || {};
+      const localized = cleanStr
+        .replace(/\(raci[oó]n\)\s*\/\s*(.+?)\(unidad en barra\)/i,
+          (_, mid) => `(${T.racion}) / ${mid}(${T['unidad en barra']})`)
+        .replace(/\(unidad\)/gi,       `(${T.unidad})`)
+        .replace(/\(barra\)/gi,        `(${T.barra})`)
+        .replace(/\(restaurante\)/gi,  `(${T.restaurante})`)
+        .replace(/\/\s*raci[oó]n\b/gi, `/ ${T.racion}`)
+        .replace(/\s/g, '&nbsp;');
+      return { type: 'simple', display: localized };
+    }
+
+    return { type: 'simple', display: str };
+  }
+
   function formatPhoneDisplay(phone) {
     const digits = (phone || '').replace(/\D/g, '');
     if (digits === '34958225143') return '(+34) 958-22-51-43';
@@ -300,15 +344,21 @@
       <h2 id="home-andalusia-title">${LABELS.andalusia[lang]}</h2>
     </div>
     <div class="home-andalusia__list">
-      ${dishes.map(dish => `<article class="home-andalusia__item">
-        <div class="home-andalusia__main">
-          ${renderBadge(dish, lang)}
-          <h3>${t(dish.name, lang)}</h3>
-          <p>${t(dish.description, lang)}</p>
-          ${renderPairingChip(dish, d.wines, lang, cartaUrl)}
-        </div>
-        <span class="home-andalusia__price">${formatPrice(dish.price)}</span>
-      </article>`).join('')}
+      ${dishes.map(dish => {
+        const parsed = parseDishPrice(formatPrice(dish.price), lang);
+        const priceHtml = `<span class="home-andalusia__price">${parsed.label || parsed.display}</span>`;
+        const priceNoteHtml = parsed.type === 'portions' ? `<p class="price-note">${parsed.note}</p>` : '';
+        return `<article class="home-andalusia__item">
+          <div class="home-andalusia__main">
+            ${renderBadge(dish, lang)}
+            <h3>${t(dish.name, lang)}</h3>
+            <p>${t(dish.description, lang)}</p>
+            ${renderPairingChip(dish, d.wines, lang, cartaUrl)}
+            ${priceNoteHtml}
+          </div>
+          ${priceHtml}
+        </article>`;
+      }).join('')}
     </div>
     <a class="home-text-link" href="${cartaUrl}">${LABELS.fullMenu[lang]}</a>
   </div>
