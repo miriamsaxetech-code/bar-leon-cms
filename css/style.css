@@ -1883,18 +1883,14 @@ h2 {
 
 /* 1. Patrón geométrico sutil de rombos de azulejo */
 .tile-bg-section {
-  background-color: var(--tile-cream);
+  background-color: rgba(168, 67, 42, 0.12); /* Grout line color */
   background-image:
-    repeating-linear-gradient(
-      45deg,
-      rgba(168, 67, 42, 0.05) 0px, rgba(168, 67, 42, 0.05) 1px,
-      transparent 1px, transparent 24px
-    ),
-    repeating-linear-gradient(
-      -45deg,
-      rgba(168, 67, 42, 0.05) 0px, rgba(168, 67, 42, 0.05) 1px,
-      transparent 1px, transparent 24px
-    );
+    linear-gradient(335deg, var(--tile-cream) 23px, transparent 23px),
+    linear-gradient(155deg, var(--tile-cream) 23px, transparent 23px),
+    linear-gradient(335deg, var(--tile-cream) 23px, transparent 23px),
+    linear-gradient(155deg, var(--tile-cream) 23px, transparent 23px);
+  background-size: 58px 58px;
+  background-position: 0px 2px, 4px 35px, 29px 31px, 34px 6px;
   padding: 36px 28px;
   border-top: 1px solid rgba(168, 67, 42, 0.2);
   border-bottom: 1px solid rgba(168, 67, 42, 0.2);
