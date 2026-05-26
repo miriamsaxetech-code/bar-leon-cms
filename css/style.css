@@ -1162,14 +1162,15 @@ h2 {
 .dm-section-head {
   display: flex;
   align-items: center;
-  justify-content: space-between;
+  justify-content: center;
+  gap: 8px;
   width: 100%;
   background: none;
   border: none;
   border-bottom: 1px solid rgba(28, 26, 23, 0.14);
   padding: 12px 0;
   cursor: pointer;
-  text-align: left;
+  text-align: center;
   user-select: none;
 }
 
@@ -1196,6 +1197,7 @@ h2 {
   font-size: 0.86rem;
   line-height: 1.45;
   padding: 6px 0;
+  text-align: center;
 }
 
 .home-daily-menu__group-list li:last-child {
