@@ -575,9 +575,12 @@
           extraHtml = `<p class="item-desc">${parts.join(' · ')}</p>`;
         }
 
+        const showProducer = item.producer && !nameStr.toLowerCase().includes(item.producer.toLowerCase());
+        const producerHtml = showProducer ? ` <span class="item-producer">${item.producer}</span>` : '';
+
         return `<article class="carta-item" id="wine-${item.id}">
   <div class="check-row">
-    <span class="check-name">${nameStr}${item.producer ? ` <span class="item-producer">${item.producer}</span>` : ''}</span>
+    <span class="check-name">${nameStr}${producerHtml}</span>
     <span class="check-leader" aria-hidden="true"></span>
     <span class="check-price">${priceStr}</span>
   </div>

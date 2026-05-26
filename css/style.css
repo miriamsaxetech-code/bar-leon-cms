@@ -850,6 +850,16 @@ h2 {
   margin-bottom: 7px;
 }
 
+.item-producer {
+  font-family: system-ui, -apple-system, sans-serif;
+  font-size: 0.72rem;
+  font-weight: 500;
+  color: var(--muted);
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  margin-left: 6px;
+}
+
 .item-maridaje {
   font-style: italic;
   font-size: 0.8rem;
