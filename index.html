@@ -34,7 +34,7 @@
       justify-content: center;
       min-height: 100vh;
       background-color: #F6F3EC;
-      background-image: url('/assets/images/hero-leon.webp');
+      background-image: url('/assets/images/web/bar-leon-plato-01.webp');
       background-size: cover;
       background-position: center;
       background-repeat: no-repeat;
@@ -65,6 +65,7 @@
       height: 88px;
       width: auto;
       opacity: 0.9;
+      margin-bottom: 8px;
     }
 
     .picker__name {
@@ -85,6 +86,46 @@
       margin-top: -10px;
     }
 
+    .picker__status-container {
+      margin-top: 4px;
+    }
+
+    .status-badge {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      padding: 6px 14px;
+      border-radius: 20px;
+      font-family: 'Inter', system-ui, sans-serif;
+      font-size: 9px;
+      font-weight: 500;
+      letter-spacing: 1.5px;
+      text-transform: uppercase;
+      background: rgba(28, 26, 23, 0.05);
+      border: 1px solid rgba(28, 26, 23, 0.12);
+      color: #1C1A17;
+      transition: all 0.2s ease;
+    }
+
+    .status-badge--open {
+      background: rgba(46, 125, 50, 0.08);
+      border-color: rgba(46, 125, 50, 0.3);
+      color: #2E7D32;
+    }
+
+    .status-badge--closed {
+      background: rgba(198, 40, 40, 0.08);
+      border-color: rgba(198, 40, 40, 0.3);
+      color: #C62828;
+    }
+
+    .status-badge__dot {
+      width: 5px;
+      height: 5px;
+      border-radius: 50%;
+      background-color: currentColor;
+    }
+
     .picker__divider {
       width: 48px;
       height: 1px;
@@ -93,7 +134,9 @@
 
     .picker__langs {
       display: flex;
+      justify-content: center;
       gap: 8px;
+      width: 100%;
     }
 
     .picker__btn {
@@ -143,6 +186,14 @@
       <div class="picker__name">Restaurante Bar León</div>
       <div class="picker__sub">Albayzín &middot; Granada &middot; 1959</div>
     </div>
+
+    <div id="status-container" class="picker__status-container" style="display: none;">
+      <span id="status-badge" class="status-badge">
+        <span class="status-badge__dot"></span>
+        <span id="status-text" class="status-badge__text"></span>
+      </span>
+    </div>
+
     <div class="picker__divider"></div>
     <div class="picker__langs">
       <button class="picker__btn" onclick="pick('es')">ES</button>
@@ -157,6 +208,45 @@
       localStorage.setItem('lang', lang);
       location.href = '/' + lang + '/';
     }
+
+    // Fetch opening hours status dynamically
+    fetch('/data/venue.json')
+      .then(function(res) { return res.json(); })
+      .then(function(data) {
+        if (!data || !data.hours) return;
+        const now = new Date();
+        const dayKeys = ['sunday','monday','tuesday','wednesday','thursday','friday','saturday'];
+        const todayKey = dayKeys[now.getDay()];
+        const todayEntry = data.hours.find(h => h.day === todayKey);
+
+        let isOpen = false;
+        if (todayEntry && todayEntry.status !== 'closed' && todayEntry.periods && todayEntry.periods.length) {
+          const nowMins = now.getHours() * 60 + now.getMinutes();
+          isOpen = todayEntry.periods.some(function(p) {
+            const parts = function(str) {
+              const s = str.split(':');
+              return parseInt(s[0], 10) * 60 + parseInt(s[1], 10);
+            };
+            return nowMins >= parts(p.open) && nowMins < parts(p.close);
+          });
+        }
+
+        const container = document.getElementById('status-container');
+        const badge = document.getElementById('status-badge');
+        const textSpan = document.getElementById('status-text');
+
+        if (isOpen) {
+          badge.classList.add('status-badge--open');
+          textSpan.textContent = 'Abierto ahora';
+        } else {
+          badge.classList.add('status-badge--closed');
+          textSpan.textContent = 'Cerrado ahora';
+        }
+        container.style.display = 'block';
+      })
+      .catch(function(err) {
+        console.error('Error fetching venue status:', err);
+      });
   </script>
 </body>
 </html>

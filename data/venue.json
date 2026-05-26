@@ -488,13 +488,13 @@
       "category_id": "andalusian-specialities",
       "name": {
         "es": "Habas con jamón ibérico y huevo frito",
-        "en": "Kidneys in sherry sauce",
-        "fr": "Fèves avec jambon ibérique et œuf au plat"
+        "en": "Broad beans with Iberian ham and fried egg",
+        "fr": "Fèves au jambon ibérique et œuf au plat"
       },
       "description": {
         "es": "Habas tiernas con jamón ibérico al 50% y huevo frito.",
-        "en": "Kidneys sautéed in a sherry sauce.",
-        "fr": "Fèves tendres, jambon ibérique 50%, œuf au plat."
+        "en": "Tender baby broad beans sautéed with Iberian ham and topped with a fried egg.",
+        "fr": "Fèves tendres sautées au jambon ibérique et surmontées d'un œuf au plat."
       },
       "price": "13,00 €",
       "pairing": {
@@ -515,8 +515,8 @@
       },
       "description": {
         "es": "Ciervo en adobo tradicional. Carne de caza típica de zonas de sierra como Jaén, especial por su sabor profundo y suavizada con vino, laurel y especias.",
-        "en": "Venison in traditional marinade, slow-cooked — Game recipe rooted in the mountains around Granada. The meat is marinated in vinegar, garlic and spices before slow-braising.",
-        "fr": "Chevreuil en marinade traditionnelle. Gibier typique des zones de montagne comme Jaén, apprécié pour sa saveur profonde et adouci avec vin, laurier et épices. En demi-portion ou portion."
+        "en": "Deer meat marinated in traditional mountain herbs and spices, slow-cooked in red wine.",
+        "fr": "Viande de cerf marinée aux herbes de montagne, mijotée au vin rouge."
       },
       "price": "Media 10,50 € / Ración 13,50 €",
       "pairing": {
@@ -537,8 +537,8 @@
       },
       "description": {
         "es": "Riñones salteados en salsa de vino de Jerez. Casquería de siempre.",
-        "en": "Veal kidneys braised in sherry sauce — Classic Andalusian offal dish. The fino sherry sauce is key: it reduces with the kidney juices into a concentrated, aromatic glaze.",
-        "fr": "Rognons d'agneau sautés dans une sauce au xérès sec. Casquería andalouse traditionnelle, franche et savoureuse."
+        "en": "Veal kidneys braised in a rich sherry wine sauce.",
+        "fr": "Rognons de veau mijotés dans une riche sauce au vin de Xérès."
       },
       "price": "Media 9,00 € / Ración 12,50 €",
       "pairing": {
@@ -559,8 +559,8 @@
       },
       "description": {
         "es": "Guiso tradicional de callos con chorizo, morcilla, pimentón y garbanzos.",
-        "en": "Tripe stew with chickpeas, chorizo and black pudding — Hearty offal stew from the Andalusian and Madrid popular kitchen. At León, served tender with a smoky paprika base.",
-        "fr": "Tripes mijotées avec chorizo, boudin noir, paprika et pois chiches. Un classique andalou généreux."
+        "en": "Traditional tripe stew with chickpeas, chorizo and black pudding.",
+        "fr": "Ragoût traditionnel de tripes avec pois chiches, chorizo et boudin noir."
       },
       "price": "Media 7,50 € / Ración 10,00 €",
       "pairing": {
@@ -581,8 +581,8 @@
       },
       "description": {
         "es": "Carne de cerdo en salsa de vino y especias. Guiso tradicional andaluz.",
-        "en": "Beef braised in Córdoba-style sauce — Slow-cooked stew from Córdoba, with tomato, peppers and garden spices.",
-        "fr": "Porc en sauce cordouane au vin et aux épices. En demi-portion ou portion."
+        "en": "Slow-cooked beef stew in a traditional red wine and vegetable sauce.",
+        "fr": "Ragoût de bœuf mijoté dans une sauce traditionnelle au vin rouge et légumes."
       },
       "price": "Media 9,00 € / Ración 12,50 €",
       "pairing": {
@@ -603,8 +603,8 @@
       },
       "description": {
         "es": "Casquería tradicional, rebozada y frita.",
-        "en": "Veal sweetbreads, breaded or in sauce — Traditional offal rarely found on modern menus. Creamy inside, crisp outside.",
-        "fr": "Casquería andalouse traditionnelle, légèrement panée et frite. Une tapa de comptoir à l'ancienne."
+        "en": "Veal sweetbreads, breaded and fried until golden.",
+        "fr": "Animelles de veau panées et frites."
       },
       "price": "Media 7,50 € / Ración 10,00 €",
       "pairing": {
@@ -625,8 +625,8 @@
       },
       "description": {
         "es": "Sesos rebozados y fritos. Casquería clásica de la cocina granadina.",
-        "en": "Breaded veal brains — Creamy texture and mild flavour. A cornerstone of Andalusian nose-to-tail cooking and the base of tortilla del Sacromonte.",
-        "fr": "Cervelles d'agneau légèrement panées, croustillantes dehors et délicates dedans. Servies avec citron."
+        "en": "Veal brains, breaded and lightly fried.",
+        "fr": "Cervelles de veau panées et légèrement frites."
       },
       "price": "Media 7,50 € / Ración 10,00 €",
       "pairing": {
@@ -642,7 +642,7 @@
       "category_id": "soups-stews",
       "name": {
         "es": "Gazpacho andaluz",
-        "en": "Fried fish platter",
+        "en": "Andalusian Gazpacho",
         "fr": "Gaspacho andalou"
       },
       "description": {
@@ -650,7 +650,7 @@
         "en": "Cold Andalusian tomato soup with cucumber, pepper, garlic and bread. Served chilled.",
         "fr": "Soupe froide andalouse à la tomate, concombre, poivron, ail et pain. Servie fraîche."
       },
-      "price": "4,50 €",
+      "price": "4,50 € / 3,00 € (vaso)",
       "pairing": {
         "es": "",
         "en": "",
@@ -669,8 +669,8 @@
       },
       "description": {
         "es": "Crema fría de tomate y pan. Solo en temporada de verano.",
-        "en": "Cold Córdoba-style tomato and bread cream, usually served with egg and ham. Summer season only.",
-        "fr": "Crème froide de tomate et pain, façon Cordoue, généralement servie avec œuf et jambon. Saison estivale uniquement."
+        "en": "Cold Córdoba-style tomato and bread cream, served with egg and ham. Summer season only.",
+        "fr": "Crème froide de tomate et pain, façon Cordoue, servie avec œuf et jambon. Saison estivale uniquement."
       },
       "price": "5,00 €",
       "pairing": {
@@ -686,13 +686,13 @@
       "category_id": "soups-stews",
       "name": {
         "es": "Sopa de picadillo",
-        "en": "Iberian ham (50%)",
+        "en": "Picadillo Soup",
         "fr": "Soupe picadillo"
       },
       "description": {
         "es": "Caldo de pollo con jamón, huevo, pan y hierbabuena.",
-        "en": "Clear chicken broth with ham, egg, bread and mint. A comforting Granada soup.",
-        "fr": "Bouillon clair de poulet avec jambon, œuf, pain et menthe. Une soupe grenadine réconfortante."
+        "en": "Clear chicken broth with diced ham, hard-boiled egg, bread and fresh mint.",
+        "fr": "Bouillon de poulet clair avec dés de jambon, œuf dur, pain et menthe fraîche."
       },
       "price": "5,00 €",
       "pairing": {
@@ -708,13 +708,13 @@
       "category_id": "soups-stews",
       "name": {
         "es": "Consomé al Jerez",
-        "en": "Mushrooms with prawns",
+        "en": "Sherry Consommé",
         "fr": "Consommé au Xérès"
       },
       "description": {
         "es": "Caldo de ave con vino de Jerez.",
-        "en": "Poultry broth with Sherry wine.",
-        "fr": "Bouillon de volaille au vin de Xérès."
+        "en": "Warm poultry broth flavored with a splash of Sherry wine.",
+        "fr": "Bouillon de volaille chaud parfumé d'une touche de vin de Xérès."
       },
       "price": "5,00 €",
       "pairing": {
@@ -730,13 +730,13 @@
       "category_id": "soups-stews",
       "name": {
         "es": "Sopa de ajos",
-        "en": "Cured cheese",
+        "en": "Garlic Soup",
         "fr": "Soupe à l'ail"
       },
       "description": {
         "es": "Pan, ajo, pimentón, caldo y huevo. Plato de invierno.",
-        "en": "Rustic garlic soup with bread, paprika, broth and egg. A winter dish.",
-        "fr": "Soupe rustique à l'ail avec pain, paprika, bouillon et œuf. Plat d'hiver."
+        "en": "Rustic garlic soup with bread, paprika, broth and a poached egg.",
+        "fr": "Soupe rustique à l'ail avec pain, paprika, bouillon et œuf poché."
       },
       "price": "6,00 €",
       "pairing": {
@@ -752,13 +752,13 @@
       "category_id": "soups-stews",
       "name": {
         "es": "Sopa de mariscos",
-        "en": "Croquettes",
+        "en": "Seafood Soup",
         "fr": "Soupe de fruits de mer"
       },
       "description": {
         "es": "Caldo de pescado con marisco, tomate, ajo y arroz.",
-        "en": "Fish broth with seafood, tomato, garlic and rice.",
-        "fr": "Bouillon de poisson, fruits de mer, tomate, ail et riz."
+        "en": "Rich seafood broth with fish, clams, prawns and rice.",
+        "fr": "Bouillon de mer riche avec poisson, palourdes, crevettes et riz."
       },
       "price": "6,50 €",
       "pairing": {
@@ -774,13 +774,13 @@
       "category_id": "soups-stews",
       "name": {
         "es": "Sopa sevillana",
-        "en": "Mushrooms",
+        "en": "Sevillian Soup",
         "fr": "Soupe sévillane"
       },
       "description": {
         "es": "Caldo con pollo, jamón, arroz y verduras.",
-        "en": "Broth with chicken, ham, rice and vegetables.",
-        "fr": "Bouillon avec poulet, jambon, riz et légumes."
+        "en": "Traditional fish soup with mayonnaise emulsified into the broth, served with prawns.",
+        "fr": "Soupe de poisson traditionnelle liée à la mayonnaise maison, servie avec des crevettes."
       },
       "price": "7,00 €",
       "pairing": {
@@ -796,13 +796,13 @@
       "category_id": "starters",
       "name": {
         "es": "Tomate aliñao",
-        "en": "Flamenquín",
-        "fr": "Tomate assaisonnée"
+        "en": "Seasoned Tomato",
+        "fr": "Tomates assaisonnées"
       },
       "description": {
         "es": "Tomate con cebolleta, aceite de oliva y sal.",
-        "en": "Ham and breaded pork loin",
-        "fr": "Tomate, oignon nouveau, huile d'olive et sel."
+        "en": "Local sliced tomatoes seasoned with spring onion, extra virgin olive oil and sea salt.",
+        "fr": "Tomates locales en tranches assaisonnées d'oignon nouveau, d'huile d'olive extra vierge et de sel."
       },
       "price": "7,50 €",
       "pairing": {
@@ -823,8 +823,8 @@
       },
       "description": {
         "es": "Patata, zanahoria, guisantes, mayonesa y gambas.",
-        "en": "Potato, carrot, peas, mayonnaise and prawns.",
-        "fr": "Pomme de terre, carotte, petits pois, mayonnaise et crevettes."
+        "en": "Potato salad with carrots, peas, tuna, mayonnaise and prawns.",
+        "fr": "Salade de pommes de terre avec carottes, petits pois, thon, mayonnaise et crevettes."
       },
       "price": "Media 5,50 € / Ración 8,00 €",
       "pairing": {
@@ -845,8 +845,8 @@
       },
       "description": {
         "es": "Ensalada fresca con productos de temporada.",
-        "en": "Fresh salad with seasonal produce.",
-        "fr": "Salade fraîche de saison."
+        "en": "Fresh mixed salad with lettuce, tomatoes, onions, tuna and hard-boiled egg.",
+        "fr": "Salade mixte fraîche avec laitue, tomates, oignons, thon et œuf dur."
       },
       "price": "8,00 €",
       "pairing": {
@@ -863,12 +863,12 @@
       "name": {
         "es": "Espárragos con mahonesa",
         "en": "Asparagus with Mayonnaise",
-        "fr": "Asperges avec mayonnaise"
+        "fr": "Asperges à la mayonnaise"
       },
       "description": {
         "es": "Espárragos con salsa mahonesa.",
-        "en": "Asparagus with mayonnaise.",
-        "fr": "Asperges à la mayonnaise."
+        "en": "Thick white asparagus spears served with house mayonnaise.",
+        "fr": "Grosses asperges blanches servies avec mayonnaise maison."
       },
       "price": "7,50 €",
       "pairing": {
@@ -889,8 +889,8 @@
       },
       "description": {
         "es": "Selección de embutidos ibéricos.",
-        "en": "Selection of Iberian charcuterie.",
-        "fr": "Sélection de charcuteries ibériques."
+        "en": "Selection of premium cured Iberian sausages (chorizo, salchichón, lomo).",
+        "fr": "Sélection de charcuteries ibériques de qualité (chorizo, salchichón, lomo)."
       },
       "price": "12,50 €",
       "pairing": {
@@ -906,15 +906,15 @@
       "category_id": "starters",
       "name": {
         "es": "Jamón cebo ibérico (50%)",
-        "en": "Fried prawns",
+        "en": "Iberian Cebo Ham (50%)",
         "fr": "Jambon ibérique cebo 50%"
       },
       "description": {
         "es": "Jamón ibérico de cebo, cortado en la casa. 100 g.",
-        "en": "Sliced to order. 100 g.",
-        "fr": "Jambon ibérique de cebo, tranché à la maison. 100 g."
+        "en": "Premium cured Iberian ham (50% breed), sliced to order. 100g.",
+        "fr": "Jambon ibérique de cebo (race 50%), tranché à la maison. 100g."
       },
-      "price": "14,00 €",
+      "price": "Media 10,00 € / Ración 14,00 €",
       "pairing": {
         "es": "Fino de Jerez — 3,50 €",
         "en": "Fino de Jerez (dry sherry) — 3,50 €",
@@ -928,15 +928,15 @@
       "category_id": "starters",
       "name": {
         "es": "Queso curado",
-        "en": "Fried squid",
+        "en": "Cured Cheese",
         "fr": "Fromage affiné"
       },
       "description": {
         "es": "Queso curado de oveja o mezcla. 200 g.",
-        "en": "Aged sheep's or mixed cheese. 200 g.",
-        "fr": "Fromage affiné de brebis ou mélange. 200 g."
+        "en": "Aged sheep's or mixed cheese board. 200g.",
+        "fr": "Plateau de fromage de brebis affiné ou mélange. 200g."
       },
-      "price": "11,00 €",
+      "price": "Media 8,00 € / Ración 11,00 €",
       "pairing": {
         "es": "Alfonso (oloroso, D.O. Jerez) — 2,80 €",
         "en": "Alfonso (oloroso sherry, D.O. Jerez) — 2,80 €",
@@ -950,13 +950,13 @@
       "category_id": "starters",
       "name": {
         "es": "Croquetas",
-        "en": "Prawns al pil pil",
-        "fr": "Croquettes"
+        "en": "Croquettes",
+        "fr": "Croquettes maison"
       },
       "description": {
         "es": "Croquetas de jamón elaboradas en la casa.",
-        "en": "House-made ham croquetas.",
-        "fr": "Croquettes maison au jambon."
+        "en": "House-made creamy ham croquettes, crispy on the outside.",
+        "fr": "Croquettes de jambon crémeuses faites maison, croustillantes à l'extérieur."
       },
       "price": "8,50 € (ración) / 1,80 € (unidad en barra)",
       "pairing": {
@@ -972,13 +972,13 @@
       "category_id": "starters",
       "name": {
         "es": "Champiñón",
-        "en": "Fried marinated dogfish",
+        "en": "Mushrooms",
         "fr": "Champignons sautés"
       },
       "description": {
         "es": "Champiñones salteados con ajo y perejil.",
-        "en": "Mushrooms sautéed with garlic and parsley.",
-        "fr": "Champignons sautés à l'ail et au persil."
+        "en": "Mushrooms sautéed in white wine with garlic and fresh parsley.",
+        "fr": "Champignons sautés au vin blanc, à l'ail et au persil frais."
       },
       "price": "Media 7,50 € / Ración 10,00 €",
       "pairing": {
@@ -994,15 +994,15 @@
       "category_id": "starters",
       "name": {
         "es": "Champiñones con gambas",
-        "en": "Clams",
+        "en": "Mushrooms with Prawns",
         "fr": "Champignons aux crevettes"
       },
       "description": {
         "es": "Champiñones y gambas salteados con ajo y perejil.",
-        "en": "Mushrooms and prawns sautéed with garlic and parsley.",
-        "fr": "Champignons et crevettes sautés à l'ail et au persil."
+        "en": "Fresh mushrooms and prawns sautéed with garlic, white wine and parsley.",
+        "fr": "Champignons frais et crevettes sautés à l'ail, vin blanc et persil."
       },
-      "price": "14,50 €",
+      "price": "Media 11,00 € / Ración 14,50 €",
       "pairing": {
         "es": "Alfonso (oloroso, D.O. Jerez) — 2,80 €",
         "en": "Alfonso (oloroso sherry, D.O. Jerez) — 2,80 €",
@@ -1015,14 +1015,14 @@
       "id": "berenjenas-fritas",
       "category_id": "starters",
       "name": {
-        "es": "Berenjenas fritas",
-        "en": "Fried baby squid",
-        "fr": "Aubergines frites"
+        "es": "Berenjenas fritas con miel",
+        "en": "Fried Eggplant with Honey",
+        "fr": "Aubergines frites au miel"
       },
       "description": {
         "es": "Berenjenas en tempura, fritas en aceite de oliva.",
-        "en": "Aubergine in tempura batter, fried in olive oil.",
-        "fr": "Aubergines en tempura, frites à l'huile d'olive."
+        "en": "Crispy fried eggplant slices, served with local cane honey.",
+        "fr": "Rondelles d'aubergines frites croustillantes, servies avec du miel de canne local."
       },
       "price": "Media 8,00 € / Ración 11,00 €",
       "pairing": {
@@ -1038,13 +1038,13 @@
       "category_id": "starters",
       "name": {
         "es": "Pulpo a la vinagreta",
-        "en": "Fried anchovies",
+        "en": "Octopus Vinaigrette",
         "fr": "Poulpe à la vinaigrette"
       },
       "description": {
         "es": "Pulpo cocido con pimiento, cebolla, vinagre y aceite de oliva.",
-        "en": "Cooked octopus with pepper, onion, vinegar and olive oil.",
-        "fr": "Poulpe cuit, poivron, oignon, vinaigre et huile d'olive."
+        "en": "Tender octopus tossed with chopped peppers, onions, olive oil and vinegar.",
+        "fr": "Poulpe tendre mélangé avec des poivrons, oignons, huile d'olive et vinaigre."
       },
       "price": "Media 5,50 € / Ración 8,00 €",
       "pairing": {
@@ -1060,13 +1060,13 @@
       "category_id": "starters",
       "name": {
         "es": "Verduras salteadas",
-        "en": "Cod with tomato",
+        "en": "Sautéed Vegetables",
         "fr": "Légumes sautés"
       },
       "description": {
         "es": "Verduras de temporada salteadas con ajo y aceite de oliva.",
-        "en": "Seasonal vegetables sautéed with garlic and olive oil.",
-        "fr": "Légumes de saison sautés à l'ail et à l'huile d'olive."
+        "en": "Assorted seasonal vegetables sautéed in olive oil.",
+        "fr": "Assortiment de légumes de saison sautés à l'huile d'olive."
       },
       "price": "7,00 €",
       "pairing": {
@@ -1082,13 +1082,13 @@
       "category_id": "starters",
       "name": {
         "es": "Entremeses variados",
-        "en": "Assorted Cold Meats",
-        "fr": "Assortiment de charcuteries"
+        "en": "Assorted Cold Starters",
+        "fr": "Assortiment d'entrées froides"
       },
       "description": {
         "es": "Surtido de embutidos y fiambres fríos de la casa.",
-        "en": "Selection of cold cuts and cured meats.",
-        "fr": "Assortiment de charcuteries et viandes froides maison."
+        "en": "A sharing platter of cured ham, cheese, potato salad and cold cuts.",
+        "fr": "Assortiment de jambon blanc, fromage, salade russe et charcuteries."
       },
       "price": "",
       "pairing": {
@@ -1104,13 +1104,13 @@
       "category_id": "fried-fish",
       "name": {
         "es": "Calamares a la romana",
-        "en": "Calamares a la Romana",
+        "en": "Battered Squid Rings",
         "fr": "Calmars à la romaine"
       },
       "description": {
         "es": "Calamares en anillas, rebozados con masa de tempura y fritos.",
-        "en": "Squid rings in tempura batter, fried until golden.",
-        "fr": "Anneaux de calmar en pâte à tempura, frits dorés."
+        "en": "Squid rings coated in batter and fried until crispy.",
+        "fr": "Rondelles de calmars panées et frites."
       },
       "price": "",
       "pairing": {
@@ -1131,8 +1131,8 @@
       },
       "description": {
         "es": "Filete de pescadilla rebozado y frito en aceite de oliva.",
-        "en": "Whiting fillet, battered and fried in olive oil.",
-        "fr": "Filet de merlan pané et frit dans l'huile d'olive."
+        "en": "Fresh whiting fillet breaded and fried in olive oil.",
+        "fr": "Filet de merlan frais pané et frit à l'huile d'olive."
       },
       "price": "",
       "pairing": {
@@ -1148,15 +1148,15 @@
       "category_id": "fried-fish",
       "name": {
         "es": "Calamares fritos",
-        "en": "Pork tenderloin",
+        "en": "Fried Squid",
         "fr": "Calmars frits"
       },
       "description": {
         "es": "Calamares rebozados y fritos en aceite de oliva.",
-        "en": "Squid, battered and fried Andalusian-style in olive oil. Available as half or full portion.",
-        "fr": "Calmars panés et frits à l'andalouse dans l'huile d'olive. En demi-portion ou portion."
+        "en": "Squid, battered and fried Andalusian-style in olive oil.",
+        "fr": "Calmars panés et frits à l'andalouse dans l'huile d'olive."
       },
-      "price": "Media 9,50 € / Ración 13,00 €",
+      "price": "Media 10,50 € / Ración 14,00 €",
       "pairing": {
         "es": "Castillo de San Diego (V.T. Cádiz) — 17,50 €",
         "en": "Castillo de San Diego (white wine) — 17,50 €",
@@ -1170,15 +1170,15 @@
       "category_id": "fried-fish",
       "name": {
         "es": "Boquerones fritos",
-        "en": "Sautéed pork loin",
+        "en": "Fried Anchovies",
         "fr": "Anchois frits"
       },
       "description": {
         "es": "Boquerones frescos rebozados y fritos.",
-        "en": "Fresh anchovies, lightly battered and fried Andalusian-style. Available as half or full portion.",
-        "fr": "Anchois frais légèrement panés et frits à l'andalouse. En demi-portion ou portion."
+        "en": "Fresh local anchovies, lightly floured and fried.",
+        "fr": "Anchois frais locaux, légèrement farinés et frits."
       },
-      "price": "Media 9,50 € / Ración 13,00 €",
+      "price": "Media 10,50 € / Ración 14,00 €",
       "pairing": {
         "es": "Manzanilla — 3,50 €",
         "en": "Manzanilla (dry sherry, Sanlúcar) — 3,50 €",
@@ -1192,13 +1192,13 @@
       "category_id": "fried-fish",
       "name": {
         "es": "Cazón frito en adobo",
-        "en": "San Jacobo (ham and cheese cutlet)",
+        "en": "Fried Marinated Dogfish",
         "fr": "Chien de mer mariné frit"
       },
       "description": {
         "es": "Cazón marinado en ajo, orégano y pimentón, rebozado y frito.",
-        "en": "Dogfish marinated with garlic, oregano and paprika, then battered and fried. An Andalusian coastal classic.",
-        "fr": "Chien de mer mariné à l'ail, origan et paprika, puis pané et frit. Un classique côtier andalou."
+        "en": "Dogfish marinated in cumin, oregano, vinegar and garlic, lightly fried.",
+        "fr": "Roussette marinée au cumin, origan, vinaigre et ail, frite."
       },
       "price": "Media 9,50 € / Ración 13,00 €",
       "pairing": {
@@ -1214,13 +1214,13 @@
       "category_id": "fried-fish",
       "name": {
         "es": "Almejas",
-        "en": "Lamb chops",
+        "en": "Clams",
         "fr": "Palourdes"
       },
       "description": {
         "es": "Almejas salteadas con ajo, perejil y vino blanco.",
-        "en": "Clams sautéed with garlic, parsley and white wine.",
-        "fr": "Palourdes sautées à l'ail, persil et vin blanc."
+        "en": "Clams sautéed with garlic, parsley and dry white wine.",
+        "fr": "Palourdes sautées à l'ail, persil et vin blanc sec."
       },
       "price": "Media 9,50 € / Ración 13,00 €",
       "pairing": {
@@ -1236,12 +1236,12 @@
       "category_id": "fried-fish",
       "name": {
         "es": "Gambas fritas",
-        "en": "Beef entrecôte",
+        "en": "Fried Prawns",
         "fr": "Crevettes frites"
       },
       "description": {
         "es": "Gambas rebozadas y fritas en aceite de oliva.",
-        "en": "Prawns breaded and fried in olive oil.",
+        "en": "Prawns coated in batter and fried in olive oil.",
         "fr": "Crevettes panées et frites à l'huile d'olive."
       },
       "price": "Media 10,50 € / Ración 14,00 €",
@@ -1263,10 +1263,10 @@
       },
       "description": {
         "es": "Gambas salteadas con ajo, guindilla y aceite de oliva.",
-        "en": "Prawns sizzling with garlic, chilli and olive oil. Available as half or full portion.",
-        "fr": "Crevettes servies avec ail, piment et huile d'olive bien chaude. En demi-portion ou portion."
+        "en": "Prawns sizzling in olive oil with garlic, chilli and white wine.",
+        "fr": "Crevettes servies avec ail, piment et huile d'olive bien chaude."
       },
-      "price": "Media 10,50 € / Ración 14,00 €",
+      "price": "Media 9,50 € / Ración 13,00 €",
       "pairing": {
         "es": "",
         "en": "",
@@ -1280,15 +1280,15 @@
       "category_id": "fried-fish",
       "name": {
         "es": "Chopos fritos (puntillitas)",
-        "en": "Flamenquín",
+        "en": "Fried Baby Squid",
         "fr": "Puntillitas frites"
       },
       "description": {
         "es": "Puntillitas de calamar rebozadas y fritas.",
-        "en": "Small baby squid, battered and fried whole until golden.",
-        "fr": "Petits calamars panés et frits entiers jusqu'à être dorés."
+        "en": "Tiny baby squid, floured and fried until crispy.",
+        "fr": "Petits calmars entiers (chopos) farinés et frits."
       },
-      "price": "Media 10,50 € / Ración 14,00 €",
+      "price": "Media 9,50 € / Ración 13,00 €",
       "pairing": {
         "es": "",
         "en": "",
@@ -1302,13 +1302,13 @@
       "category_id": "fried-fish",
       "name": {
         "es": "Fritura de pescado variado",
-        "en": "Mixed Fried Fish",
+        "en": "Mixed Fried Fish Platter",
         "fr": "Friture de poissons variés"
       },
       "description": {
         "es": "Selección de pescados frescos rebozados y fritos. Según disponibilidad.",
-        "en": "Selection of fresh fish, breaded and fried. Subject to availability.",
-        "fr": "Sélection de poissons frais panés et frits. Selon disponibilité."
+        "en": "A generous selection of traditional local fried fish.",
+        "fr": "Un grand plateau assorti de poissons frits traditionnels."
       },
       "price": "17,50 €",
       "pairing": {
@@ -1329,8 +1329,8 @@
       },
       "description": {
         "es": "Bacalao desalado con salsa de tomate, cebolla y pimiento.",
-        "en": "Desalted cod with tomato sauce, onion and pepper.",
-        "fr": "Morue dessalée, sauce tomate, oignon et poivron."
+        "en": "Fried cod fillet cooked in a slow-simmered homemade tomato sauce.",
+        "fr": "Filet de morue frite cuit dans une sauce tomate maison mijotée."
       },
       "price": "15,00 €",
       "pairing": {
@@ -1346,13 +1346,13 @@
       "category_id": "fried-fish",
       "name": {
         "es": "Filete de pez espada (plancha)",
-        "en": "Grilled Swordfish Steak",
+        "en": "Grilled Swordfish",
         "fr": "Filet d'espadon grillé"
       },
       "description": {
         "es": "Pez espada a la plancha con ajo, aceite de oliva y limón.",
-        "en": "Grilled swordfish with garlic, olive oil and lemon.",
-        "fr": "Espadon grillé, ail, huile d'olive et citron."
+        "en": "Swordfish steak grilled with garlic, parsley and olive oil.",
+        "fr": "Darne d'espadon grillée avec ail, persil et huile d'olive."
       },
       "price": "15,00 €",
       "pairing": {
@@ -1373,8 +1373,8 @@
       },
       "description": {
         "es": "Calamares a la plancha con ajo, perejil y limón.",
-        "en": "Grilled squid with garlic, parsley and lemon.",
-        "fr": "Calmars grillés, ail, persil et citron."
+        "en": "Whole squid grilled on the flat top with garlic and parsley.",
+        "fr": "Calmars entiers grillés à la plancha avec ail et persil."
       },
       "price": "16,00 €",
       "pairing": {
@@ -1390,13 +1390,13 @@
       "category_id": "meats",
       "name": {
         "es": "Pinchitos",
-        "en": "Fried eggs with potatoes and Iberian ham",
+        "en": "Pinchitos",
         "fr": "Pinchitos"
       },
       "description": {
         "es": "Carne adobada en pinchos, elaborada en la casa.",
-        "en": "House-marinated meat skewers.",
-        "fr": "Brochettes de viande marinée maison."
+        "en": "Spiced pork skewers grilled over flame, seasoned with Moorish spices.",
+        "fr": "Brochettes de porc marinées aux épices mauresques et grillées."
       },
       "price": "4,80 € (unidad)",
       "pairing": {
@@ -1412,13 +1412,13 @@
       "category_id": "meats",
       "name": {
         "es": "Pollo",
-        "en": "Chicken",
-        "fr": "Poulet"
+        "en": "Grilled Chicken Breast",
+        "fr": "Blanc de poulet"
       },
       "description": {
         "es": "Pollo a la plancha o al horno. Según elaboración del día.",
-        "en": "Grilled or roast chicken. As prepared on the day.",
-        "fr": "Poulet grillé ou au four. Selon préparation du jour."
+        "en": "Grilled chicken breast served with hand-cut fries.",
+        "fr": "Blanc de poulet grillé servi avec des frites maison."
       },
       "price": "9,00 €",
       "pairing": {
@@ -1439,8 +1439,8 @@
       },
       "description": {
         "es": "Lomo de cerdo salteado con ajo, pimiento y cebolla.",
-        "en": "Pork loin sautéed with garlic, pepper and onion.",
-        "fr": "Longe de porc sautée, ail, poivron et oignon."
+        "en": "Pork loin strips sautéed with onions, peppers and white wine.",
+        "fr": "Lanières de longe de porc sautées avec oignons, poivrons et vin blanc."
       },
       "price": "Media 10,50 € / Ración 14,00 €",
       "pairing": {
@@ -1462,7 +1462,7 @@
       "description": {
         "es": "Lomo de cerdo relleno de jamón, rebozado y frito.",
         "en": "Rolled pork loin wrapped in ham, breaded and fried. A classic from Córdoba.",
-        "fr": "Rouleau de longe de porc enveloppé dans du jambon, pané et frit. Spécialité de Córdoba."
+        "fr": "Rouleau de longe de porc enveloppé dans du jambon, pané et frit."
       },
       "price": "5,00 € (barra) / 14,00 € (restaurante)",
       "pairing": {
@@ -1478,13 +1478,13 @@
       "category_id": "meats",
       "name": {
         "es": "Filete de cerdo (empanado o plancha)",
-        "en": "Pork Steak (breaded or grilled)",
+        "en": "Pork Loin Steak (breaded or grilled)",
         "fr": "Filet de porc (pané ou grillé)"
       },
       "description": {
         "es": "Filete de cerdo a elegir: empanado y frito, o a la plancha.",
-        "en": "Pork steak your way: breaded and fried, or char-grilled.",
-        "fr": "Filet de porc au choix : pané et frit, ou grillé."
+        "en": "Pork loin steak, choice of breaded or grilled, served with fries.",
+        "fr": "Filet de longe de porc, au choix pané ou grillé, servi avec frites."
       },
       "price": "",
       "pairing": {
@@ -1505,8 +1505,8 @@
       },
       "description": {
         "es": "Corte ibérico entre la paleta y el lomo, muy jugoso a la plancha.",
-        "en": "Iberian pork secreto — a hidden cut between shoulder and loin, prized for its marbling.",
-        "fr": "Secreto ibérique — coupe cachée entre épaule et longe, très persillée, grillée."
+        "en": "Premium Iberian pork cut (secreto) grilled, served with fries.",
+        "fr": "Morceau de secreto de porc ibérique grillé, servi avec frites."
       },
       "price": "",
       "pairing": {
@@ -1527,8 +1527,8 @@
       },
       "description": {
         "es": "Ternera empanada y frita. Con limón.",
-        "en": "Breaded and fried veal. With lemon.",
-        "fr": "Veau pané et frit. Avec citron."
+        "en": "Breaded veal cutlet fried until golden, served with fries.",
+        "fr": "Escalope de veau panée et frite, servie avec frites."
       },
       "price": "12,50 €",
       "pairing": {
@@ -1549,8 +1549,8 @@
       },
       "description": {
         "es": "Ternera en salsa, estofada con verduras y vino.",
-        "en": "Veal braised in sauce with vegetables and wine.",
-        "fr": "Veau braisé en sauce, légumes et vin."
+        "en": "Traditional beef stew slow-cooked with carrots and potatoes.",
+        "fr": "Ragoût de veau traditionnel mijoté aux carottes et pommes de terre."
       },
       "price": "12,50 €",
       "pairing": {
@@ -1571,10 +1571,10 @@
       },
       "description": {
         "es": "Chuletas de cordero a la plancha.",
-        "en": "Chargrilled lamb chops.",
-        "fr": "Côtelettes d'agneau grillées."
+        "en": "Grilled lamb chops seasoned with garlic and rosemary, served with fries.",
+        "fr": "Côtelettes d'agneau grillées parfumées à l'ail, servies avec frites."
       },
-      "price": "14,00 €",
+      "price": "2,80 € (unidad)",
       "pairing": {
         "es": "Muñana Rojo (D.O. Granada) — 19,00 €",
         "en": "Muñana Rojo (red wine, D.O. Granada) — 19,00 €",
@@ -1589,12 +1589,12 @@
       "name": {
         "es": "Presa ibérica",
         "en": "Grilled Iberian Presa",
-        "fr": "Presa ibérique"
+        "fr": "Presa ibérique grillée"
       },
       "description": {
         "es": "Presa ibérica a la plancha.",
-        "en": "Select Iberian pork cut, grilled.",
-        "fr": "Presa ibérique grillée."
+        "en": "Iberian pork shoulder cut (presa) grilled medium-rare, served with fries.",
+        "fr": "Presa de porc ibérique grillée rosée, servie avec frites."
       },
       "price": "14,00 €",
       "pairing": {
@@ -1610,13 +1610,13 @@
       "category_id": "meats",
       "name": {
         "es": "San Jacobo",
-        "en": "San Jacobo",
-        "fr": "San Jacobo"
+        "en": "San Jacobo (ham & cheese cutlet)",
+        "fr": "San Jacobo (jambon-fromage pané)"
       },
       "description": {
         "es": "Jamón cocido y queso envueltos en lomo, rebozado y frito.",
-        "en": "Pork loin stuffed with ham and cheese, breaded and fried — Spanish take on cordon bleu. At León it's made with fresh loin, Iberian ham and cured cheese.",
-        "fr": "Jambon cuit et fromage enveloppés dans du lomo, pané et frit."
+        "en": "Pork loin stuffed with ham and cheese, breaded and fried.",
+        "fr": "Longe de porc farcie au jambon et fromage, panée et frite."
       },
       "price": "15,00 €",
       "pairing": {
@@ -1632,15 +1632,15 @@
       "category_id": "meats",
       "name": {
         "es": "Solomillo de cerdo",
-        "en": "Spanish potato omelette",
+        "en": "Pork Tenderloin",
         "fr": "Filet de porc"
       },
       "description": {
         "es": "Solomillo de cerdo a la plancha.",
-        "en": "Grilled pork tenderloin.",
-        "fr": "Filet de porc grillé."
+        "en": "Pork tenderloin medallions grilled and served with fries.",
+        "fr": "Médaillons de filet de porc grillés, servis avec frites."
       },
-      "price": "14,50 €",
+      "price": "12,50 €",
       "pairing": {
         "es": "Fontedei Prado Negro (D.O. Granada) — 17,00 €",
         "en": "Fontedei Prado Negro (red wine, D.O. Granada) — 17,00 €",
@@ -1659,8 +1659,8 @@
       },
       "description": {
         "es": "Solomillo de cerdo con salsa de pimienta.",
-        "en": "Pork tenderloin with pepper sauce.",
-        "fr": "Filet de porc à la sauce poivre."
+        "en": "Pork tenderloin medallions served in a creamy green peppercorn sauce.",
+        "fr": "Médaillons de filet de porc servis avec une sauce crémeuse au poivre vert."
       },
       "price": "15,50 €",
       "pairing": {
@@ -1676,15 +1676,15 @@
       "category_id": "meats",
       "name": {
         "es": "Entrecot de ternera",
-        "en": "Potato omelette slice",
-        "fr": "Entrecôte de veau"
+        "en": "Beef Entrecôte",
+        "fr": "Entrecôte de bœuf"
       },
       "description": {
         "es": "Entrecot de ternera a la plancha.",
-        "en": "Grilled veal entrecôte.",
-        "fr": "Entrecôte de veau grillée."
+        "en": "Grilled beef ribeye steak served with fries and sea salt.",
+        "fr": "Entrecôte de bœuf grillée servie avec frites et fleur de sel."
       },
-      "price": "19,00 €",
+      "price": "14,50 €",
       "pairing": {
         "es": "Marqués de Cáceres Reserva (D.O. Rioja) — 26,00 €",
         "en": "Marqués de Cáceres Reserva (red wine, D.O. Rioja) — 26,00 €",
@@ -1698,13 +1698,13 @@
       "category_id": "meats",
       "name": {
         "es": "Entrecot a la pimienta",
-        "en": "Entrecôte in Pepper Sauce",
+        "en": "Beef Entrecôte in Pepper Sauce",
         "fr": "Entrecôte au poivre"
       },
       "description": {
         "es": "Entrecot de ternera con salsa de pimienta.",
-        "en": "Veal entrecôte with pepper sauce.",
-        "fr": "Entrecôte de veau à la sauce poivre."
+        "en": "Grilled beef ribeye steak topped with green peppercorn cream sauce.",
+        "fr": "Entrecôte de bœuf grillée surmontée d'une sauce crème au poivre vert."
       },
       "price": "20,00 €",
       "pairing": {
@@ -1720,13 +1720,13 @@
       "category_id": "eggs-omelettes",
       "name": {
         "es": "Pincho de tortilla de patatas",
-        "en": "Seafood paella",
+        "en": "Potato Omelette Slice",
         "fr": "Tranche de tortilla"
       },
       "description": {
         "es": "Tortilla de patatas elaborada en la casa.",
-        "en": "House-made potato omelette.",
-        "fr": "Tortilla de pommes de terre maison."
+        "en": "A slice of our traditional Spanish potato and onion omelette.",
+        "fr": "Une tranche de notre tortilla de pommes de terre espagnole traditionnelle."
       },
       "price": "3,50 €",
       "pairing": {
@@ -1747,8 +1747,8 @@
       },
       "description": {
         "es": "Tortilla de patatas con jamón.",
-        "en": "Potato omelette with ham.",
-        "fr": "Tortilla de pommes de terre au jambon."
+        "en": "French-style omelette filled with chopped Serrano ham.",
+        "fr": "Omelette classique garnie de dés de jambon serrano."
       },
       "price": "6,50 €",
       "pairing": {
@@ -1764,13 +1764,13 @@
       "category_id": "eggs-omelettes",
       "name": {
         "es": "Tortilla de patatas",
-        "en": "Vegetable paella",
+        "en": "Spanish Potato Omelette",
         "fr": "Tortilla espagnole"
       },
       "description": {
         "es": "Tortilla de patatas con o sin cebolla.",
-        "en": "With or without onion.",
-        "fr": "Avec ou sans oignon."
+        "en": "Whole traditional Spanish potato omelette with onions.",
+        "fr": "Tortilla de pommes de terre entière, préparée avec des oignons."
       },
       "price": "8,50 €",
       "pairing": {
@@ -1791,8 +1791,8 @@
       },
       "description": {
         "es": "Huevos revueltos con espárragos.",
-        "en": "Scrambled eggs with asparagus.",
-        "fr": "Œufs brouillés aux asperges."
+        "en": "Scrambled eggs cooked with tender wild green asparagus.",
+        "fr": "Œufs brouillés cuits avec de tendres asperges sauvages."
       },
       "price": "8,50 €",
       "pairing": {
@@ -1813,8 +1813,8 @@
       },
       "description": {
         "es": "Huevos revueltos con champiñones.",
-        "en": "Scrambled eggs with mushrooms.",
-        "fr": "Œufs brouillés aux champignons."
+        "en": "Scrambled eggs cooked with sautéed mushrooms, garlic and parsley.",
+        "fr": "Œufs brouillés cuits avec des champignons sautés, ail et persil."
       },
       "price": "8,50 €",
       "pairing": {
@@ -1835,8 +1835,8 @@
       },
       "description": {
         "es": "Huevos revueltos con gambas.",
-        "en": "Scrambled eggs with prawns.",
-        "fr": "Œufs brouillés aux crevettes."
+        "en": "Scrambled eggs cooked with prawns, garlic and green shoots.",
+        "fr": "Œufs brouillés cuits avec des crevettes, de l'ail et des pousses d'ail."
       },
       "price": "10,00 €",
       "pairing": {
@@ -1857,8 +1857,8 @@
       },
       "description": {
         "es": "Huevos fritos con patatas y jamón ibérico al 50%.",
-        "en": "Fried eggs with potatoes and 50% Iberian ham.",
-        "fr": "Œufs frits, pommes de terre et jambon ibérique 50%."
+        "en": "Two fried eggs served over hand-cut fries and topped with Iberian ham.",
+        "fr": "Deux œufs au plat sur frites maison, recouverts de jambon ibérique."
       },
       "price": "13,00 €",
       "pairing": {
@@ -1874,13 +1874,13 @@
       "category_id": "rice",
       "name": {
         "es": "Paella mixta",
-        "en": "House flan",
+        "en": "Mixed Paella",
         "fr": "Paella mixte"
       },
       "description": {
         "es": "Arroz con pollo, marisco y verduras. Por encargo, mínimo 2 raciones.",
-        "en": "Minimum 2 people. On request.",
-        "fr": "Riz au poulet, fruits de mer et légumes. Sur commande, minimum 2 rations."
+        "en": "Traditional saffron rice dish cooked with chicken, pork and seafood (min. 2 servings).",
+        "fr": "Riz au safran traditionnel cuisiné avec poulet, porc et fruits de mer (min. 2 personnes)."
       },
       "price": "14,00 € / ración",
       "pairing": {
@@ -1896,13 +1896,13 @@
       "category_id": "rice",
       "name": {
         "es": "Paella de mariscos",
-        "en": "Custard",
+        "en": "Seafood Paella",
         "fr": "Paella aux fruits de mer"
       },
       "description": {
         "es": "Arroz con marisco y caldo de pescado. Por encargo, mínimo 2 raciones.",
-        "en": "Minimum 2 people. On request.",
-        "fr": "Riz aux fruits de mer et bouillon de poisson. Sur commande, minimum 2 rations."
+        "en": "Saffron rice cooked with squid, mussels, prawns and clams (min. 2 servings).",
+        "fr": "Riz au safran cuisiné avec calmars, moules, crevettes et palourdes (min. 2 personnes)."
       },
       "price": "15,00 € / ración",
       "pairing": {
@@ -1918,13 +1918,13 @@
       "category_id": "rice",
       "name": {
         "es": "Paella de verduras",
-        "en": "Rice pudding",
+        "en": "Vegetable Paella",
         "fr": "Paella aux légumes"
       },
       "description": {
         "es": "Arroz con verduras de temporada. Por encargo, mínimo 2 raciones.",
-        "en": "Seasonal vegetables. Minimum 2 people. On request.",
-        "fr": "Riz aux légumes de saison. Sur commande, minimum 2 rations."
+        "en": "Saffron rice loaded with seasonal vegetables and artichokes (min. 2 servings).",
+        "fr": "Riz au safran garni de légumes de saison et d'artichauts (min. 2 personnes)."
       },
       "price": "14,00 € / ración",
       "pairing": {
@@ -1940,13 +1940,13 @@
       "category_id": "desserts",
       "name": {
         "es": "Fruta del tiempo",
-        "en": "Muñana Rojo",
+        "en": "Seasonal Fruit",
         "fr": "Fruit de saison"
       },
       "description": {
         "es": "Fruta fresca de temporada.",
-        "en": "Fresh seasonal fruit.",
-        "fr": "Fruit frais de saison."
+        "en": "Fresh selection of seasonal fruit.",
+        "fr": "Assortiment frais de fruits de saison."
       },
       "price": "1,80 €",
       "pairing": {
@@ -1962,13 +1962,13 @@
       "category_id": "desserts",
       "name": {
         "es": "Flan de la casa",
-        "en": "Señorío de Nevada",
-        "fr": "Flan maison"
+        "en": "House Caramel Flan",
+        "fr": "Flan caramel maison"
       },
       "description": {
         "es": "Flan casero con caramelo.",
-        "en": "Homemade caramel flan.",
-        "fr": "Flan caramel maison."
+        "en": "Homemade rich egg custard served with caramel sauce.",
+        "fr": "Flan aux œufs crémeux fait maison, servi avec du caramel."
       },
       "price": "4,00 €",
       "pairing": {
@@ -1989,8 +1989,8 @@
       },
       "description": {
         "es": "Natillas caseras con canela.",
-        "en": "Homemade custard cream with cinnamon.",
-        "fr": "Crème anglaise maison à la cannelle."
+        "en": "Traditional Spanish milk custard flavored with cinnamon and lemon.",
+        "fr": "Crème dessert espagnole traditionnelle parfumée à la cannelle et au citron."
       },
       "price": "4,00 €",
       "pairing": {
@@ -2006,13 +2006,13 @@
       "category_id": "desserts",
       "name": {
         "es": "Arroz con leche",
-        "en": "Fontedei Prado Negro",
+        "en": "Rice Pudding",
         "fr": "Riz au lait"
       },
       "description": {
         "es": "Arroz con leche al estilo de la casa.",
-        "en": "House-style rice pudding.",
-        "fr": "Riz au lait à la façon de la maison."
+        "en": "Creamy slow-cooked rice pudding topped with cinnamon powder.",
+        "fr": "Riz au lait crémeux mijoté, saupoudré de cannelle."
       },
       "price": "4,00 €",
       "pairing": {
@@ -2028,13 +2028,13 @@
       "category_id": "desserts",
       "name": {
         "es": "Sorbete de limón",
-        "en": "Muñana 3 Cepas",
-        "fr": "Sorbet citron"
+        "en": "Lemon Sorbet",
+        "fr": "Sorbet au citron"
       },
       "description": {
         "es": "Sorbete de limón.",
-        "en": "Lemon sorbet.",
-        "fr": "Sorbet au citron."
+        "en": "Refreshing lemon sorbet, perfect after a meal.",
+        "fr": "Sorbet rafraîchissant au citron, idéal en fin de repas."
       },
       "price": "4,00 €",
       "pairing": {
@@ -2050,13 +2050,13 @@
       "category_id": "desserts",
       "name": {
         "es": "Tarta Canadá",
-        "en": "Tarta Canadá",
-        "fr": "Tarta Canadá"
+        "en": "Canada Cake (Contesa)",
+        "fr": "Gâteau Canada"
       },
       "description": {
         "es": "Tarta helada Contesa.",
-        "en": "Contesa ice cream cake.",
-        "fr": "Gâteau glacé Contesa."
+        "en": "Traditional Viennese chocolate and vanilla ice cream cake.",
+        "fr": "Gâteau glacé viennois traditionnel au chocolat et à la vanille."
       },
       "price": "4,80 €",
       "pairing": {
@@ -2077,8 +2077,8 @@
       },
       "description": {
         "es": "Tarta de queso cremosa.",
-        "en": "Creamy cheesecake.",
-        "fr": "Gâteau au fromage crémeux."
+        "en": "Creamy baked cheesecake with red berry coulis.",
+        "fr": "Gâteau au fromage crémeux cuit au four avec coulis de fruits rouges."
       },
       "price": "5,00 €",
       "pairing": {
@@ -2094,13 +2094,13 @@
       "category_id": "desserts",
       "name": {
         "es": "Brownie",
-        "en": "Delirio",
-        "fr": "Brownie"
+        "en": "Chocolate Brownie",
+        "fr": "Brownie au chocolat"
       },
       "description": {
         "es": "Brownie de chocolate.",
-        "en": "Chocolate brownie.",
-        "fr": "Brownie au chocolat."
+        "en": "Rich chocolate brownie served warm with vanilla ice cream.",
+        "fr": "Brownie au chocolat fondant servi chaud avec une boule de glace vanille."
       },
       "price": "5,50 €",
       "pairing": {
@@ -2116,13 +2116,13 @@
       "category_id": "desserts",
       "name": {
         "es": "Tarta al whisky",
-        "en": "Whisky Cake",
-        "fr": "Gâteau au whisky"
+        "en": "Whisky Ice-Cream Cake",
+        "fr": "Gâteau glacé au whisky"
       },
       "description": {
         "es": "Tarta de nata y whisky.",
-        "en": "Cream and whisky cake.",
-        "fr": "Gâteau à la crème et au whisky."
+        "en": "Classic frozen ice cream cake flavored with a layer of whisky.",
+        "fr": "Gâteau glacé traditionnel parfumé au whisky."
       },
       "price": "5,50 €",
       "pairing": {
@@ -2138,13 +2138,13 @@
       "category_id": "bocadillos",
       "name": {
         "es": "Bocadillo de lomo con jamón o queso",
-        "en": "Pork loin sandwich with ham or cheese",
+        "en": "Pork Loin Sandwich with Ham or Cheese",
         "fr": "Sandwich de longe de porc avec jambon ou fromage"
       },
       "description": {
         "es": "Lomo de cerdo a la plancha con jamón serrano o queso curado. Nota: No se sirven bocadillos en el comedor.",
-        "en": "Grilled pork loin with Serrano ham or cured cheese. Note: Sandwiches are not served in the dining room.",
-        "fr": "Longe de porc grillée avec jambon serrano ou fromage affiné. Note : Les sandwichs ne sont pas servis en salle."
+        "en": "Grilled pork loin with Serrano ham or cured cheese in a crusty bread roll.",
+        "fr": "Longe de porc grillée avec jambon serrano ou fromage affiné dans un pain croustillant."
       },
       "price": "4,00 €",
       "pairing": {
@@ -2160,13 +2160,13 @@
       "category_id": "bocadillos",
       "name": {
         "es": "Bocadillo de lomo con jamón y queso",
-        "en": "Pork loin sandwich with ham and cheese",
+        "en": "Pork Loin Sandwich with Ham and Cheese",
         "fr": "Sandwich de longe de porc avec jambon et fromage"
       },
       "description": {
         "es": "Lomo de cerdo a la plancha con jamón serrano y queso curado. Nota: No se sirven bocadillos en el comedor.",
-        "en": "Grilled pork loin with Serrano ham and cured cheese. Note: Sandwiches are not served in the dining room.",
-        "fr": "Longe de porc grillée avec jambon serrano et fromage affiné. Note : Les sandwichs ne sont pas servis en salle."
+        "en": "Grilled pork loin with both Serrano ham and cheese in a crusty bread roll.",
+        "fr": "Longe de porc grillée avec jambon serrano et fromage affiné dans un pain croustillant."
       },
       "price": "4,50 €",
       "pairing": {
@@ -2182,13 +2182,13 @@
       "category_id": "bocadillos",
       "name": {
         "es": "Bocadillo de jamón o queso",
-        "en": "Serrano ham or cheese sandwich",
+        "en": "Serrano Ham or Cheese Sandwich",
         "fr": "Sandwich au jambon serrano ou fromage"
       },
       "description": {
         "es": "Jamón serrano o queso curado de la casa. Nota: No se sirven bocadillos en el comedor.",
-        "en": "Serrano ham or cured cheese. Note: Sandwiches are not served in the dining room.",
-        "fr": "Jambon serrano ou fromage affiné de la maison. Note : Les sandwichs ne sont pas servis en salle."
+        "en": "Serrano ham or cured cheese in a crusty bread roll.",
+        "fr": "Jambon serrano ou fromage affiné dans un pain croustillant."
       },
       "price": "3,80 €",
       "pairing": {
@@ -2204,13 +2204,13 @@
       "category_id": "bocadillos",
       "name": {
         "es": "Bocadillo “Junior”",
-        "en": "“Junior” bocadillo (pork loin, ham, cheese, lettuce, mayo)",
-        "fr": "Bocadillo « Junior » (longe de porc, jambon, fromage, laitue, mayo)"
+        "en": "“Junior” Sandwich",
+        "fr": "Sandwich « Junior »"
       },
       "description": {
         "es": "Lomo de cerdo a la plancha, jamón serrano, queso, lechuga y mayonesa. Nota: No se sirven bocadillos en el comedor.",
-        "en": "Spanish bocadillo with grilled pork loin, Serrano ham, cheese, lettuce and mayonnaise. Note: bocadillos are not served in the dining room.",
-        "fr": "Bocadillo espagnol avec longe de porc grillée, jambon serrano, fromage, laitue et mayonnaise. Note : les bocadillos ne sont pas servis en salle."
+        "en": "Pork loin, Serrano ham, cheese, lettuce and mayonnaise in a crusty roll.",
+        "fr": "Longe de porc, jambon serrano, fromage, laitue et mayonnaise."
       },
       "price": "5,20 €",
       "pairing": {
@@ -2226,13 +2226,13 @@
       "category_id": "bocadillos",
       "name": {
         "es": "Bocadillo de calamares",
-        "en": "Fried squid sandwich",
+        "en": "Fried Squid Sandwich",
         "fr": "Sandwich aux calmars frits"
       },
       "description": {
         "es": "Calamares fritos al estilo andaluz. Nota: No se sirven bocadillos en el comedor.",
-        "en": "Andalusian style fried squid. Note: Sandwiches are not served in the dining room.",
-        "fr": "Calmars frits à l'andalouse. Note : Les sandwichs ne sont pas servis en salle."
+        "en": "Battered and fried squid rings in a crusty bread roll.",
+        "fr": "Calmars frits croustillants dans un pain chaud de type baguette."
       },
       "price": "5,00 €",
       "pairing": {
@@ -2248,13 +2248,13 @@
       "category_id": "bocadillos",
       "name": {
         "es": "Bocadillo Trifásico",
-        "en": "“Trifásico” bocadillo (pork loin, ham, cheese, lettuce, mayo, egg)",
-        "fr": "Bocadillo « Trifásico » (longe de porc, jambon, fromage, laitue, mayo, œuf)"
+        "en": "“Trifásico” Sandwich",
+        "fr": "Sandwich « Trifásico »"
       },
       "description": {
         "es": "Lomo de cerdo a la plancha, jamón serrano, queso, lechuga, mayonesa y huevo frito. Nota: No se sirven bocadillos en el comedor.",
-        "en": "Spanish bocadillo with grilled pork loin, Serrano ham, cheese, lettuce, mayonnaise and fried egg. Note: bocadillos are not served in the dining room.",
-        "fr": "Bocadillo espagnol avec longe de porc grillée, jambon serrano, fromage, laitue, mayonnaise et œuf au plat. Note : les bocadillos ne sont pas servis en salle."
+        "en": "Pork loin, ham, cheese, lettuce, mayonnaise and a fried egg.",
+        "fr": "Longe de porc, jambon, fromage, laitue, mayonnaise et œuf au plat."
       },
       "price": "6,00 €",
       "pairing": {
@@ -2282,7 +2282,7 @@
         "fr": "D.O.P. Vin de Qualité de Grenade"
       },
       "type": "red",
-      "price_bottle": 20.0,
+      "price_bottle": 20,
       "price_glass": 3.8,
       "available": true,
       "description": {
@@ -2306,7 +2306,7 @@
         "fr": "V.T. Cuesta del Sol, Grenade"
       },
       "type": "red",
-      "price_bottle": 18.0,
+      "price_bottle": 18,
       "price_glass": 3.5,
       "available": true,
       "description": {
@@ -2330,7 +2330,7 @@
         "fr": "D.O.P. Vin de Qualité de Grenade"
       },
       "type": "red",
-      "price_bottle": 17.0,
+      "price_bottle": 17,
       "price_glass": 3.2,
       "available": true,
       "description": {
@@ -2354,7 +2354,7 @@
         "fr": "D.O.P. Vin de Qualité de Grenade"
       },
       "type": "red",
-      "price_bottle": 17.0,
+      "price_bottle": 17,
       "price_glass": 3.2,
       "available": true,
       "description": {
@@ -2378,7 +2378,7 @@
         "fr": "D.O.P. Vin de Qualité de Grenade"
       },
       "type": "red",
-      "price_bottle": 19.0,
+      "price_bottle": 19,
       "price_glass": 3.5,
       "available": true,
       "description": {
@@ -2402,7 +2402,7 @@
         "fr": "D.O.P. Vin de Qualité de Grenade"
       },
       "type": "red",
-      "price_bottle": 21.0,
+      "price_bottle": 21,
       "available": true,
       "description": {
         "es": "Uva(s): Tempranillo, Cabernet, Merlot · Coupage con cuerpo, equilibrado, con notas de fruta y especias. · Maridaje: Guisos, carnes rojas, quesos",
@@ -2425,7 +2425,7 @@
         "fr": "V.T. Cuesta del Sol, Grenade"
       },
       "type": "white",
-      "price_bottle": 21.0,
+      "price_bottle": 21,
       "price_glass": 3.7,
       "available": true,
       "description": {
@@ -2449,7 +2449,7 @@
         "fr": "D.O.P. Vin de Qualité de Grenade"
       },
       "type": "white",
-      "price_bottle": 18.0,
+      "price_bottle": 18,
       "price_glass": 3.2,
       "available": true,
       "description": {
@@ -2473,7 +2473,7 @@
         "fr": "V.T. Cuesta del Sol, Grenade"
       },
       "type": "white",
-      "price_bottle": 18.0,
+      "price_bottle": 18,
       "available": true,
       "description": {
         "es": "Uva(s): Moscatel, Vigiriega · Blanco joven y aromático. Ligero dulzor y frescura, perfecto para el aperitivo. · Maridaje: Gazpacho, verduras salteadas, tapas ligeras",
@@ -2496,7 +2496,7 @@
         "fr": "D.O. Granada"
       },
       "type": "rose",
-      "price_bottle": 18.0,
+      "price_bottle": 18,
       "price_glass": 3.2,
       "available": true,
       "description": {
@@ -2520,7 +2520,7 @@
         "fr": "D.O.Ca. Rioja"
       },
       "type": "red",
-      "price_bottle": 17.0,
+      "price_bottle": 17,
       "price_glass": 3.2,
       "available": true,
       "description": {
@@ -2544,7 +2544,7 @@
         "fr": "D.O.Ca. Rioja"
       },
       "type": "red",
-      "price_bottle": 18.0,
+      "price_bottle": 18,
       "price_glass": 3.2,
       "available": true,
       "description": {
@@ -2568,7 +2568,7 @@
         "fr": "D.O.Ca. Rioja"
       },
       "type": "red",
-      "price_bottle": 18.0,
+      "price_bottle": 18,
       "price_glass": 3.2,
       "available": true,
       "description": {
@@ -2592,7 +2592,7 @@
         "fr": "D.O. Rioja"
       },
       "type": "red",
-      "price_bottle": 19.0,
+      "price_bottle": 19,
       "price_glass": 3.2,
       "available": true,
       "description": {
@@ -2616,7 +2616,7 @@
         "fr": "D.O.Ca. Rioja"
       },
       "type": "red",
-      "price_bottle": 26.0,
+      "price_bottle": 26,
       "available": true,
       "description": {
         "es": "Uva(s): Tempranillo, Garnacha, Graciano · Reserva con 24 meses en barrica. Complejo, elegante, con fruta madura y vainilla. · Maridaje: Cordero asado, carne de monte, quesos curados",
@@ -2639,7 +2639,7 @@
         "fr": "D.O. Ribera del Duero"
       },
       "type": "red",
-      "price_bottle": 17.0,
+      "price_bottle": 17,
       "price_glass": 3.2,
       "available": true,
       "description": {
@@ -2686,7 +2686,7 @@
         "fr": "V.T. Castilla y León"
       },
       "type": "red",
-      "price_bottle": 18.0,
+      "price_bottle": 18,
       "price_glass": 3.2,
       "available": true,
       "description": {
@@ -2710,7 +2710,7 @@
         "fr": "D.O. Ribera del Duero"
       },
       "type": "red",
-      "price_bottle": 19.0,
+      "price_bottle": 19,
       "price_glass": 3.2,
       "available": true,
       "description": {
@@ -2734,7 +2734,7 @@
         "fr": "D.O. Ribera del Duero"
       },
       "type": "red",
-      "price_bottle": 19.0,
+      "price_bottle": 19,
       "available": true,
       "description": {
         "es": "Uva(s): Tempranillo · Crianza con 12 meses en barrica. Estructura media, notas de fruta y cuero. · Maridaje: Carne de monte, callos, guisos contundentes",
@@ -2757,7 +2757,7 @@
         "fr": "D.O. Rueda"
       },
       "type": "white",
-      "price_bottle": 17.0,
+      "price_bottle": 17,
       "price_glass": 3.2,
       "available": true,
       "description": {
@@ -2829,7 +2829,7 @@
         "fr": "V.T. Castilla y León"
       },
       "type": "white",
-      "price_bottle": 19.0,
+      "price_bottle": 19,
       "price_glass": 3.3,
       "available": true,
       "description": {
@@ -2945,7 +2945,7 @@
         "fr": "D.O. Jerez"
       },
       "type": "sherry",
-      "price_glass": 4.0,
+      "price_glass": 4,
       "available": true,
       "description": {
         "es": "Comienza como fino y evoluciona con crianza oxidativa. Color ámbar, notas de nuez y avellana. · Maridaje: Riñones al Jerez, consomé, queso curado",
@@ -2968,7 +2968,7 @@
         "fr": "D.O. Jerez"
       },
       "type": "sherry",
-      "price_glass": 4.0,
+      "price_glass": 4,
       "available": true,
       "description": {
         "es": "Crianza oxidativa completa. Seco, complejo, con notas de nuez, tabaco y cuero. · Maridaje: Carne de monte, callos, guisos de cuchara",

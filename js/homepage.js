@@ -78,7 +78,7 @@
 
   function parseDishPrice(str, lang) {
     if (!str) return { type: 'simple', display: '' };
-    
+
     // Normalize non-breaking spaces for regex matching
     const cleanStr = str.replace(/&nbsp;/g, ' ').replace(/\u00a0/g, ' ');
 
@@ -127,12 +127,28 @@
   }
 
   function formatTimePeriod(period, lang) {
-    function fmt(value) {
-      if (lang !== 'fr') return value;
-      const parts = value.split(':');
+    function to12Hour(timeStr) {
+      const parts = timeStr.split(':');
+      let hours = parseInt(parts[0], 10);
+      const minutes = parts[1];
+      const ampm = hours >= 12 ? 'PM' : 'AM';
+      hours = hours % 12;
+      hours = hours ? hours : 12;
+      return `${hours}:${minutes} ${ampm}`;
+    }
+
+    function toFrench(timeStr) {
+      const parts = timeStr.split(':');
       return `${parts[0]}h${parts[1]}`;
     }
-    return `${fmt(period.open)}–${fmt(period.close)}`;
+
+    if (lang === 'en') {
+      return `${to12Hour(period.open)} – ${to12Hour(period.close)}`;
+    } else if (lang === 'fr') {
+      return `${toFrench(period.open)} à ${toFrench(period.close)}`;
+    } else {
+      return `${period.open} a ${period.close}`;
+    }
   }
 
   // ─── SERVICE TIME HELPER ─────────────────────────────────────────────────────
@@ -457,6 +473,7 @@
     const phoneDisplay = formatPhoneDisplay(d.contact.phone);
     const cartaUrl     = CARTA_LINKS[lang];
     const nav          = d.nav;
+    const inService    = isNowServiceTime(d.hours);
 
     const notice = t(d.venue.notice, lang);
     const aviso  = notice ? `<p class="aviso">${notice}</p>` : '';
@@ -555,6 +572,10 @@
     <div class="nav-primary">
       <a href="${cartaUrl}">${t(d.nav.menu, lang)}</a>
       <a href="${cartaUrl}#hours">${t(d.nav.hours, lang)}</a>
+      <a href="${cartaUrl}#hours" class="status-pill ${inService ? 'status-pill--open' : 'status-pill--closed'}">
+        <span class="status-pill__dot"></span>
+        ${inService ? (lang === 'en' ? 'Open' : lang === 'fr' ? 'Ouvert' : 'Abierto') : (lang === 'en' ? 'Closed' : lang === 'fr' ? 'Fermé' : 'Cerrado')}
+      </a>
       ${callCta}
     </div>
     <div class="lang-selector" aria-label="Language">${langSelector(lang, HOME_LINKS)}</div>

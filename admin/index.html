@@ -32,7 +32,7 @@
     ].join('\n'), { raw: true });
 
     // ── COMPONENTE DE PREVISUALIZACIÓN ─────────────────────────
-    var h = CMS.h;
+    var h = window.h || CMS.h;
 
     var DAY_ES = {
       monday: 'Lunes', tuesday: 'Martes', wednesday: 'Miércoles',

@@ -140,12 +140,28 @@
   }
 
   function formatTimePeriod(period, lang) {
-    const sep = lang === 'fr' ? 'h' : ':';
-    function fmt(t) {
-      const [h, m] = t.split(':');
-      return lang === 'fr' ? `${h}h${m}` : t;
+    function to12Hour(timeStr) {
+      const parts = timeStr.split(':');
+      let hours = parseInt(parts[0], 10);
+      const minutes = parts[1];
+      const ampm = hours >= 12 ? 'PM' : 'AM';
+      hours = hours % 12;
+      hours = hours ? hours : 12;
+      return `${hours}:${minutes} ${ampm}`;
     }
-    return `${fmt(period.open)}–${fmt(period.close)}`;
+
+    function toFrench(timeStr) {
+      const parts = timeStr.split(':');
+      return `${parts[0]}h${parts[1]}`;
+    }
+
+    if (lang === 'en') {
+      return `${to12Hour(period.open)} – ${to12Hour(period.close)}`;
+    } else if (lang === 'fr') {
+      return `${toFrench(period.open)} à ${toFrench(period.close)}`;
+    } else {
+      return `${period.open} a ${period.close}`;
+    }
   }
 
   function langSelector(lang) {
@@ -891,6 +907,7 @@
       const d = await res.json();
 
       const nav = d.nav;
+      const inService = isNowServiceTime(d.hours);
 
       headerNav.innerHTML = `<div class="carta-header-left">
   <a href="${HOME_LINKS[lang]}" class="carta-back">${t(nav.back, lang)}</a>
@@ -898,6 +915,10 @@
 <div class="carta-header-center" style="display: flex; align-items: center; gap: 8px; justify-content: center;">
   <img src="../assets/images/lion-logo.svg" class="header-logo" alt="" />
   <span class="carta-bar-name">${t(d.venue.name, lang)}</span>
+  <span class="status-pill ${inService ? 'status-pill--open' : 'status-pill--closed'}">
+    <span class="status-pill__dot"></span>
+    ${inService ? (lang === 'en' ? 'Open' : lang === 'fr' ? 'Ouvert' : 'Abierto') : (lang === 'en' ? 'Closed' : lang === 'fr' ? 'Fermé' : 'Cerrado')}
+  </span>
 </div>
 <div class="carta-header-right">
   <div class="carta-lang-selector" aria-label="Language">${langSelector(lang)}</div>

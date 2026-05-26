@@ -944,10 +944,10 @@ h2 {
 /* ─── SITE SINCE ─── */
 .site-location__since,
 .site-since {
-  font-family: 'Granaina Sucia', cursive, sans-serif;
-  font-size: 0.85rem;
+  font-family: 'Playfair Display', Georgia, serif;
+  font-size: 0.8rem;
   text-transform: none;
-  letter-spacing: 0.05em;
+  letter-spacing: 0.03em;
   opacity: 0.85;
 }
 
@@ -987,10 +987,10 @@ h2 {
 }
 
 .hero-editorial-year {
-  font-family: 'Granaina Sucia', cursive, sans-serif;
+  font-family: 'Playfair Display', Georgia, serif;
   font-size: 0.8rem;
   text-transform: none;
-  letter-spacing: 0.05em;
+  letter-spacing: 0.03em;
   color: var(--muted);
   margin-bottom: 22px;
 }
@@ -1530,7 +1530,7 @@ h2 {
   }
   .nav-primary {
     display: grid;
-    grid-template-columns: repeat(3, minmax(0, 1fr));
+    grid-template-columns: repeat(2, minmax(0, 1fr));
     gap: 4px;
     width: 100%;
   }
@@ -1623,6 +1623,11 @@ h2 {
     display: inline-block;
     padding: 14px 10px;
   }
+  .nav-primary .status-pill {
+    display: inline-flex;
+    justify-content: center;
+    min-width: 0;
+  }
   .lang-selector a,
   .lang-selector .lang-active {
     display: inline-block;
@@ -1655,7 +1660,7 @@ h2 {
 }
 
 @media (max-width: 380px) {
-  .nav-primary { gap: 12px; }
+  .nav-primary { gap: 4px; }
   .nav-primary a { font-size: 0.7rem; }
 }
 
@@ -2067,5 +2072,52 @@ h2 {
   opacity: 0.65;
   margin: 36px 0 12px;
   letter-spacing: 0.15em;
+}
+
+/* ─── STATUS PILL ─── */
+.status-pill {
+  display: inline-flex;
+  align-items: center;
+  gap: 5px;
+  padding: 4px 10px;
+  border-radius: 12px;
+  font-family: var(--font-body, system-ui, sans-serif);
+  font-size: 0.68rem;
+  font-weight: 500;
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+  text-decoration: none !important;
+  border: 1px solid rgba(28, 26, 23, 0.12);
+  transition: all 0.2s ease;
+  line-height: 1;
+}
+
+.status-pill--open {
+  background: rgba(46, 125, 50, 0.06);
+  border-color: rgba(46, 125, 50, 0.25);
+  color: #2e7d32 !important;
+}
+
+.status-pill--open:hover {
+  background: rgba(46, 125, 50, 0.12);
+  border-color: rgba(46, 125, 50, 0.4);
+}
+
+.status-pill--closed {
+  background: rgba(198, 40, 40, 0.06);
+  border-color: rgba(198, 40, 40, 0.25);
+  color: #c62828 !important;
+}
+
+.status-pill--closed:hover {
+  background: rgba(198, 40, 40, 0.12);
+  border-color: rgba(198, 40, 40, 0.4);
+}
+
+.status-pill__dot {
+  width: 5px;
+  height: 5px;
+  border-radius: 50%;
+  background-color: currentColor;
 }
 
