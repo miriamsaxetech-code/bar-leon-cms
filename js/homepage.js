@@ -559,12 +559,6 @@
     </div>
     <div class="lang-selector" aria-label="Language">${langSelector(lang, HOME_LINKS)}</div>
   </nav>
-  <div class="tile-frame">
-    <blockquote>
-      "${t(d.venue.tagline, lang)}"
-    </blockquote>
-    <cite>${t(d.venue.name, lang)} &middot; ${addr.street} &middot; ${addr.city}</cite>
-  </div>
   ${aviso}
   ${renderHomeDailyMenu(d, lang, cartaUrl)}
   ${hero}
@@ -575,6 +569,12 @@
   ${locationBlock}
   ${renderStoriesArchive(d, lang)}
   ${cariocaSlot}
+  <div class="tile-frame">
+    <blockquote>
+      "${t(d.venue.tagline, lang)}"
+    </blockquote>
+    <cite>${t(d.venue.name, lang)} &middot; ${addr.street} &middot; ${addr.city}</cite>
+  </div>
   <div class="footer-separator">❖</div>
   <div class="homepage-footer">
     <div class="homepage-footer-inner">
