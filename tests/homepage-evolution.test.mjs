@@ -138,6 +138,7 @@ assert.match(withArchive.html, /tres generaciones sosteniendo una barra granadin
 const withHomepageCarioca = await renderHomepageAt('2026-05-25T13:30:00+02:00', 'es', { withArchive: true, homepageCarioca: true });
 assert.equal((withHomepageCarioca.html.match(/bar-leon-plato-01\.webp/g) || []).length, 1);
 assert.doesNotMatch(withHomepageCarioca.html, /carioca-slot/);
+assert.match(withHomepageCarioca.html, /class="status-pill status-pill--open"/);
 assert.match(withHomepageCarioca.html, /Estamos abiertos/);
 
 const english = await renderHomepageAt('2026-05-25T13:30:00+02:00', 'en');
