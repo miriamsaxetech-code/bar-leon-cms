@@ -673,6 +673,60 @@
 </div>`;
   }
 
+  function renderChalkboard(d, lang) {
+    const cb = d.chalkboard;
+    if (!cb || !cb.group1 || !cb.group2) return '';
+
+    const mediaLabel  = { es: 'media', en: 'half',   fr: 'demi'   }[lang] || 'media';
+    const racionLabel = { es: 'ración', en: 'full',   fr: 'ration' }[lang] || 'ración';
+
+    function rowHtml(item) {
+      const name  = item[lang] || item.es || '';
+      const media = item.media  || '—';
+      const racion = item.racion || '—';
+      return `<div class="chalkboard-row">
+  <span class="chalkboard-name">${name}</span>
+  <span class="chalkboard-media">${media}</span>
+  <span class="chalkboard-racion">${racion}</span>
+</div>`;
+    }
+
+    const g1 = (cb.group1 || []).map(rowHtml).join('');
+    const g2 = (cb.group2 || []).map(rowHtml).join('');
+
+    const headerRow = `<div class="chalkboard-row chalkboard-col-header">
+  <span class="chalkboard-name"></span>
+  <span class="chalkboard-media">${mediaLabel}</span>
+  <span class="chalkboard-racion">${racionLabel}</span>
+</div>`;
+
+    const subtitle = {
+      es: 'Albayz&iacute;n &middot; Granada',
+      en: 'Albayz&iacute;n &middot; Granada',
+      fr: 'Albayz&iacute;n &middot; Grenade',
+    }[lang];
+
+    return `<div class="wrap">
+  <div class="barra-chalkboard">
+    <div class="chalkboard-header">
+      <div class="chalkboard-title">Bar Le&oacute;n &mdash; Desde 1959</div>
+      <div class="chalkboard-subtitle">${subtitle}</div>
+    </div>
+    <div class="chalkboard-body">
+      <div class="chalkboard-group">
+        ${headerRow}
+        ${g1}
+      </div>
+      <div class="chalkboard-vsep" aria-hidden="true"></div>
+      <div class="chalkboard-group">
+        ${headerRow}
+        ${g2}
+      </div>
+    </div>
+  </div>
+</div>`;
+  }
+
   function renderMenuSections(d, nav, lang) {
     const serviceMode = d.service_mode || {};
 
@@ -701,6 +755,7 @@
     <p class="section-label">${LABELS.bar[lang]}</p>
     <p class="menu-panel-copy">${LABELS.barIntro[lang]}</p>
   </div>
+  ${renderChalkboard(d, lang)}
   <div class="wrap">${renderParaEmpezar(d.wines, d.beverages, lang)}</div>
   ${renderBarSnapshot(lang)}
   ${renderWines(null, d.beverages, d.dishes, d.categories, lang, 'bar', 'wine', null)}
@@ -911,16 +966,18 @@
       const nav = d.nav;
       const inService = isNowServiceTime(d.hours);
 
+      const locationLabel = { es: '¿Cómo llegar?', en: 'How to find us', fr: 'Comment nous trouver' }[lang] || '¿Cómo llegar?';
+      const mapsUrl = (d.social && d.social.google_maps) ? d.social.google_maps : '#hours';
+
       headerNav.innerHTML = `<div class="carta-header-left">
   <a href="${HOME_LINKS[lang]}" class="carta-back">${t(nav.back, lang)}</a>
 </div>
-<div class="carta-header-center" style="display: flex; align-items: center; gap: 8px; justify-content: center;">
-  <img src="../assets/images/lion-logo.svg" class="header-logo" alt="" />
-  <span class="carta-bar-name">${t(d.venue.name, lang)}</span>
-  <span class="status-pill ${inService ? 'status-pill--open' : 'status-pill--closed'}">
-    <span class="status-pill__dot"></span>
-    ${inService ? LABELS.statusOpen[lang] : LABELS.statusClosed[lang]}
-  </span>
+<div class="carta-header-center">
+  <div class="carta-header-name-row">
+    <img src="../assets/images/lion-logo.svg" class="header-logo" alt="" />
+    <span class="carta-bar-name">${t(d.venue.name, lang)}</span>
+  </div>
+  <a href="${mapsUrl}" class="carta-location-btn" target="_blank" rel="noopener">${locationLabel}</a>
 </div>
 <div class="carta-header-right">
   <div class="carta-lang-selector" aria-label="Language">${langSelector(lang)}</div>
