@@ -44,6 +44,8 @@
     soldout:           { es: 'Agotado hoy', en: 'Sold out today', fr: "Épuisé aujourd'hui" },
     paraEmpezarTitle:  { es: 'Para empezar',              en: 'To start',                   fr: 'Pour commencer'           },
     paraEmpezarSub:    { es: 'La barra, antes de la mesa.', en: 'The bar, before the table.', fr: 'Le comptoir, avant la table.' },
+    statusOpen:        { es: 'Estamos abiertos', en: 'We are open', fr: 'Nous sommes ouverts' },
+    statusClosed:      { es: 'Cerrado', en: 'Closed', fr: 'Fermé' },
     whatsappFab:       { es: 'WhatsApp', en: 'WhatsApp', fr: 'WhatsApp' },
   };
 
@@ -917,7 +919,7 @@
   <span class="carta-bar-name">${t(d.venue.name, lang)}</span>
   <span class="status-pill ${inService ? 'status-pill--open' : 'status-pill--closed'}">
     <span class="status-pill__dot"></span>
-    ${inService ? (lang === 'en' ? 'Open' : lang === 'fr' ? 'Ouvert' : 'Abierto') : (lang === 'en' ? 'Closed' : lang === 'fr' ? 'Fermé' : 'Cerrado')}
+    ${inService ? LABELS.statusOpen[lang] : LABELS.statusClosed[lang]}
   </span>
 </div>
 <div class="carta-header-right">

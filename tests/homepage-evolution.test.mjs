@@ -64,6 +64,9 @@ async function renderHomepageAt(dateIso, lang = 'es', options = {}) {
 
   const venue = JSON.parse(await fs.readFile('data/venue.json', 'utf8'));
   if (!options.withArchive) venue.cariocas = [];
+  if (options.homepageCarioca && venue.cariocas[0]) {
+    venue.cariocas[0].context = 'homepage';
+  }
   const source = await fs.readFile('js/homepage.js', 'utf8');
   const fixedNow = new Date(dateIso);
 
@@ -132,9 +135,15 @@ assert.match(withArchive.html, /Stories of León/);
 assert.match(withArchive.html, /bar-leon-plato-01\.webp/);
 assert.match(withArchive.html, /tres generaciones sosteniendo una barra granadina/);
 
+const withHomepageCarioca = await renderHomepageAt('2026-05-25T13:30:00+02:00', 'es', { withArchive: true, homepageCarioca: true });
+assert.equal((withHomepageCarioca.html.match(/bar-leon-plato-01\.webp/g) || []).length, 1);
+assert.doesNotMatch(withHomepageCarioca.html, /carioca-slot/);
+assert.match(withHomepageCarioca.html, /Estamos abiertos/);
+
 const english = await renderHomepageAt('2026-05-25T13:30:00+02:00', 'en');
 assert.match(english.html, /site-location__since">Since 1959/);
 assert.match(english.html, /class="call-label">Call<\/span>/);
+assert.match(english.html, /We are open/);
 assert.match(english.html, /Try a local red wine/);
 assert.match(english.html, /beyond Rioja\/Ribera/);
 assert.match(english.html, /D\.O\.P\.\s*Granada|D\.O\.\s*Granada/);
@@ -144,5 +153,6 @@ assert.doesNotMatch(english.html, /Pairs with/);
 const french = await renderHomepageAt('2026-05-25T13:30:00+02:00', 'fr');
 assert.match(french.html, /site-location__since">Depuis 1959/);
 assert.match(french.html, /class="call-label">Appeler<\/span>/);
+assert.match(french.html, /Nous sommes ouverts/);
 
 console.log('homepage evolution render OK');

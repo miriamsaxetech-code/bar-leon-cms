@@ -46,6 +46,8 @@
     storiesSub:   { es: 'Archivo familiar y memoria de barra. Solo material real del León.', en: 'Family archive and bar memory. Only real León material.', fr: 'Archives familiales et mémoire du comptoir. Uniquement du matériel réel du León.' },
     call:         { es: 'Llamar', en: 'Call', fr: 'Appeler' },
     whatsapp:     { es: 'WhatsApp', en: 'WhatsApp', fr: 'WhatsApp' },
+    statusOpen:   { es: 'Estamos abiertos', en: 'We are open', fr: 'Nous sommes ouverts' },
+    statusClosed: { es: 'Cerrado', en: 'Closed', fr: 'Fermé' },
     recommended:  { es: 'Recomendado', en: 'Recommended', fr: 'Recommandé' },
     seasonal:     { es: 'Temporada', en: 'Seasonal', fr: 'Saison' },
     house:        { es: 'De la casa', en: 'House specialty', fr: 'Spécialité maison' },
@@ -418,22 +420,6 @@
 </section>`;
   }
 
-  // ─── CARIOCA SLOT ─────────────────────────────────────────────────────────────
-  function renderCariocaSlot(venue, lang) {
-    const item = (venue.cariocas || []).find(c => c.active && c.context === 'homepage');
-    if (!item) return '';
-    const caption = t(item.caption, lang) || '';
-    return `
-    <div class="carioca-slot">
-      <figure class="carioca-slot__card">
-        <img src="${item.image}" alt="Carioca de Bar León" loading="lazy"
-             onerror="this.closest('.carioca-slot').style.display='none'">
-        <figcaption>${caption}</figcaption>
-      </figure>
-    </div>
-  `;
-  }
-
   // ─── SOCIAL MEDIA LINKS ───────────────────────────────────────────────────────
   function renderSocialLinks(social) {
     const platforms = [
@@ -558,9 +544,6 @@
   </div>
 </section>`;
 
-    // ─── CARIOCA SLOT ─────────────────────────────────────────────────────────────
-    const cariocaSlot = renderCariocaSlot(d, lang);
-
     return `<div class="wrap">
   ${logoBlock}
   <h1 class="site-name">${t(d.venue.name, lang)}</h1>
@@ -574,7 +557,7 @@
       <a href="${cartaUrl}#hours">${t(d.nav.hours, lang)}</a>
       <a href="${cartaUrl}#hours" class="status-pill ${inService ? 'status-pill--open' : 'status-pill--closed'}">
         <span class="status-pill__dot"></span>
-        ${inService ? (lang === 'en' ? 'Open' : lang === 'fr' ? 'Ouvert' : 'Abierto') : (lang === 'en' ? 'Closed' : lang === 'fr' ? 'Fermé' : 'Cerrado')}
+        ${inService ? LABELS.statusOpen[lang] : LABELS.statusClosed[lang]}
       </a>
       ${callCta}
     </div>
@@ -589,7 +572,6 @@
   ${renderSocialLinks(d.social)}
   ${locationBlock}
   ${renderStoriesArchive(d, lang)}
-  ${cariocaSlot}
   <div class="tile-frame">
     <blockquote>
       "${t(d.venue.tagline, lang)}"
