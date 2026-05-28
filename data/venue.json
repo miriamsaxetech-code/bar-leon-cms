@@ -3524,6 +3524,50 @@
       },
       "context": "archive",
       "active": true
+    },
+    {
+      "id": "barra-anos-70",
+      "image": "../assets/images/leon1.jpeg",
+      "caption": {
+        "es": "La barra en los años 70: servicio constante, azulejería original y clientela fiel.",
+        "en": "The bar counter in the 70s: constant service, original tiles, and loyal clientele.",
+        "fr": "Le comptoir dans les années 70 : service continu, azulejos d'origine et clientèle fidèle."
+      },
+      "context": "archive",
+      "active": true
+    },
+    {
+      "id": "preparacion-barra",
+      "image": "../assets/images/leon2.jpeg",
+      "caption": {
+        "es": "Preparando la barra: el ritual diario de limpieza y montaje de vitrinas.",
+        "en": "Preparing the bar: the daily ritual of cleaning and glass display setups.",
+        "fr": "Préparation du comptoir : le rituel quotidien de nettoyage et de montage des vitrines."
+      },
+      "context": "archive",
+      "active": true
+    },
+    {
+      "id": "tertulia-cofrade",
+      "image": "../assets/images/leon3.jpeg",
+      "caption": {
+        "es": "La tertulia cofrade tras las procesiones en Plaza Nueva. El León como punto de encuentro del Albayzín.",
+        "en": "Cofrade gatherings after the processions in Plaza Nueva. The León as Albayzín's meeting point.",
+        "fr": "Les rencontres cofrades après les processions sur la Plaza Nueva. Le León comme point de rencontre de l'Albayzín."
+      },
+      "context": "archive",
+      "active": true
+    },
+    {
+      "id": "comedor-clasico",
+      "image": "../assets/images/leon5.jpeg",
+      "caption": {
+        "es": "El comedor clásico: mesas de madera preparadas para el guiso diario del Albayzín.",
+        "en": "The classic dining room: wooden tables ready for Albayzín's daily stew.",
+        "fr": "La salle à manger classique : tables en bois prêtes pour le ragoût quotidien de l'Albayzín."
+      },
+      "context": "archive",
+      "active": true
     }
   ],
   "service_mode": {

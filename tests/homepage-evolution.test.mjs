@@ -131,7 +131,7 @@ const afterHours = await renderHomepageAt('2026-05-25T18:30:00+02:00');
 assert.ok(afterHours.body.children.some(el => el.className === 'mobile-service-cta' && el.href === 'https://wa.me/34696948630'));
 
 const withArchive = await renderHomepageAt('2026-05-25T13:30:00+02:00', 'es', { withArchive: true });
-assert.match(withArchive.html, /Stories of León/);
+assert.match(withArchive.html, /Historias del León/);
 assert.match(withArchive.html, /bar-leon-plato-01\.webp/);
 assert.match(withArchive.html, /tres generaciones sosteniendo una barra granadina/);
 

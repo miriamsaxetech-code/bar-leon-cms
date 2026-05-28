@@ -42,7 +42,7 @@
     fullMenu:     { es: 'Ver carta completa', en: 'View full menu', fr: 'Voir la carte' },
     andalusia:    { es: 'Sabores de Andalucía', en: 'Flavors of Andalusia', fr: "Saveurs d'Andalousie" },
     andalusiaSub: { es: 'Platos de casa, guiso y barra granadina.', en: 'House dishes, stews, and Granada bar classics.', fr: 'Plats maison, mijotés et comptoir grenadin.' },
-    stories:      { es: 'Stories of León', en: 'Stories of León', fr: 'Stories of León' },
+    stories:      { es: 'Historias del León', en: 'Stories of León', fr: 'Histoires du León' },
     storiesSub:   { es: 'Archivo familiar y memoria de barra. Solo material real del León.', en: 'Family archive and bar memory. Only real León material.', fr: 'Archives familiales et mémoire du comptoir. Uniquement du matériel réel du León.' },
     call:         { es: 'Llamar', en: 'Call', fr: 'Appeler' },
     whatsapp:     { es: 'WhatsApp', en: 'WhatsApp', fr: 'WhatsApp' },
@@ -294,26 +294,41 @@
     return (str || '').split(' · ').map(s => s.trim()).filter(Boolean);
   }
 
+  function isDailyMenuToday(dm) {
+    if (!dm || !dm.active || !dm.days) return false;
+    const now = new Date();
+    const dayKeys = ['sunday','monday','tuesday','wednesday','thursday','friday','saturday'];
+    const todayKey = dayKeys[now.getDay()];
+    return dm.days.includes(todayKey);
+  }
+
   function renderHomeDailyMenu(d, lang, cartaUrl) {
     const dm = d.daily_menu;
     if (!dm || !dm.active) return '';
+
+    const isMenuToday = isDailyMenuToday(dm);
+    let kickerText = '';
+    if (isMenuToday) {
+      kickerText = LABELS.dailyKicker[lang];
+    } else {
+      kickerText = {
+        es: 'Disponible de lunes a viernes',
+        en: 'Available Monday to Friday',
+        fr: 'Disponible du lundi au vendredi'
+      }[lang] || 'Disponible de lunes a viernes';
+    }
 
     const days = (dm.days || [])
       .map(day => DAY_NAMES[day] ? DAY_NAMES[day][lang] : day)
       .join(', ');
     const period = dm.service_period ? formatTimePeriod(dm.service_period, lang) : '';
 
-    function renderAccordionGroup(label, values, open) {
+    function renderBentoCell(label, values) {
       if (!values.length) return '';
       const items = values.map(item => `<li>${item}</li>`).join('');
-      return `<div class="accordion-item${open ? ' is-open' : ''}">
-  <button class="dm-section-head" aria-expanded="${open ? 'true' : 'false'}">
-    <span>${label}</span>
-    <span class="accordion-icon" aria-hidden="true"></span>
-  </button>
-  <div class="accordion-body">
-    <ul class="home-daily-menu__group-list">${items}</ul>
-  </div>
+      return `<div class="bento-cell">
+  <h3 class="bento-cell__title">${label}</h3>
+  <ul class="bento-cell__list">${items}</ul>
 </div>`;
     }
 
@@ -325,18 +340,18 @@
 
     return `<section class="tile-frame home-daily-menu" aria-labelledby="home-daily-title">
   <div class="home-daily-menu__head">
-    <p class="section-label">${LABELS.dailyKicker[lang]}</p>
+    <p class="section-label">${kickerText}</p>
     <div>
       <h2 id="home-daily-title">${LABELS.dailyMenu[lang]}</h2>
       <p class="home-daily-menu__meta">${days}${period ? ` · ${period}` : ''}</p>
     </div>
     <span class="home-daily-menu__price">${formatPrice(dm.price)}</span>
   </div>
-  <div class="home-daily-menu__body">
-    ${renderAccordionGroup(LABELS.starters[lang], splitList(t(dm.starters, lang)), true)}
-    ${renderAccordionGroup(LABELS.seconds[lang], splitList(t(dm.seconds, lang)), false)}
-    ${renderAccordionGroup(LABELS.daily[lang], mains.concat(seasonal), false)}
-    ${renderAccordionGroup(LABELS.desserts[lang], splitList(t(dm.desserts, lang)), false)}
+  <div class="home-daily-menu__grid">
+    ${renderBentoCell(LABELS.starters[lang], splitList(t(dm.starters, lang)))}
+    ${renderBentoCell(LABELS.seconds[lang], splitList(t(dm.seconds, lang)))}
+    ${renderBentoCell(LABELS.daily[lang], mains.concat(seasonal))}
+    ${renderBentoCell(LABELS.desserts[lang], splitList(t(dm.desserts, lang)))}
   </div>
   <div class="home-daily-menu__foot">
     <p>${t(dm.includes, lang)}</p>
@@ -401,22 +416,42 @@
   }
 
   function renderStoriesArchive(d, lang) {
-    const item = (d.cariocas || []).find(entry => {
+    const activeItems = (d.cariocas || []).filter(entry => {
       const context = entry.context || 'homepage';
       return entry.active && (context === 'homepage' || context === 'archive' || context === 'historia' || context === 'stories') && (entry.image || entry.src);
     });
-    if (!item) return '';
-    const image = item.image || item.src;
-    const caption = t(item.caption, lang);
+    if (!activeItems.length) return '';
+
+    const slidesHtml = activeItems.map((item, idx) => {
+      const image = item.image || item.src;
+      const caption = t(item.caption, lang);
+      return `<div class="album-slide${idx === 0 ? ' is-active' : ''}" data-slide-index="${idx}">
+  <div class="photo-corners">
+    <span class="corner corner--tl"></span>
+    <span class="corner corner--tr"></span>
+    <span class="corner corner--bl"></span>
+    <span class="corner corner--br"></span>
+    <img src="${image}" alt="${caption || LABELS.stories[lang]}" loading="lazy">
+  </div>
+  ${caption ? `<figcaption class="album-caption">${caption}</figcaption>` : ''}
+</div>`;
+    }).join('\n');
+
     return `<section class="stories-archive" aria-labelledby="stories-archive-title">
   <div class="home-section-head">
     <p class="section-label">${LABELS.storiesSub[lang]}</p>
     <h2 id="stories-archive-title">${LABELS.stories[lang]}</h2>
   </div>
-  <figure class="stories-archive__figure">
-    <img src="${image}" alt="${caption || LABELS.stories[lang]}" loading="lazy" onerror="this.closest('section').style.display='none'">
-    ${caption ? `<figcaption>${caption}</figcaption>` : ''}
-  </figure>
+  <div class="album-container">
+    <div class="album-slides">
+      ${slidesHtml}
+    </div>
+    <div class="album-nav">
+      <button class="album-btn album-btn--prev" aria-label="Anterior">&larr; Anterior</button>
+      <span class="album-counter"><span class="album-counter__current">1</span> / <span class="album-counter__total">${activeItems.length}</span></span>
+      <button class="album-btn album-btn--next" aria-label="Siguiente">Siguiente &rarr;</button>
+    </div>
+  </div>
 </section>`;
   }
 
@@ -551,14 +586,16 @@
     <span class="site-location__place">${addr.neighborhood} &middot; ${addr.city}</span>
     <span class="site-location__since">${since}</span>
   </p>
+  <div class="site-status-container">
+    <a href="${cartaUrl}#hours" class="status-pill ${inService ? 'status-pill--open' : 'status-pill--closed'}">
+      <span class="status-pill__dot"></span>
+      ${inService ? LABELS.statusOpen[lang] : LABELS.statusClosed[lang]}
+    </a>
+  </div>
   <nav class="site-nav" aria-label="Navigation">
     <div class="nav-primary">
       <a href="${cartaUrl}">${t(d.nav.menu, lang)}</a>
       <a href="${cartaUrl}#hours">${t(d.nav.hours, lang)}</a>
-      <a href="${cartaUrl}#hours" class="status-pill ${inService ? 'status-pill--open' : 'status-pill--closed'}">
-        <span class="status-pill__dot"></span>
-        ${inService ? LABELS.statusOpen[lang] : LABELS.statusClosed[lang]}
-      </a>
       ${callCta}
     </div>
     <div class="lang-selector" aria-label="Language">${langSelector(lang, HOME_LINKS)}</div>
@@ -617,6 +654,35 @@
     });
   }
 
+  function initStoriesAlbum(root) {
+    if (typeof root.querySelector !== 'function') return;
+    const container = root.querySelector('.stories-archive');
+    if (!container) return;
+
+    const slides = container.querySelectorAll('.album-slide');
+    const prevBtn = container.querySelector('.album-btn--prev');
+    const nextBtn = container.querySelector('.album-btn--next');
+    const currentCounter = container.querySelector('.album-counter__current');
+    if (!slides.length || !prevBtn || !nextBtn || !currentCounter) return;
+
+    let currentIndex = 0;
+
+    function showSlide(index) {
+      slides[currentIndex].classList.remove('is-active');
+      currentIndex = (index + slides.length) % slides.length;
+      slides[currentIndex].classList.add('is-active');
+      currentCounter.textContent = currentIndex + 1;
+    }
+
+    prevBtn.addEventListener('click', function() {
+      showSlide(currentIndex - 1);
+    });
+
+    nextBtn.addEventListener('click', function() {
+      showSlide(currentIndex + 1);
+    });
+  }
+
   function initReveal(root) {
     if (!window.IntersectionObserver) return;
     const els = root.querySelectorAll(
@@ -647,6 +713,7 @@
       injectLangBar(lang, HOME_LINKS);
       injectMobileServiceCTA(d, lang);
       initDailyMenuAccordion(app);
+      initStoriesAlbum(app);
       app.style.display = 'block';
       loader.classList.add('fade-out');
       setTimeout(() => { loader.style.display = 'none'; }, 380);
