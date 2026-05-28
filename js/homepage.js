@@ -323,12 +323,17 @@
       .join(', ');
     const period = dm.service_period ? formatTimePeriod(dm.service_period, lang) : '';
 
-    function renderBentoCell(label, values) {
+    function renderAccordionGroup(label, values, open) {
       if (!values.length) return '';
       const items = values.map(item => `<li>${item}</li>`).join('');
-      return `<div class="bento-cell">
-  <h3 class="bento-cell__title">${label}</h3>
-  <ul class="bento-cell__list">${items}</ul>
+      return `<div class="accordion-item${open ? ' is-open' : ''}">
+  <button class="dm-section-head" aria-expanded="${open ? 'true' : 'false'}">
+    <span>${label}</span>
+    <span class="accordion-icon" aria-hidden="true"></span>
+  </button>
+  <div class="accordion-body">
+    <ul class="home-daily-menu__group-list">${items}</ul>
+  </div>
 </div>`;
     }
 
@@ -347,11 +352,11 @@
     </div>
     <span class="home-daily-menu__price">${formatPrice(dm.price)}</span>
   </div>
-  <div class="home-daily-menu__grid">
-    ${renderBentoCell(LABELS.starters[lang], splitList(t(dm.starters, lang)))}
-    ${renderBentoCell(LABELS.seconds[lang], splitList(t(dm.seconds, lang)))}
-    ${renderBentoCell(LABELS.daily[lang], mains.concat(seasonal))}
-    ${renderBentoCell(LABELS.desserts[lang], splitList(t(dm.desserts, lang)))}
+  <div class="home-daily-menu__body">
+    ${renderAccordionGroup(LABELS.starters[lang], splitList(t(dm.starters, lang)), true)}
+    ${renderAccordionGroup(LABELS.seconds[lang], splitList(t(dm.seconds, lang)), false)}
+    ${renderAccordionGroup(LABELS.daily[lang], mains.concat(seasonal), false)}
+    ${renderAccordionGroup(LABELS.desserts[lang], splitList(t(dm.desserts, lang)), false)}
   </div>
   <div class="home-daily-menu__foot">
     <p>${t(dm.includes, lang)}</p>
