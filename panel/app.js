@@ -225,319 +225,316 @@ function renderAll() {
   renderHorarios();
   renderMenuDelDia();
   renderAviso();
-  // Carioca: solo bindings, no tiene datos preexistentes para renderizar
+  renderCariocas();
 }
 
 // ══════════════════════════════════════════════════════════════
-// TAB: PRECIOS / CATÁLOGO CRUD
+// TAB: PRECIOS
 // ══════════════════════════════════════════════════════════════
-
-function _buildCatalogGroups(filter) {
-  const q = (filter || '').toLowerCase().trim();
-  const categories = state.categories || [];
-  const catMap = {};
-  categories.forEach(c => { catMap[c.id] = c; });
-
-  const groups = {
-    food:  { label: 'Platos',  type: 'dish',     items: [] },
-    wine:  { label: 'Vinos',   type: 'wine',     items: [] },
-    drink: { label: 'Bebidas', type: 'beverage', items: [] },
-  };
-
-  (state.dishes || []).forEach(d => {
-    const cat  = catMap[d.category_id];
-    const type = cat ? cat.type : 'food';
-    const name = (d.name && d.name.es) ? d.name.es : d.id;
-    if (q && !name.toLowerCase().includes(q)) return;
-    const group = groups[type] || groups.food;
-    group.items.push({ ...d, _type: 'dish', _priceField: 'price' });
-  });
-
-  (state.wines || []).forEach(w => {
-    const name = typeof w.name === 'object' ? (w.name.es || w.id) : (w.name || w.id);
-    if (q && !name.toLowerCase().includes(q)) return;
-    groups.wine.items.push({
-      ...w,
-      name: { es: name },
-      _type: 'wine',
-      _priceField: w.price_bottle ? 'price_bottle' : 'price_glass',
-    });
-  });
-
-  (state.beverages || []).forEach(b => {
-    const name = (b.name && b.name.es) ? b.name.es : b.id;
-    if (q && !name.toLowerCase().includes(q)) return;
-    groups.drink.items.push({ ...b, _type: 'beverage', _priceField: 'price' });
-  });
-
-  return groups;
-}
 
 function renderPrecios(filter) {
   const container = document.getElementById('precios-list');
   if (!container || !state) return;
 
-  const groups = _buildCatalogGroups(filter);
-  const searching = !!(filter || '').trim();
+  const q = (filter || '').toLowerCase().trim();
   container.innerHTML = '';
 
-  let totalVisible = 0;
-
-  Object.entries(groups).forEach(([groupKey, group]) => {
-    // Group heading: label + count + add button (hidden while searching)
-    const heading = document.createElement('div');
-    heading.className = 'price-group-heading';
-
-    const headLabel = document.createElement('span');
-    headLabel.className = 'price-group-heading__label';
-    headLabel.textContent = group.label;
-
-    const headCount = document.createElement('span');
-    headCount.className = 'price-group-heading__count';
-    headCount.textContent = group.items.length;
-
-    heading.appendChild(headLabel);
-    heading.appendChild(headCount);
-
-    if (!searching) {
-      const addBtn = document.createElement('button');
-      addBtn.className = 'btn-add-item';
-      addBtn.dataset.groupType = group.type;
-      addBtn.setAttribute('aria-label', `Añadir ${group.label.toLowerCase().slice(0, -1)}`);
-      addBtn.textContent = '+ Añadir';
-      heading.appendChild(addBtn);
-    }
-
-    container.appendChild(heading);
-
-    if (group.items.length === 0 && !searching) {
-      const empty = document.createElement('p');
-      empty.className = 'empty-state empty-state--group';
-      empty.textContent = 'Sin elementos. Usa + Añadir para agregar el primero.';
-      container.appendChild(empty);
-    }
-
-    group.items.forEach(item => {
-      container.appendChild(_buildCatalogRow(item));
+  getCatalogGroups().forEach(group => {
+    const allItems = Array.isArray(state[group.collection]) ? state[group.collection] : [];
+    const items = allItems.filter(item => {
+      const name = getPanelItemName(item);
+      return !q || name.toLowerCase().includes(q);
     });
 
-    totalVisible += group.items.length;
+    const section = document.createElement('section');
+    section.className = 'catalog-section';
+    section.dataset.collection = group.collection;
+
+    const header = document.createElement('div');
+    header.className = 'catalog-section__header';
+    header.innerHTML = `<div>
+      <h2 class="catalog-section__title">${group.label}</h2>
+      <p class="catalog-section__count">${items.length} elementos</p>
+    </div>`;
+
+    const addBtn = document.createElement('button');
+    addBtn.type = 'button';
+    addBtn.className = 'btn btn--ghost btn--small catalog-add-btn';
+    addBtn.dataset.action = 'add';
+    addBtn.dataset.collection = group.collection;
+    addBtn.textContent = '+ Añadir';
+    addBtn.setAttribute('aria-label', `Añadir en ${group.label}`);
+    header.appendChild(addBtn);
+    section.appendChild(header);
+
+    const list = document.createElement('div');
+    list.className = 'catalog-list';
+
+    if (items.length === 0) {
+      const empty = document.createElement('p');
+      empty.className = 'empty-state empty-state--compact';
+      empty.textContent = q ? 'No hay resultados en esta sección.' : 'Todavía no hay elementos.';
+      list.appendChild(empty);
+    }
+
+    items.forEach(item => {
+      list.appendChild(createCatalogRow(group, item));
+    });
+
+    section.appendChild(list);
+    container.appendChild(section);
   });
 
-  if (searching && totalVisible === 0) {
+  if (container.children.length === 0) {
     container.innerHTML = '<p class="empty-state">No se encontraron resultados.</p>';
   }
 }
 
-function _buildCatalogRow(item) {
-  const nameText = (item.name && item.name.es) ? item.name.es : item.id;
-  const isAvailable = item.available !== false;
+function getCatalogGroups() {
+  return [
+    { collection: 'dishes', label: 'Platos', priceFields: ['price'], categories: 'food' },
+    { collection: 'wines', label: 'Vinos', priceFields: ['price_glass', 'price_bottle'] },
+    { collection: 'beverages', label: 'Bebidas', priceFields: ['price'], categories: 'drink' },
+  ];
+}
 
-  const row = document.createElement('div');
-  row.className = 'price-row' + (isAvailable ? '' : ' price-row--unavailable');
-  row.dataset.id   = item.id;
-  row.dataset.type = item._type;
+function getPanelItemName(item) {
+  if (!item) return '';
+  if (item.name && typeof item.name === 'object') return item.name.es || item.id || '';
+  return item.name || item.id || '';
+}
 
-  // Name — tap to edit inline
-  const nameEl = document.createElement('button');
-  nameEl.className = 'price-row__name price-row__name--editable';
-  nameEl.dataset.id   = item.id;
-  nameEl.dataset.type = item._type;
-  nameEl.setAttribute('aria-label', `Editar nombre de ${nameText}`);
-  nameEl.textContent = nameText;
+function getPanelCollectionItem(collection, id) {
+  return Array.isArray(state && state[collection])
+    ? state[collection].find(item => item.id === id)
+    : null;
+}
 
-  // Price
-  const priceBtn = document.createElement('button');
-  priceBtn.className = 'price-row__price';
-  priceBtn.dataset.id    = item.id;
-  priceBtn.dataset.type  = item._type;
-  priceBtn.dataset.field = item._priceField;
-  priceBtn.setAttribute('aria-label', `Editar precio de ${nameText}`);
-  priceBtn.textContent = getPanelPriceDisplay(item);
+function createCatalogRow(group, item) {
+  const row = document.createElement('article');
+  row.className = 'catalog-row';
+  row.dataset.collection = group.collection;
+  row.dataset.id = item.id;
 
-  // Availability toggle
-  const toggleLabel = document.createElement('label');
-  toggleLabel.className = 'catalog-toggle';
-  toggleLabel.setAttribute('aria-label', isAvailable ? 'Disponible' : 'No disponible');
-  const toggleInput = document.createElement('input');
-  toggleInput.type = 'checkbox';
-  toggleInput.className = 'catalog-toggle__input';
-  toggleInput.checked = isAvailable;
-  toggleInput.dataset.id   = item.id;
-  toggleInput.dataset.type = item._type;
-  const toggleThumb = document.createElement('span');
-  toggleThumb.className = 'catalog-toggle__thumb';
-  toggleThumb.setAttribute('aria-hidden', 'true');
-  toggleLabel.appendChild(toggleInput);
-  toggleLabel.appendChild(toggleThumb);
+  const main = document.createElement('div');
+  main.className = 'catalog-row__main';
 
-  // Delete button
-  const delBtn = document.createElement('button');
-  delBtn.className = 'btn-delete-item';
-  delBtn.dataset.id   = item.id;
-  delBtn.dataset.type = item._type;
-  delBtn.setAttribute('aria-label', `Eliminar ${nameText}`);
-  delBtn.textContent = '✕';
+  const nameInput = document.createElement('input');
+  nameInput.type = 'text';
+  nameInput.className = 'field-input catalog-name-input';
+  nameInput.value = getPanelItemName(item);
+  nameInput.dataset.action = 'name';
+  nameInput.dataset.collection = group.collection;
+  nameInput.dataset.id = item.id;
+  nameInput.setAttribute('aria-label', 'Nombre');
+  main.appendChild(nameInput);
 
-  row.appendChild(nameEl);
-  row.appendChild(priceBtn);
-  row.appendChild(toggleLabel);
-  row.appendChild(delBtn);
+  if (group.categories) {
+    main.appendChild(createCategorySelect(group, item));
+  }
+
+  const prices = document.createElement('div');
+  prices.className = 'catalog-row__prices';
+  group.priceFields.forEach(field => {
+    const wrap = document.createElement('label');
+    wrap.className = 'catalog-price-field';
+    const label = field === 'price_bottle' ? 'Botella' : field === 'price_glass' ? 'Copa' : 'Precio';
+    wrap.innerHTML = `<span>${label}</span>`;
+    const input = document.createElement('input');
+    input.type = 'text';
+    input.inputMode = 'decimal';
+    input.className = 'field-input catalog-price-input';
+    input.value = formatPanelEuro(item[field]).replace(' €', '');
+    input.dataset.action = 'price';
+    input.dataset.collection = group.collection;
+    input.dataset.id = item.id;
+    input.dataset.field = field;
+    input.setAttribute('aria-label', label);
+    wrap.appendChild(input);
+    prices.appendChild(wrap);
+  });
+  main.appendChild(prices);
+  main.appendChild(createAllergenSelector(group, item));
+
+  const actions = document.createElement('div');
+  actions.className = 'catalog-row__actions';
+
+  const activeLabel = document.createElement('label');
+  activeLabel.className = 'catalog-active';
+  activeLabel.innerHTML = '<span>Visible</span>';
+  const active = document.createElement('input');
+  active.type = 'checkbox';
+  active.checked = item.available !== false;
+  active.dataset.action = 'available';
+  active.dataset.collection = group.collection;
+  active.dataset.id = item.id;
+  activeLabel.appendChild(active);
+  actions.appendChild(activeLabel);
+
+  const deleteBtn = document.createElement('button');
+  deleteBtn.type = 'button';
+  deleteBtn.className = 'catalog-delete';
+  deleteBtn.dataset.action = 'delete';
+  deleteBtn.dataset.collection = group.collection;
+  deleteBtn.dataset.id = item.id;
+  deleteBtn.textContent = 'Borrar';
+  deleteBtn.setAttribute('aria-label', `Borrar ${getPanelItemName(item)}`);
+  actions.appendChild(deleteBtn);
+
+  row.appendChild(main);
+  row.appendChild(actions);
   return row;
+}
+
+function createCategorySelect(group, item) {
+  const select = document.createElement('select');
+  select.className = 'field-select catalog-category-select';
+  select.dataset.action = 'category';
+  select.dataset.collection = group.collection;
+  select.dataset.id = item.id;
+  select.setAttribute('aria-label', 'Categoría');
+
+  const categories = (state.categories || []).filter(cat => {
+    if (!group.categories) return false;
+    if (group.categories === 'food') return cat.type === 'food' || !cat.type;
+    return cat.type === group.categories;
+  });
+
+  categories.forEach(cat => {
+    const option = document.createElement('option');
+    option.value = cat.id;
+    option.textContent = cat.name && cat.name.es ? cat.name.es : cat.id;
+    option.selected = item.category_id === cat.id;
+    select.appendChild(option);
+  });
+
+  return select;
 }
 
 function bindPreciosEdit() {
   const list = document.getElementById('precios-list');
   if (!list) return;
 
-  // ── Price inline edit (existing behaviour) ────────────────────────────────
   list.addEventListener('click', e => {
-    const btn = e.target.closest('.price-row__price');
-    if (!btn || btn.tagName === 'INPUT') return;
-
-    const dishId    = btn.dataset.id;
-    const itemType  = btn.dataset.type || 'dish';
-    const priceField = btn.dataset.field || 'price';
-
-    const input = document.createElement('input');
-    input.type = 'text';
-    input.inputMode = 'decimal';
-    input.value = btn.textContent.trim();
-    input.className = 'price-input';
-    input.setAttribute('aria-label', 'Precio');
-
-    btn.replaceWith(input);
-    input.focus();
-    input.select();
-
-    function commitPrice() {
-      const newVal = input.value.trim() || btn.textContent.trim();
-      updatePanelPrice(itemType, dishId, priceField, newVal);
-      const newBtn = document.createElement('button');
-      newBtn.className = 'price-row__price';
-      newBtn.dataset.id    = dishId;
-      newBtn.dataset.type  = itemType;
-      newBtn.dataset.field = priceField;
-      newBtn.setAttribute('aria-label', `Editar precio de ${dishId}`);
-      newBtn.textContent = newVal;
-      input.replaceWith(newBtn);
-      markDirty();
+    const addBtn = e.target.closest('[data-action="add"]');
+    if (addBtn) {
+      addCatalogItem(addBtn.dataset.collection);
+      return;
     }
 
-    input.addEventListener('blur', commitPrice);
-    input.addEventListener('keydown', ev => {
-      if (ev.key === 'Enter')  { ev.preventDefault(); input.blur(); }
-      if (ev.key === 'Escape') { input.value = btn.textContent; input.blur(); }
-    });
-  });
+    const deleteBtn = e.target.closest('[data-action="delete"]');
+    if (!deleteBtn) return;
 
-  // ── Name inline edit ──────────────────────────────────────────────────────
-  list.addEventListener('click', e => {
-    const nameBtn = e.target.closest('.price-row__name--editable');
-    if (!nameBtn || nameBtn.tagName === 'INPUT') return;
-
-    const id   = nameBtn.dataset.id;
-    const type = nameBtn.dataset.type || 'dish';
-    const originalText = nameBtn.textContent.trim();
-
-    const input = document.createElement('input');
-    input.type = 'text';
-    input.value = originalText;
-    input.className = 'name-input';
-    input.setAttribute('aria-label', 'Nombre');
-
-    nameBtn.replaceWith(input);
-    input.focus();
-    input.select();
-
-    function commitName() {
-      const newName = input.value.trim() || originalText;
-      _updateItemName(type, id, newName);
-
-      const newBtn = document.createElement('button');
-      newBtn.className = 'price-row__name price-row__name--editable';
-      newBtn.dataset.id   = id;
-      newBtn.dataset.type = type;
-      newBtn.setAttribute('aria-label', `Editar nombre de ${newName}`);
-      newBtn.textContent = newName;
-      input.replaceWith(newBtn);
-
-      // Update row unavailable class if needed
-      const row = newBtn.closest('.price-row');
-      if (row) row.dataset.id = id;
-
+    const item = getPanelCollectionItem(deleteBtn.dataset.collection, deleteBtn.dataset.id);
+    const name = getPanelItemName(item);
+    if (!window.confirm(`¿Borrar "${name}"?`)) return;
+    if (deletePanelItem(state, deleteBtn.dataset.collection, deleteBtn.dataset.id)) {
+      renderPrecios(document.getElementById('search-precios')?.value || '');
       markDirty();
     }
-
-    input.addEventListener('blur', commitName);
-    input.addEventListener('keydown', ev => {
-      if (ev.key === 'Enter')  { ev.preventDefault(); input.blur(); }
-      if (ev.key === 'Escape') { input.value = originalText; input.blur(); }
-    });
   });
 
-  // ── Availability toggle ───────────────────────────────────────────────────
   list.addEventListener('change', e => {
-    const toggle = e.target.closest('.catalog-toggle__input');
-    if (!toggle) return;
-    setPanelItemAvailable(state, toggle.dataset.type, toggle.dataset.id, toggle.checked);
-    const row = toggle.closest('.price-row');
-    if (row) row.classList.toggle('price-row--unavailable', !toggle.checked);
-    markDirty();
-  });
+    const target = e.target;
+    const action = target.dataset.action;
+    const collection = target.dataset.collection;
+    const id = target.dataset.id;
+    if (!action || !collection || !id) return;
 
-  // ── Add item ──────────────────────────────────────────────────────────────
-  list.addEventListener('click', e => {
-    const addBtn = e.target.closest('.btn-add-item');
-    if (!addBtn) return;
-    const type = addBtn.dataset.groupType;
-    const name = 'Nuevo elemento';
-    const newItem = createPanelItem(type, name,
-      type === 'dish' ? ((state.categories || [])[0] || {}).id || '' :
-      type === 'wine' ? 'granada-wines' : 'beer'
-    );
-    // Ensure unique id against existing collection
-    const existingKey = type === 'wine' ? 'wines' : type === 'beverage' ? 'beverages' : 'dishes';
-    newItem.id = slugifyPanelId(name, state[existingKey] || []);
-    addPanelItem(state, type, newItem);
-    markDirty();
+    const item = getPanelCollectionItem(collection, id);
+    if (!item) return;
 
-    // Re-render and focus the new item's name field
-    const searchInput = document.getElementById('search-precios');
-    renderPrecios(searchInput ? searchInput.value : '');
-    const newRow = list.querySelector(`.price-row[data-id="${newItem.id}"]`);
-    if (newRow) {
-      const nameBtn = newRow.querySelector('.price-row__name--editable');
-      if (nameBtn) nameBtn.click();
-      newRow.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
+    if (action === 'name') {
+      if (!item.name || typeof item.name !== 'object') item.name = { es: '', en: '', fr: '' };
+      item.name.es = target.value.trim();
+    } else if (action === 'price') {
+      item[target.dataset.field] = collection === 'wines' ? parsePanelEuro(target.value) : target.value.trim();
+    } else if (action === 'category') {
+      item.category_id = target.value;
+    } else if (action === 'available') {
+      item.available = target.checked;
+    } else if (action === 'allergen') {
+      setPanelItemAllergen(state, collection, id, target.dataset.allergen, target.checked);
     }
-  });
-
-  // ── Delete item ───────────────────────────────────────────────────────────
-  list.addEventListener('click', e => {
-    const delBtn = e.target.closest('.btn-delete-item');
-    if (!delBtn) return;
-    const id   = delBtn.dataset.id;
-    const type = delBtn.dataset.type;
-    const row  = delBtn.closest('.price-row');
-    const name = row ? (row.querySelector('.price-row__name--editable') || {}).textContent || id : id;
-
-    if (!window.confirm(`¿Eliminar "${name}"?\nEsta acción no se puede deshacer hasta guardar.`)) return;
-
-    deletePanelItem(state, type, id);
     markDirty();
-
-    const searchInput = document.getElementById('search-precios');
-    renderPrecios(searchInput ? searchInput.value : '');
   });
 
-  // ── Search ────────────────────────────────────────────────────────────────
+  // Búsqueda en tiempo real
   const searchInput = document.getElementById('search-precios');
   if (searchInput) {
     searchInput.addEventListener('input', () => {
       renderPrecios(searchInput.value);
+      // Re-bind (el contenedor se reemplaza)
     });
   }
+}
+
+function createAllergenSelector(group, item) {
+  const defs = Array.isArray(state.allergens) ? state.allergens : [];
+  const selected = new Set(Array.isArray(item.allergens) ? item.allergens : []);
+  const details = document.createElement('details');
+  details.className = 'catalog-allergens';
+
+  const summary = document.createElement('summary');
+  summary.textContent = `Alérgenos (${selected.size})`;
+  details.appendChild(summary);
+
+  const grid = document.createElement('div');
+  grid.className = 'catalog-allergens__grid';
+  defs.forEach(def => {
+    const label = document.createElement('label');
+    label.className = 'catalog-allergen-option';
+    const input = document.createElement('input');
+    input.type = 'checkbox';
+    input.checked = selected.has(def.id);
+    input.dataset.action = 'allergen';
+    input.dataset.collection = group.collection;
+    input.dataset.id = item.id;
+    input.dataset.allergen = def.id;
+    const text = document.createElement('span');
+    text.textContent = def.label && def.label.es ? def.label.es : def.id;
+    label.appendChild(input);
+    label.appendChild(text);
+    grid.appendChild(label);
+  });
+
+  if (!defs.length) {
+    const empty = document.createElement('p');
+    empty.className = 'empty-state empty-state--compact';
+    empty.textContent = 'No hay catálogo de alérgenos.';
+    grid.appendChild(empty);
+  }
+
+  details.appendChild(grid);
+  return details;
+}
+
+function addCatalogItem(collection) {
+  const group = getCatalogGroups().find(g => g.collection === collection);
+  if (!group) return;
+
+  const name = window.prompt(`Nombre para ${group.label.toLowerCase()}:`);
+  if (!name || !name.trim()) {
+    showError('Escribe un nombre para añadir el elemento.');
+    return;
+  }
+
+  const price = window.prompt('Precio inicial (opcional):') || '';
+  const existingIds = new Set((state[collection] || []).map(item => item.id));
+  const firstCategory = group.categories
+    ? (state.categories || []).find(cat => group.categories === 'food' ? (cat.type === 'food' || !cat.type) : cat.type === group.categories)
+    : null;
+
+  const item = createPanelItem(collection, {
+    name: name.trim(),
+    price,
+    price_glass: collection === 'wines' ? price : '',
+    category_id: firstCategory ? firstCategory.id : '',
+  }, existingIds);
+
+  addPanelItem(state, collection, item);
+  renderPrecios(document.getElementById('search-precios')?.value || '');
+  markDirty();
 }
 
 function getPanelPriceDisplay(item) {
@@ -560,6 +557,113 @@ function parsePanelEuro(value) {
   return Number.isFinite(parsed) ? parsed : value;
 }
 
+function slugifyPanelId(value) {
+  return String(value || '')
+    .normalize('NFD')
+    .replace(/[\u0300-\u036f]/g, '')
+    .toLowerCase()
+    .trim()
+    .replace(/[^a-z0-9]+/g, '-')
+    .replace(/^-+|-+$/g, '') || `item-${Date.now()}`;
+}
+
+function uniquePanelId(baseId, existingIds) {
+  const ids = existingIds instanceof Set ? existingIds : new Set(existingIds || []);
+  if (!ids.has(baseId)) return baseId;
+  let i = 2;
+  while (ids.has(`${baseId}-${i}`)) i += 1;
+  return `${baseId}-${i}`;
+}
+
+function createPanelItem(collection, values, existingIds) {
+  const name = String(values && values.name ? values.name : '').trim();
+  const id = uniquePanelId(slugifyPanelId(name), existingIds);
+  const nameField = { es: name, en: '', fr: '' };
+
+  if (collection === 'wines') {
+    return {
+      id,
+      name: nameField,
+      type: values.type || '',
+      region: values.region || '',
+      price_glass: parsePanelEuro(values.price_glass || values.price || ''),
+      price_bottle: parsePanelEuro(values.price_bottle || ''),
+      available: true,
+      allergens: [],
+    };
+  }
+
+  if (collection === 'beverages') {
+    return {
+      id,
+      name: nameField,
+      price: values.price || '',
+      category_id: values.category_id || '',
+      available: true,
+      allergens: [],
+    };
+  }
+
+  return {
+    id,
+    name: nameField,
+    description: { es: '', en: '', fr: '' },
+    price: values.price || '',
+    category_id: values.category_id || '',
+    available: true,
+    allergens: [],
+  };
+}
+
+function addPanelItem(panelState, collection, item) {
+  if (!panelState[collection]) panelState[collection] = [];
+  panelState[collection].push(item);
+  return item;
+}
+
+function deletePanelItem(panelState, collection, id) {
+  if (!Array.isArray(panelState[collection])) return false;
+  const before = panelState[collection].length;
+  panelState[collection] = panelState[collection].filter(item => item.id !== id);
+  return panelState[collection].length !== before;
+}
+
+function setPanelItemAvailable(panelState, collection, id, available) {
+  const item = Array.isArray(panelState[collection])
+    ? panelState[collection].find(entry => entry.id === id)
+    : null;
+  if (!item) return false;
+  item.available = available;
+  return true;
+}
+
+function setPanelItemAllergen(panelState, collection, id, allergenId, present) {
+  const item = Array.isArray(panelState[collection])
+    ? panelState[collection].find(entry => entry.id === id)
+    : null;
+  if (!item || !allergenId) return false;
+  if (!Array.isArray(item.allergens)) item.allergens = [];
+  const next = new Set(item.allergens);
+  if (present) next.add(allergenId);
+  else next.delete(allergenId);
+  item.allergens = Array.from(next);
+  return true;
+}
+
+function splitPanelListText(value) {
+  return String(value || '')
+    .split(/\s*·\s*|\n+/)
+    .map(item => item.trim())
+    .filter(Boolean);
+}
+
+function joinPanelListItems(items) {
+  return (items || [])
+    .map(item => String(item || '').trim())
+    .filter(Boolean)
+    .join(' · ');
+}
+
 function updatePanelPrice(type, id, field, value) {
   if (!state) return;
   const collections = {
@@ -570,15 +674,6 @@ function updatePanelPrice(type, id, field, value) {
   const item = (collections[type] || []).find(entry => entry.id === id);
   if (!item) return;
   item[field] = type === 'wine' ? parsePanelEuro(value) : value;
-}
-
-function _updateItemName(type, id, newName) {
-  if (!state || !newName) return;
-  const key = type === 'wine' ? 'wines' : type === 'beverage' ? 'beverages' : 'dishes';
-  const item = (state[key] || []).find(i => i.id === id);
-  if (!item) return;
-  if (!item.name || typeof item.name !== 'object') item.name = { es: '', en: '', fr: '' };
-  item.name.es = newName;
 }
 
 // ══════════════════════════════════════════════════════════════
@@ -702,85 +797,22 @@ function createTimeInput(value, onChange) {
 // TAB: MENÚ DEL DÍA
 // ══════════════════════════════════════════════════════════════
 
-function _renderMenuList(containerId, text) {
-  const container = document.getElementById(containerId);
-  if (!container) return;
-  const field = container.dataset.field;
-  container.innerHTML = '';
-
-  const items = splitPanelListText(text);
-
-  items.forEach((item, idx) => {
-    container.appendChild(_buildMenuListRow(item, idx, field));
-  });
-
-  const addBtn = document.createElement('button');
-  addBtn.type = 'button';
-  addBtn.className = 'btn-menu-list-add';
-  addBtn.dataset.field = field;
-  addBtn.setAttribute('aria-label', 'Añadir elemento');
-  addBtn.textContent = '+ Añadir';
-  container.appendChild(addBtn);
-}
-
-function _buildMenuListRow(text, index, field) {
-  const row = document.createElement('div');
-  row.className = 'menu-list-row';
-  row.dataset.index = index;
-
-  const input = document.createElement('input');
-  input.type = 'text';
-  input.className = 'menu-list-input';
-  input.value = text;
-  input.placeholder = 'Elemento…';
-  input.dataset.field = field;
-  input.setAttribute('aria-label', `Elemento ${index + 1}`);
-
-  const delBtn = document.createElement('button');
-  delBtn.type = 'button';
-  delBtn.className = 'menu-list-delete';
-  delBtn.dataset.field = field;
-  delBtn.dataset.index = String(index);
-  delBtn.setAttribute('aria-label', 'Eliminar');
-  delBtn.textContent = '✕';
-
-  row.appendChild(input);
-  row.appendChild(delBtn);
-  return row;
-}
-
-function _serializeMenuList(containerId) {
-  const container = document.getElementById(containerId);
-  if (!container) return '';
-  const inputs = Array.from(container.querySelectorAll('.menu-list-input'));
-  return joinPanelListItems(inputs.map(i => i.value.trim()).filter(Boolean));
-}
-
-function _commitMenuList(field) {
-  if (!state) return;
-  if (!state.daily_menu) state.daily_menu = {};
-  const containerId = `menu-${field}-list`;
-  const text = _serializeMenuList(containerId);
-  if (!state.daily_menu[field]) state.daily_menu[field] = { es: '', en: '', fr: '' };
-  state.daily_menu[field].es = text;
-  markDailyMenuTextDirty();
-}
-
 function renderMenuDelDia() {
   if (!state) return;
   const m = state.daily_menu || {};
 
-  const activeEl = document.getElementById('menu-active');
-  const priceEl  = document.getElementById('menu-price');
-  if (activeEl) activeEl.checked = m.active === true;
-  if (priceEl)  priceEl.value   = m.price != null ? Number(m.price).toFixed(2).replace('.', ',') : '';
+  const activeEl   = document.getElementById('menu-active');
+  const priceEl    = document.getElementById('menu-price');
+  const mainsList  = document.getElementById('menu-mains-list');
 
-  _renderMenuList('menu-starters-list', (m.starters && m.starters.es) || '');
-  _renderMenuList('menu-seconds-list',  (m.seconds  && m.seconds.es)  || '');
-  _renderMenuList('menu-desserts-list', (m.desserts && m.desserts.es) || '');
-  _renderMenuList('menu-seasonal-list', (m.seasonal && m.seasonal.es) || '');
+  if (activeEl)   activeEl.checked    = m.active === true;
+  if (priceEl)    priceEl.value       = m.price != null ? Number(m.price).toFixed(2).replace('.', ',') : '';
 
-  const mainsList = document.getElementById('menu-mains-list');
+  renderDailyMenuList('starters', 'menu-starters-list', 'Añadir primero');
+  renderDailyMenuList('seconds', 'menu-seconds-list', 'Añadir segundo');
+  renderDailyMenuList('desserts', 'menu-desserts-list', 'Añadir postre');
+  renderDailyMenuList('seasonal', 'menu-seasonal-list', 'Añadir nota');
+
   if (!mainsList) return;
   mainsList.innerHTML = '';
   const days = Array.isArray(m.days) ? m.days : [];
@@ -825,65 +857,145 @@ function renderMenuDelDia() {
   });
 }
 
+function ensureDailyMenuField(field) {
+  if (!state.daily_menu) state.daily_menu = {};
+  if (!state.daily_menu[field] || typeof state.daily_menu[field] !== 'object') {
+    state.daily_menu[field] = { es: '', en: '', fr: '' };
+  }
+  return state.daily_menu[field];
+}
+
+function getDailyMenuItems(field) {
+  const data = ensureDailyMenuField(field);
+  return splitPanelListText(data.es || '');
+}
+
+function setDailyMenuItems(field, items) {
+  const data = ensureDailyMenuField(field);
+  data.es = joinPanelListItems(items);
+  markDailyMenuTextDirty();
+}
+
+function renderDailyMenuList(field, containerId, addLabel) {
+  const container = document.getElementById(containerId);
+  if (!container) return;
+
+  const items = getDailyMenuItems(field);
+  container.innerHTML = '';
+
+  const rows = document.createElement('div');
+  rows.className = 'daily-edit-list__rows';
+
+  if (!items.length) {
+    const empty = document.createElement('p');
+    empty.className = 'empty-state empty-state--compact';
+    empty.textContent = 'Sin elementos.';
+    rows.appendChild(empty);
+  }
+
+  items.forEach((item, index) => {
+    const row = document.createElement('div');
+    row.className = 'daily-edit-row';
+
+    const input = document.createElement('input');
+    input.type = 'text';
+    input.className = 'field-input daily-edit-input';
+    input.value = item;
+    input.dataset.menuAction = 'update';
+    input.dataset.menuField = field;
+    input.dataset.index = String(index);
+    input.setAttribute('aria-label', item || 'Elemento del menú');
+
+    const remove = document.createElement('button');
+    remove.type = 'button';
+    remove.className = 'daily-edit-delete';
+    remove.dataset.menuAction = 'delete';
+    remove.dataset.menuField = field;
+    remove.dataset.index = String(index);
+    remove.textContent = 'Borrar';
+
+    row.appendChild(input);
+    row.appendChild(remove);
+    rows.appendChild(row);
+  });
+
+  const add = document.createElement('button');
+  add.type = 'button';
+  add.className = 'btn btn--ghost btn--small daily-edit-add';
+  add.dataset.menuAction = 'add';
+  add.dataset.menuField = field;
+  add.textContent = `+ ${addLabel}`;
+
+  container.appendChild(rows);
+  container.appendChild(add);
+}
+
 function bindMenuDelDia() {
-  // Active toggle and price — static elements, bind directly
-  const activeEl = document.getElementById('menu-active');
-  if (activeEl) {
-    activeEl.addEventListener('change', e => {
-      if (!state.daily_menu) state.daily_menu = {};
-      state.daily_menu.active = e.target.checked;
-      markDirty();
-    });
-  }
+  const fields = [
+    {
+      id: 'menu-active',
+      event: 'change',
+      handler: e => {
+        if (!state.daily_menu) state.daily_menu = {};
+        state.daily_menu.active = e.target.checked;
+        markDirty();
+      },
+    },
+    {
+      id: 'menu-price',
+      event: 'change',
+      handler: e => {
+        if (!state.daily_menu) state.daily_menu = {};
+        const raw = e.target.value.replace(',', '.').replace(/[^\d.]/g, '');
+        const num = parseFloat(raw);
+        state.daily_menu.price = isFinite(num) ? num : state.daily_menu.price;
+        markDirty();
+      },
+    },
+  ];
 
-  const priceEl = document.getElementById('menu-price');
-  if (priceEl) {
-    priceEl.addEventListener('change', e => {
-      if (!state.daily_menu) state.daily_menu = {};
-      const raw = e.target.value.replace(',', '.').replace(/[^\d.]/g, '');
-      const num = parseFloat(raw);
-      state.daily_menu.price = isFinite(num) ? num : state.daily_menu.price;
-      markDirty();
-    });
-  }
+  fields.forEach(({ id, event, handler }) => {
+    const el = document.getElementById(id);
+    if (el) el.addEventListener(event, handler);
+  });
 
-  // List containers — delegate on parent tab panel
-  const menuTab = document.getElementById('tab-menu');
-  if (!menuTab) return;
+  const menuPanel = document.querySelector('.menu-panel');
+  if (!menuPanel) return;
 
-  // Edit item text
-  menuTab.addEventListener('change', e => {
-    const input = e.target.closest('.menu-list-input');
+  menuPanel.addEventListener('click', e => {
+    const control = e.target.closest('[data-menu-action]');
+    if (!control) return;
+    const action = control.dataset.menuAction;
+    const field = control.dataset.menuField;
+    if (!field) return;
+
+    const items = getDailyMenuItems(field);
+    if (action === 'add') {
+      const value = window.prompt('Nuevo elemento:');
+      if (!value || !value.trim()) return;
+      items.push(value.trim());
+      setDailyMenuItems(field, items);
+      renderMenuDelDia();
+    }
+
+    if (action === 'delete') {
+      const index = Number(control.dataset.index);
+      if (!Number.isInteger(index)) return;
+      items.splice(index, 1);
+      setDailyMenuItems(field, items);
+      renderMenuDelDia();
+    }
+  });
+
+  menuPanel.addEventListener('change', e => {
+    const input = e.target.closest('[data-menu-action="update"]');
     if (!input) return;
-    _commitMenuList(input.dataset.field);
-  });
-
-  // Add item
-  menuTab.addEventListener('click', e => {
-    const addBtn = e.target.closest('.btn-menu-list-add');
-    if (!addBtn) return;
-    const field = addBtn.dataset.field;
-    const containerId = `menu-${field}-list`;
-    const container = document.getElementById(containerId);
-    if (!container) return;
-
-    // Insert new row before the add button
-    const allRows = container.querySelectorAll('.menu-list-row');
-    const newRow = _buildMenuListRow('', allRows.length, field);
-    container.insertBefore(newRow, addBtn);
-    const newInput = newRow.querySelector('.menu-list-input');
-    if (newInput) newInput.focus();
-    _commitMenuList(field);
-  });
-
-  // Delete item
-  menuTab.addEventListener('click', e => {
-    const delBtn = e.target.closest('.menu-list-delete');
-    if (!delBtn) return;
-    const field = delBtn.dataset.field;
-    const row = delBtn.closest('.menu-list-row');
-    if (row) row.remove();
-    _commitMenuList(field);
+    const field = input.dataset.menuField;
+    const index = Number(input.dataset.index);
+    if (!field || !Number.isInteger(index)) return;
+    const items = getDailyMenuItems(field);
+    items[index] = input.value.trim();
+    setDailyMenuItems(field, items);
   });
 }
 
@@ -1044,6 +1156,98 @@ function bindCariocaEvents() {
       }
     });
   }
+
+  const list = document.getElementById('cariocas-list');
+  if (list) {
+    list.addEventListener('change', e => {
+      const input = e.target.closest('[data-carioca-action="active"]');
+      if (!input || !Array.isArray(state.cariocas)) return;
+      const index = Number(input.dataset.index);
+      if (!Number.isInteger(index) || !state.cariocas[index]) return;
+      state.cariocas[index].active = input.checked;
+      markDirty();
+    });
+
+    list.addEventListener('click', e => {
+      const btn = e.target.closest('[data-carioca-action="delete"]');
+      if (!btn || !Array.isArray(state.cariocas)) return;
+      const index = Number(btn.dataset.index);
+      const item = state.cariocas[index];
+      if (!item) return;
+      const caption = item.caption && item.caption.es ? item.caption.es : item.id;
+      if (!window.confirm(`¿Borrar la foto "${caption}" del panel?`)) return;
+      state.cariocas.splice(index, 1);
+      renderCariocas();
+      markDirty();
+    });
+  }
+}
+
+function renderCariocas() {
+  const container = document.getElementById('cariocas-list');
+  if (!container || !state) return;
+
+  const items = Array.isArray(state.cariocas) ? state.cariocas : [];
+  container.innerHTML = '';
+
+  if (!items.length) {
+    container.innerHTML = '<p class="empty-state empty-state--compact">No hay fotos publicadas todavía.</p>';
+    return;
+  }
+
+  items.forEach((item, index) => {
+    const row = document.createElement('article');
+    row.className = 'carioca-item';
+
+    const image = document.createElement('img');
+    image.className = 'carioca-item__img';
+    image.src = normalizePanelImagePath(item.image || item.src || '');
+    image.alt = item.caption && item.caption.es ? item.caption.es : 'Foto de Bar León';
+    image.loading = 'lazy';
+
+    const body = document.createElement('div');
+    body.className = 'carioca-item__body';
+    const caption = document.createElement('p');
+    caption.className = 'carioca-item__caption';
+    caption.textContent = item.caption && item.caption.es ? item.caption.es : item.id || 'Foto sin descripción';
+    const meta = document.createElement('p');
+    meta.className = 'carioca-item__meta';
+    meta.textContent = item.context ? `Sección: ${item.context}` : 'Sin sección';
+    body.appendChild(caption);
+    body.appendChild(meta);
+
+    const controls = document.createElement('div');
+    controls.className = 'carioca-item__controls';
+
+    const activeLabel = document.createElement('label');
+    activeLabel.className = 'catalog-active';
+    activeLabel.innerHTML = '<span>Visible</span>';
+    const active = document.createElement('input');
+    active.type = 'checkbox';
+    active.checked = item.active !== false;
+    active.dataset.cariocaAction = 'active';
+    active.dataset.index = String(index);
+    activeLabel.appendChild(active);
+
+    const del = document.createElement('button');
+    del.type = 'button';
+    del.className = 'catalog-delete';
+    del.dataset.cariocaAction = 'delete';
+    del.dataset.index = String(index);
+    del.textContent = 'Borrar';
+
+    controls.appendChild(activeLabel);
+    controls.appendChild(del);
+
+    row.appendChild(image);
+    row.appendChild(body);
+    row.appendChild(controls);
+    container.appendChild(row);
+  });
+}
+
+function normalizePanelImagePath(path) {
+  return String(path || '').replace(/^\.\.\//, '/');
 }
 
 function showCariocaPreview(file) {
@@ -1377,81 +1581,6 @@ function bindEvents() {
   });
 }
 
-// ══════════════════════════════════════════════════════════════
-// PURE CRUD HELPERS  (no DOM — testable in Node)
-// ══════════════════════════════════════════════════════════════
-
-function slugifyPanelId(name, existingItems) {
-  const base = String(name)
-    .normalize('NFD').replace(/[̀-ͯ]/g, '')
-    .toLowerCase()
-    .replace(/[^a-z0-9]+/g, '-')
-    .replace(/^-+|-+$/g, '');
-
-  if (!existingItems || existingItems.length === 0) return base;
-
-  const ids = new Set(existingItems.map(i => i.id));
-  if (!ids.has(base)) return base;
-
-  // Append incrementing suffix until unique
-  let n = 1;
-  while (ids.has(`${base}-${n}`)) n++;
-  return `${base}-${n}`;
-}
-
-function createPanelItem(type, nameEs, categoryId) {
-  const base = {
-    id: slugifyPanelId(nameEs),
-    name: { es: nameEs, en: '', fr: '' },
-    category_id: categoryId || '',
-    available: true,
-  };
-
-  if (type === 'wine') {
-    return { ...base, price_bottle: '', price_glass: '', producer: '', description: { es: '', en: '', fr: '' } };
-  }
-  if (type === 'beverage') {
-    return { ...base, price: '', description: { es: '', en: '', fr: '' } };
-  }
-  // dish (default)
-  return { ...base, price: '', description: { es: '', en: '', fr: '' } };
-}
-
-function _collectionKey(type) {
-  if (type === 'wine') return 'wines';
-  if (type === 'beverage') return 'beverages';
-  return 'dishes';
-}
-
-function addPanelItem(state, type, item) {
-  const key = _collectionKey(type);
-  if (!state[key]) state[key] = [];
-  state[key].push(item);
-}
-
-function deletePanelItem(state, type, id) {
-  const key = _collectionKey(type);
-  if (!state[key]) return;
-  state[key] = state[key].filter(i => i.id !== id);
-}
-
-function setPanelItemAvailable(state, type, id, available) {
-  const key = _collectionKey(type);
-  const item = (state[key] || []).find(i => i.id === id);
-  if (item) item.available = available;
-}
-
-function splitPanelListText(text) {
-  if (!text) return [];
-  return String(text).split(' · ').map(s => s.trim()).filter(Boolean);
-}
-
-function joinPanelListItems(items) {
-  if (!items || items.length === 0) return '';
-  return items.join(' · ');
-}
-
-// Expose for Node test harness
 if (typeof window !== 'undefined') {
   window.__panelTestApi = {
     slugifyPanelId,
@@ -1459,6 +1588,7 @@ if (typeof window !== 'undefined') {
     addPanelItem,
     deletePanelItem,
     setPanelItemAvailable,
+    setPanelItemAllergen,
     splitPanelListText,
     joinPanelListItems,
   };

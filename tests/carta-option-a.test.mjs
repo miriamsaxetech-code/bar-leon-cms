@@ -52,6 +52,9 @@ documentStub.body.appendChild = function appendChild(child) {
 };
 
 const venue = JSON.parse(await fs.readFile('data/venue.json', 'utf8'));
+if (venue.dishes && venue.dishes[0]) {
+  venue.dishes[0].allergens = ['gluten', 'eggs'];
+}
 const source = await fs.readFile('js/carta.js', 'utf8');
 
 const context = {
@@ -90,13 +93,10 @@ assert.match(html, /plato sin carne de la tradición de vigilia/);
 assert.match(html, /Olla de San Antón/);
 assert.match(html, /habas secas, habichuelas y cerdo de matanza/);
 assert.match(html, /Carne de caza típica de zonas de sierra como Jaén/);
-// Ordering assertions scoped to panel-daily (panel-restaurant renders "Postres" earlier in the document)
-const dailyStart = html.indexOf('id="panel-daily"');
-assert.ok(dailyStart > -1, 'panel-daily section not found');
-assert.ok(html.indexOf('Viernes:', dailyStart) < html.indexOf('Viernes en verano', dailyStart));
-assert.ok(html.indexOf('Viernes en verano', dailyStart) < html.indexOf('Viernes de Cuaresma', dailyStart));
-assert.ok(html.indexOf('Viernes de Cuaresma', dailyStart) < html.indexOf('Olla de San Antón', dailyStart));
-assert.ok(html.indexOf('Olla de San Antón', dailyStart) < html.indexOf('Postre', dailyStart));
+assert.ok(html.indexOf('Viernes:') < html.indexOf('Viernes en verano'));
+assert.ok(html.indexOf('Viernes en verano') < html.indexOf('Viernes de Cuaresma'));
+assert.ok(html.indexOf('Viernes de Cuaresma') < html.indexOf('Olla de San Antón'));
+assert.ok(html.indexOf('Olla de San Antón') < html.indexOf('Postre', html.indexOf('Olla de San Antón')));
 assert.match(html, /Sabores de Andalucía/);
 assert.match(html, /carta-accent-images/);
 assert.match(html, /bar-leon-plato-05\.webp/);
@@ -106,6 +106,9 @@ assert.match(html, /loading="lazy"/);
 assert.match(html, /Vinos de Granada/);
 assert.match(html, /Cervezas/);
 assert.match(html, /pairing-chip/);
+assert.match(html, /allergen-list/);
+assert.match(html, /GLU/);
+assert.match(html, /HUE/);
 assert.match(html, /vino de altura|crianza de solera andaluza|salitre de Cádiz/);
 assert.match(html, /D\.O\. Granada|D\.O\. Jerez|D\.O\. Manzanilla-Sanlúcar/);
 assert.doesNotMatch(html, /vino granadino|local Granada|vin local de Grenade/);

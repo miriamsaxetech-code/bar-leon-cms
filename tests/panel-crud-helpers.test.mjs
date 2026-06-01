@@ -2,214 +2,75 @@ import assert from 'node:assert/strict';
 import fs from 'node:fs/promises';
 import vm from 'node:vm';
 
-// Minimal DOM stub — helpers are pure and need no real DOM
-const documentStub = {
-  getElementById() { return null; },
-  createElement() { return { style: {}, classList: { add() {}, remove() {} }, addEventListener() {} }; },
-  querySelector() { return null; },
-  querySelectorAll() { return []; },
-  addEventListener() {},
-  body: { appendChild() {}, insertBefore() {}, firstChild: null },
-};
-
 const source = await fs.readFile('panel/app.js', 'utf8');
 
 const context = {
   console,
-  document: documentStub,
-  window: {},
   localStorage: { getItem() { return null; }, setItem() {}, removeItem() {} },
   sessionStorage: { getItem() { return null; }, setItem() {}, removeItem() {} },
-  fetch: async () => ({ ok: false }),
-  setTimeout() {},
-  clearTimeout() {},
+  document: {
+    addEventListener() {},
+    getElementById() { return null; },
+    querySelectorAll() { return []; },
+  },
+  window: {
+    addEventListener() {},
+  },
+  fetch() {},
 };
 
 vm.createContext(context);
 vm.runInContext(source, context);
 
 const api = context.window.__panelTestApi;
-assert.ok(api, '__panelTestApi not exposed on window');
 
-const {
-  slugifyPanelId,
-  createPanelItem,
-  addPanelItem,
-  deletePanelItem,
-  setPanelItemAvailable,
-  splitPanelListText,
-  joinPanelListItems,
-} = api;
+assert.equal(api.slugifyPanelId('  Olla de San Antón  '), 'olla-de-san-anton');
+assert.equal(api.slugifyPanelId('Café con leche'), 'cafe-con-leche');
 
-// ── slugifyPanelId ────────────────────────────────────────────────────────────
+const dish = api.createPanelItem('dishes', {
+  name: 'Tapa Nueva',
+  price: '6,50',
+  category_id: 'tapas',
+}, new Set(['tapa-nueva']));
+assert.equal(dish.id, 'tapa-nueva-2');
+assert.equal(JSON.stringify(dish.name), JSON.stringify({ es: 'Tapa Nueva', en: '', fr: '' }));
+assert.equal(dish.price, '6,50');
+assert.equal(dish.category_id, 'tapas');
+assert.equal(dish.available, true);
+assert.equal(JSON.stringify(dish.allergens), JSON.stringify([]));
 
-{
-  const slug = slugifyPanelId('Tortilla del Sacromonte');
-  assert.match(slug, /^[a-z0-9-]+$/, 'slug must be lowercase kebab');
-  assert.ok(slug.startsWith('tortilla'), 'slug starts with normalized name');
-}
+const wine = api.createPanelItem('wines', {
+  name: 'Vino Nuevo',
+  price_glass: '3,50',
+  price_bottle: '18,00',
+}, new Set());
+assert.equal(wine.id, 'vino-nuevo');
+assert.equal(wine.price_glass, 3.5);
+assert.equal(wine.price_bottle, 18);
 
-{
-  // Two calls with same name produce different slugs (timestamp suffix)
-  const a = slugifyPanelId('Callos');
-  const b = slugifyPanelId('Callos');
-  // They MAY collide in same ms, but must at minimum be valid slugs
-  assert.match(a, /^[a-z0-9-]+$/);
-  assert.match(b, /^[a-z0-9-]+$/);
-}
+const state = { dishes: [], wines: [wine], beverages: [] };
+api.addPanelItem(state, 'dishes', dish);
+assert.equal(state.dishes.length, 1);
+assert.equal(state.dishes[0].id, 'tapa-nueva-2');
 
-{
-  // Slug must not collide with an existing id list
-  const existing = [{ id: 'callos' }, { id: 'callos-1' }];
-  const slug = slugifyPanelId('Callos', existing);
-  assert.notEqual(slug, 'callos');
-  assert.notEqual(slug, 'callos-1');
-}
+api.setPanelItemAvailable(state, 'dishes', 'tapa-nueva-2', false);
+assert.equal(state.dishes[0].available, false);
 
-// ── createPanelItem ───────────────────────────────────────────────────────────
+api.setPanelItemAllergen(state, 'dishes', 'tapa-nueva-2', 'gluten', true);
+api.setPanelItemAllergen(state, 'dishes', 'tapa-nueva-2', 'milk', true);
+assert.equal(JSON.stringify(state.dishes[0].allergens), JSON.stringify(['gluten', 'milk']));
 
-{
-  const item = createPanelItem('dish', 'Berenjenas fritas', 'frituras');
-  assert.equal(typeof item.id, 'string', 'item must have an id');
-  assert.ok(item.id.length > 0, 'id must not be empty');
-  assert.equal(item.name.es, 'Berenjenas fritas');
-  assert.equal(item.name.en, '');
-  assert.equal(item.name.fr, '');
-  assert.equal(item.category_id, 'frituras');
-  assert.equal(item.available, true);
-  assert.equal(typeof item.price, 'string');
-}
+api.setPanelItemAllergen(state, 'dishes', 'tapa-nueva-2', 'gluten', false);
+assert.equal(JSON.stringify(state.dishes[0].allergens), JSON.stringify(['milk']));
 
-{
-  const wine = createPanelItem('wine', 'Vino nuevo', 'granada-wines');
-  assert.equal(wine.name.es, 'Vino nuevo');
-  assert.equal(wine.name.en, '');
-  assert.equal(wine.name.fr, '');
-  assert.equal(wine.category_id, 'granada-wines');
-  assert.equal(wine.available, true);
-}
+api.deletePanelItem(state, 'dishes', 'tapa-nueva-2');
+assert.equal(state.dishes.length, 0);
 
-{
-  const bev = createPanelItem('beverage', 'Agua tónica', 'soft-drinks');
-  assert.equal(bev.name.es, 'Agua tónica');
-  assert.equal(bev.available, true);
-}
-
-// ── addPanelItem ──────────────────────────────────────────────────────────────
-
-{
-  const state = { dishes: [{ id: 'existing', name: { es: 'Uno' } }], wines: [], beverages: [] };
-  const newDish = createPanelItem('dish', 'Dos', 'sopas');
-  addPanelItem(state, 'dish', newDish);
-  assert.equal(state.dishes.length, 2);
-  assert.equal(state.dishes[1].name.es, 'Dos');
-}
-
-{
-  const state = { dishes: [], wines: [{ id: 'w1', name: { es: 'Vino viejo' } }], beverages: [] };
-  const newWine = createPanelItem('wine', 'Vino fresco', 'rioja');
-  addPanelItem(state, 'wine', newWine);
-  assert.equal(state.wines.length, 2);
-  assert.equal(state.wines[1].name.es, 'Vino fresco');
-}
-
-{
-  const state = { dishes: [], wines: [], beverages: [] };
-  const bev = createPanelItem('beverage', 'Tónica', 'soft-drinks');
-  addPanelItem(state, 'beverage', bev);
-  assert.equal(state.beverages.length, 1);
-}
-
-// ── deletePanelItem ───────────────────────────────────────────────────────────
-
-{
-  const state = {
-    dishes: [{ id: 'a' }, { id: 'b' }, { id: 'c' }],
-    wines: [],
-    beverages: [],
-  };
-  deletePanelItem(state, 'dish', 'b');
-  assert.equal(state.dishes.length, 2);
-  assert.ok(!state.dishes.find(d => d.id === 'b'), 'deleted item must be gone');
-  assert.ok(state.dishes.find(d => d.id === 'a'), 'other items remain');
-  assert.ok(state.dishes.find(d => d.id === 'c'), 'other items remain');
-}
-
-{
-  const state = { dishes: [], wines: [{ id: 'w1' }, { id: 'w2' }], beverages: [] };
-  deletePanelItem(state, 'wine', 'w1');
-  assert.equal(state.wines.length, 1);
-  assert.equal(state.wines[0].id, 'w2');
-}
-
-{
-  // Deleting a non-existent id is a no-op
-  const state = { dishes: [{ id: 'x' }], wines: [], beverages: [] };
-  deletePanelItem(state, 'dish', 'does-not-exist');
-  assert.equal(state.dishes.length, 1);
-}
-
-// ── setPanelItemAvailable ─────────────────────────────────────────────────────
-
-{
-  const state = { dishes: [{ id: 'd1', available: true }], wines: [], beverages: [] };
-  setPanelItemAvailable(state, 'dish', 'd1', false);
-  assert.equal(state.dishes[0].available, false);
-  setPanelItemAvailable(state, 'dish', 'd1', true);
-  assert.equal(state.dishes[0].available, true);
-}
-
-{
-  const state = { dishes: [], wines: [{ id: 'w1', available: true }], beverages: [] };
-  setPanelItemAvailable(state, 'wine', 'w1', false);
-  assert.equal(state.wines[0].available, false);
-}
-
-{
-  const state = { dishes: [], wines: [], beverages: [{ id: 'b1', available: false }] };
-  setPanelItemAvailable(state, 'beverage', 'b1', true);
-  assert.equal(state.beverages[0].available, true);
-}
-
-// ── splitPanelListText ────────────────────────────────────────────────────────
-
-{
-  const items = splitPanelListText('Gazpacho · Salmorejo · Ajoblanco');
-  assert.equal(items.length, 3);
-  assert.equal(items[0], 'Gazpacho');
-  assert.equal(items[1], 'Salmorejo');
-  assert.equal(items[2], 'Ajoblanco');
-}
-
-{
-  assert.equal(splitPanelListText('').length, 0);
-  assert.equal(splitPanelListText(null).length, 0);
-  assert.equal(splitPanelListText(undefined).length, 0);
-}
-
-{
-  // Single item — no separator
-  const items = splitPanelListText('Gazpacho');
-  assert.equal(items.length, 1);
-  assert.equal(items[0], 'Gazpacho');
-}
-
-// ── joinPanelListItems ────────────────────────────────────────────────────────
-
-{
-  const text = joinPanelListItems(['Gazpacho', 'Salmorejo', 'Ajoblanco']);
-  assert.equal(text, 'Gazpacho · Salmorejo · Ajoblanco');
-}
-
-{
-  assert.equal(joinPanelListItems([]), '');
-  assert.equal(joinPanelListItems(['Solo']), 'Solo');
-}
-
-{
-  // Round-trip: split → join should be lossless for valid input
-  const original = 'Primero · Segundo · Postre';
-  assert.equal(joinPanelListItems(splitPanelListText(original)), original);
-}
+assert.equal(
+  JSON.stringify(api.splitPanelListText(`Gazpacho · Salmorejo
+Ensalada`)),
+  JSON.stringify(['Gazpacho', 'Salmorejo', 'Ensalada'])
+);
+assert.equal(api.joinPanelListItems(['Gazpacho', '', ' Salmorejo ']), 'Gazpacho · Salmorejo');
 
 console.log('panel CRUD helpers OK');

@@ -315,6 +315,21 @@
     return `<a class="pairing-chip" href="#wine-${matched.id}" data-wine-id="${matched.id}" data-wine-name="${wineDisplayName}">${chipText}</a>`;
   }
 
+  function renderAllergens(item, allergens, lang) {
+    const ids = Array.isArray(item && item.allergens) ? item.allergens : [];
+    if (!ids.length || !Array.isArray(allergens)) return '';
+    const labels = ids.map(id => {
+      const def = allergens.find(a => a.id === id);
+      if (!def) return '';
+      const text = def.label ? t(def.label, lang) : id;
+      const short = def.short ? t(def.short, lang) : text;
+      return `<span class="allergen-chip" title="${text}">${short}</span>`;
+    }).filter(Boolean).join('');
+    if (!labels) return '';
+    const lead = { es: 'Alérgenos', en: 'Allergens', fr: 'Allergènes' }[lang] || 'Alérgenos';
+    return `<div class="allergen-list" aria-label="${lead}"><span class="allergen-list__label">${lead}</span>${labels}</div>`;
+  }
+
   function renderMenuDia(dm, nav, lang) {
     if (!dm || !dm.active) return '';
 
@@ -375,7 +390,7 @@
   }
 
   // ─── SPOTLIGHT: SABORES DE ANDALUCÍA ─────────────────────────────────────────
-  function renderSpotlightAndalucia(dishes, categories, wines, lang) {
+  function renderSpotlightAndalucia(dishes, categories, wines, allergens, lang) {
     const cat = (categories || []).find(c => c.id === SABORES_CATEGORY_ID);
     if (!cat) return '';
     const catName = t(cat.name, lang);
@@ -387,6 +402,7 @@
       const statusHtml = renderDishStatus(dish, lang);
       const descText = t(dish.description, lang);
       const pairingChip = renderPairingChip(dish, wines, lang);
+      const allergensHtml = renderAllergens(dish, allergens, lang);
       const parsed = parseDishPrice(formatPrice(dish.price), lang);
       const priceHtml = dish.status === 'soldout' ? '' : `<span class="check-price dish-price">${parsed.label || parsed.display}</span>`;
       const priceNote = (dish.status !== 'soldout' && parsed.type === 'portions')
@@ -399,6 +415,7 @@
   ${priceNote}
   ${statusHtml}
   ${pairingChip}
+  ${allergensHtml}
 </div>`;
     }).join('');
 
@@ -430,7 +447,7 @@
 </section>`;
   }
 
-  function renderCarta(dishes, categories, wines, lang, service) {
+  function renderCarta(dishes, categories, wines, allergens, lang, service) {
     const available = (dishes || []).filter(i => i.available !== false);
     const catMap = {};
     (categories || [])
@@ -464,6 +481,7 @@
         const badge = renderBadge(item, lang);
         const statusHtml = renderDishStatus(item, lang);
         const pairingChip = renderPairingChip(item, wines, lang);
+        const allergensHtml = renderAllergens(item, allergens, lang);
         const parsed = parseDishPrice(formatPrice(item.price), lang);
         const priceCell = item.status === 'soldout' ? '' : `<span class="check-price dish-price">${parsed.label || parsed.display}</span>`;
         const priceNote = (item.status !== 'soldout' && parsed.type === 'portions')
@@ -479,6 +497,7 @@
   ${t(item.description, lang) ? `<p class="item-desc">${t(item.description, lang)}</p>` : ''}
   ${statusHtml}
   ${pairingChip}
+  ${allergensHtml}
 </article>`;
       }).join('');
 
@@ -536,7 +555,7 @@
 </div>`;
   }
 
-  function renderWines(wines, beverages, dishes, categories, lang, service, excludeType, includeType) {
+  function renderWines(wines, beverages, dishes, categories, allergens, lang, service, excludeType, includeType) {
     const hasWines = Array.isArray(wines) && wines.length > 0;
     const hasBeverages = Array.isArray(beverages) && beverages.length > 0;
     const hasDishes = Array.isArray(dishes) && dishes.length > 0;
@@ -601,6 +620,7 @@
         const producerHtml = showProducer ? ` <span class="item-producer">${item.producer}</span>` : '';
 
         const itemBadge = renderBadge(item, lang);
+        const allergensHtml = renderAllergens(item, allergens, lang);
         return `<article class="carta-item" id="wine-${item.id}">
   <div class="check-row">
     <span class="check-name">${nameStr}${producerHtml}${itemBadge ? ' ' + itemBadge : ''}</span>
@@ -608,6 +628,7 @@
     <span class="check-price">${priceStr}</span>
   </div>
   ${extraHtml}
+  ${allergensHtml}
 </article>`;
       }).join('');
 
@@ -758,8 +779,8 @@
     <p class="section-label">${LABELS.restaurant[lang]}</p>
     <p class="menu-panel-copy">${LABELS.restaurantIntro[lang]}</p>
   </div>
-  ${renderSpotlightAndalucia(d.dishes, d.categories, d.wines, lang)}
-  ${renderCarta(d.dishes, d.categories, d.wines, lang, 'restaurant')}
+  ${renderSpotlightAndalucia(d.dishes, d.categories, d.wines, d.allergens, lang)}
+  ${renderCarta(d.dishes, d.categories, d.wines, d.allergens, lang, 'restaurant')}
   ${renderRestaurantSnapshot(lang)}
 </section>
 <section id="panel-beverages" class="menu-panel" role="tabpanel" data-panel="beverages" hidden>
@@ -767,14 +788,14 @@
     <p class="section-label">${LABELS.beverages[lang]}</p>
     <p class="menu-panel-copy">${LABELS.beveragesIntro[lang]}</p>
   </div>
-  ${renderWines(null, d.beverages, null, d.categories, lang, 'bar', 'wine', null)}
+  ${renderWines(null, d.beverages, null, d.categories, d.allergens, lang, 'bar', 'wine', null)}
 </section>
 <section id="panel-wines" class="menu-panel" role="tabpanel" data-panel="wines" hidden>
   <div class="wrap menu-panel-intro">
     <p class="section-label">${LABELS.wines[lang]}</p>
     <p class="menu-panel-copy">${LABELS.winesIntro[lang]}</p>
   </div>
-  ${renderWines(d.wines, null, null, d.categories, lang, 'bar', null, 'wine')}
+  ${renderWines(d.wines, null, null, d.categories, d.allergens, lang, 'bar', null, 'wine')}
 </section>
 <section id="panel-daily" class="menu-panel" role="tabpanel" data-panel="daily" hidden>
   <div class="wrap menu-panel-inner">${renderMenuDia(d.daily_menu, nav, lang)}</div>
@@ -1002,7 +1023,9 @@
     const el = document.createElement('script');
     el.type = 'application/ld+json';
     el.textContent = JSON.stringify(schema);
-    if (document.head) document.head.appendChild(el);
+    if (document.head) {
+      document.head.appendChild(el);
+    }
   }
 
   async function init() {
