@@ -36,6 +36,8 @@ function clearToken() {
 let state = null; // venue.json completo, cargado en memoria
 let cariocaFile = null; // archivo de imagen pendiente de subir
 let dailyMenuTextDirty = false;
+let lastSavedSnapshot = null; // JSON string of state before last save, for undo
+let undoTimer = null;
 
 // ══════════════════════════════════════════════════════════════
 // INICIALIZACIÓN
@@ -900,6 +902,10 @@ function markDirty() {
   if (statusEl) statusEl.textContent = 'Cambios sin guardar';
   const saveBtn = document.getElementById('save-btn');
   if (saveBtn) saveBtn.disabled = false;
+  // Hide undo once new edits are made — the snapshot is stale
+  const undoBtn = document.getElementById('undo-btn');
+  if (undoBtn) undoBtn.hidden = true;
+  if (undoTimer) { clearTimeout(undoTimer); undoTimer = null; }
 }
 
 function markDailyMenuTextDirty() {
@@ -936,8 +942,16 @@ async function saveAll() {
 
   const saveBtn    = document.getElementById('save-btn');
   const statusEl   = document.getElementById('save-status');
+  const undoBtn    = document.getElementById('undo-btn');
 
-  if (saveBtn)  { saveBtn.disabled = true; saveBtn.textContent = 'Guardando…'; }
+  // Capture snapshot before overwriting, for undo
+  lastSavedSnapshot = JSON.stringify(state);
+
+  // Hide undo during save
+  if (undoBtn) undoBtn.hidden = true;
+  if (undoTimer) { clearTimeout(undoTimer); undoTimer = null; }
+
+  if (saveBtn)  { saveBtn.disabled = true; saveBtn.textContent = 'Publicando…'; }
   if (statusEl) statusEl.textContent = '';
 
   // Si hay imagen carioca pendiente, subirla primero
@@ -964,7 +978,7 @@ async function saveAll() {
 
     } catch (err) {
       showError('No se pudo subir la imagen. Comprueba tu conexión e inténtalo de nuevo.');
-      if (saveBtn)  { saveBtn.disabled = false; saveBtn.textContent = 'Guardar cambios'; }
+      if (saveBtn)  { saveBtn.disabled = false; saveBtn.textContent = 'Publicar en la web'; }
       if (statusEl) statusEl.textContent = '';
       return;
     }
@@ -994,7 +1008,7 @@ async function saveAll() {
 
     if (resp.status === 409) {
       showError('La información del restaurante fue modificada mientras trabajabas. Recarga el panel y vuelve a hacer tus cambios.');
-      if (saveBtn)  { saveBtn.disabled = false; saveBtn.textContent = 'Guardar cambios'; }
+      if (saveBtn)  { saveBtn.disabled = false; saveBtn.textContent = 'Publicar en la web'; }
       return;
     }
 
@@ -1004,19 +1018,27 @@ async function saveAll() {
 
     dirty = false;
     dailyMenuTextDirty = false;
-    if (statusEl) statusEl.textContent = '✓ Guardado. Tu web se actualizará en unos 30 segundos.';
-    if (saveBtn)  { saveBtn.textContent = 'Guardar cambios'; saveBtn.disabled = false; }
+    if (statusEl) statusEl.textContent = '✓ Publicado. Tu web se actualizará en unos 30 segundos.';
+    if (saveBtn)  { saveBtn.textContent = 'Publicar en la web'; saveBtn.disabled = false; }
 
-    // Limpiar el mensaje de confirmación después de 6 s
+    // Show undo button for 60 seconds
+    if (undoBtn) {
+      undoBtn.hidden = false;
+      undoBtn.disabled = false;
+      undoBtn.textContent = 'Deshacer';
+      undoTimer = setTimeout(() => { undoBtn.hidden = true; }, 60000);
+    }
+
+    // Clear the confirmation message after 6 s
     setTimeout(() => {
-      if (statusEl && statusEl.textContent === '✓ Guardado. Tu web se actualizará en unos 30 segundos.') {
+      if (statusEl && statusEl.textContent === '✓ Publicado. Tu web se actualizará en unos 30 segundos.') {
         statusEl.textContent = '';
       }
     }, 6000);
 
   } catch {
     showError('Error de conexión. Comprueba tu internet e inténtalo de nuevo.');
-    if (saveBtn)  { saveBtn.disabled = false; saveBtn.textContent = 'Guardar cambios'; }
+    if (saveBtn)  { saveBtn.disabled = false; saveBtn.textContent = 'Publicar en la web'; }
     if (statusEl) statusEl.textContent = '';
   }
 }
@@ -1082,6 +1104,34 @@ function bindEvents() {
   // Botón Guardar
   const saveBtn = document.getElementById('save-btn');
   if (saveBtn) saveBtn.addEventListener('click', saveAll);
+
+  // Botón Deshacer
+  const undoBtn = document.getElementById('undo-btn');
+  if (undoBtn) {
+    undoBtn.addEventListener('click', async () => {
+      if (!lastSavedSnapshot) return;
+      undoBtn.disabled = true;
+      undoBtn.textContent = 'Deshaciendo…';
+      try {
+        const token = getToken();
+        if (!token) { clearToken(); showAuthScreen(); return; }
+        const resp = await fetch('/admin-save', {
+          method: 'POST',
+          headers: {
+            'Authorization': `Bearer ${token}`,
+            'Content-Type': 'application/json',
+          },
+          body: lastSavedSnapshot,
+        });
+        if (!resp.ok) throw new Error(`HTTP ${resp.status}`);
+        location.reload();
+      } catch {
+        showError('No se pudo deshacer. Recarga el panel e inténtalo de nuevo.');
+        undoBtn.disabled = false;
+        undoBtn.textContent = 'Deshacer';
+      }
+    });
+  }
 
   // Botón Cerrar sesión
   const logoutBtn = document.getElementById('logout-btn');

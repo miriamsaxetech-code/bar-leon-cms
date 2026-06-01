@@ -58,9 +58,9 @@
   "social": {
     "instagram": "https://www.instagram.com/barleongranada/",
     "facebook": "https://www.facebook.com/BarLeonGranada/",
-    "tripadvisor": "",
-    "google_maps": "https://maps.google.com/?q=Restaurante+Bar+León+Plaza+Nueva+Granada",
-    "google_reviews": "https://www.google.com/search?q=Bar+León+Granada+opiniones",
+    "tripadvisor": "https://www.tripadvisor.es/Restaurant_Review-g187441-d9837130-Reviews-Bar_Leon-Granada_Province_Andalusia.html",
+    "google_maps": "https://maps.app.goo.gl/yPmyTpk6LwHwz7Fz9",
+    "google_reviews": "https://search.google.com/local/writereview?placeid=ChIJ8_W6U_j8cg0R-52e_wnF10I",
     "x": ""
   },
   "chalkboard": {
@@ -916,13 +916,13 @@
       "category_id": "soups-stews",
       "name": {
         "es": "Sopa de picadillo",
-        "en": "Picadillo Soup",
-        "fr": "Soupe picadillo"
+        "en": "Sopa de Picadillo",
+        "fr": "Soupe de Picadillo"
       },
       "description": {
         "es": "Caldo de pollo con jamón, huevo, pan y hierbabuena.",
-        "en": "Clear chicken broth with diced ham, hard-boiled egg, bread and fresh mint.",
-        "fr": "Bouillon de poulet clair avec dés de jambon, œuf dur, pain et menthe fraîche."
+        "en": "Chicken broth with noodles, hard-boiled egg, ham and fresh mint.",
+        "fr": "Bouillon de poulet avec vermicelles, œuf dur, jambon et menthe fraîche."
       },
       "price": "5,00 €",
       "pairing": {
@@ -1008,7 +1008,7 @@
         "fr": "Soupe sévillane"
       },
       "description": {
-        "es": "Caldo con pollo, jamón, arroz y verduras.",
+        "es": "Caldo de pescado tradicional con rape, langostinos y mayonesa.",
         "en": "Traditional fish soup with mayonnaise emulsified into the broth, served with prawns.",
         "fr": "Soupe de poisson traditionnelle liée à la mayonnaise maison, servie avec des crevettes."
       },
@@ -3677,7 +3677,7 @@
     "edict_header": {
       "es": "Bar León · Granada · Est. 1959",
       "en": "Bar León · Granada · Est. 1959",
-      "fr": "Bar León · Grenade · Dep. 1959"
+      "fr": "Bar León · Grenade · Depuis 1959"
     },
     "edict_foot": {
       "es": "Bar León · Cocina Tradicional Granadina",

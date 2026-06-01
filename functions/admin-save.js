@@ -38,10 +38,10 @@ export async function onRequestPost(context) {
   }
 
   // ── Read current file SHA (required for GitHub Contents API update) ─────────
-  const OWNER  = 'miriamsaxetech-code';
-  const REPO   = 'bar-leon-cms';
-  const PATH   = 'data/venue.json';
-  const BRANCH = 'main';
+  const OWNER  = env.GITHUB_OWNER  || 'miriamsaxetech-code';
+  const REPO   = env.GITHUB_REPO   || 'bar-leon-cms';
+  const PATH   = env.GITHUB_PATH   || 'data/venue.json';
+  const BRANCH = env.GITHUB_BRANCH || 'main';
   const PAT    = env.GITHUB_TOKEN;
 
   if (!PAT) {

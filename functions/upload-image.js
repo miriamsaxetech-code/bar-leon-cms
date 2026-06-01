@@ -3,9 +3,6 @@
 // Authorization: Bearer <panel_token>
 // Requires env vars: GITHUB_TOKEN, PANEL_SECRET
 
-const OWNER  = 'miriamsaxetech-code';
-const REPO   = 'bar-leon-cms';
-const BRANCH = 'main';
 const MAX_UPLOAD_BYTES = 3 * 1024 * 1024;
 const ALLOWED_IMAGE_TYPES = new Set(['image/jpeg', 'image/png', 'image/webp']);
 
@@ -67,6 +64,10 @@ export async function onRequestPost(context) {
   if (!env.GITHUB_TOKEN) {
     return jsonError('missing_github_token', 500);
   }
+
+  const OWNER  = env.GITHUB_OWNER  || 'miriamsaxetech-code';
+  const REPO   = env.GITHUB_REPO   || 'bar-leon-cms';
+  const BRANCH = env.GITHUB_BRANCH || 'main';
 
   let formData;
   try {

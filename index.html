@@ -17,7 +17,8 @@
   <style>
     @font-face {
       font-family: 'Granaina Limpia';
-      src: url('/assets/fonts/granaina-limpia.otf') format('opentype');
+      src: url('/assets/fonts/granaina-limpia.woff2') format('woff2'),
+           url('/assets/fonts/granaina-limpia.otf') format('opentype');
       font-display: swap;
     }
 
@@ -116,7 +117,7 @@
 
     .picker__lang {
       font-family: 'Granaina Limpia', Georgia, serif;
-      font-size: 15px;
+      font-size: 16px;
       letter-spacing: 3.5px;
       text-transform: uppercase;
       color: #0F0D0B;
@@ -204,7 +205,14 @@
 
         var container = document.getElementById('status-container');
         var textSpan = document.getElementById('status-text');
-        textSpan.textContent = isOpen ? 'abierto' : 'cerrado';
+        var userLang = (navigator.language || '').slice(0, 2);
+        var statusLabels = {
+          es: { open: 'abierto', closed: 'cerrado' },
+          en: { open: 'open', closed: 'closed' },
+          fr: { open: 'ouvert', closed: 'fermé' }
+        };
+        var labels = statusLabels[userLang] || statusLabels.es;
+        textSpan.textContent = isOpen ? labels.open : labels.closed;
         container.style.display = 'block';
       })
       .catch(function() {});
