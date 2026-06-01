@@ -1002,7 +1002,7 @@
     const el = document.createElement('script');
     el.type = 'application/ld+json';
     el.textContent = JSON.stringify(schema);
-    document.head.appendChild(el);
+    if (document.head) document.head.appendChild(el);
   }
 
   async function init() {
