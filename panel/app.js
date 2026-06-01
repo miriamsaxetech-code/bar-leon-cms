@@ -395,6 +395,97 @@ function parsePanelEuro(value) {
   return Number.isFinite(parsed) ? parsed : value;
 }
 
+function slugifyPanelId(value) {
+  return String(value || '')
+    .normalize('NFD')
+    .replace(/[\u0300-\u036f]/g, '')
+    .toLowerCase()
+    .trim()
+    .replace(/[^a-z0-9]+/g, '-')
+    .replace(/^-+|-+$/g, '') || `item-${Date.now()}`;
+}
+
+function uniquePanelId(baseId, existingIds) {
+  const ids = existingIds instanceof Set ? existingIds : new Set(existingIds || []);
+  if (!ids.has(baseId)) return baseId;
+  let i = 2;
+  while (ids.has(`${baseId}-${i}`)) i += 1;
+  return `${baseId}-${i}`;
+}
+
+function createPanelItem(collection, values, existingIds) {
+  const name = String(values && values.name ? values.name : '').trim();
+  const id = uniquePanelId(slugifyPanelId(name), existingIds);
+  const nameField = { es: name, en: '', fr: '' };
+
+  if (collection === 'wines') {
+    return {
+      id,
+      name: nameField,
+      type: values.type || '',
+      region: values.region || '',
+      price_glass: parsePanelEuro(values.price_glass || values.price || ''),
+      price_bottle: parsePanelEuro(values.price_bottle || ''),
+      available: true,
+    };
+  }
+
+  if (collection === 'beverages') {
+    return {
+      id,
+      name: nameField,
+      price: values.price || '',
+      category_id: values.category_id || '',
+      available: true,
+    };
+  }
+
+  return {
+    id,
+    name: nameField,
+    description: { es: '', en: '', fr: '' },
+    price: values.price || '',
+    category_id: values.category_id || '',
+    available: true,
+  };
+}
+
+function addPanelItem(panelState, collection, item) {
+  if (!panelState[collection]) panelState[collection] = [];
+  panelState[collection].push(item);
+  return item;
+}
+
+function deletePanelItem(panelState, collection, id) {
+  if (!Array.isArray(panelState[collection])) return false;
+  const before = panelState[collection].length;
+  panelState[collection] = panelState[collection].filter(item => item.id !== id);
+  return panelState[collection].length !== before;
+}
+
+function setPanelItemAvailable(panelState, collection, id, available) {
+  const item = Array.isArray(panelState[collection])
+    ? panelState[collection].find(entry => entry.id === id)
+    : null;
+  if (!item) return false;
+  item.available = available;
+  return true;
+}
+
+function splitPanelListText(value) {
+  return String(value || '')
+    .split(/\s*·\s*|\n+/)
+    .map(item => item.trim())
+    .filter(Boolean);
+}
+
+function joinPanelListItems(items) {
+  return (items || [])
+    .map(item => String(item || '').trim())
+    .filter(Boolean)
+    .join(' · ');
+}
+
 function updatePanelPrice(type, id, field, value) {
   if (!state) return;
   const collections = {
@@ -1149,4 +1240,16 @@ function bindEvents() {
       e.returnValue = '¿Seguro que quieres salir? Tienes cambios sin guardar.';
     }
   });
+}
+
+if (typeof window !== 'undefined') {
+  window.__panelTestApi = {
+    slugifyPanelId,
+    createPanelItem,
+    addPanelItem,
+    deletePanelItem,
+    setPanelItemAvailable,
+    splitPanelListText,
+    joinPanelListItems,
+  };
 }
