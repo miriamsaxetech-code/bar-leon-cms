@@ -1610,13 +1610,13 @@ h2 {
   top: 50%;
   left: 50%;
   transform: translate(-50%, -50%);
-  width: 240px;
-  height: 240px;
-  background-image: url('../assets/images/fajalauza-plate.svg');
+  width: 140px;
+  height: 200px;
+  background-image: url('../assets/images/lion-logo.svg');
   background-repeat: no-repeat;
   background-position: center;
   background-size: contain;
-  opacity: 0.055;
+  opacity: 0.05;
   pointer-events: none;
   z-index: 0;
 }
@@ -2402,8 +2402,8 @@ h2 {
 /* Data rows */
 .chalkboard-row {
   display: grid;
-  grid-template-columns: 1fr 44px 52px;
-  gap: 0 6px;
+  grid-template-columns: 1fr 60px 60px;
+  gap: 0 12px;
   font-family: Georgia, serif;
   font-style: italic;
   font-size: 0.76rem;
@@ -2411,6 +2411,7 @@ h2 {
   line-height: 1.72;
   border-bottom: 1px solid rgba(255, 255, 255, 0.05);
   text-shadow: 0 0 8px rgba(242, 238, 220, 0.07);
+  align-items: start;
 }
 
 .chalkboard-row:last-child {
@@ -2432,17 +2433,18 @@ h2 {
   color: rgba(230, 224, 200, 0.7);
   white-space: nowrap;
   text-align: right;
-  align-self: center;
+  align-self: start;
+  padding-top: 1px;
 }
 
 .chalkboard-media {
   text-align: right;
 }
 
-@media (max-width: 540px) {
+@media (max-width: 768px) {
   .barra-chalkboard {
     border-width: 7px;
-    padding: 20px 14px 18px;
+    padding: 20px 18px 18px;
   }
   .chalkboard-body {
     grid-template-columns: 1fr;
@@ -2450,11 +2452,11 @@ h2 {
   .chalkboard-vsep {
     height: 1px;
     width: auto;
-    margin: 12px 0;
+    margin: 16px 0;
     background: rgba(255, 255, 255, 0.14);
   }
   .chalkboard-row {
-    grid-template-columns: 1fr 38px 46px;
+    grid-template-columns: 1fr 60px 60px;
     font-size: 0.72rem;
   }
   .chalkboard-title {
