@@ -65,40 +65,232 @@
   },
   "chalkboard": {
     "group1": [
-      { "es": "Cordobés (carne en salsa)", "en": "Córdoba Pork Stew",        "fr": "Ragoût à la Cordouane",      "media": "9,00",  "racion": "12,50" },
-      { "es": "Riñones",                   "en": "Veal Kidneys",              "fr": "Rognons",                    "media": "9,00",  "racion": "12,50" },
-      { "es": "Callos",                    "en": "Tripe Stew",                "fr": "Tripes",                     "media": "7,50",  "racion": "10,00" },
-      { "es": "Criadillas",                "en": "Bull's Testicles",          "fr": "Amourettes",                 "media": "7,50",  "racion": "10,00" },
-      { "es": "Carne de monte (ciervo)",   "en": "Wild Venison",              "fr": "Venaison",                   "media": "10,50", "racion": "13,50" },
-      { "es": "Sesos",                     "en": "Braised Brains",            "fr": "Cervelle",                   "media": "7,50",  "racion": "10,00" },
-      { "es": "Pinchitos (unidad)",        "en": "Pinchitos (each)",          "fr": "Pinchitos (unité)",          "media": null,    "racion": "4,50 unid." },
-      { "es": "Flamenquín (unidad)",       "en": "Flamenquín (each)",         "fr": "Flamenquín (unité)",         "media": null,    "racion": "5,00 unid." },
-      { "es": "Croquetas (unidad)",        "en": "Croquettes (each)",         "fr": "Croquettes (unité)",         "media": null,    "racion": "1,50 unid." },
-      { "es": "Lomo salteado",             "en": "Sautéed Pork Loin",         "fr": "Longe sautée",               "media": "10,50", "racion": "14,00" },
-      { "es": "San Jacobo",                "en": "Chicken Kiev-style",        "fr": "San Jacobo",                 "media": null,    "racion": "15,00" },
-      { "es": "Entrecot de ternera",       "en": "Beef Entrecôte",            "fr": "Entrecôte de bœuf",          "media": null,    "racion": "19,00" },
-      { "es": "Solomillo de cerdo",        "en": "Pork Tenderloin",           "fr": "Filet de porc",              "media": null,    "racion": "14,50" },
-      { "es": "Chuletas de cordero",       "en": "Lamb Chops (each)",         "fr": "Côtelettes d'agneau",        "media": null,    "racion": "2,50 unid." },
-      { "es": "Jamón serrano",             "en": "Cured Ham",                 "fr": "Jambon serrano",             "media": "10,00", "racion": "13,00" },
-      { "es": "Queso manchego",            "en": "Manchego Cheese",           "fr": "Fromage manchego",           "media": "8,00",  "racion": "11,00" }
+      {
+        "es": "Cordobés (carne en salsa)",
+        "en": "Córdoba Pork Stew",
+        "fr": "Ragoût à la Cordouane",
+        "media": "9,00",
+        "racion": "12,50"
+      },
+      {
+        "es": "Riñones",
+        "en": "Veal Kidneys",
+        "fr": "Rognons",
+        "media": "9,00",
+        "racion": "12,50"
+      },
+      {
+        "es": "Callos",
+        "en": "Tripe Stew",
+        "fr": "Tripes",
+        "media": "7,50",
+        "racion": "10,00"
+      },
+      {
+        "es": "Criadillas",
+        "en": "Bull's Testicles",
+        "fr": "Amourettes",
+        "media": "7,50",
+        "racion": "10,00"
+      },
+      {
+        "es": "Carne de monte (ciervo)",
+        "en": "Wild Venison",
+        "fr": "Venaison",
+        "media": "10,50",
+        "racion": "13,50"
+      },
+      {
+        "es": "Sesos",
+        "en": "Braised Brains",
+        "fr": "Cervelle",
+        "media": "7,50",
+        "racion": "10,00"
+      },
+      {
+        "es": "Pinchitos (unidad)",
+        "en": "Pinchitos (each)",
+        "fr": "Pinchitos (unité)",
+        "media": null,
+        "racion": "4,50 unid."
+      },
+      {
+        "es": "Flamenquín (unidad)",
+        "en": "Flamenquín (each)",
+        "fr": "Flamenquín (unité)",
+        "media": null,
+        "racion": "5,00 unid."
+      },
+      {
+        "es": "Croquetas (unidad)",
+        "en": "Croquettes (each)",
+        "fr": "Croquettes (unité)",
+        "media": null,
+        "racion": "1,50 unid."
+      },
+      {
+        "es": "Lomo salteado",
+        "en": "Sautéed Pork Loin",
+        "fr": "Longe sautée",
+        "media": "10,50",
+        "racion": "14,00"
+      },
+      {
+        "es": "San Jacobo",
+        "en": "Chicken Kiev-style",
+        "fr": "San Jacobo",
+        "media": null,
+        "racion": "15,00"
+      },
+      {
+        "es": "Entrecot de ternera",
+        "en": "Beef Entrecôte",
+        "fr": "Entrecôte de bœuf",
+        "media": null,
+        "racion": "19,00"
+      },
+      {
+        "es": "Solomillo de cerdo",
+        "en": "Pork Tenderloin",
+        "fr": "Filet de porc",
+        "media": null,
+        "racion": "14,50"
+      },
+      {
+        "es": "Chuletas de cordero",
+        "en": "Lamb Chops (each)",
+        "fr": "Côtelettes d'agneau",
+        "media": null,
+        "racion": "2,50 unid."
+      },
+      {
+        "es": "Jamón serrano",
+        "en": "Cured Ham",
+        "fr": "Jambon serrano",
+        "media": "10,00",
+        "racion": "13,00"
+      },
+      {
+        "es": "Queso manchego",
+        "en": "Manchego Cheese",
+        "fr": "Fromage manchego",
+        "media": "8,00",
+        "racion": "11,00"
+      }
     ],
     "group2": [
-      { "es": "Berenjenas (con miel)",          "en": "Aubergines with Honey",     "fr": "Aubergines au miel",         "media": "8,00",  "racion": "11,00" },
-      { "es": "Ensaladilla rusa",               "en": "Russian Salad",             "fr": "Salade russe",               "media": "5,50",  "racion": "8,00"  },
-      { "es": "Huevos fritos, jamón y papas",   "en": "Fried Eggs, Ham & Potatoes","fr": "Œufs frits, jambon, pommes", "media": null,    "racion": "13,00" },
-      { "es": "Habas, jamón y huevo",           "en": "Broad Beans, Ham & Egg",    "fr": "Fèves, jambon et œuf",       "media": null,    "racion": "13,00" },
-      { "es": "Champiñón",                      "en": "Sautéed Mushrooms",         "fr": "Champignons sautés",         "media": "7,50",  "racion": "10,00" },
-      { "es": "Champiñón con gambas",           "en": "Mushrooms with Prawns",     "fr": "Champignons aux crevettes",  "media": "11,00", "racion": "14,50" },
-      { "es": "Almejas",                        "en": "Clams",                     "fr": "Palourdes",                  "media": "9,50",  "racion": "13,00" },
-      { "es": "Gambas fritas",                  "en": "Fried Prawns",              "fr": "Crevettes frites",           "media": "10,50", "racion": "14,00" },
-      { "es": "Gambas pil pil",                 "en": "Prawns Pil Pil",            "fr": "Crevettes pil pil",          "media": "10,50", "racion": "14,00" },
-      { "es": "Calamares fritos",               "en": "Fried Calamari",            "fr": "Calamars frits",             "media": "9,50",  "racion": "13,00" },
-      { "es": "Cazón en adobo",                 "en": "Marinated Dogfish",         "fr": "Cazón mariné",               "media": "9,50",  "racion": "13,00" },
-      { "es": "Chopos fritos (puntillitas)",     "en": "Baby Cuttlefish, Fried",    "fr": "Petites seiches frites",     "media": "10,50", "racion": "14,00" },
-      { "es": "Boquerones fritos",              "en": "Fried Anchovies",           "fr": "Anchois frits",              "media": "9,50",  "racion": "13,00" },
-      { "es": "Fritura de pescado",             "en": "Fried Fish Platter",        "fr": "Friture de poisson",         "media": null,    "racion": "17,50" },
-      { "es": "Pulpo a la vinagreta",           "en": "Octopus Vinaigrette",       "fr": "Poulpe vinaigrette",         "media": "5,50",  "racion": "8,00"  },
-      { "es": "Gazpacho andaluz",               "en": "Andalusian Gazpacho",       "fr": "Gaspacho andalou",           "media": null,    "racion": "3,00 vaso" }
+      {
+        "es": "Berenjenas (con miel)",
+        "en": "Aubergines with Honey",
+        "fr": "Aubergines au miel",
+        "media": "8,00",
+        "racion": "11,00"
+      },
+      {
+        "es": "Ensaladilla rusa",
+        "en": "Russian Salad",
+        "fr": "Salade russe",
+        "media": "5,50",
+        "racion": "8,00"
+      },
+      {
+        "es": "Huevos fritos, jamón y papas",
+        "en": "Fried Eggs, Ham & Potatoes",
+        "fr": "Œufs frits, jambon, pommes",
+        "media": null,
+        "racion": "13,00"
+      },
+      {
+        "es": "Habas, jamón y huevo",
+        "en": "Broad Beans, Ham & Egg",
+        "fr": "Fèves, jambon et œuf",
+        "media": null,
+        "racion": "13,00"
+      },
+      {
+        "es": "Champiñón",
+        "en": "Sautéed Mushrooms",
+        "fr": "Champignons sautés",
+        "media": "7,50",
+        "racion": "10,00"
+      },
+      {
+        "es": "Champiñón con gambas",
+        "en": "Mushrooms with Prawns",
+        "fr": "Champignons aux crevettes",
+        "media": "11,00",
+        "racion": "14,50"
+      },
+      {
+        "es": "Almejas",
+        "en": "Clams",
+        "fr": "Palourdes",
+        "media": "9,50",
+        "racion": "13,00"
+      },
+      {
+        "es": "Gambas fritas",
+        "en": "Fried Prawns",
+        "fr": "Crevettes frites",
+        "media": "10,50",
+        "racion": "14,00"
+      },
+      {
+        "es": "Gambas pil pil",
+        "en": "Prawns Pil Pil",
+        "fr": "Crevettes pil pil",
+        "media": "10,50",
+        "racion": "14,00"
+      },
+      {
+        "es": "Calamares fritos",
+        "en": "Fried Calamari",
+        "fr": "Calamars frits",
+        "media": "9,50",
+        "racion": "13,00"
+      },
+      {
+        "es": "Cazón en adobo",
+        "en": "Marinated Dogfish",
+        "fr": "Cazón mariné",
+        "media": "9,50",
+        "racion": "13,00"
+      },
+      {
+        "es": "Chopos fritos (puntillitas)",
+        "en": "Baby Cuttlefish, Fried",
+        "fr": "Petites seiches frites",
+        "media": "10,50",
+        "racion": "14,00"
+      },
+      {
+        "es": "Boquerones fritos",
+        "en": "Fried Anchovies",
+        "fr": "Anchois frits",
+        "media": "9,50",
+        "racion": "13,00"
+      },
+      {
+        "es": "Fritura de pescado",
+        "en": "Fried Fish Platter",
+        "fr": "Friture de poisson",
+        "media": null,
+        "racion": "17,50"
+      },
+      {
+        "es": "Pulpo a la vinagreta",
+        "en": "Octopus Vinaigrette",
+        "fr": "Poulpe vinaigrette",
+        "media": "5,50",
+        "racion": "8,00"
+      },
+      {
+        "es": "Gazpacho andaluz",
+        "en": "Andalusian Gazpacho",
+        "fr": "Gaspacho andalou",
+        "media": null,
+        "racion": "3,00 vaso"
+      }
     ]
   },
   "seo": {
