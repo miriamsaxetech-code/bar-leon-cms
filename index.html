@@ -64,29 +64,43 @@
       width: 100%;
     }
 
-    .picker__logo {
-      height: 84px;
-      width: auto;
-      opacity: 0.82;
-      margin-bottom: 6px;
+    .picker__tile-frame {
+      display: block;
+      width: 100%;
+      max-width: 320px;
+      aspect-ratio: 994 / 646;
+      border-radius: 4px;
+      box-shadow:
+        0 10px 24px rgba(28, 26, 23, 0.2),
+        0 2px 6px rgba(28, 26, 23, 0.1);
+      overflow: hidden;
+      margin-bottom: 8px;
+      transition: transform 0.3s cubic-bezier(0.16, 1, 0.3, 1), box-shadow 0.3s ease;
     }
 
-    .picker__name {
-      font-family: 'Granaina Limpia', Georgia, serif;
-      font-size: 25px;
-      font-weight: normal;
-      color: #0F0D0B;
-      line-height: 1.15;
-      letter-spacing: 0.5px;
+    .picker__tile-frame:hover {
+      transform: scale(1.02) translateY(-2px);
+      box-shadow:
+        0 14px 32px rgba(28, 26, 23, 0.25),
+        0 4px 10px rgba(28, 26, 23, 0.14);
     }
 
-    .picker__sub {
-      font-family: 'Inter', system-ui, sans-serif;
-      font-size: 8.5px;
-      letter-spacing: 3.5px;
-      color: #3C3834;
-      text-transform: uppercase;
-      margin-top: -8px;
+    .picker__tile {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      display: block;
+    }
+
+    .sr-only {
+      position: absolute;
+      width: 1px;
+      height: 1px;
+      padding: 0;
+      margin: -1px;
+      overflow: hidden;
+      clip: rect(0, 0, 0, 0);
+      border: 0;
     }
 
     /* Status — editorial note, no pill, no color signal */
@@ -156,11 +170,11 @@
   </script>
 
   <div class="picker">
-    <img class="picker__logo" src="/assets/images/lion-logo.svg" alt="Bar León" />
-    <div>
-      <div class="picker__name">Restaurante Bar León</div>
-      <div class="picker__sub">Albayzín &middot; Granada &middot; 1959</div>
-    </div>
+    <picture class="picker__tile-frame">
+      <source srcset="/assets/images/web/azulejo-leon.webp" type="image/webp">
+      <img class="picker__tile" src="/assets/images/web/azulejo-leon.png" alt="Restaurante Bar León — Granada" />
+    </picture>
+    <h1 class="sr-only">Restaurante Bar León — Granada — Desde 1959</h1>
 
     <div id="status-container" class="picker__status-container" style="display: none;">
       <span id="status-text" class="status-note"></span>

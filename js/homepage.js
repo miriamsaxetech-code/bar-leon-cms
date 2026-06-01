@@ -571,8 +571,12 @@
     }[lang];
 
     const logoBlock = `
-<div class="site-logo-container">
-  <img src="../assets/images/lion-logo.svg" class="site-logo" alt="" />
+<div class="site-tile-container">
+  <picture class="site-tile-frame">
+    <source srcset="../assets/images/web/azulejo-leon.webp" type="image/webp">
+    <img class="site-tile" src="../assets/images/web/azulejo-leon.png" alt="Restaurante Bar León — Granada" fetchpriority="high" />
+  </picture>
+  <h1 class="sr-only">${t(d.venue.name, lang)}</h1>
 </div>`;
 
     // ─── CALL CTA LOGIC ─────────────────────────────────────────────────────────
@@ -601,7 +605,6 @@
 
     return `<div class="wrap">
   ${logoBlock}
-  <h1 class="site-name">${t(d.venue.name, lang)}</h1>
   <p class="site-location">
     <span class="site-location__place">${addr.neighborhood} &middot; ${addr.city}</span>
     <span class="site-location__since">${since}</span>

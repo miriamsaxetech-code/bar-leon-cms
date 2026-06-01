@@ -33,6 +33,18 @@ textarea:focus-visible {
   outline-offset: 4px;
 }
 
+/* Screen reader only utility */
+.sr-only {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  padding: 0;
+  margin: -1px;
+  overflow: hidden;
+  clip: rect(0, 0, 0, 0);
+  border: 0;
+}
+
 :root {
   --bg:         #F6F3EC;
   --ink:        #1C1A17;
@@ -1524,27 +1536,58 @@ h2 {
   margin-top: 3px;
 }
 
-/* ─── SITE LOGO HOME ─── */
-.site-logo-container {
+/* ─── SITE TILE HOME ─── */
+.site-tile-container {
   display: flex;
   justify-content: center;
-  margin-top: 12px;
-  margin-bottom: 24px;
+  margin-top: 16px;
+  margin-bottom: 32px;
+  padding: 0 16px;
 }
 
-.site-logo {
-  width: 96px;
-  height: auto;
+.site-tile-frame {
+  display: block;
+  max-width: 520px;
+  width: 100%;
+  aspect-ratio: 994 / 646; /* Matches the dimensions of azulejo-leon.webp */
+  border-radius: 4px;
+  box-shadow:
+    0 12px 32px rgba(28, 26, 23, 0.18),
+    0 2px 6px rgba(28, 26, 23, 0.08);
+  overflow: hidden;
+  transition: transform 0.3s cubic-bezier(0.16, 1, 0.3, 1), box-shadow 0.3s ease;
   opacity: 0;
-  transform: scale(0.94);
-  animation: logoFadeIn 0.8s cubic-bezier(0.16, 1, 0.3, 1) forwards;
-  animation-delay: 0.15s;
+  transform: scale(0.96) translateY(4px);
+  animation: tileFadeIn 0.8s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+  animation-delay: 0.1s;
 }
 
-@keyframes logoFadeIn {
+.site-tile-frame:hover {
+  transform: scale(1.015) translateY(-2px);
+  box-shadow:
+    0 16px 40px rgba(28, 26, 23, 0.22),
+    0 4px 12px rgba(28, 26, 23, 0.12);
+}
+
+.site-tile {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
+}
+
+@keyframes tileFadeIn {
   to {
-    opacity: 0.95;
-    transform: scale(1);
+    opacity: 1;
+    transform: scale(1) translateY(0);
+  }
+}
+
+@media (max-width: 540px) {
+  .site-tile-container {
+    margin-top: 8px;
+    margin-bottom: 24px;
+    padding: 0 12px;
   }
 }
 
@@ -1567,13 +1610,13 @@ h2 {
   top: 50%;
   left: 50%;
   transform: translate(-50%, -50%);
-  width: 140px;
-  height: 200px;
-  background-image: url('../assets/images/lion-logo.svg');
+  width: 240px;
+  height: 240px;
+  background-image: url('../assets/images/fajalauza-plate.svg');
   background-repeat: no-repeat;
   background-position: center;
   background-size: contain;
-  opacity: 0.05;
+  opacity: 0.055;
   pointer-events: none;
   z-index: 0;
 }
@@ -2256,51 +2299,68 @@ h2 {
 
 /* ─── VINOS DE BARRA — lista editorial ─── */
 .barra-chalkboard {
-  background: transparent;
-  border: none;
-  border-top: 1px solid rgba(28, 26, 23, 0.14);
-  border-bottom: 1px solid rgba(28, 26, 23, 0.14);
-  box-shadow: none;
-  padding: 28px 0 24px;
+  background: #1B2018;
+  border: 10px solid #2E2214;
+  box-shadow:
+    inset 0 0 90px rgba(0, 0, 0, 0.5),
+    inset 0 0 24px rgba(0, 0, 0, 0.35),
+    0 6px 18px rgba(0, 0, 0, 0.35);
+  padding: 28px 32px 24px;
   position: relative;
-  margin: 16px 0 36px;
+  margin: 28px 0;
   overflow: hidden;
 }
 
+/* Subtle inner frame rule */
 .barra-chalkboard::before {
-  display: none;
+  content: '';
+  position: absolute;
+  inset: 4px;
+  border: 1px solid rgba(255, 255, 255, 0.05);
+  pointer-events: none;
+  z-index: 1;
 }
 
+/* Chalk dust / grain texture overlay */
 .barra-chalkboard::after {
-  display: none;
+  content: '';
+  position: absolute;
+  inset: 0;
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='200' height='200'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.72' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='200' height='200' filter='url(%23n)'/%3E%3C/svg%3E");
+  opacity: 0.045;
+  mix-blend-mode: screen;
+  pointer-events: none;
+  z-index: 0;
 }
 
 .chalkboard-header {
   text-align: center;
   margin-bottom: 20px;
   padding-bottom: 14px;
-  border-bottom: 1px solid rgba(28, 26, 23, 0.14);
+  border-bottom: 1px solid rgba(255, 255, 255, 0.14);
   position: relative;
   z-index: 2;
 }
 
 .chalkboard-title {
   font-family: 'Granaina Limpia', Georgia, serif;
-  font-size: 1.05rem;
-  color: var(--ink);
-  letter-spacing: 0.08em;
+  font-size: 1.65rem;
+  color: rgba(255, 252, 240, 0.92);
+  letter-spacing: 0.06em;
   line-height: 1.1;
-  text-shadow: none;
+  text-shadow:
+    0 0 12px rgba(255, 252, 240, 0.18),
+    0 1px 2px rgba(0, 0, 0, 0.6);
 }
 
 .chalkboard-subtitle {
-  font-family: system-ui, -apple-system, sans-serif;
-  font-size: 0.62rem;
-  color: var(--muted);
+  font-family: Georgia, serif;
+  font-size: 0.65rem;
+  color: rgba(240, 235, 215, 0.5);
   letter-spacing: 0.22em;
   text-transform: uppercase;
   margin-top: 5px;
-  text-shadow: none;
+  text-shadow: 0 0 6px rgba(240, 235, 215, 0.1);
 }
 
 .chalkboard-body {
@@ -2312,7 +2372,7 @@ h2 {
 }
 
 .chalkboard-vsep {
-  background: rgba(28, 26, 23, 0.12);
+  background: rgba(255, 255, 255, 0.12);
   margin: 0 18px;
 }
 
@@ -2330,12 +2390,12 @@ h2 {
 .chalkboard-col-header .chalkboard-racion {
   font-family: system-ui, -apple-system, sans-serif;
   font-style: normal;
-  font-size: 0.75rem;
+  font-size: 0.56rem;
   text-transform: uppercase;
   letter-spacing: 0.2em;
-  color: var(--muted);
+  color: rgba(240, 235, 215, 0.38);
   padding-bottom: 6px;
-  border-bottom: 1px solid rgba(28, 26, 23, 0.14);
+  border-bottom: 1px solid rgba(255, 255, 255, 0.14);
   margin-bottom: 4px;
 }
 
@@ -2346,11 +2406,11 @@ h2 {
   gap: 0 6px;
   font-family: Georgia, serif;
   font-style: italic;
-  font-size: 0.78rem;
-  color: var(--ink);
+  font-size: 0.76rem;
+  color: rgba(242, 238, 220, 0.88);
   line-height: 1.72;
-  border-bottom: 1px solid rgba(28, 26, 23, 0.08);
-  text-shadow: none;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+  text-shadow: 0 0 8px rgba(242, 238, 220, 0.07);
 }
 
 .chalkboard-row:last-child {
@@ -2369,7 +2429,7 @@ h2 {
   font-family: 'Courier New', monospace;
   font-style: normal;
   font-size: 0.69rem;
-  color: var(--muted);
+  color: rgba(230, 224, 200, 0.7);
   white-space: nowrap;
   text-align: right;
   align-self: center;
@@ -2381,7 +2441,8 @@ h2 {
 
 @media (max-width: 540px) {
   .barra-chalkboard {
-    padding: 22px 0 18px;
+    border-width: 7px;
+    padding: 20px 14px 18px;
   }
   .chalkboard-body {
     grid-template-columns: 1fr;
@@ -2390,13 +2451,13 @@ h2 {
     height: 1px;
     width: auto;
     margin: 12px 0;
-    background: rgba(28, 26, 23, 0.12);
+    background: rgba(255, 255, 255, 0.14);
   }
   .chalkboard-row {
     grid-template-columns: 1fr 38px 46px;
     font-size: 0.72rem;
   }
   .chalkboard-title {
-    font-size: 0.95rem;
+    font-size: 1.35rem;
   }
 }
