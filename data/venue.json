@@ -706,9 +706,9 @@
       },
       "price": "10,00 €",
       "pairing": {
-        "es": "Manzanilla — 3,50 €",
-        "en": "Manzanilla (dry sherry, Sanlúcar) — 3,50 €",
-        "fr": "Manzanilla (xérès sec, Sanlúcar) — 3,50 €"
+        "es": "Calvente Vigiriega — Copa 3,70 € / Bot. 22,00 €",
+        "en": "Calvente Vigiriega (native Vigiriega grape, Granada) — Glass 3.70 € / Btl. 22.00 €",
+        "fr": "Calvente Vigiriega (raisin autochtone grenadin) — Verre 3,70 € / Bout. 22,00 €"
       },
       "available": true,
       "featured": "recommended"
@@ -828,12 +828,12 @@
       "category_id": "andalusian-specialities",
       "name": {
         "es": "Criadillas",
-        "en": "Fried Sweetbreads",
+        "en": "Bull's Testicles",
         "fr": "Animelles frites"
       },
       "description": {
         "es": "Casquería tradicional, rebozada y frita.",
-        "en": "Veal sweetbreads, breaded and fried until golden.",
+        "en": "Bull's testicles, breaded and fried until golden.",
         "fr": "Animelles de veau panées et frites."
       },
       "price": "Media 7,50 € / Ración 10,00 €",
@@ -1256,9 +1256,9 @@
       },
       "price": "Media 8,00 € / Ración 11,00 €",
       "pairing": {
-        "es": "",
-        "en": "",
-        "fr": ""
+        "es": "Muñana Flamenco Semi — Copa 3,20 € / Bot. 19,00 €",
+        "en": "Muñana Flamenco Semi (off-dry Moscatel, Granada) — Glass 3.20 € / Btl. 19.00 €",
+        "fr": "Muñana Flamenco Semi (Moscatel demi-sec, Grenade) — Verre 3,20 € / Bout. 19,00 €"
       },
       "available": true,
       "featured": false
@@ -2519,7 +2519,8 @@
         "es": "Uva(s): Tempranillo, Cabernet · Tinto con crianza, cuerpo medio y notas de roble y fruta negra. · Maridaje: Carnes rojas, caza, quesos curados",
         "en": "Grape(s): Tempranillo, Cabernet · Oak-aged red, medium body, notes of oak and dark fruit. · Pairing: Red meats, game, cured cheeses",
         "fr": "Cépage(s): Tempranillo, Cabernet · Rouge élevé en fût, corps moyen, notes de chêne et fruits noirs. · Accord: Viandes rouges, gibier, fromages affinés"
-      }
+      },
+      "featured": "local"
     },
     {
       "id": "calvente-guindalera",
@@ -2543,7 +2544,8 @@
         "es": "Uva(s): Garnacha tinta · Tinto joven, afrutado, con notas de cereza y un paso ligero. Ideal para tapeo. · Maridaje: Carnes a la brasa, queso curado, embutidos",
         "en": "Grape(s): Grenache · Young, fruity red with cherry notes and a light body. Perfect for tapas. · Pairing: Grilled meats, cured cheese, charcuterie",
         "fr": "Cépage(s): Grenache · Rouge jeune, fruité, notes de cerise et bouche légère. Idéal pour le tapeo. · Accord: Viandes grillées, fromage affiné, charcuterie"
-      }
+      },
+      "featured": "local"
     },
     {
       "id": "fontedei-prado-negro",
@@ -2567,7 +2569,8 @@
         "es": "Uva(s): Tempranillo, Cabernet Sauvignon · Tinto con estructura media, notas de fruta madura y un final especiado. · Maridaje: Carne de monte, callos, guisos de cuchara",
         "en": "Grape(s): Tempranillo, Cabernet Sauvignon · Medium-bodied red with ripe fruit and a spiced finish. · Pairing: Game, tripe, hearty stews",
         "fr": "Cépage(s): Tempranillo, Cabernet Sauvignon · Rouge de structure moyenne, fruits mûrs et finale épicée. · Accord: Gibier, tripes, ragoûts"
-      }
+      },
+      "featured": "local"
     },
     {
       "id": "delirio-munana",
@@ -2591,7 +2594,8 @@
         "es": "Uva(s): Tempranillo, Syrah · Tinto joven de Granada, fresco y afrutado con fondo especiado. · Maridaje: Tapas variadas, embutidos, verduras salteadas",
         "en": "Grape(s): Tempranillo, Syrah · Young Granada red, fresh and fruity with a spiced finish. · Pairing: Mixed tapas, charcuterie, sautéed vegetables",
         "fr": "Cépage(s): Tempranillo, Syrah · Rouge jeune de Grenade, frais et fruité, fond épicé. · Accord: Tapas variées, charcuterie, légumes sautés"
-      }
+      },
+      "featured": "local"
     },
     {
       "id": "munana-rojo",
@@ -2615,7 +2619,8 @@
         "es": "Uva(s): Tempranillo, Garnacha · Tinto robusto con taninos suaves y fondo de fruta madura. · Maridaje: Carne de monte, entrecot, cordero",
         "en": "Grape(s): Tempranillo, Grenache · Robust red with soft tannins and ripe fruit notes. · Pairing: Game, entrecôte, lamb",
         "fr": "Cépage(s): Tempranillo, Grenache · Rouge robuste aux tanins souples et fruits mûrs. · Accord: Gibier, entrecôte, agneau"
-      }
+      },
+      "featured": "local"
     },
     {
       "id": "munana-3-cepas",
@@ -2638,7 +2643,8 @@
         "es": "Uva(s): Tempranillo, Cabernet, Merlot · Coupage con cuerpo, equilibrado, con notas de fruta y especias. · Maridaje: Guisos, carnes rojas, quesos",
         "en": "Grape(s): Tempranillo, Cabernet, Merlot · Balanced blend with body, fruit and spice notes. · Pairing: Stews, red meats, cheeses",
         "fr": "Cépage(s): Tempranillo, Cabernet, Merlot · Assemblage équilibré, structuré, notes de fruits et d'épices. · Accord: Ragoûts, viandes rouges, fromages"
-      }
+      },
+      "featured": "local"
     },
     {
       "id": "calvente-vigiriega",
@@ -2662,7 +2668,8 @@
         "es": "Uva(s): Vigiriega (variedad autóctona granadina) · Blanco seco con notas florales y fondo mineral. Fresco, limpio y con personalidad mediterránea. · Maridaje: Fritura de pescado, mariscos, ensaladilla",
         "en": "Grape(s): Vigiriega (native Granada grape) · Dry white with floral notes and mineral finish. Fresh, clean, Mediterranean character. · Pairing: Fried fish, seafood, Russian salad",
         "fr": "Cépage(s): Vigiriega (cépage autochtone de Grenade) · Blanc sec aux notes florales et fond minéral. Frais, net, caractère méditerranéen. · Accord: Friture de poisson, fruits de mer, salade russe"
-      }
+      },
+      "featured": "local"
     },
     {
       "id": "munana-flamenco-semi",
@@ -2686,7 +2693,8 @@
         "es": "Uva(s): Moscatel, Chardonnay · Blanco semidulce de Granada. Aromático, con fruta tropical y flor de azahar. · Maridaje: Aperitivo, ensaladas, postres ligeros",
         "en": "Grape(s): Muscat, Chardonnay · Semi-sweet Granada white. Aromatic, with tropical fruit and orange blossom. · Pairing: Aperitif, salads, light desserts",
         "fr": "Cépage(s): Muscat, Chardonnay · Blanc demi-sec de Grenade. Aromatique, fruits tropicaux et fleur d'oranger. · Accord: Apéritif, salades, desserts légers"
-      }
+      },
+      "featured": "local"
     },
     {
       "id": "xateo",
@@ -2709,7 +2717,8 @@
         "es": "Uva(s): Moscatel, Vigiriega · Blanco joven y aromático. Ligero dulzor y frescura, perfecto para el aperitivo. · Maridaje: Gazpacho, verduras salteadas, tapas ligeras",
         "en": "Grape(s): Muscat, Vigiriega · Young aromatic white. Light sweetness and freshness, ideal as an aperitif. · Pairing: Gazpacho, sautéed vegetables, light tapas",
         "fr": "Cépage(s): Muscat, Vigiriega · Blanc jeune et aromatique. Légère douceur et fraîcheur, parfait en apéritif. · Accord: Gaspacho, légumes sautés, tapas légères"
-      }
+      },
+      "featured": "local"
     },
     {
       "id": "munana-rosado",
@@ -2733,7 +2742,8 @@
         "es": "",
         "en": "",
         "fr": ""
-      }
+      },
+      "featured": "local"
     },
     {
       "id": "antano-crianza",
@@ -3502,6 +3512,23 @@
         "en": "",
         "fr": ""
       }
+    },
+    {
+      "id": "mosto-salobrana",
+      "category_id": "soft-drinks",
+      "name": {
+        "es": "Mosto de Salobreña",
+        "en": "Mosto de Salobreña",
+        "fr": "Mosto de Salobreña"
+      },
+      "description": {
+        "es": "Zumo de uva sin fermentar de la costa granadina.",
+        "en": "Unfermented grape juice from Granada's coast.",
+        "fr": "Jus de raisin non fermenté de la côte de Grenade."
+      },
+      "price": "2,80 €",
+      "featured": "local",
+      "available": true
     },
     {
       "id": "tinto-de-verano",
