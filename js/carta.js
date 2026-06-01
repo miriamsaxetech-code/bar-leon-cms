@@ -913,7 +913,7 @@
   ${ctaHtml}
   <div class="wrap">
     <p class="carta-brand">${t(d.venue.name, lang)}</p>
-    <a href="/admin/" class="owner-link">Acceso propietario</a>
+    <a href="/panel/" class="owner-link">Acceso propietario</a>
   </div>
 </footer>`;
   }
