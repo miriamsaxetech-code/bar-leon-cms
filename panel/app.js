@@ -237,81 +237,52 @@ function renderPrecios(filter) {
   if (!container || !state) return;
 
   const q = (filter || '').toLowerCase().trim();
-
-  // Agrupar platos por tipo de categoría
-  const categories  = state.categories || [];
-  const dishes      = state.dishes || [];
-  const wines       = state.wines || [];
-  const beverages   = state.beverages || [];
-
-  // Mapas rápidos
-  const catMap = {};
-  categories.forEach(c => { catMap[c.id] = c; });
-
-  // Agrupar dishes por tipo de categoría
-  const groups = {
-    food: { label: 'Platos', items: [] },
-    wine: { label: 'Vinos', items: [] },
-    drink: { label: 'Bebidas', items: [] },
-  };
-
-  dishes.forEach(d => {
-    const cat = catMap[d.category_id];
-    const type = cat ? cat.type : 'food';
-    const name = (d.name && d.name.es) ? d.name.es : d.id;
-    if (q && !name.toLowerCase().includes(q)) return;
-    const group = groups[type] || groups.food;
-    group.items.push({ ...d, _type: 'dish', _priceField: 'price', _catName: cat ? cat.name.es : '' });
-  });
-
-  wines.forEach(w => {
-    const name = typeof w.name === 'object' ? (w.name.es || w.id) : (w.name || w.id);
-    if (q && !name.toLowerCase().includes(q)) return;
-    groups.wine.items.push({
-      ...w,
-      name: { es: name },
-      _type: 'wine',
-      _priceField: w.price_bottle ? 'price_bottle' : 'price_glass',
-    });
-  });
-
-  beverages.forEach(b => {
-    const name = (b.name && b.name.es) ? b.name.es : b.id;
-    if (q && !name.toLowerCase().includes(q)) return;
-    groups.drink.items.push({ ...b, _type: 'beverage', _priceField: 'price' });
-  });
-
   container.innerHTML = '';
 
-  Object.values(groups).forEach(group => {
-    if (group.items.length === 0) return;
-
-    const heading = document.createElement('div');
-    heading.className = 'price-group-heading';
-    heading.textContent = group.label;
-    container.appendChild(heading);
-
-    group.items.forEach(item => {
-      const row = document.createElement('div');
-      row.className = 'price-row';
-      row.dataset.id = item.id;
-
-      const nameEl = document.createElement('span');
-      nameEl.className = 'price-row__name';
-      nameEl.textContent = item.name && item.name.es ? item.name.es : item.id;
-
-      const priceBtn = document.createElement('button');
-      priceBtn.className = 'price-row__price';
-      priceBtn.dataset.id = item.id;
-      priceBtn.dataset.type = item._type;
-      priceBtn.dataset.field = item._priceField;
-      priceBtn.setAttribute('aria-label', `Editar precio de ${nameEl.textContent}`);
-      priceBtn.textContent = getPanelPriceDisplay(item);
-
-      row.appendChild(nameEl);
-      row.appendChild(priceBtn);
-      container.appendChild(row);
+  getCatalogGroups().forEach(group => {
+    const allItems = Array.isArray(state[group.collection]) ? state[group.collection] : [];
+    const items = allItems.filter(item => {
+      const name = getPanelItemName(item);
+      return !q || name.toLowerCase().includes(q);
     });
+
+    const section = document.createElement('section');
+    section.className = 'catalog-section';
+    section.dataset.collection = group.collection;
+
+    const header = document.createElement('div');
+    header.className = 'catalog-section__header';
+    header.innerHTML = `<div>
+      <h2 class="catalog-section__title">${group.label}</h2>
+      <p class="catalog-section__count">${items.length} elementos</p>
+    </div>`;
+
+    const addBtn = document.createElement('button');
+    addBtn.type = 'button';
+    addBtn.className = 'btn btn--ghost btn--small catalog-add-btn';
+    addBtn.dataset.action = 'add';
+    addBtn.dataset.collection = group.collection;
+    addBtn.textContent = '+ Añadir';
+    addBtn.setAttribute('aria-label', `Añadir en ${group.label}`);
+    header.appendChild(addBtn);
+    section.appendChild(header);
+
+    const list = document.createElement('div');
+    list.className = 'catalog-list';
+
+    if (items.length === 0) {
+      const empty = document.createElement('p');
+      empty.className = 'empty-state empty-state--compact';
+      empty.textContent = q ? 'No hay resultados en esta sección.' : 'Todavía no hay elementos.';
+      list.appendChild(empty);
+    }
+
+    items.forEach(item => {
+      list.appendChild(createCatalogRow(group, item));
+    });
+
+    section.appendChild(list);
+    container.appendChild(section);
   });
 
   if (container.children.length === 0) {
@@ -319,50 +290,170 @@ function renderPrecios(filter) {
   }
 }
 
-// Edición inline de precios
+function getCatalogGroups() {
+  return [
+    { collection: 'dishes', label: 'Platos', priceFields: ['price'], categories: 'food' },
+    { collection: 'wines', label: 'Vinos', priceFields: ['price_glass', 'price_bottle'] },
+    { collection: 'beverages', label: 'Bebidas', priceFields: ['price'], categories: 'drink' },
+  ];
+}
+
+function getPanelItemName(item) {
+  if (!item) return '';
+  if (item.name && typeof item.name === 'object') return item.name.es || item.id || '';
+  return item.name || item.id || '';
+}
+
+function getPanelCollectionItem(collection, id) {
+  return Array.isArray(state && state[collection])
+    ? state[collection].find(item => item.id === id)
+    : null;
+}
+
+function createCatalogRow(group, item) {
+  const row = document.createElement('article');
+  row.className = 'catalog-row';
+  row.dataset.collection = group.collection;
+  row.dataset.id = item.id;
+
+  const main = document.createElement('div');
+  main.className = 'catalog-row__main';
+
+  const nameInput = document.createElement('input');
+  nameInput.type = 'text';
+  nameInput.className = 'field-input catalog-name-input';
+  nameInput.value = getPanelItemName(item);
+  nameInput.dataset.action = 'name';
+  nameInput.dataset.collection = group.collection;
+  nameInput.dataset.id = item.id;
+  nameInput.setAttribute('aria-label', 'Nombre');
+  main.appendChild(nameInput);
+
+  if (group.categories) {
+    main.appendChild(createCategorySelect(group, item));
+  }
+
+  const prices = document.createElement('div');
+  prices.className = 'catalog-row__prices';
+  group.priceFields.forEach(field => {
+    const wrap = document.createElement('label');
+    wrap.className = 'catalog-price-field';
+    const label = field === 'price_bottle' ? 'Botella' : field === 'price_glass' ? 'Copa' : 'Precio';
+    wrap.innerHTML = `<span>${label}</span>`;
+    const input = document.createElement('input');
+    input.type = 'text';
+    input.inputMode = 'decimal';
+    input.className = 'field-input catalog-price-input';
+    input.value = formatPanelEuro(item[field]).replace(' €', '');
+    input.dataset.action = 'price';
+    input.dataset.collection = group.collection;
+    input.dataset.id = item.id;
+    input.dataset.field = field;
+    input.setAttribute('aria-label', label);
+    wrap.appendChild(input);
+    prices.appendChild(wrap);
+  });
+  main.appendChild(prices);
+
+  const actions = document.createElement('div');
+  actions.className = 'catalog-row__actions';
+
+  const activeLabel = document.createElement('label');
+  activeLabel.className = 'catalog-active';
+  activeLabel.innerHTML = '<span>Visible</span>';
+  const active = document.createElement('input');
+  active.type = 'checkbox';
+  active.checked = item.available !== false;
+  active.dataset.action = 'available';
+  active.dataset.collection = group.collection;
+  active.dataset.id = item.id;
+  activeLabel.appendChild(active);
+  actions.appendChild(activeLabel);
+
+  const deleteBtn = document.createElement('button');
+  deleteBtn.type = 'button';
+  deleteBtn.className = 'catalog-delete';
+  deleteBtn.dataset.action = 'delete';
+  deleteBtn.dataset.collection = group.collection;
+  deleteBtn.dataset.id = item.id;
+  deleteBtn.textContent = 'Borrar';
+  deleteBtn.setAttribute('aria-label', `Borrar ${getPanelItemName(item)}`);
+  actions.appendChild(deleteBtn);
+
+  row.appendChild(main);
+  row.appendChild(actions);
+  return row;
+}
+
+function createCategorySelect(group, item) {
+  const select = document.createElement('select');
+  select.className = 'field-select catalog-category-select';
+  select.dataset.action = 'category';
+  select.dataset.collection = group.collection;
+  select.dataset.id = item.id;
+  select.setAttribute('aria-label', 'Categoría');
+
+  const categories = (state.categories || []).filter(cat => {
+    if (!group.categories) return false;
+    if (group.categories === 'food') return cat.type === 'food' || !cat.type;
+    return cat.type === group.categories;
+  });
+
+  categories.forEach(cat => {
+    const option = document.createElement('option');
+    option.value = cat.id;
+    option.textContent = cat.name && cat.name.es ? cat.name.es : cat.id;
+    option.selected = item.category_id === cat.id;
+    select.appendChild(option);
+  });
+
+  return select;
+}
+
 function bindPreciosEdit() {
   const list = document.getElementById('precios-list');
   if (!list) return;
 
   list.addEventListener('click', e => {
-    const btn = e.target.closest('.price-row__price');
-    if (!btn || btn.tagName === 'INPUT') return;
-
-    const dishId = btn.dataset.id;
-    const itemType = btn.dataset.type || 'dish';
-    const priceField = btn.dataset.field || 'price';
-
-    const input = document.createElement('input');
-    input.type = 'text';
-    input.inputMode = 'decimal';
-    input.value = btn.textContent.trim();
-    input.className = 'price-input';
-    input.setAttribute('aria-label', 'Precio');
-
-    btn.replaceWith(input);
-    input.focus();
-    input.select();
-
-    function commit() {
-      const newVal = input.value.trim() || btn.textContent.trim();
-      updatePanelPrice(itemType, dishId, priceField, newVal);
-      // Restaurar botón
-      const newBtn = document.createElement('button');
-      newBtn.className = 'price-row__price';
-      newBtn.dataset.id = dishId;
-      newBtn.dataset.type = itemType;
-      newBtn.dataset.field = priceField;
-      newBtn.setAttribute('aria-label', `Editar precio de ${dishId}`);
-      newBtn.textContent = newVal;
-      input.replaceWith(newBtn);
-      markDirty();
+    const addBtn = e.target.closest('[data-action="add"]');
+    if (addBtn) {
+      addCatalogItem(addBtn.dataset.collection);
+      return;
     }
 
-    input.addEventListener('blur', commit);
-    input.addEventListener('keydown', e => {
-      if (e.key === 'Enter') { e.preventDefault(); input.blur(); }
-      if (e.key === 'Escape') { input.value = btn.textContent; input.blur(); }
-    });
+    const deleteBtn = e.target.closest('[data-action="delete"]');
+    if (!deleteBtn) return;
+
+    const item = getPanelCollectionItem(deleteBtn.dataset.collection, deleteBtn.dataset.id);
+    const name = getPanelItemName(item);
+    if (!window.confirm(`¿Borrar "${name}"?`)) return;
+    if (deletePanelItem(state, deleteBtn.dataset.collection, deleteBtn.dataset.id)) {
+      renderPrecios(document.getElementById('search-precios')?.value || '');
+      markDirty();
+    }
+  });
+
+  list.addEventListener('change', e => {
+    const target = e.target;
+    const action = target.dataset.action;
+    const collection = target.dataset.collection;
+    const id = target.dataset.id;
+    if (!action || !collection || !id) return;
+
+    const item = getPanelCollectionItem(collection, id);
+    if (!item) return;
+
+    if (action === 'name') {
+      if (!item.name || typeof item.name !== 'object') item.name = { es: '', en: '', fr: '' };
+      item.name.es = target.value.trim();
+    } else if (action === 'price') {
+      item[target.dataset.field] = collection === 'wines' ? parsePanelEuro(target.value) : target.value.trim();
+    } else if (action === 'category') {
+      item.category_id = target.value;
+    } else if (action === 'available') {
+      item.available = target.checked;
+    }
+    markDirty();
   });
 
   // Búsqueda en tiempo real
@@ -373,6 +464,34 @@ function bindPreciosEdit() {
       // Re-bind (el contenedor se reemplaza)
     });
   }
+}
+
+function addCatalogItem(collection) {
+  const group = getCatalogGroups().find(g => g.collection === collection);
+  if (!group) return;
+
+  const name = window.prompt(`Nombre para ${group.label.toLowerCase()}:`);
+  if (!name || !name.trim()) {
+    showError('Escribe un nombre para añadir el elemento.');
+    return;
+  }
+
+  const price = window.prompt('Precio inicial (opcional):') || '';
+  const existingIds = new Set((state[collection] || []).map(item => item.id));
+  const firstCategory = group.categories
+    ? (state.categories || []).find(cat => group.categories === 'food' ? (cat.type === 'food' || !cat.type) : cat.type === group.categories)
+    : null;
+
+  const item = createPanelItem(collection, {
+    name: name.trim(),
+    price,
+    price_glass: collection === 'wines' ? price : '',
+    category_id: firstCategory ? firstCategory.id : '',
+  }, existingIds);
+
+  addPanelItem(state, collection, item);
+  renderPrecios(document.getElementById('search-precios')?.value || '');
+  markDirty();
 }
 
 function getPanelPriceDisplay(item) {
