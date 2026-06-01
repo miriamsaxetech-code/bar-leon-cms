@@ -17,9 +17,28 @@
       <div class="auth-logo">🦁</div>
       <h1 class="auth-title">Panel de Control</h1>
       <p class="auth-subtitle">Bar León · Calle Pan, 1</p>
-      <button id="login-btn" class="btn btn--primary btn--full">
-        Entrar con GitHub
-      </button>
+
+      <form id="pin-form" class="pin-form" autocomplete="off" novalidate>
+        <div class="pin-inputs" aria-label="Introduce tu PIN de 6 dígitos">
+          <input class="pin-digit" type="password" inputmode="numeric" pattern="[0-9]" maxlength="1" aria-label="Dígito 1">
+          <input class="pin-digit" type="password" inputmode="numeric" pattern="[0-9]" maxlength="1" aria-label="Dígito 2">
+          <input class="pin-digit" type="password" inputmode="numeric" pattern="[0-9]" maxlength="1" aria-label="Dígito 3">
+          <input class="pin-digit" type="password" inputmode="numeric" pattern="[0-9]" maxlength="1" aria-label="Dígito 4">
+          <input class="pin-digit" type="password" inputmode="numeric" pattern="[0-9]" maxlength="1" aria-label="Dígito 5">
+          <input class="pin-digit" type="password" inputmode="numeric" pattern="[0-9]" maxlength="1" aria-label="Dígito 6">
+        </div>
+
+        <label class="pin-remember">
+          <input type="checkbox" id="pin-remember-cb" class="pin-remember__check">
+          <span class="pin-remember__label">Recordar este dispositivo 30 días</span>
+        </label>
+
+        <button type="submit" id="pin-submit" class="btn btn--primary btn--full">
+          Entrar
+        </button>
+
+        <p id="pin-error" class="pin-error" hidden>PIN incorrecto. Inténtalo de nuevo.</p>
+      </form>
     </div>
   </div>
 
@@ -37,6 +56,7 @@
     <nav class="panel-tabs" role="tablist" aria-label="Secciones del panel">
       <button class="panel-tab active" data-tab="precios"   role="tab" aria-selected="true"  aria-controls="tab-precios">Precios</button>
       <button class="panel-tab"        data-tab="horarios"  role="tab" aria-selected="false" aria-controls="tab-horarios">Horarios</button>
+      <button class="panel-tab"        data-tab="menu"      role="tab" aria-selected="false" aria-controls="tab-menu">Menú</button>
       <button class="panel-tab"        data-tab="aviso"     role="tab" aria-selected="false" aria-controls="tab-aviso">Aviso</button>
       <button class="panel-tab"        data-tab="carioca"   role="tab" aria-selected="false" aria-controls="tab-carioca">Archivo</button>
     </nav>
@@ -62,6 +82,55 @@
       <!-- TAB: HORARIOS -->
       <div id="tab-horarios" class="tab-panel" role="tabpanel" hidden>
         <div id="horarios-list" class="hours-list"></div>
+      </div>
+
+      <!-- TAB: MENÚ DEL DÍA -->
+      <div id="tab-menu" class="tab-panel" role="tabpanel" hidden>
+        <div class="menu-panel">
+
+          <label class="toggle-row">
+            <span class="toggle-row__label">Menú disponible hoy</span>
+            <div class="toggle-wrap">
+              <input type="checkbox" id="menu-active" class="toggle-input" role="switch">
+              <span class="toggle-thumb" aria-hidden="true"></span>
+            </div>
+          </label>
+
+          <div class="field-group">
+            <label class="field-label" for="menu-price">Precio del menú (€)</label>
+            <input type="text" inputmode="decimal" id="menu-price" class="field-input" placeholder="Ej: 12,50">
+          </div>
+
+          <div class="field-group">
+            <label class="field-label" for="menu-starters">Primeros</label>
+            <textarea id="menu-starters" class="field-textarea" rows="3"
+              placeholder="Ej: Gazpacho · Ensalada de la casa · Salmorejo"></textarea>
+          </div>
+
+          <div class="field-group">
+            <label class="field-label" for="menu-seconds">Segundos</label>
+            <textarea id="menu-seconds" class="field-textarea" rows="3"
+              placeholder="Ej: Filete de cerdo · Pescadilla · Pollo a la plancha"></textarea>
+          </div>
+
+          <div id="menu-mains-group" class="field-group">
+            <label class="field-label">Plato del día</label>
+            <div id="menu-mains-list" class="menu-mains-list"></div>
+          </div>
+
+          <div class="field-group">
+            <label class="field-label" for="menu-desserts">Postre</label>
+            <textarea id="menu-desserts" class="field-textarea" rows="2"
+              placeholder="Ej: Natillas · Arroz con leche · Helado · Fruta"></textarea>
+          </div>
+
+          <div class="field-group">
+            <label class="field-label" for="menu-seasonal">Nota opcional</label>
+            <textarea id="menu-seasonal" class="field-textarea" rows="2"
+              placeholder="Ej: Viernes en verano: Arroz a la cubana."></textarea>
+          </div>
+
+        </div>
       </div>
 
       <!-- TAB: AVISO -->

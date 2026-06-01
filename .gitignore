@@ -3,3 +3,4 @@ Thumbs.db
 node_modules/
 *.log
 .gemini/
+.dev.vars

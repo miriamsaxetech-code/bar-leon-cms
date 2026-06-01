@@ -302,6 +302,22 @@
     return dm.days.includes(todayKey);
   }
 
+  function localDateKey(date) {
+    const year = date.getFullYear();
+    const month = String(date.getMonth() + 1).padStart(2, '0');
+    const day = String(date.getDate()).padStart(2, '0');
+    return `${year}-${month}-${day}`;
+  }
+
+  function renderNotice(venue, lang) {
+    if (!venue || venue.notice_active !== true) return '';
+    const notice = t(venue.notice, lang).trim();
+    if (!notice) return '';
+    const expiry = venue.notice_expiry || '';
+    if (expiry && expiry < localDateKey(new Date())) return '';
+    return `<p class="aviso">${notice}</p>`;
+  }
+
   function renderHomeDailyMenu(d, lang, cartaUrl) {
     const dm = d.daily_menu;
     if (!dm || !dm.active) return '';
@@ -501,8 +517,7 @@
     const nav          = d.nav;
     const inService    = isNowServiceTime(d.hours);
 
-    const notice = t(d.venue.notice, lang);
-    const aviso  = notice ? `<p class="aviso">${notice}</p>` : '';
+    const aviso = renderNotice(d.venue, lang);
 
     const since = { es: 'Desde 1959', en: 'Since 1959', fr: 'Depuis 1959' }[lang];
     const directionsLabel = { es: 'Cómo llegar', en: 'Get directions', fr: 'Itinéraire' }[lang];

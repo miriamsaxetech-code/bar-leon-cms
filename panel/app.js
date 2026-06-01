@@ -9,20 +9,25 @@
 // AUTENTICACIÓN
 // ══════════════════════════════════════════════════════════════
 
-function getToken()        { return sessionStorage.getItem('gh_token'); }
-function setToken(t)       { sessionStorage.setItem('gh_token', t); }
-function clearToken()      { sessionStorage.removeItem('gh_token'); }
+const DEVICE_KEY  = 'panel_device_token';
+const SESSION_KEY = 'panel_session_token';
 
-// Recoger token desde el fragmento de URL (#token=xxx) si viene de callback
-(function pickUpTokenFromHash() {
-  if (!location.hash) return;
-  const hashParams = new URLSearchParams(location.hash.slice(1));
-  const t = hashParams.get('token');
-  if (t) {
-    setToken(decodeURIComponent(t));
-    history.replaceState(null, '', location.pathname);
+function getToken() {
+  return localStorage.getItem(DEVICE_KEY) || sessionStorage.getItem(SESSION_KEY) || null;
+}
+
+function setToken(token, remember) {
+  if (remember) {
+    localStorage.setItem(DEVICE_KEY, token);
+  } else {
+    sessionStorage.setItem(SESSION_KEY, token);
   }
-})();
+}
+
+function clearToken() {
+  localStorage.removeItem(DEVICE_KEY);
+  sessionStorage.removeItem(SESSION_KEY);
+}
 
 // ══════════════════════════════════════════════════════════════
 // ESTADO GLOBAL
@@ -30,6 +35,7 @@ function clearToken()      { sessionStorage.removeItem('gh_token'); }
 
 let state = null; // venue.json completo, cargado en memoria
 let cariocaFile = null; // archivo de imagen pendiente de subir
+let dailyMenuTextDirty = false;
 
 // ══════════════════════════════════════════════════════════════
 // INICIALIZACIÓN
@@ -44,6 +50,7 @@ document.addEventListener('DOMContentLoaded', async () => {
   }
 
   try {
+    await validateStoredToken(token);
     await loadVenueData();
     showPanel();
     renderAll();
@@ -58,6 +65,17 @@ document.addEventListener('DOMContentLoaded', async () => {
   }
 });
 
+async function validateStoredToken(token) {
+  const resp = await fetch('/panel-session', {
+    headers: { 'Authorization': `Bearer ${token}` },
+  });
+  if (!resp.ok) {
+    const err = new Error('Sesión no válida');
+    err.status = resp.status;
+    throw err;
+  }
+}
+
 // ══════════════════════════════════════════════════════════════
 // PANTALLAS
 // ══════════════════════════════════════════════════════════════
@@ -66,32 +84,82 @@ function showAuthScreen() {
   document.getElementById('auth-screen').hidden = false;
   document.getElementById('panel').hidden = true;
 
-  document.getElementById('login-btn').addEventListener('click', () => {
-    // Codificamos la URL de retorno en el parámetro state
-    const returnUrl = '/panel/';
-    const authUrl = `/functions/auth?provider=github&state=${encodeURIComponent('return:' + returnUrl)}`;
-    location.href = authUrl;
+  const form      = document.getElementById('pin-form');
+  const digits    = Array.from(document.querySelectorAll('.pin-digit'));
+  const submitBtn = document.getElementById('pin-submit');
+  const errorEl   = document.getElementById('pin-error');
+
+  // Auto-advance focus between PIN digit boxes
+  digits.forEach((input, idx) => {
+    input.addEventListener('input', () => {
+      const val = input.value.replace(/\D/g, '');
+      input.value = val.slice(-1); // keep only last numeric char
+      if (val && idx < digits.length - 1) digits[idx + 1].focus();
+    });
+    input.addEventListener('keydown', e => {
+      if (e.key === 'Backspace' && !input.value && idx > 0) digits[idx - 1].focus();
+    });
+    input.addEventListener('paste', e => {
+      e.preventDefault();
+      const pasted = (e.clipboardData || window.clipboardData).getData('text').replace(/\D/g, '');
+      pasted.split('').slice(0, digits.length).forEach((ch, i) => {
+        if (digits[i]) digits[i].value = ch;
+      });
+      const next = Math.min(pasted.length, digits.length - 1);
+      digits[next].focus();
+    });
   });
+
+  form.onsubmit = async e => {
+    e.preventDefault();
+    errorEl.hidden = true;
+
+    const pin = digits.map(d => d.value).join('');
+    if (pin.length !== 6) { digits[0].focus(); return; }
+
+    const remember = document.getElementById('pin-remember-cb').checked;
+    submitBtn.disabled = true;
+    submitBtn.textContent = 'Comprobando…';
+
+    try {
+      const resp = await fetch('/pin-login', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ pin, remember }),
+      });
+
+      if (resp.status === 401) {
+        errorEl.hidden = false;
+        digits.forEach(d => { d.value = ''; });
+        digits[0].focus();
+        return;
+      }
+
+      if (!resp.ok) throw new Error(`HTTP ${resp.status}`);
+
+      const { token } = await resp.json();
+      setToken(token, remember);
+
+      await loadVenueData();
+      showPanel();
+      renderAll();
+      bindEvents();
+
+    } catch {
+      showError('Error de conexión. Comprueba tu internet e inténtalo de nuevo.');
+    } finally {
+      submitBtn.disabled = false;
+      submitBtn.textContent = 'Entrar';
+    }
+  };
+
+  // Focus first digit on load
+  digits[0]?.focus();
 }
 
 function showPanel() {
   document.getElementById('auth-screen').hidden = true;
   document.getElementById('panel').hidden = false;
-
-  // Mostrar nombre de usuario (no bloqueante)
-  fetch('https://api.github.com/user', {
-    headers: {
-      'Authorization': `Bearer ${getToken()}`,
-      'User-Agent': 'bar-leon-cms',
-    },
-  })
-    .then(r => r.ok ? r.json() : null)
-    .then(u => {
-      if (u) {
-        document.getElementById('user-info').textContent = u.login || '';
-      }
-    })
-    .catch(() => {});
 }
 
 // ══════════════════════════════════════════════════════════════
@@ -142,6 +210,7 @@ function bindTabNav() {
 function renderAll() {
   renderPrecios();
   renderHorarios();
+  renderMenuDelDia();
   renderAviso();
   // Carioca: solo bindings, no tiene datos preexistentes para renderizar
 }
@@ -443,6 +512,160 @@ function createTimeInput(value, onChange) {
 }
 
 // ══════════════════════════════════════════════════════════════
+// TAB: MENÚ DEL DÍA
+// ══════════════════════════════════════════════════════════════
+
+function renderMenuDelDia() {
+  if (!state) return;
+  const m = state.daily_menu || {};
+
+  const activeEl   = document.getElementById('menu-active');
+  const priceEl    = document.getElementById('menu-price');
+  const startersEl = document.getElementById('menu-starters');
+  const secondsEl  = document.getElementById('menu-seconds');
+  const dessertsEl = document.getElementById('menu-desserts');
+  const seasonalEl = document.getElementById('menu-seasonal');
+  const mainsList  = document.getElementById('menu-mains-list');
+
+  if (activeEl)   activeEl.checked    = m.active === true;
+  if (priceEl)    priceEl.value       = m.price != null ? String(m.price).replace('.', ',') : '';
+  if (startersEl) startersEl.value    = (m.starters && m.starters.es) || '';
+  if (secondsEl)  secondsEl.value     = (m.seconds  && m.seconds.es)  || '';
+  if (dessertsEl) dessertsEl.value    = (m.desserts && m.desserts.es) || '';
+  if (seasonalEl) seasonalEl.value    = (m.seasonal && m.seasonal.es) || '';
+
+  if (!mainsList) return;
+  mainsList.innerHTML = '';
+  const days = Array.isArray(m.days) ? m.days : [];
+  days.forEach(day => {
+    const existing = Array.isArray(m.mains)
+      ? m.mains.find(x => x.day === day)
+      : null;
+
+    const row = document.createElement('div');
+    row.className = 'menu-main-row';
+
+    const label = document.createElement('span');
+    label.className = 'menu-main-day';
+    label.textContent = DAY_NAMES[day] || day;
+
+    const input = document.createElement('input');
+    input.type = 'text';
+    input.className = 'field-input menu-main-input';
+    input.value = (existing && existing.name && existing.name.es) || '';
+    input.placeholder = 'Plato del día';
+    input.dataset.day = day;
+    input.setAttribute('aria-label', `Plato del día ${DAY_NAMES[day] || day}`);
+
+    input.addEventListener('change', () => {
+      if (!state.daily_menu.mains) state.daily_menu.mains = [];
+      const entry = state.daily_menu.mains.find(x => x.day === day);
+      if (entry) {
+        entry.name.es = input.value.trim();
+      } else {
+        state.daily_menu.mains.push({ day, name: { es: input.value.trim(), en: '', fr: '' } });
+      }
+      markDailyMenuTextDirty();
+    });
+
+    row.appendChild(label);
+    row.appendChild(input);
+    mainsList.appendChild(row);
+  });
+}
+
+function bindMenuDelDia() {
+  const fields = [
+    {
+      id: 'menu-active',
+      event: 'change',
+      handler: e => {
+        if (!state.daily_menu) state.daily_menu = {};
+        state.daily_menu.active = e.target.checked;
+        markDirty();
+      },
+    },
+    {
+      id: 'menu-price',
+      event: 'change',
+      handler: e => {
+        if (!state.daily_menu) state.daily_menu = {};
+        const raw = e.target.value.replace(',', '.').replace(/[^\d.]/g, '');
+        const num = parseFloat(raw);
+        state.daily_menu.price = isFinite(num) ? num : state.daily_menu.price;
+        markDirty();
+      },
+    },
+    {
+      id: 'menu-starters',
+      event: 'change',
+      handler: e => {
+        if (!state.daily_menu) state.daily_menu = {};
+        if (!state.daily_menu.starters) state.daily_menu.starters = {};
+        state.daily_menu.starters.es = e.target.value;
+        markDailyMenuTextDirty();
+      },
+    },
+    {
+      id: 'menu-seconds',
+      event: 'change',
+      handler: e => {
+        if (!state.daily_menu) state.daily_menu = {};
+        if (!state.daily_menu.seconds) state.daily_menu.seconds = {};
+        state.daily_menu.seconds.es = e.target.value;
+        markDailyMenuTextDirty();
+      },
+    },
+    {
+      id: 'menu-desserts',
+      event: 'change',
+      handler: e => {
+        if (!state.daily_menu) state.daily_menu = {};
+        if (!state.daily_menu.desserts) state.daily_menu.desserts = {};
+        state.daily_menu.desserts.es = e.target.value;
+        markDailyMenuTextDirty();
+      },
+    },
+    {
+      id: 'menu-seasonal',
+      event: 'change',
+      handler: e => {
+        if (!state.daily_menu) state.daily_menu = {};
+        if (!state.daily_menu.seasonal) state.daily_menu.seasonal = {};
+        state.daily_menu.seasonal.es = e.target.value;
+        markDailyMenuTextDirty();
+      },
+    },
+  ];
+
+  fields.forEach(({ id, event, handler }) => {
+    const el = document.getElementById(id);
+    if (el) el.addEventListener(event, handler);
+  });
+}
+
+function copySpanishFallback(field) {
+  if (!field || typeof field !== 'object') return;
+  const es = typeof field.es === 'string' ? field.es.trim() : '';
+  field.en = es;
+  field.fr = es;
+}
+
+function syncDailyMenuFallbackTranslations() {
+  if (!state || !state.daily_menu) return;
+  const m = state.daily_menu;
+
+  copySpanishFallback(m.starters);
+  copySpanishFallback(m.seconds);
+  copySpanishFallback(m.desserts);
+  copySpanishFallback(m.seasonal);
+
+  if (Array.isArray(m.mains)) {
+    m.mains.forEach(entry => copySpanishFallback(entry && entry.name));
+  }
+}
+
+// ══════════════════════════════════════════════════════════════
 // TAB: AVISO
 // ══════════════════════════════════════════════════════════════
 
@@ -610,43 +833,24 @@ async function resizeImage(file, maxWidth = 1200, maxBytes = 1024 * 1024) {
   });
 }
 
-// Sube la imagen a GitHub y devuelve la ruta relativa
+// Sube la imagen al servidor y devuelve la ruta relativa
 async function uploadCariocaImage(file, token) {
-  return new Promise((resolve, reject) => {
-    const reader = new FileReader();
-    reader.onerror = () => reject(new Error('Error leyendo el archivo'));
-    reader.onload = async () => {
-      try {
-        const base64 = reader.result.split(',')[1];
-        const filename = `carioca-${Date.now()}.jpg`;
-        const resp = await fetch(
-          `https://api.github.com/repos/miriamsaxetech-code/bar-leon-cms/contents/assets/images/cariocas/${filename}`,
-          {
-            method: 'PUT',
-            headers: {
-              'Authorization': `Bearer ${token}`,
-              'User-Agent': 'bar-leon-cms',
-              'Content-Type': 'application/json',
-            },
-            body: JSON.stringify({
-              message: 'chore(panel): upload carioca image',
-              content: base64,
-              branch: 'main',
-            }),
-          }
-        );
-        if (!resp.ok) {
-          const errText = await resp.text();
-          reject(new Error(`Error subiendo imagen: ${errText}`));
-          return;
-        }
-        resolve(`/assets/images/cariocas/${filename}`);
-      } catch (err) {
-        reject(err);
-      }
-    };
-    reader.readAsDataURL(file);
+  const formData = new FormData();
+  formData.append('image', file);
+
+  const resp = await fetch('/upload-image', {
+    method: 'POST',
+    headers: { 'Authorization': `Bearer ${token}` },
+    body: formData,
   });
+
+  if (!resp.ok) {
+    const errText = await resp.text();
+    throw new Error(`Error subiendo imagen: ${errText}`);
+  }
+
+  const { path } = await resp.json();
+  return path;
 }
 
 // Construye un objeto carioca a partir del formulario
@@ -677,6 +881,11 @@ function markDirty() {
   if (statusEl) statusEl.textContent = 'Cambios sin guardar';
   const saveBtn = document.getElementById('save-btn');
   if (saveBtn) saveBtn.disabled = false;
+}
+
+function markDailyMenuTextDirty() {
+  dailyMenuTextDirty = true;
+  markDirty();
 }
 
 async function saveAll() {
@@ -720,9 +929,13 @@ async function saveAll() {
     }
   }
 
+  if (dailyMenuTextDirty) {
+    syncDailyMenuFallbackTranslations();
+  }
+
   // Enviar el JSON completo a admin-save
   try {
-    const resp = await fetch('/functions/admin-save', {
+    const resp = await fetch('/admin-save', {
       method: 'POST',
       headers: {
         'Authorization': `Bearer ${token}`,
@@ -749,6 +962,7 @@ async function saveAll() {
     }
 
     dirty = false;
+    dailyMenuTextDirty = false;
     if (statusEl) statusEl.textContent = '✓ Guardado';
     if (saveBtn)  { saveBtn.textContent = 'Guardar cambios'; saveBtn.disabled = false; }
 
@@ -820,6 +1034,7 @@ function showError(msg) {
 function bindEvents() {
   bindTabNav();
   bindPreciosEdit();
+  bindMenuDelDia();
   bindAvisoEvents();
   bindCariocaEvents();
 

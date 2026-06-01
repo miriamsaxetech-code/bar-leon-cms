@@ -55,6 +55,21 @@
       return h('p', { className: 'pr-section' }, titulo);
     }
 
+    function todayKey() {
+      var now = new Date();
+      var month = String(now.getMonth() + 1).padStart(2, '0');
+      var day = String(now.getDate()).padStart(2, '0');
+      return now.getFullYear() + '-' + month + '-' + day;
+    }
+
+    function shouldShowNotice(venueData, aviso) {
+      if (!aviso) return false;
+      var active = venueData.get ? venueData.get('notice_active') === true : venueData.notice_active === true;
+      if (!active) return false;
+      var expiry = venueData.get ? (venueData.get('notice_expiry') || '') : (venueData.notice_expiry || '');
+      return !expiry || expiry >= todayKey();
+    }
+
     function PreviewBarLeon(props) {
       var entry = props.entry;
       var data  = entry.getIn(['data']);
@@ -105,7 +120,7 @@
 
       return h('div', {},
         // Aviso
-        aviso ? h('div', { className: 'pr-aviso' }, '⚠️  ' + aviso) : null,
+        shouldShowNotice(venueData, aviso) ? h('div', { className: 'pr-aviso' }, '⚠️  ' + aviso) : null,
 
         // Menú del día
         seccion('Menú del día'),

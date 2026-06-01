@@ -310,6 +310,15 @@ collections:
                   - { name: es, label: "Aviso (ES)", widget: string, required: false }
                   - { name: en, label: "Aviso (EN)", widget: string, required: false }
                   - { name: fr, label: "Aviso (FR)", widget: string, required: false }
+              - name: notice_active
+                label: "Mostrar aviso en la web"
+                widget: boolean
+                required: false
+                default: false
+              - name: notice_expiry
+                label: "Fecha de caducidad del aviso"
+                widget: string
+                required: false
               - name: currency
                 label: "Moneda"
                 widget: string

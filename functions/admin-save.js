@@ -1,13 +1,30 @@
 // Cloudflare Pages Function — Admin save endpoint
 // Accepts POST with JSON body containing the full updated venue.json
 // Commits it to GitHub via the Contents API.
-// Requires env vars: GITHUB_TOKEN (a PAT with repo write access)
+// Requires env vars: GITHUB_TOKEN (a PAT with repo write access), PANEL_SECRET
+
+async function verifyPanelToken(token, secret) {
+  const parts = token.split('.');
+  if (parts.length !== 2) return false;
+  try {
+    const { exp } = JSON.parse(atob(parts[0]));
+    if (!exp || Date.now() > exp) return false;
+
+    const enc = new TextEncoder();
+    const key = await crypto.subtle.importKey(
+      'raw', enc.encode(secret),
+      { name: 'HMAC', hash: 'SHA-256' },
+      false, ['verify']
+    );
+    const sigBytes = Uint8Array.from(atob(parts[1]), c => c.charCodeAt(0));
+    return crypto.subtle.verify('HMAC', key, sigBytes, enc.encode(parts[0]));
+  } catch {
+    return false;
+  }
+}
 
 export async function onRequestPost(context) {
   const { request, env } = context;
-
-  // ── CORS preflight (same-origin in production, useful in dev) ──────────────
-  const origin = request.headers.get('Origin') || '';
 
   // ── Auth check ──────────────────────────────────────────────────────────────
   const authHeader = request.headers.get('Authorization');
@@ -16,15 +33,8 @@ export async function onRequestPost(context) {
   }
   const userToken = authHeader.slice(7);
 
-  // Verify the user token is valid by calling GitHub API
-  const ghUser = await fetch('https://api.github.com/user', {
-    headers: {
-      'Authorization': `Bearer ${userToken}`,
-      'User-Agent': 'bar-leon-cms',
-    },
-  });
-  if (!ghUser.ok) {
-    return new Response('Token no válido', { status: 401 });
+  if (!(await verifyPanelToken(userToken, env.PANEL_SECRET))) {
+    return new Response('Token no válido o caducado', { status: 401 });
   }
 
   // ── Read current file SHA (required for GitHub Contents API update) ─────────
