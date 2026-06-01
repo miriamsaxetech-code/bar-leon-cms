@@ -702,25 +702,85 @@ function createTimeInput(value, onChange) {
 // TAB: MENÚ DEL DÍA
 // ══════════════════════════════════════════════════════════════
 
+function _renderMenuList(containerId, text) {
+  const container = document.getElementById(containerId);
+  if (!container) return;
+  const field = container.dataset.field;
+  container.innerHTML = '';
+
+  const items = splitPanelListText(text);
+
+  items.forEach((item, idx) => {
+    container.appendChild(_buildMenuListRow(item, idx, field));
+  });
+
+  const addBtn = document.createElement('button');
+  addBtn.type = 'button';
+  addBtn.className = 'btn-menu-list-add';
+  addBtn.dataset.field = field;
+  addBtn.setAttribute('aria-label', 'Añadir elemento');
+  addBtn.textContent = '+ Añadir';
+  container.appendChild(addBtn);
+}
+
+function _buildMenuListRow(text, index, field) {
+  const row = document.createElement('div');
+  row.className = 'menu-list-row';
+  row.dataset.index = index;
+
+  const input = document.createElement('input');
+  input.type = 'text';
+  input.className = 'menu-list-input';
+  input.value = text;
+  input.placeholder = 'Elemento…';
+  input.dataset.field = field;
+  input.setAttribute('aria-label', `Elemento ${index + 1}`);
+
+  const delBtn = document.createElement('button');
+  delBtn.type = 'button';
+  delBtn.className = 'menu-list-delete';
+  delBtn.dataset.field = field;
+  delBtn.dataset.index = String(index);
+  delBtn.setAttribute('aria-label', 'Eliminar');
+  delBtn.textContent = '✕';
+
+  row.appendChild(input);
+  row.appendChild(delBtn);
+  return row;
+}
+
+function _serializeMenuList(containerId) {
+  const container = document.getElementById(containerId);
+  if (!container) return '';
+  const inputs = Array.from(container.querySelectorAll('.menu-list-input'));
+  return joinPanelListItems(inputs.map(i => i.value.trim()).filter(Boolean));
+}
+
+function _commitMenuList(field) {
+  if (!state) return;
+  if (!state.daily_menu) state.daily_menu = {};
+  const containerId = `menu-${field}-list`;
+  const text = _serializeMenuList(containerId);
+  if (!state.daily_menu[field]) state.daily_menu[field] = { es: '', en: '', fr: '' };
+  state.daily_menu[field].es = text;
+  markDailyMenuTextDirty();
+}
+
 function renderMenuDelDia() {
   if (!state) return;
   const m = state.daily_menu || {};
 
-  const activeEl   = document.getElementById('menu-active');
-  const priceEl    = document.getElementById('menu-price');
-  const startersEl = document.getElementById('menu-starters');
-  const secondsEl  = document.getElementById('menu-seconds');
-  const dessertsEl = document.getElementById('menu-desserts');
-  const seasonalEl = document.getElementById('menu-seasonal');
-  const mainsList  = document.getElementById('menu-mains-list');
+  const activeEl = document.getElementById('menu-active');
+  const priceEl  = document.getElementById('menu-price');
+  if (activeEl) activeEl.checked = m.active === true;
+  if (priceEl)  priceEl.value   = m.price != null ? Number(m.price).toFixed(2).replace('.', ',') : '';
 
-  if (activeEl)   activeEl.checked    = m.active === true;
-  if (priceEl)    priceEl.value       = m.price != null ? Number(m.price).toFixed(2).replace('.', ',') : '';
-  if (startersEl) startersEl.value    = (m.starters && m.starters.es) || '';
-  if (secondsEl)  secondsEl.value     = (m.seconds  && m.seconds.es)  || '';
-  if (dessertsEl) dessertsEl.value    = (m.desserts && m.desserts.es) || '';
-  if (seasonalEl) seasonalEl.value    = (m.seasonal && m.seasonal.es) || '';
+  _renderMenuList('menu-starters-list', (m.starters && m.starters.es) || '');
+  _renderMenuList('menu-seconds-list',  (m.seconds  && m.seconds.es)  || '');
+  _renderMenuList('menu-desserts-list', (m.desserts && m.desserts.es) || '');
+  _renderMenuList('menu-seasonal-list', (m.seasonal && m.seasonal.es) || '');
 
+  const mainsList = document.getElementById('menu-mains-list');
   if (!mainsList) return;
   mainsList.innerHTML = '';
   const days = Array.isArray(m.days) ? m.days : [];
@@ -766,72 +826,64 @@ function renderMenuDelDia() {
 }
 
 function bindMenuDelDia() {
-  const fields = [
-    {
-      id: 'menu-active',
-      event: 'change',
-      handler: e => {
-        if (!state.daily_menu) state.daily_menu = {};
-        state.daily_menu.active = e.target.checked;
-        markDirty();
-      },
-    },
-    {
-      id: 'menu-price',
-      event: 'change',
-      handler: e => {
-        if (!state.daily_menu) state.daily_menu = {};
-        const raw = e.target.value.replace(',', '.').replace(/[^\d.]/g, '');
-        const num = parseFloat(raw);
-        state.daily_menu.price = isFinite(num) ? num : state.daily_menu.price;
-        markDirty();
-      },
-    },
-    {
-      id: 'menu-starters',
-      event: 'change',
-      handler: e => {
-        if (!state.daily_menu) state.daily_menu = {};
-        if (!state.daily_menu.starters) state.daily_menu.starters = {};
-        state.daily_menu.starters.es = e.target.value;
-        markDailyMenuTextDirty();
-      },
-    },
-    {
-      id: 'menu-seconds',
-      event: 'change',
-      handler: e => {
-        if (!state.daily_menu) state.daily_menu = {};
-        if (!state.daily_menu.seconds) state.daily_menu.seconds = {};
-        state.daily_menu.seconds.es = e.target.value;
-        markDailyMenuTextDirty();
-      },
-    },
-    {
-      id: 'menu-desserts',
-      event: 'change',
-      handler: e => {
-        if (!state.daily_menu) state.daily_menu = {};
-        if (!state.daily_menu.desserts) state.daily_menu.desserts = {};
-        state.daily_menu.desserts.es = e.target.value;
-        markDailyMenuTextDirty();
-      },
-    },
-    {
-      id: 'menu-seasonal',
-      event: 'change',
-      handler: e => {
-        if (!state.daily_menu) state.daily_menu = {};
-        if (!state.daily_menu.seasonal) state.daily_menu.seasonal = {};
-        state.daily_menu.seasonal.es = e.target.value;
-        markDailyMenuTextDirty();
-      },
-    },
-  ];
+  // Active toggle and price — static elements, bind directly
+  const activeEl = document.getElementById('menu-active');
+  if (activeEl) {
+    activeEl.addEventListener('change', e => {
+      if (!state.daily_menu) state.daily_menu = {};
+      state.daily_menu.active = e.target.checked;
+      markDirty();
+    });
+  }
 
-  fields.forEach(({ id, event, handler }) => {
-    const el = document.getElementById(id);
-    if (el) el.addEventListener(event, handler);
+  const priceEl = document.getElementById('menu-price');
+  if (priceEl) {
+    priceEl.addEventListener('change', e => {
+      if (!state.daily_menu) state.daily_menu = {};
+      const raw = e.target.value.replace(',', '.').replace(/[^\d.]/g, '');
+      const num = parseFloat(raw);
+      state.daily_menu.price = isFinite(num) ? num : state.daily_menu.price;
+      markDirty();
+    });
+  }
+
+  // List containers — delegate on parent tab panel
+  const menuTab = document.getElementById('tab-menu');
+  if (!menuTab) return;
+
+  // Edit item text
+  menuTab.addEventListener('change', e => {
+    const input = e.target.closest('.menu-list-input');
+    if (!input) return;
+    _commitMenuList(input.dataset.field);
+  });
+
+  // Add item
+  menuTab.addEventListener('click', e => {
+    const addBtn = e.target.closest('.btn-menu-list-add');
+    if (!addBtn) return;
+    const field = addBtn.dataset.field;
+    const containerId = `menu-${field}-list`;
+    const container = document.getElementById(containerId);
+    if (!container) return;
+
+    // Insert new row before the add button
+    const allRows = container.querySelectorAll('.menu-list-row');
+    const newRow = _buildMenuListRow('', allRows.length, field);
+    container.insertBefore(newRow, addBtn);
+    const newInput = newRow.querySelector('.menu-list-input');
+    if (newInput) newInput.focus();
+    _commitMenuList(field);
+  });
+
+  // Delete item
+  menuTab.addEventListener('click', e => {
+    const delBtn = e.target.closest('.menu-list-delete');
+    if (!delBtn) return;
+    const field = delBtn.dataset.field;
+    const row = delBtn.closest('.menu-list-row');
+    if (row) row.remove();
+    _commitMenuList(field);
   });
 }
 
