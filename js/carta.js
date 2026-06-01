@@ -34,13 +34,16 @@
     dailyMenu:  { es: 'Menú del Día',   en: 'Daily Menu',    fr: 'Menu du Jour' },
     restaurant: { es: 'Carta Restaurante', en: 'Restaurant Menu', fr: 'Carte Restaurant' },
     bar:        { es: 'Carta Barra',    en: 'Bar Menu',      fr: 'Carte Bar' },
-    barIntro:   { es: 'Para barra, cervezas y bebidas. Sin ceremonia, que aquí se viene a gusto.', en: 'Beers, spirits, and soft drinks. Simple, direct, and easy.', fr: 'Bières, spiritueux et boissons. Simple et direct.' },
+    barIntro:   { es: 'Lo que sale de la barra. Sin ceremonia.', en: 'Straight from the bar. No fuss.', fr: 'Ce qui sort du comptoir. Sans cérémonie.' },
+    beverages:  { es: 'Bebidas',        en: 'Drinks',        fr: 'Boissons' },
+    beveragesIntro: { es: 'Cervezas, refrescos y licores.', en: 'Beers, soft drinks and spirits.', fr: 'Bières, boissons et spiritueux.' },
     restaurantIntro: { es: 'La carta de mesa, separada del menú del día.', en: 'The table menu, separate from the daily menu.', fr: 'La carte de table, séparée du menu du jour.' },
     wines:      { es: 'La Bodega',      en: 'The Cellar',    fr: 'La Cave' },
     winesIntro: { es: 'Nuestra selección de vinos. D.O. Granada por delante, acompañados de los grandes clásicos de la península.', en: 'Our wine selection. Local D.O. Granada first, alongside classic Spanish appellations.', fr: 'Notre sélection de vins. Les vins de Grenade en priorité, accompagnés des grands classiques espagnols.' },
     badge_recommended: { es: 'Recomendado', en: 'Recommended',   fr: 'Recommandé'         },
     badge_seasonal:    { es: 'Temporada',   en: 'Seasonal',       fr: 'Saison'             },
     badge_house:       { es: 'De la casa',  en: 'House special',  fr: 'Maison'             },
+    badge_local:       { es: 'Granada',     en: 'Granada',        fr: 'Grenade'            },
     soldout:           { es: 'Agotado hoy', en: 'Sold out today', fr: "Épuisé aujourd'hui" },
     paraEmpezarTitle:  { es: 'Para empezar',              en: 'To start',                   fr: 'Pour commencer'           },
     paraEmpezarSub:    { es: 'La barra, antes de la mesa.', en: 'The bar, before the table.', fr: 'Le comptoir, avant la table.' },
@@ -193,6 +196,7 @@
     if (v === true || v === 'recommended') return `<span class="dish-badge dish-badge--recommended">${LABELS.badge_recommended[lang]}</span>`;
     if (v === 'seasonal') return `<span class="dish-badge dish-badge--seasonal">${LABELS.badge_seasonal[lang]}</span>`;
     if (v === 'house') return `<span class="dish-badge dish-badge--house">${LABELS.badge_house[lang]}</span>`;
+    if (v === 'local') return `<span class="dish-badge dish-badge--local">${LABELS.badge_local[lang]}</span>`;
     return '';
   }
 
@@ -596,9 +600,10 @@
         const showProducer = item.producer && !nameStr.toLowerCase().includes(item.producer.toLowerCase());
         const producerHtml = showProducer ? ` <span class="item-producer">${item.producer}</span>` : '';
 
+        const itemBadge = renderBadge(item, lang);
         return `<article class="carta-item" id="wine-${item.id}">
   <div class="check-row">
-    <span class="check-name">${nameStr}${producerHtml}</span>
+    <span class="check-name">${nameStr}${producerHtml}${itemBadge ? ' ' + itemBadge : ''}</span>
     <span class="check-leader" aria-hidden="true"></span>
     <span class="check-price">${priceStr}</span>
   </div>
@@ -731,15 +736,22 @@
     const serviceMode = d.service_mode || {};
 
     return `<div class="wrap menu-switch-wrap">
-  <div class="menu-switch menu-switch--four" role="tablist" aria-label="${t(nav.menu, lang)}">
-    <button type="button" class="menu-switch-btn is-active" role="tab" aria-selected="true" aria-controls="panel-daily" data-panel="daily">${LABELS.dailyMenu[lang]}</button>
+  <div class="menu-switch menu-switch--five" role="tablist" aria-label="${t(nav.menu, lang)}">
+    <button type="button" class="menu-switch-btn is-active" role="tab" aria-selected="true" aria-controls="panel-bar" data-panel="bar">${LABELS.bar[lang]}</button>
     <button type="button" class="menu-switch-btn" role="tab" aria-selected="false" aria-controls="panel-restaurant" data-panel="restaurant">${LABELS.restaurant[lang]}</button>
-    <button type="button" class="menu-switch-btn" role="tab" aria-selected="false" aria-controls="panel-bar" data-panel="bar">${LABELS.bar[lang]}</button>
+    <button type="button" class="menu-switch-btn" role="tab" aria-selected="false" aria-controls="panel-beverages" data-panel="beverages">${LABELS.beverages[lang]}</button>
     <button type="button" class="menu-switch-btn" role="tab" aria-selected="false" aria-controls="panel-wines" data-panel="wines">${LABELS.wines[lang]}</button>
+    <button type="button" class="menu-switch-btn menu-switch-btn--secondary" role="tab" aria-selected="false" aria-controls="panel-daily" data-panel="daily">${LABELS.dailyMenu[lang]}</button>
   </div>
 </div>
-<section id="panel-daily" class="menu-panel is-active" role="tabpanel" data-panel="daily">
-  <div class="wrap menu-panel-inner">${renderMenuDia(d.daily_menu, nav, lang)}</div>
+<section id="panel-bar" class="menu-panel is-active" role="tabpanel" data-panel="bar">
+  <div class="wrap menu-panel-intro">
+    <p class="section-label">${LABELS.bar[lang]}</p>
+    <p class="menu-panel-copy">${LABELS.barIntro[lang]}</p>
+  </div>
+  ${renderChalkboard(d, lang)}
+  <div class="wrap">${renderParaEmpezar(d.wines, d.beverages, lang)}</div>
+  ${renderBarSnapshot(lang)}
 </section>
 <section id="panel-restaurant" class="menu-panel" role="tabpanel" data-panel="restaurant" hidden>
   <div class="wrap menu-panel-intro">
@@ -750,15 +762,12 @@
   ${renderCarta(d.dishes, d.categories, d.wines, lang, 'restaurant')}
   ${renderRestaurantSnapshot(lang)}
 </section>
-<section id="panel-bar" class="menu-panel" role="tabpanel" data-panel="bar" hidden>
+<section id="panel-beverages" class="menu-panel" role="tabpanel" data-panel="beverages" hidden>
   <div class="wrap menu-panel-intro">
-    <p class="section-label">${LABELS.bar[lang]}</p>
-    <p class="menu-panel-copy">${LABELS.barIntro[lang]}</p>
+    <p class="section-label">${LABELS.beverages[lang]}</p>
+    <p class="menu-panel-copy">${LABELS.beveragesIntro[lang]}</p>
   </div>
-  ${renderChalkboard(d, lang)}
-  <div class="wrap">${renderParaEmpezar(d.wines, d.beverages, lang)}</div>
-  ${renderBarSnapshot(lang)}
-  ${renderWines(null, d.beverages, d.dishes, d.categories, lang, 'bar', 'wine', null)}
+  ${renderWines(null, d.beverages, null, d.categories, lang, 'bar', 'wine', null)}
 </section>
 <section id="panel-wines" class="menu-panel" role="tabpanel" data-panel="wines" hidden>
   <div class="wrap menu-panel-intro">
@@ -766,6 +775,9 @@
     <p class="menu-panel-copy">${LABELS.winesIntro[lang]}</p>
   </div>
   ${renderWines(d.wines, null, null, d.categories, lang, 'bar', null, 'wine')}
+</section>
+<section id="panel-daily" class="menu-panel" role="tabpanel" data-panel="daily" hidden>
+  <div class="wrap menu-panel-inner">${renderMenuDia(d.daily_menu, nav, lang)}</div>
 </section>`;
   }
 
