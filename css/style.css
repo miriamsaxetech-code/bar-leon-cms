@@ -32,16 +32,16 @@ textarea:focus-visible {
 }
 
 :root {
-  --bg:     #F6F3EC;
-  --ink:    #1C1A17;
-  --accent: #7A1C1C;
-  --muted:  #5C5752;
-  --faint:  rgba(122, 28, 28, 0.16);
-  --terracotta: #A8432A;
-  --ocre: #B8853A;
+  --bg:         #F6F3EC;
+  --ink:        #1C1A17;
+  --accent:     #1D4D85;   /* azul fajalauza */
+  --muted:      #5C5752;
+  --faint:      rgba(29, 77, 133, 0.10);
+  --terracotta: #1D4D85;   /* unificado — azul fajalauza */
+  --ocre:       #3A6FA8;   /* azul fajalauza claro */
   --tile-cream: #F2EAD8;
-  --tile-dark: #2A1F14;
-  --tile-blue-detail: #3A5F8A;
+  --tile-dark:  #1C1A17;
+  --tile-blue-detail: #1D4D85;
 }
 
 html, body {
@@ -52,8 +52,8 @@ body {
   background: var(--bg);
   color: var(--ink);
   font-family: Georgia, serif;
-  font-size: 15px;
-  line-height: 1.6;
+  font-size: 16px;
+  line-height: 1.72;
 }
 
 /* ─── MASTHEAD RULE ─── */
@@ -104,15 +104,8 @@ body {
 }
 
 .masthead-rule {
-  height: 8px;
-  background: repeating-linear-gradient(
-    90deg,
-    var(--terracotta) 0px, var(--terracotta) 16px,
-    var(--ocre)       16px, var(--ocre)       32px,
-    var(--tile-dark)  32px, var(--tile-dark)  34px,
-    var(--ocre)       34px, var(--ocre)       50px,
-    var(--terracotta) 50px, var(--terracotta) 66px
-  );
+  height: 3px;
+  background: var(--accent);
   width: 100%;
 }
 
@@ -140,24 +133,17 @@ body {
 
 /* ─── LAYOUT ─── */
 .wrap {
-  max-width: 860px;
+  max-width: 900px;
   margin: 0 auto;
-  padding: 0 28px;
+  padding: 0 36px;
 }
 
 hr.divider,
 .warm-divider {
   border: none;
-  height: 8px;
-  background: repeating-linear-gradient(
-    90deg,
-    var(--terracotta) 0px, var(--terracotta) 16px,
-    var(--ocre)       16px, var(--ocre)       32px,
-    var(--tile-dark)  32px, var(--tile-dark)  34px,
-    var(--ocre)       34px, var(--ocre)       50px,
-    var(--terracotta) 50px, var(--terracotta) 66px
-  );
-  margin: 52px 0;
+  height: 1px;
+  background: rgba(29, 77, 133, 0.18);
+  margin: 72px 0;
 }
 
 /* ─── TYPOGRAPHY ─── */
@@ -202,7 +188,7 @@ h2 {
 ═══════════════════════════════════════ */
 
 #homepage {
-  padding-top: 28px;
+  padding-top: 44px;
   padding-bottom: 0;
 }
 
@@ -319,33 +305,22 @@ h2 {
 /* ─── TAGLINE / TILE FRAME ─── */
 .azulejo-frame,
 .tile-frame {
-  margin: 28px 0 32px;
+  margin: 40px 0 48px;
   position: relative;
-  padding: 24px 28px;
+  padding: 28px 32px;
   background: var(--tile-cream);
-  border: 2px solid var(--terracotta);
+  border: 1px solid rgba(29, 77, 133, 0.18);
+  border-left: 3px solid var(--accent);
 }
 
 .azulejo-frame::before,
 .tile-frame::before {
-  content: '';
-  position: absolute;
-  inset: 4px;
-  border: 1px solid var(--ocre);
-  pointer-events: none;
+  display: none;
 }
 
 .azulejo-frame::after,
 .tile-frame::after {
-  content: '◆ ◆';
-  position: absolute;
-  bottom: 6px;
-  right: 12px;
-  font-size: 0.48rem;
-  color: var(--terracotta);
-  letter-spacing: 4px;
-  opacity: 0.6;
-  pointer-events: none;
+  display: none;
 }
 
 .azulejo-frame blockquote,
@@ -602,13 +577,13 @@ h2 {
 
 /* ─── CARTA BODY ─── */
 #carta-body {
-  padding-top: 36px;
+  padding-top: 52px;
   padding-bottom: 0;
 }
 
 /* ─── CARTA MODE SWITCH ─── */
 .menu-switch-wrap {
-  margin-bottom: 24px;
+  margin-bottom: 40px;
 }
 
 .menu-switch {
@@ -654,12 +629,22 @@ h2 {
   color: var(--bg);
 }
 
+.menu-switch-btn--secondary {
+  font-size: 0.6rem;
+  opacity: 0.58;
+  font-weight: 500;
+}
+
+.menu-switch-btn--secondary.is-active {
+  opacity: 1;
+}
+
 .menu-panel {
   animation: menuPanelIn 0.22s ease;
 }
 
 .menu-panel-inner {
-  margin-bottom: 36px;
+  margin-bottom: 56px;
 }
 
 .menu-panel-intro {
@@ -768,7 +753,7 @@ h2 {
   display: flex;
   align-items: center;
   justify-content: space-between;
-  padding: 16px 0;
+  padding: 26px 0;
   cursor: pointer;
   user-select: none;
   border: none;
@@ -834,8 +819,8 @@ h2 {
 }
 
 .carta-item {
-  padding: 14px 0;
-  border-bottom: 1px solid rgba(28, 26, 23, 0.14);
+  padding: 22px 0;
+  border-bottom: 1px solid rgba(28, 26, 23, 0.1);
 }
 
 .carta-item:last-child {
@@ -1230,7 +1215,7 @@ h2 {
 }
 
 .home-daily-menu__group-list li {
-  border-bottom: 1px solid rgba(122, 28, 28, 0.12);
+  border-bottom: 1px solid rgba(28, 26, 23, 0.1);
   color: var(--ink);
   font-size: 0.86rem;
   line-height: 1.45;
@@ -1278,8 +1263,8 @@ h2 {
 .home-andalusia,
 .stories-archive {
   border-top: 1px solid rgba(28, 26, 23, 0.16);
-  margin-top: 46px;
-  padding-top: 30px;
+  margin-top: 72px;
+  padding-top: 48px;
 }
 
 .home-andalusia__list {
@@ -1596,9 +1581,9 @@ h2 {
 
 /* ─── LOCATION & REVIEWS SECTION ─── */
 .location-section {
-  margin-top: 48px;
+  margin-top: 76px;
   border-top: 1px solid rgba(28, 26, 23, 0.14);
-  padding-top: 32px;
+  padding-top: 52px;
 }
 
 .location-grid {
@@ -1680,7 +1665,7 @@ h2 {
     letter-spacing: 0.16em;
     line-height: 1.55;
   }
-  #homepage { padding-top: 20px; }
+  #homepage { padding-top: 28px; }
   .site-logo-container { margin-bottom: 18px; }
   .site-nav {
     align-items: flex-start;
@@ -1839,11 +1824,11 @@ h2 {
 
 /* ─── SPOTLIGHT: SABORES DE ANDALUCÍA ─── */
 .spotlight-andalucia {
-  margin: 2.75rem 0;
-  padding: 2.25rem 0;
-  background: linear-gradient(180deg, rgba(242, 234, 216, 0.75), rgba(242, 234, 216, 0.35));
+  margin: 3.5rem 0;
+  padding: 2.75rem 0;
+  background: transparent;
   border-top: 1px solid rgba(28, 26, 23, 0.12);
-  border-bottom: 1px solid rgba(28, 26, 23, 0.12);
+  border-bottom: none;
 }
 
 .spotlight-andalucia-inner {
@@ -1858,16 +1843,16 @@ h2 {
   letter-spacing: 0;
   text-transform: none;
   color: var(--ink);
-  padding: 18px 0;
-  border-bottom: 1px solid rgba(28, 26, 23, 0.16);
+  padding: 24px 0 22px;
+  border-bottom: 1px solid rgba(28, 26, 23, 0.12);
 }
 
 .spotlight-card {
   display: grid;
   grid-template-columns: minmax(0, 1fr) auto;
   gap: 8px 18px;
-  padding: 1rem 0;
-  border-bottom: 1px solid rgba(28, 26, 23, 0.12);
+  padding: 1.5rem 0;
+  border-bottom: 1px solid rgba(28, 26, 23, 0.1);
 }
 .spotlight-card:last-child { border-bottom: none; }
 .spotlight-card .dish-badge,
@@ -1913,7 +1898,7 @@ h2 {
   display: inline-block;
   justify-self: start;
   width: fit-content;
-  border: 1px solid rgba(122, 28, 28, 0.32);
+  border: 1px solid rgba(29, 77, 133, 0.28);
   background: rgba(246, 243, 236, 0.7);
   color: var(--accent);
   font-size: 0.6rem;
@@ -1923,9 +1908,10 @@ h2 {
   padding: 3px 7px;
   text-transform: uppercase;
 }
-.dish-badge--recommended { border-color: rgba(122, 28, 28, 0.42); color: var(--accent); }
+.dish-badge--recommended { border-color: rgba(29, 77, 133, 0.42); color: var(--accent); }
 .dish-badge--seasonal { border-color: rgba(45, 107, 74, 0.42); color: #2D6B4A; }
 .dish-badge--house { border-color: rgba(74, 56, 0, 0.42); color: #4a3800; }
+.dish-badge--local { border-color: rgba(29, 77, 133, 0.42); color: #1D4D85; }
 
 /* ─── DISH STATUS ─── */
 .dish--soldout { opacity: 0.5; }
@@ -1940,10 +1926,10 @@ h2 {
   width: fit-content;
   max-width: 100%;
   min-height: 32px;
-  background: rgba(184, 133, 58, 0.12);
-  border: 1px solid rgba(184, 133, 58, 0.38);
+  background: rgba(29, 77, 133, 0.07);
+  border: 1px solid rgba(29, 77, 133, 0.22);
   border-radius: 8px;
-  color: #5a4200;
+  color: var(--accent);
   cursor: pointer;
   font-size: 0.72rem;
   font-weight: 600;
@@ -1954,18 +1940,19 @@ h2 {
   white-space: normal;
 }
 .pairing-chip:hover,
-.pairing-chip:focus-visible { background: rgba(184, 133, 58, 0.2); }
+.pairing-chip:focus-visible { background: rgba(29, 77, 133, 0.14); }
 .is-pairing-target {
-  background: rgba(184, 133, 58, 0.08);
+  background: rgba(29, 77, 133, 0.05);
   transition: background 0.25s ease;
 }
 
 /* ─── PARA EMPEZAR ─── */
 .para-empezar {
-  margin: 1.5rem 0 2rem;
-  padding: 1.25rem;
-  background: var(--tile-cream);
-  border: 1px solid rgba(168, 67, 42, 0.3);
+  margin: 2rem 0 2.5rem;
+  padding: 0;
+  background: transparent;
+  border: none;
+  border-top: 1px solid rgba(28, 26, 23, 0.12);
   border-radius: 0;
 }
 .para-empezar__title {
@@ -1993,23 +1980,23 @@ h2 {
   gap: 0.4rem;
   min-width: 90px;
   padding: 0.8rem 1rem;
-  background: var(--tile-dark);
+  background: transparent;
   border-radius: 0;
-  border: 1px solid var(--ocre);
-  box-shadow: inset 0 0 0 2px rgba(28, 26, 23, 0.2);
+  border: 1px solid rgba(29, 77, 133, 0.2);
+  box-shadow: none;
 }
 .para-empezar__name {
   font-family: Georgia, serif;
   font-size: 0.75rem;
   font-weight: 500;
-  color: var(--bg);
+  color: var(--ink);
   text-align: center;
   letter-spacing: 0.03em;
 }
 .para-empezar__price {
   font-family: 'Courier New', Courier, monospace;
   font-size: 0.85rem;
-  color: var(--ocre);
+  color: var(--accent);
   font-weight: 700;
 }
 @media (min-width: 600px) {
@@ -2057,51 +2044,29 @@ h2 {
 
 /* 1. Patrón geométrico sutil de rombos de azulejo */
 .tile-bg-section {
-  background-color: var(--tile-cream);
-  background-image:
-    repeating-linear-gradient(
-      45deg,
-      rgba(168, 67, 42, 0.05) 0px, rgba(168, 67, 42, 0.05) 1px,
-      transparent 1px, transparent 24px
-    ),
-    repeating-linear-gradient(
-      -45deg,
-      rgba(168, 67, 42, 0.05) 0px, rgba(168, 67, 42, 0.05) 1px,
-      transparent 1px, transparent 24px
-    );
-  padding: 36px 28px;
-  border-top: 1px solid rgba(168, 67, 42, 0.2);
-  border-bottom: 1px solid rgba(168, 67, 42, 0.2);
-  margin: 46px 0;
+  background-color: transparent;
+  background-image: none;
+  padding: 0;
+  border: none;
+  margin: 0;
 }
 
-/* 2. Marco tradicional de azulejo */
+/* 2. Marco editorial */
 .tile-frame {
   position: relative;
-  padding: 32px 28px;
+  padding: 28px 32px;
   background: var(--tile-cream);
-  border: 2px solid var(--terracotta);
-  margin: 36px 0 40px;
+  border: 1px solid rgba(29, 77, 133, 0.18);
+  border-left: 3px solid var(--accent);
+  margin: 40px 0 48px;
 }
 
 .tile-frame::before {
-  content: '';
-  position: absolute;
-  inset: 4px;
-  border: 1px solid var(--ocre);
-  pointer-events: none;
+  display: none;
 }
 
 .tile-frame::after {
-  content: '◆ ◆';
-  position: absolute;
-  bottom: 8px;
-  right: 14px;
-  font-size: 0.52rem;
-  color: var(--terracotta);
-  letter-spacing: 4px;
-  opacity: 0.65;
-  pointer-events: none;
+  display: none;
 }
 
 /* 3. Tarjeta tradicional editorial */
@@ -2112,42 +2077,35 @@ h2 {
   box-shadow: 0 4px 12px rgba(28, 26, 23, 0.03);
 }
 
-/* 4. Divisor de secciones con personalidad */
+/* 4. Divisor de secciones */
 .warm-divider {
   border: none;
-  height: 8px;
-  background: repeating-linear-gradient(
-    90deg,
-    var(--terracotta) 0px, var(--terracotta) 12px,
-    var(--ocre)       12px, var(--ocre)       24px,
-    var(--tile-dark)  24px, var(--tile-dark)  26px,
-    var(--ocre)       26px, var(--ocre)       38px,
-    var(--terracotta) 38px, var(--terracotta) 50px
-  );
+  height: 1px;
+  background: rgba(29, 77, 133, 0.18);
   width: 100%;
-  margin: 44px 0;
+  margin: 72px 0;
 }
 
 @media (max-width: 540px) {
   .tile-bg-section {
-    padding: 24px 16px;
-    margin: 34px 0;
+    padding: 0;
+    margin: 0;
   }
   .tile-frame {
-    margin: 24px 0 28px;
-    padding: 24px 20px;
+    margin: 28px 0 36px;
+    padding: 22px 20px;
   }
   .tile-card {
     padding: 20px 16px;
   }
   .warm-divider {
-    margin: 34px 0;
+    margin: 48px 0;
   }
 }
 
 /* ─── EDITORIAL SNAPSHOT ─── */
 .editorial-snapshot {
-  margin: 44px 0;
+  display: none !important;
 }
 
 .editorial-snapshot__figure {
@@ -2290,70 +2248,53 @@ h2 {
   white-space: nowrap;
 }
 
-/* ─── BAR CHALKBOARD ─── */
+/* ─── VINOS DE BARRA — lista editorial ─── */
 .barra-chalkboard {
-  background: #1B2018;
-  border: 10px solid #2E2214;
-  box-shadow:
-    inset 0 0 90px rgba(0, 0, 0, 0.5),
-    inset 0 0 24px rgba(0, 0, 0, 0.35),
-    0 6px 18px rgba(0, 0, 0, 0.35);
-  padding: 28px 32px 24px;
+  background: transparent;
+  border: none;
+  border-top: 1px solid rgba(28, 26, 23, 0.14);
+  border-bottom: 1px solid rgba(28, 26, 23, 0.14);
+  box-shadow: none;
+  padding: 28px 0 24px;
   position: relative;
-  margin: 28px 0;
+  margin: 16px 0 36px;
   overflow: hidden;
 }
 
-/* Subtle inner frame rule */
 .barra-chalkboard::before {
-  content: '';
-  position: absolute;
-  inset: 4px;
-  border: 1px solid rgba(255, 255, 255, 0.05);
-  pointer-events: none;
-  z-index: 1;
+  display: none;
 }
 
-/* Chalk dust / grain texture overlay */
 .barra-chalkboard::after {
-  content: '';
-  position: absolute;
-  inset: 0;
-  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='200' height='200'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.72' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='200' height='200' filter='url(%23n)'/%3E%3C/svg%3E");
-  opacity: 0.045;
-  mix-blend-mode: screen;
-  pointer-events: none;
-  z-index: 0;
+  display: none;
 }
 
 .chalkboard-header {
   text-align: center;
   margin-bottom: 20px;
   padding-bottom: 14px;
-  border-bottom: 1px solid rgba(255, 255, 255, 0.14);
+  border-bottom: 1px solid rgba(28, 26, 23, 0.14);
   position: relative;
   z-index: 2;
 }
 
 .chalkboard-title {
   font-family: 'Granaina Limpia', Georgia, serif;
-  font-size: 1.65rem;
-  color: rgba(255, 252, 240, 0.92);
-  letter-spacing: 0.06em;
+  font-size: 1.05rem;
+  color: var(--ink);
+  letter-spacing: 0.08em;
   line-height: 1.1;
-  text-shadow:
-    0 0 12px rgba(255, 252, 240, 0.18),
-    0 1px 2px rgba(0, 0, 0, 0.6);
+  text-shadow: none;
 }
 
 .chalkboard-subtitle {
-  font-family: Georgia, serif;
-  font-size: 0.65rem;
-  color: rgba(240, 235, 215, 0.5);
+  font-family: system-ui, -apple-system, sans-serif;
+  font-size: 0.62rem;
+  color: var(--muted);
   letter-spacing: 0.22em;
   text-transform: uppercase;
   margin-top: 5px;
-  text-shadow: 0 0 6px rgba(240, 235, 215, 0.1);
+  text-shadow: none;
 }
 
 .chalkboard-body {
@@ -2365,7 +2306,7 @@ h2 {
 }
 
 .chalkboard-vsep {
-  background: rgba(255, 255, 255, 0.12);
+  background: rgba(28, 26, 23, 0.12);
   margin: 0 18px;
 }
 
@@ -2386,9 +2327,9 @@ h2 {
   font-size: 0.56rem;
   text-transform: uppercase;
   letter-spacing: 0.2em;
-  color: rgba(240, 235, 215, 0.38);
+  color: var(--muted);
   padding-bottom: 6px;
-  border-bottom: 1px solid rgba(255, 255, 255, 0.14);
+  border-bottom: 1px solid rgba(28, 26, 23, 0.14);
   margin-bottom: 4px;
 }
 
@@ -2399,11 +2340,11 @@ h2 {
   gap: 0 6px;
   font-family: Georgia, serif;
   font-style: italic;
-  font-size: 0.76rem;
-  color: rgba(242, 238, 220, 0.88);
+  font-size: 0.78rem;
+  color: var(--ink);
   line-height: 1.72;
-  border-bottom: 1px solid rgba(255, 255, 255, 0.05);
-  text-shadow: 0 0 8px rgba(242, 238, 220, 0.07);
+  border-bottom: 1px solid rgba(28, 26, 23, 0.08);
+  text-shadow: none;
 }
 
 .chalkboard-row:last-child {
@@ -2422,7 +2363,7 @@ h2 {
   font-family: 'Courier New', monospace;
   font-style: normal;
   font-size: 0.69rem;
-  color: rgba(230, 224, 200, 0.7);
+  color: var(--muted);
   white-space: nowrap;
   text-align: right;
   align-self: center;
@@ -2434,8 +2375,7 @@ h2 {
 
 @media (max-width: 540px) {
   .barra-chalkboard {
-    border-width: 7px;
-    padding: 20px 14px 18px;
+    padding: 22px 0 18px;
   }
   .chalkboard-body {
     grid-template-columns: 1fr;
@@ -2444,13 +2384,13 @@ h2 {
     height: 1px;
     width: auto;
     margin: 12px 0;
-    background: rgba(255, 255, 255, 0.14);
+    background: rgba(28, 26, 23, 0.12);
   }
   .chalkboard-row {
     grid-template-columns: 1fr 38px 46px;
     font-size: 0.72rem;
   }
   .chalkboard-title {
-    font-size: 1.35rem;
+    font-size: 0.95rem;
   }
 }

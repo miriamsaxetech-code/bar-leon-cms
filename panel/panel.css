@@ -9,8 +9,8 @@
   --bg-2:      #EDEAE0;
   --ink:       #1C1A17;
   --ink-2:     #5A5650;
-  --accent:    #7A1C1C;
-  --accent-2:  #9B2C2C;
+  --accent:    #1D4D85;
+  --accent-2:  #2E5FA3;
   --border:    #D4CFC4;
   --white:     #FFFFFF;
   --success:   #2D7A3A;
@@ -85,7 +85,7 @@ body {
   color: var(--accent);
   border: 1.5px solid var(--accent);
 }
-.btn--ghost:hover:not(:disabled) { background: rgba(122, 28, 28, 0.07); }
+.btn--ghost:hover:not(:disabled) { background: rgba(29, 77, 133, 0.07); }
 
 .btn--full { width: 100%; }
 
@@ -302,7 +302,7 @@ body {
   border-bottom-color: var(--accent);
 }
 
-.panel-tab:active { background: rgba(122, 28, 28, 0.05); }
+.panel-tab:active { background: rgba(29, 77, 133, 0.05); }
 
 /* ══════════════════════════════════════════════════════════════
    CONTENIDO
@@ -501,7 +501,7 @@ body {
   border-radius: var(--radius-sm);
   transition: color 0.15s, background 0.15s;
 }
-.period-remove:hover { color: var(--accent); background: rgba(122, 28, 28, 0.08); }
+.period-remove:hover { color: var(--accent); background: rgba(29, 77, 133, 0.08); }
 
 .hours-add-period {
   align-self: flex-start;
@@ -693,7 +693,7 @@ body {
 .upload-area:hover,
 .upload-area--over {
   border-color: var(--accent);
-  background: rgba(122, 28, 28, 0.04);
+  background: rgba(29, 77, 133, 0.04);
 }
 
 .upload-icon {

@@ -621,10 +621,10 @@
     <div class="lang-selector" aria-label="Language">${langSelector(lang, HOME_LINKS)}</div>
   </nav>
   ${aviso}
-  ${renderHomeDailyMenu(d, lang, cartaUrl)}
   ${hero}
   ${trustStrip}
   ${renderHomeAndalusia(d, lang, cartaUrl)}
+  ${renderHomeDailyMenu(d, lang, cartaUrl)}
   ${renderHomeFoodGallery(lang)}
   ${renderSocialLinks(d.social)}
   ${locationBlock}
@@ -744,7 +744,7 @@
         en: 'Error loading page. Please reload.',
         fr: 'Erreur de chargement. Veuillez recharger la page.'
       }[lang] || 'Error al cargar. Por favor, recarga la p&aacute;gina.';
-      loader.innerHTML = `<span style="color:#7A1C1C;font-family:Georgia,serif;font-size:0.9rem;padding:0 24px;text-align:center;display:block;">${errMsg}</span>`;
+      loader.innerHTML = `<span style="color:#1D4D85;font-family:Georgia,serif;font-size:0.9rem;padding:0 24px;text-align:center;display:block;">${errMsg}</span>`;
       console.error('Bar León:', err);
     }
   }

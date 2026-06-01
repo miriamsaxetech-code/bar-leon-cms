@@ -514,9 +514,9 @@
       },
       "price": "10,00 €",
       "pairing": {
-        "es": "Manzanilla — 3,50 €",
-        "en": "Manzanilla (dry sherry, Sanlúcar) — 3,50 €",
-        "fr": "Manzanilla (xérès sec, Sanlúcar) — 3,50 €"
+        "es": "Calvente (uva autóctona granadina) — Copa 3,70 € / Bot. 21,00 €",
+        "en": "Calvente Vigiriega (native Granada white grape) — Glass 3.70 € / Bottle 21.00 €",
+        "fr": "Calvente Vigiriega (cépage autochtone grenadin) — Verre 3,70 € / Bout. 21,00 €"
       },
       "available": true,
       "featured": "recommended"
@@ -636,12 +636,12 @@
       "category_id": "andalusian-specialities",
       "name": {
         "es": "Criadillas",
-        "en": "Fried Sweetbreads",
+        "en": "Bull's Testicles, breaded and fried",
         "fr": "Animelles frites"
       },
       "description": {
         "es": "Casquería tradicional, rebozada y frita.",
-        "en": "Veal sweetbreads, breaded and fried until golden.",
+        "en": "Bull's testicles, breaded and fried until golden.",
         "fr": "Animelles de veau panées et frites."
       },
       "price": "Media 7,50 € / Ración 10,00 €",
@@ -1064,9 +1064,9 @@
       },
       "price": "Media 8,00 € / Ración 11,00 €",
       "pairing": {
-        "es": "",
-        "en": "",
-        "fr": ""
+        "es": "Muñana Flamenco Semi (D.O. Granada) — Copa 3,20 € / Bot. 18,00 €",
+        "en": "Muñana Flamenco Semi (semi-sweet, D.O. Granada) — Glass 3.20 € / Bottle 18.00 €",
+        "fr": "Muñana Flamenco Semi (demi-sec, D.O. Granada) — Verre 3,20 € / Bout. 18,00 €"
       },
       "available": true,
       "featured": false
@@ -3309,6 +3309,23 @@
         "es": "",
         "en": "",
         "fr": ""
+      }
+    },
+    {
+      "id": "mosto-salobrana",
+      "category_id": "drinks",
+      "name": {
+        "es": "Mosto de Salobreña",
+        "en": "Mosto de Salobreña",
+        "fr": "Mosto de Salobreña"
+      },
+      "price": "2,80 €",
+      "available": true,
+      "featured": "local",
+      "description": {
+        "es": "Zumo de uva sin fermentar de la costa granadina.",
+        "en": "Unfermented grape juice from Granada's coast.",
+        "fr": "Jus de raisin non fermenté de la côte de Grenade."
       }
     },
     {

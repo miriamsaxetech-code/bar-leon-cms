@@ -539,7 +539,7 @@ function renderMenuDelDia() {
   const mainsList  = document.getElementById('menu-mains-list');
 
   if (activeEl)   activeEl.checked    = m.active === true;
-  if (priceEl)    priceEl.value       = m.price != null ? String(m.price).replace('.', ',') : '';
+  if (priceEl)    priceEl.value       = m.price != null ? Number(m.price).toFixed(2).replace('.', ',') : '';
   if (startersEl) startersEl.value    = (m.starters && m.starters.es) || '';
   if (secondsEl)  secondsEl.value     = (m.seconds  && m.seconds.es)  || '';
   if (dessertsEl) dessertsEl.value    = (m.desserts && m.desserts.es) || '';
