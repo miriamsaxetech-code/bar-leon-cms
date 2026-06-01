@@ -871,6 +871,64 @@ body {
   padding: 4px 0;
 }
 
+.section-title-row {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.cariocas-list {
+  display: grid;
+  gap: 10px;
+}
+
+.carioca-item {
+  display: grid;
+  grid-template-columns: 72px 1fr;
+  gap: 10px;
+  align-items: center;
+  background: var(--white);
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  padding: 10px;
+}
+
+.carioca-item__img {
+  width: 72px;
+  height: 72px;
+  border-radius: var(--radius-sm);
+  object-fit: cover;
+  background: var(--bg-2);
+}
+
+.carioca-item__body {
+  min-width: 0;
+}
+
+.carioca-item__caption {
+  margin: 0;
+  color: var(--ink);
+  font-size: 0.9rem;
+  font-weight: 650;
+  line-height: 1.25;
+}
+
+.carioca-item__meta {
+  margin: 4px 0 0;
+  color: var(--ink-2);
+  font-size: 0.78rem;
+}
+
+.carioca-item__controls {
+  grid-column: 1 / -1;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 10px;
+  border-top: 1px solid var(--border);
+  padding-top: 8px;
+}
+
 /* ══════════════════════════════════════════════════════════════
    BARRA DE GUARDAR
    ══════════════════════════════════════════════════════════════ */

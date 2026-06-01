@@ -225,7 +225,7 @@ function renderAll() {
   renderHorarios();
   renderMenuDelDia();
   renderAviso();
-  // Carioca: solo bindings, no tiene datos preexistentes para renderizar
+  renderCariocas();
 }
 
 // ══════════════════════════════════════════════════════════════
@@ -1097,6 +1097,98 @@ function bindCariocaEvents() {
       }
     });
   }
+
+  const list = document.getElementById('cariocas-list');
+  if (list) {
+    list.addEventListener('change', e => {
+      const input = e.target.closest('[data-carioca-action="active"]');
+      if (!input || !Array.isArray(state.cariocas)) return;
+      const index = Number(input.dataset.index);
+      if (!Number.isInteger(index) || !state.cariocas[index]) return;
+      state.cariocas[index].active = input.checked;
+      markDirty();
+    });
+
+    list.addEventListener('click', e => {
+      const btn = e.target.closest('[data-carioca-action="delete"]');
+      if (!btn || !Array.isArray(state.cariocas)) return;
+      const index = Number(btn.dataset.index);
+      const item = state.cariocas[index];
+      if (!item) return;
+      const caption = item.caption && item.caption.es ? item.caption.es : item.id;
+      if (!window.confirm(`¿Borrar la foto "${caption}" del panel?`)) return;
+      state.cariocas.splice(index, 1);
+      renderCariocas();
+      markDirty();
+    });
+  }
+}
+
+function renderCariocas() {
+  const container = document.getElementById('cariocas-list');
+  if (!container || !state) return;
+
+  const items = Array.isArray(state.cariocas) ? state.cariocas : [];
+  container.innerHTML = '';
+
+  if (!items.length) {
+    container.innerHTML = '<p class="empty-state empty-state--compact">No hay fotos publicadas todavía.</p>';
+    return;
+  }
+
+  items.forEach((item, index) => {
+    const row = document.createElement('article');
+    row.className = 'carioca-item';
+
+    const image = document.createElement('img');
+    image.className = 'carioca-item__img';
+    image.src = normalizePanelImagePath(item.image || item.src || '');
+    image.alt = item.caption && item.caption.es ? item.caption.es : 'Foto de Bar León';
+    image.loading = 'lazy';
+
+    const body = document.createElement('div');
+    body.className = 'carioca-item__body';
+    const caption = document.createElement('p');
+    caption.className = 'carioca-item__caption';
+    caption.textContent = item.caption && item.caption.es ? item.caption.es : item.id || 'Foto sin descripción';
+    const meta = document.createElement('p');
+    meta.className = 'carioca-item__meta';
+    meta.textContent = item.context ? `Sección: ${item.context}` : 'Sin sección';
+    body.appendChild(caption);
+    body.appendChild(meta);
+
+    const controls = document.createElement('div');
+    controls.className = 'carioca-item__controls';
+
+    const activeLabel = document.createElement('label');
+    activeLabel.className = 'catalog-active';
+    activeLabel.innerHTML = '<span>Visible</span>';
+    const active = document.createElement('input');
+    active.type = 'checkbox';
+    active.checked = item.active !== false;
+    active.dataset.cariocaAction = 'active';
+    active.dataset.index = String(index);
+    activeLabel.appendChild(active);
+
+    const del = document.createElement('button');
+    del.type = 'button';
+    del.className = 'catalog-delete';
+    del.dataset.cariocaAction = 'delete';
+    del.dataset.index = String(index);
+    del.textContent = 'Borrar';
+
+    controls.appendChild(activeLabel);
+    controls.appendChild(del);
+
+    row.appendChild(image);
+    row.appendChild(body);
+    row.appendChild(controls);
+    container.appendChild(row);
+  });
+}
+
+function normalizePanelImagePath(path) {
+  return String(path || '').replace(/^\.\.\//, '/');
 }
 
 function showCariocaPreview(file) {
