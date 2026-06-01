@@ -131,6 +131,19 @@ assert.match(uploadSource, /MAX_UPLOAD_BYTES/);
 assert.match(uploadSource, /mimeToExtension/);
 assert.match(uploadSource, /Content-Type': 'application\/json'/);
 
+const pinLogin = await import(`../functions/pin-login.js?test=${Date.now()}`);
+const missingConfigResponse = await pinLogin.onRequestPost({
+  request: new Request('https://bar-leon-cms.pages.dev/pin-login', {
+    method: 'POST',
+    headers: { 'Content-Type': 'application/json' },
+    body: JSON.stringify({ pin: '000000', remember: true }),
+  }),
+  env: { PANEL_PIN: '000000' },
+});
+assert.equal(missingConfigResponse.status, 500);
+assert.equal(missingConfigResponse.headers.get('Content-Type'), 'application/json');
+assert.deepEqual(await missingConfigResponse.json(), { ok: false, error: 'missing_panel_config' });
+
 const gitignore = await fs.readFile('.gitignore', 'utf8');
 assert.match(gitignore, /^\.dev\.vars$/m);
 

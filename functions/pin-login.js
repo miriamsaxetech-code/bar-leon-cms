@@ -19,6 +19,13 @@ async function signToken(exp, secret) {
   return `${payload}.${sigB64}`;
 }
 
+function jsonResponse(body, status) {
+  return new Response(JSON.stringify(body), {
+    status,
+    headers: { 'Content-Type': 'application/json' },
+  });
+}
+
 export async function onRequestPost(context) {
   const { request, env } = context;
 
@@ -26,36 +33,34 @@ export async function onRequestPost(context) {
   const panelSecret = env.PANEL_SECRET;
 
   if (!panelPin || !panelSecret) {
-    return new Response('Configuración incompleta', { status: 500 });
+    return jsonResponse({ ok: false, error: 'missing_panel_config' }, 500);
   }
 
   let body;
   try {
     body = await request.json();
   } catch {
-    return new Response('Cuerpo no válido', { status: 400 });
+    return jsonResponse({ ok: false, error: 'invalid_json' }, 400);
   }
 
   const { pin, remember } = body;
 
   // Constant-time string comparison to resist timing attacks
   if (!pin || pin.length !== panelPin.length) {
-    return new Response('PIN incorrecto', { status: 401 });
+    return jsonResponse({ ok: false, error: 'invalid_pin' }, 401);
   }
   let mismatch = 0;
   for (let i = 0; i < panelPin.length; i++) {
     mismatch |= pin.charCodeAt(i) ^ panelPin.charCodeAt(i);
   }
   if (mismatch !== 0) {
-    return new Response('PIN incorrecto', { status: 401 });
+    return jsonResponse({ ok: false, error: 'invalid_pin' }, 401);
   }
 
   const ttl   = remember ? DEVICE_TTL : SESSION_TTL;
   const token = await signToken(Date.now() + ttl, panelSecret);
 
-  return new Response(JSON.stringify({ token }), {
-    headers: { 'Content-Type': 'application/json' },
-  });
+  return jsonResponse({ token }, 200);
 }
 
 export async function onRequestOptions() {

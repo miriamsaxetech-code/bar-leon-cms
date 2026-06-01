@@ -128,6 +128,12 @@ function showAuthScreen() {
         body: JSON.stringify({ pin, remember }),
       });
 
+      let result = null;
+      const contentType = resp.headers.get('Content-Type') || '';
+      if (contentType.includes('application/json')) {
+        result = await resp.json();
+      }
+
       if (resp.status === 401) {
         errorEl.hidden = false;
         digits.forEach(d => { d.value = ''; });
@@ -135,9 +141,14 @@ function showAuthScreen() {
         return;
       }
 
+      if (resp.status === 500 && result && result.error === 'missing_panel_config') {
+        showError('Falta configurar el PIN del panel en Cloudflare. Avise al administrador.');
+        return;
+      }
+
       if (!resp.ok) throw new Error(`HTTP ${resp.status}`);
 
-      const { token } = await resp.json();
+      const { token } = result || {};
       setToken(token, remember);
 
       await loadVenueData();
