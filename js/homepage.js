@@ -388,7 +388,7 @@
         const rank = v => v === true || v === 'recommended' ? 0 : v === 'house' ? 1 : v === 'seasonal' ? 2 : 3;
         return rank(a.featured) - rank(b.featured);
       })
-      .slice(0, 5);
+      .slice(0, 6);
     if (!dishes.length) return '';
 
     return `<section class="tile-bg-section home-andalusia" aria-labelledby="home-andalusia-title">
@@ -719,6 +719,51 @@
     els.forEach(function(el) { el.classList.add('reveal'); io.observe(el); });
   }
 
+  function buildOpeningHours(hours) {
+    const CODE = { monday:'Mo', tuesday:'Tu', wednesday:'We', thursday:'Th', friday:'Fr', saturday:'Sa', sunday:'Su' };
+    const result = [];
+    (hours || []).forEach(function(h) {
+      if (h.status === 'closed' || !h.periods || !h.periods.length) return;
+      const code = CODE[h.day];
+      if (!code) return;
+      h.periods.forEach(function(p) { result.push(code + ' ' + p.open + '-' + p.close); });
+    });
+    return result;
+  }
+
+  function injectRestaurantJsonLd(d, lang) {
+    const BASE = 'https://www.barleongrx.com';
+    const PATH = { es: '/es/', en: '/en/', fr: '/fr/' };
+    const schema = {
+      '@context': 'https://schema.org',
+      '@type': 'Restaurant',
+      name: 'Restaurante Bar León',
+      url: BASE + (PATH[lang] || PATH.es),
+      description: d.seo && d.seo.description ? (d.seo.description[lang] || d.seo.description.es) : '',
+      foundingDate: d.venue && d.venue.founding_year ? String(d.venue.founding_year) : '1959',
+      servesCuisine: d.venue && d.venue.cuisine ? (d.venue.cuisine[lang] || d.venue.cuisine.es) : 'Traditional Andalusian',
+      telephone: d.contact && d.contact.phone ? d.contact.phone : '',
+      address: {
+        '@type': 'PostalAddress',
+        streetAddress: d.contact.address.street,
+        addressLocality: d.contact.address.city,
+        postalCode: d.contact.address.postal_code,
+        addressRegion: d.contact.address.region,
+        addressCountry: d.contact.address.country,
+      },
+      openingHours: buildOpeningHours(d.hours),
+      image: BASE + '/assets/images/og.png',
+      sameAs: [d.social && d.social.instagram, d.social && d.social.facebook].filter(Boolean),
+    };
+    if (d.social && d.social.google_maps) schema.hasMap = d.social.google_maps;
+    const el = document.createElement('script');
+    el.type = 'application/ld+json';
+    el.textContent = JSON.stringify(schema);
+    if (document.head) {
+      document.head.appendChild(el);
+    }
+  }
+
   async function init() {
     const lang   = getLang();
     const loader = document.getElementById('loader');
@@ -729,6 +774,7 @@
       if (!res.ok) throw new Error('HTTP ' + res.status);
       const d = await res.json();
 
+      injectRestaurantJsonLd(d, lang);
       app.innerHTML = render(d, lang);
       injectLangBar(lang, HOME_LINKS);
       injectMobileServiceCTA(d, lang);

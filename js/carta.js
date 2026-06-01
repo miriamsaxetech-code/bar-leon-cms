@@ -963,6 +963,48 @@
     els.forEach(function(el) { el.classList.add('reveal'); io.observe(el); });
   }
 
+  function injectMenuJsonLd(d, lang) {
+    const BASE = 'https://www.barleongrx.com';
+    const MENU_PATH = { es: '/es/carta.html', en: '/en/menu.html', fr: '/fr/carte.html' };
+    const foodCats = (d.categories || []).filter(c => c.type === 'food');
+    const dishes   = (d.dishes || []).filter(dish => dish.available !== false);
+
+    const menuSections = foodCats.map(cat => {
+      const items = dishes
+        .filter(dish => dish.category_id === cat.id)
+        .map(dish => {
+          const entry = {
+            '@type': 'MenuItem',
+            name: dish.name ? (dish.name[lang] || dish.name.es) : '',
+          };
+          if (dish.description) entry.description = dish.description[lang] || dish.description.es;
+          if (dish.price) {
+            const raw = String(dish.price).replace(/[^\d,\.]/g, '').replace(',', '.');
+            if (raw) entry.offers = { '@type': 'Offer', price: raw, priceCurrency: 'EUR' };
+          }
+          return entry;
+        })
+        .filter(e => e.name);
+      return { '@type': 'MenuSection', name: cat.name ? (cat.name[lang] || cat.name.es) : cat.id, hasMenuItem: items };
+    }).filter(s => s.hasMenuItem.length > 0);
+
+    const schema = {
+      '@context': 'https://schema.org',
+      '@type': 'Restaurant',
+      name: 'Restaurante Bar León',
+      url: BASE + (MENU_PATH[lang] || MENU_PATH.es),
+      hasMenu: {
+        '@type': 'Menu',
+        name: { es: 'Carta', en: 'Menu', fr: 'Carte' }[lang] || 'Carta',
+        hasMenuSection: menuSections,
+      },
+    };
+    const el = document.createElement('script');
+    el.type = 'application/ld+json';
+    el.textContent = JSON.stringify(schema);
+    document.head.appendChild(el);
+  }
+
   async function init() {
     const lang      = getLang();
     const loader    = document.getElementById('loader');
@@ -975,6 +1017,7 @@
       if (!res.ok) throw new Error('HTTP ' + res.status);
       const d = await res.json();
 
+      injectMenuJsonLd(d, lang);
       const nav = d.nav;
       const inService = isNowServiceTime(d.hours);
 

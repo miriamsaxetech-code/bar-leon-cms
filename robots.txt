@@ -1,2 +1,5 @@
 User-agent: *
 Disallow: /admin/
+Disallow: /panel/
+
+Sitemap: https://www.barleongrx.com/sitemap.xml
