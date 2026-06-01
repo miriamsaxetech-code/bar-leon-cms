@@ -744,18 +744,15 @@ function renderMenuDelDia() {
 
   const activeEl   = document.getElementById('menu-active');
   const priceEl    = document.getElementById('menu-price');
-  const startersEl = document.getElementById('menu-starters');
-  const secondsEl  = document.getElementById('menu-seconds');
-  const dessertsEl = document.getElementById('menu-desserts');
-  const seasonalEl = document.getElementById('menu-seasonal');
   const mainsList  = document.getElementById('menu-mains-list');
 
   if (activeEl)   activeEl.checked    = m.active === true;
   if (priceEl)    priceEl.value       = m.price != null ? Number(m.price).toFixed(2).replace('.', ',') : '';
-  if (startersEl) startersEl.value    = (m.starters && m.starters.es) || '';
-  if (secondsEl)  secondsEl.value     = (m.seconds  && m.seconds.es)  || '';
-  if (dessertsEl) dessertsEl.value    = (m.desserts && m.desserts.es) || '';
-  if (seasonalEl) seasonalEl.value    = (m.seasonal && m.seasonal.es) || '';
+
+  renderDailyMenuList('starters', 'menu-starters-list', 'Añadir primero');
+  renderDailyMenuList('seconds', 'menu-seconds-list', 'Añadir segundo');
+  renderDailyMenuList('desserts', 'menu-desserts-list', 'Añadir postre');
+  renderDailyMenuList('seasonal', 'menu-seasonal-list', 'Añadir nota');
 
   if (!mainsList) return;
   mainsList.innerHTML = '';
@@ -801,6 +798,79 @@ function renderMenuDelDia() {
   });
 }
 
+function ensureDailyMenuField(field) {
+  if (!state.daily_menu) state.daily_menu = {};
+  if (!state.daily_menu[field] || typeof state.daily_menu[field] !== 'object') {
+    state.daily_menu[field] = { es: '', en: '', fr: '' };
+  }
+  return state.daily_menu[field];
+}
+
+function getDailyMenuItems(field) {
+  const data = ensureDailyMenuField(field);
+  return splitPanelListText(data.es || '');
+}
+
+function setDailyMenuItems(field, items) {
+  const data = ensureDailyMenuField(field);
+  data.es = joinPanelListItems(items);
+  markDailyMenuTextDirty();
+}
+
+function renderDailyMenuList(field, containerId, addLabel) {
+  const container = document.getElementById(containerId);
+  if (!container) return;
+
+  const items = getDailyMenuItems(field);
+  container.innerHTML = '';
+
+  const rows = document.createElement('div');
+  rows.className = 'daily-edit-list__rows';
+
+  if (!items.length) {
+    const empty = document.createElement('p');
+    empty.className = 'empty-state empty-state--compact';
+    empty.textContent = 'Sin elementos.';
+    rows.appendChild(empty);
+  }
+
+  items.forEach((item, index) => {
+    const row = document.createElement('div');
+    row.className = 'daily-edit-row';
+
+    const input = document.createElement('input');
+    input.type = 'text';
+    input.className = 'field-input daily-edit-input';
+    input.value = item;
+    input.dataset.menuAction = 'update';
+    input.dataset.menuField = field;
+    input.dataset.index = String(index);
+    input.setAttribute('aria-label', item || 'Elemento del menú');
+
+    const remove = document.createElement('button');
+    remove.type = 'button';
+    remove.className = 'daily-edit-delete';
+    remove.dataset.menuAction = 'delete';
+    remove.dataset.menuField = field;
+    remove.dataset.index = String(index);
+    remove.textContent = 'Borrar';
+
+    row.appendChild(input);
+    row.appendChild(remove);
+    rows.appendChild(row);
+  });
+
+  const add = document.createElement('button');
+  add.type = 'button';
+  add.className = 'btn btn--ghost btn--small daily-edit-add';
+  add.dataset.menuAction = 'add';
+  add.dataset.menuField = field;
+  add.textContent = `+ ${addLabel}`;
+
+  container.appendChild(rows);
+  container.appendChild(add);
+}
+
 function bindMenuDelDia() {
   const fields = [
     {
@@ -823,51 +893,50 @@ function bindMenuDelDia() {
         markDirty();
       },
     },
-    {
-      id: 'menu-starters',
-      event: 'change',
-      handler: e => {
-        if (!state.daily_menu) state.daily_menu = {};
-        if (!state.daily_menu.starters) state.daily_menu.starters = {};
-        state.daily_menu.starters.es = e.target.value;
-        markDailyMenuTextDirty();
-      },
-    },
-    {
-      id: 'menu-seconds',
-      event: 'change',
-      handler: e => {
-        if (!state.daily_menu) state.daily_menu = {};
-        if (!state.daily_menu.seconds) state.daily_menu.seconds = {};
-        state.daily_menu.seconds.es = e.target.value;
-        markDailyMenuTextDirty();
-      },
-    },
-    {
-      id: 'menu-desserts',
-      event: 'change',
-      handler: e => {
-        if (!state.daily_menu) state.daily_menu = {};
-        if (!state.daily_menu.desserts) state.daily_menu.desserts = {};
-        state.daily_menu.desserts.es = e.target.value;
-        markDailyMenuTextDirty();
-      },
-    },
-    {
-      id: 'menu-seasonal',
-      event: 'change',
-      handler: e => {
-        if (!state.daily_menu) state.daily_menu = {};
-        if (!state.daily_menu.seasonal) state.daily_menu.seasonal = {};
-        state.daily_menu.seasonal.es = e.target.value;
-        markDailyMenuTextDirty();
-      },
-    },
   ];
 
   fields.forEach(({ id, event, handler }) => {
     const el = document.getElementById(id);
     if (el) el.addEventListener(event, handler);
+  });
+
+  const menuPanel = document.querySelector('.menu-panel');
+  if (!menuPanel) return;
+
+  menuPanel.addEventListener('click', e => {
+    const control = e.target.closest('[data-menu-action]');
+    if (!control) return;
+    const action = control.dataset.menuAction;
+    const field = control.dataset.menuField;
+    if (!field) return;
+
+    const items = getDailyMenuItems(field);
+    if (action === 'add') {
+      const value = window.prompt('Nuevo elemento:');
+      if (!value || !value.trim()) return;
+      items.push(value.trim());
+      setDailyMenuItems(field, items);
+      renderMenuDelDia();
+    }
+
+    if (action === 'delete') {
+      const index = Number(control.dataset.index);
+      if (!Number.isInteger(index)) return;
+      items.splice(index, 1);
+      setDailyMenuItems(field, items);
+      renderMenuDelDia();
+    }
+  });
+
+  menuPanel.addEventListener('change', e => {
+    const input = e.target.closest('[data-menu-action="update"]');
+    if (!input) return;
+    const field = input.dataset.menuField;
+    const index = Number(input.dataset.index);
+    if (!field || !Number.isInteger(index)) return;
+    const items = getDailyMenuItems(field);
+    items[index] = input.value.trim();
+    setDailyMenuItems(field, items);
   });
 }
 

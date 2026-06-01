@@ -627,6 +627,44 @@ body {
   min-height: 44px;
 }
 
+.daily-edit-list {
+  display: grid;
+  gap: 10px;
+}
+
+.daily-edit-list__rows {
+  display: grid;
+  gap: 8px;
+}
+
+.daily-edit-row {
+  display: grid;
+  grid-template-columns: 1fr auto;
+  gap: 8px;
+  align-items: center;
+}
+
+.daily-edit-input {
+  min-height: 42px;
+}
+
+.daily-edit-delete {
+  background: transparent;
+  border: 1px solid rgba(122, 28, 28, 0.28);
+  border-radius: var(--radius-sm);
+  color: var(--error-bg);
+  cursor: pointer;
+  font-family: var(--font);
+  font-size: 0.78rem;
+  font-weight: 700;
+  min-height: 40px;
+  padding: 0 10px;
+}
+
+.daily-edit-add {
+  justify-self: start;
+}
+
 /* ── Campos genéricos ───────────────────────────────────────── */
 
 .field-group {
