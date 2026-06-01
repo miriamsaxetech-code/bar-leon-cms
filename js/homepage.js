@@ -642,7 +642,7 @@
       <a href="${phoneLink}" class="phone-link">${phoneDisplay}</a>
     </div>
     <div class="owner-access">
-      <a href="/admin/" class="owner-link">Acceso propietario</a>
+      <a href="/panel/" class="owner-link">Acceso propietario</a>
     </div>
   </div>
 </div>`;
