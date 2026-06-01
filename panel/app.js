@@ -229,42 +229,31 @@ function renderAll() {
 }
 
 // ══════════════════════════════════════════════════════════════
-// TAB: PRECIOS
+// TAB: PRECIOS / CATÁLOGO CRUD
 // ══════════════════════════════════════════════════════════════
 
-function renderPrecios(filter) {
-  const container = document.getElementById('precios-list');
-  if (!container || !state) return;
-
+function _buildCatalogGroups(filter) {
   const q = (filter || '').toLowerCase().trim();
-
-  // Agrupar platos por tipo de categoría
-  const categories  = state.categories || [];
-  const dishes      = state.dishes || [];
-  const wines       = state.wines || [];
-  const beverages   = state.beverages || [];
-
-  // Mapas rápidos
+  const categories = state.categories || [];
   const catMap = {};
   categories.forEach(c => { catMap[c.id] = c; });
 
-  // Agrupar dishes por tipo de categoría
   const groups = {
-    food: { label: 'Platos', items: [] },
-    wine: { label: 'Vinos', items: [] },
-    drink: { label: 'Bebidas', items: [] },
+    food:  { label: 'Platos',  type: 'dish',     items: [] },
+    wine:  { label: 'Vinos',   type: 'wine',     items: [] },
+    drink: { label: 'Bebidas', type: 'beverage', items: [] },
   };
 
-  dishes.forEach(d => {
-    const cat = catMap[d.category_id];
+  (state.dishes || []).forEach(d => {
+    const cat  = catMap[d.category_id];
     const type = cat ? cat.type : 'food';
     const name = (d.name && d.name.es) ? d.name.es : d.id;
     if (q && !name.toLowerCase().includes(q)) return;
     const group = groups[type] || groups.food;
-    group.items.push({ ...d, _type: 'dish', _priceField: 'price', _catName: cat ? cat.name.es : '' });
+    group.items.push({ ...d, _type: 'dish', _priceField: 'price' });
   });
 
-  wines.forEach(w => {
+  (state.wines || []).forEach(w => {
     const name = typeof w.name === 'object' ? (w.name.es || w.id) : (w.name || w.id);
     if (q && !name.toLowerCase().includes(q)) return;
     groups.wine.items.push({
@@ -275,61 +264,139 @@ function renderPrecios(filter) {
     });
   });
 
-  beverages.forEach(b => {
+  (state.beverages || []).forEach(b => {
     const name = (b.name && b.name.es) ? b.name.es : b.id;
     if (q && !name.toLowerCase().includes(q)) return;
     groups.drink.items.push({ ...b, _type: 'beverage', _priceField: 'price' });
   });
 
+  return groups;
+}
+
+function renderPrecios(filter) {
+  const container = document.getElementById('precios-list');
+  if (!container || !state) return;
+
+  const groups = _buildCatalogGroups(filter);
+  const searching = !!(filter || '').trim();
   container.innerHTML = '';
 
-  Object.values(groups).forEach(group => {
-    if (group.items.length === 0) return;
+  let totalVisible = 0;
 
+  Object.entries(groups).forEach(([groupKey, group]) => {
+    // Group heading: label + count + add button (hidden while searching)
     const heading = document.createElement('div');
     heading.className = 'price-group-heading';
-    heading.textContent = group.label;
+
+    const headLabel = document.createElement('span');
+    headLabel.className = 'price-group-heading__label';
+    headLabel.textContent = group.label;
+
+    const headCount = document.createElement('span');
+    headCount.className = 'price-group-heading__count';
+    headCount.textContent = group.items.length;
+
+    heading.appendChild(headLabel);
+    heading.appendChild(headCount);
+
+    if (!searching) {
+      const addBtn = document.createElement('button');
+      addBtn.className = 'btn-add-item';
+      addBtn.dataset.groupType = group.type;
+      addBtn.setAttribute('aria-label', `Añadir ${group.label.toLowerCase().slice(0, -1)}`);
+      addBtn.textContent = '+ Añadir';
+      heading.appendChild(addBtn);
+    }
+
     container.appendChild(heading);
 
+    if (group.items.length === 0 && !searching) {
+      const empty = document.createElement('p');
+      empty.className = 'empty-state empty-state--group';
+      empty.textContent = 'Sin elementos. Usa + Añadir para agregar el primero.';
+      container.appendChild(empty);
+    }
+
     group.items.forEach(item => {
-      const row = document.createElement('div');
-      row.className = 'price-row';
-      row.dataset.id = item.id;
-
-      const nameEl = document.createElement('span');
-      nameEl.className = 'price-row__name';
-      nameEl.textContent = item.name && item.name.es ? item.name.es : item.id;
-
-      const priceBtn = document.createElement('button');
-      priceBtn.className = 'price-row__price';
-      priceBtn.dataset.id = item.id;
-      priceBtn.dataset.type = item._type;
-      priceBtn.dataset.field = item._priceField;
-      priceBtn.setAttribute('aria-label', `Editar precio de ${nameEl.textContent}`);
-      priceBtn.textContent = getPanelPriceDisplay(item);
-
-      row.appendChild(nameEl);
-      row.appendChild(priceBtn);
-      container.appendChild(row);
+      container.appendChild(_buildCatalogRow(item));
     });
+
+    totalVisible += group.items.length;
   });
 
-  if (container.children.length === 0) {
+  if (searching && totalVisible === 0) {
     container.innerHTML = '<p class="empty-state">No se encontraron resultados.</p>';
   }
 }
 
-// Edición inline de precios
+function _buildCatalogRow(item) {
+  const nameText = (item.name && item.name.es) ? item.name.es : item.id;
+  const isAvailable = item.available !== false;
+
+  const row = document.createElement('div');
+  row.className = 'price-row' + (isAvailable ? '' : ' price-row--unavailable');
+  row.dataset.id   = item.id;
+  row.dataset.type = item._type;
+
+  // Name — tap to edit inline
+  const nameEl = document.createElement('button');
+  nameEl.className = 'price-row__name price-row__name--editable';
+  nameEl.dataset.id   = item.id;
+  nameEl.dataset.type = item._type;
+  nameEl.setAttribute('aria-label', `Editar nombre de ${nameText}`);
+  nameEl.textContent = nameText;
+
+  // Price
+  const priceBtn = document.createElement('button');
+  priceBtn.className = 'price-row__price';
+  priceBtn.dataset.id    = item.id;
+  priceBtn.dataset.type  = item._type;
+  priceBtn.dataset.field = item._priceField;
+  priceBtn.setAttribute('aria-label', `Editar precio de ${nameText}`);
+  priceBtn.textContent = getPanelPriceDisplay(item);
+
+  // Availability toggle
+  const toggleLabel = document.createElement('label');
+  toggleLabel.className = 'catalog-toggle';
+  toggleLabel.setAttribute('aria-label', isAvailable ? 'Disponible' : 'No disponible');
+  const toggleInput = document.createElement('input');
+  toggleInput.type = 'checkbox';
+  toggleInput.className = 'catalog-toggle__input';
+  toggleInput.checked = isAvailable;
+  toggleInput.dataset.id   = item.id;
+  toggleInput.dataset.type = item._type;
+  const toggleThumb = document.createElement('span');
+  toggleThumb.className = 'catalog-toggle__thumb';
+  toggleThumb.setAttribute('aria-hidden', 'true');
+  toggleLabel.appendChild(toggleInput);
+  toggleLabel.appendChild(toggleThumb);
+
+  // Delete button
+  const delBtn = document.createElement('button');
+  delBtn.className = 'btn-delete-item';
+  delBtn.dataset.id   = item.id;
+  delBtn.dataset.type = item._type;
+  delBtn.setAttribute('aria-label', `Eliminar ${nameText}`);
+  delBtn.textContent = '✕';
+
+  row.appendChild(nameEl);
+  row.appendChild(priceBtn);
+  row.appendChild(toggleLabel);
+  row.appendChild(delBtn);
+  return row;
+}
+
 function bindPreciosEdit() {
   const list = document.getElementById('precios-list');
   if (!list) return;
 
+  // ── Price inline edit (existing behaviour) ────────────────────────────────
   list.addEventListener('click', e => {
     const btn = e.target.closest('.price-row__price');
     if (!btn || btn.tagName === 'INPUT') return;
 
-    const dishId = btn.dataset.id;
-    const itemType = btn.dataset.type || 'dish';
+    const dishId    = btn.dataset.id;
+    const itemType  = btn.dataset.type || 'dish';
     const priceField = btn.dataset.field || 'price';
 
     const input = document.createElement('input');
@@ -343,14 +410,13 @@ function bindPreciosEdit() {
     input.focus();
     input.select();
 
-    function commit() {
+    function commitPrice() {
       const newVal = input.value.trim() || btn.textContent.trim();
       updatePanelPrice(itemType, dishId, priceField, newVal);
-      // Restaurar botón
       const newBtn = document.createElement('button');
       newBtn.className = 'price-row__price';
-      newBtn.dataset.id = dishId;
-      newBtn.dataset.type = itemType;
+      newBtn.dataset.id    = dishId;
+      newBtn.dataset.type  = itemType;
       newBtn.dataset.field = priceField;
       newBtn.setAttribute('aria-label', `Editar precio de ${dishId}`);
       newBtn.textContent = newVal;
@@ -358,19 +424,118 @@ function bindPreciosEdit() {
       markDirty();
     }
 
-    input.addEventListener('blur', commit);
-    input.addEventListener('keydown', e => {
-      if (e.key === 'Enter') { e.preventDefault(); input.blur(); }
-      if (e.key === 'Escape') { input.value = btn.textContent; input.blur(); }
+    input.addEventListener('blur', commitPrice);
+    input.addEventListener('keydown', ev => {
+      if (ev.key === 'Enter')  { ev.preventDefault(); input.blur(); }
+      if (ev.key === 'Escape') { input.value = btn.textContent; input.blur(); }
     });
   });
 
-  // Búsqueda en tiempo real
+  // ── Name inline edit ──────────────────────────────────────────────────────
+  list.addEventListener('click', e => {
+    const nameBtn = e.target.closest('.price-row__name--editable');
+    if (!nameBtn || nameBtn.tagName === 'INPUT') return;
+
+    const id   = nameBtn.dataset.id;
+    const type = nameBtn.dataset.type || 'dish';
+    const originalText = nameBtn.textContent.trim();
+
+    const input = document.createElement('input');
+    input.type = 'text';
+    input.value = originalText;
+    input.className = 'name-input';
+    input.setAttribute('aria-label', 'Nombre');
+
+    nameBtn.replaceWith(input);
+    input.focus();
+    input.select();
+
+    function commitName() {
+      const newName = input.value.trim() || originalText;
+      _updateItemName(type, id, newName);
+
+      const newBtn = document.createElement('button');
+      newBtn.className = 'price-row__name price-row__name--editable';
+      newBtn.dataset.id   = id;
+      newBtn.dataset.type = type;
+      newBtn.setAttribute('aria-label', `Editar nombre de ${newName}`);
+      newBtn.textContent = newName;
+      input.replaceWith(newBtn);
+
+      // Update row unavailable class if needed
+      const row = newBtn.closest('.price-row');
+      if (row) row.dataset.id = id;
+
+      markDirty();
+    }
+
+    input.addEventListener('blur', commitName);
+    input.addEventListener('keydown', ev => {
+      if (ev.key === 'Enter')  { ev.preventDefault(); input.blur(); }
+      if (ev.key === 'Escape') { input.value = originalText; input.blur(); }
+    });
+  });
+
+  // ── Availability toggle ───────────────────────────────────────────────────
+  list.addEventListener('change', e => {
+    const toggle = e.target.closest('.catalog-toggle__input');
+    if (!toggle) return;
+    setPanelItemAvailable(state, toggle.dataset.type, toggle.dataset.id, toggle.checked);
+    const row = toggle.closest('.price-row');
+    if (row) row.classList.toggle('price-row--unavailable', !toggle.checked);
+    markDirty();
+  });
+
+  // ── Add item ──────────────────────────────────────────────────────────────
+  list.addEventListener('click', e => {
+    const addBtn = e.target.closest('.btn-add-item');
+    if (!addBtn) return;
+    const type = addBtn.dataset.groupType;
+    const name = 'Nuevo elemento';
+    const newItem = createPanelItem(type, name,
+      type === 'dish' ? ((state.categories || [])[0] || {}).id || '' :
+      type === 'wine' ? 'granada-wines' : 'beer'
+    );
+    // Ensure unique id against existing collection
+    const existingKey = type === 'wine' ? 'wines' : type === 'beverage' ? 'beverages' : 'dishes';
+    newItem.id = slugifyPanelId(name, state[existingKey] || []);
+    addPanelItem(state, type, newItem);
+    markDirty();
+
+    // Re-render and focus the new item's name field
+    const searchInput = document.getElementById('search-precios');
+    renderPrecios(searchInput ? searchInput.value : '');
+    const newRow = list.querySelector(`.price-row[data-id="${newItem.id}"]`);
+    if (newRow) {
+      const nameBtn = newRow.querySelector('.price-row__name--editable');
+      if (nameBtn) nameBtn.click();
+      newRow.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
+    }
+  });
+
+  // ── Delete item ───────────────────────────────────────────────────────────
+  list.addEventListener('click', e => {
+    const delBtn = e.target.closest('.btn-delete-item');
+    if (!delBtn) return;
+    const id   = delBtn.dataset.id;
+    const type = delBtn.dataset.type;
+    const row  = delBtn.closest('.price-row');
+    const name = row ? (row.querySelector('.price-row__name--editable') || {}).textContent || id : id;
+
+    if (!window.confirm(`¿Eliminar "${name}"?\nEsta acción no se puede deshacer hasta guardar.`)) return;
+
+    deletePanelItem(state, type, id);
+    markDirty();
+
+    const searchInput = document.getElementById('search-precios');
+    renderPrecios(searchInput ? searchInput.value : '');
+  });
+
+  // ── Search ────────────────────────────────────────────────────────────────
   const searchInput = document.getElementById('search-precios');
   if (searchInput) {
     searchInput.addEventListener('input', () => {
       renderPrecios(searchInput.value);
-      // Re-bind (el contenedor se reemplaza)
     });
   }
 }
@@ -405,6 +570,15 @@ function updatePanelPrice(type, id, field, value) {
   const item = (collections[type] || []).find(entry => entry.id === id);
   if (!item) return;
   item[field] = type === 'wine' ? parsePanelEuro(value) : value;
+}
+
+function _updateItemName(type, id, newName) {
+  if (!state || !newName) return;
+  const key = type === 'wine' ? 'wines' : type === 'beverage' ? 'beverages' : 'dishes';
+  const item = (state[key] || []).find(i => i.id === id);
+  if (!item) return;
+  if (!item.name || typeof item.name !== 'object') item.name = { es: '', en: '', fr: '' };
+  item.name.es = newName;
 }
 
 // ══════════════════════════════════════════════════════════════
