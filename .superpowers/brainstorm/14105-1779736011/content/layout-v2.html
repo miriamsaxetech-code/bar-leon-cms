@@ -1,0 +1,79 @@
+<h2>Portada — layout A revisado</h2>
+<p class="subtitle">Logo solo, sin texto grande. ¿Con o sin el nombre debajo?</p>
+
+<style>
+  @import url('https://fonts.googleapis.com/css2?family=Playfair+Display:wght@700&family=Inter:wght@400;500&display=swap');
+  .page-wrap { display:flex; gap:32px; flex-wrap:wrap; justify-content:center; }
+  .mock-page {
+    border-radius:10px; overflow:hidden; border:1px solid #ddd;
+    background:#F6F3EC; font-family:'Inter',system-ui,sans-serif;
+    width:300px;
+  }
+  .mock-inner {
+    display:flex; flex-direction:column; align-items:center;
+    justify-content:center; padding:48px 32px; gap:28px; min-height:340px;
+  }
+  .mock-name { font-size:9px; letter-spacing:3px; color:#5C5752; text-transform:uppercase; text-align:center; }
+  .mock-langs { display:flex; gap:10px; margin-top:4px; }
+  .lang-btn {
+    padding:11px 24px; font-size:11px; letter-spacing:3px; text-transform:uppercase;
+    border:1px solid #1C1A17; background:transparent; color:#1C1A17;
+    font-family:'Inter',sans-serif; cursor:default; border-radius:1px;
+    transition:all .15s;
+  }
+  .lang-btn.active { background:#7A1C1C; color:#F6F3EC; border-color:#7A1C1C; }
+  .mock-caption { font-size:9px; color:#7A1C1C; letter-spacing:2px; text-transform:uppercase; }
+  .divider { width:40px; height:1px; background:#C8C3BA; }
+</style>
+
+<div class="page-wrap">
+
+  <!-- VERSION 1: logo + name small + 3 buttons -->
+  <div class="card" data-choice="with-name" onclick="toggleSelect(this)" style="width:300px">
+    <div class="card-image" style="background:#F6F3EC;padding:0">
+      <div class="mock-page">
+        <div class="mock-inner">
+          <img src="/assets/images/lion-logo.svg" width="72" height="110" alt="León" style="opacity:.85" />
+          <div style="text-align:center;display:flex;flex-direction:column;gap:4px">
+            <div style="font-family:'Playfair Display',Georgia,serif;font-size:18px;font-weight:700;color:#1C1A17;letter-spacing:0.5px">Restaurante Bar León</div>
+            <div class="mock-name">Albayzín · Granada · 1959</div>
+          </div>
+          <div class="divider"></div>
+          <div class="mock-langs">
+            <button class="lang-btn">ES</button>
+            <button class="lang-btn active">EN</button>
+            <button class="lang-btn">FR</button>
+          </div>
+          <div class="mock-caption">choose your language</div>
+        </div>
+      </div>
+    </div>
+    <div class="card-body">
+      <h3>Con nombre</h3>
+      <p>Logo + "Restaurante Bar León" en serif + subtítulo fino + idiomas.</p>
+    </div>
+  </div>
+
+  <!-- VERSION 2: logo only + 3 buttons -->
+  <div class="card" data-choice="logo-only" onclick="toggleSelect(this)" style="width:300px">
+    <div class="card-image" style="background:#F6F3EC;padding:0">
+      <div class="mock-page">
+        <div class="mock-inner">
+          <img src="/assets/images/lion-logo.svg" width="90" height="138" alt="León" style="opacity:.85" />
+          <div class="divider"></div>
+          <div class="mock-langs">
+            <button class="lang-btn">ES</button>
+            <button class="lang-btn active">EN</button>
+            <button class="lang-btn">FR</button>
+          </div>
+          <div class="mock-caption">choose your language</div>
+        </div>
+      </div>
+    </div>
+    <div class="card-body">
+      <h3>Solo logo</h3>
+      <p>El logo más grande, sin texto. Más silencioso e impactante. Quien conoce el bar lo reconoce; quien no, igual elige idioma.</p>
+    </div>
+  </div>
+
+</div>

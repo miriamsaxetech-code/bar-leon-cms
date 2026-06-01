@@ -29,7 +29,7 @@
         </div>
 
         <label class="pin-remember">
-          <input type="checkbox" id="pin-remember-cb" class="pin-remember__check">
+          <input type="checkbox" id="pin-remember-cb" class="pin-remember__check" checked>
           <span class="pin-remember__label">Recordar este dispositivo 30 días</span>
         </label>
 
@@ -58,7 +58,7 @@
       <button class="panel-tab"        data-tab="horarios"  role="tab" aria-selected="false" aria-controls="tab-horarios">Horarios</button>
       <button class="panel-tab"        data-tab="menu"      role="tab" aria-selected="false" aria-controls="tab-menu">Menú</button>
       <button class="panel-tab"        data-tab="aviso"     role="tab" aria-selected="false" aria-controls="tab-aviso">Aviso</button>
-      <button class="panel-tab"        data-tab="carioca"   role="tab" aria-selected="false" aria-controls="tab-carioca">Archivo</button>
+      <button class="panel-tab"        data-tab="carioca"   role="tab" aria-selected="false" aria-controls="tab-carioca">Foto</button>
     </nav>
 
     <main class="panel-content">
@@ -160,6 +160,7 @@
               placeholder="E.g.: Closed for holidays August 1–15."
               rows="3"
             ></textarea>
+            <span class="field-hint">Si se deja vacío, se mostrará el texto en español.</span>
           </div>
           <div class="field-group">
             <label class="field-label" for="aviso-texto-fr">Texto del aviso (francés)</label>
@@ -169,6 +170,7 @@
               placeholder="Ex.: Fermé pour vacances du 1er au 15 août."
               rows="3"
             ></textarea>
+            <span class="field-hint">Si se deja vacío, se mostrará el texto en español.</span>
           </div>
           <div class="field-group">
             <label class="field-label" for="aviso-expiry">Fecha de caducidad del aviso (opcional)</label>
@@ -210,10 +212,12 @@
           <div class="field-group">
             <label class="field-label" for="carioca-caption-en">Descripción (inglés)</label>
             <input type="text" id="carioca-caption-en" class="field-input" placeholder="E.g.: A gathering at Bar León, 1972.">
+            <span class="field-hint">Si se deja vacío, se mostrará el texto en español.</span>
           </div>
           <div class="field-group">
             <label class="field-label" for="carioca-caption-fr">Descripción (francés)</label>
-            <input type="text" id="carioca-caption-fr" class="field-input" placeholder="Ex.: Une réunion au Bar León, 1972.">
+            <input type="text" id="carioca-caption-fr" class="field-input" placeholder="Ex.: Une reunión au Bar León, 1972.">
+            <span class="field-hint">Si se deja vacío, se mostrará el texto en español.</span>
           </div>
           <div class="field-group">
             <label class="field-label" for="carioca-context">Sección de la web</label>
@@ -238,6 +242,7 @@
 
     <!-- Barra de guardar -->
     <div class="panel-save-bar">
+      <div id="save-bar-reminder" class="save-bar-reminder" hidden>Foto subida. Recuerda guardar los cambios para publicarla.</div>
       <span id="save-status" class="save-status"></span>
       <button id="save-btn" class="btn btn--primary btn--save">Guardar cambios</button>
     </div>

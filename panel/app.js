@@ -548,17 +548,21 @@ function renderMenuDelDia() {
   if (!mainsList) return;
   mainsList.innerHTML = '';
   const days = Array.isArray(m.days) ? m.days : [];
+  const dayKeys = ['sunday','monday','tuesday','wednesday','thursday','friday','saturday'];
+  const todayKey = dayKeys[new Date().getDay()];
+
   days.forEach(day => {
     const existing = Array.isArray(m.mains)
       ? m.mains.find(x => x.day === day)
       : null;
 
+    const isToday = (day === todayKey);
     const row = document.createElement('div');
-    row.className = 'menu-main-row';
+    row.className = 'menu-main-row' + (isToday ? ' menu-main-row--today' : '');
 
     const label = document.createElement('span');
     label.className = 'menu-main-day';
-    label.textContent = DAY_NAMES[day] || day;
+    label.textContent = (DAY_NAMES[day] || day) + (isToday ? ' (hoy)' : '');
 
     const input = document.createElement('input');
     input.type = 'text';
@@ -755,8 +759,8 @@ function bindCariocaEvents() {
     if (!file) return;
 
     // Rechazar HEIC
-    if (file.name.toLowerCase().endsWith('.heic') || file.type === 'image/heic') {
-      showError('El formato HEIC no es compatible. Por favor convierte la foto a JPG o PNG antes de subirla.');
+    if (file.name.toLowerCase().endsWith('.heic') || file.type === 'image/heic' || file.name.toLowerCase().endsWith('.heif') || file.type === 'image/heif') {
+      showError('Usa una foto de tu carrete (no de la cámara directamente). Toca "Elegir foto" y selecciona desde el álbum.');
       fileInput.value = '';
       return;
     }
@@ -773,6 +777,8 @@ function bindCariocaEvents() {
       cariocaFile = resized;
       showCariocaPreview(resized);
       markDirty();
+      const reminder = document.getElementById('save-bar-reminder');
+      if (reminder) reminder.hidden = false;
     } catch (err) {
       showError('No se pudo procesar la imagen. Prueba con otro archivo.');
     }
@@ -784,6 +790,8 @@ function bindCariocaEvents() {
       fileInput.value = '';
       const previewWrap = document.getElementById('carioca-preview-wrap');
       if (previewWrap) previewWrap.hidden = true;
+      const reminder = document.getElementById('save-bar-reminder');
+      if (reminder) reminder.hidden = true;
     });
   }
 
@@ -907,6 +915,25 @@ async function saveAll() {
     return;
   }
 
+  // E. Advertencia antes de publicar un aviso vacío
+  const avisoActive = document.getElementById('aviso-active')?.checked;
+  const avisoTextoEs = document.getElementById('aviso-texto-es')?.value.trim();
+  if (avisoActive && !avisoTextoEs) {
+    const confirmSave = confirm('El aviso está activado pero no tiene texto en español. ¿Quieres publicarlo igualmente?');
+    if (!confirmSave) return;
+  }
+
+  // F. Advertencia si menú está activado pero vacío
+  const menuActive = document.getElementById('menu-active')?.checked;
+  const starters = document.getElementById('menu-starters')?.value.trim();
+  const seconds = document.getElementById('menu-seconds')?.value.trim();
+  const desserts = document.getElementById('menu-desserts')?.value.trim();
+  const mains = Array.from(document.querySelectorAll('.menu-main-input')).map(input => input.value.trim()).filter(Boolean);
+  if (menuActive && !starters && !seconds && !desserts && mains.length === 0) {
+    const confirmSave = confirm('El menú del día está activado pero no tiene contenido. ¿Quieres publicarlo igualmente?');
+    if (!confirmSave) return;
+  }
+
   const saveBtn    = document.getElementById('save-btn');
   const statusEl   = document.getElementById('save-status');
 
@@ -931,6 +958,9 @@ async function saveAll() {
       const previewWrap = document.getElementById('carioca-preview-wrap');
       if (previewWrap) previewWrap.hidden = true;
       if (statusMsg)   { statusMsg.textContent = ''; statusMsg.hidden = true; }
+      
+      const reminder = document.getElementById('save-bar-reminder');
+      if (reminder) reminder.hidden = true;
 
     } catch (err) {
       showError('No se pudo subir la imagen. Comprueba tu conexión e inténtalo de nuevo.');
@@ -974,15 +1004,15 @@ async function saveAll() {
 
     dirty = false;
     dailyMenuTextDirty = false;
-    if (statusEl) statusEl.textContent = '✓ Guardado';
+    if (statusEl) statusEl.textContent = '✓ Guardado. Tu web se actualizará en unos 30 segundos.';
     if (saveBtn)  { saveBtn.textContent = 'Guardar cambios'; saveBtn.disabled = false; }
 
-    // Limpiar el mensaje de confirmación después de 4 s
+    // Limpiar el mensaje de confirmación después de 6 s
     setTimeout(() => {
-      if (statusEl && statusEl.textContent === '✓ Guardado') {
+      if (statusEl && statusEl.textContent === '✓ Guardado. Tu web se actualizará en unos 30 segundos.') {
         statusEl.textContent = '';
       }
-    }, 4000);
+    }, 6000);
 
   } catch {
     showError('Error de conexión. Comprueba tu internet e inténtalo de nuevo.');

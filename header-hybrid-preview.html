@@ -1,0 +1,745 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Header Híbrido — Bar León</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,700;1,400&display=swap" rel="stylesheet">
+<style>
+
+@font-face {
+  font-family: 'Granaina Limpia';
+  src: url('assets/fonts/granaina-limpia.otf') format('opentype');
+  font-weight: normal;
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: 'Granaina Sucia';
+  src: url('assets/fonts/granaina-sucia2.otf') format('opentype');
+  font-weight: normal;
+  font-style: normal;
+  font-display: swap;
+}
+
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+:root {
+  --bg:         #F6F3EC;
+  --ink:        #1C1A17;
+  --accent:     #7A1C1C;
+  --muted:      #5C5752;
+  --terracotta: #A8432A;
+  --ocre:       #B8853A;
+  --tile-cream: #F2EAD8;
+  --tile-dark:  #2A1F14;
+  /* New tokens for hybrid header */
+  --navy:       #1B2A3A;
+  --gold:       #C4A05A;
+  --parchment:  #F4EDE0;
+}
+
+/* ── PREVIEW WRAPPER ── */
+body {
+  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+  background: #D4CCC0;
+  color: var(--ink);
+  padding: 2rem 1rem;
+}
+
+.preview-meta {
+  max-width: 900px;
+  margin: 0 auto 1.2rem;
+}
+
+.preview-label {
+  font-size: 0.7rem;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: #888;
+  margin-bottom: 0.4rem;
+}
+
+.preview-meta h1 {
+  font-family: Georgia, serif;
+  font-size: 1.1rem;
+  color: #333;
+  margin-bottom: 0.35rem;
+  font-weight: normal;
+}
+
+.preview-meta .intro {
+  font-size: 0.8rem;
+  color: #666;
+  line-height: 1.6;
+  max-width: 520px;
+}
+
+.preview-card {
+  max-width: 900px;
+  margin: 0 auto 2rem;
+  background: #fff;
+  border-radius: 8px;
+  overflow: hidden;
+  box-shadow: 0 4px 24px rgba(0,0,0,0.14);
+}
+
+.card-label {
+  padding: 0.55rem 1rem;
+  border-bottom: 1px solid #eee;
+  font-size: 0.66rem;
+  color: #aaa;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+}
+
+/* ── ZONE 0: Masthead stripe ── */
+.hh-stripe {
+  height: 8px;
+  background: repeating-linear-gradient(
+    90deg,
+    var(--terracotta) 0px,  var(--terracotta) 16px,
+    var(--ocre)       16px, var(--ocre)       32px,
+    var(--tile-dark)  32px, var(--tile-dark)  34px,
+    var(--ocre)       34px, var(--ocre)       50px,
+    var(--terracotta) 50px, var(--terracotta) 66px
+  );
+  width: 100%;
+}
+
+/* ── ZONE 1: Hero band ── */
+.hh-hero {
+  display: flex;
+  align-items: stretch;
+  background-color: var(--parchment);
+  background-image:
+    radial-gradient(ellipse at 16% 65%, rgba(168,67,42,0.03) 0%, transparent 55%),
+    radial-gradient(ellipse at 84% 30%, rgba(184,133,58,0.025) 0%, transparent 52%);
+  position: relative;
+  min-height: 220px;
+}
+
+/* Subtle grain overlay — zero HTTP cost */
+.hh-hero::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='200' height='200'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.72' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='200' height='200' filter='url(%23n)' opacity='0.038'/%3E%3C/svg%3E");
+  mix-blend-mode: multiply;
+  pointer-events: none;
+  z-index: 0;
+}
+
+.hh-left,
+.hh-center,
+.hh-separator,
+.hh-right {
+  position: relative;
+  z-index: 1;
+}
+
+/* ── LEFT: Pomegranate + badge ── */
+.hh-left {
+  flex: 0 0 200px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 16px;
+  padding: 32px 20px 28px;
+}
+
+.hh-pomegranate svg {
+  width: 92px;
+  height: auto;
+  display: block;
+}
+
+.hh-badge {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  width: 66px;
+  height: 66px;
+  border-radius: 50%;
+  border: 1.5px solid var(--navy);
+  line-height: 1.1;
+  padding: 4px;
+}
+
+.hh-badge__since {
+  font-family: system-ui, -apple-system, sans-serif;
+  font-size: 0.48rem;
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+  color: var(--navy);
+  opacity: 0.7;
+  margin-top: 2px;
+}
+
+.hh-badge__year {
+  font-family: 'Granaina Sucia', 'Playfair Display', Georgia, serif;
+  font-size: 1.12rem;
+  color: var(--navy);
+  letter-spacing: 0.02em;
+}
+
+/* ── CENTER: Primary identity ── */
+.hh-center {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  padding: 40px 24px;
+  text-align: center;
+}
+
+.hh-eyebrow {
+  font-family: system-ui, -apple-system, sans-serif;
+  font-size: 0.65rem;
+  letter-spacing: 0.28em;
+  text-transform: uppercase;
+  color: var(--navy);
+  opacity: 0.68;
+  margin-bottom: 12px;
+}
+
+.hh-brand {
+  font-family: 'Granaina Limpia', 'Playfair Display', Georgia, serif;
+  font-size: clamp(3rem, 6.5vw, 5rem);
+  font-weight: normal;
+  letter-spacing: 0.05em;
+  color: var(--navy);
+  line-height: 0.92;
+  margin-bottom: 20px;
+}
+
+.hh-location-rule {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  width: 100%;
+  max-width: 220px;
+}
+
+.hh-location-rule__line {
+  flex: 1;
+  height: 1px;
+  background: var(--gold);
+  display: block;
+  opacity: 0.85;
+}
+
+.hh-location-rule__text {
+  font-family: system-ui, -apple-system, sans-serif;
+  font-size: 0.58rem;
+  letter-spacing: 0.32em;
+  text-transform: uppercase;
+  color: var(--gold);
+  white-space: nowrap;
+}
+
+/* ── HAIRLINE SEPARATOR ── */
+.hh-separator {
+  width: 1px;
+  background: rgba(27, 42, 58, 0.14);
+  align-self: stretch;
+  margin: 30px 0;
+  flex-shrink: 0;
+}
+
+/* ── RIGHT: Alhambra + tagline ── */
+.hh-right {
+  flex: 0 0 200px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 14px;
+  padding: 32px 20px 28px;
+}
+
+.hh-alhambra svg {
+  width: 168px;
+  height: auto;
+  display: block;
+}
+
+.hh-tagline {
+  font-family: 'Playfair Display', Georgia, serif;
+  font-size: 0.78rem;
+  font-style: italic;
+  color: var(--muted);
+  text-align: center;
+  line-height: 1.65;
+  max-width: 155px;
+}
+
+/* ── ZONE 2: Navigation bar ── */
+.hh-nav {
+  background: var(--navy);
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 0 22px;
+  min-height: 44px;
+  gap: 12px;
+}
+
+.hh-nav__list {
+  display: flex;
+  align-items: center;
+  list-style: none;
+  flex: 1;
+  flex-wrap: nowrap;
+  overflow: hidden;
+}
+
+.hh-nav__link {
+  font-family: system-ui, -apple-system, sans-serif;
+  font-size: 0.61rem;
+  text-transform: uppercase;
+  letter-spacing: 0.15em;
+  color: rgba(244, 237, 224, 0.62);
+  text-decoration: none;
+  padding: 4px 9px;
+  white-space: nowrap;
+  transition: color 0.15s;
+}
+
+.hh-nav__link:hover {
+  color: rgba(244, 237, 224, 0.92);
+}
+
+.hh-nav__link--active {
+  color: rgba(244, 237, 224, 0.92);
+}
+
+.hh-nav__link--cta {
+  color: var(--gold);
+  border: 1px solid rgba(196, 160, 90, 0.36);
+  padding: 4px 11px;
+  border-radius: 1px;
+  margin-left: 4px;
+}
+
+.hh-nav__link--cta:hover {
+  color: #d4b870;
+  border-color: rgba(196, 160, 90, 0.62);
+}
+
+.hh-nav__lang {
+  display: flex;
+  align-items: center;
+  gap: 3px;
+  flex-shrink: 0;
+}
+
+.hh-nav__lang-active {
+  font-family: system-ui, -apple-system, sans-serif;
+  font-size: 0.58rem;
+  letter-spacing: 0.15em;
+  color: rgba(244, 237, 224, 0.88);
+  font-weight: 600;
+  text-transform: uppercase;
+}
+
+.hh-nav__lang-link {
+  font-family: system-ui, -apple-system, sans-serif;
+  font-size: 0.58rem;
+  letter-spacing: 0.15em;
+  color: rgba(244, 237, 224, 0.4);
+  text-decoration: none;
+  text-transform: uppercase;
+}
+
+.hh-nav__lang-link:hover { color: rgba(244, 237, 224, 0.78); }
+
+.hh-nav__lang-sep {
+  color: rgba(244, 237, 224, 0.18);
+  font-size: 0.5rem;
+  padding: 0 1px;
+}
+
+.hh-nav__hamburger {
+  display: none;
+  flex-direction: column;
+  gap: 5px;
+  background: none;
+  border: none;
+  padding: 8px 4px;
+  cursor: pointer;
+  flex-shrink: 0;
+}
+
+.hh-nav__hamburger span {
+  display: block;
+  width: 20px;
+  height: 1.5px;
+  background: rgba(244, 237, 224, 0.72);
+}
+
+/* ── RESPONSIVE ── */
+@media (max-width: 860px) {
+  .hh-hero { flex-wrap: wrap; }
+  .hh-center {
+    order: 1;
+    flex: 0 0 100%;
+    padding: 30px 20px 16px;
+  }
+  .hh-left {
+    order: 2;
+    flex: 0 0 50%;
+    padding: 16px 16px 24px;
+  }
+  .hh-right {
+    order: 3;
+    flex: 0 0 50%;
+    padding: 16px 16px 24px;
+  }
+  .hh-separator { display: none; }
+}
+
+@media (max-width: 520px) {
+  .hh-left,
+  .hh-right  { flex: 0 0 100%; }
+  .hh-pomegranate svg { width: 70px; }
+  .hh-alhambra svg    { width: 130px; }
+  .hh-nav__list       { display: none; }
+  .hh-nav__hamburger  { display: flex; }
+}
+
+/* ── SPEC NOTES ── */
+.preview-notes {
+  max-width: 900px;
+  margin: 0 auto;
+}
+
+.spec-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr 1fr;
+  gap: 14px;
+  margin-bottom: 1.2rem;
+}
+
+@media (max-width: 580px) {
+  .spec-grid { grid-template-columns: 1fr; }
+}
+
+.spec-block {
+  background: #fff;
+  border-radius: 7px;
+  padding: 13px 15px;
+  box-shadow: 0 1px 6px rgba(0,0,0,0.07);
+}
+
+.spec-block h3 {
+  font-size: 0.68rem;
+  text-transform: uppercase;
+  letter-spacing: 0.1em;
+  color: #aaa;
+  margin-bottom: 8px;
+}
+
+.spec-block ul {
+  list-style: none;
+  display: flex;
+  flex-direction: column;
+  gap: 5px;
+}
+
+.spec-block li {
+  font-size: 0.75rem;
+  color: #555;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  line-height: 1.3;
+}
+
+.swatch {
+  width: 13px;
+  height: 13px;
+  border-radius: 3px;
+  flex-shrink: 0;
+  border: 1px solid rgba(0,0,0,0.1);
+}
+
+.verdict-block {
+  background: #F0EBE0;
+  border-radius: 7px;
+  padding: 13px 15px;
+  font-size: 0.78rem;
+  color: #555;
+  line-height: 1.65;
+}
+
+.verdict-block strong { color: #333; }
+.verdict-block code {
+  background: rgba(0,0,0,0.06);
+  padding: 1px 5px;
+  border-radius: 3px;
+  font-size: 0.73rem;
+}
+
+</style>
+</head>
+<body>
+
+<!-- HEADER IDENTIFICATION -->
+<div class="preview-meta">
+  <p class="preview-label">Header Híbrido — Restaurante Bar León · Granada · 1959</p>
+  <h1>Alternativa refinada: 1 + 2 + 5</h1>
+  <p class="intro">Estructura de Alt 2 · Calidez de pergamino de Alt 1 · Contención editorial de Alt 5. Ilustraciones de trazo de tinta, BAR LEON limpio en azul marino, sin foto real, sin clisés turísticos.</p>
+</div>
+
+<!-- PREVIEW CARD -->
+<div class="preview-card">
+  <div class="card-label">Desktop — visualización en tarjeta de 900 px</div>
+
+  <header class="hh-masthead" role="banner">
+
+    <!-- ── ZONE 0: Terracotta/ocre stripe ── -->
+    <div class="hh-stripe" aria-hidden="true"></div>
+
+    <!-- ── ZONE 1: Three-column hero band ── -->
+    <div class="hh-hero">
+
+      <!-- LEFT: Pomegranate illustration + Desde 1959 badge -->
+      <div class="hh-left">
+
+        <div class="hh-pomegranate" aria-hidden="true">
+          <!--
+            Pomegranate — whole fruit, line-art, ink style.
+            Granada (city) = granado (pomegranate tree) in Spanish.
+            viewBox 0 0 90 108 · stroke color #6B1A1A (deep burgundy ink)
+          -->
+          <svg viewBox="0 0 90 108" xmlns="http://www.w3.org/2000/svg">
+            <!-- Stem at base -->
+            <line x1="45" y1="97" x2="45" y2="106"
+                  stroke="#6B1A1A" stroke-width="1.6" stroke-linecap="round"/>
+
+            <!-- Fruit body — slightly vertical ellipse -->
+            <ellipse cx="45" cy="60" rx="33" ry="37"
+                     fill="rgba(249,240,236,0.32)" stroke="#6B1A1A" stroke-width="1.8"/>
+
+            <!-- Natural segment ridges (very subtle) -->
+            <path d="M45,23 C40,38 38,58 40,93"
+                  stroke="#6B1A1A" stroke-width="0.7" fill="none" opacity="0.28"/>
+            <path d="M45,23 C50,38 52,58 50,93"
+                  stroke="#6B1A1A" stroke-width="0.7" fill="none" opacity="0.28"/>
+
+            <!-- Crown base ring (calyx collar) -->
+            <ellipse cx="45" cy="23" rx="7" ry="2.5"
+                     fill="#F4EDE0" stroke="#6B1A1A" stroke-width="1.2"/>
+
+            <!-- Crown petals (5 petals, front 3 solid, rear 2 faded) -->
+            <!-- Center front petal -->
+            <path d="M45,23 L42,11 L45,5 L48,11 Z" fill="#6B1A1A"/>
+            <!-- Left front petal -->
+            <path d="M45,23 L33,14 L36,7 L42,14 Z" fill="#6B1A1A" opacity="0.76"/>
+            <!-- Right front petal -->
+            <path d="M45,23 L57,14 L54,7 L48,14 Z" fill="#6B1A1A" opacity="0.76"/>
+            <!-- Left rear petal (smaller, more muted) -->
+            <path d="M45,23 L24,18 L26,12 L35,17 Z" fill="#6B1A1A" opacity="0.42"/>
+            <!-- Right rear petal -->
+            <path d="M45,23 L66,18 L64,12 L55,17 Z" fill="#6B1A1A" opacity="0.42"/>
+          </svg>
+        </div>
+
+        <div class="hh-badge" aria-label="Desde 1959">
+          <span class="hh-badge__since">Desde</span>
+          <span class="hh-badge__year">1959</span>
+        </div>
+
+      </div><!-- /.hh-left -->
+
+      <!-- CENTER: Primary brand identity -->
+      <div class="hh-center">
+        <p class="hh-eyebrow">Restaurante · Bar</p>
+        <h1 class="hh-brand">BAR LEON</h1>
+        <div class="hh-location-rule" aria-label="Granada">
+          <span class="hh-location-rule__line" aria-hidden="true"></span>
+          <span class="hh-location-rule__text">Granada</span>
+          <span class="hh-location-rule__line" aria-hidden="true"></span>
+        </div>
+      </div><!-- /.hh-center -->
+
+      <!-- HAIRLINE vertical separator (Alt 2 structural element) -->
+      <div class="hh-separator" aria-hidden="true"></div>
+
+      <!-- RIGHT: Alhambra sketch + tagline -->
+      <div class="hh-right">
+
+        <div class="hh-alhambra" aria-hidden="true">
+          <!--
+            Alhambra + Sierra Nevada — ink sketch silhouette.
+            Alt 5 style: line-art, no photography, warm sepia ink #3D2B1F.
+            viewBox 0 0 220 100 · rendered 168px wide via CSS
+            Layers: mountains → cypress → Alcazaba walls → Torre de la Vela
+                    → Nasrid palace body with Moorish arches → right tower → cypress
+          -->
+          <svg viewBox="0 0 220 100" xmlns="http://www.w3.org/2000/svg">
+
+            <!-- Sierra Nevada mountains (back layer, very faint) -->
+            <path d="M0,78 C12,58 28,52 46,63 C56,36 70,28 90,48 C102,20 120,16 142,42
+                     C157,23 174,26 198,50 L220,44 L220,100 L0,100 Z"
+                  fill="rgba(61,43,31,0.04)"
+                  stroke="#3D2B1F" stroke-width="0.85" stroke-opacity="0.26"/>
+
+            <!-- Left cypress tree -->
+            <ellipse cx="14" cy="70" rx="5" ry="18"
+                     fill="rgba(61,43,31,0.05)" stroke="#3D2B1F" stroke-width="1.1"/>
+            <line x1="14" y1="88" x2="14" y2="94"
+                  stroke="#3D2B1F" stroke-width="1.2" stroke-linecap="round"/>
+
+            <!-- Alcazaba fortification wall — crenellated profile -->
+            <!--
+              The path traces: wall base → merlon up → step right → crenel down
+              → merlon up → step right → crenel down → merlon → base close.
+              Merlons at y≈62, crenels at y≈68, wall base at y≈78.
+            -->
+            <path d="M25,78 L25,66 L31,66 L31,72 L36,72 L36,61 L42,61
+                     L42,72 L47,72 L47,66 L53,66 L53,78 Z"
+                  fill="rgba(61,43,31,0.055)" stroke="#3D2B1F" stroke-width="1.2"/>
+
+            <!-- Torre de la Vela — the tallest element, left of center -->
+            <rect x="55" y="36" width="18" height="42"
+                  fill="rgba(61,43,31,0.06)" stroke="#3D2B1F" stroke-width="1.3"/>
+            <!-- Torre crenellations -->
+            <path d="M55,36 L55,29 L59,29 L59,36 L61,36 L61,27
+                     L65,27 L65,36 L67,36 L67,29 L71,29 L71,36 L73,36"
+                  fill="none" stroke="#3D2B1F" stroke-width="1.15"/>
+            <!-- Torre arched window (Moorish horseshoe arch) -->
+            <path d="M61,56 L61,51 Q64,47 67,51 L67,56 Z"
+                  fill="rgba(61,43,31,0.11)" stroke="#3D2B1F" stroke-width="0.9"/>
+
+            <!-- Nasrid Palace body — wide horizontal mass -->
+            <rect x="75" y="54" width="86" height="24"
+                  fill="rgba(61,43,31,0.045)" stroke="#3D2B1F" stroke-width="1.2"/>
+            <!-- Palace crenellations (simplified merlon row) -->
+            <path d="M75,54 L75,47 L80,47 L80,54 L83,54 L83,45
+                     L88,45 L88,54 L91,54 L91,47 L96,47 L96,54 L99,54 L99,45
+                     L104,45 L104,54 L107,54 L107,47 L112,47 L112,54 L115,54 L115,45
+                     L120,45 L120,54 L123,54 L123,47 L128,47 L128,54 L131,54 L131,45
+                     L136,45 L136,54 L139,54 L139,47 L144,47 L144,54 L147,54 L147,45
+                     L152,45 L152,54 L155,54 L155,47 L160,47 L160,54 L161,54"
+                  fill="none" stroke="#3D2B1F" stroke-width="0.92"/>
+            <!-- Row of 5 Moorish arched openings -->
+            <path d="M83,78 L83,67 Q87,62 91,67 L91,78"
+                  fill="rgba(61,43,31,0.07)" stroke="#3D2B1F" stroke-width="0.9"/>
+            <path d="M94,78 L94,67 Q98,62 102,67 L102,78"
+                  fill="rgba(61,43,31,0.07)" stroke="#3D2B1F" stroke-width="0.9"/>
+            <path d="M105,78 L105,67 Q109,62 113,67 L113,78"
+                  fill="rgba(61,43,31,0.07)" stroke="#3D2B1F" stroke-width="0.9"/>
+            <path d="M116,78 L116,67 Q120,62 124,67 L124,78"
+                  fill="rgba(61,43,31,0.07)" stroke="#3D2B1F" stroke-width="0.9"/>
+            <path d="M127,78 L127,67 Q131,62 135,67 L135,78"
+                  fill="rgba(61,43,31,0.07)" stroke="#3D2B1F" stroke-width="0.9"/>
+
+            <!-- Right secondary tower -->
+            <rect x="163" y="43" width="14" height="35"
+                  fill="rgba(61,43,31,0.05)" stroke="#3D2B1F" stroke-width="1.2"/>
+            <path d="M163,43 L163,36 L167,36 L167,43 L169,43
+                     L169,34 L171,34 L171,43 L173,43 L173,36 L177,36 L177,43"
+                  fill="none" stroke="#3D2B1F" stroke-width="0.95"/>
+
+            <!-- Right cypress tree -->
+            <ellipse cx="205" cy="72" rx="5" ry="16"
+                     fill="rgba(61,43,31,0.05)" stroke="#3D2B1F" stroke-width="1.1"/>
+            <line x1="205" y1="88" x2="205" y2="94"
+                  stroke="#3D2B1F" stroke-width="1.2" stroke-linecap="round"/>
+
+            <!-- Ground baseline (very faint) -->
+            <line x1="0" y1="93" x2="220" y2="93"
+                  stroke="#3D2B1F" stroke-width="0.65" stroke-opacity="0.2"/>
+          </svg>
+        </div>
+
+        <p class="hh-tagline"><em>Tradición, solera y sabor desde 1959.</em></p>
+
+      </div><!-- /.hh-right -->
+
+    </div><!-- /.hh-hero -->
+
+    <!-- ── ZONE 2: Navigation bar ── -->
+    <nav class="hh-nav" aria-label="Navegación principal">
+      <ul class="hh-nav__list">
+        <li><a class="hh-nav__link hh-nav__link--active" href="#">Inicio</a></li>
+        <li><a class="hh-nav__link" href="#">Carta</a></li>
+        <li><a class="hh-nav__link" href="#">Menú del Día</a></li>
+        <li><a class="hh-nav__link" href="#">Bodega</a></li>
+        <li><a class="hh-nav__link" href="#">Nuestra Historia</a></li>
+        <li><a class="hh-nav__link" href="#">Dónde estamos</a></li>
+        <li><a class="hh-nav__link hh-nav__link--cta" href="#">Reservar</a></li>
+      </ul>
+      <button class="hh-nav__hamburger" aria-label="Abrir menú">
+        <span></span><span></span><span></span>
+      </button>
+      <div class="hh-nav__lang" aria-label="Idioma">
+        <span class="hh-nav__lang-active">ES</span>
+        <span class="hh-nav__lang-sep">·</span>
+        <a class="hh-nav__lang-link" href="#">EN</a>
+        <span class="hh-nav__lang-sep">·</span>
+        <a class="hh-nav__lang-link" href="#">FR</a>
+      </div>
+    </nav>
+
+  </header>
+</div><!-- /.preview-card -->
+
+<!-- SPEC NOTES -->
+<div class="preview-notes">
+  <div class="spec-grid">
+
+    <div class="spec-block">
+      <h3>Paleta</h3>
+      <ul>
+        <li><span class="swatch" style="background:#1B2A3A"></span> <strong>--navy</strong> — BAR LEON, nav</li>
+        <li><span class="swatch" style="background:#F4EDE0"></span> <strong>--parchment</strong> — fondo</li>
+        <li><span class="swatch" style="background:#C4A05A"></span> <strong>--gold</strong> — regla, GRANADA</li>
+        <li><span class="swatch" style="background:#6B1A1A"></span> Granada SVG — trazo tinta</li>
+        <li><span class="swatch" style="background:#3D2B1F"></span> Alhambra SVG — sepia tinta</li>
+        <li><span class="swatch" style="background:#A8432A"></span> --terracotta — franja</li>
+        <li><span class="swatch" style="background:#B8853A"></span> --ocre — franja</li>
+      </ul>
+    </div>
+
+    <div class="spec-block">
+      <h3>Tipografía</h3>
+      <ul>
+        <li><strong>BAR LEON</strong> — Granaina Limpia</li>
+        <li><strong>1959</strong> — Granaina Sucia</li>
+        <li><strong>Tagline</strong> — Playfair italic</li>
+        <li><strong>Nav, labels</strong> — system-ui</li>
+        <li><strong>Eyebrow</strong> — system-ui caps</li>
+      </ul>
+    </div>
+
+    <div class="spec-block">
+      <h3>De dónde viene cada elemento</h3>
+      <ul>
+        <li>Zonas horizontales claras — Alt 2</li>
+        <li>Regla separadora vertical — Alt 2</li>
+        <li>Barra de navegación navy — Alt 2</li>
+        <li>Pergamino cálido, atmósfera — Alt 1</li>
+        <li>Ilustraciones de trazo tinta — Alt 5</li>
+        <li>Espacio negativo, contención — Alt 5</li>
+        <li>BAR LEON sin textura distress — Alt 5</li>
+      </ul>
+    </div>
+
+  </div>
+
+  <div class="verdict-block">
+    <strong>Siguiente paso:</strong> si este header funciona visualmente, se integra en el sitio real añadiendo <code>--navy</code>, <code>--gold</code>, <code>--parchment</code> a <code>:root</code> en <code>css/style.css</code>, copiando las clases <code>hh-*</code> al mismo fichero, y reemplazando <code>injectLangBar()</code> + la inyección de <code>.masthead-rule</code> / <code>.site-logo-container</code> / <code>.site-nav</code> en <code>js/homepage.js</code> con una nueva función <code>injectHybridHeader()</code>. Los SVGs se convierten en template literals dentro de esa función.
+  </div>
+</div>
+
+</body>
+</html>

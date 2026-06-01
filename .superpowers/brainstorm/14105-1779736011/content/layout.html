@@ -1,0 +1,105 @@
+<h2>Portada — selector de idioma</h2>
+<p class="subtitle">3 opciones de layout. Haz clic en la que más te guste.</p>
+
+<style>
+  .mock-page { border-radius:8px; overflow:hidden; border:1px solid #ddd; background:#F6F3EC; font-family:'Georgia',serif; }
+  .mock-page__inner { display:flex; flex-direction:column; align-items:center; justify-content:center; padding:40px 24px; gap:24px; min-height:260px; }
+  .mock-logo { width:40px; height:40px; background:#1C1A17; border-radius:50%; opacity:.7; }
+  .mock-title { font-size:22px; font-weight:700; color:#1C1A17; letter-spacing:-0.5px; }
+  .mock-sub { font-size:10px; letter-spacing:3px; color:#5C5752; text-transform:uppercase; }
+  .mock-langs-row { display:flex; gap:12px; }
+  .mock-lang-btn { padding:10px 22px; font-size:13px; letter-spacing:2px; text-transform:uppercase; border:1px solid #1C1A17; background:transparent; color:#1C1A17; cursor:pointer; font-family:inherit; border-radius:2px; }
+  .mock-lang-btn.primary { background:#7A1C1C; color:#F6F3EC; border-color:#7A1C1C; }
+  .mock-lang-btn:not(.primary) { opacity:.7; }
+
+  /* B: split */
+  .mock-split { display:grid; grid-template-columns:1fr 1fr; min-height:260px; }
+  .mock-split__img { background: linear-gradient(135deg,#7A1C1C 0%,#3a0d0d 100%); display:flex; align-items:center; justify-content:center; color:#F6F3EC; font-size:11px; letter-spacing:2px; text-transform:uppercase; opacity:.85; }
+  .mock-split__right { display:flex; flex-direction:column; align-items:center; justify-content:center; gap:20px; padding:32px 24px; background:#F6F3EC; }
+
+  /* C: overlay */
+  .mock-overlay { position:relative; min-height:260px; background:linear-gradient(135deg,#2a1010 0%,#5a2020 50%,#7A1C1C 100%); display:flex; flex-direction:column; align-items:center; justify-content:center; gap:20px; }
+  .mock-overlay__text { color:#F6F3EC; }
+  .mock-overlay__title { font-size:22px; font-weight:700; letter-spacing:-0.5px; }
+  .mock-overlay__sub { font-size:9px; letter-spacing:3px; text-transform:uppercase; opacity:.7; }
+  .mock-lang-btn-light { padding:10px 22px; font-size:12px; letter-spacing:2px; text-transform:uppercase; border:1px solid rgba(246,243,236,.5); background:rgba(246,243,236,.12); color:#F6F3EC; font-family:'Georgia',serif; border-radius:2px; }
+  .mock-lang-btn-light.primary { background:rgba(246,243,236,.9); color:#7A1C1C; border-color:transparent; }
+</style>
+
+<div class="cards">
+
+  <!-- OPTION A -->
+  <div class="card" data-choice="a" onclick="toggleSelect(this)">
+    <div class="card-image">
+      <div class="mock-page">
+        <div class="mock-page__inner">
+          <div class="mock-logo"></div>
+          <div style="text-align:center">
+            <div class="mock-title">Bar León</div>
+            <div class="mock-sub">Albayzín · Granada · 1959</div>
+          </div>
+          <div class="mock-langs-row">
+            <button class="mock-lang-btn">ES</button>
+            <button class="mock-lang-btn primary">EN</button>
+            <button class="mock-lang-btn">FR</button>
+          </div>
+          <div style="font-size:9px;color:#5C5752;letter-spacing:1.5px">CHOOSE YOUR LANGUAGE</div>
+        </div>
+      </div>
+    </div>
+    <div class="card-body">
+      <h3>A — Centrado minimalista</h3>
+      <p>Logo, nombre y tres botones de idioma. Fondo crema, toda la atención en la elección. Limpio y acorde al tono del bar.</p>
+    </div>
+  </div>
+
+  <!-- OPTION B -->
+  <div class="card" data-choice="b" onclick="toggleSelect(this)">
+    <div class="card-image">
+      <div class="mock-page">
+        <div class="mock-split">
+          <div class="mock-split__img">foto del bar / azulejo</div>
+          <div class="mock-split__right">
+            <div style="text-align:center">
+              <div class="mock-title">Bar León</div>
+              <div class="mock-sub">Granada · 1959</div>
+            </div>
+            <div class="mock-langs-row" style="flex-direction:column;gap:8px;align-items:stretch">
+              <button class="mock-lang-btn primary" style="text-align:center">Español</button>
+              <button class="mock-lang-btn" style="text-align:center;opacity:.65">English</button>
+              <button class="mock-lang-btn" style="text-align:center;opacity:.65">Français</button>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="card-body">
+      <h3>B — Split foto + selección</h3>
+      <p>Imagen del bar a la izquierda, elección de idioma a la derecha. Nombres completos en lugar de siglas. Más visual y atmosférico.</p>
+    </div>
+  </div>
+
+  <!-- OPTION C -->
+  <div class="card" data-choice="c" onclick="toggleSelect(this)">
+    <div class="card-image">
+      <div class="mock-page" style="background:transparent">
+        <div class="mock-overlay">
+          <div class="mock-overlay__text" style="text-align:center">
+            <div class="mock-overlay__title">Bar León</div>
+            <div class="mock-overlay__sub">Albayzín · Granada · Desde 1959</div>
+          </div>
+          <div class="mock-langs-row">
+            <button class="mock-lang-btn-light">ES</button>
+            <button class="mock-lang-btn-light primary">EN</button>
+            <button class="mock-lang-btn-light">FR</button>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="card-body">
+      <h3>C — Fondo oscuro / overlay</h3>
+      <p>Toda la página es una imagen oscura del bar (o degradado granate), con el nombre y los idiomas encima en blanco. Más dramático e impactante.</p>
+    </div>
+  </div>
+
+</div>

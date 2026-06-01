@@ -1,0 +1,46 @@
+<h2>Tres enfoques posibles</h2>
+<p class="subtitle">Mismo destino, distinto nivel de ambición. Mi recomendación está marcada.</p>
+
+<div class="options">
+  <div class="option" data-choice="patch" onclick="toggleSelect(this)">
+    <div class="letter">A</div>
+    <div class="content">
+      <h3>Parche rápido <span style="font-size:0.75em;color:#888;font-weight:400">— ~1 semana</span></h3>
+      <p><strong>Admin:</strong> Panel móvil mínimo solo para los 3 casos: precio, horario, aviso. Autenticación por PIN simple + GitHub API directo.<br><br>
+      <strong>Frontend:</strong> Badges de "destacado" en platos seleccionados. Maridaje visible debajo del precio. Sin cambiar la estructura actual.<br><br>
+      <strong>Upselling:</strong> Strip fija de vinos/generosos al abrir la carta.</p>
+      <div class="pros-cons">
+        <div class="pros"><h4>A favor</h4><ul><li>Listo en días</li><li>Riesgo mínimo</li></ul></div>
+        <div class="cons"><h4>En contra</h4><ul><li>Dos admins (Decap + nuevo)</li><li>Sin wow real</li></ul></div>
+      </div>
+    </div>
+  </div>
+
+  <div class="option" data-choice="functional" onclick="toggleSelect(this)" style="border:2px solid #7A1C1C">
+    <div class="letter" style="background:#7A1C1C">B</div>
+    <div class="content">
+      <h3>Rediseño funcional ⭐ recomendado <span style="font-size:0.75em;color:#888;font-weight:400">— ~3 semanas</span></h3>
+      <p><strong>Admin:</strong> Panel móvil completo reemplaza Decap para las 3 acciones frecuentes. Decap se queda solo para cambios estructurales (añadir platos, editar descripciones). Login con GitHub OAuth existente + vista móvil simplificada.<br><br>
+      <strong>Frontend:</strong> Sección "Sabores de Andalucía" se convierte en spotlight visual propio (tarjetas con foto). Maridaje integrado. WhatsApp CTA visible. Upsell strip dinámica basada en datos.<br><br>
+      <strong>Upselling:</strong> Pairings como tarjetas visuales. "Para empezar" block de generosos/aperitivos. Badge de temporada/recomendado.</p>
+      <div class="pros-cons">
+        <div class="pros"><h4>A favor</h4><ul><li>Admin funciona en el móvil del dueño</li><li>Wow moments reales en carta</li><li>No rompe lo que funciona</li></ul></div>
+        <div class="cons"><h4>En contra</h4><ul><li>Más trabajo que A</li><li>Decap sigue siendo la fuente de verdad</li></ul></div>
+      </div>
+    </div>
+  </div>
+
+  <div class="option" data-choice="visual" onclick="toggleSelect(this)">
+    <div class="letter">C</div>
+    <div class="content">
+      <h3>Visual y emotivo <span style="font-size:0.75em;color:#888;font-weight:400">— ~6 semanas</span></h3>
+      <p><strong>Admin:</strong> Igual que B + editor inline de descripciones y fotos de plato desde el móvil.<br><br>
+      <strong>Frontend:</strong> Rediseño completo con lenguaje visual de cerámica andaluza (azul Fajalauza, terracota). Hero animado. Galería de platos con foto documental. Sección de historia visual.<br><br>
+      <strong>Upselling:</strong> Todo B más: animaciones de plato destacado, modo "para visitante" con guía de pedido, integración de reviews de Google inline.</p>
+      <div class="pros-cons">
+        <div class="pros"><h4>A favor</h4><ul><li>Experiencia premium</li><li>Diferenciación real</li></ul></div>
+        <div class="cons"><h4>En contra</h4><ul><li>Requiere fotos nuevas de calidad</li><li>Riesgo de sobrediseño</li><li>Esfuerzo alto</li></ul></div>
+      </div>
+    </div>
+  </div>
+</div>

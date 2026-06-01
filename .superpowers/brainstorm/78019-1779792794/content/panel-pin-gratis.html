@@ -1,0 +1,72 @@
+<h2>Panel gratis y fácil</h2>
+<p class="subtitle">Diseño propuesto: entrar con PIN privado, recordar este móvil y mantener GitHub solo como rescate técnico.</p>
+
+<div class="split">
+  <div class="mockup">
+    <div class="mockup-header">Entrada sin cuentas externas</div>
+    <div class="mockup-body">
+      <div style="display:grid; gap:14px; max-width:340px; margin:auto;">
+        <div style="font-size:34px; line-height:1; text-align:center;">Bar León</div>
+        <div class="label">Panel privado</div>
+        <div style="display:grid; grid-template-columns:repeat(6,1fr); gap:8px;">
+          <input class="mock-input" value="•" style="text-align:center;">
+          <input class="mock-input" value="•" style="text-align:center;">
+          <input class="mock-input" value="•" style="text-align:center;">
+          <input class="mock-input" value="•" style="text-align:center;">
+          <input class="mock-input" value="•" style="text-align:center;">
+          <input class="mock-input" value="•" style="text-align:center;">
+        </div>
+        <button class="mock-button" style="width:100%;">Entrar</button>
+        <p style="font-size:13px; color:#666; margin:0;">Recordar este dispositivo durante 30 días.</p>
+        <p style="font-size:12px; color:#888; margin:0;">Protegido contra robots con Cloudflare Turnstile.</p>
+      </div>
+    </div>
+  </div>
+
+  <div class="mockup">
+    <div class="mockup-header">Inicio del panel</div>
+    <div class="mockup-body">
+      <div style="display:grid; gap:12px;">
+        <div style="display:flex; justify-content:space-between; align-items:center;">
+          <strong>Hoy en la web</strong>
+          <span style="font-size:13px; color:#2D7A3A;">Todo guardado</span>
+        </div>
+        <div class="placeholder" style="height:auto; padding:14px; text-align:left;">
+          <strong>Aviso visible</strong><br>
+          Sin aviso activo
+        </div>
+        <div style="display:grid; grid-template-columns:1fr 1fr; gap:10px;">
+          <button class="mock-button">Menú del día</button>
+          <button class="mock-button">Precios</button>
+          <button class="mock-button">Horarios</button>
+          <button class="mock-button">Fotos</button>
+        </div>
+        <div class="placeholder" style="height:auto; padding:12px; text-align:left;">Acciones frecuentes arriba; listas largas y detalles solo cuando hagan falta.</div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="options">
+  <div class="option selected" data-choice="pin-device" onclick="toggleSelect(this)">
+    <div class="letter">A</div>
+    <div class="content">
+      <h3>PIN + dispositivo recordado</h3>
+      <p>Gratis, rápido y suficientemente claro para uso interno del bar.</p>
+    </div>
+  </div>
+  <div class="option" data-choice="pin-turnstile" onclick="toggleSelect(this)">
+    <div class="letter">B</div>
+    <div class="content">
+      <h3>PIN + Turnstile obligatorio</h3>
+      <p>Más protección contra intentos automáticos; sigue siendo gratis.</p>
+    </div>
+  </div>
+  <div class="option" data-choice="github-only" onclick="toggleSelect(this)">
+    <div class="letter">C</div>
+    <div class="content">
+      <h3>GitHub actual</h3>
+      <p>Más seguro pero demasiado técnico para el uso diario del dueño.</p>
+    </div>
+  </div>
+</div>

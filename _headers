@@ -2,6 +2,16 @@
 # CSP is NOT set globally to avoid header conflicts.
 # It is defined per path group so each route gets exactly one CSP.
 
+# ── STATIC ASSETS — aggressive browser caching ──────────────────────────────
+/assets/*
+  Cache-Control: public, max-age=31536000, immutable
+
+/css/*
+  Cache-Control: public, max-age=86400
+
+/js/*
+  Cache-Control: public, max-age=86400
+
 # ── GLOBAL — structural headers only (no CSP here) ─────────────────────────
 /*
   X-Content-Type-Options: nosniff

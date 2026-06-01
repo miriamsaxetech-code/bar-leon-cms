@@ -1,0 +1,298 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Bar León — Diseño integral</title>
+<style>
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  body { font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif; background: #1a1a1a; color: #f0ece3; padding: 24px 16px; }
+  h1 { font-family: Georgia, serif; font-size: 1.4rem; margin-bottom: 4px; color: #f0ece3; }
+  .sub { font-size: 0.85rem; color: #999; margin-bottom: 28px; }
+
+  .track { display: flex; flex-direction: column; gap: 20px; max-width: 860px; margin: 0 auto; }
+
+  .area { border: 1px solid #333; border-radius: 10px; overflow: hidden; }
+  .area-header { padding: 12px 16px; display: flex; align-items: center; gap: 10px; font-weight: 600; font-size: 0.9rem; border-bottom: 1px solid #333; }
+  .dot { width: 10px; height: 10px; border-radius: 50%; flex-shrink: 0; }
+  .dot-red { background: #7A1C1C; }
+  .dot-gold { background: #B8953F; }
+  .dot-blue { background: #2563EB; }
+  .area-body { padding: 16px; display: flex; flex-direction: column; gap: 12px; }
+
+  .feature { background: #242424; border-radius: 8px; padding: 14px; display: flex; gap: 14px; align-items: flex-start; }
+  .feature-icon { font-size: 1.6rem; flex-shrink: 0; width: 36px; text-align: center; }
+  .feature-text h3 { font-size: 0.9rem; color: #f0ece3; margin-bottom: 3px; }
+  .feature-text p { font-size: 0.8rem; color: #888; line-height: 1.5; }
+  .badge { display: inline-block; font-size: 0.68rem; background: #7A1C1C; color: #fff; border-radius: 4px; padding: 2px 6px; margin-left: 6px; vertical-align: middle; font-weight: 600; letter-spacing: 0.03em; }
+  .badge-gold { background: #7a5c1c; }
+  .badge-blue { background: #1d4ed8; }
+
+  /* MOCKUP PANELS */
+  .mockup-row { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; }
+  @media(max-width: 600px) { .mockup-row { grid-template-columns: 1fr; } }
+
+  .phone { background: #111; border: 2px solid #444; border-radius: 20px; padding: 12px 10px; max-width: 220px; margin: 0 auto; }
+  .phone-screen { background: #FAF8F2; border-radius: 12px; overflow: hidden; padding: 10px; }
+  .phone-screen .ph { font-family: Georgia, serif; font-size: 0.7rem; color: #1C1A17; }
+  .phone-screen .ph-small { font-size: 0.6rem; color: #666; }
+  .phone-screen .ph-price { font-size: 0.9rem; font-weight: 700; color: #7A1C1C; font-family: Georgia, serif; }
+
+  .card-dish { background: #FAF8F2; border-radius: 10px; padding: 12px; color: #1C1A17; }
+  .card-dish .dish-name { font-family: Georgia, serif; font-size: 0.85rem; font-weight: 700; margin-bottom: 2px; }
+  .card-dish .dish-desc { font-size: 0.72rem; color: #555; margin-bottom: 8px; line-height: 1.4; }
+  .card-dish .dish-price { font-size: 0.9rem; font-weight: 700; color: #7A1C1C; }
+  .card-dish .pairing-chip { display: inline-flex; align-items: center; gap: 4px; background: #f0e8d0; border: 1px solid #d4c098; border-radius: 20px; padding: 3px 8px; font-size: 0.65rem; color: #5a4200; margin-top: 6px; }
+  .card-dish .featured-chip { display: inline-flex; align-items: center; gap: 4px; background: #7A1C1C; color: #fff; border-radius: 20px; padding: 2px 7px; font-size: 0.62rem; margin-bottom: 4px; }
+
+  .admin-panel { background: #FAF8F2; border-radius: 10px; padding: 10px; color: #1C1A17; }
+  .admin-row { display: flex; justify-content: space-between; align-items: center; padding: 7px 0; border-bottom: 1px solid #e8e0d0; }
+  .admin-row:last-child { border-bottom: none; }
+  .admin-row .ar-name { font-size: 0.72rem; font-weight: 600; }
+  .admin-row .ar-price { font-size: 0.72rem; color: #7A1C1C; font-weight: 700; background: #f0e8d0; border-radius: 4px; padding: 2px 7px; }
+  .admin-header { font-family: Georgia, serif; font-size: 0.8rem; font-weight: 700; margin-bottom: 8px; color: #1C1A17; display: flex; justify-content: space-between; align-items: center; }
+  .admin-header span { font-size: 0.65rem; color: #7A1C1C; font-family: sans-serif; font-weight: 400; }
+  .admin-tabs { display: flex; gap: 4px; margin-bottom: 10px; }
+  .admin-tab { font-size: 0.65rem; padding: 4px 8px; border-radius: 6px; border: 1px solid #ddd; background: #fff; color: #666; cursor: pointer; }
+  .admin-tab.active { background: #7A1C1C; color: #fff; border-color: #7A1C1C; }
+
+  .carioca-card { background: #FAF8F2; border-radius: 10px; padding: 12px; color: #1C1A17; display: flex; gap: 10px; align-items: center; }
+  .carioca-img { width: 56px; height: 56px; border-radius: 8px; background: #e8d8b8; display: flex; align-items: center; justify-content: center; font-size: 1.6rem; flex-shrink: 0; }
+  .carioca-text { font-size: 0.72rem; line-height: 1.5; color: #444; font-style: italic; }
+  .carioca-text strong { font-style: normal; font-size: 0.7rem; color: #1C1A17; display: block; margin-bottom: 2px; }
+
+  .section-label { font-size: 0.72rem; text-transform: uppercase; letter-spacing: 0.08em; color: #7A1C1C; font-weight: 700; margin-bottom: 6px; }
+
+  .timeline-item { display: flex; gap: 10px; align-items: flex-start; }
+  .timeline-dot { width: 8px; height: 8px; border-radius: 50%; background: #B8953F; flex-shrink: 0; margin-top: 5px; }
+  .timeline-line { width: 1px; background: #e0d4b8; margin-left: 3px; height: 30px; }
+</style>
+</head>
+<body>
+
+<h1>Bar León — Plan integral de diseño</h1>
+<p class="sub">Enfoque B · 3 áreas · Cariocas integradas</p>
+
+<div class="track">
+
+  <!-- ÁREA 1: WOW MOMENTS -->
+  <div class="area">
+    <div class="area-header">
+      <div class="dot dot-red"></div>
+      Wow moments — Experiencia del cliente
+    </div>
+    <div class="area-body">
+
+      <div class="feature">
+        <div class="feature-icon">🎨</div>
+        <div class="feature-text">
+          <h3>Caricaturas como identidad visual <span class="badge">NUEVO</span></h3>
+          <p>La tarjeta de Antonio León Mena (1959) ancla la sección Historia. "La Leonera" del 60 aniversario abre la Hemeroteca. No son fotos decorativas — son el corazón del relato.</p>
+        </div>
+      </div>
+
+      <div style="padding: 0 4px;">
+        <div class="section-label">Vista previa — Sección Historia</div>
+        <div class="card-dish" style="display:flex; gap:12px; align-items:center;">
+          <div style="width:64px; height:64px; background:#e8d8b8; border-radius:8px; display:flex; align-items:center; justify-content:center; font-size:2rem; flex-shrink:0;">🎭</div>
+          <div>
+            <div class="featured-chip">Desde 1959</div>
+            <div class="dish-name">Antonio León Mena</div>
+            <div class="dish-desc">Fundador. Calle Pan, 3. Tres generaciones en la misma barra.</div>
+          </div>
+        </div>
+      </div>
+
+      <div class="feature">
+        <div class="feature-icon">🦁</div>
+        <div class="feature-text">
+          <h3>Slot de carioca rotativa <span class="badge">NUEVO</span></h3>
+          <p>Un bloque en la homepage que muestra una carioca activa — editable desde el panel de control. Seasonal: Semana Santa, verano, Corpus. El dueño sube la imagen y el texto; la web la publica.</p>
+        </div>
+      </div>
+
+      <div style="padding: 0 4px;">
+        <div class="section-label">Vista previa — Carioca en homepage</div>
+        <div class="carioca-card">
+          <div class="carioca-img">🎭</div>
+          <div>
+            <div class="carioca-text">
+              <strong>La Leonera · Calle Pan, 1</strong>
+              "Aquí no hay clientes, solo amigos.<br>Y algún que otro despistado con maleta."
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="feature">
+        <div class="feature-icon">✨</div>
+        <div class="feature-text">
+          <h3>Sabores de Andalucía — Spotlight section <span class="badge">MEJORADO</span></h3>
+          <p>Sale del acordeón genérico. Pasa a ser una sección propia con tarjetas visuales, descripción de cada plato y maridaje integrado. Primera cosa que ves al abrir la carta.</p>
+        </div>
+      </div>
+
+    </div>
+  </div>
+
+  <!-- ÁREA 2: UPSELLING -->
+  <div class="area">
+    <div class="area-header">
+      <div class="dot dot-gold"></div>
+      Upselling — Aumentar el ticket medio
+    </div>
+    <div class="area-body">
+
+      <div class="feature">
+        <div class="feature-icon">🍷</div>
+        <div class="feature-text">
+          <h3>Maridaje como tarjeta visual <span class="badge badge-gold">CLAVE</span></h3>
+          <p>Cada plato con pairing muestra una chip "Marida con: Calvente Guindalera · 18€" tocable. Enlaza directo a ese vino en la Carta Barra. Convierte el dato existente en acción de venta.</p>
+        </div>
+      </div>
+
+      <div style="padding: 0 4px;">
+        <div class="section-label">Vista previa — Dish card con pairing</div>
+        <div class="card-dish">
+          <div class="featured-chip">⭐ Especialidad</div>
+          <div class="dish-name">Carne de monte · ciervo en adobo</div>
+          <div class="dish-desc">Ciervo adobado con especias. Media ración o ración completa.</div>
+          <div style="display:flex; justify-content:space-between; align-items:center;">
+            <div class="dish-price">Media 10,50€ · Ración 13,50€</div>
+          </div>
+          <div class="pairing-chip">🍷 Marida con Ribera del Duero · Muñana Rojo</div>
+        </div>
+      </div>
+
+      <div class="feature">
+        <div class="feature-icon">🥂</div>
+        <div class="feature-text">
+          <h3>Bloque "Para empezar" <span class="badge badge-gold">NUEVO</span></h3>
+          <p>Antes de la carta de comida, un bloque corto que pone en valor fino, manzanilla, vermut y Alhambra Reserva. "La barra, antes de la mesa." Precio de copa visible. Empuja el aperitivo.</p>
+        </div>
+      </div>
+
+      <div class="feature">
+        <div class="feature-icon">📌</div>
+        <div class="feature-text">
+          <h3>Badges de plato: Recomendado / Temporada / Casa <span class="badge badge-gold">NUEVO</span></h3>
+          <p>El campo <code>featured</code> ya existe en venue.json. Añadimos 3 tipos de badge visual. El dueño los activa desde el admin. Guía al visitante hacia los platos clave sin texto extra.</p>
+        </div>
+      </div>
+
+      <div class="feature">
+        <div class="feature-icon">📲</div>
+        <div class="feature-text">
+          <h3>CTA de WhatsApp flotante <span class="badge badge-gold">NUEVO</span></h3>
+          <p>Botón fijo en carta y homepage: "Reservar mesa · WhatsApp". Número ya en venue.json (+34 696 948 630). Cero fricción para el cliente que decide en móvil.</p>
+        </div>
+      </div>
+
+    </div>
+  </div>
+
+  <!-- ÁREA 3: ADMIN PANEL -->
+  <div class="area">
+    <div class="area-header">
+      <div class="dot dot-blue"></div>
+      Panel de control — Admin móvil sin fricción
+    </div>
+    <div class="area-body">
+
+      <div class="feature">
+        <div class="feature-icon">⚡</div>
+        <div class="feature-text">
+          <h3>Panel rápido en <code>/admin-quick/</code> <span class="badge badge-blue">NUEVO</span></h3>
+          <p>Interfaz móvil separada de Decap. Misma autenticación GitHub OAuth. Tres pestañas: Precios · Horarios · Avisos. Cada acción son 3 toques máximo. Decap sigue para ediciones estructurales.</p>
+        </div>
+      </div>
+
+      <div style="padding: 0 4px;">
+        <div class="section-label">Vista previa — Admin móvil (Precios)</div>
+        <div class="phone">
+          <div class="phone-screen">
+            <div class="admin-header">Panel León <span>✓ Conectado</span></div>
+            <div class="admin-tabs">
+              <div class="admin-tab active">Precios</div>
+              <div class="admin-tab">Horarios</div>
+              <div class="admin-tab">Aviso</div>
+            </div>
+            <div class="admin-row">
+              <div class="ar-name">Callos</div>
+              <div class="ar-price">Media 7,50€</div>
+            </div>
+            <div class="admin-row">
+              <div class="ar-name">Carne de monte</div>
+              <div class="ar-price">Media 10,50€</div>
+            </div>
+            <div class="admin-row">
+              <div class="ar-name">Riñones al Jerez</div>
+              <div class="ar-price">Media 9,00€</div>
+            </div>
+            <div class="admin-row">
+              <div class="ar-name">Tortilla Sacromonte</div>
+              <div class="ar-price">10,00€</div>
+            </div>
+            <div style="margin-top:10px; background:#7A1C1C; color:#fff; text-align:center; border-radius:6px; padding:7px; font-size:0.72rem; font-weight:600;">Guardar cambios</div>
+          </div>
+        </div>
+      </div>
+
+      <div class="feature">
+        <div class="feature-icon">🖼️</div>
+        <div class="feature-text">
+          <h3>Gestión de cariocas desde el panel <span class="badge badge-blue">NUEVO</span></h3>
+          <p>Nueva pestaña "Carioca" en el admin. El dueño sube una imagen + texto corto. Activa/desactiva. La web la muestra automáticamente. Sin GitHub, sin commits, sin YAML.</p>
+        </div>
+      </div>
+
+    </div>
+  </div>
+
+  <!-- RESUMEN TÉCNICO -->
+  <div class="area" style="border-color:#444">
+    <div class="area-header" style="color:#aaa">
+      <div class="dot" style="background:#555"></div>
+      Stack técnico — sin romper lo que funciona
+    </div>
+    <div class="area-body">
+      <div style="display:grid; grid-template-columns:1fr 1fr; gap:10px;">
+        <div class="feature" style="background:#1a1a1a;">
+          <div class="feature-icon" style="font-size:1.2rem;">📁</div>
+          <div class="feature-text">
+            <h3 style="font-size:0.8rem;">venue.json</h3>
+            <p>Añadir campos: <code>cariocas[]</code>, badge type en dishes. Sin cambiar arquitectura.</p>
+          </div>
+        </div>
+        <div class="feature" style="background:#1a1a1a;">
+          <div class="feature-icon" style="font-size:1.2rem;">⚙️</div>
+          <div class="feature-text">
+            <h3 style="font-size:0.8rem;">Cloudflare Function</h3>
+            <p>Nuevo endpoint <code>/api/admin-save</code> que escribe en GitHub API. Token en env var.</p>
+          </div>
+        </div>
+        <div class="feature" style="background:#1a1a1a;">
+          <div class="feature-icon" style="font-size:1.2rem;">📱</div>
+          <div class="feature-text">
+            <h3 style="font-size:0.8rem;">admin-quick/</h3>
+            <p>HTML/CSS/JS vanilla. Mobile-first. OAuth reutilizado. Sin dependencias.</p>
+          </div>
+        </div>
+        <div class="feature" style="background:#1a1a1a;">
+          <div class="feature-icon" style="font-size:1.2rem;">🎨</div>
+          <div class="feature-text">
+            <h3 style="font-size:0.8rem;">carta.js + style.css</h3>
+            <p>Spotlight section, pairing chips, badges, WhatsApp CTA, carioca block.</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+</div>
+
+<script>
+// No interaction needed — informational overview
+</script>
+</body>
+</html>

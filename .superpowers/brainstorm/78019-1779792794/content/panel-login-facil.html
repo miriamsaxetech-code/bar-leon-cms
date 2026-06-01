@@ -1,0 +1,73 @@
+<h2>Panel fácil para Bar León</h2>
+<p class="subtitle">Primera propuesta: quitar fricción al entrar y convertir el panel en acciones claras de móvil.</p>
+
+<div class="split">
+  <div class="mockup">
+    <div class="mockup-header">Entrada recomendada</div>
+    <div class="mockup-body">
+      <div style="display:grid; gap:14px; max-width:360px; margin:auto;">
+        <div style="font-size:38px; line-height:1; text-align:center;">Bar León</div>
+        <div class="label">Acceso privado</div>
+        <input class="mock-input" value="+34 600 000 000" aria-label="Movil">
+        <button class="mock-button" style="width:100%;">Recibir código</button>
+        <div style="display:grid; grid-template-columns:repeat(6,1fr); gap:6px;">
+          <input class="mock-input" value="4" style="text-align:center;">
+          <input class="mock-input" value="1" style="text-align:center;">
+          <input class="mock-input" value="8" style="text-align:center;">
+          <input class="mock-input" value="2" style="text-align:center;">
+          <input class="mock-input" value="9" style="text-align:center;">
+          <input class="mock-input" value="6" style="text-align:center;">
+        </div>
+        <p style="font-size:13px; color:#666; margin:0;">Solo móviles autorizados. Sesión recordada en este dispositivo.</p>
+      </div>
+    </div>
+  </div>
+
+  <div class="mockup">
+    <div class="mockup-header">Panel simplificado</div>
+    <div class="mockup-body">
+      <div style="display:grid; gap:12px;">
+        <div style="display:flex; justify-content:space-between; align-items:center;">
+          <strong>Hoy en la web</strong>
+          <span style="font-size:13px; color:#2D7A3A;">Guardado</span>
+        </div>
+        <div class="placeholder" style="height:auto; padding:14px; text-align:left;">
+          <strong>Menú del día</strong><br>
+          12,50 € · activo · Lunes, martes, jueves y viernes
+        </div>
+        <div style="display:grid; grid-template-columns:1fr 1fr; gap:10px;">
+          <button class="mock-button">Cambiar precio</button>
+          <button class="mock-button">Editar aviso</button>
+          <button class="mock-button">Horario especial</button>
+          <button class="mock-button">Subir foto</button>
+        </div>
+        <div class="label">Cambios frecuentes</div>
+        <div class="placeholder" style="height:auto; padding:12px; text-align:left;">Platos y bebidas con buscador grande, botones de disponible/agotado y guardar fijo.</div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="options">
+  <div class="option selected" data-choice="whatsapp-sms" onclick="toggleSelect(this)">
+    <div class="letter">A</div>
+    <div class="content">
+      <h3>Móvil autorizado + código</h3>
+      <p>El usuario escribe su número, recibe un código por WhatsApp o SMS, y entra sin GitHub.</p>
+    </div>
+  </div>
+  <div class="option" data-choice="pin-local" onclick="toggleSelect(this)">
+    <div class="letter">B</div>
+    <div class="content">
+      <h3>Móvil + PIN fijo</h3>
+      <p>Más barato, pero menos seguro y peor si el PIN se comparte o se filtra.</p>
+    </div>
+  </div>
+  <div class="option" data-choice="github-backup" onclick="toggleSelect(this)">
+    <div class="letter">C</div>
+    <div class="content">
+      <h3>GitHub oculto como respaldo</h3>
+      <p>Mantenemos GitHub solo para administración técnica o emergencia.</p>
+    </div>
+  </div>
+</div>
