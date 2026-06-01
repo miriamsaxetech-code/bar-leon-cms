@@ -354,6 +354,7 @@ function createCatalogRow(group, item) {
     prices.appendChild(wrap);
   });
   main.appendChild(prices);
+  main.appendChild(createAllergenSelector(group, item));
 
   const actions = document.createElement('div');
   actions.className = 'catalog-row__actions';
@@ -452,6 +453,8 @@ function bindPreciosEdit() {
       item.category_id = target.value;
     } else if (action === 'available') {
       item.available = target.checked;
+    } else if (action === 'allergen') {
+      setPanelItemAllergen(state, collection, id, target.dataset.allergen, target.checked);
     }
     markDirty();
   });
@@ -464,6 +467,46 @@ function bindPreciosEdit() {
       // Re-bind (el contenedor se reemplaza)
     });
   }
+}
+
+function createAllergenSelector(group, item) {
+  const defs = Array.isArray(state.allergens) ? state.allergens : [];
+  const selected = new Set(Array.isArray(item.allergens) ? item.allergens : []);
+  const details = document.createElement('details');
+  details.className = 'catalog-allergens';
+
+  const summary = document.createElement('summary');
+  summary.textContent = `Alérgenos (${selected.size})`;
+  details.appendChild(summary);
+
+  const grid = document.createElement('div');
+  grid.className = 'catalog-allergens__grid';
+  defs.forEach(def => {
+    const label = document.createElement('label');
+    label.className = 'catalog-allergen-option';
+    const input = document.createElement('input');
+    input.type = 'checkbox';
+    input.checked = selected.has(def.id);
+    input.dataset.action = 'allergen';
+    input.dataset.collection = group.collection;
+    input.dataset.id = item.id;
+    input.dataset.allergen = def.id;
+    const text = document.createElement('span');
+    text.textContent = def.label && def.label.es ? def.label.es : def.id;
+    label.appendChild(input);
+    label.appendChild(text);
+    grid.appendChild(label);
+  });
+
+  if (!defs.length) {
+    const empty = document.createElement('p');
+    empty.className = 'empty-state empty-state--compact';
+    empty.textContent = 'No hay catálogo de alérgenos.';
+    grid.appendChild(empty);
+  }
+
+  details.appendChild(grid);
+  return details;
 }
 
 function addCatalogItem(collection) {
@@ -546,6 +589,7 @@ function createPanelItem(collection, values, existingIds) {
       price_glass: parsePanelEuro(values.price_glass || values.price || ''),
       price_bottle: parsePanelEuro(values.price_bottle || ''),
       available: true,
+      allergens: [],
     };
   }
 
@@ -556,6 +600,7 @@ function createPanelItem(collection, values, existingIds) {
       price: values.price || '',
       category_id: values.category_id || '',
       available: true,
+      allergens: [],
     };
   }
 
@@ -566,6 +611,7 @@ function createPanelItem(collection, values, existingIds) {
     price: values.price || '',
     category_id: values.category_id || '',
     available: true,
+    allergens: [],
   };
 }
 
@@ -588,6 +634,19 @@ function setPanelItemAvailable(panelState, collection, id, available) {
     : null;
   if (!item) return false;
   item.available = available;
+  return true;
+}
+
+function setPanelItemAllergen(panelState, collection, id, allergenId, present) {
+  const item = Array.isArray(panelState[collection])
+    ? panelState[collection].find(entry => entry.id === id)
+    : null;
+  if (!item || !allergenId) return false;
+  if (!Array.isArray(item.allergens)) item.allergens = [];
+  const next = new Set(item.allergens);
+  if (present) next.add(allergenId);
+  else next.delete(allergenId);
+  item.allergens = Array.from(next);
   return true;
 }
 
@@ -1529,6 +1588,7 @@ if (typeof window !== 'undefined') {
     addPanelItem,
     deletePanelItem,
     setPanelItemAvailable,
+    setPanelItemAllergen,
     splitPanelListText,
     joinPanelListItems,
   };

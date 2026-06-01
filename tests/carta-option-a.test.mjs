@@ -52,6 +52,9 @@ documentStub.body.appendChild = function appendChild(child) {
 };
 
 const venue = JSON.parse(await fs.readFile('data/venue.json', 'utf8'));
+if (venue.dishes && venue.dishes[0]) {
+  venue.dishes[0].allergens = ['gluten', 'eggs'];
+}
 const source = await fs.readFile('js/carta.js', 'utf8');
 
 const context = {
@@ -103,6 +106,9 @@ assert.match(html, /loading="lazy"/);
 assert.match(html, /Vinos de Granada/);
 assert.match(html, /Cervezas/);
 assert.match(html, /pairing-chip/);
+assert.match(html, /allergen-list/);
+assert.match(html, /GLU/);
+assert.match(html, /HUE/);
 assert.match(html, /vino de altura|crianza de solera andaluza|salitre de Cádiz/);
 assert.match(html, /D\.O\. Granada|D\.O\. Jerez|D\.O\. Manzanilla-Sanlúcar/);
 assert.doesNotMatch(html, /vino granadino|local Granada|vin local de Grenade/);

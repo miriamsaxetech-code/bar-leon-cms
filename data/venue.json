@@ -3766,5 +3766,189 @@
     "menu_del_dia": true,
     "restaurant_open": true,
     "bar_open": true
-  }
+  },
+  "allergens": [
+    {
+      "id": "gluten",
+      "label": {
+        "es": "Gluten",
+        "en": "Gluten",
+        "fr": "Gluten"
+      },
+      "short": {
+        "es": "GLU",
+        "en": "GLU",
+        "fr": "GLU"
+      }
+    },
+    {
+      "id": "crustaceans",
+      "label": {
+        "es": "Crustáceos",
+        "en": "Crustaceans",
+        "fr": "Crustacés"
+      },
+      "short": {
+        "es": "CRU",
+        "en": "CRU",
+        "fr": "CRU"
+      }
+    },
+    {
+      "id": "eggs",
+      "label": {
+        "es": "Huevos",
+        "en": "Eggs",
+        "fr": "Œufs"
+      },
+      "short": {
+        "es": "HUE",
+        "en": "EGG",
+        "fr": "ŒUF"
+      }
+    },
+    {
+      "id": "fish",
+      "label": {
+        "es": "Pescado",
+        "en": "Fish",
+        "fr": "Poisson"
+      },
+      "short": {
+        "es": "PES",
+        "en": "FSH",
+        "fr": "POI"
+      }
+    },
+    {
+      "id": "peanuts",
+      "label": {
+        "es": "Cacahuetes",
+        "en": "Peanuts",
+        "fr": "Arachides"
+      },
+      "short": {
+        "es": "CAC",
+        "en": "PNT",
+        "fr": "ARA"
+      }
+    },
+    {
+      "id": "soybeans",
+      "label": {
+        "es": "Soja",
+        "en": "Soybeans",
+        "fr": "Soja"
+      },
+      "short": {
+        "es": "SOJ",
+        "en": "SOY",
+        "fr": "SOJ"
+      }
+    },
+    {
+      "id": "milk",
+      "label": {
+        "es": "Leche",
+        "en": "Milk",
+        "fr": "Lait"
+      },
+      "short": {
+        "es": "LEC",
+        "en": "MLK",
+        "fr": "LAI"
+      }
+    },
+    {
+      "id": "nuts",
+      "label": {
+        "es": "Frutos de cáscara",
+        "en": "Tree nuts",
+        "fr": "Fruits à coque"
+      },
+      "short": {
+        "es": "FC",
+        "en": "NUT",
+        "fr": "FAC"
+      }
+    },
+    {
+      "id": "celery",
+      "label": {
+        "es": "Apio",
+        "en": "Celery",
+        "fr": "Céleri"
+      },
+      "short": {
+        "es": "API",
+        "en": "CEL",
+        "fr": "CEL"
+      }
+    },
+    {
+      "id": "mustard",
+      "label": {
+        "es": "Mostaza",
+        "en": "Mustard",
+        "fr": "Moutarde"
+      },
+      "short": {
+        "es": "MOS",
+        "en": "MUS",
+        "fr": "MOU"
+      }
+    },
+    {
+      "id": "sesame",
+      "label": {
+        "es": "Sésamo",
+        "en": "Sesame",
+        "fr": "Sésame"
+      },
+      "short": {
+        "es": "SES",
+        "en": "SES",
+        "fr": "SES"
+      }
+    },
+    {
+      "id": "sulphites",
+      "label": {
+        "es": "Sulfitos",
+        "en": "Sulphites",
+        "fr": "Sulfites"
+      },
+      "short": {
+        "es": "SUL",
+        "en": "SUL",
+        "fr": "SUL"
+      }
+    },
+    {
+      "id": "lupin",
+      "label": {
+        "es": "Altramuces",
+        "en": "Lupin",
+        "fr": "Lupin"
+      },
+      "short": {
+        "es": "ALT",
+        "en": "LUP",
+        "fr": "LUP"
+      }
+    },
+    {
+      "id": "molluscs",
+      "label": {
+        "es": "Moluscos",
+        "en": "Molluscs",
+        "fr": "Mollusques"
+      },
+      "short": {
+        "es": "MOL",
+        "en": "MOL",
+        "fr": "MOL"
+      }
+    }
+  ]
 }

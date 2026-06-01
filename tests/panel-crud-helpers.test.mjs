@@ -37,6 +37,7 @@ assert.equal(JSON.stringify(dish.name), JSON.stringify({ es: 'Tapa Nueva', en: '
 assert.equal(dish.price, '6,50');
 assert.equal(dish.category_id, 'tapas');
 assert.equal(dish.available, true);
+assert.equal(JSON.stringify(dish.allergens), JSON.stringify([]));
 
 const wine = api.createPanelItem('wines', {
   name: 'Vino Nuevo',
@@ -54,6 +55,13 @@ assert.equal(state.dishes[0].id, 'tapa-nueva-2');
 
 api.setPanelItemAvailable(state, 'dishes', 'tapa-nueva-2', false);
 assert.equal(state.dishes[0].available, false);
+
+api.setPanelItemAllergen(state, 'dishes', 'tapa-nueva-2', 'gluten', true);
+api.setPanelItemAllergen(state, 'dishes', 'tapa-nueva-2', 'milk', true);
+assert.equal(JSON.stringify(state.dishes[0].allergens), JSON.stringify(['gluten', 'milk']));
+
+api.setPanelItemAllergen(state, 'dishes', 'tapa-nueva-2', 'gluten', false);
+assert.equal(JSON.stringify(state.dishes[0].allergens), JSON.stringify(['milk']));
 
 api.deletePanelItem(state, 'dishes', 'tapa-nueva-2');
 assert.equal(state.dishes.length, 0);

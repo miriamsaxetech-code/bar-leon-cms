@@ -457,6 +457,50 @@ body {
   gap: 10px;
 }
 
+.catalog-allergens {
+  border: 1px solid var(--border);
+  border-radius: var(--radius-sm);
+  background: var(--bg);
+  padding: 0;
+}
+
+.catalog-allergens summary {
+  cursor: pointer;
+  color: var(--ink-2);
+  font-size: 0.84rem;
+  font-weight: 700;
+  min-height: 40px;
+  padding: 10px;
+}
+
+.catalog-allergens__grid {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 6px;
+  padding: 0 10px 10px;
+}
+
+.catalog-allergen-option {
+  display: inline-flex;
+  align-items: center;
+  gap: 7px;
+  background: var(--white);
+  border: 1px solid var(--border);
+  border-radius: var(--radius-sm);
+  color: var(--ink);
+  font-size: 0.78rem;
+  font-weight: 600;
+  min-height: 38px;
+  padding: 6px 8px;
+}
+
+.catalog-allergen-option input {
+  accent-color: var(--accent);
+  width: 18px;
+  height: 18px;
+  flex-shrink: 0;
+}
+
 .catalog-active {
   display: inline-flex;
   align-items: center;

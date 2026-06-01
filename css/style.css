@@ -1995,6 +1995,35 @@ h2 {
   transition: background 0.25s ease;
 }
 
+/* ─── ALLERGEN CHIPS ─── */
+.allergen-list {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 5px;
+  margin-top: 8px;
+}
+
+.allergen-list__label {
+  color: var(--muted);
+  font-family: system-ui, -apple-system, sans-serif;
+  font-size: 0.62rem;
+  font-weight: 700;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+}
+
+.allergen-chip {
+  border: 1px solid rgba(29, 77, 133, 0.28);
+  border-radius: 999px;
+  color: var(--accent);
+  font-family: system-ui, -apple-system, sans-serif;
+  font-size: 0.62rem;
+  font-weight: 700;
+  line-height: 1;
+  padding: 4px 6px;
+}
+
 /* ─── PARA EMPEZAR ─── */
 .para-empezar {
   margin: 2rem 0 2.5rem;
