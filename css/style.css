@@ -596,6 +596,10 @@ h2 {
   grid-template-columns: repeat(4, minmax(0, 1fr));
 }
 
+.menu-switch--five {
+  grid-template-columns: repeat(5, minmax(0, 1fr));
+}
+
 .menu-switch-btn {
   appearance: none;
   background: transparent;

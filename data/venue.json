@@ -65,40 +65,232 @@
   },
   "chalkboard": {
     "group1": [
-      { "es": "Cordobés (carne en salsa)", "en": "Córdoba Pork Stew",        "fr": "Ragoût à la Cordouane",      "media": "9,00",  "racion": "12,50" },
-      { "es": "Riñones",                   "en": "Veal Kidneys",              "fr": "Rognons",                    "media": "9,00",  "racion": "12,50" },
-      { "es": "Callos",                    "en": "Tripe Stew",                "fr": "Tripes",                     "media": "7,50",  "racion": "10,00" },
-      { "es": "Criadillas",                "en": "Bull's Testicles",          "fr": "Amourettes",                 "media": "7,50",  "racion": "10,00" },
-      { "es": "Carne de monte (ciervo)",   "en": "Wild Venison",              "fr": "Venaison",                   "media": "10,50", "racion": "13,50" },
-      { "es": "Sesos",                     "en": "Braised Brains",            "fr": "Cervelle",                   "media": "7,50",  "racion": "10,00" },
-      { "es": "Pinchitos (unidad)",        "en": "Pinchitos (each)",          "fr": "Pinchitos (unité)",          "media": null,    "racion": "4,50 unid." },
-      { "es": "Flamenquín (unidad)",       "en": "Flamenquín (each)",         "fr": "Flamenquín (unité)",         "media": null,    "racion": "5,00 unid." },
-      { "es": "Croquetas (unidad)",        "en": "Croquettes (each)",         "fr": "Croquettes (unité)",         "media": null,    "racion": "1,50 unid." },
-      { "es": "Lomo salteado",             "en": "Sautéed Pork Loin",         "fr": "Longe sautée",               "media": "10,50", "racion": "14,00" },
-      { "es": "San Jacobo",                "en": "Chicken Kiev-style",        "fr": "San Jacobo",                 "media": null,    "racion": "15,00" },
-      { "es": "Entrecot de ternera",       "en": "Beef Entrecôte",            "fr": "Entrecôte de bœuf",          "media": null,    "racion": "19,00" },
-      { "es": "Solomillo de cerdo",        "en": "Pork Tenderloin",           "fr": "Filet de porc",              "media": null,    "racion": "14,50" },
-      { "es": "Chuletas de cordero",       "en": "Lamb Chops (each)",         "fr": "Côtelettes d'agneau",        "media": null,    "racion": "2,50 unid." },
-      { "es": "Jamón serrano",             "en": "Cured Ham",                 "fr": "Jambon serrano",             "media": "10,00", "racion": "13,00" },
-      { "es": "Queso manchego",            "en": "Manchego Cheese",           "fr": "Fromage manchego",           "media": "8,00",  "racion": "11,00" }
+      {
+        "es": "Cordobés (carne en salsa)",
+        "en": "Córdoba Pork Stew",
+        "fr": "Ragoût à la Cordouane",
+        "media": "10,00",
+        "racion": "14,00"
+      },
+      {
+        "es": "Riñones",
+        "en": "Veal Kidneys",
+        "fr": "Rognons",
+        "media": "10,00",
+        "racion": "14,00"
+      },
+      {
+        "es": "Callos",
+        "en": "Tripe Stew",
+        "fr": "Tripes",
+        "media": "8,00",
+        "racion": "11,50"
+      },
+      {
+        "es": "Criadillas",
+        "en": "Bull's Testicles",
+        "fr": "Amourettes",
+        "media": "8,00",
+        "racion": "11,50"
+      },
+      {
+        "es": "Carne de monte (ciervo)",
+        "en": "Wild Venison",
+        "fr": "Venaison",
+        "media": "11,00",
+        "racion": "15,00"
+      },
+      {
+        "es": "Sesos",
+        "en": "Braised Brains",
+        "fr": "Cervelle",
+        "media": "8,00",
+        "racion": "11,50"
+      },
+      {
+        "es": "Pinchitos (unidad)",
+        "en": "Pinchitos (each)",
+        "fr": "Pinchitos (unité)",
+        "media": null,
+        "racion": "5,00 unid."
+      },
+      {
+        "es": "Flamenquín (unidad)",
+        "en": "Flamenquín (each)",
+        "fr": "Flamenquín (unité)",
+        "media": null,
+        "racion": "5,50 unid."
+      },
+      {
+        "es": "Croquetas (unidad)",
+        "en": "Croquettes (each)",
+        "fr": "Croquettes (unité)",
+        "media": null,
+        "racion": "2,00 unid."
+      },
+      {
+        "es": "Lomo salteado",
+        "en": "Sautéed Pork Loin",
+        "fr": "Longe sautée",
+        "media": "11,00",
+        "racion": "15,00"
+      },
+      {
+        "es": "San Jacobo",
+        "en": "Chicken Kiev-style",
+        "fr": "San Jacobo",
+        "media": null,
+        "racion": "16,50"
+      },
+      {
+        "es": "Entrecot de ternera",
+        "en": "Beef Entrecôte",
+        "fr": "Entrecôte de bœuf",
+        "media": null,
+        "racion": "22,50"
+      },
+      {
+        "es": "Solomillo de cerdo",
+        "en": "Pork Tenderloin",
+        "fr": "Filet de porc",
+        "media": null,
+        "racion": "16,50"
+      },
+      {
+        "es": "Chuletas de cordero",
+        "en": "Lamb Chops (each)",
+        "fr": "Côtelettes d'agneau",
+        "media": null,
+        "racion": "3,00 unid."
+      },
+      {
+        "es": "Jamón cebo ibérico (50%)",
+        "en": "Iberian Cured Ham (50%)",
+        "fr": "Jambon ibérique (50%)",
+        "media": "10,50",
+        "racion": "15,00"
+      },
+      {
+        "es": "Queso curado",
+        "en": "Cured Cheese",
+        "fr": "Fromage affiné",
+        "media": "9,00",
+        "racion": "12,00"
+      }
     ],
     "group2": [
-      { "es": "Berenjenas (con miel)",          "en": "Aubergines with Honey",     "fr": "Aubergines au miel",         "media": "8,00",  "racion": "11,00" },
-      { "es": "Ensaladilla rusa",               "en": "Russian Salad",             "fr": "Salade russe",               "media": "5,50",  "racion": "8,00"  },
-      { "es": "Huevos fritos, jamón y papas",   "en": "Fried Eggs, Ham & Potatoes","fr": "Œufs frits, jambon, pommes", "media": null,    "racion": "13,00" },
-      { "es": "Habas, jamón y huevo",           "en": "Broad Beans, Ham & Egg",    "fr": "Fèves, jambon et œuf",       "media": null,    "racion": "13,00" },
-      { "es": "Champiñón",                      "en": "Sautéed Mushrooms",         "fr": "Champignons sautés",         "media": "7,50",  "racion": "10,00" },
-      { "es": "Champiñón con gambas",           "en": "Mushrooms with Prawns",     "fr": "Champignons aux crevettes",  "media": "11,00", "racion": "14,50" },
-      { "es": "Almejas",                        "en": "Clams",                     "fr": "Palourdes",                  "media": "9,50",  "racion": "13,00" },
-      { "es": "Gambas fritas",                  "en": "Fried Prawns",              "fr": "Crevettes frites",           "media": "10,50", "racion": "14,00" },
-      { "es": "Gambas pil pil",                 "en": "Prawns Pil Pil",            "fr": "Crevettes pil pil",          "media": "10,50", "racion": "14,00" },
-      { "es": "Calamares fritos",               "en": "Fried Calamari",            "fr": "Calamars frits",             "media": "9,50",  "racion": "13,00" },
-      { "es": "Cazón en adobo",                 "en": "Marinated Dogfish",         "fr": "Cazón mariné",               "media": "9,50",  "racion": "13,00" },
-      { "es": "Chopos fritos (puntillitas)",     "en": "Baby Cuttlefish, Fried",    "fr": "Petites seiches frites",     "media": "10,50", "racion": "14,00" },
-      { "es": "Boquerones fritos",              "en": "Fried Anchovies",           "fr": "Anchois frits",              "media": "9,50",  "racion": "13,00" },
-      { "es": "Fritura de pescado",             "en": "Fried Fish Platter",        "fr": "Friture de poisson",         "media": null,    "racion": "17,50" },
-      { "es": "Pulpo a la vinagreta",           "en": "Octopus Vinaigrette",       "fr": "Poulpe vinaigrette",         "media": "5,50",  "racion": "8,00"  },
-      { "es": "Gazpacho andaluz",               "en": "Andalusian Gazpacho",       "fr": "Gaspacho andalou",           "media": null,    "racion": "3,00 vaso" }
+      {
+        "es": "Berenjenas (con miel)",
+        "en": "Aubergines with Honey",
+        "fr": "Aubergines au miel",
+        "media": "8,50",
+        "racion": "11,50"
+      },
+      {
+        "es": "Ensaladilla rusa",
+        "en": "Russian Salad",
+        "fr": "Salade russe",
+        "media": "6,00",
+        "racion": "9,50"
+      },
+      {
+        "es": "Huevos fritos, jamón y papas",
+        "en": "Fried Eggs, Ham & Potatoes",
+        "fr": "Œufs frits, jambon, pommes",
+        "media": null,
+        "racion": "14,00"
+      },
+      {
+        "es": "Habas, jamón y huevo",
+        "en": "Broad Beans, Ham & Egg",
+        "fr": "Fèves, jambon et œuf",
+        "media": null,
+        "racion": "14,00"
+      },
+      {
+        "es": "Champiñón",
+        "en": "Sautéed Mushrooms",
+        "fr": "Champignons sautés",
+        "media": "8,00",
+        "racion": "11,50"
+      },
+      {
+        "es": "Champiñón con gambas",
+        "en": "Mushrooms with Prawns",
+        "fr": "Champignons aux crevettes",
+        "media": "11,00",
+        "racion": "15,00"
+      },
+      {
+        "es": "Almejas",
+        "en": "Clams",
+        "fr": "Palourdes",
+        "media": "10,00",
+        "racion": "14,00"
+      },
+      {
+        "es": "Gambas fritas",
+        "en": "Fried Prawns",
+        "fr": "Crevettes frites",
+        "media": "11,00",
+        "racion": "15,00"
+      },
+      {
+        "es": "Gambas pil pil",
+        "en": "Prawns Pil Pil",
+        "fr": "Crevettes pil pil",
+        "media": "11,00",
+        "racion": "15,00"
+      },
+      {
+        "es": "Calamares fritos",
+        "en": "Fried Calamari",
+        "fr": "Calamars frits",
+        "media": "10,00",
+        "racion": "14,00"
+      },
+      {
+        "es": "Cazón en adobo",
+        "en": "Marinated Dogfish",
+        "fr": "Cazón mariné",
+        "media": "10,00",
+        "racion": "14,00"
+      },
+      {
+        "es": "Chopos fritos (puntillitas)",
+        "en": "Baby Cuttlefish, Fried",
+        "fr": "Petites seiches frites",
+        "media": "11,00",
+        "racion": "15,00"
+      },
+      {
+        "es": "Boquerones fritos",
+        "en": "Fried Anchovies",
+        "fr": "Anchois frits",
+        "media": "10,00",
+        "racion": "14,00"
+      },
+      {
+        "es": "Fritura de pescado",
+        "en": "Fried Fish Platter",
+        "fr": "Friture de poisson",
+        "media": null,
+        "racion": "18,50"
+      },
+      {
+        "es": "Pulpo a la vinagreta",
+        "en": "Octopus Vinaigrette",
+        "fr": "Poulpe vinaigrette",
+        "media": "6,00",
+        "racion": "9,00"
+      },
+      {
+        "es": "Gazpacho andaluz",
+        "en": "Andalusian Gazpacho",
+        "fr": "Gaspacho andalou",
+        "media": null,
+        "racion": "3,50 vaso"
+      }
     ]
   },
   "seo": {
@@ -276,9 +468,9 @@
       {
         "day": "tuesday",
         "name": {
-          "es": "Macarrones",
-          "en": "Macarrones (pasta)",
-          "fr": "Macaronis"
+          "es": "Pollo asado",
+          "en": "Roast chicken",
+          "fr": "Poulet rôti"
         }
       },
       {
@@ -508,15 +700,15 @@
         "fr": "Omelette du Sacromonte"
       },
       "description": {
-        "es": "Tradición granadina. Tortilla con sesos, criadillas y jamón. Receta de siempre.",
+        "es": "Tradición granadina. Tortilla con sesos, criadillas y jamón. Receta de toda la vida.",
         "en": "Granada-style omelette with offal (brains and sweetbreads) and vegetables.",
         "fr": "Omelette historique du Sacromonte, préparée avec cervelles d'agneau, animelles et jambon. Un classique grenadin pour curieux."
       },
       "price": "10,00 €",
       "pairing": {
-        "es": "Calvente (uva autóctona granadina) — Copa 3,70 € / Bot. 21,00 €",
-        "en": "Calvente Vigiriega (native Granada white grape) — Glass 3.70 € / Bottle 21.00 €",
-        "fr": "Calvente Vigiriega (cépage autochtone grenadin) — Verre 3,70 € / Bout. 21,00 €"
+        "es": "Calvente (uva autóctona granadina) — Copa 3,70 € / Bot. 22,00 €",
+        "en": "Calvente Vigiriega (native Granada white grape) — Glass 3.70 € / Bottle 22.00 €",
+        "fr": "Calvente Vigiriega (cépage autochtone grenadin) — Verre 3,70 € / Bout. 22,00 €"
       },
       "available": true,
       "featured": "recommended"
@@ -536,9 +728,9 @@
       },
       "price": "13,00 €",
       "pairing": {
-        "es": "Delirio (D.O. Granada) — 17,00 €",
-        "en": "Delirio (red wine, D.O. Granada) — 17,00 €",
-        "fr": "Delirio (vin rouge, D.O. Granada) — 17,00 €"
+        "es": "Delirio (D.O. Granada) — 18,00 €",
+        "en": "Delirio (red wine, D.O. Granada) — 18,00 €",
+        "fr": "Delirio (vin rouge, D.O. Granada) — 18,00 €"
       },
       "available": true,
       "featured": "seasonal"
@@ -558,9 +750,9 @@
       },
       "price": "Media 10,50 € / Ración 13,50 €",
       "pairing": {
-        "es": "Muñana Rojo (D.O. Granada) — 19,00 €",
-        "en": "Muñana Rojo (red wine, D.O. Granada) — 19,00 €",
-        "fr": "Muñana Rojo (vin rouge, D.O. Granada) — 19,00 €"
+        "es": "Muñana Rojo (D.O. Granada) — 20,00 €",
+        "en": "Muñana Rojo (red wine, D.O. Granada) — 20,00 €",
+        "fr": "Muñana Rojo (vin rouge, D.O. Granada) — 20,00 €"
       },
       "available": true,
       "featured": "house"
@@ -574,7 +766,7 @@
         "fr": "Rognons au Xérès"
       },
       "description": {
-        "es": "Riñones salteados en salsa de vino de Jerez. Casquería de siempre.",
+        "es": "Riñones salteados en salsa de vino de Jerez. Casquería de toda la vida.",
         "en": "Veal kidneys braised in a rich sherry wine sauce.",
         "fr": "Rognons de veau mijotés dans une riche sauce au vin de Xérès."
       },
@@ -684,7 +876,7 @@
         "fr": "Gaspacho andalou"
       },
       "description": {
-        "es": "Tomate, pepino, pimiento, ajo y pan. Servido frío.",
+        "es": "Tomate, pepino, pimiento y ajo. Servido frío.",
         "en": "Cold Andalusian tomato soup with cucumber, pepper, garlic and bread. Served chilled.",
         "fr": "Soupe froide andalouse à la tomate, concombre, poivron, ail et pain. Servie fraîche."
       },
@@ -816,7 +1008,7 @@
         "fr": "Soupe sévillane"
       },
       "description": {
-        "es": "Caldo con pollo, jamón, arroz y verduras.",
+        "es": "Sopa de pescado, marisco y mayonesa.",
         "en": "Traditional fish soup with mayonnaise emulsified into the broth, served with prawns.",
         "fr": "Soupe de poisson traditionnelle liée à la mayonnaise maison, servie avec des crevettes."
       },
@@ -932,9 +1124,9 @@
       },
       "price": "12,50 €",
       "pairing": {
-        "es": "Calvente Guindalera (D.O. Granada) — 18,00 €",
-        "en": "Calvente Guindalera (red wine, D.O. Granada) — 18,00 €",
-        "fr": "Calvente Guindalera (vin rouge, D.O. Granada) — 18,00 €"
+        "es": "Calvente Guindalera (D.O. Granada) — 19,00 €",
+        "en": "Calvente Guindalera (red wine, D.O. Granada) — 19,00 €",
+        "fr": "Calvente Guindalera (vin rouge, D.O. Granada) — 19,00 €"
       },
       "available": true,
       "featured": false
@@ -996,7 +1188,7 @@
         "en": "House-made creamy ham croquettes, crispy on the outside.",
         "fr": "Croquettes de jambon crémeuses faites maison, croustillantes à l'extérieur."
       },
-      "price": "8,50 € (ración) / 1,80 € (unidad en barra)",
+      "price": "Ración 8,50 € · Unidad 1,80 €",
       "pairing": {
         "es": "Alfonso (oloroso, D.O. Jerez) — 2,80 €",
         "en": "Alfonso (oloroso sherry, D.O. Jerez) — 2,80 €",
@@ -1036,7 +1228,7 @@
         "fr": "Champignons aux crevettes"
       },
       "description": {
-        "es": "Champiñones y gambas salteados con ajo y perejil.",
+        "es": "Champiñones y gambas salteados con ajo, vino blanco y perejil.",
         "en": "Fresh mushrooms and prawns sautéed with garlic, white wine and parsley.",
         "fr": "Champignons frais et crevettes sautés à l'ail, vin blanc et persil."
       },
@@ -1058,15 +1250,15 @@
         "fr": "Aubergines frites au miel"
       },
       "description": {
-        "es": "Berenjenas en tempura, fritas en aceite de oliva.",
+        "es": "Berenjenas fritas en aceite de oliva.",
         "en": "Crispy fried eggplant slices, served with local cane honey.",
         "fr": "Rondelles d'aubergines frites croustillantes, servies avec du miel de canne local."
       },
       "price": "Media 8,00 € / Ración 11,00 €",
       "pairing": {
-        "es": "Muñana Flamenco Semi (D.O. Granada) — Copa 3,20 € / Bot. 18,00 €",
+        "es": "Muñana Flamenco Semi (D.O. Granada) — Copa 3,20 € / Bot. 19,00 €",
         "en": "Muñana Flamenco Semi (semi-sweet, D.O. Granada) — Glass 3.20 € / Bottle 18.00 €",
-        "fr": "Muñana Flamenco Semi (demi-sec, D.O. Granada) — Verre 3,20 € / Bout. 18,00 €"
+        "fr": "Muñana Flamenco Semi (demi-sec, D.O. Granada) — Verre 3,20 € / Bout. 19,00 €"
       },
       "available": true,
       "featured": false
@@ -1504,9 +1696,9 @@
       },
       "price": "5,00 € (barra) / 14,00 € (restaurante)",
       "pairing": {
-        "es": "Delirio (D.O. Granada) — 17,00 €",
-        "en": "Delirio (red wine, D.O. Granada) — 17,00 €",
-        "fr": "Delirio (vin rouge, D.O. Granada) — 17,00 €"
+        "es": "Delirio (D.O. Granada) — 18,00 €",
+        "en": "Delirio (red wine, D.O. Granada) — 18,00 €",
+        "fr": "Delirio (vin rouge, D.O. Granada) — 18,00 €"
       },
       "available": true,
       "featured": false
@@ -1614,9 +1806,9 @@
       },
       "price": "2,80 € (unidad)",
       "pairing": {
-        "es": "Muñana Rojo (D.O. Granada) — 19,00 €",
-        "en": "Muñana Rojo (red wine, D.O. Granada) — 19,00 €",
-        "fr": "Muñana Rojo (vin rouge, D.O. Granada) — 19,00 €"
+        "es": "Muñana Rojo (D.O. Granada) — 20,00 €",
+        "en": "Muñana Rojo (red wine, D.O. Granada) — 20,00 €",
+        "fr": "Muñana Rojo (vin rouge, D.O. Granada) — 20,00 €"
       },
       "available": true,
       "featured": false
@@ -1658,9 +1850,9 @@
       },
       "price": "15,00 €",
       "pairing": {
-        "es": "Delirio (D.O. Granada) — 17,00 €",
-        "en": "Delirio (red wine, D.O. Granada) — 17,00 €",
-        "fr": "Delirio (vin rouge, D.O. Granada) — 17,00 €"
+        "es": "Delirio (D.O. Granada) — 18,00 €",
+        "en": "Delirio (red wine, D.O. Granada) — 18,00 €",
+        "fr": "Delirio (vin rouge, D.O. Granada) — 18,00 €"
       },
       "available": true,
       "featured": false
@@ -1680,9 +1872,9 @@
       },
       "price": "12,50 €",
       "pairing": {
-        "es": "Fontedei Prado Negro (D.O. Granada) — 17,00 €",
-        "en": "Fontedei Prado Negro (red wine, D.O. Granada) — 17,00 €",
-        "fr": "Fontedei Prado Negro (vin rouge, D.O. Granada) — 17,00 €"
+        "es": "Fontedei Prado Negro (D.O. Granada) — 18,00 €",
+        "en": "Fontedei Prado Negro (red wine, D.O. Granada) — 18,00 €",
+        "fr": "Fontedei Prado Negro (vin rouge, D.O. Granada) — 18,00 €"
       },
       "available": true,
       "featured": false
@@ -1916,9 +2108,9 @@
         "fr": "Paella mixte"
       },
       "description": {
-        "es": "Arroz con pollo, marisco y verduras. Por encargo, mínimo 2 raciones.",
-        "en": "Traditional saffron rice dish cooked with chicken, pork and seafood (min. 2 servings).",
-        "fr": "Riz au safran traditionnel cuisiné avec poulet, porc et fruits de mer (min. 2 personnes)."
+        "es": "Arroz con pollo, marisco y verduras. Elaborada al momento. Mínimo 2 raciones — unos 45 minutos de espera.",
+        "en": "Rice with chicken, seafood and vegetables. Made to order. Minimum 2 portions — around 45 minutes.",
+        "fr": "Riz au poulet, fruits de mer et légumes. Préparée à la commande. Minimum 2 portions — environ 45 minutes."
       },
       "price": "14,00 € / ración",
       "pairing": {
@@ -2344,8 +2536,8 @@
         "fr": "V.T. Cuesta del Sol, Grenade"
       },
       "type": "red",
-      "price_bottle": 18,
-      "price_glass": 3.5,
+      "price_bottle": 19,
+      "price_glass": 3.4,
       "available": true,
       "description": {
         "es": "Uva(s): Garnacha tinta · Tinto joven, afrutado, con notas de cereza y un paso ligero. Ideal para tapeo. · Maridaje: Carnes a la brasa, queso curado, embutidos",
@@ -2368,8 +2560,8 @@
         "fr": "D.O.P. Vin de Qualité de Grenade"
       },
       "type": "red",
-      "price_bottle": 17,
-      "price_glass": 3.2,
+      "price_bottle": 18,
+      "price_glass": 3.4,
       "available": true,
       "description": {
         "es": "Uva(s): Tempranillo, Cabernet Sauvignon · Tinto con estructura media, notas de fruta madura y un final especiado. · Maridaje: Carne de monte, callos, guisos de cuchara",
@@ -2392,8 +2584,8 @@
         "fr": "D.O.P. Vin de Qualité de Grenade"
       },
       "type": "red",
-      "price_bottle": 17,
-      "price_glass": 3.2,
+      "price_bottle": 18,
+      "price_glass": 3.4,
       "available": true,
       "description": {
         "es": "Uva(s): Tempranillo, Syrah · Tinto joven de Granada, fresco y afrutado con fondo especiado. · Maridaje: Tapas variadas, embutidos, verduras salteadas",
@@ -2416,8 +2608,8 @@
         "fr": "D.O.P. Vin de Qualité de Grenade"
       },
       "type": "red",
-      "price_bottle": 19,
-      "price_glass": 3.5,
+      "price_bottle": 20,
+      "price_glass": 3.6,
       "available": true,
       "description": {
         "es": "Uva(s): Tempranillo, Garnacha · Tinto robusto con taninos suaves y fondo de fruta madura. · Maridaje: Carne de monte, entrecot, cordero",
@@ -2440,7 +2632,7 @@
         "fr": "D.O.P. Vin de Qualité de Grenade"
       },
       "type": "red",
-      "price_bottle": 21,
+      "price_bottle": 22,
       "available": true,
       "description": {
         "es": "Uva(s): Tempranillo, Cabernet, Merlot · Coupage con cuerpo, equilibrado, con notas de fruta y especias. · Maridaje: Guisos, carnes rojas, quesos",
@@ -2463,7 +2655,7 @@
         "fr": "V.T. Cuesta del Sol, Grenade"
       },
       "type": "white",
-      "price_bottle": 21,
+      "price_bottle": 22,
       "price_glass": 3.7,
       "available": true,
       "description": {
@@ -2487,7 +2679,7 @@
         "fr": "D.O.P. Vin de Qualité de Grenade"
       },
       "type": "white",
-      "price_bottle": 18,
+      "price_bottle": 19,
       "price_glass": 3.2,
       "available": true,
       "description": {
@@ -2511,7 +2703,7 @@
         "fr": "V.T. Cuesta del Sol, Grenade"
       },
       "type": "white",
-      "price_bottle": 18,
+      "price_bottle": 19,
       "available": true,
       "description": {
         "es": "Uva(s): Moscatel, Vigiriega · Blanco joven y aromático. Ligero dulzor y frescura, perfecto para el aperitivo. · Maridaje: Gazpacho, verduras salteadas, tapas ligeras",
@@ -2534,7 +2726,7 @@
         "fr": "D.O. Granada"
       },
       "type": "rose",
-      "price_bottle": 18,
+      "price_bottle": 19,
       "price_glass": 3.2,
       "available": true,
       "description": {
@@ -2558,8 +2750,8 @@
         "fr": "D.O.Ca. Rioja"
       },
       "type": "red",
-      "price_bottle": 17,
-      "price_glass": 3.2,
+      "price_bottle": 18,
+      "price_glass": 3.4,
       "available": true,
       "description": {
         "es": "Uva(s): Tempranillo · Crianza ligero y franco. Fruta y madera bien integrada. · Maridaje: Tapas, embutidos, platos de cuchara",
@@ -2582,8 +2774,8 @@
         "fr": "D.O.Ca. Rioja"
       },
       "type": "red",
-      "price_bottle": 18,
-      "price_glass": 3.2,
+      "price_bottle": 19,
+      "price_glass": 3.4,
       "available": true,
       "description": {
         "es": "Uva(s): Tempranillo · Tinto crianza redondo y accesible. Notas de cereza y un toque de roble. · Maridaje: Croquetas, entrecot, guisos de cuchara",
@@ -2608,7 +2800,7 @@
       "type": "red",
       "price_bottle": 18,
       "price_glass": 3.2,
-      "available": true,
+      "available": false,
       "description": {
         "es": "Uva(s): Tempranillo · Crianza clásico riojano. Fruta roja, especias suaves y final limpio. · Maridaje: Carnes a la brasa, callos, queso semicurado",
         "en": "Grape(s): Tempranillo · Classic Rioja crianza. Red fruit, gentle spice and a clean finish. · Pairing: Grilled meats, tripe, semi-cured cheese",
@@ -2630,8 +2822,8 @@
         "fr": "D.O. Rioja"
       },
       "type": "red",
-      "price_bottle": 19,
-      "price_glass": 3.2,
+      "price_bottle": 20,
+      "price_glass": 3.4,
       "available": true,
       "description": {
         "es": "",
@@ -2654,7 +2846,7 @@
         "fr": "D.O.Ca. Rioja"
       },
       "type": "red",
-      "price_bottle": 26,
+      "price_bottle": 28,
       "available": true,
       "description": {
         "es": "Uva(s): Tempranillo, Garnacha, Graciano · Reserva con 24 meses en barrica. Complejo, elegante, con fruta madura y vainilla. · Maridaje: Cordero asado, carne de monte, quesos curados",
@@ -2677,8 +2869,8 @@
         "fr": "D.O. Ribera del Duero"
       },
       "type": "red",
-      "price_bottle": 17,
-      "price_glass": 3.2,
+      "price_bottle": 19,
+      "price_glass": 3.4,
       "available": true,
       "description": {
         "es": "Uva(s): Tempranillo · Tinto roble joven y equilibrado. Fruta negra y paso amable. · Maridaje: Entrecot, cordero, embutidos ibéricos",
@@ -2724,8 +2916,8 @@
         "fr": "V.T. Castilla y León"
       },
       "type": "red",
-      "price_bottle": 18,
-      "price_glass": 3.2,
+      "price_bottle": 19,
+      "price_glass": 3.4,
       "available": true,
       "description": {
         "es": "Uva(s): Verdejo, Moscatel · Blanco de baja graduación (5,5°), ligero y afrutado. Dulzor sutil. · Maridaje: Aperitivo, tapas ligeras, postres",
@@ -2748,8 +2940,8 @@
         "fr": "D.O. Ribera del Duero"
       },
       "type": "red",
-      "price_bottle": 19,
-      "price_glass": 3.2,
+      "price_bottle": 20,
+      "price_glass": 3.4,
       "available": true,
       "description": {
         "es": "Uva(s): Tinto Fino (Tempranillo) · Roble con 6 meses en barrica. Fruta fresca, taninos suaves y recuerdo a vainilla. · Maridaje: Carnes rojas, carne de monte, quesos",
@@ -2772,7 +2964,7 @@
         "fr": "D.O. Ribera del Duero"
       },
       "type": "red",
-      "price_bottle": 19,
+      "price_bottle": 20,
       "available": true,
       "description": {
         "es": "Uva(s): Tempranillo · Crianza con 12 meses en barrica. Estructura media, notas de fruta y cuero. · Maridaje: Carne de monte, callos, guisos contundentes",
@@ -2795,7 +2987,7 @@
         "fr": "D.O. Rueda"
       },
       "type": "white",
-      "price_bottle": 17,
+      "price_bottle": 19,
       "price_glass": 3.2,
       "available": true,
       "description": {
@@ -2819,7 +3011,7 @@
         "fr": "V.T. Cádiz"
       },
       "type": "white",
-      "price_bottle": 17.5,
+      "price_bottle": 18.5,
       "price_glass": 3.2,
       "available": true,
       "description": {
@@ -2843,7 +3035,7 @@
         "fr": "V.T. Andalousie"
       },
       "type": "white",
-      "price_bottle": 17.5,
+      "price_bottle": 18.5,
       "price_glass": 3.2,
       "available": true,
       "description": {
@@ -2867,7 +3059,7 @@
         "fr": "V.T. Castilla y León"
       },
       "type": "white",
-      "price_bottle": 19,
+      "price_bottle": 21,
       "price_glass": 3.3,
       "available": true,
       "description": {
@@ -2891,7 +3083,7 @@
         "fr": "D.O. Jerez"
       },
       "type": "sherry",
-      "price_glass": 2.8,
+      "price_glass": 2.9,
       "available": true,
       "description": {
         "es": "Seco, pálido, con notas de almendra y levadura. Crianza biológica bajo velo de flor. · Maridaje: Jamón ibérico, aceitunas, fritura de pescado",
@@ -2914,7 +3106,7 @@
         "fr": "D.O. Manzanilla-Sanlúcar"
       },
       "type": "sherry",
-      "price_glass": 2.8,
+      "price_glass": 2.9,
       "available": true,
       "description": {
         "es": "Fino de Sanlúcar: más salino y ligero, con brisa atlántica. Seco y fresco. · Maridaje: Mariscos, tortilla del Sacromonte, boquerones",

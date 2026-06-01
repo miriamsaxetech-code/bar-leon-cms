@@ -34,7 +34,9 @@
     dailyMenu:  { es: 'Menú del Día',   en: 'Daily Menu',    fr: 'Menu du Jour' },
     restaurant: { es: 'Carta Restaurante', en: 'Restaurant Menu', fr: 'Carte Restaurant' },
     bar:        { es: 'Carta Barra',    en: 'Bar Menu',      fr: 'Carte Bar' },
-    barIntro:   { es: 'Para barra, cervezas y bebidas. Sin ceremonia, que aquí se viene a gusto.', en: 'Beers, spirits, and soft drinks. Simple, direct, and easy.', fr: 'Bières, spiritueux et boissons. Simple et direct.' },
+    barIntro:   { es: 'Lo que sale de la barra. Sin ceremonia.', en: 'Straight from the bar. No fuss.', fr: 'Ce qui sort du comptoir. Sans cérémonie.' },
+    beverages:  { es: 'Bebidas',        en: 'Drinks',        fr: 'Boissons' },
+    beveragesIntro: { es: 'Cervezas, refrescos y licores.', en: 'Beers, soft drinks and spirits.', fr: 'Bières, boissons et spiritueux.' },
     restaurantIntro: { es: 'La carta de mesa, separada del menú del día.', en: 'The table menu, separate from the daily menu.', fr: 'La carte de table, séparée du menu du jour.' },
     wines:      { es: 'La Bodega',      en: 'The Cellar',    fr: 'La Cave' },
     winesIntro: { es: 'Nuestra selección de vinos. D.O. Granada por delante, acompañados de los grandes clásicos de la península.', en: 'Our wine selection. Local D.O. Granada first, alongside classic Spanish appellations.', fr: 'Notre sélection de vins. Les vins de Grenade en priorité, accompagnés des grands classiques espagnols.' },
@@ -734,9 +736,10 @@
     const serviceMode = d.service_mode || {};
 
     return `<div class="wrap menu-switch-wrap">
-  <div class="menu-switch menu-switch--four" role="tablist" aria-label="${t(nav.menu, lang)}">
+  <div class="menu-switch menu-switch--five" role="tablist" aria-label="${t(nav.menu, lang)}">
     <button type="button" class="menu-switch-btn is-active" role="tab" aria-selected="true" aria-controls="panel-bar" data-panel="bar">${LABELS.bar[lang]}</button>
     <button type="button" class="menu-switch-btn" role="tab" aria-selected="false" aria-controls="panel-restaurant" data-panel="restaurant">${LABELS.restaurant[lang]}</button>
+    <button type="button" class="menu-switch-btn" role="tab" aria-selected="false" aria-controls="panel-beverages" data-panel="beverages">${LABELS.beverages[lang]}</button>
     <button type="button" class="menu-switch-btn" role="tab" aria-selected="false" aria-controls="panel-wines" data-panel="wines">${LABELS.wines[lang]}</button>
     <button type="button" class="menu-switch-btn menu-switch-btn--secondary" role="tab" aria-selected="false" aria-controls="panel-daily" data-panel="daily">${LABELS.dailyMenu[lang]}</button>
   </div>
@@ -749,7 +752,6 @@
   ${renderChalkboard(d, lang)}
   <div class="wrap">${renderParaEmpezar(d.wines, d.beverages, lang)}</div>
   ${renderBarSnapshot(lang)}
-  ${renderWines(null, d.beverages, d.dishes, d.categories, lang, 'bar', 'wine', null)}
 </section>
 <section id="panel-restaurant" class="menu-panel" role="tabpanel" data-panel="restaurant" hidden>
   <div class="wrap menu-panel-intro">
@@ -759,6 +761,13 @@
   ${renderSpotlightAndalucia(d.dishes, d.categories, d.wines, lang)}
   ${renderCarta(d.dishes, d.categories, d.wines, lang, 'restaurant')}
   ${renderRestaurantSnapshot(lang)}
+</section>
+<section id="panel-beverages" class="menu-panel" role="tabpanel" data-panel="beverages" hidden>
+  <div class="wrap menu-panel-intro">
+    <p class="section-label">${LABELS.beverages[lang]}</p>
+    <p class="menu-panel-copy">${LABELS.beveragesIntro[lang]}</p>
+  </div>
+  ${renderWines(null, d.beverages, null, d.categories, lang, 'bar', 'wine', null)}
 </section>
 <section id="panel-wines" class="menu-panel" role="tabpanel" data-panel="wines" hidden>
   <div class="wrap menu-panel-intro">
