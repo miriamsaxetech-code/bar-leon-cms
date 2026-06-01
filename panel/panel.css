@@ -349,62 +349,132 @@ body {
 }
 .search-input:focus { border-color: var(--accent); }
 
-.price-group-heading {
-  background: var(--bg-2);
-  border-bottom: 1px solid var(--border);
-  color: var(--ink-2);
-  font-size: 0.78rem;
-  font-weight: 700;
-  letter-spacing: 0.08em;
-  padding: 8px 16px;
-  text-transform: uppercase;
-}
-
 .price-list {
-  /* noop — list has no outer padding, rows fill full width */
+  display: grid;
+  gap: 14px;
+  padding: 14px;
 }
 
-.price-row {
+.catalog-section {
+  background: var(--white);
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  box-shadow: 0 1px 8px rgba(28, 26, 23, 0.06);
+  overflow: hidden;
+}
+
+.catalog-section__header {
   display: flex;
   align-items: center;
   justify-content: space-between;
-  border-bottom: 1px solid var(--border);
-  min-height: 52px;
-  padding: 10px 16px;
   gap: 12px;
+  padding: 12px;
+  border-bottom: 1px solid var(--border);
+}
+
+.catalog-section__title {
+  margin: 0;
+  font-size: 0.95rem;
+  color: var(--ink);
+}
+
+.catalog-section__count {
+  margin: 2px 0 0;
+  color: var(--ink-2);
+  font-size: 0.76rem;
+}
+
+.catalog-add-btn {
+  min-width: 92px;
+}
+
+.catalog-list {
+  display: grid;
+  gap: 0;
+}
+
+.catalog-row {
   background: var(--white);
+  border-bottom: 1px solid var(--border);
+  display: grid;
+  gap: 10px;
+  padding: 12px;
   transition: background 0.1s;
 }
-.price-row:active { background: var(--bg); }
 
-.price-row__name {
-  flex: 1;
-  font-size: 0.95rem;
-  color: var(--ink);
-  line-height: 1.3;
+.catalog-row:last-child {
+  border-bottom: none;
 }
 
-.price-row__price {
-  background: var(--bg-2);
-  border: 1.5px solid var(--border);
+.catalog-row__main {
+  display: grid;
+  gap: 8px;
+}
+
+.catalog-name-input {
+  font-weight: 650;
+}
+
+.catalog-category-select {
+  min-height: 40px;
+}
+
+.catalog-row__prices {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(112px, 1fr));
+  gap: 8px;
+}
+
+.catalog-price-field {
+  display: grid;
+  gap: 4px;
+}
+
+.catalog-price-field span {
+  color: var(--ink-2);
+  font-size: 0.72rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.06em;
+}
+
+.catalog-price-input {
+  min-height: 40px;
+}
+
+.catalog-row__actions {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 10px;
+}
+
+.catalog-active {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  color: var(--ink-2);
+  font-size: 0.86rem;
+  font-weight: 600;
+}
+
+.catalog-active input {
+  accent-color: var(--accent);
+  min-height: 20px;
+  min-width: 20px;
+}
+
+.catalog-delete {
+  background: transparent;
+  border: 1px solid rgba(122, 28, 28, 0.28);
   border-radius: var(--radius-sm);
-  color: var(--ink);
+  color: var(--error-bg);
   cursor: pointer;
   font-family: var(--font);
-  font-size: 0.95rem;
-  font-weight: 600;
-  min-height: 44px;
-  min-width: 80px;
+  font-size: 0.84rem;
+  font-weight: 700;
+  min-height: 40px;
   padding: 0 12px;
-  text-align: center;
-  transition: border-color 0.15s, background 0.15s;
-  white-space: nowrap;
-}
-.price-row__price:hover,
-.price-row__price:focus-visible {
-  border-color: var(--accent);
-  background: var(--white);
-  outline: none;
 }
 
 .price-input {
@@ -428,6 +498,10 @@ body {
   font-size: 0.95rem;
   padding: 32px 16px;
   text-align: center;
+}
+
+.empty-state--compact {
+  padding: 18px 12px;
 }
 
 /* ══════════════════════════════════════════════════════════════
