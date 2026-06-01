@@ -1150,3 +1150,90 @@ function bindEvents() {
     }
   });
 }
+
+// ══════════════════════════════════════════════════════════════
+// PURE CRUD HELPERS  (no DOM — testable in Node)
+// ══════════════════════════════════════════════════════════════
+
+function slugifyPanelId(name, existingItems) {
+  const base = String(name)
+    .normalize('NFD').replace(/[̀-ͯ]/g, '')
+    .toLowerCase()
+    .replace(/[^a-z0-9]+/g, '-')
+    .replace(/^-+|-+$/g, '');
+
+  if (!existingItems || existingItems.length === 0) return base;
+
+  const ids = new Set(existingItems.map(i => i.id));
+  if (!ids.has(base)) return base;
+
+  // Append incrementing suffix until unique
+  let n = 1;
+  while (ids.has(`${base}-${n}`)) n++;
+  return `${base}-${n}`;
+}
+
+function createPanelItem(type, nameEs, categoryId) {
+  const base = {
+    id: slugifyPanelId(nameEs),
+    name: { es: nameEs, en: '', fr: '' },
+    category_id: categoryId || '',
+    available: true,
+  };
+
+  if (type === 'wine') {
+    return { ...base, price_bottle: '', price_glass: '', producer: '', description: { es: '', en: '', fr: '' } };
+  }
+  if (type === 'beverage') {
+    return { ...base, price: '', description: { es: '', en: '', fr: '' } };
+  }
+  // dish (default)
+  return { ...base, price: '', description: { es: '', en: '', fr: '' } };
+}
+
+function _collectionKey(type) {
+  if (type === 'wine') return 'wines';
+  if (type === 'beverage') return 'beverages';
+  return 'dishes';
+}
+
+function addPanelItem(state, type, item) {
+  const key = _collectionKey(type);
+  if (!state[key]) state[key] = [];
+  state[key].push(item);
+}
+
+function deletePanelItem(state, type, id) {
+  const key = _collectionKey(type);
+  if (!state[key]) return;
+  state[key] = state[key].filter(i => i.id !== id);
+}
+
+function setPanelItemAvailable(state, type, id, available) {
+  const key = _collectionKey(type);
+  const item = (state[key] || []).find(i => i.id === id);
+  if (item) item.available = available;
+}
+
+function splitPanelListText(text) {
+  if (!text) return [];
+  return String(text).split(' · ').map(s => s.trim()).filter(Boolean);
+}
+
+function joinPanelListItems(items) {
+  if (!items || items.length === 0) return '';
+  return items.join(' · ');
+}
+
+// Expose for Node test harness
+if (typeof window !== 'undefined') {
+  window.__panelTestApi = {
+    slugifyPanelId,
+    createPanelItem,
+    addPanelItem,
+    deletePanelItem,
+    setPanelItemAvailable,
+    splitPanelListText,
+    joinPanelListItems,
+  };
+}
