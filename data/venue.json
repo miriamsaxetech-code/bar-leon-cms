@@ -707,8 +707,8 @@
       "price": "10,00 €",
       "pairing": {
         "es": "Calvente Vigiriega — Copa 3,70 € / Bot. 22,00 €",
-        "en": "Calvente Vigiriega (native Vigiriega grape, Granada) — Glass 3.70 € / Btl. 22.00 €",
-        "fr": "Calvente Vigiriega (raisin autochtone grenadin) — Verre 3,70 € / Bout. 22,00 €"
+        "en": "Calvente Vigiriega — Glass 3.70 € / Btl. 22.00 €",
+        "fr": "Calvente Vigiriega — Verre 3,70 € / Bout. 22,00 €"
       },
       "available": true,
       "featured": "recommended"
@@ -829,12 +829,12 @@
       "name": {
         "es": "Criadillas",
         "en": "Bull's Testicles",
-        "fr": "Animelles frites"
+        "fr": "Animelles"
       },
       "description": {
         "es": "Casquería tradicional, rebozada y frita.",
-        "en": "Bull's testicles, breaded and fried until golden.",
-        "fr": "Animelles de veau panées et frites."
+        "en": "Traditional offal, breaded and fried.",
+        "fr": "Abats traditionnels, panés et frits."
       },
       "price": "Media 7,50 € / Ración 10,00 €",
       "pairing": {
@@ -1257,8 +1257,8 @@
       "price": "Media 8,00 € / Ración 11,00 €",
       "pairing": {
         "es": "Muñana Flamenco Semi — Copa 3,20 € / Bot. 19,00 €",
-        "en": "Muñana Flamenco Semi (off-dry Moscatel, Granada) — Glass 3.20 € / Btl. 19.00 €",
-        "fr": "Muñana Flamenco Semi (Moscatel demi-sec, Grenade) — Verre 3,20 € / Bout. 19,00 €"
+        "en": "Muñana Flamenco Semi — Glass 3.20 € / Btl. 19.00 €",
+        "fr": "Muñana Flamenco Semi — Verre 3,20 € / Bout. 19,00 €"
       },
       "available": true,
       "featured": false
