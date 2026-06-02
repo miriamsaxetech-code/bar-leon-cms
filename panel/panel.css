@@ -1110,3 +1110,61 @@ body {
   color: #8A6D1C;
   font-weight: 800;
 }
+
+/* ── Pizarra (Carta Barra) ───────────────────────────────── */
+
+.pizarra-panel {
+  display: grid;
+  gap: 12px;
+  padding: 12px;
+}
+
+.pizarra-panel__intro {
+  color: var(--ink-2);
+  font-size: 0.84rem;
+  margin: 0;
+}
+
+.pizarra-list {
+  display: grid;
+  gap: 12px;
+}
+
+.pizarra-row {
+  display: grid;
+  gap: 8px;
+  padding: 12px;
+  border-bottom: 1px solid var(--border);
+}
+
+.pizarra-row:last-child {
+  border-bottom: none;
+}
+
+.pizarra-name-input {
+  font-weight: 650;
+}
+
+.pizarra-row__prices {
+  display: grid;
+  grid-template-columns: 1fr 1fr auto;
+  gap: 8px;
+  align-items: end;
+}
+
+.pizarra-price-label {
+  display: grid;
+  gap: 4px;
+}
+
+.pizarra-price-label span {
+  color: var(--ink-2);
+  font-size: 0.72rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.06em;
+}
+
+.pizarra-price-input {
+  min-height: 40px;
+}

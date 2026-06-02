@@ -226,6 +226,7 @@ function renderAll() {
   renderMenuDelDia();
   renderAviso();
   renderCariocas();
+  renderPizarra();
 }
 
 // ══════════════════════════════════════════════════════════════
@@ -1321,6 +1322,185 @@ function buildCariocaFromForm(imagePath) {
 }
 
 // ══════════════════════════════════════════════════════════════
+// TAB: PIZARRA (CARTA BARRA)
+// ══════════════════════════════════════════════════════════════
+
+const PIZARRA_GROUPS = [
+  { key: 'group1', label: 'Grupo 1 — Carnes y casquería' },
+  { key: 'group2', label: 'Grupo 2 — Pescados y verduras' },
+];
+
+function renderPizarra() {
+  const container = document.getElementById('pizarra-list');
+  if (!container || !state) return;
+
+  const cb = state.chalkboard || {};
+  container.innerHTML = '';
+
+  PIZARRA_GROUPS.forEach(({ key, label }) => {
+    const items = Array.isArray(cb[key]) ? cb[key] : [];
+
+    const section = document.createElement('section');
+    section.className = 'catalog-section';
+    section.dataset.pizarraGroup = key;
+
+    const header = document.createElement('div');
+    header.className = 'catalog-section__header';
+    header.innerHTML = `<div>
+      <h2 class="catalog-section__title">${label}</h2>
+      <p class="catalog-section__count">${items.length} platos</p>
+    </div>`;
+
+    const addBtn = document.createElement('button');
+    addBtn.type = 'button';
+    addBtn.className = 'btn btn--ghost btn--small catalog-add-btn';
+    addBtn.dataset.pizarraAction = 'add';
+    addBtn.dataset.group = key;
+    addBtn.textContent = '+ Añadir';
+    addBtn.setAttribute('aria-label', `Añadir plato en ${label}`);
+    header.appendChild(addBtn);
+    section.appendChild(header);
+
+    const list = document.createElement('div');
+    list.className = 'catalog-list';
+
+    if (items.length === 0) {
+      const empty = document.createElement('p');
+      empty.className = 'empty-state empty-state--compact';
+      empty.textContent = 'Todavía no hay platos en este grupo.';
+      list.appendChild(empty);
+    }
+
+    items.forEach((item, idx) => {
+      list.appendChild(createPizarraRow(key, item, idx));
+    });
+
+    section.appendChild(list);
+    container.appendChild(section);
+  });
+}
+
+function createPizarraRow(groupKey, item, idx) {
+  const row = document.createElement('div');
+  row.className = 'pizarra-row';
+  row.dataset.group = groupKey;
+  row.dataset.idx = String(idx);
+
+  const nameInput = document.createElement('input');
+  nameInput.type = 'text';
+  nameInput.className = 'field-input pizarra-name-input';
+  nameInput.value = item.es || '';
+  nameInput.dataset.pizarraAction = 'name';
+  nameInput.dataset.group = groupKey;
+  nameInput.dataset.idx = String(idx);
+  nameInput.setAttribute('aria-label', 'Nombre del plato');
+  nameInput.placeholder = 'Nombre del plato';
+
+  const prices = document.createElement('div');
+  prices.className = 'pizarra-row__prices';
+
+  const mediaLabel = document.createElement('label');
+  mediaLabel.className = 'pizarra-price-label';
+  mediaLabel.innerHTML = '<span>½ Media</span>';
+  const mediaInput = document.createElement('input');
+  mediaInput.type = 'text';
+  mediaInput.className = 'field-input pizarra-price-input';
+  mediaInput.value = item.media || '';
+  mediaInput.dataset.pizarraAction = 'media';
+  mediaInput.dataset.group = groupKey;
+  mediaInput.dataset.idx = String(idx);
+  mediaInput.setAttribute('aria-label', 'Precio media');
+  mediaInput.placeholder = '—';
+  mediaLabel.appendChild(mediaInput);
+
+  const racionLabel = document.createElement('label');
+  racionLabel.className = 'pizarra-price-label';
+  racionLabel.innerHTML = '<span>Ración</span>';
+  const racionInput = document.createElement('input');
+  racionInput.type = 'text';
+  racionInput.className = 'field-input pizarra-price-input';
+  racionInput.value = item.racion || '';
+  racionInput.dataset.pizarraAction = 'racion';
+  racionInput.dataset.group = groupKey;
+  racionInput.dataset.idx = String(idx);
+  racionInput.setAttribute('aria-label', 'Precio ración');
+  racionInput.placeholder = '—';
+  racionLabel.appendChild(racionInput);
+
+  const deleteBtn = document.createElement('button');
+  deleteBtn.type = 'button';
+  deleteBtn.className = 'catalog-delete';
+  deleteBtn.dataset.pizarraAction = 'delete';
+  deleteBtn.dataset.group = groupKey;
+  deleteBtn.dataset.idx = String(idx);
+  deleteBtn.textContent = 'Borrar';
+  deleteBtn.setAttribute('aria-label', `Borrar ${item.es || 'plato'}`);
+
+  prices.appendChild(mediaLabel);
+  prices.appendChild(racionLabel);
+  prices.appendChild(deleteBtn);
+
+  row.appendChild(nameInput);
+  row.appendChild(prices);
+  return row;
+}
+
+function bindPizarraEvents() {
+  const container = document.getElementById('pizarra-list');
+  if (!container) return;
+
+  container.addEventListener('input', e => {
+    const el = e.target;
+    const action = el.dataset.pizarraAction;
+    if (!action) return;
+
+    const group = el.dataset.group;
+    const idx = parseInt(el.dataset.idx, 10);
+    if (!state.chalkboard || !Array.isArray(state.chalkboard[group])) return;
+    const item = state.chalkboard[group][idx];
+    if (!item) return;
+
+    if (action === 'name') {
+      item.es = el.value;
+    } else if (action === 'media') {
+      item.media = el.value.trim() || null;
+    } else if (action === 'racion') {
+      item.racion = el.value.trim() || null;
+    }
+    markDirty();
+  });
+
+  container.addEventListener('click', e => {
+    const btn = e.target.closest('[data-pizarra-action]');
+    if (!btn || btn.tagName === 'INPUT') return;
+
+    const action = btn.dataset.pizarraAction;
+    const group = btn.dataset.group;
+
+    if (action === 'add') {
+      if (!state.chalkboard) state.chalkboard = { group1: [], group2: [] };
+      if (!Array.isArray(state.chalkboard[group])) state.chalkboard[group] = [];
+      state.chalkboard[group].push({ es: '', en: '', fr: '', media: null, racion: null });
+      renderPizarra();
+      markDirty();
+      const section = container.querySelector(`[data-pizarra-group="${group}"]`);
+      const newInput = section && section.querySelector('.pizarra-row:last-child .pizarra-name-input');
+      if (newInput) newInput.focus();
+      return;
+    }
+
+    if (action === 'delete') {
+      const idx = parseInt(btn.dataset.idx, 10);
+      const itemName = (state.chalkboard[group] || [])[idx]?.es || 'este plato';
+      if (!confirm(`¿Eliminar "${itemName}"?`)) return;
+      state.chalkboard[group].splice(idx, 1);
+      renderPizarra();
+      markDirty();
+    }
+  });
+}
+
+// ══════════════════════════════════════════════════════════════
 // GUARDAR
 // ══════════════════════════════════════════════════════════════
 
@@ -1530,6 +1710,7 @@ function bindEvents() {
   bindMenuDelDia();
   bindAvisoEvents();
   bindCariocaEvents();
+  bindPizarraEvents();
 
   // Botón Guardar
   const saveBtn = document.getElementById('save-btn');
