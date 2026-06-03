@@ -19,6 +19,6 @@ Antes de cualquier iteración nueva: leer `legacy-decisions.md` y `legacy-audit.
 Antes de editar contenido: consultar `bar-leon-canonical.md` para reglas de escritura.
 Antes de cambiar stack: consultar `stack.md` para entender por qué se tomaron las decisiones.
 
-## Corrección urgente pendiente
+## Nota de migración
 
-`data/es.json` → `contact.address` dice `Albaicín`. Debe decir `Albayzín`.
+El proyecto migró de tres archivos separados (`data/es.json`, `data/en.json`, `data/fr.json`) a un único `data/venue.json` con contenido multilingüe inline (claves `es`/`en`/`fr` por campo). La corrección de `Albaycín → Albayzín` fue aplicada en la migración. Ver `context/stack.md` para la arquitectura actual.

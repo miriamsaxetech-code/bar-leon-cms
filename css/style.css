@@ -1549,7 +1549,7 @@ h2 {
   display: block;
   max-width: 520px;
   width: 100%;
-  aspect-ratio: 994 / 646; /* Matches the dimensions of azulejo-leon.webp */
+  aspect-ratio: 3 / 2; /* hero-leon.webp (rótulo oficial) 900×600 */
   border-radius: 4px;
   box-shadow:
     0 12px 32px rgba(28, 26, 23, 0.18),
@@ -2514,5 +2514,302 @@ h2 {
   }
   .chalkboard-title {
     font-size: 1.15rem;
+  }
+}
+
+/* ─── PIZARRA MENÚ DEL DÍA (homepage) ─── */
+.pizarra-dia {
+  margin: 40px 0;
+}
+
+.pizarra-dia__wrap {
+  padding: 28px 32px 24px;
+  position: relative;
+  z-index: 2;
+}
+
+/* Header override: inherit chalkboard header style */
+.pizarra-dia .home-daily-menu__head {
+  border-bottom-color: rgba(255, 255, 255, 0.14);
+}
+
+.pizarra-dia .home-daily-menu__head .section-label {
+  color: rgba(240, 235, 215, 0.5);
+  letter-spacing: 0.22em;
+}
+
+.pizarra-dia .home-daily-menu h2 {
+  font-family: 'Granaina Limpia', Georgia, serif;
+  color: rgba(255, 252, 240, 0.92);
+  text-shadow: 0 0 12px rgba(255, 252, 240, 0.18), 0 1px 2px rgba(0, 0, 0, 0.6);
+}
+
+.pizarra-dia .home-daily-menu__meta {
+  color: rgba(240, 235, 215, 0.45);
+}
+
+.pizarra-dia .home-daily-menu__price {
+  color: rgba(240, 220, 160, 0.9);
+  text-shadow: 0 0 10px rgba(240, 220, 160, 0.2);
+}
+
+/* Body: accordion overrides */
+.pizarra-dia .home-daily-menu__body {
+  border-top-color: rgba(255, 255, 255, 0.1);
+}
+
+.pizarra-dia .accordion-item {
+  border-bottom-color: rgba(255, 255, 255, 0.1);
+}
+
+.pizarra-dia .accordion-item:first-child {
+  border-top-color: rgba(255, 255, 255, 0.1);
+}
+
+.pizarra-dia .dm-section-head {
+  border-bottom-color: rgba(255, 255, 255, 0.08);
+}
+
+.pizarra-dia .dm-section-head span:first-child {
+  color: rgba(240, 220, 160, 0.75);
+}
+
+.pizarra-dia .is-open .dm-section-head span:first-child {
+  color: rgba(255, 252, 240, 0.92);
+}
+
+.pizarra-dia .accordion-icon::before,
+.pizarra-dia .accordion-icon::after {
+  background-color: rgba(255, 252, 240, 0.5);
+}
+
+.pizarra-dia .home-daily-menu__group-list li {
+  color: rgba(240, 235, 215, 0.78);
+  border-bottom-color: rgba(255, 255, 255, 0.07);
+}
+
+.pizarra-dia .home-daily-menu__group-list li em {
+  color: rgba(240, 235, 215, 0.5);
+}
+
+/* Footer */
+.pizarra-dia .home-daily-menu__foot {
+  border-top-color: rgba(255, 255, 255, 0.1);
+}
+
+.pizarra-dia .home-daily-menu__foot p {
+  color: rgba(240, 235, 215, 0.45);
+}
+
+.pizarra-dia .home-daily-menu__foot a {
+  color: rgba(240, 235, 215, 0.7);
+}
+
+.pizarra-dia .home-daily-menu__foot a:hover {
+  color: rgba(255, 252, 240, 0.95);
+}
+
+@media (max-width: 768px) {
+  .pizarra-dia__wrap {
+    padding: 20px 18px 18px;
+  }
+}
+
+@media (max-width: 420px) {
+  .pizarra-dia__wrap {
+    padding: 16px 14px 14px;
+  }
+}
+
+/* ─── HISTORIA DEL LEÓN ─── */
+.historia-leon {
+  margin-top: 52px;
+  padding-top: 48px;
+  border-top: 1px solid rgba(28, 26, 23, 0.16);
+}
+
+.historia-leon h2 {
+  font-family: 'Playfair Display', Georgia, serif;
+  font-size: clamp(1.2rem, 3.5vw, 1.5rem);
+  font-weight: 700;
+  color: var(--ink);
+  margin-bottom: 16px;
+}
+
+.historia-leon__text {
+  max-width: 65ch;
+  font-family: Georgia, serif;
+  font-size: 0.95rem;
+  line-height: 1.75;
+  color: var(--ink);
+}
+
+.historia-leon__text p + p {
+  margin-top: 14px;
+}
+
+/* ─── CÓMO SE PIDE AQUÍ ─── */
+.ordering-guide {
+  margin-top: 64px;
+  padding-top: 48px;
+  border-top: 1px solid rgba(28, 26, 23, 0.16);
+}
+
+.ordering-guide h2 {
+  font-family: 'Playfair Display', Georgia, serif;
+  font-size: clamp(1.15rem, 3.5vw, 1.4rem);
+  font-weight: 700;
+  color: var(--ink);
+  margin-bottom: 8px;
+}
+
+.ordering-guide__intro {
+  font-size: 0.85rem;
+  color: var(--muted);
+  line-height: 1.6;
+  margin-bottom: 20px;
+  max-width: 60ch;
+}
+
+.ordering-guide__list {
+  display: grid;
+  grid-template-columns: max-content 1fr;
+  gap: 0;
+  border-top: 1px solid rgba(28, 26, 23, 0.14);
+}
+
+.ordering-guide__term {
+  font-weight: 700;
+  font-size: 0.82rem;
+  letter-spacing: 0.05em;
+  color: var(--ink);
+  padding: 10px 20px 10px 0;
+  border-bottom: 1px solid rgba(28, 26, 23, 0.1);
+  white-space: nowrap;
+}
+
+.ordering-guide__def {
+  font-size: 0.82rem;
+  color: var(--muted);
+  line-height: 1.5;
+  padding: 10px 0;
+  border-bottom: 1px solid rgba(28, 26, 23, 0.1);
+  margin: 0;
+}
+
+@media (max-width: 480px) {
+  .ordering-guide__list {
+    grid-template-columns: 1fr;
+  }
+  .ordering-guide__term {
+    padding-bottom: 2px;
+    border-bottom: none;
+  }
+  .ordering-guide__def {
+    padding-top: 2px;
+    padding-bottom: 10px;
+  }
+}
+
+/* ─── VINOS DE GRANADA — bloque editorial ─── */
+.wine-editorial {
+  margin-top: 64px;
+  padding-top: 48px;
+  border-top: 1px solid rgba(28, 26, 23, 0.16);
+}
+
+.wine-editorial__head {
+  text-align: center;
+  margin-bottom: 28px;
+}
+
+.wine-editorial__head h2 {
+  font-family: 'Playfair Display', Georgia, serif;
+  font-size: clamp(1.3rem, 4vw, 1.7rem);
+  font-weight: 700;
+  color: var(--ink);
+  margin-bottom: 10px;
+}
+
+.wine-editorial__intro {
+  font-size: 0.9rem;
+  color: var(--muted);
+  line-height: 1.6;
+  max-width: 52ch;
+  margin: 0 auto;
+  font-style: italic;
+}
+
+.wine-editorial__cards {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 16px;
+  margin-bottom: 20px;
+}
+
+.wine-editorial__card {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+  padding: 16px;
+  background: #1c1a17;
+  color: rgba(242, 238, 220, 0.88);
+  text-decoration: none;
+  border: 1px solid rgba(255, 255, 255, 0.07);
+  transition: background 0.2s ease;
+}
+
+.wine-editorial__card:hover {
+  background: #252320;
+}
+
+.wine-editorial__name {
+  font-family: 'Granaina Limpia', Georgia, serif;
+  font-size: 0.95rem;
+  color: rgba(255, 252, 240, 0.92);
+  letter-spacing: 0.03em;
+}
+
+.wine-editorial__region {
+  font-size: 0.68rem;
+  text-transform: uppercase;
+  letter-spacing: 0.12em;
+  color: rgba(240, 235, 215, 0.45);
+  margin-top: 2px;
+}
+
+.wine-editorial__note {
+  font-size: 0.75rem;
+  color: rgba(240, 220, 160, 0.7);
+  font-style: italic;
+  margin-top: 4px;
+}
+
+.wine-editorial__glass {
+  font-family: 'Courier New', Courier, monospace;
+  font-size: 0.78rem;
+  color: rgba(240, 220, 160, 0.85);
+  margin-top: 6px;
+  align-self: flex-end;
+}
+
+.wine-editorial__cta {
+  display: block;
+  text-align: center;
+  font-size: 0.72rem;
+  font-weight: 700;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: var(--ink);
+  text-decoration: none;
+}
+
+.wine-editorial__cta:hover {
+  color: var(--accent);
+}
+
+@media (max-width: 600px) {
+  .wine-editorial__cards {
+    grid-template-columns: 1fr;
   }
 }

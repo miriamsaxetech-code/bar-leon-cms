@@ -33,6 +33,11 @@
       "en": "",
       "fr": ""
     },
+    "history": {
+      "es": "",
+      "en": "",
+      "fr": ""
+    },
     "currency": "EUR",
     "primary_language": "es",
     "active_languages": [
@@ -324,15 +329,146 @@
         "bar leon grenade"
       ]
     },
-    "canonical": "https://www.barleongrx.com",
+    "public_base_url": "https://restaurantebarleon.com",
+    "canonical": "https://restaurantebarleon.com",
     "og_image": "/assets/images/og.png"
   },
-  "hero": {
+  "ordering_guide": {
+    "title": {
+      "es": "Cómo se pide aquí",
+      "en": "How to order here",
+      "fr": "Comment commander ici"
+    },
+    "intro": {
+      "es": "En Granada se pide de otra manera. Aquí no hay carta de raciones únicas ni menú cerrado de turista. Esto es lo que encontrará en la barra:",
+      "en": "Ordering in Granada works differently. There is no fixed tourist menu and no single portion size. Here is what you will find at the counter:",
+      "fr": "Commander à Grenade fonctionne différemment. Pas de menu touristique fixe, pas de portion unique. Voici ce que vous trouverez au comptoir :"
+    },
+    "items": [
+      {
+        "term": { "es": "Tapa", "en": "Tapa", "fr": "Tapa" },
+        "def": {
+          "es": "Bocado pequeño, gratis con la bebida. En Bar León no se cobra la tapa.",
+          "en": "A small bite served free with your drink. At Bar León, the tapa is always included.",
+          "fr": "Une petite bouchée offerte avec la boisson. Au Bar León, la tapa est toujours incluse."
+        }
+      },
+      {
+        "term": { "es": "Media ración", "en": "Half portion", "fr": "Demi-portion" },
+        "def": {
+          "es": "Ideal para probar varios platos entre dos personas.",
+          "en": "The right size for sharing and trying multiple dishes between two.",
+          "fr": "Idéal pour partager et goûter plusieurs plats à deux."
+        }
+      },
+      {
+        "term": { "es": "Ración", "en": "Full portion", "fr": "Portion entière" },
+        "def": {
+          "es": "Plato completo. Sirve para uno o para compartir generosamente.",
+          "en": "A full dish. Enough for one or to share generously.",
+          "fr": "Un plat complet. Suffisant pour une personne ou à partager généreusement."
+        }
+      },
+      {
+        "term": { "es": "Menú del día", "en": "Daily set menu", "fr": "Menu du jour" },
+        "def": {
+          "es": "Primero, segundo, postre y pan: 12,50 €. De lunes a viernes en el servicio de mediodía.",
+          "en": "Starter, main, dessert, and bread: €12.50. Monday to Friday at lunch.",
+          "fr": "Entrée, plat, dessert et pain : 12,50 €. Du lundi au vendredi au déjeuner."
+        }
+      },
+      {
+        "term": { "es": "Vino de Granada", "en": "Granada wine", "fr": "Vin de Grenade" },
+        "def": {
+          "es": "Pídale al camarero el vino de la tierra. Desde 3,40 € la copa.",
+          "en": "Ask the waiter for the local wine. From €3.40 a glass.",
+          "fr": "Demandez au serveur le vin local. À partir de 3,40 € le verre."
+        }
+      }
+    ]
+  },
+  "wine_editorial": {
+    "title": {
+      "es": "La bodega de la casa",
+      "en": "The house cellar",
+      "fr": "La cave de la maison"
+    },
+    "intro": {
+      "es": "En Granada hay viñedos a 1.300 metros. Los vinos de aquí no salen en las listas de los gastrobares. Salen en la nuestra.",
+      "en": "Granada has vineyards at 1,300 metres. These wines don't appear on trendy wine lists. They appear on ours.",
+      "fr": "La région de Grenade possède des vignes à 1 300 mètres d'altitude. Ces vins n'apparaissent pas dans les bars à la mode. Ils apparaissent chez nous."
+    },
+    "cta": {
+      "es": "Ver la bodega completa",
+      "en": "View the full cellar",
+      "fr": "Voir la cave complète"
+    },
+    "featured_wine_ids": ["senorio-de-nevada", "calvente-guindalera", "manzanilla-casa-bernal"]
+  },
+  "faq": [
+    {
+      "question": {
+        "es": "¿Cómo se puede reservar mesa en Bar León?",
+        "en": "How can I book a table at Bar León?",
+        "fr": "Comment réserver une table au Bar León ?"
+      },
+      "answer": {
+        "es": "Las reservas se hacen exclusivamente por teléfono llamando al +34 958 22 51 43. No se acepta reserva online.",
+        "en": "Reservations are made by phone only: +34 958 22 51 43. Online booking is not available.",
+        "fr": "Les réservations se font uniquement par téléphone au +34 958 22 51 43. Aucune réservation en ligne n'est disponible."
+      }
+    },
+    {
+      "question": {
+        "es": "¿Tienen menú del día?",
+        "en": "Do you have a daily set menu?",
+        "fr": "Proposez-vous un menu du jour ?"
+      },
+      "answer": {
+        "es": "Sí. El menú del día está disponible de lunes a martes y de jueves a viernes, en el servicio de mediodía (13:00–16:00). Precio: 12,50 € IVA incluido, sin bebida.",
+        "en": "Yes. The daily menu is available Monday–Tuesday and Thursday–Friday at lunch (1:00 PM–4:00 PM). Price: €12.50 including VAT, drinks not included.",
+        "fr": "Oui. Le menu du jour est disponible du lundi au mardi et du jeudi au vendredi, au déjeuner (13h–16h). Prix : 12,50 € TTC, boissons non comprises."
+      }
+    },
+    {
+      "question": {
+        "es": "¿Dónde está Bar León exactamente?",
+        "en": "Where exactly is Bar León?",
+        "fr": "Où se trouve exactement le Bar León ?"
+      },
+      "answer": {
+        "es": "Estamos en Calle Pan, 1, en el Albayzín, a dos minutos a pie de Plaza Nueva, Granada.",
+        "en": "We are at Calle Pan, 1, in the Albayzín neighbourhood, a two-minute walk from Plaza Nueva, Granada.",
+        "fr": "Nous sommes au Calle Pan, 1, dans le quartier de l'Albayzín, à deux minutes à pied de Plaza Nueva, Grenade."
+      }
+    },
+    {
+      "question": {
+        "es": "¿Qué días está abierto Bar León?",
+        "en": "What days is Bar León open?",
+        "fr": "Quels jours le Bar León est-il ouvert ?"
+      },
+      "answer": {
+        "es": "Abrimos lunes, martes, jueves, viernes, sábado y domingo. Los miércoles permanecemos cerrados.",
+        "en": "We are open Monday, Tuesday, Thursday, Friday, Saturday, and Sunday. We are closed on Wednesdays.",
+        "fr": "Nous sommes ouverts le lundi, mardi, jeudi, vendredi, samedi et dimanche. Nous sommes fermés le mercredi."
+      }
+    }
+  ],
+  "logo": {
     "image": "/assets/images/hero-leon.webp",
     "alt": {
-      "es": "Interior del Restaurante-Bar León en el Albayzín, Granada",
-      "en": "Interior of Restaurante-Bar León in Granada's Albayzín",
-      "fr": "Intérieur du Restaurante-Bar León dans l'Albayzín de Grenade"
+      "es": "Rótulo del Restaurante Bar León — Granada",
+      "en": "Restaurante Bar León signage — Granada",
+      "fr": "Enseigne du Restaurante Bar León — Grenade"
+    }
+  },
+  "hero": {
+    "image": "/assets/images/web/leon-barra.webp",
+    "alt": {
+      "es": "La barra del Restaurante Bar León, Granada",
+      "en": "The bar counter at Restaurante Bar León, Granada",
+      "fr": "Le comptoir du Restaurante Bar León, Grenade"
     },
     "focal_point": "center"
   },
@@ -722,9 +858,9 @@
         "fr": "Fèves au jambon ibérique et œuf au plat"
       },
       "description": {
-        "es": "Habas tiernas con jamón ibérico al 50% y huevo frito.",
-        "en": "Tender baby broad beans sautéed with Iberian ham and topped with a fried egg.",
-        "fr": "Fèves tendres sautées au jambon ibérique et surmontées d'un œuf au plat."
+        "es": "Habas tiernas con jamón ibérico al 50% y huevo frito. Plato de temporada — cuando no hay habas, no hay habas.",
+        "en": "Tender baby broad beans sautéed with Iberian ham and topped with a fried egg. A seasonal dish — when the broad beans are gone, they're gone.",
+        "fr": "Fèves tendres sautées au jambon ibérique et surmontées d'un œuf au plat. Plat de saison — quand il n'y a plus de fèves, il n'y en a plus."
       },
       "price": "13,00 €",
       "pairing": {
@@ -744,9 +880,9 @@
         "fr": "Chevreuil en marinade"
       },
       "description": {
-        "es": "Ciervo en adobo tradicional. Carne de caza típica de zonas de sierra como Jaén, especial por su sabor profundo y suavizada con vino, laurel y especias.",
-        "en": "Deer meat marinated in traditional mountain herbs and spices, slow-cooked in red wine.",
-        "fr": "Viande de cerf marinée aux herbes de montagne, mijotée au vin rouge."
+        "es": "Ciervo en adobo tradicional. Carne de caza típica de la sierra. Adobo de 24 horas en vino, laurel y especias — cuando se acaba, se acaba.",
+        "en": "Venison in a traditional 24-hour mountain marinade of wine, bay leaf, and spices. When it runs out, it runs out.",
+        "fr": "Chevreuil en marinade traditionnelle de montagne 24 heures, au vin, laurier et épices. Quand c'est fini, c'est fini."
       },
       "price": "Media 10,50 € / Ración 13,50 €",
       "pairing": {
@@ -766,9 +902,9 @@
         "fr": "Rognons au Xérès"
       },
       "description": {
-        "es": "Riñones salteados en salsa de vino de Jerez. Casquería de siempre.",
-        "en": "Veal kidneys braised in a rich sherry wine sauce.",
-        "fr": "Rognons de veau mijotés dans une riche sauce au vin de Xérès."
+        "es": "Riñones salteados en salsa de vino de Jerez. Casquería de siempre. El plato que piden los que saben lo que es comer bien.",
+        "en": "Veal kidneys braised in a rich sherry wine sauce. Old-school offal at its best — the dish ordered by those who know.",
+        "fr": "Rognons de veau mijotés dans une riche sauce au vin de Xérès. Abats à l'ancienne — le plat commandé par ceux qui s'y connaissent."
       },
       "price": "Media 9,00 € / Ración 12,50 €",
       "pairing": {

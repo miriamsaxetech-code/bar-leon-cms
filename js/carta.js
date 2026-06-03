@@ -2,7 +2,7 @@
   'use strict';
 
   const HOME_LINKS  = { es: '/es/', en: '/en/', fr: '/fr/' };
-  const CARTA_LINKS = { es: '/es/carta.html', en: '/en/menu.html', fr: '/fr/carte.html' };
+  const CARTA_LINKS = { es: '/es/carta', en: '/en/menu', fr: '/fr/carte' };
 
   const SABORES_CATEGORY_ID = 'andalusian-specialities';
   const WEB_IMAGE_BASE = '../assets/images/web/';
@@ -116,7 +116,9 @@
       fr: { racion: 'Portion', unidad: 'unité', barra: 'comptoir', restaurante: 'restaurant', 'unidad en barra': "à l'unité" },
     };
 
-    const m = str.match(/^Media\s+(.+?)\s*\/\s*Raci[oó]n\s+(.+)$/i);
+    const cleanStr = str.replace(/&nbsp;/g, ' ').replace(/ /g, ' ');
+
+    const m = cleanStr.match(/^Media\s+(.+?)\s*\/\s*Raci[oó]n\s+(.+)$/i);
     if (m) {
       const T = PORTION_TERMS[lang] || PORTION_TERMS.es;
       const half = m[1].trim();
@@ -131,7 +133,7 @@
     // For other annotation patterns, do inline substitution as before
     if (lang !== 'es') {
       const T = INLINE_TERMS[lang] || {};
-      const localized = str
+      const localized = cleanStr
         .replace(/\(raci[oó]n\)\s*\/\s*(.+?)\(unidad en barra\)/i,
           (_, mid) => `(${T.racion}) / ${mid}(${T['unidad en barra']})`)
         .replace(/\(unidad\)/gi,       `(${T.unidad})`)
@@ -141,7 +143,7 @@
       return { type: 'simple', display: localized };
     }
 
-    return { type: 'simple', display: str };
+    return { type: 'simple', display: cleanStr };
   }
 
   function formatTimePeriod(period, lang) {
@@ -246,9 +248,9 @@
     }
     if (haystack.includes('manzanilla') || haystack.includes('sanlúcar')) {
       return {
-        es: 'salitre de Cádiz',
-        en: 'Cádiz saltiness',
-        fr: 'salinité de Cadix',
+        es: 'salinidad de Sanlúcar',
+        en: 'salty Sanlúcar character',
+        fr: 'salinité de Sanlúcar',
       }[lang];
     }
     if (haystack.includes('jerez')) {
@@ -984,9 +986,13 @@
     els.forEach(function(el) { el.classList.add('reveal'); io.observe(el); });
   }
 
+  function getPublicBaseUrl(d) {
+    return (d.seo && (d.seo.public_base_url || d.seo.canonical)) || 'https://restaurantebarleon.com';
+  }
+
   function injectMenuJsonLd(d, lang) {
-    const BASE = 'https://www.barleongrx.com';
-    const MENU_PATH = { es: '/es/carta.html', en: '/en/menu.html', fr: '/fr/carte.html' };
+    const BASE = getPublicBaseUrl(d);
+    const MENU_PATH = { es: '/es/carta', en: '/en/menu', fr: '/fr/carte' };
     const foodCats = (d.categories || []).filter(c => c.type === 'food');
     const dishes   = (d.dishes || []).filter(dish => dish.available !== false);
 
@@ -1011,19 +1017,27 @@
 
     const schema = {
       '@context': 'https://schema.org',
-      '@type': 'Restaurant',
-      name: 'Restaurante Bar León',
-      url: BASE + (MENU_PATH[lang] || MENU_PATH.es),
-      hasMenu: {
-        '@type': 'Menu',
-        name: { es: 'Carta', en: 'Menu', fr: 'Carte' }[lang] || 'Carta',
-        hasMenuSection: menuSections,
-      },
+      '@graph': [
+        {
+          '@type': 'Restaurant',
+          name: 'Restaurante Bar León',
+          url: BASE,
+          hasMenu: BASE + '/es/carta',
+        },
+        {
+          '@type': 'Menu',
+          '@id': BASE + '/es/carta',
+          url: BASE + (MENU_PATH[lang] || MENU_PATH.es),
+          name: { es: 'Carta', en: 'Menu', fr: 'Carte' }[lang] || 'Carta',
+          hasMenuSection: menuSections,
+        },
+      ],
     };
-    const el = document.createElement('script');
+    const el = document.getElementById && document.getElementById('menu-jsonld') || document.createElement('script');
+    el.id = 'menu-jsonld';
     el.type = 'application/ld+json';
     el.textContent = JSON.stringify(schema);
-    if (document.head) {
+    if (document.head && !el.parentNode) {
       document.head.appendChild(el);
     }
   }

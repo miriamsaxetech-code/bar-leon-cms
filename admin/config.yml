@@ -2,9 +2,9 @@ backend:
   name: github
   repo: miriamsaxetech-code/bar-leon-cms
   branch: main
-  base_url: https://bar-leon-cms.pages.dev
+  base_url: https://restaurantebarleon.com
   auth_endpoint: auth
-  site_domain: bar-leon-cms.pages.dev
+  site_domain: restaurantebarleon.com
 
 media_folder: assets/images
 public_folder: assets/images
@@ -522,6 +522,35 @@ collections:
                   - { name: es, label: "ES", widget: string }
                   - { name: en, label: "EN", widget: string }
                   - { name: fr, label: "FR", widget: string }
+
+          # ── PIZARRA DE LA BARRA ─────────────────────────────────
+          - name: chalkboard
+            label: "🍖 Pizarra de la Barra"
+            widget: object
+            collapsed: true
+            fields:
+              - name: group1
+                label: "Columna izquierda (carnes, embutidos)"
+                label_singular: Plato
+                widget: list
+                summary: "{{fields.es}}"
+                fields:
+                  - { name: es, label: "Nombre (ES)", widget: string }
+                  - { name: en, label: "Nombre (EN)", widget: string, required: false }
+                  - { name: fr, label: "Nombre (FR)", widget: string, required: false }
+                  - { name: media, label: "Precio media (ej: 10,00)", widget: string, required: false }
+                  - { name: racion, label: "Precio ración (ej: 14,00)", widget: string }
+              - name: group2
+                label: "Columna derecha (fritos, verduras, pescados)"
+                label_singular: Plato
+                widget: list
+                summary: "{{fields.es}}"
+                fields:
+                  - { name: es, label: "Nombre (ES)", widget: string }
+                  - { name: en, label: "Nombre (EN)", widget: string, required: false }
+                  - { name: fr, label: "Nombre (FR)", widget: string, required: false }
+                  - { name: media, label: "Precio media (ej: 8,50)", widget: string, required: false }
+                  - { name: racion, label: "Precio ración (ej: 11,50)", widget: string }
 
           # ── CARIOCAS ────────────────────────────────────────────
           - name: cariocas

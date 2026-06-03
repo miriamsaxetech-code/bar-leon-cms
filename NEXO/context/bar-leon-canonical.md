@@ -131,7 +131,22 @@ Evitar siempre:
 
 ---
 
-## Carta actual (datos reales, es.json)
+## Acceso CMS
+
+El proyecto tiene dos interfaces de administración que escriben sobre `data/venue.json`. La división es intencional:
+
+| Sistema | Ruta | Usuario | Cuándo usarlo |
+|---|---|---|---|
+| Panel del propietario | `/panel/` | Propietario (no técnico) | Tareas diarias: precios, horarios, avisos, fotos del local |
+| Decap CMS | `/admin/` | Desarrollador / asistente | Cambios de esquema, traducciones, platos, vinos, SEO, hero, nav |
+
+**Regla:** si el propietario puede hacerlo en el panel, no se hace en Decap. El panel es la herramienta operativa diaria; Decap es para cambios que requieren contexto técnico.
+
+Ambos sistemas detectan conflictos de escritura (SHA-mismatch 409). No usar los dos a la vez sobre la misma sesión de datos.
+
+---
+
+## Carta actual (datos reales, venue.json)
 
 **Categorías activas:**
 - SABORES DE ANDALUCÍA

@@ -1,5 +1,7 @@
 User-agent: *
-Disallow: /admin/
-Disallow: /panel/
+Allow: /
 
-Sitemap: https://www.barleongrx.com/sitemap.xml
+Disallow: /admin/
+Disallow: /admin-quick/
+
+Sitemap: https://restaurantebarleon.com/sitemap.xml

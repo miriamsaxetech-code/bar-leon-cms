@@ -9,10 +9,10 @@
   <link rel="icon" href="/assets/images/favicon-16x16.png" type="image/png" sizes="16x16" />
   <link rel="apple-touch-icon" href="/assets/images/apple-touch-icon.png" />
   <meta property="og:type" content="website" />
-  <meta property="og:url" content="https://www.barleongrx.com/en/menu.html" />
+  <meta property="og:url" content="https://restaurantebarleon.com/en/menu" />
   <meta property="og:title" content="Menu — Bar León, Granada" />
   <meta property="og:description" content="Full menu at Bar León. Traditional Granada dishes, daily special and opening hours. Plaza Nueva, Granada." />
-  <meta property="og:image" content="https://www.barleongrx.com/assets/images/og.png" />
+  <meta property="og:image" content="https://restaurantebarleon.com/assets/images/og.png" />
   <meta property="og:image:width" content="1200" />
   <meta property="og:image:height" content="630" />
   <meta property="og:locale" content="en_GB" />
@@ -20,15 +20,19 @@
   <meta name="twitter:card" content="summary_large_image" />
   <meta name="twitter:title" content="Menu — Bar León, Granada" />
   <meta name="twitter:description" content="Full menu at Bar León. Traditional Granada dishes, daily special and opening hours. Plaza Nueva, Granada." />
-  <meta name="twitter:image" content="https://www.barleongrx.com/assets/images/og.png" />
-  <link rel="canonical" href="https://www.barleongrx.com/en/menu.html" />
-  <link rel="alternate" hreflang="es" href="/es/carta.html" />
-  <link rel="alternate" hreflang="en" href="/en/menu.html" />
-  <link rel="alternate" hreflang="fr" href="/fr/carte.html" />
+  <meta name="twitter:image" content="https://restaurantebarleon.com/assets/images/og.png" />
+  <link rel="canonical" href="https://restaurantebarleon.com/en/menu" />
+  <link rel="alternate" hreflang="es" href="https://restaurantebarleon.com/es/carta" />
+  <link rel="alternate" hreflang="en" href="https://restaurantebarleon.com/en/menu" />
+  <link rel="alternate" hreflang="fr" href="https://restaurantebarleon.com/fr/carte" />
+  <link rel="alternate" hreflang="x-default" href="https://restaurantebarleon.com/es/carta" />
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
   <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@700&family=Inter:wght@400;500;600&display=swap" rel="stylesheet" />
   <link rel="stylesheet" href="../css/style.css" />
+  <script id="menu-jsonld" type="application/ld+json">
+    {"@context":"https://schema.org","@graph":[{"@type":"Restaurant","name":"Restaurante Bar León","url":"https://restaurantebarleon.com","hasMenu":"https://restaurantebarleon.com/es/carta","telephone":"+34 958 22 51 43","address":{"@type":"PostalAddress","streetAddress":"C/ Pan, 1","addressLocality":"Granada","postalCode":"18010","addressRegion":"Andalucía","addressCountry":"ES"}},{"@type":"Menu","@id":"https://restaurantebarleon.com/es/carta","url":"https://restaurantebarleon.com/en/menu","name":"Menu","hasMenuSection":[{"@type":"MenuSection","name":"Bar Menu"},{"@type":"MenuSection","name":"Restaurant Menu"},{"@type":"MenuSection","name":"Drinks"},{"@type":"MenuSection","name":"The Cellar"},{"@type":"MenuSection","name":"Daily Menu"}]}]}
+  </script>
 </head>
 <body>
   <div class="masthead-rule"></div>
@@ -38,7 +42,39 @@
     </div>
   </header>
   <div id="loader">Bar Le&oacute;n</div>
-  <main id="carta-body" style="display:none"></main>
+  <main id="carta-body">
+    <div class="wrap">
+      <h1>Menu — Restaurante Bar León</h1>
+      <p>Full menu at Bar León, C/ Pan, 1, Granada. Traditional dishes, Granada bar classics, daily menu and wines.</p>
+      <p><strong>Address:</strong> C/ Pan, 1, Albayzín, 18010 Granada. <strong>Phone:</strong> <a href="tel:+34958225143">+34 958 22 51 43</a>.</p>
+      <nav aria-label="Menu navigation">
+        <a href="/en/">Home</a>
+        <a href="/en/menu#hours">Opening hours</a>
+        <a href="/es/carta">Español</a>
+        <a href="/fr/carte">Français</a>
+      </nav>
+      <section>
+        <h2>Bar Menu</h2>
+        <p>Sharing portions, tapas, fried dishes, sandwiches and bar classics.</p>
+      </section>
+      <section>
+        <h2>Restaurant Menu</h2>
+        <p>Traditional Granada dishes and Andalusian specialties.</p>
+      </section>
+      <section>
+        <h2>Drinks</h2>
+        <p>Beers, soft drinks, wines and spirits.</p>
+      </section>
+      <section>
+        <h2>The Cellar</h2>
+        <p>Granada wines and classic Spanish appellations.</p>
+      </section>
+      <section>
+        <h2>Daily Menu</h2>
+        <p>Daily menu from Monday to Friday when available.</p>
+      </section>
+    </div>
+  </main>
   <script src="../js/carta.js"></script>
 </body>
 </html>

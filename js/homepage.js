@@ -2,7 +2,7 @@
   'use strict';
 
   const HOME_LINKS  = { es: '/es/', en: '/en/', fr: '/fr/' };
-  const CARTA_LINKS = { es: '/es/carta.html', en: '/en/menu.html', fr: '/fr/carte.html' };
+  const CARTA_LINKS = { es: '/es/carta', en: '/en/menu', fr: '/fr/carte' };
   const WEB_IMAGE_BASE = '../assets/images/web/';
 
   const HOME_FOOD_IMAGES = [
@@ -359,24 +359,26 @@
     });
     const seasonal = splitList(t(dm.seasonal, lang)).map(note => `<em>${note}</em>`);
 
-    return `<section class="tile-frame home-daily-menu" aria-labelledby="home-daily-title">
-  <div class="home-daily-menu__head">
-    <p class="section-label">${kickerText}</p>
-    <div>
-      <h2 id="home-daily-title">${LABELS.dailyMenu[lang]}</h2>
-      <p class="home-daily-menu__meta">${days}${period ? ` · ${period}` : ''}</p>
+    return `<section class="chalkboard-menu pizarra-dia home-daily-menu" aria-labelledby="home-daily-title">
+  <div class="pizarra-dia__wrap">
+    <div class="home-daily-menu__head">
+      <p class="section-label">${kickerText}</p>
+      <div>
+        <h2 id="home-daily-title">${LABELS.dailyMenu[lang]}</h2>
+        <p class="home-daily-menu__meta">${days}${period ? ` · ${period}` : ''}</p>
+      </div>
+      <span class="home-daily-menu__price">${formatPrice(dm.price)}</span>
     </div>
-    <span class="home-daily-menu__price">${formatPrice(dm.price)}</span>
-  </div>
-  <div class="home-daily-menu__body">
-    ${renderAccordionGroup(LABELS.starters[lang], splitList(t(dm.starters, lang)), true)}
-    ${renderAccordionGroup(LABELS.seconds[lang], splitList(t(dm.seconds, lang)), false)}
-    ${renderAccordionGroup(LABELS.daily[lang], mains.concat(seasonal), false)}
-    ${renderAccordionGroup(LABELS.desserts[lang], splitList(t(dm.desserts, lang)), false)}
-  </div>
-  <div class="home-daily-menu__foot">
-    <p>${t(dm.includes, lang)}</p>
-    <a href="${cartaUrl}">${LABELS.fullMenu[lang]}</a>
+    <div class="home-daily-menu__body">
+      ${renderAccordionGroup(LABELS.starters[lang], splitList(t(dm.starters, lang)), true)}
+      ${renderAccordionGroup(LABELS.seconds[lang], splitList(t(dm.seconds, lang)), false)}
+      ${renderAccordionGroup(LABELS.daily[lang], mains.concat(seasonal), false)}
+      ${renderAccordionGroup(LABELS.desserts[lang], splitList(t(dm.desserts, lang)), false)}
+    </div>
+    <div class="home-daily-menu__foot">
+      <p>${t(dm.includes, lang)}</p>
+      <a href="${cartaUrl}">${LABELS.fullMenu[lang]}</a>
+    </div>
   </div>
 </section>`;
   }
@@ -510,6 +512,66 @@
     document.body.appendChild(fab);
   }
 
+  function renderHistoria(d, lang) {
+    const history = d.venue && d.venue.history ? t(d.venue.history, lang) : '';
+    if (!history || !history.trim()) return '';
+    const historyTitle = { es: 'Historia del León', en: 'The Story of Bar León', fr: 'L\'histoire du Bar León' }[lang];
+    const paragraphs = history.split('\n').filter(function(p) { return p.trim(); })
+      .map(function(p) { return `<p>${p.trim()}</p>`; }).join('');
+    return `<section class="historia-leon" aria-labelledby="historia-title">
+  <h2 id="historia-title">${historyTitle}</h2>
+  <div class="historia-leon__text">${paragraphs}</div>
+</section>`;
+  }
+
+  function renderOrderingGuide(d, lang, cartaUrl) {
+    const og = d.ordering_guide;
+    if (!og || !og.items || !og.items.length) return '';
+    const items = og.items.map(function(item) {
+      return `<dt class="ordering-guide__term">${t(item.term, lang)}</dt>
+<dd class="ordering-guide__def">${t(item.def, lang)}</dd>`;
+    }).join('');
+    return `<section class="ordering-guide" aria-labelledby="ordering-guide-title">
+  <h2 id="ordering-guide-title">${t(og.title, lang)}</h2>
+  <p class="ordering-guide__intro">${t(og.intro, lang)}</p>
+  <dl class="ordering-guide__list">${items}</dl>
+</section>`;
+  }
+
+  function renderWineEditorial(d, lang, cartaUrl) {
+    const we = d.wine_editorial;
+    if (!we) return '';
+
+    const wines = (d.wines || []).filter(function(w) { return w.available !== false; });
+    const featured = (we.featured_wine_ids || [])
+      .map(function(id) { return wines.find(function(w) { return w.id === id; }); })
+      .filter(Boolean);
+    if (!featured.length) return '';
+
+    const bodegaAnchor = '#la-bodega';
+    const wineCards = featured.map(function(wine) {
+      const name = t(wine.name, lang);
+      const region = t(wine.region, lang);
+      const note = wineCultureNote(wine, lang);
+      const glass = wine.price_glass ? wine.price_glass.toFixed(2).replace('.', ',') + '&nbsp;€' : '';
+      return `<a class="wine-editorial__card" href="${cartaUrl}#wine-${wine.id}">
+  <span class="wine-editorial__name">${name}</span>
+  <span class="wine-editorial__region">${region}</span>
+  ${note ? `<span class="wine-editorial__note">${note}</span>` : ''}
+  ${glass ? `<span class="wine-editorial__glass">${glass} copa</span>` : ''}
+</a>`;
+    }).join('');
+
+    return `<section class="wine-editorial" aria-labelledby="wine-editorial-title">
+  <div class="wine-editorial__head">
+    <h2 id="wine-editorial-title">${t(we.title, lang)}</h2>
+    <p class="wine-editorial__intro">${t(we.intro, lang)}</p>
+  </div>
+  <div class="wine-editorial__cards">${wineCards}</div>
+  <a class="wine-editorial__cta" href="${cartaUrl}${bodegaAnchor}">${t(we.cta, lang)} →</a>
+</section>`;
+  }
+
   function render(d, lang) {
     const phoneLink    = d.contact.phone_link;
     const phoneDisplay = formatPhoneDisplay(d.contact.phone);
@@ -570,11 +632,13 @@
       fr: 'Si vous avez aimé, laissez-nous un avis positif. Sinon, dites-le nous au comptoir et nous le réglerons ensemble.'
     }[lang];
 
+    const logoAlt = d.logo && d.logo.alt ? t(d.logo.alt, lang) : t(d.venue.full_name, lang);
+    const logoSrc = d.logo && d.logo.image ? d.logo.image : '../assets/images/web/azulejo-leon.webp';
     const logoBlock = `
 <div class="site-tile-container">
   <picture class="site-tile-frame">
-    <source srcset="../assets/images/web/azulejo-leon.webp" type="image/webp">
-    <img class="site-tile" src="../assets/images/web/azulejo-leon.png" alt="Restaurante Bar León — Granada" fetchpriority="high" />
+    <source srcset="${logoSrc}" type="image/webp">
+    <img class="site-tile" src="${logoSrc.replace('.webp', '.png')}" alt="${logoAlt}" fetchpriority="high" />
   </picture>
   <h1 class="sr-only">${t(d.venue.name, lang)}</h1>
 </div>`;
@@ -626,9 +690,12 @@
   ${aviso}
   ${hero}
   ${trustStrip}
+  ${renderHistoria(d, lang)}
   ${renderHomeAndalusia(d, lang, cartaUrl)}
   ${renderHomeDailyMenu(d, lang, cartaUrl)}
+  ${renderOrderingGuide(d, lang, cartaUrl)}
   ${renderHomeFoodGallery(lang)}
+  ${renderWineEditorial(d, lang, cartaUrl)}
   ${renderSocialLinks(d.social)}
   ${locationBlock}
   ${renderStoriesArchive(d, lang)}
@@ -734,17 +801,31 @@
     return result;
   }
 
+  function getPublicBaseUrl(d) {
+    return (d.seo && (d.seo.public_base_url || d.seo.canonical)) || 'https://restaurantebarleon.com';
+  }
+
   function injectRestaurantJsonLd(d, lang) {
-    const BASE = 'https://www.barleongrx.com';
-    const PATH = { es: '/es/', en: '/en/', fr: '/fr/' };
+    const BASE = getPublicBaseUrl(d);
+    const CARTA = { es: '/es/carta.html', en: '/en/menu.html', fr: '/fr/carte.html' };
+
+    const cuisineBase = d.venue && d.venue.cuisine ? (d.venue.cuisine[lang] || d.venue.cuisine.es) : 'Traditional Andalusian';
+    const cuisineLists = {
+      es: [cuisineBase, 'Cocina andaluza', 'Taberna', 'Casquería', 'Vinos de Granada'],
+      en: [cuisineBase, 'Andalusian cuisine', 'Tavern', 'Offal dishes', 'Granada wines'],
+      fr: [cuisineBase, 'Cuisine andalouse', 'Taverne', 'Abats', 'Vins de Grenade'],
+    };
+
     const schema = {
       '@context': 'https://schema.org',
       '@type': 'Restaurant',
       name: 'Restaurante Bar León',
-      url: BASE + (PATH[lang] || PATH.es),
+      url: BASE,
       description: d.seo && d.seo.description ? (d.seo.description[lang] || d.seo.description.es) : '',
       foundingDate: d.venue && d.venue.founding_year ? String(d.venue.founding_year) : '1959',
-      servesCuisine: d.venue && d.venue.cuisine ? (d.venue.cuisine[lang] || d.venue.cuisine.es) : 'Traditional Andalusian',
+      servesCuisine: cuisineLists[lang] || cuisineLists.es,
+      priceRange: '€',
+      hasMenu: BASE + (CARTA[lang] || CARTA.es),
       telephone: d.contact && d.contact.phone ? d.contact.phone : '',
       address: {
         '@type': 'PostalAddress',
@@ -759,11 +840,30 @@
       sameAs: [d.social && d.social.instagram, d.social && d.social.facebook].filter(Boolean),
     };
     if (d.social && d.social.google_maps) schema.hasMap = d.social.google_maps;
-    const el = document.createElement('script');
-    el.type = 'application/ld+json';
-    el.textContent = JSON.stringify(schema);
-    if (document.head) {
-      document.head.appendChild(el);
+
+    function injectScript(obj, id) {
+      const el = (id && document.getElementById(id)) || document.createElement('script');
+      if (id) el.id = id;
+      el.type = 'application/ld+json';
+      el.textContent = JSON.stringify(obj);
+      if (document.head && !el.parentNode) document.head.appendChild(el);
+    }
+
+    injectScript(schema, 'restaurant-jsonld');
+
+    if (d.faq && d.faq.length) {
+      const faqSchema = {
+        '@context': 'https://schema.org',
+        '@type': 'FAQPage',
+        mainEntity: d.faq.map(function(item) {
+          return {
+            '@type': 'Question',
+            name: t(item.question, lang),
+            acceptedAnswer: { '@type': 'Answer', text: t(item.answer, lang) },
+          };
+        }),
+      };
+      injectScript(faqSchema, 'faq-jsonld');
     }
   }
 

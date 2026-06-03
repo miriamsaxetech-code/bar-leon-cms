@@ -3,66 +3,69 @@
         xmlns:xhtml="http://www.w3.org/1999/xhtml">
 
   <url>
-    <loc>https://www.barleongrx.com/es/</loc>
-    <lastmod>2026-06-01</lastmod>
+    <loc>https://restaurantebarleon.com/es/</loc>
+    <lastmod>2026-06-03</lastmod>
     <changefreq>weekly</changefreq>
     <priority>1.0</priority>
-    <xhtml:link rel="alternate" hreflang="es" href="https://www.barleongrx.com/es/"/>
-    <xhtml:link rel="alternate" hreflang="en" href="https://www.barleongrx.com/en/"/>
-    <xhtml:link rel="alternate" hreflang="fr" href="https://www.barleongrx.com/fr/"/>
-    <xhtml:link rel="alternate" hreflang="x-default" href="https://www.barleongrx.com/"/>
+    <xhtml:link rel="alternate" hreflang="es" href="https://restaurantebarleon.com/es/"/>
+    <xhtml:link rel="alternate" hreflang="en" href="https://restaurantebarleon.com/en/"/>
+    <xhtml:link rel="alternate" hreflang="fr" href="https://restaurantebarleon.com/fr/"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://restaurantebarleon.com/es/"/>
   </url>
 
   <url>
-    <loc>https://www.barleongrx.com/en/</loc>
-    <lastmod>2026-06-01</lastmod>
+    <loc>https://restaurantebarleon.com/en/</loc>
+    <lastmod>2026-06-03</lastmod>
     <changefreq>weekly</changefreq>
-    <priority>1.0</priority>
-    <xhtml:link rel="alternate" hreflang="es" href="https://www.barleongrx.com/es/"/>
-    <xhtml:link rel="alternate" hreflang="en" href="https://www.barleongrx.com/en/"/>
-    <xhtml:link rel="alternate" hreflang="fr" href="https://www.barleongrx.com/fr/"/>
-    <xhtml:link rel="alternate" hreflang="x-default" href="https://www.barleongrx.com/"/>
+    <priority>0.9</priority>
+    <xhtml:link rel="alternate" hreflang="es" href="https://restaurantebarleon.com/es/"/>
+    <xhtml:link rel="alternate" hreflang="en" href="https://restaurantebarleon.com/en/"/>
+    <xhtml:link rel="alternate" hreflang="fr" href="https://restaurantebarleon.com/fr/"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://restaurantebarleon.com/es/"/>
   </url>
 
   <url>
-    <loc>https://www.barleongrx.com/fr/</loc>
-    <lastmod>2026-06-01</lastmod>
+    <loc>https://restaurantebarleon.com/fr/</loc>
+    <lastmod>2026-06-03</lastmod>
     <changefreq>weekly</changefreq>
-    <priority>1.0</priority>
-    <xhtml:link rel="alternate" hreflang="es" href="https://www.barleongrx.com/es/"/>
-    <xhtml:link rel="alternate" hreflang="en" href="https://www.barleongrx.com/en/"/>
-    <xhtml:link rel="alternate" hreflang="fr" href="https://www.barleongrx.com/fr/"/>
-    <xhtml:link rel="alternate" hreflang="x-default" href="https://www.barleongrx.com/"/>
+    <priority>0.9</priority>
+    <xhtml:link rel="alternate" hreflang="es" href="https://restaurantebarleon.com/es/"/>
+    <xhtml:link rel="alternate" hreflang="en" href="https://restaurantebarleon.com/en/"/>
+    <xhtml:link rel="alternate" hreflang="fr" href="https://restaurantebarleon.com/fr/"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://restaurantebarleon.com/es/"/>
   </url>
 
   <url>
-    <loc>https://www.barleongrx.com/es/carta.html</loc>
-    <lastmod>2026-06-01</lastmod>
-    <changefreq>monthly</changefreq>
+    <loc>https://restaurantebarleon.com/es/carta</loc>
+    <lastmod>2026-06-03</lastmod>
+    <changefreq>weekly</changefreq>
     <priority>0.9</priority>
-    <xhtml:link rel="alternate" hreflang="es" href="https://www.barleongrx.com/es/carta.html"/>
-    <xhtml:link rel="alternate" hreflang="en" href="https://www.barleongrx.com/en/menu.html"/>
-    <xhtml:link rel="alternate" hreflang="fr" href="https://www.barleongrx.com/fr/carte.html"/>
+    <xhtml:link rel="alternate" hreflang="es" href="https://restaurantebarleon.com/es/carta"/>
+    <xhtml:link rel="alternate" hreflang="en" href="https://restaurantebarleon.com/en/menu"/>
+    <xhtml:link rel="alternate" hreflang="fr" href="https://restaurantebarleon.com/fr/carte"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://restaurantebarleon.com/es/carta"/>
   </url>
 
   <url>
-    <loc>https://www.barleongrx.com/en/menu.html</loc>
-    <lastmod>2026-06-01</lastmod>
-    <changefreq>monthly</changefreq>
-    <priority>0.9</priority>
-    <xhtml:link rel="alternate" hreflang="es" href="https://www.barleongrx.com/es/carta.html"/>
-    <xhtml:link rel="alternate" hreflang="en" href="https://www.barleongrx.com/en/menu.html"/>
-    <xhtml:link rel="alternate" hreflang="fr" href="https://www.barleongrx.com/fr/carte.html"/>
+    <loc>https://restaurantebarleon.com/en/menu</loc>
+    <lastmod>2026-06-03</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.8</priority>
+    <xhtml:link rel="alternate" hreflang="es" href="https://restaurantebarleon.com/es/carta"/>
+    <xhtml:link rel="alternate" hreflang="en" href="https://restaurantebarleon.com/en/menu"/>
+    <xhtml:link rel="alternate" hreflang="fr" href="https://restaurantebarleon.com/fr/carte"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://restaurantebarleon.com/es/carta"/>
   </url>
 
   <url>
-    <loc>https://www.barleongrx.com/fr/carte.html</loc>
-    <lastmod>2026-06-01</lastmod>
-    <changefreq>monthly</changefreq>
-    <priority>0.9</priority>
-    <xhtml:link rel="alternate" hreflang="es" href="https://www.barleongrx.com/es/carta.html"/>
-    <xhtml:link rel="alternate" hreflang="en" href="https://www.barleongrx.com/en/menu.html"/>
-    <xhtml:link rel="alternate" hreflang="fr" href="https://www.barleongrx.com/fr/carte.html"/>
+    <loc>https://restaurantebarleon.com/fr/carte</loc>
+    <lastmod>2026-06-03</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.8</priority>
+    <xhtml:link rel="alternate" hreflang="es" href="https://restaurantebarleon.com/es/carta"/>
+    <xhtml:link rel="alternate" hreflang="en" href="https://restaurantebarleon.com/en/menu"/>
+    <xhtml:link rel="alternate" hreflang="fr" href="https://restaurantebarleon.com/fr/carte"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://restaurantebarleon.com/es/carta"/>
   </url>
 
 </urlset>

@@ -10,7 +10,9 @@ Sitio estático completamente. Sin backend propio. Sin base de datos. Sin servid
 GitHub repo (miriamsaxetech-code/bar-leon-cms)
   └── Cloudflare Pages (deploy automático en push a main)
         ├── Sitio público (HTML + CSS + JS vanilla)
-        └── /admin/ (Decap CMS — edición sin código)
+        ├── /admin/     — Decap CMS (edición full-schema, desktop)
+        ├── /panel/     — Panel del propietario (precios, horarios, avisos, fotos)
+        └── /functions/ — Cloudflare Pages Functions (auth OAuth, save a GitHub)
 ```
 
 ---
@@ -29,9 +31,15 @@ GitHub repo (miriamsaxetech-code/bar-leon-cms)
 │   ├── homepage.js     — lógica y render de homepage
 │   └── carta.js        — lógica y render de carta/menú/horarios
 ├── data/
-│   ├── es.json         — contenido español (fuente canónica)
-│   ├── en.json         — contenido inglés
-│   └── fr.json         — contenido francés
+│   └── venue.json      — fuente de verdad única (117KB, multilingüe inline, 16 claves)
+├── panel/
+│   ├── index.html      — panel del propietario (4 tabs)
+│   ├── app.js          — lógica del panel (~847 LOC)
+│   └── panel.css       — estilos del panel
+├── functions/
+│   ├── auth.js         — redirect OAuth → GitHub
+│   ├── callback.js     — intercambio de token (Decap popup + panel redirect)
+│   └── admin-save.js   — POST endpoint: commit venue.json a GitHub
 ├── es/
 │   ├── index.html      — homepage en español
 │   └── carta.html      — carta en español
@@ -50,27 +58,26 @@ GitHub repo (miriamsaxetech-code/bar-leon-cms)
 
 ## CMS
 
-**Decap CMS** (anteriormente Netlify CMS)
+El proyecto tiene **dos interfaces de administración** que escriben sobre el mismo archivo `data/venue.json`.
+
+**Sistema A — Decap CMS** (`/admin/`, desktop)
 - Versión: 3.0.0 desde `https://unpkg.com/decap-cms@3.0.0/dist/decap-cms.js`
 - Backend: GitHub (`miriamsaxetech-code/bar-leon-cms`, rama `main`)
 - Autenticación: GitHub OAuth
-- Archivos editables: `data/es.json` (ES canónico; traducciones EN/FR se editan en los JSON correspondientes directamente en el repo)
+- Archivo editable: `data/venue.json` (esquema completo, 16 claves)
+- Uso: desarrollador/asistente — cambios de esquema, traducciones, contenido nuevo
 
-**Campos CMS disponibles:**
-- Inicio: titular, subtítulo, aviso especial (opcional)
-- Menú del día: disponible (SI/NO), días, precio, condiciones, primeros, platosDelDia, temporada
-- Horarios: día · estado (ABIERTO/CERRADO/CERRADO TARDE) · texto visible
-- Carta: categoría · nombre · descripción · maridaje · precio · disponible (SI/NO)
+**Sistema B — Panel del propietario** (`/panel/`, móvil-first)
+- Autenticación: GitHub OAuth (mismo flujo, token en sessionStorage)
+- Tabs disponibles: Precios · Horarios · Aviso · Archivo (Carioca)
+- Archivo editable: `data/venue.json` (subset de alta frecuencia)
+- Uso: propietario — tareas diarias sin necesidad de conocimiento técnico
 
-**Categorías de carta definidas en CMS (según es.json):**
-- SABORES DE ANDALUCÍA
-- SOPAS Y PLATOS DE CUCHARA
-- ENTRANTES Y RACIONES
-- FRITURAS Y PESCADOS
-- CARNES
-- HUEVOS Y TORTILLAS
-- ARROCES
-- POSTRES
+**División de responsabilidades:**
+- `/panel/` → propietario: precios, horarios, avisos temporales, fotos del local
+- `/admin/` → desarrollador/asistente: traducción, platos, vinos, bebidas, SEO, hero, nav
+
+**Nota:** ambos sistemas detectan conflictos de escritura (SHA-mismatch 409). Si dos sesiones se solapan, la segunda recibe un error.
 
 
 ---
@@ -130,7 +137,7 @@ Rutas de carta por idioma:
 
 **Actualizar horarios:** CMS → lista Horarios → editar estado/detalle por día.
 
-**Recuperar versión anterior:** GitHub → archivo `data/es.json` → History → elegir versión.
+**Recuperar versión anterior:** GitHub → archivo `data/venue.json` → History → elegir versión.
 
 ---
 

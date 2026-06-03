@@ -9,10 +9,10 @@
   <link rel="icon" href="/assets/images/favicon-16x16.png" type="image/png" sizes="16x16" />
   <link rel="apple-touch-icon" href="/assets/images/apple-touch-icon.png" />
   <meta property="og:type" content="website" />
-  <meta property="og:url" content="https://www.barleongrx.com/es/carta.html" />
+  <meta property="og:url" content="https://restaurantebarleon.com/es/carta" />
   <meta property="og:title" content="Carta — Bar León, Granada" />
   <meta property="og:description" content="Carta completa del Bar León. Platos tradicionales granadinos, menú del día y horarios. Plaza Nueva, Granada." />
-  <meta property="og:image" content="https://www.barleongrx.com/assets/images/og.png" />
+  <meta property="og:image" content="https://restaurantebarleon.com/assets/images/og.png" />
   <meta property="og:image:width" content="1200" />
   <meta property="og:image:height" content="630" />
   <meta property="og:locale" content="es_ES" />
@@ -20,15 +20,19 @@
   <meta name="twitter:card" content="summary_large_image" />
   <meta name="twitter:title" content="Carta — Bar León, Granada" />
   <meta name="twitter:description" content="Carta completa del Bar León. Platos tradicionales granadinos, menú del día y horarios. Plaza Nueva, Granada." />
-  <meta name="twitter:image" content="https://www.barleongrx.com/assets/images/og.png" />
-  <link rel="canonical" href="https://www.barleongrx.com/es/carta.html" />
-  <link rel="alternate" hreflang="es" href="/es/carta.html" />
-  <link rel="alternate" hreflang="en" href="/en/menu.html" />
-  <link rel="alternate" hreflang="fr" href="/fr/carte.html" />
+  <meta name="twitter:image" content="https://restaurantebarleon.com/assets/images/og.png" />
+  <link rel="canonical" href="https://restaurantebarleon.com/es/carta" />
+  <link rel="alternate" hreflang="es" href="https://restaurantebarleon.com/es/carta" />
+  <link rel="alternate" hreflang="en" href="https://restaurantebarleon.com/en/menu" />
+  <link rel="alternate" hreflang="fr" href="https://restaurantebarleon.com/fr/carte" />
+  <link rel="alternate" hreflang="x-default" href="https://restaurantebarleon.com/es/carta" />
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
   <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@700&family=Inter:wght@400;500;600&display=swap" rel="stylesheet" />
   <link rel="stylesheet" href="../css/style.css" />
+  <script id="menu-jsonld" type="application/ld+json">
+    {"@context":"https://schema.org","@graph":[{"@type":"Restaurant","name":"Restaurante Bar León","url":"https://restaurantebarleon.com","hasMenu":"https://restaurantebarleon.com/es/carta","telephone":"+34 958 22 51 43","address":{"@type":"PostalAddress","streetAddress":"C/ Pan, 1","addressLocality":"Granada","postalCode":"18010","addressRegion":"Andalucía","addressCountry":"ES"}},{"@type":"Menu","@id":"https://restaurantebarleon.com/es/carta","url":"https://restaurantebarleon.com/es/carta","name":"Carta","hasMenuSection":[{"@type":"MenuSection","name":"Carta Barra"},{"@type":"MenuSection","name":"Carta Restaurante"},{"@type":"MenuSection","name":"Bebidas"},{"@type":"MenuSection","name":"La Bodega"},{"@type":"MenuSection","name":"Menú del Día"}]}]}
+  </script>
 </head>
 <body>
   <div class="masthead-rule"></div>
@@ -38,7 +42,39 @@
     </div>
   </header>
   <div id="loader">Bar Le&oacute;n</div>
-  <main id="carta-body" style="display:none"></main>
+  <main id="carta-body">
+    <div class="wrap">
+      <h1>Carta — Restaurante Bar León</h1>
+      <p>Carta completa del Bar León en C/ Pan, 1, Granada. Cocina tradicional, barra granadina, menú del día y vinos.</p>
+      <p><strong>Dirección:</strong> C/ Pan, 1, Albayzín, 18010 Granada. <strong>Teléfono:</strong> <a href="tel:+34958225143">+34 958 22 51 43</a>.</p>
+      <nav aria-label="Navegación de carta">
+        <a href="/es/">Inicio</a>
+        <a href="/es/carta#hours">Horarios</a>
+        <a href="/en/menu">English</a>
+        <a href="/fr/carte">Français</a>
+      </nav>
+      <section>
+        <h2>Carta Barra</h2>
+        <p>Raciones, tapas, frituras, bocadillos y clásicos de barra.</p>
+      </section>
+      <section>
+        <h2>Carta Restaurante</h2>
+        <p>Platos tradicionales granadinos y especialidades andaluzas.</p>
+      </section>
+      <section>
+        <h2>Bebidas</h2>
+        <p>Cervezas, refrescos, vinos y licores.</p>
+      </section>
+      <section>
+        <h2>La Bodega</h2>
+        <p>Vinos de Granada y denominaciones clásicas españolas.</p>
+      </section>
+      <section>
+        <h2>Menú del Día</h2>
+        <p>Menú diario de lunes a viernes cuando está disponible.</p>
+      </section>
+    </div>
+  </main>
   <script src="../js/carta.js"></script>
 </body>
 </html>

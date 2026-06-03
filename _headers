@@ -45,3 +45,7 @@
   X-Robots-Tag: noindex, nofollow
   Cache-Control: no-store
   Content-Security-Policy: default-src 'self'; script-src 'self' 'unsafe-inline' 'unsafe-eval' https://unpkg.com; style-src 'self' 'unsafe-inline' https://unpkg.com https://fonts.googleapis.com; img-src 'self' data: blob: https:; font-src 'self' https://unpkg.com https://fonts.gstatic.com; connect-src 'self' https://api.github.com https://raw.githubusercontent.com https://github.com https://unpkg.com; frame-src https://github.com; frame-ancestors 'none'
+
+/admin-quick/*
+  X-Robots-Tag: noindex, nofollow
+  Cache-Control: no-store

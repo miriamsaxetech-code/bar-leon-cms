@@ -3,5 +3,8 @@ Thumbs.db
 node_modules/
 *.log
 .gemini/
+.claude/
+.wrangler/
+.superpowers/brainstorm/
 .dev.vars
 wrangler.toml
