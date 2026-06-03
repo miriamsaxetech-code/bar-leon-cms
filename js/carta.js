@@ -733,7 +733,7 @@
     }[lang];
 
     return `<div class="wrap">
-  <div class="barra-chalkboard">
+  <div class="barra-chalkboard chalkboard-menu">
     <div class="chalkboard-header">
       <div class="chalkboard-title">Bar Le&oacute;n &mdash; Desde 1959</div>
       <div class="chalkboard-subtitle">${subtitle}</div>
