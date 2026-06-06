@@ -884,7 +884,7 @@
       },
       "available": true,
       "featured": "recommended",
-      "beer_pairing": "cruzcampo-tercio"
+      "beer_pairing": "aguila-sin-filtrar-tercio"
     },
     {
       "id": "habas-jamon-iberico",
@@ -930,7 +930,7 @@
       },
       "available": true,
       "featured": "house",
-      "beer_pairing": "cruzcampo-tercio"
+      "beer_pairing": "alcazar-tercio"
     },
     {
       "id": "rinones-al-jerez",
@@ -976,7 +976,7 @@
       },
       "available": true,
       "featured": "house",
-      "beer_pairing": "cruzcampo-tercio"
+      "beer_pairing": "aguila-sin-filtrar-tercio"
     },
     {
       "id": "cordobes",
@@ -999,7 +999,7 @@
       },
       "available": true,
       "featured": false,
-      "beer_pairing": "cruzcampo-tercio"
+      "beer_pairing": "alcazar-tercio"
     },
     {
       "id": "criadillas",
@@ -1045,7 +1045,7 @@
       },
       "available": true,
       "featured": false,
-      "beer_pairing": "cruzcampo-tercio"
+      "beer_pairing": "aguila-sin-filtrar-tercio"
     },
     {
       "id": "gazpacho-andaluz",
