@@ -7,23 +7,29 @@
 
 
   const LABELS = {
-    dailyMenu:    { es: 'Menú del Día', en: 'Daily Menu', fr: 'Menu du Jour' },
-    dailyKicker:  { es: 'Hoy se mira primero', en: 'Start here today', fr: "Aujourd'hui, on commence ici" },
-    starters:     { es: 'Primeros', en: 'First course', fr: 'Entrées' },
-    seconds:      { es: 'Segundos', en: 'Second course', fr: 'Plats' },
-    daily:        { es: 'Plato del día', en: 'Daily special', fr: 'Plat du jour' },
-    desserts:     { es: 'Postre', en: 'Dessert', fr: 'Dessert' },
-    fullMenu:     { es: 'Ver carta completa', en: 'View full menu', fr: 'Voir la carte' },
-    andalusia:    { es: 'Sabores de Andalucía', en: 'Flavors of Andalusia', fr: "Saveurs d'Andalousie" },
-    andalusiaSub: { es: 'Platos de casa, guiso y barra granadina.', en: 'House dishes, stews, and Granada bar classics.', fr: 'Plats maison, mijotés et comptoir grenadin.' },
-    stories:      { es: 'Historias del León', en: 'Stories of León', fr: 'Histoires du León' },
-    storiesSub:   { es: 'Archivo familiar y memoria de barra. Solo material real del León.', en: 'Family archive and bar memory. Only real León material.', fr: 'Archives familiales et mémoire du comptoir. Uniquement du matériel réel du León.' },
-    call:         { es: 'Llamar', en: 'Call', fr: 'Appeler' },
-    statusOpen:   { es: 'Estamos abiertos', en: 'We are open', fr: 'Nous sommes ouverts' },
-    statusClosed: { es: 'Cerrado', en: 'Closed', fr: 'Fermé' },
-    recommended:  { es: 'Recomendado', en: 'Recommended', fr: 'Recommandé' },
-    seasonal:     { es: 'Temporada', en: 'Seasonal', fr: 'Saison' },
-    house:        { es: 'De la casa', en: 'House specialty', fr: 'Spécialité maison' },
+    dailyMenu:          { es: 'Menú del Día',       en: 'Daily Menu',        fr: 'Menu du Jour'          },
+    dailyKicker:        { es: 'Hoy se mira primero', en: 'Start here today', fr: "Aujourd'hui, on commence ici" },
+    starters:           { es: 'Primeros',            en: 'First course',     fr: 'Entrées'               },
+    seconds:            { es: 'Segundos',            en: 'Second course',    fr: 'Plats'                 },
+    daily:              { es: 'Plato del día',       en: 'Daily special',    fr: 'Plat du jour'          },
+    desserts:           { es: 'Postre',              en: 'Dessert',          fr: 'Dessert'               },
+    fullMenu:           { es: 'Ver carta completa',  en: 'View full menu',   fr: 'Voir la carte'         },
+    andalusia:          { es: 'Sabores de Andalucía', en: 'Flavors of Andalusia', fr: "Saveurs d'Andalousie" },
+    andalusiaSub:       { es: 'Platos de casa, guiso y barra granadina.', en: 'House dishes, stews, and Granada bar classics.', fr: 'Plats maison, mijotés et comptoir grenadin.' },
+    stories:            { es: 'Historias del León',  en: 'Stories of León',  fr: 'Histoires du León'     },
+    storiesSub:         { es: 'Archivo familiar y memoria de barra. Solo material real del León.', en: 'Family archive and bar memory. Only real León material.', fr: 'Archives familiales et mémoire du comptoir. Uniquement du matériel réel du León.' },
+    call:               { es: 'Llamar',              en: 'Call',             fr: 'Appeler'               },
+    statusOpen:         { es: 'Estamos abiertos',    en: 'We are open',      fr: 'Nous sommes ouverts'   },
+    statusClosed:       { es: 'Cerrado',             en: 'Closed',           fr: 'Fermé'                 },
+    recommended:        { es: 'Recomendado',         en: 'Recommended',      fr: 'Recommandé'            },
+    seasonal:           { es: 'Temporada',           en: 'Seasonal',         fr: 'Saison'                },
+    house:              { es: 'De la casa',          en: 'House specialty',  fr: 'Spécialité maison'     },
+    cartaRestaurante:   { es: 'Carta restaurante',   en: 'Restaurant menu',  fr: 'Menu restaurant'       },
+    cartaBarra:         { es: 'Carta barra',         en: 'Bar menu',         fr: 'Menu du bar'           },
+    menuDia:            { es: 'Menú del día',        en: 'Daily menu',       fr: 'Menu du jour'          },
+    horasHoy:           { es: 'Hoy',                 en: 'Today',            fr: "Aujourd'hui"           },
+    cerradoHoy:         { es: 'Cerrado hoy',         en: 'Closed today',     fr: "Fermé aujourd'hui"     },
+    directions:         { es: 'Cómo llegar',         en: 'Directions',       fr: 'Itinéraire'            },
   };
 
   const DAY_NAMES = {
@@ -158,6 +164,34 @@
         : `<a class="lang-bar__link" href="${links[l]}">${l.toUpperCase()}</a>`
     ).join('<span class="lang-bar__sep">·</span>');
     document.body.insertBefore(bar, document.body.firstChild);
+  }
+
+  function injectSiteNav(lang, links, cartaUrl) {
+    const cartaLabel    = { es: 'Carta',    en: 'Menu',    fr: 'Carte'   }[lang];
+    const historiaLabel = { es: 'Historia', en: 'History', fr: 'Histoire'}[lang];
+    const contactoLabel = { es: 'Contacto', en: 'Contact', fr: 'Contact' }[lang];
+    const langItems = ['es', 'en', 'fr'].map(function(l) {
+      return l === lang
+        ? `<span class="site-top-nav__lang-active">${l.toUpperCase()}</span>`
+        : `<a class="site-top-nav__lang-link" href="${links[l]}">${l.toUpperCase()}</a>`;
+    }).join('<span class="site-top-nav__lang-sep" aria-hidden="true">·</span>');
+
+    const nav = document.createElement('nav');
+    nav.className = 'site-top-nav';
+    nav.setAttribute('aria-label', { es: 'Navegación principal', en: 'Main navigation', fr: 'Navigation principale' }[lang]);
+    nav.innerHTML = `<div class="site-top-nav__inner">
+  <a class="site-top-nav__brand" href="${links[lang]}">
+    <img src="../assets/images/lion-logo.svg" alt="" width="24" height="37" aria-hidden="true" class="site-top-nav__lion" />
+    <span class="site-top-nav__name">Bar León</span>
+  </a>
+  <ul class="site-top-nav__links" role="list">
+    <li><a class="site-top-nav__link" href="${cartaUrl}">${cartaLabel}</a></li>
+    <li><a class="site-top-nav__link" href="#historia">${historiaLabel}</a></li>
+    <li><a class="site-top-nav__link" href="#contacto">${contactoLabel}</a></li>
+  </ul>
+  <div class="site-top-nav__langs" aria-label="Language / Idioma / Langue">${langItems}</div>
+</div>`;
+    document.body.insertBefore(nav, document.body.firstChild);
   }
 
   function renderBadge() { return ''; }
@@ -298,111 +332,116 @@
     const dm = d.daily_menu;
     if (!dm || !dm.active) return '';
 
-    const isMenuToday = isDailyMenuToday(dm);
-    let kickerText = '';
-    if (isMenuToday) {
-      kickerText = LABELS.dailyKicker[lang];
-    } else {
-      kickerText = {
-        es: 'Disponible de lunes a viernes',
-        en: 'Available Monday to Friday',
-        fr: 'Disponible du lundi au vendredi'
-      }[lang] || 'Disponible de lunes a viernes';
-    }
+    const days   = (dm.days || []).map(function(day) { return DAY_NAMES[day] ? DAY_NAMES[day][lang] : day; }).join(', ');
+    const period = dm.service_period ? `${dm.service_period.open}–${dm.service_period.close}` : '';
 
-    const days = (dm.days || [])
-      .map(day => DAY_NAMES[day] ? DAY_NAMES[day][lang] : day)
-      .join(', ');
-    const period = dm.service_period ? formatTimePeriod(dm.service_period, lang) : '';
+    const superLabel = { es: 'DE LUNES A VIERNES', en: 'MONDAY TO FRIDAY', fr: 'DU LUNDI AU VENDREDI' }[lang];
+    const ctaLabel   = { es: 'VER MENÚ COMPLETO →', en: 'VIEW FULL MENU →', fr: 'VOIR LE MENU →' }[lang];
+    const noteText   = t(dm.includes, lang);
 
-    function renderAccordionGroup(label, values, open) {
-      if (!values.length) return '';
-      const items = values.map(item => `<li>${item}</li>`).join('');
-      return `<div class="accordion-item${open ? ' is-open' : ''}">
-  <button class="dm-section-head" aria-expanded="${open ? 'true' : 'false'}">
-    <span>${label}</span>
-    <span class="accordion-icon" aria-hidden="true"></span>
+    function accordionPanel(label, items, isOpen) {
+      if (!items.length) return '';
+      const listItems = items.map(function(item) { return `<li class="pizarra-accordion-list-item">${item}</li>`; }).join('');
+      return `<div class="pizarra-accordion-item${isOpen ? ' is-open' : ''}">
+  <button class="pizarra-accordion-btn" aria-expanded="${isOpen ? 'true' : 'false'}">
+    <span>${label}</span><span class="pizarra-accordion-icon" aria-hidden="true"></span>
   </button>
-  <div class="accordion-body">
-    <ul class="home-daily-menu__group-list">${items}</ul>
+  <div class="pizarra-accordion-body">
+    <ul class="pizarra-accordion-list">${listItems}</ul>
   </div>
 </div>`;
     }
 
-    const mains = (dm.mains || []).map(item => {
-      const day = DAY_NAMES[item.day] ? DAY_NAMES[item.day][lang] : item.day;
-      return `<strong>${day}:</strong> ${t(item.name, lang)}`;
-    });
-    const seasonal = splitList(t(dm.seasonal, lang)).map(note => `<em>${note}</em>`);
+    const starterItems = splitList(t(dm.starters, lang));
+    const secondItems  = splitList(t(dm.seconds, lang));
+    const dessertItems = splitList(t(dm.desserts, lang));
 
-    return `<section class="chalkboard-menu pizarra-dia home-daily-menu" aria-labelledby="home-daily-title">
-  <div class="pizarra-dia__wrap">
-    <div class="home-daily-menu__head">
-      <p class="section-label">${kickerText}</p>
-      <div>
-        <h2 id="home-daily-title">${LABELS.dailyMenu[lang]}</h2>
-        <p class="home-daily-menu__meta">${days}${period ? ` · ${period}` : ''}</p>
-      </div>
-      <span class="home-daily-menu__price">${formatPrice(dm.price)}</span>
+    return `<section class="pizarra-nueva" aria-labelledby="pizarra-nueva-title">
+  <div class="pizarra-nueva__left">
+    <img class="pizarra-nueva__lion" src="../assets/images/lion-logo.svg" alt="" width="48" height="74" aria-hidden="true" />
+    <p class="pizarra-nueva__super">${superLabel}</p>
+    <h2 id="pizarra-nueva-title" class="pizarra-nueva__title">${LABELS.dailyMenu[lang]}</h2>
+    <p class="pizarra-nueva__price">${formatPrice(dm.price)}</p>
+    <p class="pizarra-nueva__days">${days}</p>
+    <p class="pizarra-nueva__time">${period}</p>
+    <p class="pizarra-nueva__note">${noteText}</p>
+  </div>
+  <div class="pizarra-nueva__right">
+    <div class="pizarra-nueva__accordions">
+      ${accordionPanel(LABELS.starters[lang], starterItems, true)}
+      ${accordionPanel(LABELS.seconds[lang], secondItems, false)}
+      ${accordionPanel(LABELS.desserts[lang], dessertItems, false)}
     </div>
-    <div class="home-daily-menu__body">
-      ${renderAccordionGroup(LABELS.starters[lang], splitList(t(dm.starters, lang)), true)}
-      ${renderAccordionGroup(LABELS.seconds[lang], splitList(t(dm.seconds, lang)), false)}
-      ${renderAccordionGroup(LABELS.daily[lang], mains.concat(seasonal), false)}
-      ${renderAccordionGroup(LABELS.desserts[lang], splitList(t(dm.desserts, lang)), false)}
-    </div>
-    <div class="home-daily-menu__foot">
-      <p>${t(dm.includes, lang)}</p>
-      <a href="${cartaUrl}">${LABELS.fullMenu[lang]}</a>
-    </div>
+    <a class="pizarra-nueva__cta" href="${cartaUrl}#daily">${ctaLabel}</a>
   </div>
 </section>`;
   }
 
-  function renderHomeAndalusia(d, lang, cartaUrl) {
-    var dishes;
-    if (d.home_featured_ids && d.home_featured_ids.length) {
-      var byId = {};
-      (d.dishes || []).forEach(function(dish) { byId[dish.id] = dish; });
-      dishes = d.home_featured_ids
-        .map(function(id) { return byId[id]; })
-        .filter(function(dish) { return dish && dish.available !== false; });
-    } else {
-      dishes = (d.dishes || [])
-        .filter(function(dish) { return dish.available !== false && dish.category_id === 'andalusian-specialities' && dish.featured; })
-        .sort(function(a, b) {
-          var rank = function(v) { return v === true || v === 'recommended' ? 0 : v === 'house' ? 1 : v === 'seasonal' ? 2 : 3; };
-          return rank(a.featured) - rank(b.featured);
-        })
-        .slice(0, 6);
-    }
+  function renderSabores(d, lang, cartaUrl) {
+    const DISH_LABELS = {
+      'rinones-al-jerez':       { es: 'LA CASA',      en: 'HOUSE',       fr: 'MAISON'     },
+      'carne-de-monte':         { es: 'DE MONTE ★',   en: 'MOUNTAIN ★',  fr: 'MONTAGNE ★' },
+      'tortilla-sacromonte':    { es: 'GRANADA',       en: 'GRANADA',     fr: 'GRANADA'    },
+      'cordobes':               { es: 'DE LA SIERRA',  en: 'SIERRA',      fr: 'SIERRA'     },
+      'champinones-con-gambas': { es: 'DE LA BARRA',   en: 'BAR TAPA',    fr: 'COMPTOIR'   },
+      'habas-jamon-iberico':    { es: 'LA HUERTA',     en: 'GARDEN',      fr: 'POTAGER'    },
+    };
+
+    var byId = {};
+    (d.dishes || []).forEach(function(dish) { byId[dish.id] = dish; });
+    const dishes = (d.home_featured_ids || [])
+      .map(function(id) { return byId[id]; })
+      .filter(function(dish) { return dish && dish.available !== false; });
+
     if (!dishes.length) return '';
 
-    return `<section class="tile-bg-section home-andalusia" aria-labelledby="home-andalusia-title">
-  <div class="tile-card">
-    <div class="home-section-head">
-      <p class="section-label">${LABELS.andalusiaSub[lang]}</p>
-      <h2 id="home-andalusia-title">${LABELS.andalusia[lang]}</h2>
-    </div>
-    <div class="home-andalusia__list">
-      ${dishes.map(dish => {
-        const parsed = parseDishPrice(formatPrice(dish.price), lang);
-        const priceHtml = parsed.type === 'portions' ? '' : `<span class="home-andalusia__price">${parsed.display}</span>`;
-        const priceNoteHtml = parsed.type === 'portions' ? `<p class="price-note">${parsed.note}</p>` : '';
-        return `<article class="home-andalusia__item">
-          <div class="home-andalusia__main">
-            ${renderBadge(dish, lang)}
-            <h3>${t(dish.name, lang)}</h3>
-            <p>${t(dish.description, lang)}</p>
-            ${renderPairingChip(dish, d.wines, lang, cartaUrl)}
-            ${renderBeerPairingChip(dish, d.beverages, lang, cartaUrl)}
-            ${priceNoteHtml}
-          </div>
-          ${priceHtml}
-        </article>`;
-      }).join('')}
-    </div>
-    <a class="home-text-link" href="${cartaUrl}">${LABELS.fullMenu[lang]}</a>
+    const kicker   = { es: 'PLATOS DE CASA · GUISO · BARRA GRANADINA', en: 'HOUSE DISHES · STEWS · GRANADA BAR', fr: 'PLATS MAISON · MIJOTÉS · COMPTOIR' }[lang];
+    const ctaLabel = { es: 'VER CARTA COMPLETA', en: 'VIEW FULL MENU', fr: 'VOIR LA CARTE COMPLÈTE' }[lang];
+
+    function dishCard(dish) {
+      const label = (DISH_LABELS[dish.id] && DISH_LABELS[dish.id][lang]) || '';
+      const name  = t(dish.name, lang);
+      let desc = t(dish.description, lang);
+      if (dish.id === 'habas-jamon-iberico') {
+        desc = desc.split('. ').filter(function(s) {
+          return !/temporada|seasonal|saison/i.test(s);
+        }).join('. ').trim();
+        if (desc && !desc.endsWith('.')) desc += '.';
+      }
+      const parsed = parseDishPrice(formatPrice(dish.price), lang);
+      const priceHtml = parsed.type === 'portions'
+        ? `<span class="sabores-price sabores-price--portions">${parsed.note}</span>`
+        : `<span class="sabores-price">${parsed.display}</span>`;
+      const pairingText = t(dish.pairing, lang);
+      const pairingHtml = pairingText
+        ? `<div class="sabores-pills"><span class="sabores-pill">${pairingText.split('—')[0].trim()}</span></div>`
+        : '';
+      return `<article class="sabores-dish">
+  <div class="sabores-label">${label}</div>
+  <div class="sabores-name-row">
+    <h3 class="sabores-name">${name}</h3>
+    ${priceHtml}
+  </div>
+  <p class="sabores-desc">${desc}</p>
+  ${pairingHtml}
+</article>`;
+    }
+
+    const left  = dishes.slice(0, 3).map(dishCard).join('');
+    const right = dishes.slice(3).map(dishCard).join('');
+
+    return `<section class="home-sabores" aria-labelledby="sabores-title">
+  <div class="sabores-header">
+    <p class="sabores-kicker">${kicker}</p>
+    <h2 id="sabores-title" class="sabores-title">${LABELS.andalusia[lang]}</h2>
+    <div class="sabores-rule"><span class="sabores-rule-pointer">◆</span></div>
+  </div>
+  <div class="sabores-grid">
+    <div class="sabores-col">${left}</div>
+    <div class="sabores-col">${right}</div>
+  </div>
+  <div class="sabores-footer">
+    <a class="sabores-cta-btn" href="${cartaUrl}">${ctaLabel} →</a>
   </div>
 </section>`;
   }
@@ -417,8 +456,8 @@
     fab.textContent = LABELS.call[lang];
     document.body.appendChild(fab);
 
-    // Show FAB only after the primary CTA block scrolls out of view.
-    const anchor = document.querySelector('.home-cta-nav');
+    // Show FAB only after the hero tile scrolls out of view.
+    const anchor = document.querySelector('.home-tile-wrap');
     if (anchor && 'IntersectionObserver' in window) {
       const obs = new IntersectionObserver(
         function(entries) { fab.classList.toggle('is-visible', !entries[0].isIntersecting); },
@@ -457,30 +496,88 @@
   }
 
 
+  function renderPracticalInfo(d, lang) {
+    const addr = d.contact.address;
+    const mapsUrl = d.social.google_maps;
+
+    const now = new Date();
+    const dayKeys = ['sunday','monday','tuesday','wednesday','thursday','friday','saturday'];
+    const todayKey = dayKeys[now.getDay()];
+    const todayEntry = (d.hours || []).find(function(h) { return h.day === todayKey; });
+
+    let hoursText;
+    if (todayEntry && todayEntry.status !== 'closed' && todayEntry.periods && todayEntry.periods.length) {
+      hoursText = todayEntry.periods.map(function(p) { return formatTimePeriod(p, lang); }).join(', ');
+    } else {
+      hoursText = LABELS.cerradoHoy[lang];
+    }
+
+    return `<div class="home-practical-info">
+  <span class="practical-info__hours"><strong>${LABELS.horasHoy[lang]}:</strong> ${hoursText}</span>
+  <span class="practical-info__sep" aria-hidden="true">·</span>
+  <span class="practical-info__addr">${addr.street}, ${addr.neighborhood}</span>
+  <span class="practical-info__sep" aria-hidden="true">·</span>
+  <a href="${mapsUrl}" target="_blank" rel="noopener" class="practical-info__directions">${LABELS.directions[lang]} ↗</a>
+</div>`;
+  }
+
+  function renderWineEditorial(d, lang, cartaUrl) {
+    const we = d.wine_editorial;
+    if (!we) return '';
+
+    const title    = t(we.title, lang);
+    const intro    = t(we.intro, lang);
+    const ctaText  = t(we.cta, lang);
+    const winesUrl = cartaUrl + '#wines';
+
+    const featuredIds = we.featured_wine_ids || [];
+    const byId = {};
+    (d.wines || []).forEach(function(w) { byId[w.id] = w; });
+    const wines = featuredIds
+      .map(function(id) { return byId[id]; })
+      .filter(function(w) { return w && w.available !== false; })
+      .slice(0, 3);
+
+    const wineCards = wines.map(function(w) {
+      const name   = typeof w.name   === 'object' ? t(w.name,   lang) : (w.name   || '');
+      const region = typeof w.region === 'object' ? t(w.region, lang) : (w.region || '');
+      const note   = wineCultureNote(w, lang);
+      return `<a class="wine-editorial__card" href="${winesUrl}">
+  <span class="wine-editorial__name">${name}</span>
+  <span class="wine-editorial__region">${region}</span>
+  ${note ? `<span class="wine-editorial__note">${note}</span>` : ''}
+</a>`;
+    }).join('');
+
+    const introParas = intro.split('\n\n').filter(Boolean)
+      .map(function(p) { return `<p>${p}</p>`; }).join('');
+
+    return `<section class="wine-editorial" aria-labelledby="wine-editorial-title">
+  <div class="wine-editorial__head">
+    <h2 id="wine-editorial-title">${title}</h2>
+    <div class="wine-editorial__intro">${introParas}</div>
+  </div>
+  ${wines.length ? `<div class="wine-editorial__cards">${wineCards}</div>` : ''}
+  <a class="wine-editorial__cta" href="${winesUrl}">${ctaText} →</a>
+</section>`;
+  }
+
   function renderHeroTile(d, lang, cartaUrl, inService) {
-    const since    = { es: 'Desde 1959', en: 'Since 1959', fr: 'Depuis 1959' }[lang];
-    const addr     = d.contact.address;
-    const tileAlt  = d.logo && d.logo.alt ? t(d.logo.alt, lang) : t(d.venue.full_name, lang);
-    const logoSrc  = d.logo && d.logo.image ? d.logo.image : '../assets/images/web/azulejo-leon.webp';
-    return `<div class="home-hero">
-  <div class="home-hero__tile">
+    const tileAlt     = { es: 'Restaurante Bar León — Granada', en: 'Restaurante Bar León — Granada', fr: 'Restaurante Bar León — Grenade' }[lang];
+    const statusLabel = inService ? LABELS.statusOpen[lang] : LABELS.statusClosed[lang];
+    const statusClass = inService ? 'status-badge--open' : 'status-badge--closed';
+    return `<div class="home-tile-wrap">
+  <div class="home-tile-frame">
     <picture>
-      <source srcset="${logoSrc}" type="image/webp">
-      <img class="home-hero__img" src="${logoSrc.replace('.webp', '.png')}" alt="${tileAlt}"
+      <source srcset="../assets/images/web/azulejo-leon.webp" type="image/webp">
+      <img class="home-tile-img" src="../assets/images/web/azulejo-leon.png" alt="${tileAlt}"
            width="994" height="646" fetchpriority="high" />
     </picture>
-    <div class="home-hero__scrim" aria-hidden="true"></div>
-    <div class="home-hero__overlay">
-      <img class="home-hero__lion" src="../assets/images/lion-logo.svg" alt=""
-           width="60" height="92" aria-hidden="true" />
-      <h1 class="home-hero__name">Bar León</h1>
-      <p class="home-hero__place">${addr.neighborhood} &middot; ${addr.city} &middot; ${since}</p>
-    </div>
   </div>
-  <div class="site-status-container">
-    <a href="${cartaUrl}#hours" class="status-pill ${inService ? 'status-pill--open' : 'status-pill--closed'}">
-      <span class="status-pill__dot"></span>
-      ${inService ? LABELS.statusOpen[lang] : LABELS.statusClosed[lang]}
+  <div class="home-tile-badge">
+    <a href="${cartaUrl}#hours" class="status-badge ${statusClass}">
+      <span class="status-badge__dot" aria-hidden="true"></span>
+      ${statusLabel}
     </a>
   </div>
 </div>`;
@@ -488,9 +585,10 @@
 
   function renderHomeCTA(lang, cartaUrl, phoneLink) {
     const quickAccess = { es: 'Acceso rápido', en: 'Quick access', fr: 'Accès rapide' }[lang];
-    const verCarta    = { es: 'Ver carta',     en: 'View menu',   fr: 'Voir la carte' }[lang];
     return `<nav class="home-cta-nav" aria-label="${quickAccess}">
-  <a href="${cartaUrl}" class="home-cta-btn home-cta-btn--carta">${verCarta}</a>
+  <a href="${cartaUrl}" class="home-cta-btn home-cta-btn--carta">${LABELS.cartaRestaurante[lang]}</a>
+  <a href="${cartaUrl}#bar" class="home-cta-btn home-cta-btn--carta">${LABELS.cartaBarra[lang]}</a>
+  <a href="${cartaUrl}#daily" class="home-cta-btn home-cta-btn--carta">${LABELS.menuDia[lang]}</a>
   <a href="${phoneLink}" class="home-cta-btn home-cta-btn--call">${LABELS.call[lang]}</a>
 </nav>`;
   }
@@ -506,28 +604,27 @@
     const locationTitle   = { es: 'Dónde estamos', en: 'Where to find us', fr: 'Où nous trouver' }[lang];
     const directionsLabel = { es: 'Encontrarnos en Plaza Nueva', en: 'Find us on Plaza Nueva', fr: 'Nous trouver Plaza Nueva' }[lang];
 
-    const locationBlock = `
+    const mapBlock = `
 <section class="location-section">
   <p class="section-label">${locationTitle}</p>
-  <div class="location-grid">
-    <div class="location-map">
-      <iframe src="https://www.openstreetmap.org/export/embed.html?bbox=-3.5985%2C37.1755%2C-3.5945%2C37.1785&amp;layer=mapnik&amp;marker=37.17698%2C-3.59653" width="100%" height="250" style="border:0;" loading="lazy" aria-label="OpenStreetMap"></iframe>
-    </div>
-    <div class="location-info">
-      <p class="location-address">${addr.street} &middot; ${addr.neighborhood} &middot; ${addr.city}</p>
-      <a href="${mapsUrl}" target="_blank" rel="noopener" class="location-link">↗ ${directionsLabel}</a>
-    </div>
+  <div class="location-map">
+    <iframe src="https://www.openstreetmap.org/export/embed.html?bbox=-3.5985%2C37.1755%2C-3.5945%2C37.1785&amp;layer=mapnik&amp;marker=37.17698%2C-3.59653" width="100%" height="250" style="border:0;" loading="lazy" aria-label="OpenStreetMap"></iframe>
+  </div>
+  <div class="location-info" style="margin-top:12px;">
+    <a href="${mapsUrl}" target="_blank" rel="noopener" class="location-link">↗ ${directionsLabel}</a>
   </div>
 </section>`;
 
     return `<div class="wrap">
   ${renderHeroTile(d, lang, cartaUrl, inService)}
   ${aviso}
-  ${renderHomeAndalusia(d, lang, cartaUrl)}
+  ${renderSabores(d, lang, cartaUrl)}
   ${renderHomeDailyMenu(d, lang, cartaUrl)}
-  ${renderHomeCTA(lang, cartaUrl, phoneLink)}
-  ${renderHistoria(lang)}
-  ${locationBlock}
+  <div id="historia">${renderHistoria(lang)}</div>
+  <section id="contacto" class="location-contacto">
+    ${mapBlock}
+    ${renderPracticalInfo(d, lang)}
+  </section>
   <div class="footer-separator">❖</div>
   <div class="homepage-footer">
     <div class="homepage-footer-inner">
@@ -557,6 +654,32 @@
           other.classList.remove('is-open');
           other.querySelector('.accordion-body').style.maxHeight = '0';
           other.querySelector('.dm-section-head').setAttribute('aria-expanded', 'false');
+        });
+        if (!isOpen) {
+          item.classList.add('is-open');
+          body.style.maxHeight = body.scrollHeight + 'px';
+          btn.setAttribute('aria-expanded', 'true');
+        }
+      });
+    });
+  }
+
+  function initPizarraAccordion(root) {
+    root.querySelectorAll('.pizarra-nueva .pizarra-accordion-item').forEach(function(item) {
+      const btn  = item.querySelector('.pizarra-accordion-btn');
+      const body = item.querySelector('.pizarra-accordion-body');
+      if (!btn || !body) return;
+
+      if (item.classList.contains('is-open')) {
+        body.style.maxHeight = body.scrollHeight + 'px';
+      }
+
+      btn.addEventListener('click', function() {
+        const isOpen = item.classList.contains('is-open');
+        root.querySelectorAll('.pizarra-nueva .pizarra-accordion-item.is-open').forEach(function(other) {
+          other.classList.remove('is-open');
+          other.querySelector('.pizarra-accordion-body').style.maxHeight = '0';
+          other.querySelector('.pizarra-accordion-btn').setAttribute('aria-expanded', 'false');
         });
         if (!isOpen) {
           item.classList.add('is-open');
@@ -702,8 +825,9 @@
 
       injectRestaurantJsonLd(d, lang);
       app.innerHTML = render(d, lang);
-      injectLangBar(lang, HOME_LINKS);
+      injectSiteNav(lang, HOME_LINKS, CARTA_LINKS[lang]);
       injectMobileServiceCTA(d, lang);
+      initPizarraAccordion(app);
       initDailyMenuAccordion(app);
       app.style.display = 'block';
       loader.classList.add('fade-out');

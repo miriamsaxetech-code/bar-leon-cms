@@ -756,11 +756,10 @@
 
   function renderMenuSections(d, nav, lang) {
     return `<div class="wrap menu-switch-wrap">
-  <div class="menu-switch menu-switch--five" role="tablist" aria-label="${t(nav.menu, lang)}">
+  <div class="menu-switch menu-switch--four" role="tablist" aria-label="${t(nav.menu, lang)}">
     <button type="button" class="menu-switch-btn is-active" role="tab" aria-selected="true" aria-controls="panel-restaurant" data-panel="restaurant">${LABELS.restaurant[lang]}</button>
     <button type="button" class="menu-switch-btn" role="tab" aria-selected="false" aria-controls="panel-bar" data-panel="bar">${LABELS.bar[lang]}</button>
     <button type="button" class="menu-switch-btn" role="tab" aria-selected="false" aria-controls="panel-beverages" data-panel="beverages">${LABELS.beverages[lang]}</button>
-    <button type="button" class="menu-switch-btn" role="tab" aria-selected="false" aria-controls="panel-wines" data-panel="wines">${LABELS.wines[lang]}</button>
     <button type="button" class="menu-switch-btn menu-switch-btn--secondary" role="tab" aria-selected="false" aria-controls="panel-daily" data-panel="daily">${LABELS.dailyMenu[lang]}</button>
   </div>
 </div>
@@ -788,9 +787,7 @@
     <p class="menu-panel-copy">${LABELS.beveragesIntro[lang]}</p>
   </div>
   ${renderWines(null, d.beverages, null, d.categories, d.allergens, lang, 'bar', 'wine', null)}
-</section>
-<section id="panel-wines" class="menu-panel" role="tabpanel" data-panel="wines" hidden>
-  <div class="wrap menu-panel-intro">
+  <div class="wrap menu-panel-intro" id="bodega" style="margin-top:40px;border-top:1px solid rgba(28,26,23,0.14);padding-top:32px;">
     <p class="section-label">${LABELS.wines[lang]}</p>
     <p class="menu-panel-copy">${LABELS.winesIntro[lang]}</p>
   </div>
@@ -866,7 +863,7 @@
   function scrollToWine(container, wineId) {
     if (!wineId) return;
 
-    const wineBtn = container.querySelector('.menu-switch-btn[data-panel="wines"]');
+    const wineBtn = container.querySelector('.menu-switch-btn[data-panel="beverages"]');
     if (wineBtn) wineBtn.click();
 
     setTimeout(function() {
@@ -1066,10 +1063,18 @@
       setTimeout(() => { loader.style.display = 'none'; }, 380);
 
       // Hash-based panel activation (e.g. /es/carta#restaurant)
-      const hashPanel = window.location.hash.replace('#', '');
+      // #wines redirects to beverages panel (bodega is now a subsection of bebidas)
+      const hashRaw   = window.location.hash.replace('#', '');
+      const hashPanel = hashRaw === 'wines' ? 'beverages' : hashRaw;
       if (hashPanel && hashPanel !== 'hours') {
         const panelBtn = app.querySelector(`.menu-switch-btn[data-panel="${hashPanel}"]`);
         if (panelBtn) panelBtn.click();
+      }
+      if (hashRaw === 'wines') {
+        setTimeout(() => {
+          const el = document.getElementById('bodega');
+          if (el) el.scrollIntoView({ behavior: 'smooth' });
+        }, 150);
       }
 
       if (window.location.hash === '#hours') {
