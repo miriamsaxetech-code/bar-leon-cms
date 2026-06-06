@@ -202,7 +202,7 @@ h2 {
 ═══════════════════════════════════════ */
 
 #homepage {
-  padding-top: 44px;
+  padding-top: 28px;
   padding-bottom: 0;
 }
 
@@ -215,6 +215,42 @@ h2 {
   color: var(--ink);
   letter-spacing: -0.01em;
   text-align: center;
+}
+
+/* ─── BRAND HEADER (logo + H1 above ceramic tile) ─── */
+.brand-header {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 8px;
+  margin-bottom: 12px;
+}
+
+.brand-logo {
+  height: 44px;
+  width: auto;
+  opacity: 0.82;
+  display: block;
+}
+
+.brand-name {
+  font-family: 'Granaina Limpia', 'Playfair Display', Georgia, serif;
+  font-weight: 700;
+  font-size: clamp(2.4rem, 7.5vw, 3.8rem);
+  line-height: 1;
+  letter-spacing: 0.02em;
+  color: var(--ink);
+  text-align: center;
+  margin: 0;
+}
+
+@media (max-width: 540px) {
+  .brand-logo {
+    height: 36px;
+  }
+  .brand-name {
+    font-size: clamp(2rem, 9vw, 2.8rem);
+  }
 }
 
 .site-location {
@@ -250,7 +286,7 @@ h2 {
 
 /* ─── SITE NAV ─── */
 .site-nav {
-  margin-top: 18px;
+  margin-top: 12px;
   display: flex;
   align-items: center;
   justify-content: space-between;
@@ -1540,8 +1576,8 @@ h2 {
 .site-tile-container {
   display: flex;
   justify-content: center;
-  margin-top: 16px;
-  margin-bottom: 32px;
+  margin-top: 8px;
+  margin-bottom: 16px;
   padding: 0 16px;
 }
 
@@ -1585,8 +1621,8 @@ h2 {
 
 @media (max-width: 540px) {
   .site-tile-container {
-    margin-top: 8px;
-    margin-bottom: 24px;
+    margin-top: 4px;
+    margin-bottom: 12px;
     padding: 0 12px;
   }
 }
@@ -2326,36 +2362,52 @@ h2 {
   white-space: nowrap;
 }
 
-/* ─── CHALKBOARD MENU — reusable visual treatment ─── */
+/* ─── CHALKBOARD MENU — authentic slate board ─── */
 .chalkboard-menu {
-  background-color: #1b1e1d;
-  border: 10px solid #281e12;
+  /* Slate: dark greenish-black, slightly lighter in the worn centre */
+  background-color: #191c1b;
+  background-image:
+    radial-gradient(ellipse 65% 55% at 50% 48%, rgba(255, 255, 255, 0.022) 0%, transparent 75%),
+    linear-gradient(175deg, rgba(255, 255, 255, 0.01) 0%, transparent 40%, rgba(255, 255, 255, 0.007) 70%, transparent 100%);
+  /* Aged wooden frame — warm dark brown */
+  border: 14px solid #3a2510;
   box-shadow:
-    inset 0 0 80px rgba(0, 0, 0, 0.45),
-    inset 0 0 20px rgba(0, 0, 0, 0.28),
-    0 3px 14px rgba(0, 0, 0, 0.32);
-  color: rgba(242, 238, 220, 0.88);
+    /* Outer frame edge — dark shadow against wall */
+    0 0 0 1px #1a0c04,
+    /* Board hanging shadow */
+    0 10px 48px rgba(0, 0, 0, 0.62),
+    0 3px 10px rgba(0, 0, 0, 0.42),
+    /* Wood top-edge highlight */
+    inset 0 14px 0 -12px rgba(160, 80, 20, 0.28),
+    /* Wood bottom-edge shadow */
+    inset 0 -14px 0 -12px rgba(0, 0, 0, 0.38),
+    /* Slate depth — dark corners, lighter centre */
+    inset 0 0 110px rgba(0, 0, 0, 0.48),
+    inset 0 0 45px rgba(0, 0, 0, 0.28);
+  color: rgba(238, 234, 212, 0.9);
   position: relative;
   overflow: hidden;
 }
 
-/* Inner chalk frame — double-rule effect */
+/* Inner chalk double-rule — visible chalk border drawn by hand */
 .chalkboard-menu::before {
   content: '';
   position: absolute;
-  inset: 5px;
-  border: 1px solid rgba(255, 255, 255, 0.07);
+  inset: 8px;
+  border: 1px solid rgba(238, 228, 195, 0.22);
   pointer-events: none;
   z-index: 1;
 }
 
-/* Chalk grain texture — CSS-only via SVG fractal noise */
+/* Chalk grain — two overlapping noise patterns for dusty slate texture */
 .chalkboard-menu::after {
   content: '';
   position: absolute;
   inset: 0;
-  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='200' height='200'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.72' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='200' height='200' filter='url(%23n)'/%3E%3C/svg%3E");
-  opacity: 0.065;
+  background-image:
+    url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='280' height='280'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.68' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='280' height='280' filter='url(%23n)'/%3E%3C/svg%3E"),
+    url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='160' height='160'%3E%3Cfilter id='n2'%3E%3CfeTurbulence type='turbulence' baseFrequency='0.88' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='160' height='160' filter='url(%23n2)' opacity='0.65'/%3E%3C/svg%3E");
+  opacity: 0.13;
   mix-blend-mode: screen;
   pointer-events: none;
   z-index: 0;
@@ -2363,88 +2415,110 @@ h2 {
 
 /* ─── BARRA CHALKBOARD — structural layer ─── */
 .barra-chalkboard {
-  padding: 28px 32px 24px;
-  margin: 28px 0;
+  padding: 32px 36px 28px;
+  margin: 32px 0;
 }
 
 .chalkboard-header {
   text-align: center;
-  margin-bottom: 20px;
-  padding-bottom: 14px;
-  border-bottom: 1px solid rgba(255, 255, 255, 0.14);
+  margin-bottom: 24px;
+  padding-bottom: 18px;
+  /* Chalk line — warm, not stark white */
+  border-bottom: 1px solid rgba(238, 228, 195, 0.22);
   position: relative;
   z-index: 2;
 }
 
+/* Second chalk rule under header — double-line like a real pizarra */
+.chalkboard-header::after {
+  content: '';
+  position: absolute;
+  bottom: -4px;
+  left: 10%;
+  right: 10%;
+  height: 1px;
+  background: rgba(238, 228, 195, 0.08);
+}
+
 .chalkboard-title {
-  font-family: 'Granaina Limpia', Georgia, serif;
-  font-size: 1.65rem;
-  color: rgba(255, 252, 240, 0.92);
-  letter-spacing: 0.06em;
+  font-family: 'Granaina Sucia', 'Granaina Limpia', Georgia, serif;
+  font-size: clamp(1.65rem, 5vw, 2.1rem);
+  color: rgba(248, 244, 225, 0.94);
+  letter-spacing: 0.02em;
   line-height: 1.1;
   text-shadow:
-    0 0 12px rgba(255, 252, 240, 0.18),
-    0 1px 2px rgba(0, 0, 0, 0.6);
+    0 0 20px rgba(248, 244, 225, 0.12),
+    0 0 6px rgba(248, 244, 225, 0.07),
+    0 1px 3px rgba(0, 0, 0, 0.72);
 }
 
 .chalkboard-subtitle {
-  font-family: Georgia, serif;
-  font-size: 0.65rem;
-  color: rgba(240, 235, 215, 0.5);
-  letter-spacing: 0.22em;
-  text-transform: uppercase;
-  margin-top: 5px;
-  text-shadow: 0 0 6px rgba(240, 235, 215, 0.1);
+  font-family: 'Granaina Sucia', 'Granaina Limpia', Georgia, serif;
+  font-size: 0.82rem;
+  color: rgba(235, 228, 200, 0.52);
+  letter-spacing: 0.08em;
+  text-transform: none;
+  margin-top: 6px;
+  text-shadow: 0 0 8px rgba(235, 228, 200, 0.07);
 }
 
 .chalkboard-body {
   display: grid;
   grid-template-columns: 1fr 1px 1fr;
-  gap: 0 0;
+  gap: 0;
   position: relative;
   z-index: 2;
 }
 
+/* Vertical chalk separator — fades at edges like a hand-drawn line */
 .chalkboard-vsep {
-  background: rgba(255, 255, 255, 0.12);
-  margin: 0 18px;
+  background: linear-gradient(
+    to bottom,
+    transparent 0%,
+    rgba(238, 228, 200, 0.18) 8%,
+    rgba(238, 228, 200, 0.24) 50%,
+    rgba(238, 228, 200, 0.18) 92%,
+    transparent 100%
+  );
+  margin: 0 20px;
 }
 
 .chalkboard-group {
   display: flex;
   flex-direction: column;
+  padding: 4px 0;
 }
 
-/* Column header row */
+/* Column header row — written in the same chalk hand */
 .chalkboard-col-header .chalkboard-name {
   opacity: 0;
 }
 
 .chalkboard-col-header .chalkboard-media,
 .chalkboard-col-header .chalkboard-racion {
-  font-family: system-ui, -apple-system, sans-serif;
+  font-family: 'Granaina Sucia', 'Granaina Limpia', Georgia, serif;
   font-style: normal;
-  font-size: 0.56rem;
-  text-transform: uppercase;
-  letter-spacing: 0.2em;
-  color: rgba(240, 235, 215, 0.38);
-  padding-bottom: 6px;
-  border-bottom: 1px solid rgba(255, 255, 255, 0.14);
-  margin-bottom: 4px;
+  font-size: 0.76rem;
+  text-transform: none;
+  letter-spacing: 0.04em;
+  color: rgba(235, 228, 200, 0.5);
+  padding-bottom: 8px;
+  border-bottom: 1px solid rgba(238, 228, 200, 0.2);
+  margin-bottom: 6px;
 }
 
-/* Data rows */
+/* Data rows — handwritten, not typeset */
 .chalkboard-row {
   display: grid;
-  grid-template-columns: 1fr 60px 60px;
-  gap: 0 12px;
-  font-family: Georgia, serif;
-  font-style: italic;
-  font-size: 0.76rem;
-  color: rgba(242, 238, 220, 0.88);
-  line-height: 1.72;
-  border-bottom: 1px solid rgba(255, 255, 255, 0.05);
-  text-shadow: 0 0 8px rgba(242, 238, 220, 0.07);
+  grid-template-columns: 1fr 64px 64px;
+  gap: 0 10px;
+  font-family: 'Granaina Sucia', 'Granaina Limpia', Georgia, serif;
+  font-style: normal;
+  font-size: clamp(0.86rem, 2.6vw, 0.98rem);
+  color: rgba(238, 234, 212, 0.88);
+  line-height: 1.9;
+  border-bottom: 1px solid rgba(238, 228, 200, 0.08);
+  text-shadow: 0 0 6px rgba(238, 234, 212, 0.06);
   align-items: start;
 }
 
@@ -2453,22 +2527,21 @@ h2 {
 }
 
 .chalkboard-name {
-  text-transform: uppercase;
-  font-style: italic;
+  font-style: normal;
+  text-transform: none;
   min-width: 0;
   overflow-wrap: break-word;
 }
 
 .chalkboard-media,
 .chalkboard-racion {
-  font-family: 'Courier New', monospace;
+  font-family: 'Granaina Sucia', 'Granaina Limpia', Georgia, serif;
   font-style: normal;
-  font-size: 0.69rem;
-  color: rgba(230, 224, 200, 0.7);
+  font-size: clamp(0.86rem, 2.6vw, 0.96rem);
+  color: rgba(238, 228, 195, 0.82);
   white-space: nowrap;
   text-align: right;
   align-self: start;
-  padding-top: 1px;
 }
 
 .chalkboard-media {
@@ -2477,10 +2550,10 @@ h2 {
 
 @media (max-width: 768px) {
   .chalkboard-menu {
-    border-width: 7px;
+    border-width: 10px;
   }
   .barra-chalkboard {
-    padding: 20px 18px 18px;
+    padding: 22px 20px 20px;
   }
   .chalkboard-body {
     grid-template-columns: 1fr;
@@ -2488,136 +2561,176 @@ h2 {
   .chalkboard-vsep {
     height: 1px;
     width: auto;
-    margin: 16px 0;
-    background: rgba(255, 255, 255, 0.14);
+    margin: 20px 0;
+    background: linear-gradient(to right, transparent, rgba(238, 228, 200, 0.24), transparent);
   }
   .chalkboard-row {
     grid-template-columns: 1fr 60px 60px;
-    font-size: 0.72rem;
   }
   .chalkboard-title {
-    font-size: 1.35rem;
+    font-size: 1.5rem;
   }
 }
 
 @media (max-width: 420px) {
   .chalkboard-menu {
-    border-width: 5px;
+    border-width: 7px;
   }
   .barra-chalkboard {
-    padding: 16px 14px 14px;
+    padding: 18px 16px 16px;
   }
   .chalkboard-row {
-    grid-template-columns: 1fr 54px 54px;
+    grid-template-columns: 1fr 56px 56px;
     gap: 0 8px;
-    font-size: 0.68rem;
+    font-size: 0.84rem;
   }
   .chalkboard-title {
-    font-size: 1.15rem;
+    font-size: 1.25rem;
   }
 }
 
 /* ─── PIZARRA MENÚ DEL DÍA (homepage) ─── */
 .pizarra-dia {
-  margin: 40px 0;
+  margin: 44px 0;
 }
 
 .pizarra-dia__wrap {
-  padding: 28px 32px 24px;
+  padding: 32px 36px 28px;
   position: relative;
   z-index: 2;
 }
 
-/* Header override: inherit chalkboard header style */
+/* Header — chalk hand, not typeset */
 .pizarra-dia .home-daily-menu__head {
-  border-bottom-color: rgba(255, 255, 255, 0.14);
+  border-bottom: 1px solid rgba(238, 228, 195, 0.18);
+  padding-bottom: 16px;
 }
 
 .pizarra-dia .home-daily-menu__head .section-label {
-  color: rgba(240, 235, 215, 0.5);
-  letter-spacing: 0.22em;
+  font-family: 'Granaina Sucia', 'Granaina Limpia', Georgia, serif;
+  font-size: 0.9rem;
+  color: rgba(235, 228, 200, 0.5);
+  letter-spacing: 0.03em;
+  text-transform: none;
 }
 
 .pizarra-dia .home-daily-menu h2 {
-  font-family: 'Granaina Limpia', Georgia, serif;
-  color: rgba(255, 252, 240, 0.92);
-  text-shadow: 0 0 12px rgba(255, 252, 240, 0.18), 0 1px 2px rgba(0, 0, 0, 0.6);
+  font-family: 'Granaina Sucia', 'Granaina Limpia', Georgia, serif;
+  color: rgba(248, 244, 225, 0.94);
+  text-shadow:
+    0 0 18px rgba(248, 244, 225, 0.12),
+    0 0 6px rgba(248, 244, 225, 0.07),
+    0 1px 3px rgba(0, 0, 0, 0.72);
 }
 
 .pizarra-dia .home-daily-menu__meta {
-  color: rgba(240, 235, 215, 0.45);
+  font-family: 'Granaina Sucia', 'Granaina Limpia', Georgia, serif;
+  font-size: 0.84rem;
+  color: rgba(235, 228, 200, 0.46);
+  letter-spacing: 0.01em;
+  text-transform: none;
 }
 
 .pizarra-dia .home-daily-menu__price {
-  color: rgba(240, 220, 160, 0.9);
-  text-shadow: 0 0 10px rgba(240, 220, 160, 0.2);
+  font-family: 'Granaina Sucia', 'Granaina Limpia', Georgia, serif;
+  font-weight: normal;
+  color: rgba(242, 222, 162, 0.92);
+  text-shadow: 0 0 14px rgba(242, 222, 162, 0.18);
 }
 
 /* Body: accordion overrides */
 .pizarra-dia .home-daily-menu__body {
-  border-top-color: rgba(255, 255, 255, 0.1);
+  border-top: 1px solid rgba(238, 228, 200, 0.12);
+  margin-top: 6px;
 }
 
 .pizarra-dia .accordion-item {
-  border-bottom-color: rgba(255, 255, 255, 0.1);
+  border-bottom: 1px solid rgba(238, 228, 200, 0.1);
 }
 
 .pizarra-dia .accordion-item:first-child {
-  border-top-color: rgba(255, 255, 255, 0.1);
+  border-top: none;
 }
 
 .pizarra-dia .dm-section-head {
-  border-bottom-color: rgba(255, 255, 255, 0.08);
+  border-bottom: 1px solid rgba(238, 228, 200, 0.08);
+  padding: 14px 0;
 }
 
+/* Section labels — chalk-written, not SaaS caps */
 .pizarra-dia .dm-section-head span:first-child {
-  color: rgba(240, 220, 160, 0.75);
+  font-family: 'Granaina Sucia', 'Granaina Limpia', Georgia, serif;
+  font-size: 1rem;
+  font-weight: normal;
+  letter-spacing: 0.01em;
+  text-transform: none;
+  color: rgba(242, 222, 162, 0.68);
 }
 
 .pizarra-dia .is-open .dm-section-head span:first-child {
-  color: rgba(255, 252, 240, 0.92);
+  color: rgba(248, 244, 225, 0.9);
 }
 
 .pizarra-dia .accordion-icon::before,
 .pizarra-dia .accordion-icon::after {
-  background-color: rgba(255, 252, 240, 0.5);
+  background-color: rgba(238, 228, 195, 0.45);
 }
 
 .pizarra-dia .home-daily-menu__group-list li {
-  color: rgba(240, 235, 215, 0.78);
-  border-bottom-color: rgba(255, 255, 255, 0.07);
+  font-family: 'Granaina Sucia', 'Granaina Limpia', Georgia, serif;
+  font-size: clamp(0.88rem, 2.8vw, 1rem);
+  color: rgba(235, 228, 200, 0.82);
+  border-bottom: 1px solid rgba(238, 228, 200, 0.07);
+  padding: 7px 0;
+  line-height: 1.6;
+  text-align: center;
+  text-shadow: 0 0 6px rgba(235, 228, 200, 0.05);
+}
+
+.pizarra-dia .home-daily-menu__group-list li strong {
+  color: rgba(248, 244, 225, 0.92);
+  font-weight: normal;
 }
 
 .pizarra-dia .home-daily-menu__group-list li em {
-  color: rgba(240, 235, 215, 0.5);
+  color: rgba(235, 228, 200, 0.5);
+  font-style: italic;
 }
 
 /* Footer */
 .pizarra-dia .home-daily-menu__foot {
-  border-top-color: rgba(255, 255, 255, 0.1);
+  border-top: 1px solid rgba(238, 228, 200, 0.1);
+  padding-top: 14px;
 }
 
 .pizarra-dia .home-daily-menu__foot p {
-  color: rgba(240, 235, 215, 0.45);
+  font-family: 'Granaina Sucia', 'Granaina Limpia', Georgia, serif;
+  font-size: 0.84rem;
+  color: rgba(235, 228, 200, 0.44);
 }
 
 .pizarra-dia .home-daily-menu__foot a {
-  color: rgba(240, 235, 215, 0.7);
+  font-family: 'Granaina Sucia', 'Granaina Limpia', Georgia, serif;
+  font-size: 0.9rem;
+  font-weight: normal;
+  letter-spacing: 0.02em;
+  text-transform: none;
+  color: rgba(235, 228, 200, 0.65);
 }
 
 .pizarra-dia .home-daily-menu__foot a:hover {
-  color: rgba(255, 252, 240, 0.95);
+  color: rgba(248, 244, 225, 0.95);
 }
 
 @media (max-width: 768px) {
   .pizarra-dia__wrap {
-    padding: 20px 18px 18px;
+    padding: 22px 20px 20px;
   }
 }
 
 @media (max-width: 420px) {
   .pizarra-dia__wrap {
-    padding: 16px 14px 14px;
+    padding: 18px 16px 16px;
   }
 }
 
@@ -2812,4 +2925,31 @@ h2 {
   .wine-editorial__cards {
     grid-template-columns: 1fr;
   }
+}
+
+/* ─── CAÑA EDITORIAL ─── */
+.cana-editorial {
+  margin-top: 56px;
+  padding-top: 48px;
+  border-top: 1px solid rgba(28, 26, 23, 0.16);
+}
+
+.cana-editorial h2 {
+  font-family: 'Granaina Limpia', 'Playfair Display', Georgia, serif;
+  font-size: clamp(1.2rem, 3.5vw, 1.5rem);
+  font-weight: 700;
+  color: var(--ink);
+  margin-bottom: 16px;
+}
+
+.cana-editorial__text {
+  max-width: 65ch;
+  font-family: Georgia, serif;
+  font-size: 0.95rem;
+  line-height: 1.75;
+  color: var(--ink);
+}
+
+.cana-editorial__text p + p {
+  margin-top: 14px;
 }
