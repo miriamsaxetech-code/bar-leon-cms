@@ -217,19 +217,19 @@ h2 {
   text-align: center;
 }
 
-/* ─── BRAND HEADER (logo + H1 above ceramic tile) ─── */
+/* ─── BRAND HEADER (lion mark + H1 above ceramic tile) ─── */
 .brand-header {
   display: flex;
   flex-direction: column;
   align-items: center;
-  gap: 8px;
-  margin-bottom: 12px;
+  gap: 14px;
+  margin-bottom: 28px;
 }
 
 .brand-logo {
-  height: 44px;
-  width: auto;
-  opacity: 0.82;
+  width: 170px;
+  height: auto;
+  opacity: 0.88;
   display: block;
 }
 
@@ -246,7 +246,8 @@ h2 {
 
 @media (max-width: 540px) {
   .brand-logo {
-    height: 36px;
+    width: 110px;
+    height: auto;
   }
   .brand-name {
     font-size: clamp(2rem, 9vw, 2.8rem);
@@ -1572,37 +1573,38 @@ h2 {
   margin-top: 3px;
 }
 
-/* ─── SITE TILE HOME ─── */
+/* ─── SITE TILE HOME — heritage stamp, secondary to lion mark ─── */
 .site-tile-container {
   display: flex;
   justify-content: center;
-  margin-top: 8px;
-  margin-bottom: 16px;
+  margin-top: 0;
+  margin-bottom: 20px;
   padding: 0 16px;
 }
 
 .site-tile-frame {
   display: block;
-  max-width: 520px;
+  max-width: 200px;
   width: 100%;
-  aspect-ratio: 3 / 2; /* hero-leon.webp (rótulo oficial) 900×600 */
-  border-radius: 4px;
+  aspect-ratio: 3 / 2;
+  border-radius: 3px;
+  border: 1px solid rgba(28, 26, 23, 0.14);
   box-shadow:
-    0 12px 32px rgba(28, 26, 23, 0.18),
-    0 2px 6px rgba(28, 26, 23, 0.08);
+    0 4px 12px rgba(28, 26, 23, 0.12),
+    0 1px 3px rgba(28, 26, 23, 0.06);
   overflow: hidden;
   transition: transform 0.3s cubic-bezier(0.16, 1, 0.3, 1), box-shadow 0.3s ease;
   opacity: 0;
   transform: scale(0.96) translateY(4px);
   animation: tileFadeIn 0.8s cubic-bezier(0.16, 1, 0.3, 1) forwards;
-  animation-delay: 0.1s;
+  animation-delay: 0.3s;
 }
 
 .site-tile-frame:hover {
-  transform: scale(1.015) translateY(-2px);
+  transform: scale(1.02) translateY(-1px);
   box-shadow:
-    0 16px 40px rgba(28, 26, 23, 0.22),
-    0 4px 12px rgba(28, 26, 23, 0.12);
+    0 6px 16px rgba(28, 26, 23, 0.16),
+    0 2px 6px rgba(28, 26, 23, 0.08);
 }
 
 .site-tile {
@@ -1621,8 +1623,8 @@ h2 {
 
 @media (max-width: 540px) {
   .site-tile-container {
-    margin-top: 4px;
-    margin-bottom: 12px;
+    margin-top: 0;
+    margin-bottom: 16px;
     padding: 0 12px;
   }
 }
