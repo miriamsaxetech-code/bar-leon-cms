@@ -222,12 +222,12 @@ h2 {
   display: flex;
   flex-direction: column;
   align-items: center;
-  gap: 14px;
-  margin-bottom: 28px;
+  gap: 10px;
+  margin-bottom: 16px;
 }
 
 .brand-logo {
-  width: 210px;
+  width: 170px;
   height: auto;
   display: block;
 }
@@ -245,11 +245,16 @@ h2 {
 
 @media (max-width: 540px) {
   .brand-logo {
-    width: 160px;
+    width: 110px;
     height: auto;
   }
   .brand-name {
-    font-size: clamp(2rem, 9vw, 2.8rem);
+    font-size: clamp(1.8rem, 8vw, 2.4rem);
+  }
+  .brand-header {
+    margin-top: 0;
+    gap: 4px;
+    margin-bottom: 2px;
   }
 }
 
@@ -2029,6 +2034,27 @@ h2 {
 }
 .pairing-chip:hover,
 .pairing-chip:focus-visible { background: rgba(29, 77, 133, 0.14); }
+.beer-chip {
+  display: inline-flex;
+  align-items: center;
+  width: fit-content;
+  max-width: 100%;
+  min-height: 32px;
+  background: rgba(160, 100, 20, 0.07);
+  border: 1px solid rgba(160, 100, 20, 0.28);
+  border-radius: 8px;
+  color: #7a4e10;
+  cursor: pointer;
+  font-size: 0.72rem;
+  font-weight: 600;
+  line-height: 1.35;
+  margin-top: 6px;
+  padding: 6px 11px;
+  text-decoration: none;
+  white-space: normal;
+}
+.beer-chip:hover,
+.beer-chip:focus-visible { background: rgba(160, 100, 20, 0.14); }
 .is-pairing-target {
   background: rgba(29, 77, 133, 0.05);
   transition: background 0.25s ease;
@@ -2454,7 +2480,7 @@ h2 {
 }
 
 .chalkboard-title {
-  font-family: 'Granaina Sucia', 'Granaina Limpia', Georgia, serif;
+  font-family: 'Caveat', cursive;
   font-size: clamp(1.65rem, 5vw, 2.1rem);
   color: rgba(248, 244, 225, 0.94);
   letter-spacing: 0.02em;
@@ -2466,7 +2492,7 @@ h2 {
 }
 
 .chalkboard-subtitle {
-  font-family: 'Granaina Sucia', 'Granaina Limpia', Georgia, serif;
+  font-family: 'Caveat', cursive;
   font-size: 0.82rem;
   color: rgba(235, 228, 200, 0.52);
   letter-spacing: 0.08em;
@@ -2509,7 +2535,7 @@ h2 {
 
 .chalkboard-col-header .chalkboard-media,
 .chalkboard-col-header .chalkboard-racion {
-  font-family: 'Granaina Sucia', 'Granaina Limpia', Georgia, serif;
+  font-family: 'Caveat', cursive;
   font-style: normal;
   font-size: 0.76rem;
   text-transform: none;
@@ -2525,7 +2551,7 @@ h2 {
   display: grid;
   grid-template-columns: 1fr 64px 64px;
   gap: 0 10px;
-  font-family: 'Granaina Sucia', 'Granaina Limpia', Georgia, serif;
+  font-family: 'Caveat', cursive;
   font-style: normal;
   font-size: clamp(0.86rem, 2.6vw, 0.98rem);
   color: rgba(238, 234, 212, 0.88);
@@ -2548,7 +2574,7 @@ h2 {
 
 .chalkboard-media,
 .chalkboard-racion {
-  font-family: 'Granaina Sucia', 'Granaina Limpia', Georgia, serif;
+  font-family: 'Caveat', cursive;
   font-style: normal;
   font-size: clamp(0.86rem, 2.6vw, 0.96rem);
   color: rgba(238, 228, 195, 0.82);
@@ -2620,7 +2646,7 @@ h2 {
 }
 
 .pizarra-dia .home-daily-menu__head .section-label {
-  font-family: 'Granaina Sucia', 'Granaina Limpia', Georgia, serif;
+  font-family: 'Caveat', cursive;
   font-size: 0.9rem;
   color: rgba(235, 228, 200, 0.5);
   letter-spacing: 0.03em;
@@ -2628,7 +2654,7 @@ h2 {
 }
 
 .pizarra-dia .home-daily-menu h2 {
-  font-family: 'Granaina Sucia', 'Granaina Limpia', Georgia, serif;
+  font-family: 'Caveat', cursive;
   color: rgba(248, 244, 225, 0.94);
   text-shadow:
     0 0 18px rgba(248, 244, 225, 0.12),
@@ -2637,7 +2663,7 @@ h2 {
 }
 
 .pizarra-dia .home-daily-menu__meta {
-  font-family: 'Granaina Sucia', 'Granaina Limpia', Georgia, serif;
+  font-family: 'Caveat', cursive;
   font-size: 0.84rem;
   color: rgba(235, 228, 200, 0.46);
   letter-spacing: 0.01em;
@@ -2645,7 +2671,7 @@ h2 {
 }
 
 .pizarra-dia .home-daily-menu__price {
-  font-family: 'Granaina Sucia', 'Granaina Limpia', Georgia, serif;
+  font-family: 'Caveat', cursive;
   font-weight: normal;
   color: rgba(242, 222, 162, 0.92);
   text-shadow: 0 0 14px rgba(242, 222, 162, 0.18);
@@ -2672,7 +2698,7 @@ h2 {
 
 /* Section labels — chalk-written, not SaaS caps */
 .pizarra-dia .dm-section-head span:first-child {
-  font-family: 'Granaina Sucia', 'Granaina Limpia', Georgia, serif;
+  font-family: 'Caveat', cursive;
   font-size: 1rem;
   font-weight: normal;
   letter-spacing: 0.01em;
@@ -2690,7 +2716,7 @@ h2 {
 }
 
 .pizarra-dia .home-daily-menu__group-list li {
-  font-family: 'Granaina Sucia', 'Granaina Limpia', Georgia, serif;
+  font-family: 'Caveat', cursive;
   font-size: clamp(0.88rem, 2.8vw, 1rem);
   color: rgba(235, 228, 200, 0.82);
   border-bottom: 1px solid rgba(238, 228, 200, 0.07);
@@ -2717,13 +2743,13 @@ h2 {
 }
 
 .pizarra-dia .home-daily-menu__foot p {
-  font-family: 'Granaina Sucia', 'Granaina Limpia', Georgia, serif;
+  font-family: 'Caveat', cursive;
   font-size: 0.84rem;
   color: rgba(235, 228, 200, 0.44);
 }
 
 .pizarra-dia .home-daily-menu__foot a {
-  font-family: 'Granaina Sucia', 'Granaina Limpia', Georgia, serif;
+  font-family: 'Caveat', cursive;
   font-size: 0.9rem;
   font-weight: normal;
   letter-spacing: 0.02em;
@@ -2978,7 +3004,7 @@ h2 {
 
 .qr-hero__img {
   width: auto;
-  max-width: 200px;
+  max-width: 160px;
   height: auto;
   display: block;
 }
@@ -3059,6 +3085,56 @@ h2 {
   opacity: 0.72;
 }
 
+/* ─── BRAND SINCE: azulejo stamp + year inline ─── */
+.brand-since {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  margin-top: 2px;
+  margin-bottom: 4px;
+}
+
+.brand-since__stamp {
+  width: 42px;
+  height: auto;
+  display: block;
+  opacity: 0.82;
+  flex-shrink: 0;
+}
+
+.brand-since__text {
+  font-family: 'Inter', system-ui, -apple-system, sans-serif;
+  font-size: 0.68rem;
+  font-weight: 500;
+  text-transform: uppercase;
+  letter-spacing: 0.22em;
+  color: var(--muted);
+  white-space: nowrap;
+  line-height: 1;
+}
+
+/* ─── HOME CONTENT GRID: Menú del Día + Sabores side by side ─── */
+.home-main-grid {
+  display: flex;
+  flex-direction: column;
+  gap: 0;
+}
+
+@media (min-width: 680px) {
+  .home-main-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 20px;
+    align-items: start;
+    margin-top: 40px;
+  }
+  .home-main-grid .home-andalusia,
+  .home-main-grid .home-daily-menu {
+    margin-top: 0;
+  }
+}
+
 /* ─── HISTORIA SHORT YEAR ─── */
 .historia-year {
   font-family: 'Granaina Limpia', Georgia, serif !important;
@@ -3132,7 +3208,7 @@ h2 {
 
 /* ─── BRAND HEADER — after hero ─── */
 .brand-header {
-  margin-top: 20px;
+  margin-top: 12px;
 }
 
 /* ─── MENU TAB BAR — scrollable on narrow mobile ─── */
@@ -3153,5 +3229,67 @@ h2 {
   }
   .menu-switch--five .menu-switch-btn:last-child {
     border-right: none;
+  }
+}
+
+/* ─── MOBILE QR-FIRST: compact hero, hidden editorial ≤540px ─── */
+@media (max-width: 540px) {
+  /* Tighter homepage top padding */
+  #homepage {
+    padding-top: 8px;
+  }
+
+  /* Site-location and status: tighter */
+  .site-location {
+    margin-top: 2px;
+  }
+  .site-status-container {
+    margin-top: 4px;
+    margin-bottom: 0;
+  }
+
+  /* Pull CTA block up */
+  .qr-actions {
+    margin-top: 10px;
+    margin-bottom: 14px;
+  }
+
+  /* Trust strip: compact */
+  .trust-strip {
+    margin-top: 6px;
+    padding: 7px 0;
+  }
+
+  /* Sabores de Andalucía: compact list, no descriptions */
+  .home-andalusia {
+    margin-top: 24px;
+    padding-top: 14px;
+  }
+  .home-section-head {
+    margin-bottom: 8px;
+  }
+  .home-section-head h2 {
+    font-size: 1.1rem;
+  }
+  .home-andalusia__item {
+    padding: 10px 0;
+    gap: 10px;
+  }
+  .home-andalusia__main p {
+    display: none;
+  }
+  .home-andalusia__main h3 {
+    font-size: 1.05rem;
+  }
+
+  /* Hide editorial sections — present on desktop, not on QR-first mobile */
+  .historia-leon,
+  .ordering-guide,
+  .mala-folla,
+  .cana-editorial,
+  .wine-editorial,
+  .home-food-gallery,
+  .stories-archive {
+    display: none;
   }
 }

@@ -186,14 +186,7 @@
     document.body.insertBefore(bar, document.body.firstChild);
   }
 
-  function renderBadge(dish, lang) {
-    const v = dish.featured;
-    if (!v || v === false) return '';
-    if (v === true || v === 'recommended') return `<span class="dish-badge dish-badge--recommended">${LABELS.recommended[lang]}</span>`;
-    if (v === 'seasonal') return `<span class="dish-badge dish-badge--seasonal">${LABELS.seasonal[lang]}</span>`;
-    if (v === 'house') return `<span class="dish-badge dish-badge--house">${LABELS.house[lang]}</span>`;
-    return '';
-  }
+  function renderBadge() { return ''; }
 
   function findWineForPairing(pairingText, wines, lang) {
     if (!pairingText) return null;
@@ -287,6 +280,16 @@
     const wine = findWineForPairing(pairingText, wines, lang);
     if (!wine) return '';
     return `<a class="pairing-chip" href="${cartaUrl}#wine-${wine.id}" data-wine-id="${wine.id}">${pairingChipText(wine, lang)}</a>`;
+  }
+
+  function renderBeerPairingChip(dish, beverages, lang, cartaUrl) {
+    const beerId = dish.beer_pairing;
+    if (!beerId) return '';
+    const beer = (beverages || []).find(b => b.id === beerId && b.available !== false);
+    if (!beer) return '';
+    const beerName = typeof beer.name === 'object' ? t(beer.name, lang) : (beer.name || '');
+    const label = { es: `Cerveza · ${beerName}`, en: `Beer · ${beerName}`, fr: `Bière · ${beerName}` }[lang] || beerName;
+    return `<a class="beer-chip" href="${cartaUrl}#bebidas">${label}</a>`;
   }
 
   function splitList(str) {
@@ -401,7 +404,7 @@
     <div class="home-andalusia__list">
       ${dishes.map(dish => {
         const parsed = parseDishPrice(formatPrice(dish.price), lang);
-        const priceHtml = `<span class="home-andalusia__price">${parsed.label || parsed.display}</span>`;
+        const priceHtml = parsed.type === 'portions' ? '' : `<span class="home-andalusia__price">${parsed.display}</span>`;
         const priceNoteHtml = parsed.type === 'portions' ? `<p class="price-note">${parsed.note}</p>` : '';
         return `<article class="home-andalusia__item">
           <div class="home-andalusia__main">
@@ -409,6 +412,7 @@
             <h3>${t(dish.name, lang)}</h3>
             <p>${t(dish.description, lang)}</p>
             ${renderPairingChip(dish, d.wines, lang, cartaUrl)}
+            ${renderBeerPairingChip(dish, d.beverages, lang, cartaUrl)}
             ${priceNoteHtml}
           </div>
           ${priceHtml}
@@ -722,19 +726,19 @@
 </section>`;
 
     return `<div class="wrap">
-  <div class="qr-hero">
+  <div class="brand-header">
+    <img class="brand-logo" src="../assets/images/lion-logo.svg" alt="Bar León" fetchpriority="high" width="110" height="169" />
+    <h1 class="brand-name">Bar León</h1>
+  </div>
+  <div class="brand-since">
     <picture>
       <source srcset="${logoSrc}" type="image/webp">
-      <img class="qr-hero__img" src="${logoSrc.replace('.webp', '.png')}" alt="${tileAlt}" fetchpriority="high" width="994" height="646" />
+      <img class="brand-since__stamp" src="${logoSrc.replace('.webp', '.png')}" alt="" width="42" height="27" loading="eager" />
     </picture>
-  </div>
-  <div class="brand-header">
-    <img class="brand-logo" src="../assets/images/lion-logo.svg" alt="Bar León" />
-    <h1 class="brand-name">Bar León</h1>
+    <span class="brand-since__text">&#8212;&thinsp;${since}&thinsp;&#8212;</span>
   </div>
   <p class="site-location">
     <span class="site-location__place">${addr.neighborhood} &middot; ${addr.city}</span>
-    <span class="site-location__since">${since}</span>
   </p>
   <div class="site-status-container">
     <a href="${cartaUrl}#hours" class="status-pill ${inService ? 'status-pill--open' : 'status-pill--closed'}">
@@ -745,8 +749,10 @@
   ${aviso}
   ${qrActions}
   ${trustStrip}
-  ${renderHomeAndalusia(d, lang, cartaUrl)}
-  ${renderHomeDailyMenu(d, lang, cartaUrl)}
+  <div class="home-main-grid">
+    ${renderHomeDailyMenu(d, lang, cartaUrl)}
+    ${renderHomeAndalusia(d, lang, cartaUrl)}
+  </div>
   ${renderHistoria(lang)}
   ${renderOrderingGuide(d, lang, cartaUrl)}
   ${renderMalaFolla(lang)}

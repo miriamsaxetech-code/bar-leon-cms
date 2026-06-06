@@ -346,7 +346,11 @@
     },
     "items": [
       {
-        "term": { "es": "Tapa", "en": "Tapa", "fr": "Tapa" },
+        "term": {
+          "es": "Tapa",
+          "en": "Tapa",
+          "fr": "Tapa"
+        },
         "def": {
           "es": "Bocado pequeño, gratis con la bebida. En Bar León no se cobra la tapa.",
           "en": "A small bite served free with your drink. At Bar León, the tapa is always included.",
@@ -354,7 +358,11 @@
         }
       },
       {
-        "term": { "es": "Media ración", "en": "Half portion", "fr": "Demi-portion" },
+        "term": {
+          "es": "Media ración",
+          "en": "Half portion",
+          "fr": "Demi-portion"
+        },
         "def": {
           "es": "Ideal para probar varios platos entre dos personas.",
           "en": "The right size for sharing and trying multiple dishes between two.",
@@ -362,7 +370,11 @@
         }
       },
       {
-        "term": { "es": "Ración", "en": "Full portion", "fr": "Portion entière" },
+        "term": {
+          "es": "Ración",
+          "en": "Full portion",
+          "fr": "Portion entière"
+        },
         "def": {
           "es": "Plato completo. Sirve para uno o para compartir generosamente.",
           "en": "A full dish. Enough for one or to share generously.",
@@ -370,7 +382,11 @@
         }
       },
       {
-        "term": { "es": "Menú del día", "en": "Daily set menu", "fr": "Menu du jour" },
+        "term": {
+          "es": "Menú del día",
+          "en": "Daily set menu",
+          "fr": "Menu du jour"
+        },
         "def": {
           "es": "Primero, segundo, postre y pan: 12,50 €. De lunes a viernes en el servicio de mediodía.",
           "en": "Starter, main, dessert, and bread: €12.50. Monday to Friday at lunch.",
@@ -378,7 +394,11 @@
         }
       },
       {
-        "term": { "es": "Vino de Granada", "en": "Granada wine", "fr": "Vin de Grenade" },
+        "term": {
+          "es": "Vino de Granada",
+          "en": "Granada wine",
+          "fr": "Vin de Grenade"
+        },
         "def": {
           "es": "Pídale al camarero el vino de la tierra. Desde 3,40 € la copa.",
           "en": "Ask the waiter for the local wine. From €3.40 a glass.",
@@ -403,7 +423,11 @@
       "en": "Open the cellar",
       "fr": "Ouvrir la cave"
     },
-    "featured_wine_ids": ["senorio-de-nevada", "calvente-guindalera", "manzanilla-casa-bernal"]
+    "featured_wine_ids": [
+      "senorio-de-nevada",
+      "calvente-guindalera",
+      "manzanilla-casa-bernal"
+    ]
   },
   "cana_editorial": {
     "title": {
@@ -859,7 +883,8 @@
         "fr": "Calvente Vigiriega — Verre 3,70 € / Bout. 22,00 €"
       },
       "available": true,
-      "featured": "recommended"
+      "featured": "recommended",
+      "beer_pairing": "alhambra-especial-tercio"
     },
     {
       "id": "habas-jamon-iberico",
@@ -881,7 +906,8 @@
         "fr": "Delirio (vin rouge, D.O. Granada) — 17,00 €"
       },
       "available": true,
-      "featured": "seasonal"
+      "featured": "seasonal",
+      "beer_pairing": "alhambra-especial-tercio"
     },
     {
       "id": "carne-de-monte",
@@ -903,7 +929,8 @@
         "fr": "Muñana Rojo (vin rouge, D.O. Granada) — 19,00 €"
       },
       "available": true,
-      "featured": "house"
+      "featured": "house",
+      "beer_pairing": "alhambra-especial-tercio"
     },
     {
       "id": "rinones-al-jerez",
@@ -925,7 +952,8 @@
         "fr": "Amontillado de Xérès (xérès) — 4,00 €"
       },
       "available": true,
-      "featured": "recommended"
+      "featured": "recommended",
+      "beer_pairing": "alhambra-especial-tercio"
     },
     {
       "id": "callos",
@@ -947,7 +975,8 @@
         "fr": "Faustino Crianza (vin rouge, D.O. Rioja) — 18,00 €"
       },
       "available": true,
-      "featured": "house"
+      "featured": "house",
+      "beer_pairing": "alhambra-especial-tercio"
     },
     {
       "id": "cordobes",
@@ -969,7 +998,8 @@
         "fr": "Castillo de Aza Crianza (vin rouge, D.O. Ribera del Duero) — 19,00 €"
       },
       "available": true,
-      "featured": false
+      "featured": false,
+      "beer_pairing": "alhambra-especial-tercio"
     },
     {
       "id": "criadillas",
@@ -991,7 +1021,8 @@
         "fr": "Fino de Xérès (xérès sec) — 3,50 €"
       },
       "available": true,
-      "featured": false
+      "featured": false,
+      "beer_pairing": "alhambra-especial-tercio"
     },
     {
       "id": "sesos",
@@ -1013,7 +1044,8 @@
         "fr": "D.O. Rueda Verdejo (vin blanc) — 17,00 €"
       },
       "available": true,
-      "featured": false
+      "featured": false,
+      "beer_pairing": "alhambra-especial-tercio"
     },
     {
       "id": "gazpacho-andaluz",
