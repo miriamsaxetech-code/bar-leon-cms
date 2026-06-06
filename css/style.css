@@ -213,7 +213,6 @@ h2 {
 /* ─── SITE NAME ─── */
 .site-name {
   font-family: 'Leon Display', Georgia, "Times New Roman", serif;
-  text-transform: uppercase;
   font-weight: 700;
   line-height: 1.05;
   font-size: clamp(2.6rem, 8vw, 4.5rem);
@@ -245,7 +244,6 @@ h2 {
   letter-spacing: 0.06em;
   color: var(--ink);
   text-align: center;
-  text-transform: uppercase;
   margin: 0;
 }
 
@@ -594,7 +592,6 @@ h2 {
 
 .carta-bar-name {
   font-family: 'Leon Display', Georgia, "Times New Roman", serif;
-  text-transform: uppercase;
   font-weight: 700;
   font-size: 1.05rem;
   line-height: 1;
@@ -1197,7 +1194,6 @@ h2 {
   font-size: clamp(1.6rem, 4.5vw, 2.4rem);
   line-height: 1.05;
   letter-spacing: 0.08em;
-  text-transform: uppercase;
 }
 
 .home-daily-menu {
@@ -2923,11 +2919,10 @@ h2 {
 }
 
 .wine-editorial__name {
-  font-family: 'Leon Display', Georgia, "Times New Roman", serif;
-  text-transform: uppercase;
+  font-family: Georgia, "Times New Roman", serif;
   font-size: 0.95rem;
+  font-style: italic;
   color: rgba(255, 252, 240, 0.92);
-  letter-spacing: 0.03em;
 }
 
 .wine-editorial__region {
@@ -2983,7 +2978,7 @@ h2 {
 
 .cana-editorial h2 {
   font-family: 'Leon Display', Georgia, "Times New Roman", serif;
-  font-size: clamp(1.2rem, 3.5vw, 1.5rem);
+  font-size: clamp(1.6rem, 4.5vw, 2.4rem);
   font-weight: 700;
   color: var(--ink);
   margin-bottom: 16px;
