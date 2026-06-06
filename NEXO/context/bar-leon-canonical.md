@@ -1,7 +1,10 @@
 # Restaurante-Bar León — Canonical Context
 
-**Source of truth for all agents, prompts, and iterations.**
-**If any instruction contradicts this file: this file wins.**
+> **SUPERSEDED.** The canonical source of truth has moved to `docs/BAR_LEON_CANONICAL.md`.
+> Read that file first. The content below is preserved for historical reference only.
+> If any content below contradicts `docs/BAR_LEON_CANONICAL.md`: the canonical wins.
+
+---
 
 ---
 

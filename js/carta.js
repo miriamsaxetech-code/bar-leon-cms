@@ -49,7 +49,6 @@
     paraEmpezarSub:    { es: 'La barra, antes de la mesa.', en: 'The bar, before the table.', fr: 'Le comptoir, avant la table.' },
     statusOpen:        { es: 'Estamos abiertos', en: 'We are open', fr: 'Nous sommes ouverts' },
     statusClosed:      { es: 'Cerrado', en: 'Closed', fr: 'Fermé' },
-    whatsappFab:       { es: 'WhatsApp', en: 'WhatsApp', fr: 'WhatsApp' },
   };
 
   const DAY_NAMES = {
@@ -756,27 +755,16 @@
   }
 
   function renderMenuSections(d, nav, lang) {
-    const serviceMode = d.service_mode || {};
-
     return `<div class="wrap menu-switch-wrap">
   <div class="menu-switch menu-switch--five" role="tablist" aria-label="${t(nav.menu, lang)}">
-    <button type="button" class="menu-switch-btn is-active" role="tab" aria-selected="true" aria-controls="panel-bar" data-panel="bar">${LABELS.bar[lang]}</button>
-    <button type="button" class="menu-switch-btn" role="tab" aria-selected="false" aria-controls="panel-restaurant" data-panel="restaurant">${LABELS.restaurant[lang]}</button>
+    <button type="button" class="menu-switch-btn is-active" role="tab" aria-selected="true" aria-controls="panel-restaurant" data-panel="restaurant">${LABELS.restaurant[lang]}</button>
+    <button type="button" class="menu-switch-btn" role="tab" aria-selected="false" aria-controls="panel-bar" data-panel="bar">${LABELS.bar[lang]}</button>
     <button type="button" class="menu-switch-btn" role="tab" aria-selected="false" aria-controls="panel-beverages" data-panel="beverages">${LABELS.beverages[lang]}</button>
     <button type="button" class="menu-switch-btn" role="tab" aria-selected="false" aria-controls="panel-wines" data-panel="wines">${LABELS.wines[lang]}</button>
     <button type="button" class="menu-switch-btn menu-switch-btn--secondary" role="tab" aria-selected="false" aria-controls="panel-daily" data-panel="daily">${LABELS.dailyMenu[lang]}</button>
   </div>
 </div>
-<section id="panel-bar" class="menu-panel is-active" role="tabpanel" data-panel="bar">
-  <div class="wrap menu-panel-intro">
-    <p class="section-label">${LABELS.bar[lang]}</p>
-    <p class="menu-panel-copy">${LABELS.barIntro[lang]}</p>
-  </div>
-  ${renderChalkboard(d, lang)}
-  <div class="wrap">${renderParaEmpezar(d.wines, d.beverages, lang)}</div>
-  ${renderBarSnapshot(lang)}
-</section>
-<section id="panel-restaurant" class="menu-panel" role="tabpanel" data-panel="restaurant" hidden>
+<section id="panel-restaurant" class="menu-panel is-active" role="tabpanel" data-panel="restaurant">
   <div class="wrap menu-panel-intro">
     <p class="section-label">${LABELS.restaurant[lang]}</p>
     <p class="menu-panel-copy">${LABELS.restaurantIntro[lang]}</p>
@@ -784,6 +772,15 @@
   ${renderSpotlightAndalucia(d.dishes, d.categories, d.wines, d.allergens, lang)}
   ${renderCarta(d.dishes, d.categories, d.wines, d.allergens, lang, 'restaurant')}
   ${renderRestaurantSnapshot(lang)}
+</section>
+<section id="panel-bar" class="menu-panel" role="tabpanel" data-panel="bar" hidden>
+  <div class="wrap menu-panel-intro">
+    <p class="section-label">${LABELS.bar[lang]}</p>
+    <p class="menu-panel-copy">${LABELS.barIntro[lang]}</p>
+  </div>
+  ${renderChalkboard(d, lang)}
+  <div class="wrap">${renderParaEmpezar(d.wines, d.beverages, lang)}</div>
+  ${renderBarSnapshot(lang)}
 </section>
 <section id="panel-beverages" class="menu-panel" role="tabpanel" data-panel="beverages" hidden>
   <div class="wrap menu-panel-intro">
@@ -923,23 +920,7 @@
 
   function renderFooter(d, nav, lang) {
     const addr = d.contact.address;
-    const serviceMode = d.service_mode || {};
-    const inService = isNowServiceTime(d.hours);
-    const whatsapp = d.contact.whatsapp ? d.contact.whatsapp.replace(/\D/g, '') : '';
-
-    let ctaHtml;
-    if (serviceMode.restaurant_open === false) {
-      ctaHtml = whatsapp
-        ? `<a href="https://wa.me/${whatsapp}" class="cta-btn">${t(nav.whatsapp_btn, lang) || 'Reservar por WhatsApp'}</a>`
-        : '';
-    } else if (inService) {
-      ctaHtml = `<a href="${d.contact.phone_link}" class="cta-btn">${t(nav.call, lang)}</a>`;
-    } else {
-      ctaHtml = whatsapp
-        ? `<a href="https://wa.me/${whatsapp}" class="cta-btn">${t(nav.whatsapp_btn, lang) || 'Reservar por WhatsApp'}</a>
-<a href="${d.contact.phone_link}" class="cta-btn cta-btn--secondary">${t(nav.call, lang)}</a>`
-        : `<a href="${d.contact.phone_link}" class="cta-btn">${t(nav.call, lang)}</a>`;
-    }
+    const ctaHtml = `<a href="${d.contact.phone_link}" class="cta-btn">${t(nav.call, lang) || 'Llamar'}</a>`;
 
     return `<footer class="carta-footer">
   <div class="wrap">
@@ -956,19 +937,10 @@
   // ─── MOBILE SERVICE CTA ───────────────────────────────────────────────────────
   function injectMobileServiceCTA(d, lang) {
     if (!d.contact) return;
-    const number = d.contact.whatsapp ? d.contact.whatsapp.replace(/\D/g, '') : '';
-    const inService = isNowServiceTime(d.hours);
     const fab = document.createElement('a');
     fab.className = 'mobile-service-cta';
-    if (inService || !number) {
-      fab.href = d.contact.phone_link;
-      fab.textContent = t(d.nav && d.nav.call, lang) || 'Llamar';
-    } else {
-      fab.href = 'https://wa.me/' + number;
-      fab.target = '_blank';
-      fab.rel = 'noopener';
-      fab.textContent = LABELS.whatsappFab[lang] || 'WhatsApp';
-    }
+    fab.href = d.contact.phone_link;
+    fab.textContent = t(d.nav && d.nav.call, lang) || 'Llamar';
     document.body.appendChild(fab);
   }
 
@@ -1092,6 +1064,13 @@
       app.style.display = 'block';
       loader.classList.add('fade-out');
       setTimeout(() => { loader.style.display = 'none'; }, 380);
+
+      // Hash-based panel activation (e.g. /es/carta#restaurant)
+      const hashPanel = window.location.hash.replace('#', '');
+      if (hashPanel && hashPanel !== 'hours') {
+        const panelBtn = app.querySelector(`.menu-switch-btn[data-panel="${hashPanel}"]`);
+        if (panelBtn) panelBtn.click();
+      }
 
       if (window.location.hash === '#hours') {
         setTimeout(() => {

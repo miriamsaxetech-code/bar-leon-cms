@@ -1,0 +1,281 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>León Display — Type Specimen</title>
+  <style>
+    @font-face {
+      font-family: "León Display";
+      font-weight: 700;
+      font-style: normal;
+      src: url("LeonDisplay-Bold.woff2") format("woff2"),
+           url("LeonDisplay-Bold.woff")  format("woff"),
+           url("LeonDisplay-Bold.otf")   format("opentype");
+    }
+    @font-face {
+      font-family: "León Display";
+      font-weight: 500;
+      font-style: normal;
+      src: url("LeonDisplay-Medium.woff2") format("woff2"),
+           url("LeonDisplay-Medium.woff")  format("woff"),
+           url("LeonDisplay-Medium.otf")   format("opentype");
+    }
+
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    body {
+      background: #f5f0e8;
+      color: #1a1208;
+      font-family: Georgia, serif;
+      padding: 60px 40px;
+      max-width: 960px;
+      margin: 0 auto;
+    }
+
+    .leon {
+      font-family: "León Display", sans-serif;
+      font-weight: 700;
+    }
+
+    .leon-medium {
+      font-family: "León Display", sans-serif;
+      font-weight: 500;
+    }
+
+    /* ─── HEADER ─────────────────────────────────────────── */
+    .header {
+      border-top: 4px solid #1a1208;
+      border-bottom: 2px solid #1a1208;
+      padding: 24px 0;
+      text-align: center;
+      margin-bottom: 64px;
+    }
+    .header-label {
+      font-size: 10px;
+      letter-spacing: 0.3em;
+      text-transform: uppercase;
+      margin-bottom: 8px;
+      opacity: 0.5;
+    }
+    .header-title {
+      font-size: 14px;
+      letter-spacing: 0.15em;
+    }
+
+    /* ─── HERO LINES ─────────────────────────────────────── */
+    .hero {
+      margin-bottom: 80px;
+    }
+    .hero-line {
+      line-height: 1.0;
+      margin-bottom: 16px;
+    }
+    .hero-line-1  { font-size: 96px; }
+    .hero-line-2  { font-size: 72px; }
+    .hero-line-3  { font-size: 54px; color: #5a3d1a; }
+
+    /* ─── SECTION ─────────────────────────────────────────── */
+    .section {
+      margin-bottom: 56px;
+    }
+    .section-label {
+      font-size: 10px;
+      letter-spacing: 0.3em;
+      text-transform: uppercase;
+      margin-bottom: 16px;
+      opacity: 0.45;
+      border-bottom: 1px solid currentColor;
+      padding-bottom: 6px;
+    }
+
+    /* ─── DIACRITICS GRID ─────────────────────────────────── */
+    .diacritics {
+      font-size: 80px;
+      line-height: 1.5;
+      letter-spacing: 0.04em;
+    }
+
+    /* ─── PANGRAMS ────────────────────────────────────────── */
+    .pangram-es { font-size: 48px; line-height: 1.15; margin-bottom: 24px; }
+    .pangram-fr { font-size: 42px; line-height: 1.2;  margin-bottom: 24px; color: #3a2800; }
+    .pangram-de { font-size: 42px; line-height: 1.2; }
+
+    /* ─── SIZE SCALE ──────────────────────────────────────── */
+    .scale-row {
+      display: flex;
+      align-items: baseline;
+      gap: 24px;
+      margin-bottom: 20px;
+    }
+    .scale-size {
+      font-size: 10px;
+      letter-spacing: 0.1em;
+      opacity: 0.4;
+      min-width: 28px;
+      flex-shrink: 0;
+    }
+
+    /* ─── WEIGHT COMPARISON ───────────────────────────────── */
+    .weight-row {
+      margin-bottom: 32px;
+    }
+    .weight-label {
+      font-size: 10px;
+      letter-spacing: 0.2em;
+      text-transform: uppercase;
+      opacity: 0.4;
+      margin-bottom: 6px;
+    }
+
+    /* ─── FOOTER ──────────────────────────────────────────── */
+    .footer {
+      margin-top: 80px;
+      border-top: 1px solid #1a1208;
+      padding-top: 20px;
+      font-size: 10px;
+      letter-spacing: 0.15em;
+      opacity: 0.4;
+      display: flex;
+      justify-content: space-between;
+    }
+    .status-ok   { color: #2a7a2a; }
+    .status-todo { color: #aa5500; }
+  </style>
+</head>
+<body>
+
+  <div class="header">
+    <div class="header-label">Espécimen tipográfico</div>
+    <div class="header-title">León Display — v1.0 · Bold &amp; Medium · 108 glyphs</div>
+  </div>
+
+  <!-- ─── HERO ─────────────────────────────────────────────── -->
+  <div class="hero">
+    <div class="hero-line hero-line-1 leon">RESTAURANTE LEÓN</div>
+    <div class="hero-line hero-line-2 leon">MENÚ DEL DÍA</div>
+    <div class="hero-line hero-line-3 leon">C/ PAN 1 · GRANADA · DESDE 1959</div>
+  </div>
+
+  <!-- ─── DIACRITICS ────────────────────────────────────────── -->
+  <div class="section">
+    <div class="section-label">Diacríticos — español / francés / alemán</div>
+    <div class="diacritics leon">Á É Í Ó Ú Ü Ñ ¿ ¡</div>
+    <div class="diacritics leon" style="font-size:60px; margin-top:12px;">À Â Ç È Ê Ë Î Ï Ô Ù Û Ÿ Ä Ö</div>
+  </div>
+
+  <!-- ─── PANGRAMS ──────────────────────────────────────────── -->
+  <div class="section">
+    <div class="section-label">Texto de muestra</div>
+
+    <div class="pangram-es leon">¿QUÉ TAL? ÁLVARO FÉLIX ÓSCAR</div>
+    <div class="pangram-fr leon">FAÇADE · PRÉFÉRENCE · NOËL · BIENTÔT</div>
+    <div class="pangram-de leon">KÄSE · ÖFFNEN · ÜBER · MÜNCHEN</div>
+  </div>
+
+  <!-- ─── HEADLINE USE CASES ────────────────────────────────── -->
+  <div class="section">
+    <div class="section-label">Usos editoriales</div>
+    <div class="leon" style="font-size:64px; line-height:1.05; margin-bottom:20px;">
+      CRIADILLAS<br>DE LA TIERRA
+    </div>
+    <div class="leon" style="font-size:48px; line-height:1.1; margin-bottom:20px; color:#3a2800;">
+      LA CAÑA · EL FINO · EL TERCIO
+    </div>
+    <div class="leon-medium" style="font-size:42px; line-height:1.1;">
+      CAFÉ CON LECHE · TOSTA DE JAMÓN
+    </div>
+  </div>
+
+  <!-- ─── SIZE SCALE ─────────────────────────────────────────── -->
+  <div class="section">
+    <div class="section-label">Escala tipográfica — Bold</div>
+
+    <div class="scale-row">
+      <span class="scale-size">96</span>
+      <span class="leon" style="font-size:96px;">GRANADA</span>
+    </div>
+    <div class="scale-row">
+      <span class="scale-size">72</span>
+      <span class="leon" style="font-size:72px;">ANDALUCÍA</span>
+    </div>
+    <div class="scale-row">
+      <span class="scale-size">54</span>
+      <span class="leon" style="font-size:54px;">ALBAICÍN · SACROMONTE</span>
+    </div>
+    <div class="scale-row">
+      <span class="scale-size">36</span>
+      <span class="leon" style="font-size:36px;">BAR RESTAURANTE TÍPICO ANDALUZ</span>
+    </div>
+    <div class="scale-row">
+      <span class="scale-size">24</span>
+      <span class="leon" style="font-size:24px;">ESPECIALIDAD EN PLATOS DE LA TIERRA DESDE 1959</span>
+    </div>
+  </div>
+
+  <!-- ─── WEIGHT COMPARISON ──────────────────────────────────── -->
+  <div class="section">
+    <div class="section-label">Contraste de peso</div>
+    <div class="weight-row">
+      <div class="weight-label">Bold · 700</div>
+      <div class="leon" style="font-size:54px;">BODEGA · TABERNA · TAPA · RACIÓN</div>
+    </div>
+    <div class="weight-row">
+      <div class="weight-label">Medium · 500</div>
+      <div class="leon-medium" style="font-size:54px;">BODEGA · TABERNA · TAPA · RACIÓN</div>
+    </div>
+  </div>
+
+  <!-- ─── UNICASE ─────────────────────────────────────────────── -->
+  <div class="section">
+    <div class="section-label">Unicase — mayúsculas y minúsculas · mismo glifo</div>
+    <div class="leon" style="font-size:48px; margin-bottom:12px;">ÑOÑO GÜEY FAÇADE ÄÖÜ</div>
+    <div class="leon" style="font-size:48px; color:#5a3d1a;">ñoño güey façade äöü</div>
+  </div>
+
+  <!-- ─── GLYPH STATUS ────────────────────────────────────────── -->
+  <div class="section">
+    <div class="section-label">Estado del juego de caracteres</div>
+    <table style="font-size:11px; letter-spacing:0.05em; border-collapse:collapse; width:100%;">
+      <tr style="border-bottom:1px solid rgba(0,0,0,0.15);">
+        <td style="padding:6px 8px; width:40%;">Mayúsculas / minúsculas (unicase)</td>
+        <td style="padding:6px 8px;" class="status-ok">✓ A–Z · 0–9 · originales intactos</td>
+      </tr>
+      <tr style="border-bottom:1px solid rgba(0,0,0,0.15);">
+        <td style="padding:6px 8px;">Español (Á É Í Ó Ú Ü Ñ ¡ ¿)</td>
+        <td style="padding:6px 8px;" class="status-ok">✓ 7 compuestos + 2 bespoke pendientes</td>
+      </tr>
+      <tr style="border-bottom:1px solid rgba(0,0,0,0.15);">
+        <td style="padding:6px 8px;">Francés (À Â Ç È Ê Ë Î Ï Ô Ù Û Ÿ)</td>
+        <td style="padding:6px 8px;" class="status-ok">✓ 12 compuestos generados automáticamente</td>
+      </tr>
+      <tr style="border-bottom:1px solid rgba(0,0,0,0.15);">
+        <td style="padding:6px 8px;">Alemán (Ä Ö Ü ß)</td>
+        <td style="padding:6px 8px;" class="status-ok">✓ Ä Ö Ü · ß→SS via GSUB liga</td>
+      </tr>
+      <tr style="border-bottom:1px solid rgba(0,0,0,0.15);">
+        <td style="padding:6px 8px;">Marcas diacríticas combinantes</td>
+        <td style="padding:6px 8px;" class="status-ok">✓ 6 glifos dibujados (´ ` ^ ~ ¨ ¸)</td>
+      </tr>
+      <tr style="border-bottom:1px solid rgba(0,0,0,0.15);">
+        <td style="padding:6px 8px;">Puntuación (: ; ! ? – — / &amp; @ « »)</td>
+        <td style="padding:6px 8px;" class="status-todo">⬜ 30 espacios · pendiente dibujo</td>
+      </tr>
+      <tr style="border-bottom:1px solid rgba(0,0,0,0.15);">
+        <td style="padding:6px 8px;">Bespoke (Æ Œ ¡ ¿)</td>
+        <td style="padding:6px 8px;" class="status-todo">⬜ 5 espacios · pendiente dibujo</td>
+      </tr>
+      <tr>
+        <td style="padding:6px 8px;">Ligatura Cuchi / alternativas ss01</td>
+        <td style="padding:6px 8px;" class="status-ok">✓ preservadas del original</td>
+      </tr>
+    </table>
+  </div>
+
+  <div class="footer">
+    <span>León Display v1 · Bar León, Granada · Basada en CQT León por Carlos Campos</span>
+    <span>2026-06-06 · FontForge 20251009</span>
+  </div>
+
+</body>
+</html>

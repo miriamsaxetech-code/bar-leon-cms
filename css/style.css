@@ -66,7 +66,7 @@ body {
   background: var(--bg);
   color: var(--ink);
   font-family: Georgia, serif;
-  font-size: 16px;
+  font-size: 17px;
   line-height: 1.72;
 }
 
@@ -227,9 +227,8 @@ h2 {
 }
 
 .brand-logo {
-  width: 170px;
+  width: 210px;
   height: auto;
-  opacity: 0.88;
   display: block;
 }
 
@@ -246,7 +245,7 @@ h2 {
 
 @media (max-width: 540px) {
   .brand-logo {
-    width: 110px;
+    width: 160px;
     height: auto;
   }
   .brand-name {
@@ -658,15 +657,15 @@ h2 {
   border-right: 1px solid rgba(28, 26, 23, 0.22);
   color: var(--ink);
   cursor: pointer;
-  font-family: system-ui, -apple-system, sans-serif;
-  font-size: 0.85rem;
-  font-weight: 600;
-  letter-spacing: 0.11em;
+  font-family: 'Granaina Limpia', system-ui, -apple-system, sans-serif;
+  font-size: 0.95rem;
+  font-weight: 700;
+  letter-spacing: 0.04em;
   line-height: 1.25;
-  min-height: 48px;
-  padding: 10px 8px;
+  min-height: 52px;
+  padding: 12px 8px;
   text-align: center;
-  text-transform: uppercase;
+  text-transform: none;
 }
 
 .menu-switch-btn:last-child {
@@ -823,11 +822,13 @@ h2 {
 }
 
 .categoria-head h2 {
-  font-size: 0.82rem;
-  letter-spacing: 0.2em;
+  font-family: 'Granaina Limpia', 'Playfair Display', Georgia, serif;
+  font-size: 1rem;
+  letter-spacing: 0.08em;
   color: var(--ink);
   line-height: 1;
   transition: color 0.2s ease;
+  text-transform: none;
 }
 
 .accordion-icon {
@@ -889,9 +890,9 @@ h2 {
 }
 
 .check-name {
-  font-family: 'Playfair Display', Georgia, serif;
+  font-family: 'Granaina Limpia', 'Playfair Display', Georgia, serif;
   font-weight: 700;
-  font-size: 1.06rem;
+  font-size: 1.1rem;
   line-height: 1.25;
   white-space: nowrap;
   flex-shrink: 0;
@@ -916,7 +917,7 @@ h2 {
 
 .check-price {
   font-family: 'Courier New', Courier, monospace;
-  font-size: 1.05rem;
+  font-size: 1.1rem;
   font-weight: 700;
   white-space: nowrap;
   flex-shrink: 0;
@@ -925,7 +926,7 @@ h2 {
 }
 
 .item-desc {
-  font-size: 0.9rem;
+  font-size: 1rem;
   color: var(--muted);
   line-height: 1.58;
   margin-bottom: 7px;
@@ -1180,10 +1181,10 @@ h2 {
 }
 
 .home-section-head h2 {
-  font-family: 'Playfair Display', Georgia, serif;
-  font-size: clamp(1.45rem, 4vw, 2.15rem);
-  line-height: 1.1;
-  letter-spacing: 0;
+  font-family: 'Granaina Limpia', 'Playfair Display', Georgia, serif;
+  font-size: clamp(1.6rem, 4.5vw, 2.4rem);
+  line-height: 1.05;
+  letter-spacing: 0.01em;
   text-transform: none;
 }
 
@@ -2144,7 +2145,17 @@ h2 {
 }
 @media (max-width: 767px) {
   body { padding-bottom: 58px; }
-  .mobile-service-cta { display: inline-flex; align-items: center; }
+  .mobile-service-cta {
+    display: inline-flex;
+    align-items: center;
+    opacity: 0;
+    pointer-events: none;
+    transition: opacity 0.25s ease;
+  }
+  .mobile-service-cta.is-visible {
+    opacity: 1;
+    pointer-events: auto;
+  }
 }
 
 /* ─── CTA BUTTON SECONDARY ─── */
@@ -2311,10 +2322,10 @@ h2 {
   align-items: center;
   justify-content: center;
   gap: 5px;
-  padding: 7px 12px;
+  padding: 9px 16px;
   border-radius: 999px;
   font-family: var(--font-body, system-ui, sans-serif);
-  font-size: 0.85rem;
+  font-size: 0.9rem;
   font-weight: 700;
   text-transform: uppercase;
   letter-spacing: 0.06em;
@@ -2954,4 +2965,193 @@ h2 {
 
 .cana-editorial__text p + p {
   margin-top: 14px;
+}
+
+/* ─── QR HERO ─── */
+.qr-hero {
+  display: flex;
+  justify-content: center;
+  padding: 8px 0 0;
+  margin-bottom: 0;
+  line-height: 0;
+}
+
+.qr-hero__img {
+  width: auto;
+  max-width: 200px;
+  height: auto;
+  display: block;
+}
+
+/* ─── QR ACTION BUTTONS ─── */
+.qr-actions {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  margin: 20px 0 28px;
+}
+
+.qr-actions__row {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 8px;
+}
+
+.qr-btn {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  min-height: 56px;
+  padding: 14px 16px;
+  font-family: 'Granaina Limpia', Georgia, serif;
+  font-size: 1.05rem;
+  font-weight: 700;
+  letter-spacing: 0.02em;
+  text-decoration: none;
+  text-align: center;
+  border: 1.5px solid var(--ink);
+  background: var(--bg);
+  color: var(--ink);
+  transition: background 0.15s, color 0.15s;
+  -webkit-tap-highlight-color: transparent;
+  line-height: 1.2;
+}
+
+.qr-btn:hover,
+.qr-btn:focus-visible {
+  background: var(--ink);
+  color: var(--bg);
+  outline: none;
+}
+
+.qr-btn--primary {
+  background: var(--ink);
+  color: var(--bg);
+  min-height: 64px;
+  font-size: 1.15rem;
+  border-left: 4px solid var(--accent);
+}
+
+.qr-btn--primary:hover {
+  background: #38352f;
+  color: var(--bg);
+}
+
+.qr-btn--call {
+  background: var(--accent);
+  color: #fff;
+  border-color: var(--accent);
+  font-family: system-ui, -apple-system, sans-serif;
+  font-size: 1rem;
+  font-weight: 700;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  min-height: 56px;
+}
+
+.qr-btn--call:hover,
+.qr-btn--call:focus-visible {
+  background: #163d6e;
+  color: #fff;
+}
+
+.qr-btn--muted {
+  opacity: 0.72;
+}
+
+/* ─── HISTORIA SHORT YEAR ─── */
+.historia-year {
+  font-family: 'Granaina Limpia', Georgia, serif !important;
+  font-size: clamp(2.2rem, 9vw, 4rem) !important;
+  font-weight: 700;
+  color: var(--ink);
+  margin-bottom: 18px;
+  line-height: 1;
+  letter-spacing: -0.01em;
+  text-transform: none !important;
+}
+
+/* ─── MALA FOLLÁ ─── */
+.mala-folla {
+  margin-top: 52px;
+  padding-top: 48px;
+  border-top: 1px solid rgba(28, 26, 23, 0.16);
+}
+
+.mala-folla h2 {
+  font-family: 'Granaina Limpia', Georgia, serif;
+  font-size: clamp(0.95rem, 2.8vw, 1.15rem);
+  font-weight: 700;
+  color: var(--muted);
+  margin-bottom: 18px;
+  letter-spacing: 0;
+  text-transform: none;
+}
+
+.mala-folla__text {
+  max-width: 58ch;
+  font-family: Georgia, serif;
+  font-size: 1rem;
+  line-height: 1.72;
+  color: var(--ink);
+}
+
+.mala-folla__text p + p {
+  margin-top: 12px;
+}
+
+.mala-folla__text p:first-child {
+  font-family: 'Granaina Limpia', Georgia, serif;
+  font-size: 1.2rem;
+  font-weight: 700;
+  color: var(--muted);
+}
+
+/* ─── ORDERING GUIDE — larger text ─── */
+.ordering-guide__term {
+  font-size: 0.92rem;
+  padding: 12px 20px 12px 0;
+}
+
+.ordering-guide__def {
+  font-size: 0.92rem;
+  padding: 12px 0;
+}
+
+/* ─── SITE LOCATION — larger ─── */
+.site-location {
+  font-size: 0.78rem;
+  margin-top: 10px;
+}
+
+/* ─── HISTORIA — larger body ─── */
+.historia-leon__text {
+  font-size: 1rem;
+  line-height: 1.75;
+}
+
+/* ─── BRAND HEADER — after hero ─── */
+.brand-header {
+  margin-top: 20px;
+}
+
+/* ─── MENU TAB BAR — scrollable on narrow mobile ─── */
+@media (max-width: 540px) {
+  .menu-switch--five {
+    display: flex;
+    overflow-x: auto;
+    -webkit-overflow-scrolling: touch;
+    scrollbar-width: none;
+  }
+  .menu-switch--five::-webkit-scrollbar {
+    display: none;
+  }
+  .menu-switch--five .menu-switch-btn {
+    flex: 0 0 auto;
+    min-width: 96px;
+    border-right: 1px solid rgba(28, 26, 23, 0.22);
+  }
+  .menu-switch--five .menu-switch-btn:last-child {
+    border-right: none;
+  }
 }

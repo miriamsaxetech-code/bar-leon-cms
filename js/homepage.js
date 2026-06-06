@@ -45,7 +45,6 @@
     stories:      { es: 'Historias del León', en: 'Stories of León', fr: 'Histoires du León' },
     storiesSub:   { es: 'Archivo familiar y memoria de barra. Solo material real del León.', en: 'Family archive and bar memory. Only real León material.', fr: 'Archives familiales et mémoire du comptoir. Uniquement du matériel réel du León.' },
     call:         { es: 'Llamar', en: 'Call', fr: 'Appeler' },
-    whatsapp:     { es: 'WhatsApp', en: 'WhatsApp', fr: 'WhatsApp' },
     statusOpen:   { es: 'Estamos abiertos', en: 'We are open', fr: 'Nous sommes ouverts' },
     statusClosed: { es: 'Cerrado', en: 'Closed', fr: 'Fermé' },
     recommended:  { es: 'Recomendado', en: 'Recommended', fr: 'Recommandé' },
@@ -496,30 +495,47 @@
   // ─── MOBILE SERVICE CTA ───────────────────────────────────────────────────────
   function injectMobileServiceCTA(d, lang) {
     if (!d.contact) return;
-    const inService = isNowServiceTime(d.hours);
-    const number = d.contact.whatsapp ? d.contact.whatsapp.replace(/\D/g, '') : '';
     const fab = document.createElement('a');
     fab.className = 'mobile-service-cta';
-    if (inService || !number) {
-      fab.href = d.contact.phone_link;
-      fab.textContent = LABELS.call[lang];
-    } else {
-      fab.href = 'https://wa.me/' + number;
-      fab.target = '_blank';
-      fab.rel = 'noopener';
-      fab.textContent = LABELS.whatsapp[lang];
-    }
+    fab.href = d.contact.phone_link;
+    fab.textContent = LABELS.call[lang];
     document.body.appendChild(fab);
+
+    // Show FAB only after the primary CTA block scrolls out of view.
+    const anchor = document.querySelector('.qr-actions');
+    if (anchor && 'IntersectionObserver' in window) {
+      const obs = new IntersectionObserver(
+        function(entries) { fab.classList.toggle('is-visible', !entries[0].isIntersecting); },
+        { threshold: 0 }
+      );
+      obs.observe(anchor);
+    } else {
+      fab.classList.add('is-visible');
+    }
   }
 
-  function renderHistoria(d, lang) {
-    const history = d.venue && d.venue.history ? t(d.venue.history, lang) : '';
-    if (!history || !history.trim()) return '';
-    const historyTitle = { es: 'Historia del León', en: 'The Story of Bar León', fr: 'L\'histoire du Bar León' }[lang];
-    const paragraphs = history.split('\n').filter(function(p) { return p.trim(); })
-      .map(function(p) { return `<p>${p.trim()}</p>`; }).join('');
+  function renderHistoria(lang) {
+    const since = { es: 'Desde 1959', en: 'Since 1959', fr: 'Depuis 1959' }[lang];
+    const lines = {
+      es: [
+        'Tres generaciones después, seguimos sirviendo Granada en la mesa.',
+        'En 2009 celebramos el 50 aniversario cobrando en pesetas.',
+        'No era nostalgia. Era memoria compartida.'
+      ],
+      en: [
+        'Three generations later, we are still serving Granada on the table.',
+        'In 2009 we celebrated our 50th anniversary charging in pesetas.',
+        'It was not nostalgia. It was shared memory.'
+      ],
+      fr: [
+        'Trois générations plus tard, nous servons toujours Grenade à table.',
+        'En 2009, nous avons fêté notre 50e anniversaire en facturant en pesetas.',
+        "Ce n'était pas de la nostalgie. C'était une mémoire partagée."
+      ]
+    }[lang] || [];
+    const paragraphs = lines.map(function(p) { return `<p>${p}</p>`; }).join('');
     return `<section class="historia-leon" aria-labelledby="historia-title">
-  <h2 id="historia-title">${historyTitle}</h2>
+  <h2 id="historia-title" class="historia-year">${since}</h2>
   <div class="historia-leon__text">${paragraphs}</div>
 </section>`;
   }
@@ -586,6 +602,44 @@
 </section>`;
   }
 
+  function renderMalaFolla(lang) {
+    const content = {
+      es: {
+        title: 'La mala follá (explicada para forasteros)',
+        body: [
+          'No es mala educación.',
+          'Es decir lo justo. No sonreír por protocolo. No elogiar sin motivo. No hacer de cada pregunta una performance.',
+          'Cuando el camarero sirve sin preguntarte si todo está bien cada tres minutos, eso es respeto. Cuando la respuesta es seca pero honesta, eso también es respeto.',
+          'Llevas décadas viniendo a por eso, aunque no lo sepas todavía.'
+        ]
+      },
+      en: {
+        title: 'The Granada character (explained for outsiders)',
+        body: [
+          'It is not rudeness.',
+          'It is saying what needs to be said. Not smiling on command. Not praising without reason.',
+          'When the waiter serves you without asking if everything is okay every three minutes, that is respect. When the answer is dry but honest, that is also respect.',
+          'You have been coming back for decades because of it, even if you did not know it yet.'
+        ]
+      },
+      fr: {
+        title: 'Le caractère grenadin (expliqué aux étrangers)',
+        body: [
+          "Ce n'est pas de l'impolitesse.",
+          "C'est dire l'essentiel. Ne pas sourire par protocole. Ne pas élogier sans raison.",
+          "Quand le serveur vous sert sans vous demander si tout va bien toutes les trois minutes, c'est du respect. Quand la réponse est sèche mais honnête, c'est aussi du respect.",
+          "Vous revenez ici depuis des décennies à cause de ça, même si vous ne le saviez pas encore."
+        ]
+      }
+    }[lang];
+    if (!content) return '';
+    const paragraphs = content.body.map(function(p) { return `<p>${p}</p>`; }).join('');
+    return `<section class="mala-folla" aria-labelledby="mala-folla-title">
+  <h2 id="mala-folla-title">${content.title}</h2>
+  <div class="mala-folla__text">${paragraphs}</div>
+</section>`;
+  }
+
   function render(d, lang) {
     const phoneLink    = d.contact.phone_link;
     const phoneDisplay = formatPhoneDisplay(d.contact.phone);
@@ -601,25 +655,6 @@
 
     const mapsUrl    = d.social.google_maps;
     const reviewsUrl = d.social.google_reviews;
-
-    const heroAlt = t(d.hero.alt, lang) || `${t(d.venue.full_name, lang)} — ${t(d.contact.address.city, lang) || d.contact.address.city}`;
-
-    const heroImg = d.hero && d.hero.image;
-    const hero = heroImg
-      ? `<figure class="hero-frame">
-  <picture>
-    <source srcset="${heroImg}" type="image/webp">
-    <img src="${heroImg.replace('.webp', '.png')}" alt="${heroAlt}" fetchpriority="high" decoding="async">
-  </picture>
-</figure>`
-      : `<div class="hero-editorial" role="img" aria-label="${heroAlt}">
-  <div class="hero-editorial-inner">
-    <p class="hero-editorial-name">${t(d.venue.full_name, lang)}</p>
-    <p class="hero-editorial-year">${since}</p>
-    <hr class="hero-editorial-rule">
-    <p class="hero-editorial-desc">${t(d.venue.cuisine, lang)}<br>${d.contact.address.neighborhood} &middot; ${d.contact.address.city}</p>
-  </div>
-</div>`;
 
     const trustStrip = `
 <div class="trust-strip">
@@ -648,21 +683,25 @@
 
     const tileAlt = d.logo && d.logo.alt ? t(d.logo.alt, lang) : t(d.venue.full_name, lang);
     const logoSrc = d.logo && d.logo.image ? d.logo.image : '../assets/images/web/azulejo-leon.webp';
-    const logoBlock = `
-<div class="brand-header">
-  <img class="brand-logo" src="../assets/images/lion-logo.svg" alt="" aria-hidden="true" />
-  <h1 class="brand-name">Bar León</h1>
-</div>
-<div class="site-tile-container">
-  <picture class="site-tile-frame">
-    <source srcset="${logoSrc}" type="image/webp">
-    <img class="site-tile" src="${logoSrc.replace('.webp', '.png')}" alt="${tileAlt}" fetchpriority="high" />
-  </picture>
-</div>`;
 
-    // ─── CALL CTA LOGIC ─────────────────────────────────────────────────────────
-    const phoneCtaHtml = `<a href="${phoneLink}" class="call-cta"><span class="call-label">${t(nav && nav.call, lang) || 'Llamar'}</span></a>`;
-    const callCta = phoneCtaHtml;
+    const qrActionLabels = {
+      restaurant: { es: 'Carta restaurante', en: 'Restaurant menu', fr: 'Carte restaurant' },
+      bar:        { es: 'Carta barra',       en: 'Bar menu',        fr: 'Carte bar'        },
+      beverages:  { es: 'Bebidas',           en: 'Drinks',          fr: 'Boissons'         },
+      wines:      { es: 'Bodega',            en: 'Wine cellar',     fr: 'Cave à vins'      },
+      daily:      { es: 'Menú del día',      en: 'Daily menu',      fr: 'Menu du jour'     },
+    };
+
+    const qrActions = `
+<nav class="qr-actions" aria-label="${{ es: 'Acceso rápido', en: 'Quick access', fr: 'Accès rapide' }[lang]}">
+  <a href="${cartaUrl}#restaurant" class="qr-btn qr-btn--primary">${qrActionLabels.restaurant[lang]}</a>
+  <div class="qr-actions__row">
+    <a href="${cartaUrl}#bar" class="qr-btn">${qrActionLabels.bar[lang]}</a>
+    <a href="${cartaUrl}#beverages" class="qr-btn">${qrActionLabels.beverages[lang]}</a>
+  </div>
+  <a href="${cartaUrl}#daily" class="qr-btn">${qrActionLabels.daily[lang]}</a>
+  <a href="${phoneLink}" class="qr-btn qr-btn--call">${LABELS.call[lang]}</a>
+</nav>`;
 
     const locationBlock = `
 <section class="location-section">
@@ -675,9 +714,7 @@
       <p class="location-friends">"${friendsLabel}"</p>
       <p class="location-copy">${mapCopy}</p>
       <a href="${mapsUrl}" target="_blank" rel="noopener" class="location-link">↗ ${directionsLabel}</a>
-
       <hr class="location-sep" />
-
       <p class="review-copy">${reviewCopy}</p>
       <a href="${reviewsUrl}" target="_blank" rel="noopener" class="location-link">★ ${reviewsLabel}</a>
     </div>
@@ -685,7 +722,16 @@
 </section>`;
 
     return `<div class="wrap">
-  ${logoBlock}
+  <div class="qr-hero">
+    <picture>
+      <source srcset="${logoSrc}" type="image/webp">
+      <img class="qr-hero__img" src="${logoSrc.replace('.webp', '.png')}" alt="${tileAlt}" fetchpriority="high" width="994" height="646" />
+    </picture>
+  </div>
+  <div class="brand-header">
+    <img class="brand-logo" src="../assets/images/lion-logo.svg" alt="Bar León" />
+    <h1 class="brand-name">Bar León</h1>
+  </div>
   <p class="site-location">
     <span class="site-location__place">${addr.neighborhood} &middot; ${addr.city}</span>
     <span class="site-location__since">${since}</span>
@@ -696,24 +742,17 @@
       ${inService ? LABELS.statusOpen[lang] : LABELS.statusClosed[lang]}
     </a>
   </div>
-  <nav class="site-nav" aria-label="Navigation">
-    <div class="nav-primary">
-      <a href="${cartaUrl}">${t(d.nav.menu, lang)}</a>
-      <a href="${cartaUrl}#hours">${t(d.nav.hours, lang)}</a>
-      ${callCta}
-    </div>
-    <div class="lang-selector" aria-label="Language">${langSelector(lang, HOME_LINKS)}</div>
-  </nav>
   ${aviso}
-  ${hero}
+  ${qrActions}
   ${trustStrip}
-  ${renderHistoria(d, lang)}
   ${renderHomeAndalusia(d, lang, cartaUrl)}
   ${renderHomeDailyMenu(d, lang, cartaUrl)}
+  ${renderHistoria(lang)}
   ${renderOrderingGuide(d, lang, cartaUrl)}
-  ${renderHomeFoodGallery(lang)}
-  ${renderWineEditorial(d, lang, cartaUrl)}
+  ${renderMalaFolla(lang)}
   ${renderCanaEditorial(d, lang)}
+  ${renderWineEditorial(d, lang, cartaUrl)}
+  ${renderHomeFoodGallery(lang)}
   ${renderSocialLinks(d.social)}
   ${locationBlock}
   ${renderStoriesArchive(d, lang)}
@@ -727,7 +766,7 @@
   <div class="homepage-footer">
     <div class="homepage-footer-inner">
       <p class="address">${addr.neighborhood} &middot; ${addr.city} &middot; ${addr.region}<br>${t(d.venue.cuisine_tag, lang)}</p>
-      <a href="${phoneLink}" class="phone-link">${phoneDisplay}</a>
+      <div class="lang-selector" aria-label="Language">${langSelector(lang, HOME_LINKS)}</div>
     </div>
     <div class="owner-access">
       <a href="/panel/" class="owner-link">Acceso propietario</a>
