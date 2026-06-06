@@ -5,32 +5,6 @@
   const CARTA_LINKS = { es: '/es/carta', en: '/en/menu', fr: '/fr/carte' };
   const WEB_IMAGE_BASE = '../assets/images/web/';
 
-  const HOME_FOOD_IMAGES = [
-    {
-      src: 'bar-leon-plato-02.webp',
-      alt: {
-        es: 'Cazuela tradicional servida en barro en Bar León',
-        en: 'Traditional clay-pot dish served at Bar León',
-        fr: 'Plat traditionnel servi en cazuela de terre cuite au Bar León',
-      },
-    },
-    {
-      src: 'bar-leon-plato-03.webp',
-      alt: {
-        es: 'Plato de arroz de la casa con copa de vino en la barra',
-        en: 'House rice dish with a glass of wine at the bar',
-        fr: 'Plat de riz maison avec un verre de vin au comptoir',
-      },
-    },
-    {
-      src: 'bar-leon-plato-04.webp',
-      alt: {
-        es: 'Habas con jamón y huevo, cocina granadina de temporada',
-        en: 'Broad beans with ham and egg, seasonal Granada cooking',
-        fr: 'Fèves au jambon et œuf, cuisine grenadine de saison',
-      },
-    },
-  ];
 
   const LABELS = {
     dailyMenu:    { es: 'Menú del Día', en: 'Daily Menu', fr: 'Menu du Jour' },
@@ -433,77 +407,6 @@
 </section>`;
   }
 
-  function renderHomeFoodGallery(lang) {
-    const image = HOME_FOOD_IMAGES[0];
-    const captionSuffix = {
-      es: 'Cocina y barra tradicional del León.',
-      en: 'Traditional cooking and counter at Bar León.',
-      fr: 'Cuisine traditionnelle et comptoir du León.'
-    }[lang];
-    return `<section class="home-food-gallery editorial-snapshot" aria-label="${LABELS.andalusia[lang]}">
-  <figure class="editorial-snapshot__figure">
-    <img class="editorial-snapshot__img" src="${WEB_IMAGE_BASE}${image.src}" alt="${image.alt[lang]}" width="800" height="500" loading="lazy" decoding="async">
-    <figcaption class="editorial-snapshot__caption">
-      ${image.alt[lang]} &mdash; ${captionSuffix}
-    </figcaption>
-  </figure>
-</section>`;
-  }
-
-  function renderStoriesArchive(d, lang) {
-    const activeItems = (d.cariocas || []).filter(entry => {
-      const context = entry.context || 'homepage';
-      return entry.active && (context === 'homepage' || context === 'archive' || context === 'historia' || context === 'stories') && (entry.image || entry.src);
-    });
-    if (!activeItems.length) return '';
-
-    const slidesHtml = activeItems.map((item, idx) => {
-      const image = item.image || item.src;
-      const caption = t(item.caption, lang);
-      return `<div class="album-slide${idx === 0 ? ' is-active' : ''}" data-slide-index="${idx}">
-  <div class="photo-corners">
-    <span class="corner corner--tl"></span>
-    <span class="corner corner--tr"></span>
-    <span class="corner corner--bl"></span>
-    <span class="corner corner--br"></span>
-    <img src="${image}" alt="${caption || LABELS.stories[lang]}" loading="lazy">
-  </div>
-  ${caption ? `<figcaption class="album-caption">${caption}</figcaption>` : ''}
-</div>`;
-    }).join('\n');
-
-    return `<section class="stories-archive" aria-labelledby="stories-archive-title">
-  <div class="home-section-head">
-    <p class="section-label">${LABELS.storiesSub[lang]}</p>
-    <h2 id="stories-archive-title">${LABELS.stories[lang]}</h2>
-  </div>
-  <div class="album-container">
-    <div class="album-slides">
-      ${slidesHtml}
-    </div>
-    <div class="album-nav">
-      <button class="album-btn album-btn--prev" aria-label="Anterior">&larr; Anterior</button>
-      <span class="album-counter"><span class="album-counter__current">1</span> / <span class="album-counter__total">${activeItems.length}</span></span>
-      <button class="album-btn album-btn--next" aria-label="Siguiente">Siguiente &rarr;</button>
-    </div>
-  </div>
-</section>`;
-  }
-
-  // ─── SOCIAL MEDIA LINKS ───────────────────────────────────────────────────────
-  function renderSocialLinks(social) {
-    const platforms = [
-      { key: 'instagram',   label: 'Instagram'   },
-      { key: 'facebook',    label: 'Facebook'    },
-      { key: 'tripadvisor', label: 'TripAdvisor' },
-      { key: 'x',          label: 'X'           },
-    ];
-    const links = platforms
-      .filter(p => social && social[p.key])
-      .map(p => `<a class="social-link" href="${social[p.key]}" target="_blank" rel="noopener">${p.label}</a>`);
-    if (!links.length) return '';
-    return `<div class="social-strip">${links.join('<span class="social-sep"> · </span>')}</div>`;
-  }
 
   // ─── MOBILE SERVICE CTA ───────────────────────────────────────────────────────
   function injectMobileServiceCTA(d, lang) {
@@ -515,7 +418,7 @@
     document.body.appendChild(fab);
 
     // Show FAB only after the primary CTA block scrolls out of view.
-    const anchor = document.querySelector('.qr-actions');
+    const anchor = document.querySelector('.home-cta-nav');
     if (anchor && 'IntersectionObserver' in window) {
       const obs = new IntersectionObserver(
         function(entries) { fab.classList.toggle('is-visible', !entries[0].isIntersecting); },
@@ -553,168 +456,55 @@
 </section>`;
   }
 
-  function renderOrderingGuide(d, lang, cartaUrl) {
-    const og = d.ordering_guide;
-    if (!og || !og.items || !og.items.length) return '';
-    const items = og.items.map(function(item) {
-      return `<dt class="ordering-guide__term">${t(item.term, lang)}</dt>
-<dd class="ordering-guide__def">${t(item.def, lang)}</dd>`;
-    }).join('');
-    return `<section class="ordering-guide" aria-labelledby="ordering-guide-title">
-  <h2 id="ordering-guide-title">${t(og.title, lang)}</h2>
-  <p class="ordering-guide__intro">${t(og.intro, lang)}</p>
-  <dl class="ordering-guide__list">${items}</dl>
-</section>`;
-  }
 
-  function renderWineEditorial(d, lang, cartaUrl) {
-    const we = d.wine_editorial;
-    if (!we) return '';
-
-    const wines = (d.wines || []).filter(function(w) { return w.available !== false; });
-    const featured = (we.featured_wine_ids || [])
-      .map(function(id) { return wines.find(function(w) { return w.id === id; }); })
-      .filter(Boolean);
-    if (!featured.length) return '';
-
-    const bodegaAnchor = '#la-bodega';
-    const wineCards = featured.map(function(wine) {
-      const name = t(wine.name, lang);
-      const region = t(wine.region, lang);
-      const note = wineCultureNote(wine, lang);
-      const glass = wine.price_glass ? wine.price_glass.toFixed(2).replace('.', ',') + '&nbsp;€' : '';
-      return `<a class="wine-editorial__card" href="${cartaUrl}#wine-${wine.id}">
-  <span class="wine-editorial__name">${name}</span>
-  <span class="wine-editorial__region">${region}</span>
-  ${note ? `<span class="wine-editorial__note">${note}</span>` : ''}
-  ${glass ? `<span class="wine-editorial__glass">${glass} copa</span>` : ''}
-</a>`;
-    }).join('');
-
-    return `<section class="wine-editorial" aria-labelledby="wine-editorial-title">
-  <div class="wine-editorial__head">
-    <h2 id="wine-editorial-title">${t(we.title, lang)}</h2>
-    <p class="wine-editorial__intro">${t(we.intro, lang)}</p>
+  function renderHeroTile(d, lang, cartaUrl, inService) {
+    const since    = { es: 'Desde 1959', en: 'Since 1959', fr: 'Depuis 1959' }[lang];
+    const addr     = d.contact.address;
+    const tileAlt  = d.logo && d.logo.alt ? t(d.logo.alt, lang) : t(d.venue.full_name, lang);
+    const logoSrc  = d.logo && d.logo.image ? d.logo.image : '../assets/images/web/azulejo-leon.webp';
+    return `<div class="home-hero">
+  <div class="home-hero__tile">
+    <picture>
+      <source srcset="${logoSrc}" type="image/webp">
+      <img class="home-hero__img" src="${logoSrc.replace('.webp', '.png')}" alt="${tileAlt}"
+           width="994" height="646" fetchpriority="high" />
+    </picture>
+    <div class="home-hero__scrim" aria-hidden="true"></div>
+    <div class="home-hero__overlay">
+      <img class="home-hero__lion" src="../assets/images/lion-logo.svg" alt=""
+           width="60" height="92" aria-hidden="true" />
+      <h1 class="home-hero__name">Bar León</h1>
+      <p class="home-hero__place">${addr.neighborhood} &middot; ${addr.city} &middot; ${since}</p>
+    </div>
   </div>
-  <div class="wine-editorial__cards">${wineCards}</div>
-  <a class="wine-editorial__cta" href="${cartaUrl}${bodegaAnchor}">${t(we.cta, lang)} →</a>
-</section>`;
+  <div class="site-status-container">
+    <a href="${cartaUrl}#hours" class="status-pill ${inService ? 'status-pill--open' : 'status-pill--closed'}">
+      <span class="status-pill__dot"></span>
+      ${inService ? LABELS.statusOpen[lang] : LABELS.statusClosed[lang]}
+    </a>
+  </div>
+</div>`;
   }
 
-  function renderCanaEditorial(d, lang) {
-    const ce = d.cana_editorial;
-    if (!ce) return '';
-    const title = t(ce.title, lang);
-    const body = t(ce.body, lang);
-    if (!body || !body.trim()) return '';
-    const paragraphs = body.split('\n').filter(function(p) { return p.trim(); })
-      .map(function(p) { return `<p>${p.trim()}</p>`; }).join('');
-    return `<section class="cana-editorial" aria-labelledby="cana-title">
-  <h2 id="cana-title">${title}</h2>
-  <div class="cana-editorial__text">${paragraphs}</div>
-</section>`;
-  }
-
-  function renderMalaFolla(lang) {
-    const content = {
-      es: {
-        title: 'La mala follá (explicada para forasteros)',
-        body: [
-          'No es mala educación.',
-          'Es decir lo justo. No sonreír por protocolo. No elogiar sin motivo. No hacer de cada pregunta una performance.',
-          'Cuando el camarero sirve sin preguntarte si todo está bien cada tres minutos, eso es respeto. Cuando la respuesta es seca pero honesta, eso también es respeto.',
-          'Llevas décadas viniendo a por eso, aunque no lo sepas todavía.'
-        ]
-      },
-      en: {
-        title: 'The Granada character (explained for outsiders)',
-        body: [
-          'It is not rudeness.',
-          'It is saying what needs to be said. Not smiling on command. Not praising without reason.',
-          'When the waiter serves you without asking if everything is okay every three minutes, that is respect. When the answer is dry but honest, that is also respect.',
-          'You have been coming back for decades because of it, even if you did not know it yet.'
-        ]
-      },
-      fr: {
-        title: 'Le caractère grenadin (expliqué aux étrangers)',
-        body: [
-          "Ce n'est pas de l'impolitesse.",
-          "C'est dire l'essentiel. Ne pas sourire par protocole. Ne pas élogier sans raison.",
-          "Quand le serveur vous sert sans vous demander si tout va bien toutes les trois minutes, c'est du respect. Quand la réponse est sèche mais honnête, c'est aussi du respect.",
-          "Vous revenez ici depuis des décennies à cause de ça, même si vous ne le saviez pas encore."
-        ]
-      }
-    }[lang];
-    if (!content) return '';
-    const paragraphs = content.body.map(function(p) { return `<p>${p}</p>`; }).join('');
-    return `<section class="mala-folla" aria-labelledby="mala-folla-title">
-  <h2 id="mala-folla-title">${content.title}</h2>
-  <div class="mala-folla__text">${paragraphs}</div>
-</section>`;
+  function renderHomeCTA(lang, cartaUrl, phoneLink) {
+    const quickAccess = { es: 'Acceso rápido', en: 'Quick access', fr: 'Accès rapide' }[lang];
+    const verCarta    = { es: 'Ver carta',     en: 'View menu',   fr: 'Voir la carte' }[lang];
+    return `<nav class="home-cta-nav" aria-label="${quickAccess}">
+  <a href="${cartaUrl}" class="home-cta-btn home-cta-btn--carta">${verCarta}</a>
+  <a href="${phoneLink}" class="home-cta-btn home-cta-btn--call">${LABELS.call[lang]}</a>
+</nav>`;
   }
 
   function render(d, lang) {
-    const phoneLink    = d.contact.phone_link;
-    const phoneDisplay = formatPhoneDisplay(d.contact.phone);
-    const cartaUrl     = CARTA_LINKS[lang];
-    const nav          = d.nav;
-    const inService    = isNowServiceTime(d.hours);
+    const phoneLink = d.contact.phone_link;
+    const cartaUrl  = CARTA_LINKS[lang];
+    const inService = isNowServiceTime(d.hours);
+    const aviso     = renderNotice(d.venue, lang);
+    const mapsUrl   = d.social.google_maps;
+    const addr      = d.contact.address;
 
-    const aviso = renderNotice(d.venue, lang);
-
-    const since = { es: 'Desde 1959', en: 'Since 1959', fr: 'Depuis 1959' }[lang];
+    const locationTitle   = { es: 'Dónde estamos', en: 'Where to find us', fr: 'Où nous trouver' }[lang];
     const directionsLabel = { es: 'Encontrarnos en Plaza Nueva', en: 'Find us on Plaza Nueva', fr: 'Nous trouver Plaza Nueva' }[lang];
-    const reviewsLabel    = { es: 'Léanos en Google', en: 'Read us on Google', fr: 'Lire les avis' }[lang];
-
-    const mapsUrl    = d.social.google_maps;
-    const reviewsUrl = d.social.google_reviews;
-
-    const trustStrip = `
-<div class="trust-strip">
-  <a href="${mapsUrl}" target="_blank" rel="noopener" class="trust-item">↗ ${directionsLabel}</a>
-  <span class="trust-sep"> · </span>
-  <a href="${reviewsUrl}" target="_blank" rel="noopener" class="trust-item">★ ${reviewsLabel}</a>
-</div>`;
-
-    const addr = d.contact.address;
-
-    // Ubicación & Reseñas variables de idioma
-    const locationTitle = { es: 'Dónde estamos', en: 'Where to find us', fr: 'Où nous trouver' }[lang];
-    const friendsLabel  = { es: 'No se sienta cliente, somos amigos', en: "Don't feel like a customer, we are friends", fr: 'Ne vous sentez pas client, nous sommes des amis' }[lang];
-
-    const mapCopy = {
-      es: 'Calle Pan, 1 — en la puerta entre Plaza Nueva, el Albaicín y la Alhambra. Si se pierde aquí, ya es por gusto.',
-      en: 'Calle Pan, 1 — at the gateway between Plaza Nueva, the Albaicín and the Alhambra. If you get lost, it is by choice.',
-      fr: "Calle Pan, 1 — à la porte entre la Plaza Nueva, l'Albaicín et l'Alhambra. Si vous vous perdez, c'est que vous le voulez bien."
-    }[lang];
-
-    const reviewCopy = {
-      es: 'Si ha comido a gusto, déjenos una reseña buena. Si no, nos lo dice en la barra y lo arreglamos como personas.',
-      en: 'If you enjoyed your meal, please leave us a good review. If not, tell us at the bar and we will make it right.',
-      fr: 'Si vous avez aimé, laissez-nous un avis positif. Sinon, dites-le nous au comptoir et nous le réglerons ensemble.'
-    }[lang];
-
-    const tileAlt = d.logo && d.logo.alt ? t(d.logo.alt, lang) : t(d.venue.full_name, lang);
-    const logoSrc = d.logo && d.logo.image ? d.logo.image : '../assets/images/web/azulejo-leon.webp';
-
-    const qrActionLabels = {
-      restaurant: { es: 'Carta restaurante', en: 'Restaurant menu', fr: 'Carte restaurant' },
-      bar:        { es: 'Carta barra',       en: 'Bar menu',        fr: 'Carte bar'        },
-      beverages:  { es: 'Bebidas',           en: 'Drinks',          fr: 'Boissons'         },
-      wines:      { es: 'Bodega',            en: 'Wine cellar',     fr: 'Cave à vins'      },
-      daily:      { es: 'Menú del día',      en: 'Daily menu',      fr: 'Menu du jour'     },
-    };
-
-    const qrActions = `
-<nav class="qr-actions" aria-label="${{ es: 'Acceso rápido', en: 'Quick access', fr: 'Accès rapide' }[lang]}">
-  <a href="${cartaUrl}#restaurant" class="qr-btn qr-btn--primary">${qrActionLabels.restaurant[lang]}</a>
-  <div class="qr-actions__row">
-    <a href="${cartaUrl}#bar" class="qr-btn">${qrActionLabels.bar[lang]}</a>
-    <a href="${cartaUrl}#beverages" class="qr-btn">${qrActionLabels.beverages[lang]}</a>
-  </div>
-  <a href="${cartaUrl}#daily" class="qr-btn">${qrActionLabels.daily[lang]}</a>
-  <a href="${phoneLink}" class="qr-btn qr-btn--call">${LABELS.call[lang]}</a>
-</nav>`;
 
     const locationBlock = `
 <section class="location-section">
@@ -724,59 +514,20 @@
       <iframe src="https://www.openstreetmap.org/export/embed.html?bbox=-3.5985%2C37.1755%2C-3.5945%2C37.1785&amp;layer=mapnik&amp;marker=37.17698%2C-3.59653" width="100%" height="250" style="border:0;" loading="lazy" aria-label="OpenStreetMap"></iframe>
     </div>
     <div class="location-info">
-      <p class="location-friends">"${friendsLabel}"</p>
-      <p class="location-copy">${mapCopy}</p>
+      <p class="location-address">${addr.street} &middot; ${addr.neighborhood} &middot; ${addr.city}</p>
       <a href="${mapsUrl}" target="_blank" rel="noopener" class="location-link">↗ ${directionsLabel}</a>
-      <hr class="location-sep" />
-      <p class="review-copy">${reviewCopy}</p>
-      <a href="${reviewsUrl}" target="_blank" rel="noopener" class="location-link">★ ${reviewsLabel}</a>
     </div>
   </div>
 </section>`;
 
     return `<div class="wrap">
-  <div class="brand-header">
-    <img class="brand-logo" src="../assets/images/lion-logo.svg" alt="Bar León" fetchpriority="high" width="110" height="169" />
-    <h1 class="brand-name">Bar León</h1>
-  </div>
-  <div class="brand-since">
-    <picture>
-      <source srcset="${logoSrc}" type="image/webp">
-      <img class="brand-since__stamp" src="${logoSrc.replace('.webp', '.png')}" alt="" width="42" height="27" loading="eager" />
-    </picture>
-    <span class="brand-since__text">&#8212;&thinsp;${since}&thinsp;&#8212;</span>
-  </div>
-  <p class="site-location">
-    <span class="site-location__place">${addr.neighborhood} &middot; ${addr.city}</span>
-  </p>
-  <div class="site-status-container">
-    <a href="${cartaUrl}#hours" class="status-pill ${inService ? 'status-pill--open' : 'status-pill--closed'}">
-      <span class="status-pill__dot"></span>
-      ${inService ? LABELS.statusOpen[lang] : LABELS.statusClosed[lang]}
-    </a>
-  </div>
+  ${renderHeroTile(d, lang, cartaUrl, inService)}
   ${aviso}
-  ${qrActions}
-  ${trustStrip}
-  <div class="home-main-grid">
-    ${renderHomeDailyMenu(d, lang, cartaUrl)}
-    ${renderHomeAndalusia(d, lang, cartaUrl)}
-  </div>
+  ${renderHomeAndalusia(d, lang, cartaUrl)}
+  ${renderHomeDailyMenu(d, lang, cartaUrl)}
+  ${renderHomeCTA(lang, cartaUrl, phoneLink)}
   ${renderHistoria(lang)}
-  ${renderOrderingGuide(d, lang, cartaUrl)}
-  ${renderMalaFolla(lang)}
-  ${renderCanaEditorial(d, lang)}
-  ${renderWineEditorial(d, lang, cartaUrl)}
-  ${renderHomeFoodGallery(lang)}
-  ${renderSocialLinks(d.social)}
   ${locationBlock}
-  ${renderStoriesArchive(d, lang)}
-  <div class="tile-frame">
-    <blockquote>
-      "${t(d.venue.tagline, lang)}"
-    </blockquote>
-    <cite>${t(d.venue.name, lang)} &middot; ${addr.street} &middot; ${addr.city}</cite>
-  </div>
   <div class="footer-separator">❖</div>
   <div class="homepage-footer">
     <div class="homepage-footer-inner">
@@ -848,7 +599,7 @@
   function initReveal(root) {
     if (!window.IntersectionObserver) return;
     const els = root.querySelectorAll(
-      '.editorial-snapshot, .hero-frame, .caricature-block, .trust-strip, .location-section, .social-strip'
+      '.editorial-snapshot, .hero-frame, .caricature-block, .location-section'
     );
     const io = new IntersectionObserver(function(entries) {
       entries.forEach(function(e) {
@@ -954,7 +705,6 @@
       injectLangBar(lang, HOME_LINKS);
       injectMobileServiceCTA(d, lang);
       initDailyMenuAccordion(app);
-      initStoriesAlbum(app);
       app.style.display = 'block';
       loader.classList.add('fade-out');
       setTimeout(() => { loader.style.display = 'none'; }, 380);

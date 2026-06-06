@@ -117,13 +117,12 @@ assert.match(lunch.html, /Olla de San Antón/);
 assert.match(lunch.html, /habas secas, habichuelas y cerdo de matanza/);
 assert.match(lunch.html, /home-andalusia/);
 assert.match(lunch.html, /Sabores de Andalucía/);
-assert.match(lunch.html, /home-food-gallery/);
-assert.match(lunch.html, /bar-leon-plato-02\.webp/);
+assert.match(lunch.html, /home-hero__tile/);
+assert.match(lunch.html, /home-cta-nav/);
 assert.match(lunch.html, /loading="lazy"/);
-assert.match(lunch.html, /site-location__place/);
-assert.match(lunch.html, /brand-since/);
+assert.match(lunch.html, /home-hero__place/);
 assert.doesNotMatch(lunch.html, /class="call-number"/);
-assert.match(lunch.html, /qr-btn qr-btn--call/);
+assert.match(lunch.html, /home-cta-btn--call/);
 assert.doesNotMatch(lunch.html, />\+34 958 22 51 43<\/a>/);
 assert.doesNotMatch(lunch.html, /hemeroteca/i);
 assert.ok(lunch.body.children.some(el => el.className === 'mobile-service-cta' && el.href === 'tel:+34958225143'));
@@ -131,20 +130,14 @@ assert.ok(lunch.body.children.some(el => el.className === 'mobile-service-cta' &
 const afterHours = await renderHomepageAt('2026-05-25T18:30:00+02:00');
 assert.ok(afterHours.body.children.some(el => el.className === 'mobile-service-cta' && el.href === 'tel:+34958225143'));
 
-const withArchive = await renderHomepageAt('2026-05-25T13:30:00+02:00', 'es', { withArchive: true });
-assert.match(withArchive.html, /Historias del León/);
-assert.match(withArchive.html, /bar-leon-plato-01\.webp/);
-assert.match(withArchive.html, /tres generaciones sosteniendo una barra granadina/);
-
-const withHomepageCarioca = await renderHomepageAt('2026-05-25T13:30:00+02:00', 'es', { withArchive: true, homepageCarioca: true });
-assert.equal((withHomepageCarioca.html.match(/bar-leon-plato-01\.webp/g) || []).length, 1);
+const withHomepageCarioca = await renderHomepageAt('2026-05-25T13:30:00+02:00', 'es');
 assert.doesNotMatch(withHomepageCarioca.html, /carioca-slot/);
 assert.match(withHomepageCarioca.html, /class="status-pill status-pill--open"/);
 assert.match(withHomepageCarioca.html, /Estamos abiertos/);
 
 const english = await renderHomepageAt('2026-05-25T13:30:00+02:00', 'en');
-assert.match(english.html, /brand-since__text[\s\S]{0,30}Since 1959/);
-assert.match(english.html, /qr-btn qr-btn--call/);
+assert.match(english.html, /home-hero__place[\s\S]{0,60}Since 1959/);
+assert.match(english.html, /home-cta-btn--call/);
 assert.match(english.html, /We are open/);
 assert.match(english.html, /Try a local red wine/);
 assert.match(english.html, /beyond Rioja\/Ribera/);
@@ -153,8 +146,8 @@ assert.doesNotMatch(english.html, /local Granada/);
 assert.doesNotMatch(english.html, /Pairs with/);
 
 const french = await renderHomepageAt('2026-05-25T13:30:00+02:00', 'fr');
-assert.match(french.html, /brand-since__text[\s\S]{0,30}Depuis 1959/);
-assert.match(french.html, /qr-btn qr-btn--call/);
+assert.match(french.html, /home-hero__place[\s\S]{0,60}Depuis 1959/);
+assert.match(french.html, /home-cta-btn--call/);
 assert.match(french.html, /Nous sommes ouverts/);
 
 console.log('homepage evolution render OK');

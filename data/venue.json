@@ -1427,7 +1427,8 @@
         "fr": "Alfonso (xérès oloroso, D.O. Jerez) — 2,80 €"
       },
       "available": true,
-      "featured": false
+      "featured": false,
+      "beer_pairing": "cruzcampo-tercio"
     },
     {
       "id": "berenjenas-fritas",

@@ -212,7 +212,7 @@ h2 {
 
 /* ─── SITE NAME ─── */
 .site-name {
-  font-family: 'Leon Display', Georgia, "Times New Roman", serif;
+  font-family: 'Playfair Display', Georgia, "Times New Roman", serif;
   font-weight: 400;
   line-height: 1.05;
   font-size: clamp(2.6rem, 8vw, 4.5rem);
@@ -221,63 +221,81 @@ h2 {
   text-align: center;
 }
 
-/* ─── BRAND HEADER (lion mark + H1 above ceramic tile) ─── */
-.brand-header {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  gap: 10px;
-  margin-bottom: 16px;
-}
+/* ─── HERO TILE ─── */
+.home-hero { display: flex; flex-direction: column; margin-bottom: 20px; }
 
-.brand-logo {
-  width: 170px;
-  height: auto;
-  display: block;
-}
-
-.brand-name {
-  font-family: 'Leon Display', Georgia, "Times New Roman", serif;
-  font-weight: 400;
-  font-size: clamp(2.4rem, 7.5vw, 3.8rem);
-  line-height: 1;
-  letter-spacing: 0.06em;
-  color: var(--ink);
-  text-align: center;
-  margin: 0;
-}
-
-@media (max-width: 540px) {
-  .brand-logo {
-    width: 88px;
-    height: auto;
-  }
-  .brand-name {
-    font-size: clamp(1.8rem, 8vw, 2.4rem);
-  }
-  .brand-header {
-    margin-top: 0;
-    gap: 4px;
-    margin-bottom: 2px;
-  }
-}
-
-.site-location {
+.home-hero__tile {
+  position: relative;
+  overflow: hidden;
+  width: 100%;
+  height: clamp(210px, 58vw, 240px);
   display: flex;
   align-items: center;
   justify-content: center;
-  flex-wrap: nowrap;
-  gap: 4px 12px;
+}
+
+.home-hero__img {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  object-position: center;
+  display: block;
+}
+
+.home-hero__scrim {
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(to bottom, rgba(20,18,14,0.28) 0%, rgba(20,18,14,0.52) 100%);
+  pointer-events: none;
+}
+
+.home-hero__overlay {
+  position: relative;
+  z-index: 2;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 6px;
+  padding: 16px;
+  text-align: center;
+}
+
+.home-hero__lion {
+  width: 60px;
+  height: auto;
+  display: block;
+  margin: 0 auto 6px;
+  filter: drop-shadow(0 1px 4px rgba(0,0,0,0.45));
+}
+
+.home-hero__name {
+  font-family: 'Playfair Display', Georgia, serif;
+  font-size: clamp(1.9rem, 6vw, 2.8rem);
+  font-weight: 700;
+  color: #f6f3ec;
+  line-height: 1;
+  letter-spacing: 0.04em;
+  margin: 0;
+  text-shadow: 0 1px 5px rgba(0,0,0,0.5);
+}
+
+.home-hero__place {
   font-family: 'Inter', system-ui, -apple-system, sans-serif;
-  font-weight: 500;
-  font-size: 0.7rem;
+  font-size: 0.65rem;
   text-transform: uppercase;
   letter-spacing: 0.22em;
-  color: var(--muted);
-  margin-top: 7px;
-  line-height: 1.45;
-  white-space: nowrap;
+  color: rgba(246,243,236,0.88);
+  margin: 0;
 }
+
+@media (min-width: 541px) {
+  .home-hero__tile { height: clamp(240px, 38vw, 320px); }
+  .home-hero__lion { width: 80px; }
+  .home-hero__name { font-size: clamp(2.4rem, 5vw, 3.4rem); }
+}
+
 
 .site-location__place,
 .site-location__since {
@@ -591,7 +609,7 @@ h2 {
 }
 
 .carta-bar-name {
-  font-family: 'Leon Display', Georgia, "Times New Roman", serif;
+  font-family: 'Playfair Display', Georgia, "Times New Roman", serif;
   font-weight: 400;
   font-size: 1.05rem;
   line-height: 1;
@@ -831,7 +849,7 @@ h2 {
 }
 
 .categoria-head h2 {
-  font-family: 'Leon Display', Georgia, "Times New Roman", serif;
+  font-family: 'Playfair Display', Georgia, "Times New Roman", serif;
   font-size: 1rem;
   font-weight: 400;
   letter-spacing: 0.08em;
@@ -1098,64 +1116,6 @@ h2 {
   line-height: 1.9;
 }
 
-/* ─── TRUST STRIP ─── */
-.trust-strip {
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  gap: 4px;
-  margin-top: 10px;
-  padding: 9px 0;
-  border-top: 1px solid rgba(28, 26, 23, 0.1);
-  border-bottom: 1px solid rgba(28, 26, 23, 0.1);
-}
-
-.trust-item {
-  font-family: system-ui, -apple-system, sans-serif;
-  font-size: 0.7rem;
-  text-transform: uppercase;
-  letter-spacing: 0.13em;
-  color: var(--muted);
-  text-decoration: none;
-}
-
-.trust-item:hover {
-  color: var(--accent);
-}
-
-.trust-sep {
-  color: rgba(28, 26, 23, 0.25);
-  font-size: 0.65rem;
-}
-
-/* ─── SOCIAL STRIP ─── */
-.social-strip {
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  gap: 4px;
-  padding: 9px 0;
-  border-bottom: 1px solid rgba(28, 26, 23, 0.1);
-  margin-bottom: 0;
-}
-
-.social-link {
-  font-family: system-ui, -apple-system, sans-serif;
-  font-size: 0.7rem;
-  text-transform: uppercase;
-  letter-spacing: 0.13em;
-  color: var(--muted);
-  text-decoration: none;
-}
-
-.social-link:hover {
-  color: var(--accent);
-}
-
-.social-sep {
-  color: rgba(28, 26, 23, 0.25);
-  font-size: 0.65rem;
-}
 
 /* ─── CALL CTA WITH NUMBER ─── */
 .call-cta {
@@ -1191,7 +1151,7 @@ h2 {
 }
 
 .home-section-head h2 {
-  font-family: 'Leon Display', Georgia, "Times New Roman", serif;
+  font-family: 'Playfair Display', Georgia, "Times New Roman", serif;
   font-size: clamp(1.6rem, 4.5vw, 2.4rem);
   font-weight: 400;
   line-height: 1.05;
@@ -1201,7 +1161,7 @@ h2 {
 .home-daily-menu {
   border: none;
   padding: 0;
-  margin: 0;
+  margin: 40px 0 0;
 }
 
 .home-daily-menu__head {
@@ -1326,11 +1286,10 @@ h2 {
   color: var(--accent);
 }
 
-.home-andalusia,
-.stories-archive {
+.home-andalusia {
   border-top: 1px solid rgba(28, 26, 23, 0.16);
-  margin-top: 72px;
-  padding-top: 48px;
+  margin-top: 24px;
+  padding-top: 32px;
 }
 
 .home-andalusia__list {
@@ -1709,18 +1668,12 @@ h2 {
   gap: 12px;
 }
 
-.location-friends {
-  font-family: Georgia, "Times New Roman", serif;
-  font-size: 1.15rem;
-  font-weight: 700;
-  color: var(--accent);
-  line-height: 1.3;
-}
-
-.location-copy, .review-copy {
-  font-size: 0.85rem;
-  color: var(--muted);
-  line-height: 1.6;
+.location-address {
+  font-family: Georgia, serif;
+  font-size: 0.9rem;
+  color: var(--ink);
+  line-height: 1.5;
+  margin: 0;
 }
 
 .location-link {
@@ -2979,7 +2932,7 @@ h2 {
 }
 
 .cana-editorial h2 {
-  font-family: 'Leon Display', Georgia, "Times New Roman", serif;
+  font-family: 'Playfair Display', Georgia, "Times New Roman", serif;
   font-size: clamp(1.6rem, 4.5vw, 2.4rem);
   font-weight: 400;
   color: var(--ink);
@@ -2998,150 +2951,53 @@ h2 {
   margin-top: 14px;
 }
 
-/* ─── QR HERO ─── */
-.qr-hero {
-  display: flex;
-  justify-content: center;
-  padding: 8px 0 0;
-  margin-bottom: 0;
-  line-height: 0;
-}
-
-.qr-hero__img {
-  width: auto;
-  max-width: 160px;
-  height: auto;
-  display: block;
-}
-
-/* ─── QR ACTION BUTTONS ─── */
-.qr-actions {
-  display: flex;
-  flex-direction: column;
+/* ─── HOME CTA NAV ─── */
+.home-cta-nav {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
   gap: 8px;
   margin: 20px 0 28px;
 }
 
-.qr-actions__row {
-  display: grid;
-  grid-template-columns: repeat(2, 1fr);
-  gap: 8px;
-}
-
-.qr-btn {
+.home-cta-btn {
   display: flex;
   align-items: center;
   justify-content: center;
-  min-height: 56px;
-  padding: 14px 16px;
+  min-height: 46px;
+  padding: 12px 16px;
   font-family: 'Inter', system-ui, -apple-system, sans-serif;
-  font-size: 1.05rem;
+  font-size: 0.95rem;
   font-weight: 600;
   letter-spacing: 0.02em;
   text-decoration: none;
   text-align: center;
   border: 1.5px solid var(--ink);
-  background: var(--bg);
-  color: var(--ink);
   transition: background 0.15s, color 0.15s;
   -webkit-tap-highlight-color: transparent;
-  line-height: 1.2;
 }
 
-.qr-btn:hover,
-.qr-btn:focus-visible {
+.home-cta-btn--carta {
   background: var(--ink);
   color: var(--bg);
-  outline: none;
 }
+.home-cta-btn--carta:hover,
+.home-cta-btn--carta:focus-visible { background: #38352f; }
 
-.qr-btn--primary {
-  background: var(--ink);
-  color: var(--bg);
-  min-height: 64px;
-  font-size: 1.15rem;
-  border-left: 4px solid var(--accent);
-}
-
-.qr-btn--primary:hover {
-  background: #38352f;
-  color: var(--bg);
-}
-
-.qr-btn--call {
-  background: var(--accent);
-  color: #fff;
+.home-cta-btn--call {
+  background: var(--bg);
+  color: var(--accent);
   border-color: var(--accent);
-  font-family: system-ui, -apple-system, sans-serif;
-  font-size: 1rem;
   font-weight: 700;
-  letter-spacing: 0.1em;
+  letter-spacing: 0.08em;
   text-transform: uppercase;
-  min-height: 56px;
 }
+.home-cta-btn--call:hover,
+.home-cta-btn--call:focus-visible { background: var(--accent); color: #fff; }
 
-.qr-btn--call:hover,
-.qr-btn--call:focus-visible {
-  background: #163d6e;
-  color: #fff;
-}
-
-.qr-btn--muted {
-  opacity: 0.72;
-}
-
-/* ─── BRAND SINCE: azulejo stamp + year inline ─── */
-.brand-since {
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  gap: 8px;
-  margin-top: 2px;
-  margin-bottom: 4px;
-}
-
-.brand-since__stamp {
-  width: 42px;
-  height: auto;
-  display: block;
-  opacity: 0.82;
-  flex-shrink: 0;
-}
-
-.brand-since__text {
-  font-family: 'Leon Display', Georgia, "Times New Roman", serif;
-  font-size: 0.72rem;
-  font-weight: 400;
-  letter-spacing: 0.12em;
-  color: var(--muted);
-  white-space: nowrap;
-  line-height: 1;
-}
-
-/* ─── HOME CONTENT GRID: Menú del Día + Sabores side by side ─── */
-.home-main-grid {
-  display: flex;
-  flex-direction: column;
-  gap: 0;
-}
-
-@media (min-width: 680px) {
-  .home-main-grid {
-    display: grid;
-    grid-template-columns: 1fr 1fr;
-    gap: 20px;
-    align-items: start;
-    margin-top: 40px;
-  }
-  .home-main-grid .home-andalusia,
-  .home-main-grid .home-daily-menu {
-    margin-top: 0;
-  }
-}
 
 /* ─── HISTORIA SHORT YEAR ─── */
 .historia-year {
-  font-family: 'Leon Display', Georgia, "Times New Roman", serif !important;
+  font-family: 'Playfair Display', Georgia, "Times New Roman", serif !important;
   font-size: clamp(2.2rem, 9vw, 4rem) !important;
   font-weight: 400;
   color: var(--ink);
@@ -3199,22 +3055,10 @@ h2 {
 }
 
 /* ─── SITE LOCATION — larger ─── */
-.site-location {
-  font-size: 0.78rem;
-  margin-top: 10px;
-}
-
 /* ─── HISTORIA — larger body ─── */
 .historia-leon__text {
   font-size: 1rem;
   line-height: 1.75;
-}
-
-/* ─── BRAND HEADER — after hero (desktop only; mobile overrides at ≤540px) ─── */
-@media (min-width: 541px) {
-  .brand-header {
-    margin-top: 12px;
-  }
 }
 
 /* ─── MENU TAB BAR — scrollable on narrow mobile ─── */
@@ -3245,32 +3089,9 @@ h2 {
     padding-top: 4px;
   }
 
-  /* Site-location and status: tighter */
-  .site-location {
-    margin-top: 0;
-  }
   .site-status-container {
     margin-top: 0;
     margin-bottom: 0;
-  }
-
-  /* brand-since: flush */
-  .brand-since {
-    margin-top: 0;
-    margin-bottom: 2px;
-  }
-
-  /* Pull CTA block up */
-  .qr-actions {
-    margin-top: 6px;
-    margin-bottom: 14px;
-    gap: 6px;
-  }
-
-  /* Trust strip: compact */
-  .trust-strip {
-    margin-top: 6px;
-    padding: 7px 0;
   }
 
   /* Sabores de Andalucía: compact list, no descriptions */
@@ -3295,14 +3116,4 @@ h2 {
     font-size: 1.05rem;
   }
 
-  /* Hide editorial sections — present on desktop, not on QR-first mobile */
-  .historia-leon,
-  .ordering-guide,
-  .mala-folla,
-  .cana-editorial,
-  .wine-editorial,
-  .home-food-gallery,
-  .stories-archive {
-    display: none;
-  }
 }
