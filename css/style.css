@@ -1543,6 +1543,102 @@ h2 {
   margin-top: 3px;
 }
 
+/* ─── MENÚ DEL DÍA — pizarra overrides ─── */
+.chalkboard-menu.edict {
+  border: 14px solid #3a2510;
+  padding: 0;
+}
+
+.chalkboard-menu .edict-head {
+  padding: 28px 32px 18px;
+  border-bottom: 1px solid rgba(238, 228, 195, 0.22);
+  position: relative;
+  z-index: 2;
+}
+
+.chalkboard-menu .edict-head h2 {
+  font-family: 'Caveat', cursive;
+  font-size: 0.78rem;
+  letter-spacing: 0.2em;
+  color: rgba(235, 228, 200, 0.6);
+  text-transform: uppercase;
+}
+
+.chalkboard-menu .edict-title {
+  font-family: 'Caveat', cursive;
+  font-size: clamp(1.7rem, 5vw, 2.2rem);
+  font-weight: 700;
+  color: rgba(248, 244, 228, 0.96);
+  text-shadow: 0 1px 4px rgba(0,0,0,0.5);
+}
+
+.chalkboard-menu .edict-price {
+  font-family: 'Caveat', cursive;
+  font-size: clamp(2rem, 6vw, 2.6rem);
+  color: rgba(248, 230, 160, 0.96);
+}
+
+.chalkboard-menu .edict-dias {
+  font-family: 'Caveat', cursive;
+  font-size: 0.9rem;
+  color: rgba(235, 228, 200, 0.62);
+  letter-spacing: 0.06em;
+}
+
+.chalkboard-menu .edict-body {
+  padding: 16px 32px 20px;
+  position: relative;
+  z-index: 2;
+}
+
+.chalkboard-menu .edict-condiciones {
+  font-family: 'Caveat', cursive;
+  font-size: 0.95rem;
+  color: rgba(235, 228, 200, 0.7);
+}
+
+.chalkboard-menu .edict-section-label {
+  font-family: 'Caveat', cursive;
+  font-size: 0.88rem;
+  letter-spacing: 0.18em;
+  color: rgba(235, 228, 200, 0.55);
+  text-transform: uppercase;
+}
+
+.chalkboard-menu .edict-platos li {
+  font-family: 'Caveat', cursive;
+  font-size: clamp(1rem, 3vw, 1.1rem);
+  color: rgba(248, 244, 228, 0.94);
+  padding: 4px 0;
+  border-bottom: 1px solid rgba(238, 228, 200, 0.08);
+}
+
+.chalkboard-menu .edict-platos li:last-child {
+  border-bottom: none;
+}
+
+.chalkboard-menu .edict-platos li strong {
+  color: rgba(248, 230, 160, 0.9);
+}
+
+.chalkboard-menu .edict-temporada {
+  font-family: 'Caveat', cursive;
+  font-size: 0.95rem;
+  color: rgba(235, 228, 200, 0.62);
+  font-style: italic;
+}
+
+.chalkboard-menu .edict-foot {
+  border-top: 1px solid rgba(238, 228, 195, 0.18);
+  padding: 10px 32px;
+  font-family: 'Caveat', cursive;
+  font-size: 0.82rem;
+  letter-spacing: 0.12em;
+  color: rgba(235, 228, 200, 0.45);
+  position: relative;
+  z-index: 2;
+}
+
 /* ─── SITE TILE HOME — heritage stamp, secondary to lion mark ─── */
 .site-tile-container {
   display: flex;

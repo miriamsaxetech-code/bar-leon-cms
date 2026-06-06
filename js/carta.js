@@ -371,7 +371,7 @@
       ? ` · ${formatTimePeriod(dm.service_period, lang)}`
       : '';
 
-    return `<div class="tile-frame edict">
+    return `<div class="chalkboard-menu edict">
     <div class="edict-head">
       <h2>${t(nav.edict_header, lang)}</h2>
       <p class="edict-title">${t(nav.daily_menu, lang)}</p>
