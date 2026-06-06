@@ -213,7 +213,7 @@ h2 {
 /* ─── SITE NAME ─── */
 .site-name {
   font-family: 'Leon Display', Georgia, "Times New Roman", serif;
-  font-weight: 700;
+  font-weight: 400;
   line-height: 1.05;
   font-size: clamp(2.6rem, 8vw, 4.5rem);
   color: var(--ink);
@@ -238,7 +238,7 @@ h2 {
 
 .brand-name {
   font-family: 'Leon Display', Georgia, "Times New Roman", serif;
-  font-weight: 700;
+  font-weight: 400;
   font-size: clamp(2.4rem, 7.5vw, 3.8rem);
   line-height: 1;
   letter-spacing: 0.06em;
@@ -249,7 +249,7 @@ h2 {
 
 @media (max-width: 540px) {
   .brand-logo {
-    width: 110px;
+    width: 88px;
     height: auto;
   }
   .brand-name {
@@ -592,7 +592,7 @@ h2 {
 
 .carta-bar-name {
   font-family: 'Leon Display', Georgia, "Times New Roman", serif;
-  font-weight: 700;
+  font-weight: 400;
   font-size: 1.05rem;
   line-height: 1;
   color: var(--ink);
@@ -833,6 +833,7 @@ h2 {
 .categoria-head h2 {
   font-family: 'Leon Display', Georgia, "Times New Roman", serif;
   font-size: 1rem;
+  font-weight: 400;
   letter-spacing: 0.08em;
   color: var(--ink);
   line-height: 1;
@@ -1192,6 +1193,7 @@ h2 {
 .home-section-head h2 {
   font-family: 'Leon Display', Georgia, "Times New Roman", serif;
   font-size: clamp(1.6rem, 4.5vw, 2.4rem);
+  font-weight: 400;
   line-height: 1.05;
   letter-spacing: 0.08em;
 }
@@ -2979,7 +2981,7 @@ h2 {
 .cana-editorial h2 {
   font-family: 'Leon Display', Georgia, "Times New Roman", serif;
   font-size: clamp(1.6rem, 4.5vw, 2.4rem);
-  font-weight: 700;
+  font-weight: 400;
   color: var(--ink);
   margin-bottom: 16px;
 }
@@ -3107,11 +3109,10 @@ h2 {
 }
 
 .brand-since__text {
-  font-family: 'Inter', system-ui, -apple-system, sans-serif;
-  font-size: 0.68rem;
-  font-weight: 500;
-  text-transform: uppercase;
-  letter-spacing: 0.22em;
+  font-family: 'Leon Display', Georgia, "Times New Roman", serif;
+  font-size: 0.72rem;
+  font-weight: 400;
+  letter-spacing: 0.12em;
   color: var(--muted);
   white-space: nowrap;
   line-height: 1;
@@ -3142,7 +3143,7 @@ h2 {
 .historia-year {
   font-family: 'Leon Display', Georgia, "Times New Roman", serif !important;
   font-size: clamp(2.2rem, 9vw, 4rem) !important;
-  font-weight: 700;
+  font-weight: 400;
   color: var(--ink);
   margin-bottom: 18px;
   line-height: 1;
@@ -3209,9 +3210,11 @@ h2 {
   line-height: 1.75;
 }
 
-/* ─── BRAND HEADER — after hero ─── */
-.brand-header {
-  margin-top: 12px;
+/* ─── BRAND HEADER — after hero (desktop only; mobile overrides at ≤540px) ─── */
+@media (min-width: 541px) {
+  .brand-header {
+    margin-top: 12px;
+  }
 }
 
 /* ─── MENU TAB BAR — scrollable on narrow mobile ─── */
@@ -3239,22 +3242,29 @@ h2 {
 @media (max-width: 540px) {
   /* Tighter homepage top padding */
   #homepage {
-    padding-top: 8px;
+    padding-top: 4px;
   }
 
   /* Site-location and status: tighter */
   .site-location {
-    margin-top: 2px;
+    margin-top: 0;
   }
   .site-status-container {
-    margin-top: 4px;
+    margin-top: 0;
     margin-bottom: 0;
+  }
+
+  /* brand-since: flush */
+  .brand-since {
+    margin-top: 0;
+    margin-bottom: 2px;
   }
 
   /* Pull CTA block up */
   .qr-actions {
-    margin-top: 10px;
+    margin-top: 6px;
     margin-bottom: 14px;
+    gap: 6px;
   }
 
   /* Trust strip: compact */
