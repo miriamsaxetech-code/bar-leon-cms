@@ -121,7 +121,7 @@ assert.match(lunch.html, /home-food-gallery/);
 assert.match(lunch.html, /bar-leon-plato-02\.webp/);
 assert.match(lunch.html, /loading="lazy"/);
 assert.match(lunch.html, /site-location__place/);
-assert.match(lunch.html, /site-location__since/);
+assert.match(lunch.html, /brand-since/);
 assert.doesNotMatch(lunch.html, /class="call-number"/);
 assert.match(lunch.html, /qr-btn qr-btn--call/);
 assert.doesNotMatch(lunch.html, />\+34 958 22 51 43<\/a>/);
@@ -143,7 +143,7 @@ assert.match(withHomepageCarioca.html, /class="status-pill status-pill--open"/);
 assert.match(withHomepageCarioca.html, /Estamos abiertos/);
 
 const english = await renderHomepageAt('2026-05-25T13:30:00+02:00', 'en');
-assert.match(english.html, /site-location__since">Since 1959/);
+assert.match(english.html, /brand-since__text[\s\S]{0,30}Since 1959/);
 assert.match(english.html, /qr-btn qr-btn--call/);
 assert.match(english.html, /We are open/);
 assert.match(english.html, /Try a local red wine/);
@@ -153,7 +153,7 @@ assert.doesNotMatch(english.html, /local Granada/);
 assert.doesNotMatch(english.html, /Pairs with/);
 
 const french = await renderHomepageAt('2026-05-25T13:30:00+02:00', 'fr');
-assert.match(french.html, /site-location__since">Depuis 1959/);
+assert.match(french.html, /brand-since__text[\s\S]{0,30}Depuis 1959/);
 assert.match(french.html, /qr-btn qr-btn--call/);
 assert.match(french.html, /Nous sommes ouverts/);
 

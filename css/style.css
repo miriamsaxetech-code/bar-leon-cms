@@ -1,17 +1,21 @@
 @font-face {
-  font-family: 'Granaina Limpia';
-  src: url('../assets/fonts/granaina-limpia.woff2') format('woff2'),
-       url('../assets/fonts/granaina-limpia.otf') format('opentype');
-  font-weight: normal;
+  font-family: 'Leon Display';
+  src: url('../fonts/LeonDisplay/LeonDisplay-Medium.woff2') format('woff2'),
+       url('../fonts/LeonDisplay/LeonDisplay-Medium.woff') format('woff'),
+       url('../fonts/LeonDisplay/LeonDisplay-Medium.otf') format('opentype'),
+       url('../fonts/LeonDisplay/LeonDisplay-Medium.ttf') format('truetype');
+  font-weight: 400;
   font-style: normal;
   font-display: swap;
 }
 
 @font-face {
-  font-family: 'Granaina Sucia';
-  src: url('../assets/fonts/granaina-sucia2.woff2') format('woff2'),
-       url('../assets/fonts/granaina-sucia2.otf') format('opentype');
-  font-weight: normal;
+  font-family: 'Leon Display';
+  src: url('../fonts/LeonDisplay/LeonDisplay-Bold.woff2') format('woff2'),
+       url('../fonts/LeonDisplay/LeonDisplay-Bold.woff') format('woff'),
+       url('../fonts/LeonDisplay/LeonDisplay-Bold.otf') format('opentype'),
+       url('../fonts/LeonDisplay/LeonDisplay-Bold.ttf') format('truetype');
+  font-weight: 700;
   font-style: normal;
   font-display: swap;
 }
@@ -208,7 +212,8 @@ h2 {
 
 /* ─── SITE NAME ─── */
 .site-name {
-  font-family: 'Granaina Limpia', 'Playfair Display', Georgia, serif;
+  font-family: 'Leon Display', Georgia, "Times New Roman", serif;
+  text-transform: uppercase;
   font-weight: 700;
   line-height: 1.05;
   font-size: clamp(2.6rem, 8vw, 4.5rem);
@@ -233,13 +238,14 @@ h2 {
 }
 
 .brand-name {
-  font-family: 'Granaina Limpia', 'Playfair Display', Georgia, serif;
+  font-family: 'Leon Display', Georgia, "Times New Roman", serif;
   font-weight: 700;
   font-size: clamp(2.4rem, 7.5vw, 3.8rem);
   line-height: 1;
-  letter-spacing: 0.02em;
+  letter-spacing: 0.06em;
   color: var(--ink);
   text-align: center;
+  text-transform: uppercase;
   margin: 0;
 }
 
@@ -587,7 +593,8 @@ h2 {
 }
 
 .carta-bar-name {
-  font-family: 'Granaina Limpia', 'Playfair Display', Georgia, serif;
+  font-family: 'Leon Display', Georgia, "Times New Roman", serif;
+  text-transform: uppercase;
   font-weight: 700;
   font-size: 1.05rem;
   line-height: 1;
@@ -662,7 +669,7 @@ h2 {
   border-right: 1px solid rgba(28, 26, 23, 0.22);
   color: var(--ink);
   cursor: pointer;
-  font-family: 'Granaina Limpia', system-ui, -apple-system, sans-serif;
+  font-family: system-ui, -apple-system, sans-serif;
   font-size: 0.95rem;
   font-weight: 700;
   letter-spacing: 0.04em;
@@ -827,7 +834,7 @@ h2 {
 }
 
 .categoria-head h2 {
-  font-family: 'Granaina Limpia', 'Playfair Display', Georgia, serif;
+  font-family: 'Leon Display', Georgia, "Times New Roman", serif;
   font-size: 1rem;
   letter-spacing: 0.08em;
   color: var(--ink);
@@ -895,7 +902,7 @@ h2 {
 }
 
 .check-name {
-  font-family: 'Granaina Limpia', 'Playfair Display', Georgia, serif;
+  font-family: Georgia, "Times New Roman", serif;
   font-weight: 700;
   font-size: 1.1rem;
   line-height: 1.25;
@@ -1019,7 +1026,7 @@ h2 {
 }
 
 .carta-brand {
-  font-family: 'Granaina Limpia', 'Playfair Display', Georgia, serif;
+  font-family: Georgia, "Times New Roman", serif;
   font-size: 0.82rem;
   color: var(--muted);
   text-align: center;
@@ -1061,7 +1068,7 @@ h2 {
 }
 
 .hero-editorial-name {
-  font-family: 'Granaina Limpia', 'Playfair Display', Georgia, serif;
+  font-family: Georgia, "Times New Roman", serif;
   font-size: clamp(1.1rem, 4vw, 1.9rem);
   font-weight: 700;
   letter-spacing: 0.04em;
@@ -1186,11 +1193,11 @@ h2 {
 }
 
 .home-section-head h2 {
-  font-family: 'Granaina Limpia', 'Playfair Display', Georgia, serif;
+  font-family: 'Leon Display', Georgia, "Times New Roman", serif;
   font-size: clamp(1.6rem, 4.5vw, 2.4rem);
   line-height: 1.05;
-  letter-spacing: 0.01em;
-  text-transform: none;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
 }
 
 .home-daily-menu {
@@ -1705,7 +1712,7 @@ h2 {
 }
 
 .location-friends {
-  font-family: 'Granaina Limpia', 'Playfair Display', Georgia, serif;
+  font-family: Georgia, "Times New Roman", serif;
   font-size: 1.15rem;
   font-weight: 700;
   color: var(--accent);
@@ -2916,7 +2923,8 @@ h2 {
 }
 
 .wine-editorial__name {
-  font-family: 'Granaina Limpia', Georgia, serif;
+  font-family: 'Leon Display', Georgia, "Times New Roman", serif;
+  text-transform: uppercase;
   font-size: 0.95rem;
   color: rgba(255, 252, 240, 0.92);
   letter-spacing: 0.03em;
@@ -2974,7 +2982,7 @@ h2 {
 }
 
 .cana-editorial h2 {
-  font-family: 'Granaina Limpia', 'Playfair Display', Georgia, serif;
+  font-family: 'Leon Display', Georgia, "Times New Roman", serif;
   font-size: clamp(1.2rem, 3.5vw, 1.5rem);
   font-weight: 700;
   color: var(--ink);
@@ -3029,7 +3037,7 @@ h2 {
   justify-content: center;
   min-height: 56px;
   padding: 14px 16px;
-  font-family: 'Granaina Limpia', Georgia, serif;
+  font-family: Georgia, "Times New Roman", serif;
   font-size: 1.05rem;
   font-weight: 700;
   letter-spacing: 0.02em;
@@ -3137,7 +3145,7 @@ h2 {
 
 /* ─── HISTORIA SHORT YEAR ─── */
 .historia-year {
-  font-family: 'Granaina Limpia', Georgia, serif !important;
+  font-family: 'Leon Display', Georgia, "Times New Roman", serif !important;
   font-size: clamp(2.2rem, 9vw, 4rem) !important;
   font-weight: 700;
   color: var(--ink);
@@ -3155,7 +3163,7 @@ h2 {
 }
 
 .mala-folla h2 {
-  font-family: 'Granaina Limpia', Georgia, serif;
+  font-family: Georgia, "Times New Roman", serif;
   font-size: clamp(0.95rem, 2.8vw, 1.15rem);
   font-weight: 700;
   color: var(--muted);
@@ -3177,7 +3185,7 @@ h2 {
 }
 
 .mala-folla__text p:first-child {
-  font-family: 'Granaina Limpia', Georgia, serif;
+  font-family: Georgia, "Times New Roman", serif;
   font-size: 1.2rem;
   font-weight: 700;
   color: var(--muted);
