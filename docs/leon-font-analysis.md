@@ -6,6 +6,34 @@
 
 ---
 
+## Implementation Status — 2026-06-06
+
+> **León Display is live in production as of branch `typography-kakin-v1`.**
+
+The expanded font files (Bold + Medium, with Spanish diacritics) are at `fonts/LeonDisplay/`.
+The @font-face declarations are in `css/style.css` under family name `'Leon Display'`.
+Granaina Limpia and Granaina Sucia have been fully retired.
+
+**Glyph coverage confirmed live:**
+- Á É Í Ó Ú Ü Ñ — uppercase Spanish diacritics ✓
+- Unicase cmap — lowercase a–z maps to same uppercase glyphs ✓
+- 0–9 digits ✓
+- `.brand-name` renders "BAR LÉÓN" fully in León Display Bold ✓
+
+**CSS selectors using León Display Bold:**
+`.brand-name` · `.site-name` · `.carta-bar-name` · `.categoria-head h2` ·
+`.home-section-head h2` · `.wine-editorial__name` · `.cana-editorial h2` · `.historia-year`
+
+**CSS selectors using Georgia fallback (mixed-case accented content):**
+`.check-name` · `.carta-brand` · `.hero-editorial-name` · `.location-friends` ·
+`.qr-btn` · `.mala-folla h2` · `.mala-folla__text p:first-child`
+
+**Pending font work (see Section 4 below):**
+The expanded font in `fonts/LeonDisplay/` covers Spanish. French/German diacritics and
+punctuation beyond period+comma are still missing. The expansion plan remains in Sections 3–6.
+
+---
+
 ## 1. Technical Analysis
 
 ### 1.1 Font Identity

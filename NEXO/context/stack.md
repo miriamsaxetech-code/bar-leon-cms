@@ -94,9 +94,20 @@ El proyecto tiene **dos interfaces de administración** que escriben sobre el mi
 
 ## Fuentes web
 
+**León Display** — fuente institucional primaria (self-hosted, `fonts/LeonDisplay/`):
+- `LeonDisplay-Bold.woff2 / .woff / .otf / .ttf` — peso 700, display headings
+- `LeonDisplay-Medium.woff2 / .woff / .otf / .ttf` — peso 400, display secundario
+- Fuente unicase (cmap lowercase → uppercase). Usar siempre con `text-transform: uppercase`.
+- Cubre: A–Z, Á É Í Ó Ú Ñ Ü y sus variantes minúsculas (mismos glifos), dígitos 0–9.
+- Análisis completo: `docs/leon-font-analysis.md`
+
 Cargadas desde Google Fonts (preconnect configurado):
-- `Playfair Display:wght@700`
-- `Inter:wght@400;500;600`
+- `Playfair Display:wght@700` — fallback editorial headings
+- `Inter:wght@400;500;600` — UI labels
+
+Fuentes eliminadas (no usar como fallback):
+- ~~Granaina Limpia~~ — retirada en `typography-kakin-v1` (rama: 2026-06-06)
+- ~~Granaina Sucia~~ — retirada en `typography-kakin-v1`
 
 ---
 
@@ -155,11 +166,12 @@ Rutas de carta por idioma:
 ## Variables CSS (tokens visuales)
 
 ```css
---bg:     #F6F3EC;
---ink:    #1C1A17;
---accent: #7A1C1C;
---muted:  #5C5752;
---faint:  rgba(122, 28, 28, 0.16);
+--bg:         #F6F3EC;   /* crema papel */
+--ink:        #1C1A17;   /* negro tinta */
+--accent:     #1D4D85;   /* azul Fajalauza (actualizado Identity Pass V2) */
+--muted:      #5C5752;   /* gris piedra */
+--faint:      rgba(29, 77, 133, 0.10);
+--terracotta: #1D4D85;   /* alias unificado — azul Fajalauza */
 ```
 
 ---
