@@ -572,6 +572,20 @@
 </section>`;
   }
 
+  function renderCanaEditorial(d, lang) {
+    const ce = d.cana_editorial;
+    if (!ce) return '';
+    const title = t(ce.title, lang);
+    const body = t(ce.body, lang);
+    if (!body || !body.trim()) return '';
+    const paragraphs = body.split('\n').filter(function(p) { return p.trim(); })
+      .map(function(p) { return `<p>${p.trim()}</p>`; }).join('');
+    return `<section class="cana-editorial" aria-labelledby="cana-title">
+  <h2 id="cana-title">${title}</h2>
+  <div class="cana-editorial__text">${paragraphs}</div>
+</section>`;
+  }
+
   function render(d, lang) {
     const phoneLink    = d.contact.phone_link;
     const phoneDisplay = formatPhoneDisplay(d.contact.phone);
@@ -582,8 +596,8 @@
     const aviso = renderNotice(d.venue, lang);
 
     const since = { es: 'Desde 1959', en: 'Since 1959', fr: 'Depuis 1959' }[lang];
-    const directionsLabel = { es: 'Cómo llegar', en: 'Get directions', fr: 'Itinéraire' }[lang];
-    const reviewsLabel    = { es: 'Reseñas en Google', en: 'Google reviews', fr: 'Avis Google' }[lang];
+    const directionsLabel = { es: 'Encontrarnos en Plaza Nueva', en: 'Find us on Plaza Nueva', fr: 'Nous trouver Plaza Nueva' }[lang];
+    const reviewsLabel    = { es: 'Léanos en Google', en: 'Read us on Google', fr: 'Lire les avis' }[lang];
 
     const mapsUrl    = d.social.google_maps;
     const reviewsUrl = d.social.google_reviews;
@@ -617,13 +631,13 @@
     const addr = d.contact.address;
 
     // Ubicación & Reseñas variables de idioma
-    const locationTitle = { es: 'Ubicación', en: 'Location', fr: 'Emplacement' }[lang];
+    const locationTitle = { es: 'Dónde estamos', en: 'Where to find us', fr: 'Où nous trouver' }[lang];
     const friendsLabel  = { es: 'No se sienta cliente, somos amigos', en: "Don't feel like a customer, we are friends", fr: 'Ne vous sentez pas client, nous sommes des amis' }[lang];
 
     const mapCopy = {
-      es: 'Estamos en calle Pan, al lado de Plaza Nueva. Si se pierde aquí, ya es por gusto.',
-      en: 'We are on Calle Pan, right next to Plaza Nueva. If you get lost, it is by choice.',
-      fr: "Nous sommes situés rue Pan, juste à côté de Plaza Nueva. Si vous vous perdez, c'est que vous le voulez bien."
+      es: 'Calle Pan, 1 — en la puerta entre Plaza Nueva, el Albaicín y la Alhambra. Si se pierde aquí, ya es por gusto.',
+      en: 'Calle Pan, 1 — at the gateway between Plaza Nueva, the Albaicín and the Alhambra. If you get lost, it is by choice.',
+      fr: "Calle Pan, 1 — à la porte entre la Plaza Nueva, l'Albaicín et l'Alhambra. Si vous vous perdez, c'est que vous le voulez bien."
     }[lang];
 
     const reviewCopy = {
@@ -632,15 +646,18 @@
       fr: 'Si vous avez aimé, laissez-nous un avis positif. Sinon, dites-le nous au comptoir et nous le réglerons ensemble.'
     }[lang];
 
-    const logoAlt = d.logo && d.logo.alt ? t(d.logo.alt, lang) : t(d.venue.full_name, lang);
+    const tileAlt = d.logo && d.logo.alt ? t(d.logo.alt, lang) : t(d.venue.full_name, lang);
     const logoSrc = d.logo && d.logo.image ? d.logo.image : '../assets/images/web/azulejo-leon.webp';
     const logoBlock = `
+<div class="brand-header">
+  <img class="brand-logo" src="../assets/images/lion-logo.svg" alt="" aria-hidden="true" />
+  <h1 class="brand-name">Bar León</h1>
+</div>
 <div class="site-tile-container">
   <picture class="site-tile-frame">
     <source srcset="${logoSrc}" type="image/webp">
-    <img class="site-tile" src="${logoSrc.replace('.webp', '.png')}" alt="${logoAlt}" fetchpriority="high" />
+    <img class="site-tile" src="${logoSrc.replace('.webp', '.png')}" alt="${tileAlt}" fetchpriority="high" />
   </picture>
-  <h1 class="sr-only">${t(d.venue.name, lang)}</h1>
 </div>`;
 
     // ─── CALL CTA LOGIC ─────────────────────────────────────────────────────────
@@ -696,6 +713,7 @@
   ${renderOrderingGuide(d, lang, cartaUrl)}
   ${renderHomeFoodGallery(lang)}
   ${renderWineEditorial(d, lang, cartaUrl)}
+  ${renderCanaEditorial(d, lang)}
   ${renderSocialLinks(d.social)}
   ${locationBlock}
   ${renderStoriesArchive(d, lang)}

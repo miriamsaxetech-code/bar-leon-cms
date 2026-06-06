@@ -92,7 +92,7 @@ assert.match(html, /Viernes de Cuaresma: Potaje de vigilia/);
 assert.match(html, /plato sin carne de la tradición de vigilia/);
 assert.match(html, /Olla de San Antón/);
 assert.match(html, /habas secas, habichuelas y cerdo de matanza/);
-assert.match(html, /Carne de caza típica de zonas de sierra como Jaén/);
+assert.match(html, /Carne de caza típica de la sierra/);
 assert.ok(html.indexOf('Viernes:') < html.indexOf('Viernes en verano'));
 assert.ok(html.indexOf('Viernes en verano') < html.indexOf('Viernes de Cuaresma'));
 assert.ok(html.indexOf('Viernes de Cuaresma') < html.indexOf('Olla de San Antón'));

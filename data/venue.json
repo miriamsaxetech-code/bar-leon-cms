@@ -34,9 +34,9 @@
       "fr": ""
     },
     "history": {
-      "es": "",
-      "en": "",
-      "fr": ""
+      "es": "Bar León lleva abierto en Plaza Nueva desde 1959. Tres generaciones en la misma barra. La cocina no ha cambiado de nombre ni de intención: casquería, habas, guisos y vinos de Granada. Lo que se comía antes de que existiera el menú de degustación.\n\nPlaza Nueva no siempre fue el sitio de terrazas y turistas que es hoy. Era un barrio con vida propia, donde la gente paraba antes del mercado, entre encargo y encargo, al salir del trabajo. El León sigue siendo ese bar. El de siempre. Donde el Albaicín baja hacia la ciudad y la Alhambra asoma al fondo, Bar León lleva décadas en la esquina que lo ha visto todo.\n\nHoy quedan pocos bares en Granada que sirvan sesos fritos, carne de monte, callos a la casera y riñones al jerez sin reinterpretarlos. En el León no es nostalgia. Es la carta.",
+      "en": "Bar León has been open on Plaza Nueva since 1959. Three generations at the same bar. The kitchen has not changed its name or its intention: offal, broad beans, stews, Granada wines. What people ate before tasting menus existed.\n\nPlaza Nueva was not always the tourist terrace it is today. It was a working neighbourhood, where people stopped between errands, before the market, after work. Bar León is still that bar — the permanent one. Sitting at the gateway between Plaza Nueva, the Albaicín and the Alhambra, it has been in the same corner through everything.\n\nFew bars in Granada still serve fried brains, wild deer, tripe and kidneys in sherry without reimagining them. At Bar León, that is not nostalgia. It is the menu.",
+      "fr": "Le Bar León est ouvert sur la Plaza Nueva depuis 1959. Trois générations derrière le même comptoir. La cuisine n'a pas changé de nom ni d'intention : abats, fèves, ragoûts et vins de Grenade. Ce qu'on mangeait avant les menus dégustation.\n\nLa Plaza Nueva n'a pas toujours été le lieu de terrasses et de touristes qu'elle est aujourd'hui. C'était un quartier avec sa propre vie, où les gens s'arrêtaient entre deux courses, avant le marché, en sortant du travail. Le León reste ce bar-là — le permanent. À la porte entre la Plaza Nueva, l'Albaicín et l'Alhambra, il tient le même coin depuis toujours.\n\nIl reste peu de bars à Grenade qui servent encore des cervelles frites, du cerf en adobo, des tripes et des rognons au jerez sans les réinterpréter. Au León, ce n'est pas de la nostalgie. C'est la carte."
     },
     "currency": "EUR",
     "primary_language": "es",
@@ -394,16 +394,28 @@
       "fr": "La cave de la maison"
     },
     "intro": {
-      "es": "En Granada hay viñedos a 1.300 metros. Los vinos de aquí no salen en las listas de los gastrobares. Salen en la nuestra.",
-      "en": "Granada has vineyards at 1,300 metres. These wines don't appear on trendy wine lists. They appear on ours.",
-      "fr": "La région de Grenade possède des vignes à 1 300 mètres d'altitude. Ces vins n'apparaissent pas dans les bars à la mode. Ils apparaissent chez nous."
+      "es": "En Granada hay viñedos a 1.300 metros. Los vinos de aquí no salen en las listas de los gastrobares. Salen en la nuestra.\n\nCalvente trabaja garnacha en la Axarquía granadina. Muñana lleva décadas en el Genil. Señorío de Nevada sube a la Contraviesa, donde la Sierra Nevada enfría las noches de agosto y concentra la uva sin esfuerzo. Fontedei hace lo mismo más al sur. En barra, manzanilla cuando aprieta el calor, amontillado con los riñones y mosto en cuanto llega el otoño.",
+      "en": "Granada has vineyards at 1,300 metres. These wines don't appear on trendy wine lists. They appear on ours.\n\nCalvente works grenache in the Axarquía highlands. Muñana has been in the Genil valley for decades. Señorío de Nevada climbs to the Contraviesa, where Sierra Nevada cools August nights and concentrates the grape without effort. Fontedei works the same land further south. At the bar: manzanilla in summer heat, amontillado with kidneys, and mosto the moment autumn arrives.",
+      "fr": "La région de Grenade possède des vignes à 1 300 mètres d'altitude. Ces vins n'apparaissent pas dans les bars à la mode. Ils apparaissent chez nous.\n\nCalvente travaille le grenache dans l'Axarquía grenadine. Muñana est dans la vallée du Génil depuis des décennies. Señorío de Nevada monte à la Contraviesa, où la Sierra Nevada rafraîchit les nuits d'août et concentre le raisin naturellement. Fontedei fait de même plus au sud. Au comptoir : manzanilla quand la chaleur pèse, amontillado avec les rognons, et mosto dès que l'automne arrive."
     },
     "cta": {
-      "es": "Ver la bodega completa",
-      "en": "View the full cellar",
-      "fr": "Voir la cave complète"
+      "es": "Abrir la bodega",
+      "en": "Open the cellar",
+      "fr": "Ouvrir la cave"
     },
     "featured_wine_ids": ["senorio-de-nevada", "calvente-guindalera", "manzanilla-casa-bernal"]
+  },
+  "cana_editorial": {
+    "title": {
+      "es": "La caña de Granada",
+      "en": "The Granada caña",
+      "fr": "La caña de Grenade"
+    },
+    "body": {
+      "es": "Una caña no es una cerveza pequeña. Es una unidad de tiempo.\n\nSe sirve fría, recién tirada, en vaso corto. Se bebe antes de que se caliente. Con la tapa que toca. Y cuando se acaba, se pide otra. En Granada, la caña marca el ritmo de la tarde: no se habla de copas, se habla de cañas.\n\nCada vez quedan menos bares que la sirvan como es: sin copa de diseño, sin marca sobre el grifo, sin precio de hotel. La caña de Granada es un rito que ha sobrevivido al turismo, al cambio de moneda y a tres generaciones de bares que abrían y cerraban alrededor del León. En la barra del León, la caña sigue siendo lo que era. Fría, barata, y con tapa.",
+      "en": "A caña is not a small beer. It is a unit of time.\n\nServed cold, freshly poured, in a short glass. Drunk before it warms up. With whatever tapa comes with it. And when it is finished, you order another. In Granada, the caña sets the pace of the afternoon: people don't talk about drinks, they talk about cañas.\n\nFewer and fewer bars still serve it properly: no design glassware, no branded tap, no hotel prices. The Granada caña is a rite that has outlasted tourism booms, currency changes and three generations of bars that opened and closed around Bar León. At the León bar, the caña is still what it was. Cold, cheap, and with a tapa.",
+      "fr": "Une caña n'est pas une petite bière. C'est une unité de temps.\n\nServie froide, fraîchement tirée, dans un verre court. À boire avant qu'elle tiédisse. Avec la tapa qui va avec. Et quand elle est finie, on en commande une autre. À Grenade, la caña cadence l'après-midi : on ne parle pas de boissons, on parle de cañas.\n\nDe moins en moins de bars la servent comme il faut : sans verre de créateur, sans marque sur la pompe, sans prix d'hôtel. La caña grenadine est un rite qui a survécu aux vagues de tourisme, aux changements de monnaie et à trois générations de bars qui ont ouvert et fermé autour du León. Au comptoir du León, la caña est toujours ce qu'elle était. Froide, abordable, et avec une tapa."
+    }
   },
   "faq": [
     {
@@ -946,9 +958,9 @@
         "fr": "Ragoût à la Cordouane"
       },
       "description": {
-        "es": "Carne de cerdo en salsa de vino y especias. Guiso tradicional andaluz.",
-        "en": "Slow-cooked beef stew in a traditional red wine and vegetable sauce.",
-        "fr": "Ragoût de bœuf mijoté dans une sauce traditionnelle au vin rouge et légumes."
+        "es": "Magra de cerdo guisada lentamente en salsa de vino con especias. El nombre es de Córdoba pero el guiso es de aquí. En la carta desde que se abrió la barra.",
+        "en": "Slow-braised pork in a wine and spice sauce. The name comes from Córdoba but the stew is Granada's. On the menu since the bar first opened.",
+        "fr": "Porc mijoté dans une sauce au vin et aux épices. Le nom vient de Cordoue, mais le ragoût est d'ici. À la carte depuis le premier jour."
       },
       "price": "Media 9,00 € / Ración 12,50 €",
       "pairing": {
@@ -990,9 +1002,9 @@
         "fr": "Cervelles frites"
       },
       "description": {
-        "es": "Sesos rebozados y fritos. Casquería clásica de la cocina granadina.",
-        "en": "Veal brains, breaded and lightly fried.",
-        "fr": "Cervelles de veau panées et légèrement frites."
+        "es": "Sesos rebozados y fritos. La mayoría de los bares granadinos ya no los sirven. En el León, sí.",
+        "en": "Brains, breaded and fried. Most Granada bars stopped serving them years ago. Bar León did not.",
+        "fr": "Cervelles panées et frites. La plupart des bars grenadins ont arrêté d'en servir. Pas le León."
       },
       "price": "Media 7,50 € / Ración 10,00 €",
       "pairing": {
