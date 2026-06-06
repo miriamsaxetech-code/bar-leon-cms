@@ -386,13 +386,22 @@
   }
 
   function renderHomeAndalusia(d, lang, cartaUrl) {
-    const dishes = (d.dishes || [])
-      .filter(dish => dish.available !== false && dish.category_id === 'andalusian-specialities')
-      .sort((a, b) => {
-        const rank = v => v === true || v === 'recommended' ? 0 : v === 'house' ? 1 : v === 'seasonal' ? 2 : 3;
-        return rank(a.featured) - rank(b.featured);
-      })
-      .slice(0, 6);
+    var dishes;
+    if (d.home_featured_ids && d.home_featured_ids.length) {
+      var byId = {};
+      (d.dishes || []).forEach(function(dish) { byId[dish.id] = dish; });
+      dishes = d.home_featured_ids
+        .map(function(id) { return byId[id]; })
+        .filter(function(dish) { return dish && dish.available !== false; });
+    } else {
+      dishes = (d.dishes || [])
+        .filter(function(dish) { return dish.available !== false && dish.category_id === 'andalusian-specialities' && dish.featured; })
+        .sort(function(a, b) {
+          var rank = function(v) { return v === true || v === 'recommended' ? 0 : v === 'house' ? 1 : v === 'seasonal' ? 2 : 3; };
+          return rank(a.featured) - rank(b.featured);
+        })
+        .slice(0, 6);
+    }
     if (!dishes.length) return '';
 
     return `<section class="tile-bg-section home-andalusia" aria-labelledby="home-andalusia-title">

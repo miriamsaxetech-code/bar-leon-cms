@@ -862,6 +862,14 @@
       "order": 17
     }
   ],
+  "home_featured_ids": [
+    "tortilla-sacromonte",
+    "rinones-al-jerez",
+    "carne-de-monte",
+    "sesos",
+    "habas-jamon-iberico",
+    "champinones-con-gambas"
+  ],
   "dishes": [
     {
       "id": "tortilla-sacromonte",
