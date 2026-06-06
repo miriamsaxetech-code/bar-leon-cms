@@ -60,6 +60,7 @@ async function renderHomepageAt(dateIso, lang = 'es', options = {}) {
     getElementById(id) {
       return elements[id] || new ElementStub('div', id);
     },
+    querySelector() { return null; },
   };
 
   const venue = JSON.parse(await fs.readFile('data/venue.json', 'utf8'));
@@ -122,13 +123,13 @@ assert.match(lunch.html, /loading="lazy"/);
 assert.match(lunch.html, /site-location__place/);
 assert.match(lunch.html, /site-location__since/);
 assert.doesNotMatch(lunch.html, /class="call-number"/);
-assert.match(lunch.html, /class="phone-link">\(\+34\) 958-22-51-43<\/a>/);
+assert.match(lunch.html, /qr-btn qr-btn--call/);
 assert.doesNotMatch(lunch.html, />\+34 958 22 51 43<\/a>/);
 assert.doesNotMatch(lunch.html, /hemeroteca/i);
 assert.ok(lunch.body.children.some(el => el.className === 'mobile-service-cta' && el.href === 'tel:+34958225143'));
 
 const afterHours = await renderHomepageAt('2026-05-25T18:30:00+02:00');
-assert.ok(afterHours.body.children.some(el => el.className === 'mobile-service-cta' && el.href === 'https://wa.me/34696948630'));
+assert.ok(afterHours.body.children.some(el => el.className === 'mobile-service-cta' && el.href === 'tel:+34958225143'));
 
 const withArchive = await renderHomepageAt('2026-05-25T13:30:00+02:00', 'es', { withArchive: true });
 assert.match(withArchive.html, /Historias del León/);
@@ -143,7 +144,7 @@ assert.match(withHomepageCarioca.html, /Estamos abiertos/);
 
 const english = await renderHomepageAt('2026-05-25T13:30:00+02:00', 'en');
 assert.match(english.html, /site-location__since">Since 1959/);
-assert.match(english.html, /class="call-label">Call<\/span>/);
+assert.match(english.html, /qr-btn qr-btn--call/);
 assert.match(english.html, /We are open/);
 assert.match(english.html, /Try a local red wine/);
 assert.match(english.html, /beyond Rioja\/Ribera/);
@@ -153,7 +154,7 @@ assert.doesNotMatch(english.html, /Pairs with/);
 
 const french = await renderHomepageAt('2026-05-25T13:30:00+02:00', 'fr');
 assert.match(french.html, /site-location__since">Depuis 1959/);
-assert.match(french.html, /class="call-label">Appeler<\/span>/);
+assert.match(french.html, /qr-btn qr-btn--call/);
 assert.match(french.html, /Nous sommes ouverts/);
 
 console.log('homepage evolution render OK');
