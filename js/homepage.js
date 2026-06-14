@@ -13,7 +13,7 @@
     seconds:      { es: 'Segundos', en: 'Second course', fr: 'Plats' },
     daily:        { es: 'Plato del día', en: 'Daily special', fr: 'Plat du jour' },
     desserts:     { es: 'Postre', en: 'Dessert', fr: 'Dessert' },
-    fullMenu:     { es: 'Ver carta completa', en: 'View full menu', fr: 'Voir la carte' },
+    fullMenu:     { es: 'Consulte la carta completa', en: 'View full menu', fr: 'Consultez la carte' },
     andalusia:    { es: 'Sabores de Andalucía', en: 'Flavors of Andalusia', fr: "Saveurs d'Andalousie" },
     andalusiaSub: { es: 'Platos de casa, guiso y barra granadina.', en: 'House dishes, stews, and Granada bar classics.', fr: 'Plats maison, mijotés et comptoir grenadin.' },
     stories:      { es: 'Historias del León', en: 'Stories of León', fr: 'Histoires du León' },
@@ -289,6 +289,7 @@
   }
 
   function splitList(str) {
+    if (Array.isArray(str)) return str.filter(Boolean);
     return (str || '').split(' · ').map(s => s.trim()).filter(Boolean);
   }
 
@@ -524,7 +525,7 @@
     const addr      = d.contact.address;
 
     const locationTitle   = { es: 'Dónde estamos', en: 'Where to find us', fr: 'Où nous trouver' }[lang];
-    const directionsLabel = { es: 'Encontrarnos en Plaza Nueva', en: 'Find us on Plaza Nueva', fr: 'Nous trouver Plaza Nueva' }[lang];
+    const directionsLabel = { es: 'Encuéntrenos en Plaza Nueva', en: 'Find us on Plaza Nueva', fr: 'Retrouvez-nous Plaza Nueva' }[lang];
 
     const locationBlock = `
 <section class="location-section">
@@ -635,7 +636,7 @@
   function buildOpeningHours(hours) {
     const CODE = { monday:'Mo', tuesday:'Tu', wednesday:'We', thursday:'Th', friday:'Fr', saturday:'Sa', sunday:'Su' };
     const result = [];
-    (hours || []).forEach(function(h) {
+    getHoursSchedule(hours).forEach(function(h) {
       if (h.status === 'closed' || !h.periods || !h.periods.length) return;
       const code = CODE[h.day];
       if (!code) return;
