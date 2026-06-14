@@ -357,8 +357,9 @@
     if (!dm || !dm.active) return '';
 
     function asList(str) {
-      return `<ul class="edict-platos">${str.split(' · ').map(s =>
-        `<li>${s.trim()}</li>`).join('')}</ul>`;
+      const items = Array.isArray(str) ? str : String(str).split(' · ');
+      return `<ul class="edict-platos">${items.map(s =>
+        `<li>${String(s).trim()}</li>`).join('')}</ul>`;
     }
 
     const starters = t(dm.starters, lang)
@@ -917,7 +918,7 @@
   }
 
   function renderHorarios(hours, nav, lang) {
-    const cells = hours.map(h => {
+    const cells = getHoursSchedule(hours).map(h => {
       const closed  = h.status === 'closed' || h.status === 'partial';
       const cls     = closed ? ' h-cerrado' : '';
       const dayName = DAY_NAMES[h.day] ? DAY_NAMES[h.day][lang] : h.day;
