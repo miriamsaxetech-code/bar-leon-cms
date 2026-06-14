@@ -3090,7 +3090,7 @@
       "price_glass": 3.8,
       "available": true,
       "description": {
-        "es": "Uva(s): Tempranillo, Cabernet · Tinto con crianza, cuerpo medio y notas de roble y fruta negra. · Maridaje: Carnes rojas, caza, quesos curados",
+        "es": "Uva(s): Tempranillo, Cabernet · Tinto con crianza, cuerpo medio y notas de roble y fruta negra. · Sugerencias: Carnes rojas, caza, quesos curados",
         "en": "Grape(s): Tempranillo, Cabernet · Oak-aged red, medium body, notes of oak and dark fruit. · Pairing: Red meats, game, cured cheeses",
         "fr": "Cépage(s): Tempranillo, Cabernet · Rouge élevé en fût, corps moyen, notes de chêne et fruits noirs. · Accord: Viandes rouges, gibier, fromages affinés"
       },
@@ -3116,7 +3116,7 @@
       "price_glass": 3.4,
       "available": true,
       "description": {
-        "es": "Uva(s): Garnacha tinta · Tinto joven, afrutado, con notas de cereza y un paso ligero. Ideal para tapeo. · Maridaje: Carnes a la brasa, queso curado, embutidos",
+        "es": "Uva(s): Garnacha tinta · Tinto joven, afrutado, con notas de cereza y un paso ligero. Ideal para tapeo. · Sugerencias: Carnes a la brasa, queso curado, embutidos",
         "en": "Grape(s): Grenache · Young, fruity red with cherry notes and a light body. Perfect for tapas. · Pairing: Grilled meats, cured cheese, charcuterie",
         "fr": "Cépage(s): Grenache · Rouge jeune, fruité, notes de cerise et bouche légère. Idéal pour le tapeo. · Accord: Viandes grillées, fromage affiné, charcuterie"
       },
@@ -3142,7 +3142,7 @@
       "price_glass": 3.4,
       "available": true,
       "description": {
-        "es": "Uva(s): Tempranillo, Cabernet Sauvignon · Tinto con estructura media, notas de fruta madura y un final especiado. · Maridaje: Carne de monte, callos, guisos de cuchara",
+        "es": "Uva(s): Tempranillo, Cabernet Sauvignon · Tinto con estructura media, notas de fruta madura y un final especiado. · Sugerencias: Carne de monte, callos, guisos de cuchara",
         "en": "Grape(s): Tempranillo, Cabernet Sauvignon · Medium-bodied red with ripe fruit and a spiced finish. · Pairing: Game, tripe, hearty stews",
         "fr": "Cépage(s): Tempranillo, Cabernet Sauvignon · Rouge de structure moyenne, fruits mûrs et finale épicée. · Accord: Gibier, tripes, ragoûts"
       },
@@ -3168,7 +3168,7 @@
       "price_glass": 3.4,
       "available": true,
       "description": {
-        "es": "Uva(s): Tempranillo, Syrah · Tinto joven de Granada, fresco y afrutado con fondo especiado. · Maridaje: Tapas variadas, embutidos, verduras salteadas",
+        "es": "Uva(s): Tempranillo, Syrah · Tinto joven de Granada, fresco y afrutado con fondo especiado. · Sugerencias: Tapas variadas, embutidos, verduras salteadas",
         "en": "Grape(s): Tempranillo, Syrah · Young Granada red, fresh and fruity with a spiced finish. · Pairing: Mixed tapas, charcuterie, sautéed vegetables",
         "fr": "Cépage(s): Tempranillo, Syrah · Rouge jeune de Grenade, frais et fruité, fond épicé. · Accord: Tapas variées, charcuterie, légumes sautés"
       },
@@ -3194,7 +3194,7 @@
       "price_glass": 3.6,
       "available": true,
       "description": {
-        "es": "Uva(s): Tempranillo, Garnacha · Tinto robusto con taninos suaves y fondo de fruta madura. · Maridaje: Carne de monte, entrecot, cordero",
+        "es": "Uva(s): Tempranillo, Garnacha · Tinto robusto con taninos suaves y fondo de fruta madura. · Sugerencias: Carne de monte, entrecot, cordero",
         "en": "Grape(s): Tempranillo, Grenache · Robust red with soft tannins and ripe fruit notes. · Pairing: Game, entrecôte, lamb",
         "fr": "Cépage(s): Tempranillo, Grenache · Rouge robuste aux tanins souples et fruits mûrs. · Accord: Gibier, entrecôte, agneau"
       },
@@ -3219,7 +3219,7 @@
       "price_bottle": 22,
       "available": true,
       "description": {
-        "es": "Uva(s): Tempranillo, Cabernet, Merlot · Coupage con cuerpo, equilibrado, con notas de fruta y especias. · Maridaje: Guisos, carnes rojas, quesos",
+        "es": "Uva(s): Tempranillo, Cabernet, Merlot · Coupage con cuerpo, equilibrado, con notas de fruta y especias. · Sugerencias: Guisos, carnes rojas, quesos",
         "en": "Grape(s): Tempranillo, Cabernet, Merlot · Balanced blend with body, fruit and spice notes. · Pairing: Stews, red meats, cheeses",
         "fr": "Cépage(s): Tempranillo, Cabernet, Merlot · Assemblage équilibré, structuré, notes de fruits et d'épices. · Accord: Ragoûts, viandes rouges, fromages"
       },
@@ -3245,7 +3245,7 @@
       "price_glass": 3.7,
       "available": true,
       "description": {
-        "es": "Uva(s): Vigiriega (variedad autóctona granadina) · Blanco seco con notas florales y fondo mineral. Fresco, limpio y con personalidad mediterránea. · Maridaje: Fritura de pescado, mariscos, ensaladilla",
+        "es": "Uva(s): Vigiriega (variedad autóctona granadina) · Blanco seco con notas florales y fondo mineral. Fresco, limpio y con personalidad mediterránea. · Sugerencias: Fritura de pescado, mariscos, ensaladilla",
         "en": "Grape(s): Vigiriega (native Granada grape) · Dry white with floral notes and mineral finish. Fresh, clean, Mediterranean character. · Pairing: Fried fish, seafood, Russian salad",
         "fr": "Cépage(s): Vigiriega (cépage autochtone de Grenade) · Blanc sec aux notes florales et fond minéral. Frais, net, caractère méditerranéen. · Accord: Friture de poisson, fruits de mer, salade russe"
       },
@@ -3271,7 +3271,7 @@
       "price_glass": 3.2,
       "available": true,
       "description": {
-        "es": "Uva(s): Moscatel, Chardonnay · Blanco semidulce de Granada. Aromático, con fruta tropical y flor de azahar. · Maridaje: Aperitivo, ensaladas, postres ligeros",
+        "es": "Uva(s): Moscatel, Chardonnay · Blanco semidulce de Granada. Aromático, con fruta tropical y flor de azahar. · Sugerencias: Aperitivo, ensaladas, postres ligeros",
         "en": "Grape(s): Muscat, Chardonnay · Semi-sweet Granada white. Aromatic, with tropical fruit and orange blossom. · Pairing: Aperitif, salads, light desserts",
         "fr": "Cépage(s): Muscat, Chardonnay · Blanc demi-sec de Grenade. Aromatique, fruits tropicaux et fleur d'oranger. · Accord: Apéritif, salades, desserts légers"
       },
@@ -3296,7 +3296,7 @@
       "price_bottle": 19,
       "available": true,
       "description": {
-        "es": "Uva(s): Moscatel, Vigiriega · Blanco joven y aromático. Ligero dulzor y frescura, perfecto para el aperitivo. · Maridaje: Gazpacho, verduras salteadas, tapas ligeras",
+        "es": "Uva(s): Moscatel, Vigiriega · Blanco joven y aromático. Ligero dulzor y frescura, perfecto para el aperitivo. · Sugerencias: Gazpacho, verduras salteadas, tapas ligeras",
         "en": "Grape(s): Muscat, Vigiriega · Young aromatic white. Light sweetness and freshness, ideal as an aperitif. · Pairing: Gazpacho, sautéed vegetables, light tapas",
         "fr": "Cépage(s): Muscat, Vigiriega · Blanc jeune et aromatique. Légère douceur et fraîcheur, parfait en apéritif. · Accord: Gaspacho, légumes sautés, tapas légères"
       },
@@ -3348,7 +3348,7 @@
       "price_glass": 3.4,
       "available": true,
       "description": {
-        "es": "Uva(s): Tempranillo · Crianza ligero y franco. Fruta y madera bien integrada. · Maridaje: Tapas, embutidos, platos de cuchara",
+        "es": "Uva(s): Tempranillo · Crianza ligero y franco. Fruta y madera bien integrada. · Sugerencias: Tapas, embutidos, platos de cuchara",
         "en": "Grape(s): Tempranillo · Light, straightforward crianza. Well-integrated fruit and oak. · Pairing: Tapas, charcuterie, spoon dishes",
         "fr": "Cépage(s): Tempranillo · Crianza léger et franc. Fruit et bois bien intégrés. · Accord: Tapas, charcuterie, plats mijotés"
       },
@@ -3373,7 +3373,7 @@
       "price_glass": 3.4,
       "available": true,
       "description": {
-        "es": "Uva(s): Tempranillo · Tinto crianza redondo y accesible. Notas de cereza y un toque de roble. · Maridaje: Croquetas, entrecot, guisos de cuchara",
+        "es": "Uva(s): Tempranillo · Tinto crianza redondo y accesible. Notas de cereza y un toque de roble. · Sugerencias: Croquetas, entrecot, guisos de cuchara",
         "en": "Grape(s): Tempranillo · Round, approachable crianza. Cherry notes and a touch of oak. · Pairing: Croquettes, entrecôte, hearty stews",
         "fr": "Cépage(s): Tempranillo · Crianza rond et accessible. Notes de cerise et touche boisée. · Accord: Croquettes, entrecôte, ragoûts"
       },
@@ -3398,7 +3398,7 @@
       "price_glass": 3.2,
       "available": false,
       "description": {
-        "es": "Uva(s): Tempranillo · Crianza clásico riojano. Fruta roja, especias suaves y final limpio. · Maridaje: Carnes a la brasa, callos, queso semicurado",
+        "es": "Uva(s): Tempranillo · Crianza clásico riojano. Fruta roja, especias suaves y final limpio. · Sugerencias: Carnes a la brasa, callos, queso semicurado",
         "en": "Grape(s): Tempranillo · Classic Rioja crianza. Red fruit, gentle spice and a clean finish. · Pairing: Grilled meats, tripe, semi-cured cheese",
         "fr": "Cépage(s): Tempranillo · Crianza classique de la Rioja. Fruits rouges, épices douces et finale nette. · Accord: Viandes grillées, tripes, fromage demi-affiné"
       },
@@ -3447,7 +3447,7 @@
       "price_bottle": 28,
       "available": true,
       "description": {
-        "es": "Uva(s): Tempranillo, Garnacha, Graciano · Reserva con 24 meses en barrica. Complejo, elegante, con fruta madura y vainilla. · Maridaje: Cordero asado, carne de monte, quesos curados",
+        "es": "Uva(s): Tempranillo, Garnacha, Graciano · Reserva con 24 meses en barrica. Complejo, elegante, con fruta madura y vainilla. · Sugerencias: Cordero asado, carne de monte, quesos curados",
         "en": "Grape(s): Tempranillo, Grenache, Graciano · Reserva aged 24 months in oak. Complex, elegant, with ripe fruit and vanilla. · Pairing: Roast lamb, game, cured cheeses",
         "fr": "Cépage(s): Tempranillo, Grenache, Graciano · Reserva élevé 24 mois en fût. Complexe, élégant, fruits mûrs et vanille. · Accord: Agneau rôti, gibier, fromages affinés"
       },
@@ -3472,7 +3472,7 @@
       "price_glass": 3.4,
       "available": true,
       "description": {
-        "es": "Uva(s): Tempranillo · Tinto roble joven y equilibrado. Fruta negra y paso amable. · Maridaje: Entrecot, cordero, embutidos ibéricos",
+        "es": "Uva(s): Tempranillo · Tinto roble joven y equilibrado. Fruta negra y paso amable. · Sugerencias: Entrecot, cordero, embutidos ibéricos",
         "en": "Grape(s): Tempranillo · Young, balanced oak-aged red. Dark fruit and a smooth palate. · Pairing: Entrecôte, lamb, Iberian charcuterie",
         "fr": "Cépage(s): Tempranillo · Rouge jeune élevé en fût, équilibré. Fruits noirs et bouche aimable. · Accord: Entrecôte, agneau, charcuterie ibérique"
       },
@@ -3496,7 +3496,7 @@
       "price_bottle": 7.5,
       "available": false,
       "description": {
-        "es": "Uva(s): Tempranillo · Tinto joven de Ribera. Fresco, afrutado, con taninos ligeros. · Maridaje: Tapas, carnes a la plancha, queso curado",
+        "es": "Uva(s): Tempranillo · Tinto joven de Ribera. Fresco, afrutado, con taninos ligeros. · Sugerencias: Tapas, carnes a la plancha, queso curado",
         "en": "Grape(s): Tempranillo · Young Ribera red. Fresh, fruity, with light tannins. · Pairing: Tapas, grilled meats, cured cheese",
         "fr": "Cépage(s): Tempranillo · Rouge jeune de Ribera. Frais, fruité, tanins légers. · Accord: Tapas, viandes grillées, fromage affiné"
       },
@@ -3521,7 +3521,7 @@
       "price_glass": 3.4,
       "available": true,
       "description": {
-        "es": "Uva(s): Verdejo, Moscatel · Blanco de baja graduación (5,5°), ligero y afrutado. Dulzor sutil. · Maridaje: Aperitivo, tapas ligeras, postres",
+        "es": "Uva(s): Verdejo, Moscatel · Blanco de baja graduación (5,5°), ligero y afrutado. Dulzor sutil. · Sugerencias: Aperitivo, tapas ligeras, postres",
         "en": "Grape(s): Verdejo, Muscat · Low-alcohol white (5.5°), light and fruity. Subtle sweetness. · Pairing: Aperitif, light tapas, desserts",
         "fr": "Cépage(s): Verdejo, Muscat · Blanc à faible degré (5,5°), léger et fruité. Douceur subtile. · Accord: Apéritif, tapas légères, desserts"
       },
@@ -3546,7 +3546,7 @@
       "price_glass": 3.4,
       "available": true,
       "description": {
-        "es": "Uva(s): Tinto Fino (Tempranillo) · Roble con 6 meses en barrica. Fruta fresca, taninos suaves y recuerdo a vainilla. · Maridaje: Carnes rojas, carne de monte, quesos",
+        "es": "Uva(s): Tinto Fino (Tempranillo) · Roble con 6 meses en barrica. Fruta fresca, taninos suaves y recuerdo a vainilla. · Sugerencias: Carnes rojas, carne de monte, quesos",
         "en": "Grape(s): Tinto Fino (Tempranillo) · Oak-aged 6 months. Fresh fruit, soft tannins and a vanilla hint. · Pairing: Red meats, game, cheeses",
         "fr": "Cépage(s): Tinto Fino (Tempranillo) · Élevé 6 mois en fût. Fruit frais, tanins souples et touche vanillée. · Accord: Viandes rouges, gibier, fromages"
       },
@@ -3570,7 +3570,7 @@
       "price_bottle": 20,
       "available": true,
       "description": {
-        "es": "Uva(s): Tempranillo · Crianza con 12 meses en barrica. Estructura media, notas de fruta y cuero. · Maridaje: Carne de monte, callos, guisos contundentes",
+        "es": "Uva(s): Tempranillo · Crianza con 12 meses en barrica. Estructura media, notas de fruta y cuero. · Sugerencias: Carne de monte, callos, guisos contundentes",
         "en": "Grape(s): Tempranillo · Crianza aged 12 months in oak. Medium body, fruit and leather notes. · Pairing: Game, tripe, robust stews",
         "fr": "Cépage(s): Tempranillo · Crianza 12 mois en fût. Structure moyenne, notes de fruit et de cuir. · Accord: Gibier, tripes, ragoûts consistants"
       },
@@ -3595,7 +3595,7 @@
       "price_glass": 3.2,
       "available": true,
       "description": {
-        "es": "Uva(s): Verdejo · Blanco seco, fresco y herbáceo. Hierba fresca y cítricos. · Maridaje: Mariscos, fritura de pescado, ensaladilla",
+        "es": "Uva(s): Verdejo · Blanco seco, fresco y herbáceo. Hierba fresca y cítricos. · Sugerencias: Mariscos, fritura de pescado, ensaladilla",
         "en": "Grape(s): Verdejo · Dry, fresh and herbaceous white. Fresh grass and citrus notes. · Pairing: Seafood, fried fish, Russian salad",
         "fr": "Cépage(s): Verdejo · Blanc sec, frais et herbacé. Notes d'herbe fraîche et d'agrumes. · Accord: Fruits de mer, friture de poisson, salade russe"
       },
@@ -3620,7 +3620,7 @@
       "price_glass": 3.2,
       "available": true,
       "description": {
-        "es": "Uva(s): Palomino Fino · Blanco seco gaditano, ligero y fresco, con recuerdo salino. · Maridaje: Fritura de pescado, boquerones, mariscos",
+        "es": "Uva(s): Palomino Fino · Blanco seco gaditano, ligero y fresco, con recuerdo salino. · Sugerencias: Fritura de pescado, boquerones, mariscos",
         "en": "Grape(s): Palomino Fino · Dry white from Cádiz, light and fresh with a saline hint. · Pairing: Fried fish, anchovies, seafood",
         "fr": "Cépage(s): Palomino Fino · Blanc sec de Cadix, léger et frais, avec un rappel salin. · Accord: Friture de poisson, anchois, fruits de mer"
       },
@@ -3645,7 +3645,7 @@
       "price_glass": 3.2,
       "available": true,
       "description": {
-        "es": "Uva(s): Moscatel, Palomino · Blanco semidulce suave y aromático. Ligero y fácil de beber. · Maridaje: Aperitivo, ensaladas, postres caseros",
+        "es": "Uva(s): Moscatel, Palomino · Blanco semidulce suave y aromático. Ligero y fácil de beber. · Sugerencias: Aperitivo, ensaladas, postres caseros",
         "en": "Grape(s): Muscat, Palomino · Soft, aromatic semi-sweet white. Light and easy-drinking. · Pairing: Aperitif, salads, homemade desserts",
         "fr": "Cépage(s): Muscat, Palomino · Blanc demi-sec doux et aromatique. Léger et facile à boire. · Accord: Apéritif, salades, desserts maison"
       },
@@ -3670,7 +3670,7 @@
       "price_glass": 3.3,
       "available": true,
       "description": {
-        "es": "Uva(s): Verdejo, Moscatel · Blanco de baja graduación (5,5°), ligero y afrutado. Dulzor sutil. · Maridaje: Aperitivo, tapas ligeras, postres",
+        "es": "Uva(s): Verdejo, Moscatel · Blanco de baja graduación (5,5°), ligero y afrutado. Dulzor sutil. · Sugerencias: Aperitivo, tapas ligeras, postres",
         "en": "Grape(s): Verdejo, Muscat · Low-alcohol white (5.5°), light and fruity. Subtle sweetness. · Pairing: Aperitif, light tapas, desserts",
         "fr": "Cépage(s): Verdejo, Muscat · Blanc à faible degré (5,5°), léger et fruité. Douceur subtile. · Accord: Apéritif, tapas légères, desserts"
       },
@@ -3694,7 +3694,7 @@
       "price_glass": 2.9,
       "available": true,
       "description": {
-        "es": "Seco, pálido, con notas de almendra y levadura. Crianza biológica bajo velo de flor. · Maridaje: Jamón ibérico, aceitunas, fritura de pescado",
+        "es": "Seco, pálido, con notas de almendra y levadura. Crianza biológica bajo velo de flor. · Sugerencias: Jamón ibérico, aceitunas, fritura de pescado",
         "en": "Dry, pale, with almond and yeast notes. Aged under flor veil. · Pairing: Iberian ham, olives, fried fish",
         "fr": "Sec, pâle, notes d'amande et de levure. Élevé sous voile de flor. · Accord: Jambon ibérique, olives, friture de poisson"
       },
@@ -3718,7 +3718,7 @@
       "price_glass": 2.9,
       "available": true,
       "description": {
-        "es": "Fino de Sanlúcar: más salino y ligero, con brisa atlántica. Seco y fresco. · Maridaje: Mariscos, tortilla del Sacromonte, boquerones",
+        "es": "Fino de Sanlúcar: más salino y ligero, con brisa atlántica. Seco y fresco. · Sugerencias: Mariscos, tortilla del Sacromonte, boquerones",
         "en": "Sanlúcar's fino: more saline and lighter, with Atlantic breeze. Dry and fresh. · Pairing: Seafood, tortilla del Sacromonte, anchovies",
         "fr": "Le fino de Sanlúcar : plus salin et léger, brise atlantique. Sec et frais. · Accord: Fruits de mer, tortilla del Sacromonte, anchois"
       },
@@ -3790,7 +3790,7 @@
       "price_glass": 4,
       "available": true,
       "description": {
-        "es": "Comienza como fino y evoluciona con crianza oxidativa. Color ámbar, notas de nuez y avellana. · Maridaje: Riñones al Jerez, consomé, queso curado",
+        "es": "Comienza como fino y evoluciona con crianza oxidativa. Color ámbar, notas de nuez y avellana. · Sugerencias: Riñones al Jerez, consomé, queso curado",
         "en": "Starts as fino, then ages oxidatively. Amber, with walnut and hazelnut notes. · Pairing: Kidneys al Jerez, consommé, cured cheese",
         "fr": "D'abord fino, puis vieilli en oxydation. Ambré, notes de noix et noisette. · Accord: Rognons au xérès, consommé, fromage affiné"
       },
@@ -3814,7 +3814,7 @@
       "price_glass": 4,
       "available": true,
       "description": {
-        "es": "Crianza oxidativa completa. Seco, complejo, con notas de nuez, tabaco y cuero. · Maridaje: Carne de monte, callos, guisos de cuchara",
+        "es": "Crianza oxidativa completa. Seco, complejo, con notas de nuez, tabaco y cuero. · Sugerencias: Carne de monte, callos, guisos de cuchara",
         "en": "Full oxidative ageing. Dry, complex, with notes of walnut, tobacco and leather. · Pairing: Game, tripe, hearty stews",
         "fr": "Élevage oxydatif complet. Sec, complexe, notes de noix, tabac et cuir. · Accord: Gibier, tripes, ragoûts"
       },
@@ -3838,7 +3838,7 @@
       "price_glass": 4.5,
       "available": true,
       "description": {
-        "es": "Dulce, denso, con notas de pasas, higos y miel. Uva secada al sol. · Maridaje: Postres, helado, queso azul",
+        "es": "Dulce, denso, con notas de pasas, higos y miel. Uva secada al sol. · Sugerencias: Postres, helado, queso azul",
         "en": "Sweet and dense, with raisin, fig and honey notes. Sun-dried grapes. · Pairing: Desserts, ice cream, blue cheese",
         "fr": "Doux et dense, notes de raisins secs, figues et miel. Raisins séchés au soleil. · Accord: Desserts, glace, fromage bleu"
       },
