@@ -186,7 +186,7 @@
 
   function findWineForPairing(pairingText, wines, lang) {
     if (!pairingText) return null;
-    return (wines || []).filter(w => w.available !== false).find(w => {
+    return (wines || []).filter(w => w.available !== false && w.deleted !== true).find(w => {
       const wineName = typeof w.name === 'object' ? t(w.name, lang) : (w.name || '');
       return wineName && pairingText.toLowerCase().includes(wineName.toLowerCase());
     }) || null;
@@ -281,7 +281,7 @@
   function renderBeerPairingChip(dish, beverages, lang, cartaUrl) {
     const beerId = dish.beer_pairing;
     if (!beerId) return '';
-    const beer = (beverages || []).find(b => b.id === beerId && b.available !== false);
+    const beer = (beverages || []).find(b => b.id === beerId && b.available !== false && b.deleted !== true);
     if (!beer) return '';
     const beerName = typeof beer.name === 'object' ? t(beer.name, lang) : (beer.name || '');
     const label = { es: `Cerveza · ${beerName}`, en: `Beer · ${beerName}`, fr: `Bière · ${beerName}` }[lang] || beerName;
@@ -389,10 +389,10 @@
       (d.dishes || []).forEach(function(dish) { byId[dish.id] = dish; });
       dishes = d.home_featured_ids
         .map(function(id) { return byId[id]; })
-        .filter(function(dish) { return dish && dish.available !== false; });
+        .filter(function(dish) { return dish && dish.available !== false && dish.deleted !== true; });
     } else {
       dishes = (d.dishes || [])
-        .filter(function(dish) { return dish.available !== false && dish.category_id === 'andalusian-specialities' && dish.featured; })
+        .filter(function(dish) { return dish.available !== false && dish.deleted !== true && dish.category_id === 'andalusian-specialities' && dish.featured; })
         .sort(function(a, b) {
           var rank = function(v) { return v === true || v === 'recommended' ? 0 : v === 'house' ? 1 : v === 'seasonal' ? 2 : 3; };
           return rank(a.featured) - rank(b.featured);

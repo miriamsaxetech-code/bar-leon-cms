@@ -327,7 +327,7 @@
   function renderPairingChip(dish, wines, lang) {
     const pairingText = t(dish.pairing, lang);
     if (!pairingText) return '';
-    const availableWines = (wines || []).filter(w => w.available !== false);
+    const availableWines = (wines || []).filter(w => w.available !== false && w.deleted !== true);
     const matched = availableWines.find(w => {
       const wineName = typeof w.name === 'object' ? t(w.name, lang) : (w.name || '');
       return pairingText.toLowerCase().includes(wineName.toLowerCase());
@@ -357,8 +357,9 @@
     if (!dm || !dm.active) return '';
 
     function asList(str) {
-      return `<ul class="edict-platos">${str.split(' · ').map(s =>
-        `<li>${s.trim()}</li>`).join('')}</ul>`;
+      const items = Array.isArray(str) ? str : String(str).split(' · ');
+      return `<ul class="edict-platos">${items.map(s =>
+        `<li>${String(s).trim()}</li>`).join('')}</ul>`;
     }
 
     const starters = t(dm.starters, lang)
@@ -417,7 +418,7 @@
     const cat = (categories || []).find(c => c.id === SABORES_CATEGORY_ID);
     if (!cat) return '';
     const catName = t(cat.name, lang);
-    const spotlightDishes = (dishes || []).filter(d => d.available !== false && d.category_id === SABORES_CATEGORY_ID);
+    const spotlightDishes = (dishes || []).filter(d => d.available !== false && d.deleted !== true && d.category_id === SABORES_CATEGORY_ID);
     if (!spotlightDishes.length) return '';
 
     const cards = spotlightDishes.map(dish => {
@@ -471,7 +472,7 @@
   }
 
   function renderCarta(dishes, categories, wines, allergens, lang, service) {
-    const available = (dishes || []).filter(i => i.available !== false);
+    const available = (dishes || []).filter(i => i.available !== false && i.deleted !== true);
     const catMap = {};
     (categories || [])
       .filter(c => (c.service || (c.type === 'food' ? 'restaurant' : 'bar')) === service)
@@ -539,7 +540,7 @@
   // ─── PARA EMPEZAR BLOCK ───────────────────────────────────────────────────────
   function renderParaEmpezar(wines, beverages, lang) {
     const PARA_EMPEZAR_NAMES = ['fino', 'manzanilla', 'vermut', 'alhambra reserva'];
-    const allItems = [...(wines || []), ...(beverages || [])].filter(i => i.available !== false);
+    const allItems = [...(wines || []), ...(beverages || [])].filter(i => i.available !== false && i.deleted !== true);
     const matched = [];
     PARA_EMPEZAR_NAMES.forEach(function(needle) {
       if (matched.length >= 5) return;
@@ -595,7 +596,7 @@
 
     const groups = {};
     const order  = [];
-    [...(wines || []), ...(beverages || []), ...(dishes || [])].filter(w => w && w.available !== false).forEach(item => {
+    [...(wines || []), ...(beverages || []), ...(dishes || [])].filter(w => w && w.available !== false && w.deleted !== true).forEach(item => {
       if (!catMap[item.category_id]) return;
       if (!groups[item.category_id]) {
         groups[item.category_id] = [];
@@ -917,7 +918,7 @@
   }
 
   function renderHorarios(hours, nav, lang) {
-    const cells = hours.map(h => {
+    const cells = getHoursSchedule(hours).map(h => {
       const closed  = h.status === 'closed' || h.status === 'partial';
       const cls     = closed ? ' h-cerrado' : '';
       const dayName = DAY_NAMES[h.day] ? DAY_NAMES[h.day][lang] : h.day;
@@ -988,7 +989,7 @@
     const BASE = getPublicBaseUrl(d);
     const MENU_PATH = { es: '/es/carta', en: '/en/menu', fr: '/fr/carte' };
     const foodCats = (d.categories || []).filter(c => c.type === 'food');
-    const dishes   = (d.dishes || []).filter(dish => dish.available !== false);
+    const dishes   = (d.dishes || []).filter(dish => dish.available !== false && dish.deleted !== true);
 
     const menuSections = foodCats.map(cat => {
       const items = dishes

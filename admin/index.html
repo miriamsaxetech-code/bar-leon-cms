@@ -116,7 +116,8 @@
       });
 
       // Hours
-      var hoursArr = hoursData.toJS ? hoursData.toJS() : [];
+      var hoursRaw = hoursData.get ? hoursData.get('schedule') : hoursData;
+      var hoursArr = hoursRaw && hoursRaw.toJS ? hoursRaw.toJS() : (Array.isArray(hoursRaw) ? hoursRaw : []);
 
       return h('div', {},
         // Aviso
