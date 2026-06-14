@@ -1744,7 +1744,7 @@ async function saveAll() {
     }
 
     if (resp.status === 409) {
-      showError('La información del restaurante fue modificada mientras trabajabas. Recarga el panel y vuelve a hacer tus cambios.');
+      showError('Alguien más guardó cambios mientras editabas. Recarga la página y vuelve a intentarlo. Tus cambios no se han perdido — están en el panel hasta que recargues.');
       if (saveBtn)  { saveBtn.disabled = false; saveBtn.textContent = 'Publicar en la web'; }
       return;
     }
@@ -1755,7 +1755,13 @@ async function saveAll() {
 
     dirty = false;
     dailyMenuTextDirty = false;
-    if (statusEl) statusEl.textContent = '✓ Publicado. Tu web se actualizará en unos 30 segundos.';
+
+    const now = new Date();
+    const hhmm = now.toLocaleTimeString('es-ES', { hour: '2-digit', minute: '2-digit' });
+    if (statusEl) {
+      statusEl.textContent = `Guardado a las ${hhmm}`;
+      statusEl.style.display = '';
+    }
     if (saveBtn)  { saveBtn.textContent = 'Publicar en la web'; saveBtn.disabled = false; }
 
     // Show undo button for 60 seconds
@@ -1765,13 +1771,6 @@ async function saveAll() {
       undoBtn.textContent = 'Deshacer';
       undoTimer = setTimeout(() => { undoBtn.hidden = true; }, 60000);
     }
-
-    // Clear the confirmation message after 6 s
-    setTimeout(() => {
-      if (statusEl && statusEl.textContent === '✓ Publicado. Tu web se actualizará en unos 30 segundos.') {
-        statusEl.textContent = '';
-      }
-    }, 6000);
 
   } catch {
     showError('Error de conexión. Comprueba tu internet e inténtalo de nuevo.');
