@@ -2034,6 +2034,14 @@ async function saveAll() {
     if (!confirmSave) return;
   }
 
+  // Validate state integrity before save — hard block, no escape hatch
+  const stateCheck = validateState(state);
+  if (!stateCheck.ok) {
+    showError('No se puede publicar: hay errores en los datos. Revisa la Carta.');
+    console.error('[Panel] Errores de validación:', stateCheck.errors);
+    return;
+  }
+
   const saveBtn    = document.getElementById('save-btn');
   const statusEl   = document.getElementById('save-status');
   const undoBtn    = document.getElementById('undo-btn');
