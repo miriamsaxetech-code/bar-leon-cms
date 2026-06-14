@@ -1426,3 +1426,25 @@ details[open] .carta-accordion__summary::after {
   background: var(--error-bg);
   color: var(--white);
 }
+
+/* ── Carta — inline add form ────────────────────────────────── */
+
+.carta-add-form {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  padding: 12px 16px;
+  border-top: 1px dashed var(--border);
+  background: var(--bg-2);
+}
+
+.carta-add-form__name,
+.carta-add-form__price {
+  font-size: 0.9rem;
+}
+
+.carta-add-form__error {
+  font-size: 0.8rem;
+  color: var(--error-bg);
+  margin: 0;
+}

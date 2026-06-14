@@ -265,7 +265,8 @@ function renderCarta(filter) {
     dishSection.appendChild(createCartaAccordion(
       cat.name && cat.name.es ? cat.name.es : cat.id,
       items,
-      'dishes'
+      'dishes',
+      cat.id
     ));
   });
 
@@ -308,7 +309,7 @@ function renderCarta(filter) {
   }
 }
 
-function createCartaAccordion(label, items, collection) {
+function createCartaAccordion(label, items, collection, categoryId) {
   const details = document.createElement('details');
   details.className = 'carta-accordion';
 
@@ -322,10 +323,60 @@ function createCartaAccordion(label, items, collection) {
     empty.className = 'empty-state empty-state--compact';
     empty.textContent = 'Sin elementos en esta sección.';
     details.appendChild(empty);
-    return details;
+  } else {
+    items.forEach(item => details.appendChild(createCartaCard(item, collection)));
   }
 
-  items.forEach(item => details.appendChild(createCartaCard(item, collection)));
+  // ── Inline add form ─────────────────────────────────
+  const addForm = document.createElement('form');
+  addForm.className = 'carta-add-form';
+  addForm.noValidate = true;
+  addForm.dataset.collection = collection;
+  if (categoryId) addForm.dataset.categoryId = categoryId;
+
+  const nameInput = document.createElement('input');
+  nameInput.type = 'text';
+  nameInput.className = 'carta-add-form__name field-input';
+  nameInput.placeholder = 'Nombre (en español)';
+  nameInput.required = true;
+  addForm.appendChild(nameInput);
+
+  if (collection === 'wines') {
+    const gInput = document.createElement('input');
+    gInput.type = 'text'; gInput.inputMode = 'decimal';
+    gInput.className = 'carta-add-form__price field-input';
+    gInput.placeholder = 'Copa';
+    gInput.dataset.priceField = 'price_glass';
+    addForm.appendChild(gInput);
+
+    const bInput = document.createElement('input');
+    bInput.type = 'text'; bInput.inputMode = 'decimal';
+    bInput.className = 'carta-add-form__price field-input';
+    bInput.placeholder = 'Botella';
+    bInput.dataset.priceField = 'price_bottle';
+    addForm.appendChild(bInput);
+  } else {
+    const priceInput = document.createElement('input');
+    priceInput.type = 'text';
+    priceInput.className = 'carta-add-form__price field-input';
+    priceInput.placeholder = 'Precio';
+    priceInput.dataset.priceField = 'price';
+    addForm.appendChild(priceInput);
+  }
+
+  const submitBtn = document.createElement('button');
+  submitBtn.type = 'submit';
+  submitBtn.className = 'btn--primary btn--small';
+  submitBtn.textContent = '+ Añadir';
+  addForm.appendChild(submitBtn);
+
+  const addError = document.createElement('p');
+  addError.className = 'carta-add-form__error';
+  addError.hidden = true;
+  addForm.appendChild(addError);
+
+  details.appendChild(addForm);
+
   return details;
 }
 
@@ -565,6 +616,40 @@ function bindCartaEdit() {
       if (typeof renderPapelera === 'function') renderPapelera();
       return;
     }
+  });
+
+  container.addEventListener('submit', e => {
+    e.preventDefault();
+    const form = e.target.closest('.carta-add-form');
+    if (!form) return;
+    const collection = form.dataset.collection;
+
+    const nameEl = form.querySelector('.carta-add-form__name');
+    const name = (nameEl?.value || '').trim();
+    if (!name) {
+      const err = form.querySelector('.carta-add-form__error');
+      if (err) { err.textContent = 'El nombre es obligatorio.'; err.hidden = false; }
+      nameEl?.focus();
+      return;
+    }
+
+    const values = { name, category_id: form.dataset.categoryId || '' };
+    form.querySelectorAll('[data-price-field]').forEach(el => {
+      values[el.dataset.priceField] = el.value.trim();
+    });
+
+    const existingIds = (state[collection] || []).map(x => x.id);
+    const newItem = createPanelItem(collection, values, existingIds);
+    newItem.available = false; // owner must explicitly mark visible before publication
+    newItem.featured = false;
+    addPanelItem(state, collection, newItem);
+    markDirty();
+
+    form.reset();
+    const err = form.querySelector('.carta-add-form__error');
+    if (err) err.hidden = true;
+
+    renderCarta(document.getElementById('search-carta')?.value || '');
   });
 }
 
