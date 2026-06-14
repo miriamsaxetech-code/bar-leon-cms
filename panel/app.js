@@ -580,6 +580,81 @@ function setPanelItemAvailable(panelState, collection, id, available) {
   return true;
 }
 
+function softDeletePanelItem(panelState, collection, id) {
+  const item = (panelState[collection] || []).find(x => x.id === id);
+  if (!item) return false;
+  item.deleted = true;
+  item.available = false;
+  return true;
+}
+
+function restorePanelItem(panelState, collection, id) {
+  const item = (panelState[collection] || []).find(x => x.id === id);
+  if (!item) return false;
+  delete item.deleted;
+  item.available = false; // restored items stay hidden; owner must explicitly make visible
+  return true;
+}
+
+function hardDeletePanelItem(panelState, collection, id) {
+  return deletePanelItem(panelState, collection, id);
+}
+
+function duplicatePanelItem(panelState, collection, id) {
+  const arr = panelState[collection] || [];
+  const original = arr.find(x => x.id === id);
+  if (!original) return null;
+  const existingIds = arr.map(x => x.id);
+  const copy = JSON.parse(JSON.stringify(original));
+  delete copy.deleted;
+  copy.available = false; // must be explicitly made visible before publication
+  copy.featured = false;
+  const baseName = getPanelItemName(original);
+  copy.id = uniquePanelId(slugifyPanelId(baseName + '-copia'), existingIds);
+  if (copy.name && typeof copy.name === 'object') {
+    copy.name = { es: (copy.name.es || '') + ' (copia)', en: copy.name.en || '', fr: copy.name.fr || '' };
+  } else {
+    copy.name = String(copy.name || '') + ' (copia)';
+  }
+  panelState[collection].push(copy);
+  return copy;
+}
+
+function validateState(panelState) {
+  const errors = [];
+  const allIds = [];
+  const catTypeMap = {};
+  (panelState.categories || []).forEach(c => { catTypeMap[c.id] = c.type; });
+  const validCatIds = new Set(Object.keys(catTypeMap));
+  const colCatType = { dishes: 'food', wines: 'wine', beverages: 'drink' };
+
+  ['dishes', 'wines', 'beverages'].forEach(col => {
+    (panelState[col] || []).forEach(item => {
+      if (allIds.includes(item.id)) {
+        errors.push(`ID duplicado: "${item.id}" en ${col}`);
+      } else {
+        allIds.push(item.id);
+      }
+      const name = getPanelItemName(item);
+      if (!name) errors.push(`Elemento sin nombre en ${col} (id: ${item.id || '?'})`);
+      if (col === 'wines') {
+        if (!item.price_glass && !item.price_bottle)
+          errors.push(`Vino sin precio (id: ${item.id})`);
+      } else {
+        if (!item.price) errors.push(`Sin precio (id: ${item.id}) en ${col}`);
+      }
+      if (item.category_id) {
+        if (!validCatIds.has(item.category_id)) {
+          errors.push(`Categoría inexistente "${item.category_id}" (id: ${item.id})`);
+        } else if (catTypeMap[item.category_id] !== colCatType[col]) {
+          errors.push(`Categoría de tipo incorrecto para ${col} (id: ${item.id})`);
+        }
+      }
+    });
+  });
+  return errors.length ? { ok: false, errors } : { ok: true, errors: [] };
+}
+
 function setPanelItemAllergen(panelState, collection, id, allergenId, present) {
   const item = Array.isArray(panelState[collection])
     ? panelState[collection].find(entry => entry.id === id)
@@ -1896,6 +1971,11 @@ if (typeof window !== 'undefined') {
     addPanelItem,
     deletePanelItem,
     setPanelItemAvailable,
+    softDeletePanelItem,
+    restorePanelItem,
+    hardDeletePanelItem,
+    duplicatePanelItem,
+    validateState,
     setPanelItemAllergen,
     splitPanelListText,
     joinPanelListItems,
