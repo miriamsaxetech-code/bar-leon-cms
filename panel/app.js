@@ -869,12 +869,14 @@ function ensureDailyMenuField(field) {
 
 function getDailyMenuItems(field) {
   const data = ensureDailyMenuField(field);
-  return splitPanelListText(data.es || '');
+  const val = data.es;
+  if (Array.isArray(val)) return [...val];
+  return splitPanelListText(val || ''); // backward compat
 }
 
 function setDailyMenuItems(field, items) {
   const data = ensureDailyMenuField(field);
-  data.es = joinPanelListItems(items);
+  data.es = items.filter(Boolean); // always write as array
   markDailyMenuTextDirty();
 }
 
@@ -1003,9 +1005,15 @@ function bindMenuDelDia() {
 
 function copySpanishFallback(field) {
   if (!field || typeof field !== 'object') return;
-  const es = typeof field.es === 'string' ? field.es.trim() : '';
-  field.en = es;
-  field.fr = es;
+  const es = field.es;
+  if (Array.isArray(es)) {
+    if (!Array.isArray(field.en) || !field.en.length) field.en = [...es];
+    if (!Array.isArray(field.fr) || !field.fr.length) field.fr = [...es];
+  } else {
+    const str = typeof es === 'string' ? es.trim() : '';
+    if (!field.en) field.en = str;
+    if (!field.fr) field.fr = str;
+  }
 }
 
 function syncDailyMenuFallbackTranslations() {

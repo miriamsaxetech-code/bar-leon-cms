@@ -622,14 +622,53 @@
       "fr": "TVA incluse. Boissons non comprises."
     },
     "starters": {
-      "es": "Gazpacho andaluz · Sopa de picadillo · Ensalada de la casa · Entremeses variados · Salmorejo",
-      "en": "Andalusian gazpacho · Picadillo soup (consommé, ham & egg) · House salad · Assorted cold starters · Salmorejo",
-      "fr": "Gaspacho andalou · Soupe picadillo (consommé, jambon & œuf) · Salade maison · Assortiment d'entrées froides · Salmorejo"
+      "es": [
+        "Gazpacho andaluz",
+        "Sopa de picadillo",
+        "Ensalada de la casa",
+        "Entremeses variados",
+        "Salmorejo"
+      ],
+      "en": [
+        "Andalusian gazpacho",
+        "Picadillo soup (consommé, ham & egg)",
+        "House salad",
+        "Assorted cold starters",
+        "Salmorejo"
+      ],
+      "fr": [
+        "Gaspacho andalou",
+        "Soupe picadillo (consommé, jambon & œuf)",
+        "Salade maison",
+        "Assortiment d'entrées froides",
+        "Salmorejo"
+      ]
     },
     "seconds": {
-      "es": "Filete de cerdo (empanado o plancha) · Secreto de cerdo · Filete de pescadilla · Calamares fritos · Filete de dorada · Pechuga de pollo",
-      "en": "Pork loin steak (breaded or grilled) · Secreto pork cut · Hake fillet · Fried squid · Sea bream fillet · Chicken breast",
-      "fr": "Filet de porc (pané ou grillé) · Secreto de porc · Filet de merlu · Calmars frits · Filet de dorade · Blanc de poulet"
+      "es": [
+        "Filete de cerdo (empanado o plancha)",
+        "Secreto de cerdo",
+        "Filete de pescadilla",
+        "Calamares fritos",
+        "Filete de dorada",
+        "Pechuga de pollo"
+      ],
+      "en": [
+        "Pork loin steak (breaded or grilled)",
+        "Secreto pork cut",
+        "Hake fillet",
+        "Fried squid",
+        "Sea bream fillet",
+        "Chicken breast"
+      ],
+      "fr": [
+        "Filet de porc (pané ou grillé)",
+        "Secreto de porc",
+        "Filet de merlu",
+        "Calmars frits",
+        "Filet de dorade",
+        "Blanc de poulet"
+      ]
     },
     "mains": [
       {
@@ -666,9 +705,24 @@
       }
     ],
     "desserts": {
-      "es": "Natillas de la casa · Arroz con leche · Helado · Fruta del tiempo",
-      "en": "House natillas · Rice pudding · Ice cream · Seasonal fruit",
-      "fr": "Natillas maison · Riz au lait · Glace · Fruit de saison"
+      "es": [
+        "Natillas de la casa",
+        "Arroz con leche",
+        "Helado",
+        "Fruta del tiempo"
+      ],
+      "en": [
+        "House natillas",
+        "Rice pudding",
+        "Ice cream",
+        "Seasonal fruit"
+      ],
+      "fr": [
+        "Natillas maison",
+        "Riz au lait",
+        "Glace",
+        "Fruit de saison"
+      ]
     },
     "seasonal": {
       "es": "Viernes en verano: Arroz a la cubana. · Viernes de Cuaresma: Potaje de vigilia, con garbanzos y bacalao; plato sin carne de la tradición de vigilia. · En enero, por San Antón: Olla de San Antón, guiso granadino de habas secas, habichuelas y cerdo de matanza, con su pringá, remojón y encurtidos.",
