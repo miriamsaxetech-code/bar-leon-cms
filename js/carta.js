@@ -539,7 +539,7 @@
   // ─── PARA EMPEZAR BLOCK ───────────────────────────────────────────────────────
   function renderParaEmpezar(wines, beverages, lang) {
     const PARA_EMPEZAR_NAMES = ['fino', 'manzanilla', 'vermut', 'alhambra reserva'];
-    const allItems = [...(wines || []), ...(beverages || [])].filter(i => i.available !== false);
+    const allItems = [...(wines || []), ...(beverages || [])].filter(i => i.available !== false && i.deleted !== true);
     const matched = [];
     PARA_EMPEZAR_NAMES.forEach(function(needle) {
       if (matched.length >= 5) return;
