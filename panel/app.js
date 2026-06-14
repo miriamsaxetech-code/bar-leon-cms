@@ -223,6 +223,7 @@ function bindTabNav() {
 function renderAll() {
   renderCarta();
   renderHorarios();
+  renderExceptions();
   renderMenuDelDia();
   renderAviso();
   renderCariocas();
@@ -734,6 +735,171 @@ function createTimeInput(value, onChange) {
   input.className = 'time-input';
   input.addEventListener('change', () => onChange(input.value));
   return input;
+}
+
+// ── Excepciones de horario ────────────────────────────────────
+
+function renderExceptions() {
+  const container = document.getElementById('exceptions-list');
+  if (!container || !state) return;
+
+  const hours = state.hours;
+  if (!hours || Array.isArray(hours)) return; // old format, skip
+  const exceptions = Array.isArray(hours.exceptions) ? hours.exceptions : [];
+
+  container.innerHTML = '';
+
+  if (!exceptions.length) {
+    const empty = document.createElement('p');
+    empty.className = 'empty-state empty-state--compact';
+    empty.textContent = 'Sin excepciones. Añade un cierre especial o apertura extraordinaria.';
+    container.appendChild(empty);
+    return;
+  }
+
+  exceptions.forEach((exc, index) => {
+    container.appendChild(createExceptionRow(exc, index));
+  });
+}
+
+function createExceptionRow(exc, index) {
+  const row = document.createElement('div');
+  row.className = 'exception-row';
+  row.dataset.index = index;
+
+  // Date picker
+  const dateInput = document.createElement('input');
+  dateInput.type = 'date';
+  dateInput.className = 'field-input exception-date';
+  dateInput.value = exc.date || '';
+  dateInput.setAttribute('aria-label', 'Fecha de la excepción');
+  dateInput.addEventListener('change', () => {
+    state.hours.exceptions[index].date = dateInput.value;
+    markDirty();
+  });
+
+  // Status select
+  const statusSelect = document.createElement('select');
+  statusSelect.className = 'field-select exception-status';
+  statusSelect.setAttribute('aria-label', 'Estado de la excepción');
+  [
+    { value: 'closed', label: 'Cerrado' },
+    { value: 'open',   label: 'Apertura especial' },
+  ].forEach(opt => {
+    const option = document.createElement('option');
+    option.value = opt.value;
+    option.textContent = opt.label;
+    option.selected = exc.status === opt.value;
+    statusSelect.appendChild(option);
+  });
+  statusSelect.addEventListener('change', () => {
+    state.hours.exceptions[index].status = statusSelect.value;
+    if (statusSelect.value === 'open' && !Array.isArray(state.hours.exceptions[index].periods)) {
+      state.hours.exceptions[index].periods = [{ open: '13:00', close: '16:00' }];
+    }
+    renderExceptions();
+    markDirty();
+  });
+
+  // Label input (Spanish only)
+  const labelInput = document.createElement('input');
+  labelInput.type = 'text';
+  labelInput.className = 'field-input exception-label';
+  labelInput.placeholder = 'Motivo (ej: Feria de Granada)';
+  labelInput.value = exc.label && exc.label.es ? exc.label.es : '';
+  labelInput.setAttribute('aria-label', 'Motivo del cierre o apertura especial');
+  labelInput.addEventListener('change', () => {
+    if (!state.hours.exceptions[index].label) state.hours.exceptions[index].label = {};
+    state.hours.exceptions[index].label.es = labelInput.value.trim();
+    markDirty();
+  });
+
+  // Remove button
+  const removeBtn = document.createElement('button');
+  removeBtn.type = 'button';
+  removeBtn.className = 'exception-remove';
+  removeBtn.textContent = '✕';
+  removeBtn.setAttribute('aria-label', 'Eliminar esta excepción');
+  removeBtn.addEventListener('click', () => {
+    state.hours.exceptions.splice(index, 1);
+    renderExceptions();
+    markDirty();
+  });
+
+  row.appendChild(dateInput);
+  row.appendChild(statusSelect);
+  row.appendChild(labelInput);
+  row.appendChild(removeBtn);
+
+  // If open: show period inputs
+  if (exc.status === 'open') {
+    const periods = Array.isArray(exc.periods) ? exc.periods : [{ open: '13:00', close: '16:00' }];
+    if (!Array.isArray(exc.periods)) state.hours.exceptions[index].periods = periods;
+
+    const periodsDiv = document.createElement('div');
+    periodsDiv.className = 'exception-periods';
+
+    periods.forEach((period, pIndex) => {
+      const periodRow = document.createElement('div');
+      periodRow.className = 'period-row';
+
+      const openInput = createTimeInput(period.open, val => {
+        state.hours.exceptions[index].periods[pIndex].open = val;
+        // Validate close > open
+        const p = state.hours.exceptions[index].periods[pIndex];
+        if (p.close && p.close <= val) {
+          showError('La hora de cierre debe ser posterior a la de apertura.');
+        }
+        markDirty();
+      });
+      const sep = document.createElement('span');
+      sep.className = 'period-sep';
+      sep.textContent = '—';
+      const closeInput = createTimeInput(period.close, val => {
+        const p = state.hours.exceptions[index].periods[pIndex];
+        if (p.open && val <= p.open) {
+          showError('La hora de cierre debe ser posterior a la de apertura.');
+        }
+        state.hours.exceptions[index].periods[pIndex].close = val;
+        markDirty();
+      });
+
+      periodRow.appendChild(openInput);
+      periodRow.appendChild(sep);
+      periodRow.appendChild(closeInput);
+      periodsDiv.appendChild(periodRow);
+    });
+    row.appendChild(periodsDiv);
+  }
+
+  return row;
+}
+
+function bindExceptions() {
+  const addBtn = document.getElementById('add-exception-btn');
+  if (!addBtn) return;
+
+  addBtn.addEventListener('click', () => {
+    if (!state.hours || Array.isArray(state.hours)) return;
+    if (!Array.isArray(state.hours.exceptions)) state.hours.exceptions = [];
+
+    const tomorrow = new Date();
+    tomorrow.setDate(tomorrow.getDate() + 1);
+    const iso = tomorrow.toISOString().slice(0, 10);
+
+    if (state.hours.exceptions.some(e => e.date === iso)) {
+      showError('Ya existe una excepción para esa fecha. Elige otra fecha.');
+      return;
+    }
+
+    state.hours.exceptions.push({
+      date: iso,
+      status: 'closed',
+      label: { es: '' },
+    });
+    renderExceptions();
+    markDirty();
+  });
 }
 
 // ══════════════════════════════════════════════════════════════
@@ -1657,6 +1823,7 @@ function showError(msg) {
 function bindEvents() {
   bindTabNav();
   bindCartaEdit();
+  bindExceptions();
   bindMenuDelDia();
   bindAvisoEvents();
   bindCariocaEvents();

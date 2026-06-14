@@ -1312,3 +1312,68 @@ details[open] .carta-accordion__summary::after {
   margin: 0;
   padding: 4px 0;
 }
+
+/* ── Excepciones de horario ──────────────────────────────────── */
+
+.exceptions-section {
+  padding: 16px 0 8px;
+  border-top: 1px solid var(--border);
+  margin-top: 8px;
+}
+
+.exceptions-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 0 16px 8px;
+}
+
+.exceptions-title {
+  font-size: 0.85rem;
+  font-weight: 700;
+  color: var(--ink-2);
+  margin: 0;
+  text-transform: uppercase;
+  letter-spacing: 0.06em;
+}
+
+.exceptions-list {
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+}
+
+.exception-row {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+  padding: 10px 16px;
+  background: var(--bg-2);
+  border-radius: var(--radius-sm);
+  margin: 0 8px;
+  position: relative;
+}
+
+.exception-date { width: auto; }
+
+.exception-label { font-size: 0.9rem; }
+
+.exception-remove {
+  position: absolute;
+  top: 8px;
+  right: 8px;
+  background: none;
+  border: none;
+  cursor: pointer;
+  font-size: 1rem;
+  color: var(--ink-2);
+  padding: 4px;
+  line-height: 1;
+}
+
+.exception-remove:hover { color: var(--error-bg); }
+
+.exception-periods {
+  padding-top: 4px;
+  border-top: 1px solid var(--border);
+}
