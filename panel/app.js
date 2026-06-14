@@ -1760,7 +1760,7 @@ async function saveAll() {
     const hhmm = now.toLocaleTimeString('es-ES', { hour: '2-digit', minute: '2-digit' });
     if (statusEl) {
       statusEl.textContent = `Guardado a las ${hhmm}`;
-      statusEl.style.display = '';
+      statusEl.style.display = 'inline';
     }
     if (saveBtn)  { saveBtn.textContent = 'Publicar en la web'; saveBtn.disabled = false; }
 
