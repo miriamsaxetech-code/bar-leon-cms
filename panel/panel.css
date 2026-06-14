@@ -1377,3 +1377,52 @@ details[open] .carta-accordion__summary::after {
   padding-top: 4px;
   border-top: 1px solid var(--border);
 }
+
+/* ── Carta card — lifecycle additions ───────────────────────── */
+
+.carta-card__name-input {
+  width: 100%;
+  padding: 6px 8px;
+  border: 1px solid var(--border);
+  border-radius: var(--radius-sm);
+  font-size: 0.95rem;
+  font-weight: 600;
+  font-family: inherit;
+  background: var(--bg);
+  color: var(--ink);
+}
+
+.carta-card__name-input:focus {
+  outline: 2px solid var(--accent);
+  outline-offset: 1px;
+}
+
+.carta-card__cat-row {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  font-size: 0.8rem;
+  color: var(--ink-2);
+}
+
+.carta-card__cat-select {
+  flex: 1;
+  font-size: 0.8rem;
+}
+
+.carta-card__actions {
+  display: flex;
+  gap: 8px;
+  padding-top: 4px;
+}
+
+.carta-card__trash-btn {
+  color: var(--error-bg);
+  border-color: var(--error-bg);
+}
+
+.carta-card__trash-btn:hover,
+.carta-card__trash-btn:focus {
+  background: var(--error-bg);
+  color: var(--white);
+}

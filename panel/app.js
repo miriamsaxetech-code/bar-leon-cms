@@ -257,6 +257,7 @@ function renderCarta(filter) {
   foodCategories.forEach(cat => {
     const items = (state.dishes || []).filter(d =>
       d.category_id === cat.id &&
+      d.deleted !== true &&
       (!q || (d.name && (d.name.es || '').toLowerCase().includes(q)))
     );
     if (q && !items.length) return;
@@ -273,7 +274,7 @@ function renderCarta(filter) {
   // SECTION: Vinos
   const wines = (state.wines || []).filter(w => {
     const name = typeof w.name === 'string' ? w.name : (w.name && w.name.es) || '';
-    return !q || name.toLowerCase().includes(q);
+    return w.deleted !== true && (!q || name.toLowerCase().includes(q));
   });
   if (!q || wines.length) {
     const wineSection = document.createElement('section');
@@ -288,7 +289,8 @@ function renderCarta(filter) {
 
   // SECTION: Bebidas
   const beverages = (state.beverages || []).filter(b =>
-    !q || (b.name && (b.name.es || '').toLowerCase().includes(q))
+    b.deleted !== true &&
+    (!q || (b.name && (b.name.es || '').toLowerCase().includes(q)))
   );
   if (!q || beverages.length) {
     const bevSection = document.createElement('section');
@@ -333,11 +335,14 @@ function createCartaCard(item, collection) {
   card.dataset.collection = collection;
   card.dataset.id = item.id;
 
-  // Name — read-only
-  const name = document.createElement('span');
-  name.className = 'carta-card__name';
-  name.textContent = getPanelItemName(item);
-  card.appendChild(name);
+  // Name — editable
+  const nameInput = document.createElement('input');
+  nameInput.type = 'text';
+  nameInput.className = 'carta-card__name-input';
+  nameInput.value = getPanelItemName(item);
+  nameInput.dataset.cartaAction = 'name';
+  nameInput.setAttribute('aria-label', 'Nombre');
+  card.appendChild(nameInput);
 
   // Price — editable
   const priceWrap = document.createElement('div');
@@ -411,11 +416,50 @@ function createCartaCard(item, collection) {
     card.appendChild(featuredRow);
   }
 
+  // Category reassignment — dishes and beverages only
+  if (collection !== 'wines' && state && state.categories) {
+    const colCatType = collection === 'dishes' ? 'food' : 'drink';
+    const eligible = state.categories.filter(c => c.type === colCatType);
+    if (eligible.length > 1) {
+      const catRow = document.createElement('label');
+      catRow.className = 'carta-card__cat-row';
+      const catSelect = document.createElement('select');
+      catSelect.className = 'field-select carta-card__cat-select';
+      catSelect.dataset.cartaAction = 'category';
+      eligible.forEach(cat => {
+        const opt = document.createElement('option');
+        opt.value = cat.id;
+        opt.textContent = cat.name && cat.name.es ? cat.name.es : cat.id;
+        if (cat.id === item.category_id) opt.selected = true;
+        catSelect.appendChild(opt);
+      });
+      catRow.appendChild(catSelect);
+      card.appendChild(catRow);
+    }
+  }
+
   // Validation slot
   const validation = document.createElement('p');
   validation.className = 'carta-card__validation';
   validation.hidden = true;
   card.appendChild(validation);
+
+  // Action buttons
+  const actions = document.createElement('div');
+  actions.className = 'carta-card__actions';
+  const dupBtn = document.createElement('button');
+  dupBtn.type = 'button';
+  dupBtn.className = 'btn--ghost btn--small';
+  dupBtn.dataset.cartaAction = 'duplicate';
+  dupBtn.textContent = 'Duplicar';
+  const trashBtn = document.createElement('button');
+  trashBtn.type = 'button';
+  trashBtn.className = 'btn--ghost btn--small carta-card__trash-btn';
+  trashBtn.dataset.cartaAction = 'trash';
+  trashBtn.textContent = 'Enviar a papelera';
+  actions.appendChild(dupBtn);
+  actions.appendChild(trashBtn);
+  card.appendChild(actions);
 
   return card;
 }
@@ -473,6 +517,53 @@ function bindCartaEdit() {
       const original = e.target.dataset.featuredOriginal;
       item.featured = e.target.checked ? original : false;
       markDirty();
+    }
+
+    if (action === 'name') {
+      const raw = e.target.value.trim();
+      if (!raw) {
+        validation.textContent = 'El nombre no puede estar vacío.';
+        validation.hidden = false;
+        return;
+      }
+      validation.hidden = true;
+      if (item.name && typeof item.name === 'object') {
+        item.name.es = raw;
+      } else {
+        item.name = raw;
+      }
+      markDirty();
+    }
+
+    if (action === 'category') {
+      item.category_id = e.target.value;
+      markDirty();
+      renderCarta(document.getElementById('search-carta')?.value || '');
+    }
+  });
+
+  container.addEventListener('click', e => {
+    const btn = e.target.closest('[data-carta-action]');
+    if (!btn) return;
+    const card = btn.closest('.carta-card');
+    if (!card) return;
+    const { collection, id } = card.dataset;
+    const action = btn.dataset.cartaAction;
+
+    if (action === 'duplicate') {
+      if (duplicatePanelItem(state, collection, id)) {
+        markDirty();
+        renderCarta(document.getElementById('search-carta')?.value || '');
+      }
+      return;
+    }
+
+    if (action === 'trash') {
+      softDeletePanelItem(state, collection, id);
+      markDirty();
+      renderCarta(document.getElementById('search-carta')?.value || '');
+      if (typeof renderPapelera === 'function') renderPapelera();
+      return;
     }
   });
 }
