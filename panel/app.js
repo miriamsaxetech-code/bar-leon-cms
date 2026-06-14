@@ -774,7 +774,15 @@ function createExceptionRow(exc, index) {
   dateInput.value = exc.date || '';
   dateInput.setAttribute('aria-label', 'Fecha de la excepción');
   dateInput.addEventListener('change', () => {
-    state.hours.exceptions[index].date = dateInput.value;
+    const liveIndex = parseInt(row.dataset.index, 10);
+    const newDate = dateInput.value;
+    const duplicate = state.hours.exceptions.some((e, i) => i !== liveIndex && e.date === newDate);
+    if (duplicate) {
+      showError('Ya existe una excepción para esa fecha. Elige otra fecha.');
+      dateInput.value = state.hours.exceptions[liveIndex].date || ''; // revert
+      return;
+    }
+    state.hours.exceptions[liveIndex].date = newDate;
     markDirty();
   });
 
@@ -793,9 +801,10 @@ function createExceptionRow(exc, index) {
     statusSelect.appendChild(option);
   });
   statusSelect.addEventListener('change', () => {
-    state.hours.exceptions[index].status = statusSelect.value;
-    if (statusSelect.value === 'open' && !Array.isArray(state.hours.exceptions[index].periods)) {
-      state.hours.exceptions[index].periods = [{ open: '13:00', close: '16:00' }];
+    const liveIndex = parseInt(row.dataset.index, 10);
+    state.hours.exceptions[liveIndex].status = statusSelect.value;
+    if (statusSelect.value === 'open' && !Array.isArray(state.hours.exceptions[liveIndex].periods)) {
+      state.hours.exceptions[liveIndex].periods = [{ open: '13:00', close: '16:00' }];
     }
     renderExceptions();
     markDirty();
@@ -809,8 +818,9 @@ function createExceptionRow(exc, index) {
   labelInput.value = exc.label && exc.label.es ? exc.label.es : '';
   labelInput.setAttribute('aria-label', 'Motivo del cierre o apertura especial');
   labelInput.addEventListener('change', () => {
-    if (!state.hours.exceptions[index].label) state.hours.exceptions[index].label = {};
-    state.hours.exceptions[index].label.es = labelInput.value.trim();
+    const liveIndex = parseInt(row.dataset.index, 10);
+    if (!state.hours.exceptions[liveIndex].label) state.hours.exceptions[liveIndex].label = {};
+    state.hours.exceptions[liveIndex].label.es = labelInput.value.trim();
     markDirty();
   });
 
@@ -821,7 +831,8 @@ function createExceptionRow(exc, index) {
   removeBtn.textContent = '✕';
   removeBtn.setAttribute('aria-label', 'Eliminar esta excepción');
   removeBtn.addEventListener('click', () => {
-    state.hours.exceptions.splice(index, 1);
+    const liveIndex = parseInt(row.dataset.index, 10);
+    state.hours.exceptions.splice(liveIndex, 1);
     renderExceptions();
     markDirty();
   });
