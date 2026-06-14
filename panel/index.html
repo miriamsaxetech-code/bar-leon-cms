@@ -54,7 +54,7 @@
     </header>
 
     <nav class="panel-tabs" role="tablist" aria-label="Secciones del panel">
-      <button class="panel-tab active" data-tab="precios"   role="tab" aria-selected="true"  aria-controls="tab-precios">Precios</button>
+      <button class="panel-tab active" data-tab="carta" role="tab" aria-selected="true" aria-controls="tab-carta">Carta</button>
       <button class="panel-tab"        data-tab="horarios"  role="tab" aria-selected="false" aria-controls="tab-horarios">Horarios</button>
       <button class="panel-tab"        data-tab="menu"      role="tab" aria-selected="false" aria-controls="tab-menu">Menú</button>
       <button class="panel-tab"        data-tab="aviso"     role="tab" aria-selected="false" aria-controls="tab-aviso">Aviso</button>
@@ -64,25 +64,32 @@
 
     <main class="panel-content">
 
-      <!-- TAB: PRECIOS -->
-      <div id="tab-precios" class="tab-panel active" role="tabpanel" aria-labelledby="">
+      <!-- TAB: CARTA -->
+      <div id="tab-carta" class="tab-panel active" role="tabpanel">
         <div class="tab-search">
           <input
-            id="search-precios"
+            id="search-carta"
             type="search"
-            placeholder="Buscar plato o bebida…"
+            placeholder="Buscar plato, bebida o vino…"
             class="search-input"
             autocomplete="off"
             autocorrect="off"
             spellcheck="false"
           >
         </div>
-        <div id="precios-list" class="price-list"></div>
+        <div id="carta-list" class="carta-list"></div>
       </div>
 
       <!-- TAB: HORARIOS -->
       <div id="tab-horarios" class="tab-panel" role="tabpanel" hidden>
         <div id="horarios-list" class="hours-list"></div>
+        <div class="exceptions-section">
+          <div class="exceptions-header">
+            <h3 class="exceptions-title">Cierres y aperturas especiales</h3>
+            <button type="button" id="add-exception-btn" class="btn btn--ghost btn--small">+ Añadir excepción</button>
+          </div>
+          <div id="exceptions-list" class="exceptions-list"></div>
+        </div>
       </div>
 
       <!-- TAB: MENÚ DEL DÍA -->

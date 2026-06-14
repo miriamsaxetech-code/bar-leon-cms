@@ -98,17 +98,21 @@ Not like: startup landing page · animated web experience · luxury hospitality 
 
 ## 5. Colour Palette (canonical)
 
-Resolves contradiction between Systems A/B/C in MASTER_SOURCE_OF_TRUTH and NEXO canonical. **This system is authoritative.**
+**This system is authoritative.** Previous Systems A, B, C (burgúndy #6B1D2A, verdes #18362E / #0B8F3A) are superseded.
+
+The primary identity colour is **Azul Fajalauza** (`#1D4D85`), named after Granada's ceramic tradition. Granate (`#7A1C1C`) is a restrained secondary accent used only for prices, featured badges, and small emphasis — never as a dominant or structural colour.
 
 | Token | Hex | Usage |
 |-------|-----|-------|
-| `--bg` | `#F6F3EC` | background / paper |
+| `--bg` | `#F6F3EC` | background / warm paper |
 | `--ink` | `#1C1A17` | body text |
-| `--accent` | `#7A1C1C` | granate / primary accent |
 | `--muted` | `#5C5752` | secondary text, labels |
-| `--faint` | `rgba(122,28,28,0.16)` | soft accent tint |
-
-No other accent colours in active use. Previous Systems A, B, C (burgúndy #6B1D2A, verdes #18362E / #0B8F3A) are superseded.
+| `--azul` | `#1D4D85` | **primary identity** — buttons, links, nav, borders, tile accents |
+| `--azul-claro` | `#3A6FA8` | hover states, lighter identity washes |
+| `--faint` | `rgba(29,77,133,0.10)` | soft azul tint for hover backgrounds |
+| `--granate` | `#7A1C1C` | prices, featured badges, small emphasis — use sparingly |
+| `--granate-faint` | `rgba(122,28,28,0.10)` | price pill backgrounds |
+| `--tile` | `#E8E2D4` | card edges, dividers, tile borders |
 
 ---
 
@@ -145,7 +149,7 @@ No other accent colours in active use. Previous Systems A, B, C (burgúndy #6B1D
 
 **Eliminated nav sections** (do not restore as independent pages):
 - Bodega → absorbed into Bebidas/Carta
-- Maridaje → internal data only, not a navigation item
+- Maridaje → internal data only, not a navigation item (field name kept; visible copy uses "Sugerencias")
 - Recomendaciones → internal data only
 
 **Hemeroteca:** remains a section but only with validated press URLs. Do not publish press mentions without confirmed URL.
@@ -267,3 +271,31 @@ Do not let the site become:
 - tourist caricature
 
 Avoid: flamenco tropes · false Andalusian romanticism · AI-generated "españolidad" · generic hospitality positioning.
+
+---
+
+## 16. Editorial Copy Rules
+
+### Pairing/recommendation language
+
+Use **"Sugerencias"** for any drink or dish pairing suggestions visible to the public. Do not use "Maridaje" in public-facing copy — Bar León is a neighbourhood bar, not a gastronomic tasting-menu restaurant.
+
+| Avoid | Use |
+|-------|-----|
+| Maridaje | Sugerencias |
+| Casa bien con | Sugerencias: fino, manzanilla o vino de Granada |
+
+The JSON field name `maridaje` is kept as a technical key. Only the visible rendered label changes.
+
+### Address register in Spanish copy
+
+Use polite plural imperative (usted/ustedes form) when inviting visitors to act:
+
+| Avoid (bare infinitive) | Use (direct address) |
+|-------------------------|----------------------|
+| Encontrarnos | Encuéntrenos |
+| Llamarnos | Llámenos |
+| Preguntar | Pregúntenos |
+| Ver carta | Consulte la carta |
+
+**Exception:** Short functional CTA buttons may keep the bare infinitive when usability demands brevity on mobile. Specifically: **"Llamar"** is the correct label for the primary phone button/FAB — do not change it.

@@ -221,8 +221,9 @@ function bindTabNav() {
 // ══════════════════════════════════════════════════════════════
 
 function renderAll() {
-  renderPrecios();
+  renderCarta();
   renderHorarios();
+  renderExceptions();
   renderMenuDelDia();
   renderAviso();
   renderCariocas();
@@ -230,73 +231,250 @@ function renderAll() {
 }
 
 // ══════════════════════════════════════════════════════════════
-// TAB: PRECIOS
+// TAB: CARTA
 // ══════════════════════════════════════════════════════════════
 
-function renderPrecios(filter) {
-  const container = document.getElementById('precios-list');
+function renderCarta(filter) {
+  const container = document.getElementById('carta-list');
   if (!container || !state) return;
 
   const q = (filter || '').toLowerCase().trim();
   container.innerHTML = '';
 
-  getCatalogGroups().forEach(group => {
-    const allItems = Array.isArray(state[group.collection]) ? state[group.collection] : [];
-    const items = allItems.filter(item => {
-      const name = getPanelItemName(item);
-      return !q || name.toLowerCase().includes(q);
-    });
+  // SECTION: Platos — grouped by category
+  const foodCategories = (state.categories || [])
+    .filter(cat => cat.type === 'food')
+    .sort((a, b) => (a.order || 0) - (b.order || 0));
 
-    const section = document.createElement('section');
-    section.className = 'catalog-section';
-    section.dataset.collection = group.collection;
+  const dishSection = document.createElement('section');
+  dishSection.className = 'carta-collection';
+  const dishHeading = document.createElement('h2');
+  dishHeading.className = 'carta-collection__title';
+  dishHeading.textContent = 'Platos';
+  dishSection.appendChild(dishHeading);
 
-    const header = document.createElement('div');
-    header.className = 'catalog-section__header';
-    header.innerHTML = `<div>
-      <h2 class="catalog-section__title">${group.label}</h2>
-      <p class="catalog-section__count">${items.length} elementos</p>
-    </div>`;
-
-    const addBtn = document.createElement('button');
-    addBtn.type = 'button';
-    addBtn.className = 'btn btn--ghost btn--small catalog-add-btn';
-    addBtn.dataset.action = 'add';
-    addBtn.dataset.collection = group.collection;
-    addBtn.textContent = '+ Añadir';
-    addBtn.setAttribute('aria-label', `Añadir en ${group.label}`);
-    header.appendChild(addBtn);
-    section.appendChild(header);
-
-    const list = document.createElement('div');
-    list.className = 'catalog-list';
-
-    if (items.length === 0) {
-      const empty = document.createElement('p');
-      empty.className = 'empty-state empty-state--compact';
-      empty.textContent = q ? 'No hay resultados en esta sección.' : 'Todavía no hay elementos.';
-      list.appendChild(empty);
-    }
-
-    items.forEach(item => {
-      list.appendChild(createCatalogRow(group, item));
-    });
-
-    section.appendChild(list);
-    container.appendChild(section);
+  let dishTotal = 0;
+  foodCategories.forEach(cat => {
+    const items = (state.dishes || []).filter(d =>
+      d.category_id === cat.id &&
+      (!q || (d.name && (d.name.es || '').toLowerCase().includes(q)))
+    );
+    if (q && !items.length) return;
+    dishTotal += items.length;
+    dishSection.appendChild(createCartaAccordion(
+      cat.name && cat.name.es ? cat.name.es : cat.id,
+      items,
+      'dishes'
+    ));
   });
 
-  if (container.children.length === 0) {
+  if (!q || dishTotal > 0) container.appendChild(dishSection);
+
+  // SECTION: Vinos
+  const wines = (state.wines || []).filter(w => {
+    const name = typeof w.name === 'string' ? w.name : (w.name && w.name.es) || '';
+    return !q || name.toLowerCase().includes(q);
+  });
+  if (!q || wines.length) {
+    const wineSection = document.createElement('section');
+    wineSection.className = 'carta-collection';
+    const wineHeading = document.createElement('h2');
+    wineHeading.className = 'carta-collection__title';
+    wineHeading.textContent = 'Vinos';
+    wineSection.appendChild(wineHeading);
+    wineSection.appendChild(createCartaAccordion('Carta de vinos', wines, 'wines'));
+    container.appendChild(wineSection);
+  }
+
+  // SECTION: Bebidas
+  const beverages = (state.beverages || []).filter(b =>
+    !q || (b.name && (b.name.es || '').toLowerCase().includes(q))
+  );
+  if (!q || beverages.length) {
+    const bevSection = document.createElement('section');
+    bevSection.className = 'carta-collection';
+    const bevHeading = document.createElement('h2');
+    bevHeading.className = 'carta-collection__title';
+    bevHeading.textContent = 'Bebidas';
+    bevSection.appendChild(bevHeading);
+    bevSection.appendChild(createCartaAccordion('Cervezas y refrescos', beverages, 'beverages'));
+    container.appendChild(bevSection);
+  }
+
+  if (!container.children.length) {
     container.innerHTML = '<p class="empty-state">No se encontraron resultados.</p>';
   }
 }
 
-function getCatalogGroups() {
-  return [
-    { collection: 'dishes', label: 'Platos', priceFields: ['price'], categories: 'food' },
-    { collection: 'wines', label: 'Vinos', priceFields: ['price_glass', 'price_bottle'] },
-    { collection: 'beverages', label: 'Bebidas', priceFields: ['price'], categories: 'drink' },
-  ];
+function createCartaAccordion(label, items, collection) {
+  const details = document.createElement('details');
+  details.className = 'carta-accordion';
+
+  const summary = document.createElement('summary');
+  summary.className = 'carta-accordion__summary';
+  summary.innerHTML = `<span class="carta-accordion__label">${label}</span><span class="carta-accordion__count">${items.length}</span>`;
+  details.appendChild(summary);
+
+  if (!items.length) {
+    const empty = document.createElement('p');
+    empty.className = 'empty-state empty-state--compact';
+    empty.textContent = 'Sin elementos en esta sección.';
+    details.appendChild(empty);
+    return details;
+  }
+
+  items.forEach(item => details.appendChild(createCartaCard(item, collection)));
+  return details;
+}
+
+function createCartaCard(item, collection) {
+  const card = document.createElement('article');
+  card.className = 'carta-card';
+  card.dataset.collection = collection;
+  card.dataset.id = item.id;
+
+  // Name — read-only
+  const name = document.createElement('span');
+  name.className = 'carta-card__name';
+  name.textContent = getPanelItemName(item);
+  card.appendChild(name);
+
+  // Price — editable
+  const priceWrap = document.createElement('div');
+  priceWrap.className = 'carta-card__price-wrap';
+
+  if (collection === 'wines') {
+    [['price_glass', 'Copa'], ['price_bottle', 'Botella']].forEach(([field, label]) => {
+      const lbl = document.createElement('label');
+      lbl.className = 'carta-price-label';
+      lbl.textContent = label + ' ';
+      const input = document.createElement('input');
+      input.type = 'text';
+      input.inputMode = 'decimal';
+      input.className = 'carta-card__price-input';
+      input.value = formatPanelEuro(item[field]).replace(' €', '');
+      input.dataset.cartaAction = 'price';
+      input.dataset.field = field;
+      input.setAttribute('aria-label', label + ' de ' + getPanelItemName(item));
+      lbl.appendChild(input);
+      priceWrap.appendChild(lbl);
+    });
+  } else {
+    const lbl = document.createElement('label');
+    lbl.className = 'carta-price-label';
+    lbl.textContent = 'Precio ';
+    const input = document.createElement('input');
+    input.type = 'text';
+    input.className = 'carta-card__price-input';
+    input.value = item.price || '';
+    input.dataset.cartaAction = 'price';
+    input.dataset.field = 'price';
+    input.setAttribute('aria-label', 'Precio de ' + getPanelItemName(item));
+    lbl.appendChild(input);
+    priceWrap.appendChild(lbl);
+  }
+  card.appendChild(priceWrap);
+
+  // Visible toggle
+  const visibleRow = document.createElement('label');
+  visibleRow.className = 'carta-card__toggle-row';
+  const visibleCheck = document.createElement('input');
+  visibleCheck.type = 'checkbox';
+  visibleCheck.className = 'carta-card__toggle';
+  visibleCheck.checked = item.available !== false;
+  visibleCheck.dataset.cartaAction = 'available';
+  visibleCheck.setAttribute('aria-label', 'Visible — ' + getPanelItemName(item));
+  const visibleSpan = document.createElement('span');
+  visibleSpan.textContent = item.available !== false ? 'Visible' : 'Oculto';
+  visibleCheck.addEventListener('change', () => {
+    visibleSpan.textContent = visibleCheck.checked ? 'Visible' : 'Oculto';
+  });
+  visibleRow.appendChild(visibleCheck);
+  visibleRow.appendChild(visibleSpan);
+  card.appendChild(visibleRow);
+
+  // Featured toggle — ONLY shown when item already has a featured value
+  if (item.featured && item.featured !== false) {
+    const featuredRow = document.createElement('label');
+    featuredRow.className = 'carta-card__toggle-row carta-card__toggle-row--featured';
+    const featuredCheck = document.createElement('input');
+    featuredCheck.type = 'checkbox';
+    featuredCheck.className = 'carta-card__toggle';
+    featuredCheck.checked = true;
+    featuredCheck.dataset.cartaAction = 'featured';
+    featuredCheck.dataset.featuredOriginal = String(item.featured);
+    featuredCheck.setAttribute('aria-label', 'Destacado — ' + getPanelItemName(item));
+    const featuredSpan = document.createElement('span');
+    featuredSpan.textContent = 'Destacado';
+    featuredRow.appendChild(featuredCheck);
+    featuredRow.appendChild(featuredSpan);
+    card.appendChild(featuredRow);
+  }
+
+  // Validation slot
+  const validation = document.createElement('p');
+  validation.className = 'carta-card__validation';
+  validation.hidden = true;
+  card.appendChild(validation);
+
+  return card;
+}
+
+function bindCartaEdit() {
+  const searchInput = document.getElementById('search-carta');
+  if (searchInput) {
+    searchInput.addEventListener('input', () => renderCarta(searchInput.value));
+  }
+
+  const container = document.getElementById('carta-list');
+  if (!container) return;
+
+  container.addEventListener('change', e => {
+    const card = e.target.closest('.carta-card');
+    if (!card) return;
+    const collection = card.dataset.collection;
+    const id = card.dataset.id;
+    const item = Array.isArray(state[collection])
+      ? state[collection].find(x => x.id === id)
+      : null;
+    if (!item) return;
+
+    const action = e.target.dataset.cartaAction;
+    const validation = card.querySelector('.carta-card__validation');
+
+    if (action === 'price') {
+      const field = e.target.dataset.field;
+      const raw = e.target.value.trim();
+      if (!raw) {
+        validation.textContent = 'El precio no puede estar vacío.';
+        validation.hidden = false;
+        return;
+      }
+      if (item.price_status === 'uncertain') {
+        validation.textContent = 'Este precio necesita confirmación — contacta con el administrador.';
+        validation.hidden = false;
+        return;
+      }
+      validation.hidden = true;
+      if (collection === 'wines') {
+        item[field] = parsePanelEuro(raw);
+      } else {
+        item[field || 'price'] = raw;
+      }
+      markDirty();
+    }
+
+    if (action === 'available') {
+      item.available = e.target.checked;
+      markDirty();
+    }
+
+    if (action === 'featured') {
+      const original = e.target.dataset.featuredOriginal;
+      item.featured = e.target.checked ? original : false;
+      markDirty();
+    }
+  });
 }
 
 function getPanelItemName(item) {
@@ -309,242 +487,6 @@ function getPanelCollectionItem(collection, id) {
   return Array.isArray(state && state[collection])
     ? state[collection].find(item => item.id === id)
     : null;
-}
-
-function createCatalogRow(group, item) {
-  const row = document.createElement('article');
-  row.className = 'catalog-row';
-  row.dataset.collection = group.collection;
-  row.dataset.id = item.id;
-
-  const main = document.createElement('div');
-  main.className = 'catalog-row__main';
-
-  const nameInput = document.createElement('input');
-  nameInput.type = 'text';
-  nameInput.className = 'field-input catalog-name-input';
-  nameInput.value = getPanelItemName(item);
-  nameInput.dataset.action = 'name';
-  nameInput.dataset.collection = group.collection;
-  nameInput.dataset.id = item.id;
-  nameInput.setAttribute('aria-label', 'Nombre');
-  main.appendChild(nameInput);
-
-  if (group.categories) {
-    main.appendChild(createCategorySelect(group, item));
-  }
-
-  const prices = document.createElement('div');
-  prices.className = 'catalog-row__prices';
-  group.priceFields.forEach(field => {
-    const wrap = document.createElement('label');
-    wrap.className = 'catalog-price-field';
-    const label = field === 'price_bottle' ? 'Botella' : field === 'price_glass' ? 'Copa' : 'Precio';
-    wrap.innerHTML = `<span>${label}</span>`;
-    const input = document.createElement('input');
-    input.type = 'text';
-    input.inputMode = 'decimal';
-    input.className = 'field-input catalog-price-input';
-    input.value = formatPanelEuro(item[field]).replace(' €', '');
-    input.dataset.action = 'price';
-    input.dataset.collection = group.collection;
-    input.dataset.id = item.id;
-    input.dataset.field = field;
-    input.setAttribute('aria-label', label);
-    wrap.appendChild(input);
-    prices.appendChild(wrap);
-  });
-  main.appendChild(prices);
-  main.appendChild(createAllergenSelector(group, item));
-
-  const actions = document.createElement('div');
-  actions.className = 'catalog-row__actions';
-
-  const activeLabel = document.createElement('label');
-  activeLabel.className = 'catalog-active';
-  activeLabel.innerHTML = '<span>Visible</span>';
-  const active = document.createElement('input');
-  active.type = 'checkbox';
-  active.checked = item.available !== false;
-  active.dataset.action = 'available';
-  active.dataset.collection = group.collection;
-  active.dataset.id = item.id;
-  activeLabel.appendChild(active);
-  actions.appendChild(activeLabel);
-
-  const deleteBtn = document.createElement('button');
-  deleteBtn.type = 'button';
-  deleteBtn.className = 'catalog-delete';
-  deleteBtn.dataset.action = 'delete';
-  deleteBtn.dataset.collection = group.collection;
-  deleteBtn.dataset.id = item.id;
-  deleteBtn.textContent = 'Borrar';
-  deleteBtn.setAttribute('aria-label', `Borrar ${getPanelItemName(item)}`);
-  actions.appendChild(deleteBtn);
-
-  row.appendChild(main);
-  row.appendChild(actions);
-  return row;
-}
-
-function createCategorySelect(group, item) {
-  const select = document.createElement('select');
-  select.className = 'field-select catalog-category-select';
-  select.dataset.action = 'category';
-  select.dataset.collection = group.collection;
-  select.dataset.id = item.id;
-  select.setAttribute('aria-label', 'Categoría');
-
-  const categories = (state.categories || []).filter(cat => {
-    if (!group.categories) return false;
-    if (group.categories === 'food') return cat.type === 'food' || !cat.type;
-    return cat.type === group.categories;
-  });
-
-  categories.forEach(cat => {
-    const option = document.createElement('option');
-    option.value = cat.id;
-    option.textContent = cat.name && cat.name.es ? cat.name.es : cat.id;
-    option.selected = item.category_id === cat.id;
-    select.appendChild(option);
-  });
-
-  return select;
-}
-
-function bindPreciosEdit() {
-  const list = document.getElementById('precios-list');
-  if (!list) return;
-
-  list.addEventListener('click', e => {
-    const addBtn = e.target.closest('[data-action="add"]');
-    if (addBtn) {
-      addCatalogItem(addBtn.dataset.collection);
-      return;
-    }
-
-    const deleteBtn = e.target.closest('[data-action="delete"]');
-    if (!deleteBtn) return;
-
-    const item = getPanelCollectionItem(deleteBtn.dataset.collection, deleteBtn.dataset.id);
-    const name = getPanelItemName(item);
-    if (!window.confirm(`¿Borrar "${name}"?`)) return;
-    if (deletePanelItem(state, deleteBtn.dataset.collection, deleteBtn.dataset.id)) {
-      renderPrecios(document.getElementById('search-precios')?.value || '');
-      markDirty();
-    }
-  });
-
-  list.addEventListener('change', e => {
-    const target = e.target;
-    const action = target.dataset.action;
-    const collection = target.dataset.collection;
-    const id = target.dataset.id;
-    if (!action || !collection || !id) return;
-
-    const item = getPanelCollectionItem(collection, id);
-    if (!item) return;
-
-    if (action === 'name') {
-      if (!item.name || typeof item.name !== 'object') item.name = { es: '', en: '', fr: '' };
-      item.name.es = target.value.trim();
-    } else if (action === 'price') {
-      item[target.dataset.field] = collection === 'wines' ? parsePanelEuro(target.value) : target.value.trim();
-    } else if (action === 'category') {
-      item.category_id = target.value;
-    } else if (action === 'available') {
-      item.available = target.checked;
-    } else if (action === 'allergen') {
-      setPanelItemAllergen(state, collection, id, target.dataset.allergen, target.checked);
-    }
-    markDirty();
-  });
-
-  // Búsqueda en tiempo real
-  const searchInput = document.getElementById('search-precios');
-  if (searchInput) {
-    searchInput.addEventListener('input', () => {
-      renderPrecios(searchInput.value);
-      // Re-bind (el contenedor se reemplaza)
-    });
-  }
-}
-
-function createAllergenSelector(group, item) {
-  const defs = Array.isArray(state.allergens) ? state.allergens : [];
-  const selected = new Set(Array.isArray(item.allergens) ? item.allergens : []);
-  const details = document.createElement('details');
-  details.className = 'catalog-allergens';
-
-  const summary = document.createElement('summary');
-  summary.textContent = `Alérgenos (${selected.size})`;
-  details.appendChild(summary);
-
-  const grid = document.createElement('div');
-  grid.className = 'catalog-allergens__grid';
-  defs.forEach(def => {
-    const label = document.createElement('label');
-    label.className = 'catalog-allergen-option';
-    const input = document.createElement('input');
-    input.type = 'checkbox';
-    input.checked = selected.has(def.id);
-    input.dataset.action = 'allergen';
-    input.dataset.collection = group.collection;
-    input.dataset.id = item.id;
-    input.dataset.allergen = def.id;
-    const text = document.createElement('span');
-    text.textContent = def.label && def.label.es ? def.label.es : def.id;
-    label.appendChild(input);
-    label.appendChild(text);
-    grid.appendChild(label);
-  });
-
-  if (!defs.length) {
-    const empty = document.createElement('p');
-    empty.className = 'empty-state empty-state--compact';
-    empty.textContent = 'No hay catálogo de alérgenos.';
-    grid.appendChild(empty);
-  }
-
-  details.appendChild(grid);
-  return details;
-}
-
-function addCatalogItem(collection) {
-  const group = getCatalogGroups().find(g => g.collection === collection);
-  if (!group) return;
-
-  const name = window.prompt(`Nombre para ${group.label.toLowerCase()}:`);
-  if (!name || !name.trim()) {
-    showError('Escribe un nombre para añadir el elemento.');
-    return;
-  }
-
-  const price = window.prompt('Precio inicial (opcional):') || '';
-  const existingIds = new Set((state[collection] || []).map(item => item.id));
-  const firstCategory = group.categories
-    ? (state.categories || []).find(cat => group.categories === 'food' ? (cat.type === 'food' || !cat.type) : cat.type === group.categories)
-    : null;
-
-  const item = createPanelItem(collection, {
-    name: name.trim(),
-    price,
-    price_glass: collection === 'wines' ? price : '',
-    category_id: firstCategory ? firstCategory.id : '',
-  }, existingIds);
-
-  addPanelItem(state, collection, item);
-  renderPrecios(document.getElementById('search-precios')?.value || '');
-  markDirty();
-}
-
-function getPanelPriceDisplay(item) {
-  if (item._type === 'wine') {
-    const label = item._priceField === 'price_bottle' ? 'Bot.' : 'Copa';
-    const value = item[item._priceField];
-    return value ? `${label} ${formatPanelEuro(value)}` : '—';
-  }
-  return item.price || '—';
 }
 
 function formatPanelEuro(value) {
@@ -697,7 +639,8 @@ function renderHorarios() {
 
   container.innerHTML = '';
 
-  state.hours.forEach((dayData, index) => {
+  const schedule = Array.isArray(state.hours) ? state.hours : (state.hours.schedule || []);
+  schedule.forEach((dayData, index) => {
     const card = document.createElement('div');
     card.className = 'hours-card';
     card.dataset.index = index;
@@ -713,7 +656,7 @@ function renderHorarios() {
       `hours-toggle-${index}`,
       dayData.status !== 'closed',
       (checked) => {
-        state.hours[index].status = checked ? 'open' : 'closed';
+        schedule[index].status = checked ? 'open' : 'closed';
         renderHorarios();
         markDirty();
       }
@@ -728,7 +671,7 @@ function renderHorarios() {
       periodsWrap.className = 'hours-periods';
 
       (dayData.periods || []).forEach((period, pIndex) => {
-        const periodRow = createPeriodRow(index, pIndex, period);
+        const periodRow = createPeriodRow(schedule, index, pIndex, period);
         periodsWrap.appendChild(periodRow);
       });
 
@@ -736,7 +679,7 @@ function renderHorarios() {
       addBtn.className = 'btn btn--ghost btn--small hours-add-period';
       addBtn.textContent = '+ Añadir franja horaria';
       addBtn.addEventListener('click', () => {
-        state.hours[index].periods.push({ open: '13:00', close: '16:00' });
+        schedule[index].periods.push({ open: '13:00', close: '16:00' });
         renderHorarios();
         markDirty();
       });
@@ -749,19 +692,19 @@ function renderHorarios() {
   });
 }
 
-function createPeriodRow(dayIndex, pIndex, period) {
+function createPeriodRow(schedule, dayIndex, pIndex, period) {
   const row = document.createElement('div');
   row.className = 'period-row';
 
   const openInput  = createTimeInput(period.open,  val => {
-    state.hours[dayIndex].periods[pIndex].open = val;
+    schedule[dayIndex].periods[pIndex].open = val;
     markDirty();
   });
   const sep = document.createElement('span');
   sep.className = 'period-sep';
   sep.textContent = '—';
   const closeInput = createTimeInput(period.close, val => {
-    state.hours[dayIndex].periods[pIndex].close = val;
+    schedule[dayIndex].periods[pIndex].close = val;
     markDirty();
   });
 
@@ -770,9 +713,9 @@ function createPeriodRow(dayIndex, pIndex, period) {
   removeBtn.setAttribute('aria-label', 'Eliminar esta franja');
   removeBtn.textContent = '✕';
   removeBtn.addEventListener('click', () => {
-    state.hours[dayIndex].periods.splice(pIndex, 1);
-    if (state.hours[dayIndex].periods.length === 0) {
-      state.hours[dayIndex].status = 'closed';
+    schedule[dayIndex].periods.splice(pIndex, 1);
+    if (schedule[dayIndex].periods.length === 0) {
+      schedule[dayIndex].status = 'closed';
     }
     renderHorarios();
     markDirty();
@@ -792,6 +735,182 @@ function createTimeInput(value, onChange) {
   input.className = 'time-input';
   input.addEventListener('change', () => onChange(input.value));
   return input;
+}
+
+// ── Excepciones de horario ────────────────────────────────────
+
+function renderExceptions() {
+  const container = document.getElementById('exceptions-list');
+  if (!container || !state) return;
+
+  const hours = state.hours;
+  if (!hours || Array.isArray(hours)) return; // old format, skip
+  const exceptions = Array.isArray(hours.exceptions) ? hours.exceptions : [];
+
+  container.innerHTML = '';
+
+  if (!exceptions.length) {
+    const empty = document.createElement('p');
+    empty.className = 'empty-state empty-state--compact';
+    empty.textContent = 'Sin excepciones. Añade un cierre especial o apertura extraordinaria.';
+    container.appendChild(empty);
+    return;
+  }
+
+  exceptions.forEach((exc, index) => {
+    container.appendChild(createExceptionRow(exc, index));
+  });
+}
+
+function createExceptionRow(exc, index) {
+  const row = document.createElement('div');
+  row.className = 'exception-row';
+  row.dataset.index = index;
+
+  // Date picker
+  const dateInput = document.createElement('input');
+  dateInput.type = 'date';
+  dateInput.className = 'field-input exception-date';
+  dateInput.value = exc.date || '';
+  dateInput.setAttribute('aria-label', 'Fecha de la excepción');
+  dateInput.addEventListener('change', () => {
+    const liveIndex = parseInt(row.dataset.index, 10);
+    const newDate = dateInput.value;
+    const duplicate = state.hours.exceptions.some((e, i) => i !== liveIndex && e.date === newDate);
+    if (duplicate) {
+      showError('Ya existe una excepción para esa fecha. Elige otra fecha.');
+      dateInput.value = state.hours.exceptions[liveIndex].date || ''; // revert
+      return;
+    }
+    state.hours.exceptions[liveIndex].date = newDate;
+    markDirty();
+  });
+
+  // Status select
+  const statusSelect = document.createElement('select');
+  statusSelect.className = 'field-select exception-status';
+  statusSelect.setAttribute('aria-label', 'Estado de la excepción');
+  [
+    { value: 'closed', label: 'Cerrado' },
+    { value: 'open',   label: 'Apertura especial' },
+  ].forEach(opt => {
+    const option = document.createElement('option');
+    option.value = opt.value;
+    option.textContent = opt.label;
+    option.selected = exc.status === opt.value;
+    statusSelect.appendChild(option);
+  });
+  statusSelect.addEventListener('change', () => {
+    const liveIndex = parseInt(row.dataset.index, 10);
+    state.hours.exceptions[liveIndex].status = statusSelect.value;
+    if (statusSelect.value === 'open' && !Array.isArray(state.hours.exceptions[liveIndex].periods)) {
+      state.hours.exceptions[liveIndex].periods = [{ open: '13:00', close: '16:00' }];
+    }
+    renderExceptions();
+    markDirty();
+  });
+
+  // Label input (Spanish only)
+  const labelInput = document.createElement('input');
+  labelInput.type = 'text';
+  labelInput.className = 'field-input exception-label';
+  labelInput.placeholder = 'Motivo (ej: Feria de Granada)';
+  labelInput.value = exc.label && exc.label.es ? exc.label.es : '';
+  labelInput.setAttribute('aria-label', 'Motivo del cierre o apertura especial');
+  labelInput.addEventListener('change', () => {
+    const liveIndex = parseInt(row.dataset.index, 10);
+    if (!state.hours.exceptions[liveIndex].label) state.hours.exceptions[liveIndex].label = {};
+    state.hours.exceptions[liveIndex].label.es = labelInput.value.trim();
+    markDirty();
+  });
+
+  // Remove button
+  const removeBtn = document.createElement('button');
+  removeBtn.type = 'button';
+  removeBtn.className = 'exception-remove';
+  removeBtn.textContent = '✕';
+  removeBtn.setAttribute('aria-label', 'Eliminar esta excepción');
+  removeBtn.addEventListener('click', () => {
+    const liveIndex = parseInt(row.dataset.index, 10);
+    state.hours.exceptions.splice(liveIndex, 1);
+    renderExceptions();
+    markDirty();
+  });
+
+  row.appendChild(dateInput);
+  row.appendChild(statusSelect);
+  row.appendChild(labelInput);
+  row.appendChild(removeBtn);
+
+  // If open: show period inputs
+  if (exc.status === 'open') {
+    const periods = Array.isArray(exc.periods) ? exc.periods : [{ open: '13:00', close: '16:00' }];
+    if (!Array.isArray(exc.periods)) state.hours.exceptions[index].periods = periods;
+
+    const periodsDiv = document.createElement('div');
+    periodsDiv.className = 'exception-periods';
+
+    periods.forEach((period, pIndex) => {
+      const periodRow = document.createElement('div');
+      periodRow.className = 'period-row';
+
+      const openInput = createTimeInput(period.open, val => {
+        state.hours.exceptions[index].periods[pIndex].open = val;
+        // Validate close > open
+        const p = state.hours.exceptions[index].periods[pIndex];
+        if (p.close && p.close <= val) {
+          showError('La hora de cierre debe ser posterior a la de apertura.');
+        }
+        markDirty();
+      });
+      const sep = document.createElement('span');
+      sep.className = 'period-sep';
+      sep.textContent = '—';
+      const closeInput = createTimeInput(period.close, val => {
+        const p = state.hours.exceptions[index].periods[pIndex];
+        if (p.open && val <= p.open) {
+          showError('La hora de cierre debe ser posterior a la de apertura.');
+        }
+        state.hours.exceptions[index].periods[pIndex].close = val;
+        markDirty();
+      });
+
+      periodRow.appendChild(openInput);
+      periodRow.appendChild(sep);
+      periodRow.appendChild(closeInput);
+      periodsDiv.appendChild(periodRow);
+    });
+    row.appendChild(periodsDiv);
+  }
+
+  return row;
+}
+
+function bindExceptions() {
+  const addBtn = document.getElementById('add-exception-btn');
+  if (!addBtn) return;
+
+  addBtn.addEventListener('click', () => {
+    if (!state.hours || Array.isArray(state.hours)) return;
+    if (!Array.isArray(state.hours.exceptions)) state.hours.exceptions = [];
+
+    const tomorrow = new Date();
+    tomorrow.setDate(tomorrow.getDate() + 1);
+    const iso = tomorrow.toISOString().slice(0, 10);
+
+    if (state.hours.exceptions.some(e => e.date === iso)) {
+      showError('Ya existe una excepción para esa fecha. Elige otra fecha.');
+      return;
+    }
+
+    state.hours.exceptions.push({
+      date: iso,
+      status: 'closed',
+      label: { es: '' },
+    });
+    renderExceptions();
+    markDirty();
+  });
 }
 
 // ══════════════════════════════════════════════════════════════
@@ -868,12 +987,14 @@ function ensureDailyMenuField(field) {
 
 function getDailyMenuItems(field) {
   const data = ensureDailyMenuField(field);
-  return splitPanelListText(data.es || '');
+  const val = data.es;
+  if (Array.isArray(val)) return [...val];
+  return splitPanelListText(val || ''); // backward compat
 }
 
 function setDailyMenuItems(field, items) {
   const data = ensureDailyMenuField(field);
-  data.es = joinPanelListItems(items);
+  data.es = items.filter(Boolean); // always write as array
   markDailyMenuTextDirty();
 }
 
@@ -1002,9 +1123,15 @@ function bindMenuDelDia() {
 
 function copySpanishFallback(field) {
   if (!field || typeof field !== 'object') return;
-  const es = typeof field.es === 'string' ? field.es.trim() : '';
-  field.en = es;
-  field.fr = es;
+  const es = field.es;
+  if (Array.isArray(es)) {
+    if (!Array.isArray(field.en) || !field.en.length) field.en = [...es];
+    if (!Array.isArray(field.fr) || !field.fr.length) field.fr = [...es];
+  } else {
+    const str = typeof es === 'string' ? es.trim() : '';
+    if (!field.en) field.en = str;
+    if (!field.fr) field.fr = str;
+  }
 }
 
 function syncDailyMenuFallbackTranslations() {
@@ -1617,7 +1744,7 @@ async function saveAll() {
     }
 
     if (resp.status === 409) {
-      showError('La información del restaurante fue modificada mientras trabajabas. Recarga el panel y vuelve a hacer tus cambios.');
+      showError('Alguien más guardó cambios mientras editabas. Recarga la página y vuelve a intentarlo. Tus cambios no se han perdido — están en el panel hasta que recargues.');
       if (saveBtn)  { saveBtn.disabled = false; saveBtn.textContent = 'Publicar en la web'; }
       return;
     }
@@ -1628,7 +1755,13 @@ async function saveAll() {
 
     dirty = false;
     dailyMenuTextDirty = false;
-    if (statusEl) statusEl.textContent = '✓ Publicado. Tu web se actualizará en unos 30 segundos.';
+
+    const now = new Date();
+    const hhmm = now.toLocaleTimeString('es-ES', { hour: '2-digit', minute: '2-digit' });
+    if (statusEl) {
+      statusEl.textContent = `Guardado a las ${hhmm}`;
+      statusEl.style.display = 'inline';
+    }
     if (saveBtn)  { saveBtn.textContent = 'Publicar en la web'; saveBtn.disabled = false; }
 
     // Show undo button for 60 seconds
@@ -1638,13 +1771,6 @@ async function saveAll() {
       undoBtn.textContent = 'Deshacer';
       undoTimer = setTimeout(() => { undoBtn.hidden = true; }, 60000);
     }
-
-    // Clear the confirmation message after 6 s
-    setTimeout(() => {
-      if (statusEl && statusEl.textContent === '✓ Publicado. Tu web se actualizará en unos 30 segundos.') {
-        statusEl.textContent = '';
-      }
-    }, 6000);
 
   } catch {
     showError('Error de conexión. Comprueba tu internet e inténtalo de nuevo.');
@@ -1706,7 +1832,8 @@ function showError(msg) {
 
 function bindEvents() {
   bindTabNav();
-  bindPreciosEdit();
+  bindCartaEdit();
+  bindExceptions();
   bindMenuDelDia();
   bindAvisoEvents();
   bindCariocaEvents();

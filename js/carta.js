@@ -62,11 +62,33 @@
   };
 
   // ─── SERVICE TIME HELPER ─────────────────────────────────────────────────────
+  function getHoursSchedule(hours) {
+    if (!hours) return [];
+    return Array.isArray(hours) ? hours : (hours.schedule || []);
+  }
+
   function isNowServiceTime(hours) {
+    const schedule = getHoursSchedule(hours);
     const now = new Date();
     const dayKeys = ['sunday','monday','tuesday','wednesday','thursday','friday','saturday'];
     const todayKey = dayKeys[now.getDay()];
-    const todayEntry = (hours || []).find(h => h.day === todayKey);
+
+    // Check date exceptions first
+    const exceptions = Array.isArray(hours && hours.exceptions) ? hours.exceptions : [];
+    const todayISO = now.toISOString().slice(0, 10);
+    const exception = exceptions.find(e => e.date === todayISO);
+    if (exception) {
+      if (exception.status === 'closed') return false;
+      if (exception.status === 'open' && exception.periods) {
+        const nowMins = now.getHours() * 60 + now.getMinutes();
+        return exception.periods.some(p => {
+          const mins = str => { const s = str.split(':'); return parseInt(s[0],10)*60+parseInt(s[1],10); };
+          return nowMins >= mins(p.open) && nowMins < mins(p.close);
+        });
+      }
+    }
+
+    const todayEntry = schedule.find(h => h.day === todayKey);
     if (!todayEntry || todayEntry.status === 'closed' || !todayEntry.periods || !todayEntry.periods.length) return false;
     const nowMins = now.getHours() * 60 + now.getMinutes();
     return todayEntry.periods.some(function(p) {

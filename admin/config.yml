@@ -359,7 +359,6 @@ collections:
               - { name: phone, label: "Teléfono", widget: string }
               - { name: phone_link, label: "Enlace telefónico (tel:)", widget: string }
               - { name: email, label: "Email (opcional)", widget: string, required: false }
-              - { name: whatsapp, label: "WhatsApp", widget: string }
 
           # ── REDES SOCIALES ──────────────────────────────────────
           - name: social

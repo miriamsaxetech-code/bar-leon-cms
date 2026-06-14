@@ -1168,3 +1168,212 @@ body {
 .pizarra-price-input {
   min-height: 40px;
 }
+
+/* ══════════════════════════════════════════════════════════════
+   TAB: CARTA
+   ══════════════════════════════════════════════════════════════ */
+
+.carta-list {
+  display: flex;
+  flex-direction: column;
+}
+
+.carta-collection {
+  margin-bottom: 8px;
+}
+
+.carta-collection__title {
+  font-size: 0.7rem;
+  font-weight: 700;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: var(--ink-2);
+  padding: 12px 16px 4px;
+  margin: 0;
+}
+
+.carta-accordion {
+  border-bottom: 1px solid var(--border);
+}
+
+.carta-accordion__summary {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 12px 16px;
+  cursor: pointer;
+  list-style: none;
+  user-select: none;
+  -webkit-user-select: none;
+  background: var(--bg);
+}
+
+.carta-accordion__summary::-webkit-details-marker { display: none; }
+
+.carta-accordion__summary::after {
+  content: '›';
+  display: inline-block;
+  font-size: 1.1rem;
+  color: var(--ink-2);
+  transition: transform 0.15s;
+  margin-left: 8px;
+}
+
+details[open] .carta-accordion__summary::after {
+  transform: rotate(90deg);
+}
+
+.carta-accordion__label {
+  font-size: 0.95rem;
+  font-weight: 600;
+  color: var(--ink);
+}
+
+.carta-accordion__count {
+  font-size: 0.8rem;
+  color: var(--ink-2);
+  background: var(--bg-2);
+  padding: 2px 8px;
+  border-radius: 20px;
+}
+
+.carta-card {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  padding: 12px 16px;
+  border-bottom: 1px solid var(--border);
+  background: var(--white);
+}
+
+.carta-card:last-child {
+  border-bottom: none;
+}
+
+.carta-card__name {
+  font-size: 0.95rem;
+  font-weight: 600;
+  color: var(--ink);
+}
+
+.carta-card__price-wrap {
+  display: flex;
+  gap: 12px;
+  flex-wrap: wrap;
+}
+
+.carta-price-label {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  font-size: 0.8rem;
+  color: var(--ink-2);
+}
+
+.carta-card__price-input {
+  width: 100px;
+  padding: 6px 8px;
+  border: 1px solid var(--border);
+  border-radius: var(--radius-sm);
+  font-size: 0.9rem;
+  font-family: var(--font);
+  background: var(--bg);
+  color: var(--ink);
+}
+
+.carta-card__price-input:focus {
+  outline: 2px solid var(--accent);
+  outline-offset: 1px;
+}
+
+.carta-card__toggle-row {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  font-size: 0.85rem;
+  color: var(--ink-2);
+  cursor: pointer;
+}
+
+.carta-card__toggle-row--featured {
+  color: var(--error-bg);
+}
+
+.carta-card__toggle {
+  width: 16px;
+  height: 16px;
+  accent-color: var(--accent);
+  cursor: pointer;
+}
+
+.carta-card__validation {
+  font-size: 0.8rem;
+  color: var(--error-bg);
+  margin: 0;
+  padding: 4px 0;
+}
+
+/* ── Excepciones de horario ──────────────────────────────────── */
+
+.exceptions-section {
+  padding: 16px 0 8px;
+  border-top: 1px solid var(--border);
+  margin-top: 8px;
+}
+
+.exceptions-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 0 16px 8px;
+}
+
+.exceptions-title {
+  font-size: 0.85rem;
+  font-weight: 700;
+  color: var(--ink-2);
+  margin: 0;
+  text-transform: uppercase;
+  letter-spacing: 0.06em;
+}
+
+.exceptions-list {
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+}
+
+.exception-row {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+  padding: 10px 16px;
+  background: var(--bg-2);
+  border-radius: var(--radius-sm);
+  margin: 0 8px;
+  position: relative;
+}
+
+.exception-date { width: auto; }
+
+.exception-label { font-size: 0.9rem; }
+
+.exception-remove {
+  position: absolute;
+  top: 8px;
+  right: 8px;
+  background: none;
+  border: none;
+  cursor: pointer;
+  font-size: 1rem;
+  color: var(--ink-2);
+  padding: 4px;
+  line-height: 1;
+}
+
+.exception-remove:hover { color: var(--error-bg); }
+
+.exception-periods {
+  padding-top: 4px;
+  border-top: 1px solid var(--border);
+}
