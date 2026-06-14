@@ -508,98 +508,101 @@
     },
     "focal_point": "center"
   },
-  "hours": [
-    {
-      "day": "monday",
-      "status": "open",
-      "periods": [
-        {
-          "open": "13:00",
-          "close": "16:00"
-        },
-        {
-          "open": "20:00",
-          "close": "23:00"
+  "hours": {
+    "schedule": [
+      {
+        "day": "monday",
+        "status": "open",
+        "periods": [
+          {
+            "open": "13:00",
+            "close": "16:00"
+          },
+          {
+            "open": "20:00",
+            "close": "23:00"
+          }
+        ]
+      },
+      {
+        "day": "tuesday",
+        "status": "partial",
+        "periods": [
+          {
+            "open": "13:00",
+            "close": "16:00"
+          }
+        ],
+        "note": {
+          "es": "Solo mediodía",
+          "en": "Lunch only",
+          "fr": "Déjeuner uniquement"
         }
-      ]
-    },
-    {
-      "day": "tuesday",
-      "status": "partial",
-      "periods": [
-        {
-          "open": "13:00",
-          "close": "16:00"
-        }
-      ],
-      "note": {
-        "es": "Solo mediodía",
-        "en": "Lunch only",
-        "fr": "Déjeuner uniquement"
+      },
+      {
+        "day": "wednesday",
+        "status": "closed",
+        "periods": []
+      },
+      {
+        "day": "thursday",
+        "status": "open",
+        "periods": [
+          {
+            "open": "13:00",
+            "close": "16:00"
+          },
+          {
+            "open": "20:00",
+            "close": "23:00"
+          }
+        ]
+      },
+      {
+        "day": "friday",
+        "status": "open",
+        "periods": [
+          {
+            "open": "13:00",
+            "close": "16:00"
+          },
+          {
+            "open": "20:30",
+            "close": "23:30"
+          }
+        ]
+      },
+      {
+        "day": "saturday",
+        "status": "open",
+        "periods": [
+          {
+            "open": "13:00",
+            "close": "16:00"
+          },
+          {
+            "open": "20:00",
+            "close": "23:30"
+          }
+        ]
+      },
+      {
+        "day": "sunday",
+        "status": "open",
+        "periods": [
+          {
+            "open": "13:00",
+            "close": "16:00"
+          },
+          {
+            "open": "20:00",
+            "close": "23:00"
+          }
+        ]
       }
-    },
-    {
-      "day": "wednesday",
-      "status": "closed",
-      "periods": []
-    },
-    {
-      "day": "thursday",
-      "status": "open",
-      "periods": [
-        {
-          "open": "13:00",
-          "close": "16:00"
-        },
-        {
-          "open": "20:00",
-          "close": "23:00"
-        }
-      ]
-    },
-    {
-      "day": "friday",
-      "status": "open",
-      "periods": [
-        {
-          "open": "13:00",
-          "close": "16:00"
-        },
-        {
-          "open": "20:30",
-          "close": "23:30"
-        }
-      ]
-    },
-    {
-      "day": "saturday",
-      "status": "open",
-      "periods": [
-        {
-          "open": "13:00",
-          "close": "16:00"
-        },
-        {
-          "open": "20:00",
-          "close": "23:30"
-        }
-      ]
-    },
-    {
-      "day": "sunday",
-      "status": "open",
-      "periods": [
-        {
-          "open": "13:00",
-          "close": "16:00"
-        },
-        {
-          "open": "20:00",
-          "close": "23:00"
-        }
-      ]
-    }
-  ],
+    ],
+    "exceptions": []
+  },
   "daily_menu": {
     "active": true,
     "price": 12.5,

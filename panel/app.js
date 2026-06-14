@@ -697,7 +697,8 @@ function renderHorarios() {
 
   container.innerHTML = '';
 
-  state.hours.forEach((dayData, index) => {
+  const schedule = Array.isArray(state.hours) ? state.hours : (state.hours.schedule || []);
+  schedule.forEach((dayData, index) => {
     const card = document.createElement('div');
     card.className = 'hours-card';
     card.dataset.index = index;
@@ -713,7 +714,7 @@ function renderHorarios() {
       `hours-toggle-${index}`,
       dayData.status !== 'closed',
       (checked) => {
-        state.hours[index].status = checked ? 'open' : 'closed';
+        schedule[index].status = checked ? 'open' : 'closed';
         renderHorarios();
         markDirty();
       }
@@ -728,7 +729,7 @@ function renderHorarios() {
       periodsWrap.className = 'hours-periods';
 
       (dayData.periods || []).forEach((period, pIndex) => {
-        const periodRow = createPeriodRow(index, pIndex, period);
+        const periodRow = createPeriodRow(schedule, index, pIndex, period);
         periodsWrap.appendChild(periodRow);
       });
 
@@ -736,7 +737,7 @@ function renderHorarios() {
       addBtn.className = 'btn btn--ghost btn--small hours-add-period';
       addBtn.textContent = '+ Añadir franja horaria';
       addBtn.addEventListener('click', () => {
-        state.hours[index].periods.push({ open: '13:00', close: '16:00' });
+        schedule[index].periods.push({ open: '13:00', close: '16:00' });
         renderHorarios();
         markDirty();
       });
@@ -749,19 +750,19 @@ function renderHorarios() {
   });
 }
 
-function createPeriodRow(dayIndex, pIndex, period) {
+function createPeriodRow(schedule, dayIndex, pIndex, period) {
   const row = document.createElement('div');
   row.className = 'period-row';
 
   const openInput  = createTimeInput(period.open,  val => {
-    state.hours[dayIndex].periods[pIndex].open = val;
+    schedule[dayIndex].periods[pIndex].open = val;
     markDirty();
   });
   const sep = document.createElement('span');
   sep.className = 'period-sep';
   sep.textContent = '—';
   const closeInput = createTimeInput(period.close, val => {
-    state.hours[dayIndex].periods[pIndex].close = val;
+    schedule[dayIndex].periods[pIndex].close = val;
     markDirty();
   });
 
@@ -770,9 +771,9 @@ function createPeriodRow(dayIndex, pIndex, period) {
   removeBtn.setAttribute('aria-label', 'Eliminar esta franja');
   removeBtn.textContent = '✕';
   removeBtn.addEventListener('click', () => {
-    state.hours[dayIndex].periods.splice(pIndex, 1);
-    if (state.hours[dayIndex].periods.length === 0) {
-      state.hours[dayIndex].status = 'closed';
+    schedule[dayIndex].periods.splice(pIndex, 1);
+    if (schedule[dayIndex].periods.length === 0) {
+      schedule[dayIndex].status = 'closed';
     }
     renderHorarios();
     markDirty();
