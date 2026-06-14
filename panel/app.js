@@ -707,6 +707,7 @@ function createPanelItem(collection, values, existingIds) {
       region: values.region || '',
       price_glass: parsePanelEuro(values.price_glass || values.price || ''),
       price_bottle: parsePanelEuro(values.price_bottle || ''),
+      price_status: 'pending',
       available: true,
       allergens: [],
     };
@@ -718,6 +719,7 @@ function createPanelItem(collection, values, existingIds) {
       name: nameField,
       price: values.price || '',
       category_id: values.category_id || '',
+      price_status: 'pending',
       available: true,
       allergens: [],
     };
@@ -729,6 +731,9 @@ function createPanelItem(collection, values, existingIds) {
     description: { es: '', en: '', fr: '' },
     price: values.price || '',
     category_id: values.category_id || '',
+    price_status: 'pending',
+    allergen_status: 'pending',
+    allergens_confirmed: [],
     available: true,
     allergens: [],
   };
