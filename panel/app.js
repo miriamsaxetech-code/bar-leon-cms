@@ -307,6 +307,69 @@ function renderCarta(filter) {
   if (!container.children.length) {
     container.innerHTML = '<p class="empty-state">No se encontraron resultados.</p>';
   }
+
+  const papeleraContainer = document.createElement('div');
+  papeleraContainer.id = 'papelera-container';
+  container.appendChild(papeleraContainer);
+  renderPapelera();
+}
+
+function renderPapelera() {
+  const container = document.getElementById('papelera-container');
+  if (!container || !state) return;
+  container.innerHTML = '';
+
+  const deleted = [];
+  ['dishes', 'wines', 'beverages'].forEach(col => {
+    (state[col] || []).filter(x => x.deleted === true).forEach(item => {
+      deleted.push({ item, collection: col });
+    });
+  });
+
+  const details = document.createElement('details');
+  details.className = 'carta-papelera';
+
+  const summary = document.createElement('summary');
+  summary.className = 'carta-papelera__summary';
+  summary.innerHTML = `<span>Papelera</span><span class="carta-accordion__count">${deleted.length}</span>`;
+  details.appendChild(summary);
+
+  if (!deleted.length) {
+    const empty = document.createElement('p');
+    empty.className = 'empty-state empty-state--compact';
+    empty.textContent = 'La papelera está vacía.';
+    details.appendChild(empty);
+  }
+
+  deleted.forEach(({ item, collection }) => {
+    const row = document.createElement('div');
+    row.className = 'papelera-row';
+    row.dataset.id = item.id;
+    row.dataset.collection = collection;
+
+    const name = document.createElement('span');
+    name.className = 'papelera-row__name';
+    name.textContent = getPanelItemName(item);
+    row.appendChild(name);
+
+    const restoreBtn = document.createElement('button');
+    restoreBtn.type = 'button';
+    restoreBtn.className = 'btn--ghost btn--small';
+    restoreBtn.textContent = 'Restaurar';
+    restoreBtn.dataset.papeleraAction = 'restore';
+    row.appendChild(restoreBtn);
+
+    const deleteBtn = document.createElement('button');
+    deleteBtn.type = 'button';
+    deleteBtn.className = 'btn--ghost btn--small papelera-row__delete-btn';
+    deleteBtn.textContent = 'Eliminar';
+    deleteBtn.dataset.papeleraAction = 'delete';
+    row.appendChild(deleteBtn);
+
+    details.appendChild(row);
+  });
+
+  container.appendChild(details);
 }
 
 function createCartaAccordion(label, items, collection, categoryId) {
@@ -617,6 +680,44 @@ function bindCartaEdit() {
       return;
     }
   });
+
+  const cartaList = document.getElementById('carta-list');
+  if (cartaList) {
+    cartaList.addEventListener('click', e => {
+      const btn = e.target.closest('[data-papelera-action]');
+      if (!btn) return;
+      const row = btn.closest('.papelera-row');
+      if (!row) return;
+      const { collection, id } = row.dataset;
+      const action = btn.dataset.papeleraAction;
+
+      if (action === 'restore') {
+        restorePanelItem(state, collection, id);
+        markDirty();
+        renderCarta(document.getElementById('search-carta')?.value || '');
+        return;
+      }
+
+      if (action === 'delete') {
+        if (!btn.dataset.confirmPending) {
+          btn.dataset.confirmPending = '1';
+          btn.textContent = '¿Confirmar?';
+          btn.classList.add('papelera-row__delete-btn--confirm');
+          setTimeout(() => {
+            if (btn.dataset.confirmPending) {
+              delete btn.dataset.confirmPending;
+              btn.textContent = 'Eliminar';
+              btn.classList.remove('papelera-row__delete-btn--confirm');
+            }
+          }, 4000);
+          return;
+        }
+        hardDeletePanelItem(state, collection, id);
+        markDirty();
+        renderCarta(document.getElementById('search-carta')?.value || '');
+      }
+    });
+  }
 
   container.addEventListener('submit', e => {
     e.preventDefault();

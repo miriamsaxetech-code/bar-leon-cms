@@ -1448,3 +1448,56 @@ details[open] .carta-accordion__summary::after {
   color: var(--error-bg);
   margin: 0;
 }
+
+/* ── Papelera ───────────────────────────────────────────────── */
+
+.carta-papelera {
+  margin-top: 24px;
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  overflow: hidden;
+}
+
+.carta-papelera__summary {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 12px 16px;
+  cursor: pointer;
+  font-size: 0.85rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.06em;
+  color: var(--ink-2);
+  background: var(--bg-2);
+  list-style: none;
+  user-select: none;
+}
+
+.carta-papelera__summary::-webkit-details-marker { display: none; }
+
+.papelera-row {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  padding: 10px 16px;
+  border-top: 1px solid var(--border);
+  background: var(--white);
+}
+
+.papelera-row__name {
+  flex: 1;
+  font-size: 0.9rem;
+  color: var(--ink-2);
+  text-decoration: line-through;
+}
+
+.papelera-row__delete-btn {
+  color: var(--error-bg);
+  border-color: var(--error-bg);
+}
+
+.papelera-row__delete-btn--confirm {
+  background: var(--error-bg);
+  color: var(--white);
+}
