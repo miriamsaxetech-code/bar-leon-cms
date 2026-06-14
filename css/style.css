@@ -33,7 +33,7 @@ button:focus-visible,
 input:focus-visible,
 select:focus-visible,
 textarea:focus-visible {
-  outline: 2px solid var(--accent);
+  outline: 2px solid var(--azul);
   outline-offset: 4px;
 }
 
@@ -50,16 +50,22 @@ textarea:focus-visible {
 }
 
 :root {
-  --bg:         #F6F3EC;
-  --ink:        #1C1A17;
-  --accent:     #1D4D85;   /* azul fajalauza */
-  --muted:      #5C5752;
-  --faint:      rgba(29, 77, 133, 0.10);
-  --terracotta: #1D4D85;   /* unificado — azul fajalauza */
-  --ocre:       #3A6FA8;   /* azul fajalauza claro */
-  --tile-cream: #F2EAD8;
-  --tile-dark:  #1C1A17;
-  --tile-blue-detail: #1D4D85;
+  /* Base */
+  --bg:           #F6F3EC;   /* warm paper cream */
+  --ink:          #1C1A17;   /* body text */
+  --muted:        #5C5752;   /* secondary text, labels */
+
+  /* Primary identity — Azul Fajalauza */
+  --azul:         #1D4D85;   /* primary identity color: buttons, links, nav, borders */
+  --azul-claro:   #3A6FA8;   /* hover states, lighter identity washes */
+  --faint:        rgba(29, 77, 133, 0.10);   /* soft azul tint for hover backgrounds */
+
+  /* Restrained accent — Granate */
+  --granate:      #7A1C1C;   /* prices, featured badges, small emphasis only */
+  --granate-faint: rgba(122, 28, 28, 0.10);  /* price pill backgrounds */
+
+  /* Borders / cards */
+  --tile:         #E8E2D4;   /* card edges, dividers, tile borders */
 }
 
 html, body {
@@ -123,7 +129,7 @@ body {
 
 .masthead-rule {
   height: 3px;
-  background: var(--accent);
+  background: var(--azul);
   width: 100%;
 }
 
@@ -221,64 +227,50 @@ h2 {
   text-align: center;
 }
 
-/* ─── HERO TILE ─── */
-.home-hero { display: flex; flex-direction: column; margin-bottom: 20px; }
-
-.home-hero__tile {
-  position: relative;
-  overflow: hidden;
-  width: 100%;
-  height: clamp(210px, 58vw, 240px);
-  display: flex;
-  align-items: center;
-  justify-content: center;
-}
-
-.home-hero__img {
-  position: absolute;
-  inset: 0;
-  width: 100%;
-  height: 100%;
-  object-fit: cover;
-  object-position: center;
-  display: block;
-}
-
-.home-hero__scrim {
-  position: absolute;
-  inset: 0;
-  background: linear-gradient(to bottom, rgba(20,18,14,0.28) 0%, rgba(20,18,14,0.52) 100%);
-  pointer-events: none;
-}
-
-.home-hero__overlay {
-  position: relative;
-  z-index: 2;
+/* ─── LOCALIZED HOME MASTHEAD ─── */
+.home-hero {
   display: flex;
   flex-direction: column;
   align-items: center;
-  gap: 6px;
-  padding: 16px;
+  margin-bottom: 4px;
+}
+
+.home-hero__masthead {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: 10px 16px 18px;
+  border-bottom: 1px solid rgba(29, 77, 133, 0.24);
   text-align: center;
 }
 
 .home-hero__lion {
-  width: 60px;
+  width: clamp(86px, 23vw, 116px);
   height: auto;
   display: block;
-  margin: 0 auto 6px;
-  filter: drop-shadow(0 1px 4px rgba(0,0,0,0.45));
+  margin: 0 auto 12px;
+  filter: drop-shadow(0 2px 7px rgba(28, 26, 23, 0.12));
 }
 
 .home-hero__name {
   font-family: 'Playfair Display', Georgia, serif;
-  font-size: clamp(1.9rem, 6vw, 2.8rem);
+  font-size: clamp(2rem, 6vw, 3rem);
   font-weight: 700;
-  color: #f6f3ec;
+  color: var(--ink);
   line-height: 1;
   letter-spacing: 0.04em;
   margin: 0;
-  text-shadow: 0 1px 5px rgba(0,0,0,0.5);
+}
+
+.home-hero__name::before {
+  content: '';
+  display: block;
+  width: 36px;
+  height: 1px;
+  background: var(--azul);
+  opacity: 0.55;
+  margin: 0 auto 12px;
 }
 
 .home-hero__place {
@@ -286,13 +278,13 @@ h2 {
   font-size: 0.65rem;
   text-transform: uppercase;
   letter-spacing: 0.22em;
-  color: rgba(246,243,236,0.88);
-  margin: 0;
+  color: var(--muted);
+  margin: 10px 0 0;
 }
 
 @media (min-width: 541px) {
-  .home-hero__tile { height: clamp(240px, 38vw, 320px); }
-  .home-hero__lion { width: 80px; }
+  .home-hero__masthead { padding-top: 18px; }
+  .home-hero__lion { width: clamp(110px, 13vw, 140px); }
   .home-hero__name { font-size: clamp(2.4rem, 5vw, 3.4rem); }
 }
 
@@ -338,7 +330,7 @@ h2 {
 }
 
 .nav-primary a:hover {
-  color: var(--accent);
+  color: var(--azul);
 }
 
 .lang-selector {
@@ -365,7 +357,7 @@ h2 {
 }
 
 .lang-selector a:hover {
-  color: var(--accent);
+  color: var(--azul);
 }
 
 .lang-selector .lang-active {
@@ -385,9 +377,9 @@ h2 {
   margin: 40px 0 48px;
   position: relative;
   padding: 28px 32px;
-  background: var(--tile-cream);
+  background: var(--tile);
   border: 1px solid rgba(29, 77, 133, 0.18);
-  border-left: 3px solid var(--accent);
+  border-left: 3px solid var(--azul);
 }
 
 .azulejo-frame::before,
@@ -423,7 +415,7 @@ h2 {
   font-size: 0.72rem;
   text-transform: uppercase;
   letter-spacing: 0.08em;
-  color: var(--terracotta);
+  color: var(--azul);
   font-style: normal;
   font-weight: 600;
   position: relative;
@@ -435,7 +427,7 @@ h2 {
 /* ─── AVISO ─── */
 .aviso {
   font-size: 0.88rem;
-  color: var(--accent);
+  color: var(--azul);
   font-style: italic;
   margin-top: 12px;
   line-height: 1.5;
@@ -516,7 +508,7 @@ h2 {
 }
 
 .homepage-footer .phone-link:hover {
-  color: var(--accent);
+  color: var(--azul);
 }
 
 .owner-access {
@@ -585,7 +577,7 @@ h2 {
 }
 
 .carta-location-btn:hover {
-  color: var(--accent);
+  color: var(--azul);
   border-color: currentColor;
 }
 
@@ -605,7 +597,7 @@ h2 {
 }
 
 .carta-back:hover {
-  color: var(--accent);
+  color: var(--azul);
 }
 
 .carta-bar-name {
@@ -639,7 +631,7 @@ h2 {
 }
 
 .carta-lang-selector a:hover {
-  color: var(--accent);
+  color: var(--azul);
 }
 
 .carta-lang-selector .lang-active {
@@ -701,7 +693,7 @@ h2 {
 
 .menu-switch-btn:hover,
 .menu-switch-btn:focus-visible {
-  color: var(--accent);
+  color: var(--azul);
   outline: none;
 }
 
@@ -758,7 +750,7 @@ h2 {
 }
 
 .edict-head {
-  border-bottom: 1px solid var(--ocre);
+  border-bottom: 1px solid var(--azul-claro);
   padding: 24px 24px 14px;
   text-align: center;
 }
@@ -784,7 +776,7 @@ h2 {
   font-family: 'Courier New', Courier, monospace;
   font-size: 1.8rem;
   font-weight: 700;
-  color: var(--accent);
+  color: var(--azul);
   margin-bottom: 6px;
 }
 
@@ -845,7 +837,7 @@ h2 {
 
 .categoria-head:hover h2,
 .is-open .categoria-head h2 {
-  color: var(--accent);
+  color: var(--azul);
 }
 
 .categoria-head h2 {
@@ -949,7 +941,7 @@ h2 {
   font-weight: 700;
   white-space: nowrap;
   flex-shrink: 0;
-  color: var(--accent);
+  color: var(--azul);
   margin-left: 4px;
 }
 
@@ -999,7 +991,7 @@ h2 {
 .horarios-grid {
   display: grid;
   grid-template-columns: 148px 1fr;
-  border: 1px solid var(--accent);
+  border: 1px solid var(--azul);
 }
 
 .h-dia,
@@ -1021,7 +1013,7 @@ h2 {
 .h-cerrado {
   font-weight: 700;
   text-transform: uppercase;
-  color: var(--accent);
+  color: var(--azul);
   letter-spacing: 0.05em;
   font-size: 0.78rem;
 }
@@ -1134,7 +1126,7 @@ h2 {
 }
 
 .call-cta:hover .call-label {
-  color: var(--accent);
+  color: var(--azul);
 }
 
 .call-number {
@@ -1148,6 +1140,16 @@ h2 {
 /* ─── HOMEPAGE EDITORIAL SECTIONS ─── */
 .home-section-head {
   margin-bottom: 18px;
+}
+
+.home-section-head .section-label::after {
+  content: '';
+  display: block;
+  width: 24px;
+  height: 1px;
+  background: var(--azul);
+  opacity: 0.45;
+  margin: 6px 0 0;
 }
 
 .home-section-head h2 {
@@ -1199,7 +1201,7 @@ h2 {
   font-family: 'Courier New', Courier, monospace;
   font-size: clamp(1.55rem, 7vw, 2.25rem);
   font-weight: 700;
-  color: var(--accent);
+  color: var(--granate);
   white-space: nowrap;
 }
 
@@ -1226,7 +1228,7 @@ h2 {
 .dm-section-head span:first-child {
   font-size: 0.62rem;
   font-weight: 700;
-  color: var(--accent);
+  color: var(--azul);
   letter-spacing: 0.2em;
   text-transform: uppercase;
 }
@@ -1283,13 +1285,20 @@ h2 {
 
 .home-daily-menu__foot a:hover,
 .home-text-link:hover {
-  color: var(--accent);
+  color: var(--azul);
 }
 
 .home-andalusia {
-  border-top: 1px solid rgba(28, 26, 23, 0.16);
-  margin-top: 24px;
-  padding-top: 32px;
+  border-top: 1px solid rgba(29, 77, 133, 0.34);
+  margin-top: 32px;
+  padding-top: 28px;
+}
+
+.home-andalusia .tile-card {
+  background: transparent;
+  border: none;
+  box-shadow: none;
+  padding: 0;
 }
 
 .home-andalusia__list {
@@ -1319,6 +1328,10 @@ h2 {
   margin-top: 2px;
 }
 
+.home-andalusia__main {
+  min-width: 0;
+}
+
 .home-andalusia__main p {
   color: var(--muted);
   font-size: 0.92rem;
@@ -1327,11 +1340,55 @@ h2 {
 }
 
 .home-andalusia__price {
-  color: var(--ink);
+  color: var(--granate);
   font-family: 'Playfair Display', Georgia, serif;
   font-size: 1rem;
   font-weight: 700;
   white-space: nowrap;
+}
+
+.home-andalusia .dish-badge {
+  border: none;
+  background: transparent;
+  margin-bottom: 4px;
+  padding: 0;
+}
+
+.home-andalusia .dish-badge::before {
+  content: '\00B7';
+  margin-right: 5px;
+}
+
+.home-andalusia .pairing-chip,
+.home-andalusia .beer-chip {
+  display: block;
+  width: 100%;
+  max-width: 100%;
+  min-height: 0;
+  margin-top: 5px;
+  padding: 0;
+  background: transparent;
+  border: none;
+  border-radius: 0;
+  font-size: 0.69rem;
+  line-height: 1.45;
+  overflow-wrap: anywhere;
+  text-decoration: underline;
+  text-decoration-color: rgba(29, 77, 133, 0.24);
+  text-underline-offset: 2px;
+}
+
+.home-andalusia .beer-chip {
+  color: #76521f;
+  text-decoration-color: rgba(118, 82, 31, 0.24);
+}
+
+.home-andalusia .pairing-chip:hover,
+.home-andalusia .pairing-chip:focus-visible,
+.home-andalusia .beer-chip:hover,
+.home-andalusia .beer-chip:focus-visible {
+  background: transparent;
+  text-decoration-color: currentColor;
 }
 
 .home-andalusia .home-text-link {
@@ -1462,7 +1519,7 @@ h2 {
   font-family: Georgia, serif;
   font-size: 0.85rem;
   font-style: italic;
-  color: var(--accent);
+  color: var(--azul);
   cursor: pointer;
   padding: 6px 12px;
   transition: color 0.2s ease, transform 0.2s ease;
@@ -1491,7 +1548,7 @@ h2 {
   font-size: 0.62rem;
   text-transform: uppercase;
   letter-spacing: 0.22em;
-  color: var(--accent);
+  color: var(--azul);
   font-weight: 600;
   margin-top: 24px;
   margin-bottom: 8px;
@@ -1734,20 +1791,22 @@ h2 {
 
 /* ─── LOCATION & REVIEWS SECTION ─── */
 .location-section {
-  margin-top: 76px;
-  border-top: 1px solid rgba(28, 26, 23, 0.14);
-  padding-top: 52px;
+  margin-top: 64px;
+  border-top: 1px solid rgba(29, 77, 133, 0.24);
+  padding-top: 36px;
 }
 
 .location-grid {
   display: grid;
   grid-template-columns: 1.2fr 1fr;
-  gap: 32px;
+  gap: 28px;
   align-items: start;
+  padding-bottom: 32px;
+  border-bottom: 1px solid rgba(29, 77, 133, 0.16);
 }
 
 .location-map {
-  border: 1px solid var(--ink);
+  border: 1px solid rgba(29, 77, 133, 0.32);
   background: #E8E3D3;
   line-height: 0;
   overflow: hidden;
@@ -1762,6 +1821,8 @@ h2 {
   display: flex;
   flex-direction: column;
   gap: 12px;
+  border-left: 1px solid rgba(29, 77, 133, 0.18);
+  padding-left: 28px;
 }
 
 .location-address {
@@ -1785,7 +1846,7 @@ h2 {
 }
 
 .location-link:hover {
-  color: var(--accent);
+  color: var(--azul);
 }
 
 .location-sep {
@@ -1798,7 +1859,14 @@ h2 {
 @media (max-width: 768px) {
   .location-grid {
     grid-template-columns: 1fr;
-    gap: 18px;
+    gap: 16px;
+    padding-bottom: 24px;
+  }
+  .location-info {
+    border-left: none;
+    border-top: 1px solid rgba(29, 77, 133, 0.16);
+    padding-top: 16px;
+    padding-left: 0;
   }
 }
 
@@ -1956,8 +2024,8 @@ h2 {
 /* ─── BOCADILLOS WARNING ─── */
 .bocadillos-warning {
   background: var(--faint);
-  color: var(--accent);
-  border: 1px solid var(--accent);
+  color: var(--azul);
+  border: 1px solid var(--azul);
   padding: 10px 14px;
   font-size: 0.8rem;
   font-weight: 600;
@@ -2029,7 +2097,7 @@ h2 {
   margin: 0;
   overflow: hidden;
   border: 1px solid rgba(28, 26, 23, 0.18);
-  background: var(--tile-cream);
+  background: var(--tile);
 }
 
 .carta-accent-images__item img {
@@ -2047,7 +2115,7 @@ h2 {
   width: fit-content;
   border: 1px solid rgba(29, 77, 133, 0.28);
   background: rgba(246, 243, 236, 0.7);
-  color: var(--accent);
+  color: var(--azul);
   font-size: 0.6rem;
   font-weight: 700;
   letter-spacing: 0.16em;
@@ -2055,7 +2123,7 @@ h2 {
   padding: 3px 7px;
   text-transform: uppercase;
 }
-.dish-badge--recommended { border-color: rgba(29, 77, 133, 0.42); color: var(--accent); }
+.dish-badge--recommended { border-color: rgba(29, 77, 133, 0.42); color: var(--azul); }
 .dish-badge--seasonal { border-color: rgba(45, 107, 74, 0.42); color: #2D6B4A; }
 .dish-badge--house { border-color: rgba(74, 56, 0, 0.42); color: #4a3800; }
 .dish-badge--local { border-color: rgba(29, 77, 133, 0.42); color: #1D4D85; }
@@ -2076,7 +2144,7 @@ h2 {
   background: rgba(29, 77, 133, 0.07);
   border: 1px solid rgba(29, 77, 133, 0.22);
   border-radius: 8px;
-  color: var(--accent);
+  color: var(--azul);
   cursor: pointer;
   font-size: 0.72rem;
   font-weight: 600;
@@ -2135,7 +2203,7 @@ h2 {
 .allergen-chip {
   border: 1px solid rgba(29, 77, 133, 0.28);
   border-radius: 999px;
-  color: var(--accent);
+  color: var(--azul);
   font-family: system-ui, -apple-system, sans-serif;
   font-size: 0.62rem;
   font-weight: 700;
@@ -2156,7 +2224,7 @@ h2 {
   font-family: 'Playfair Display', Georgia, serif;
   font-size: 1.1rem;
   margin-bottom: 0.2rem;
-  color: var(--accent);
+  color: var(--azul);
 }
 .para-empezar__sub {
   font-size: 0.8rem;
@@ -2193,7 +2261,7 @@ h2 {
 .para-empezar__price {
   font-family: 'Courier New', Courier, monospace;
   font-size: 0.85rem;
-  color: var(--accent);
+  color: var(--azul);
   font-weight: 700;
 }
 @media (min-width: 600px) {
@@ -2239,7 +2307,7 @@ h2 {
 }
 
 /* ─── CTA BUTTON SECONDARY ─── */
-.cta-btn--secondary { background: transparent; color: var(--accent); border: 1px solid var(--accent); margin-top: 0.5rem; opacity: 0.8; }
+.cta-btn--secondary { background: transparent; color: var(--azul); border: 1px solid var(--azul); margin-top: 0.5rem; opacity: 0.8; }
 
 /* ─── CARIOCA SLOT ─── */
 .carioca-slot { margin: 2rem 0; display: flex; justify-content: center; }
@@ -2262,9 +2330,9 @@ h2 {
 .tile-frame {
   position: relative;
   padding: 28px 32px;
-  background: var(--tile-cream);
+  background: var(--tile);
   border: 1px solid rgba(29, 77, 133, 0.18);
-  border-left: 3px solid var(--accent);
+  border-left: 3px solid var(--azul);
   margin: 40px 0 48px;
 }
 
@@ -2317,7 +2385,7 @@ h2 {
 
 .editorial-snapshot__figure {
   border: 1px solid rgba(28, 26, 23, 0.22);
-  background: var(--tile-cream);
+  background: var(--tile);
   padding: 12px;
   margin: 0;
   box-shadow: 0 4px 12px rgba(28, 26, 23, 0.03);
@@ -2390,7 +2458,7 @@ h2 {
 .footer-separator {
   text-align: center;
   font-size: 0.85rem;
-  color: var(--terracotta);
+  color: var(--azul);
   opacity: 0.65;
   margin: 36px 0 12px;
   letter-spacing: 0.15em;
@@ -2684,11 +2752,25 @@ h2 {
 
 /* ─── PIZARRA MENÚ DEL DÍA (homepage) ─── */
 .pizarra-dia {
-  margin: 44px 0;
+  margin: 40px 0;
+  background: #202321;
+  background-image: none;
+  border: 1px solid rgba(29, 77, 133, 0.48);
+  border-top-width: 3px;
+  box-shadow: 0 8px 26px rgba(28, 26, 23, 0.16);
+}
+
+.pizarra-dia::before {
+  inset: 9px;
+  border-color: rgba(238, 228, 195, 0.12);
+}
+
+.pizarra-dia::after {
+  display: none;
 }
 
 .pizarra-dia__wrap {
-  padding: 32px 36px 28px;
+  padding: 28px 30px 24px;
   position: relative;
   z-index: 2;
 }
@@ -2710,10 +2792,7 @@ h2 {
 .pizarra-dia .home-daily-menu h2 {
   font-family: 'Caveat', cursive;
   color: rgba(248, 244, 225, 0.94);
-  text-shadow:
-    0 0 18px rgba(248, 244, 225, 0.12),
-    0 0 6px rgba(248, 244, 225, 0.07),
-    0 1px 3px rgba(0, 0, 0, 0.72);
+  text-shadow: none;
 }
 
 .pizarra-dia .home-daily-menu__meta {
@@ -2728,7 +2807,7 @@ h2 {
   font-family: 'Caveat', cursive;
   font-weight: normal;
   color: rgba(242, 222, 162, 0.92);
-  text-shadow: 0 0 14px rgba(242, 222, 162, 0.18);
+  text-shadow: none;
 }
 
 /* Body: accordion overrides */
@@ -2771,13 +2850,13 @@ h2 {
 
 .pizarra-dia .home-daily-menu__group-list li {
   font-family: 'Caveat', cursive;
-  font-size: clamp(0.88rem, 2.8vw, 1rem);
+  font-size: clamp(0.96rem, 2.8vw, 1.04rem);
   color: rgba(235, 228, 200, 0.82);
   border-bottom: 1px solid rgba(238, 228, 200, 0.07);
   padding: 7px 0;
   line-height: 1.6;
   text-align: center;
-  text-shadow: 0 0 6px rgba(235, 228, 200, 0.05);
+  text-shadow: none;
 }
 
 .pizarra-dia .home-daily-menu__group-list li strong {
@@ -2816,14 +2895,27 @@ h2 {
 }
 
 @media (max-width: 768px) {
+  .pizarra-dia {
+    margin: 34px 0;
+  }
   .pizarra-dia__wrap {
-    padding: 22px 20px 20px;
+    padding: 24px 20px 20px;
+  }
+  .pizarra-dia .home-daily-menu__group-list li {
+    font-size: 1rem;
+    line-height: 1.55;
+    padding: 9px 0;
+  }
+  .pizarra-dia .home-daily-menu__foot {
+    align-items: flex-start;
+    flex-direction: column;
+    gap: 4px;
   }
 }
 
 @media (max-width: 420px) {
   .pizarra-dia__wrap {
-    padding: 18px 16px 16px;
+    padding: 22px 17px 18px;
   }
 }
 
@@ -2831,7 +2923,7 @@ h2 {
 .historia-leon {
   margin-top: 52px;
   padding-top: 48px;
-  border-top: 1px solid rgba(28, 26, 23, 0.16);
+  border-top: 1px solid rgba(29, 77, 133, 0.22);
 }
 
 .historia-leon h2 {
@@ -3011,7 +3103,7 @@ h2 {
 }
 
 .wine-editorial__cta:hover {
-  color: var(--accent);
+  color: var(--azul);
 }
 
 @media (max-width: 600px) {
@@ -3049,17 +3141,24 @@ h2 {
 
 /* ─── HOME CTA NAV ─── */
 .home-cta-nav {
+  display: flex;
+  flex-direction: column;
+  gap: 0;
+  margin: 20px 0 28px;
+}
+
+.home-cta-row {
   display: grid;
   grid-template-columns: 1fr 1fr;
-  gap: 8px;
-  margin: 20px 0 28px;
+  gap: 1px;
 }
 
 .home-cta-btn {
   display: flex;
   align-items: center;
   justify-content: center;
-  min-height: 46px;
+  min-height: 48px;
+  min-width: 0;
   padding: 12px 16px;
   font-family: 'Inter', system-ui, -apple-system, sans-serif;
   font-size: 0.95rem;
@@ -3067,39 +3166,61 @@ h2 {
   letter-spacing: 0.02em;
   text-decoration: none;
   text-align: center;
-  border: 1.5px solid var(--ink);
   transition: background 0.15s, color 0.15s;
   -webkit-tap-highlight-color: transparent;
 }
 
-.home-cta-btn--carta {
+/* Primary: Carta restaurante — full-width, dominant */
+.home-cta-btn--primary {
+  background: var(--azul);
+  color: #fff;
+  border: 1.5px solid var(--azul);
+  font-size: 1rem;
+  font-weight: 700;
+  letter-spacing: 0.03em;
+  margin-bottom: 8px;
+}
+.home-cta-btn--primary:hover,
+.home-cta-btn--primary:focus-visible { background: var(--azul-claro); border-color: var(--azul-claro); }
+
+/* Secondary: Carta barra, Bebidas, Menú del día */
+.home-cta-btn--secondary {
+  background: transparent;
+  color: var(--ink);
+  border: 1px solid rgba(28, 26, 23, 0.24);
+}
+.home-cta-btn--secondary:hover,
+.home-cta-btn--secondary:focus-visible { border-color: var(--azul); color: var(--azul); background: var(--bg); }
+
+.home-cta-btn--daily {
+  font-style: italic;
+  margin-top: 1px;
+}
+
+/* Call: full-width, strong — separated from secondary group */
+.home-cta-btn--call {
   background: var(--ink);
   color: var(--bg);
-}
-.home-cta-btn--carta:hover,
-.home-cta-btn--carta:focus-visible { background: #38352f; }
-
-.home-cta-btn--call {
-  background: var(--bg);
-  color: var(--accent);
-  border-color: var(--accent);
+  border: 1.5px solid var(--ink);
   font-weight: 700;
   letter-spacing: 0.08em;
   text-transform: uppercase;
+  margin-top: 14px;
+  box-shadow: inset 0 2px 0 rgba(29, 77, 133, 0.72);
 }
 .home-cta-btn--call:hover,
-.home-cta-btn--call:focus-visible { background: var(--accent); color: #fff; }
+.home-cta-btn--call:focus-visible { background: #38352f; border-color: #38352f; }
 
 
 /* ─── HISTORIA SHORT YEAR ─── */
 .historia-year {
   font-family: 'Playfair Display', Georgia, "Times New Roman", serif !important;
-  font-size: clamp(2.2rem, 9vw, 4rem) !important;
+  font-size: clamp(1.4rem, 5vw, 2rem) !important;
   font-weight: 400;
-  color: var(--ink);
-  margin-bottom: 18px;
+  color: var(--muted);
+  margin-bottom: 14px;
   line-height: 1;
-  letter-spacing: -0.01em;
+  letter-spacing: 0.04em;
   text-transform: none !important;
 }
 

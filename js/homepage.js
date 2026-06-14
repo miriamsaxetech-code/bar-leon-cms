@@ -460,22 +460,12 @@
   function renderHeroTile(d, lang, cartaUrl, inService) {
     const since    = { es: 'Desde 1959', en: 'Since 1959', fr: 'Depuis 1959' }[lang];
     const addr     = d.contact.address;
-    const tileAlt  = d.logo && d.logo.alt ? t(d.logo.alt, lang) : t(d.venue.full_name, lang);
-    const logoSrc  = d.logo && d.logo.image ? d.logo.image : '../assets/images/web/azulejo-leon.webp';
     return `<div class="home-hero">
-  <div class="home-hero__tile">
-    <picture>
-      <source srcset="${logoSrc}" type="image/webp">
-      <img class="home-hero__img" src="${logoSrc.replace('.webp', '.png')}" alt="${tileAlt}"
-           width="994" height="646" fetchpriority="high" />
-    </picture>
-    <div class="home-hero__scrim" aria-hidden="true"></div>
-    <div class="home-hero__overlay">
-      <img class="home-hero__lion" src="../assets/images/lion-logo.svg" alt=""
-           width="60" height="92" aria-hidden="true" />
-      <h1 class="home-hero__name">Bar León</h1>
-      <p class="home-hero__place">${addr.neighborhood} &middot; ${addr.city} &middot; ${since}</p>
-    </div>
+  <div class="home-hero__masthead">
+    <img class="home-hero__lion" src="../assets/images/lion-logo.svg" alt="Bar León"
+         width="140" height="215" fetchpriority="high" />
+    <h1 class="home-hero__name">Bar León</h1>
+    <p class="home-hero__place">${since} &middot; ${addr.neighborhood} &middot; ${addr.city}</p>
   </div>
   <div class="site-status-container">
     <a href="${cartaUrl}#hours" class="status-pill ${inService ? 'status-pill--open' : 'status-pill--closed'}">
@@ -488,10 +478,18 @@
 
   function renderHomeCTA(lang, cartaUrl, phoneLink) {
     const quickAccess = { es: 'Acceso rápido', en: 'Quick access', fr: 'Accès rapide' }[lang];
-    const verCarta    = { es: 'Ver carta',     en: 'View menu',   fr: 'Voir la carte' }[lang];
+    const lblRestaurante = { es: 'Carta restaurante', en: 'Restaurant menu', fr: 'Carte restaurant' }[lang];
+    const lblBarra       = { es: 'Carta barra',       en: 'Bar menu',        fr: 'Carte comptoir'   }[lang];
+    const lblBebidas     = { es: 'Bebidas',            en: 'Drinks',          fr: 'Boissons'         }[lang];
+    const lblDiario      = { es: 'Menú del día',       en: 'Daily menu',      fr: 'Menu du jour'     }[lang];
     return `<nav class="home-cta-nav" aria-label="${quickAccess}">
-  <a href="${cartaUrl}" class="home-cta-btn home-cta-btn--carta">${verCarta}</a>
-  <a href="${phoneLink}" class="home-cta-btn home-cta-btn--call">${LABELS.call[lang]}</a>
+  <a href="${cartaUrl}#restaurant" class="home-cta-btn home-cta-btn--primary">${lblRestaurante}</a>
+  <div class="home-cta-row">
+    <a href="${cartaUrl}#bar"       class="home-cta-btn home-cta-btn--secondary">${lblBarra}</a>
+    <a href="${cartaUrl}#beverages" class="home-cta-btn home-cta-btn--secondary">${lblBebidas}</a>
+  </div>
+  <a href="${cartaUrl}#daily" class="home-cta-btn home-cta-btn--secondary home-cta-btn--daily">${lblDiario}</a>
+  <a href="${phoneLink}"      class="home-cta-btn home-cta-btn--call">${LABELS.call[lang]}</a>
 </nav>`;
   }
 
@@ -523,9 +521,9 @@
     return `<div class="wrap">
   ${renderHeroTile(d, lang, cartaUrl, inService)}
   ${aviso}
+  ${renderHomeCTA(lang, cartaUrl, phoneLink)}
   ${renderHomeAndalusia(d, lang, cartaUrl)}
   ${renderHomeDailyMenu(d, lang, cartaUrl)}
-  ${renderHomeCTA(lang, cartaUrl, phoneLink)}
   ${renderHistoria(lang)}
   ${locationBlock}
   <div class="footer-separator">❖</div>

@@ -3,6 +3,17 @@
         xmlns:xhtml="http://www.w3.org/1999/xhtml">
 
   <url>
+    <loc>https://restaurantebarleon.com/</loc>
+    <lastmod>2026-06-13</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+    <xhtml:link rel="alternate" hreflang="es" href="https://restaurantebarleon.com/es/"/>
+    <xhtml:link rel="alternate" hreflang="en" href="https://restaurantebarleon.com/en/"/>
+    <xhtml:link rel="alternate" hreflang="fr" href="https://restaurantebarleon.com/fr/"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://restaurantebarleon.com/"/>
+  </url>
+
+  <url>
     <loc>https://restaurantebarleon.com/es/</loc>
     <lastmod>2026-06-03</lastmod>
     <changefreq>weekly</changefreq>
@@ -10,7 +21,7 @@
     <xhtml:link rel="alternate" hreflang="es" href="https://restaurantebarleon.com/es/"/>
     <xhtml:link rel="alternate" hreflang="en" href="https://restaurantebarleon.com/en/"/>
     <xhtml:link rel="alternate" hreflang="fr" href="https://restaurantebarleon.com/fr/"/>
-    <xhtml:link rel="alternate" hreflang="x-default" href="https://restaurantebarleon.com/es/"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://restaurantebarleon.com/"/>
   </url>
 
   <url>
@@ -21,7 +32,7 @@
     <xhtml:link rel="alternate" hreflang="es" href="https://restaurantebarleon.com/es/"/>
     <xhtml:link rel="alternate" hreflang="en" href="https://restaurantebarleon.com/en/"/>
     <xhtml:link rel="alternate" hreflang="fr" href="https://restaurantebarleon.com/fr/"/>
-    <xhtml:link rel="alternate" hreflang="x-default" href="https://restaurantebarleon.com/es/"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://restaurantebarleon.com/"/>
   </url>
 
   <url>
@@ -32,7 +43,7 @@
     <xhtml:link rel="alternate" hreflang="es" href="https://restaurantebarleon.com/es/"/>
     <xhtml:link rel="alternate" hreflang="en" href="https://restaurantebarleon.com/en/"/>
     <xhtml:link rel="alternate" hreflang="fr" href="https://restaurantebarleon.com/fr/"/>
-    <xhtml:link rel="alternate" hreflang="x-default" href="https://restaurantebarleon.com/es/"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://restaurantebarleon.com/"/>
   </url>
 
   <url>

@@ -24,7 +24,7 @@ const HOME_ALTERNATES = {
   es: '/es/',
   en: '/en/',
   fr: '/fr/',
-  'x-default': '/es/',
+  'x-default': '/',
 };
 
 const MENU_ALTERNATES = {
@@ -90,7 +90,9 @@ for (const [path, route] of Object.entries(MENU_ROUTES)) {
 
 const root = await read('index.html');
 expectNoOldHosts('index.html', root);
-assert.doesNotMatch(root, /hreflang="x-default" href="[^"]*\/"/, 'root must not be the x-default target');
+expectCanonical('index.html', root, '/');
+expectAlternates('index.html', root, HOME_ALTERNATES);
+assert.doesNotMatch(root, /http-equiv="refresh"/i, 'root must not meta-refresh');
 
 const robots = await read('robots.txt');
 expectNoOldHosts('robots.txt', robots);
@@ -106,11 +108,12 @@ for (const route of [...Object.values(HOME_ROUTES), ...Object.values(MENU_ROUTES
   assert.match(sitemap, new RegExp(`<loc>${PUBLIC_BASE_URL}${route}</loc>`), `sitemap missing ${route}`);
 }
 assert.doesNotMatch(sitemap, /\.html<\/loc>/, 'sitemap must not include .html canonical locs');
-assert.match(sitemap, new RegExp(`hreflang="x-default" href="${PUBLIC_BASE_URL}/es/"`));
+assert.match(sitemap, new RegExp(`<loc>${PUBLIC_BASE_URL}/</loc>`));
+assert.match(sitemap, new RegExp(`hreflang="x-default" href="${PUBLIC_BASE_URL}/"`));
 assert.match(sitemap, new RegExp(`hreflang="x-default" href="${PUBLIC_BASE_URL}/es/carta"`));
 
 const redirects = await read('_redirects');
-assert.match(redirects, /^\/\s+\/es\/\s+302$/m, 'root must redirect to /es/');
+assert.doesNotMatch(redirects, /^\/\s+\/es\/\s+30[1278]$/m, 'root must not redirect to /es/');
 
 const venue = await read('data/venue.json');
 expectNoOldHosts('data/venue.json', venue);

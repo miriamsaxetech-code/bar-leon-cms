@@ -79,6 +79,9 @@ await new Promise(resolve => setImmediate(resolve));
 const html = elements['carta-body'].innerHTML;
 
 assert.match(html, /class="menu-switch/);
+assert.match(html, /class="menu-switch-btn is-active"[^>]*data-panel="restaurant"/);
+assert.match(html, /id="panel-restaurant" class="menu-panel is-active"/);
+assert.match(html, /id="panel-bar" class="menu-panel"[^>]*hidden/);
 assert.match(html, /data-panel="daily"/);
 assert.match(html, /data-panel="restaurant"/);
 assert.match(html, /data-panel="bar"/);

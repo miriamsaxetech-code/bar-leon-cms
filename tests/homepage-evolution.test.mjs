@@ -117,7 +117,8 @@ assert.match(lunch.html, /Olla de San Antón/);
 assert.match(lunch.html, /habas secas, habichuelas y cerdo de matanza/);
 assert.match(lunch.html, /home-andalusia/);
 assert.match(lunch.html, /Sabores de Andalucía/);
-assert.match(lunch.html, /home-hero__tile/);
+assert.match(lunch.html, /home-hero__lion/);
+assert.doesNotMatch(lunch.html, /home-hero__azulejo|azulejo-leon\.(?:webp|png)/);
 assert.match(lunch.html, /home-cta-nav/);
 assert.match(lunch.html, /loading="lazy"/);
 assert.match(lunch.html, /home-hero__place/);
@@ -125,6 +126,8 @@ assert.doesNotMatch(lunch.html, /class="call-number"/);
 assert.match(lunch.html, /home-cta-btn--call/);
 assert.doesNotMatch(lunch.html, />\+34 958 22 51 43<\/a>/);
 assert.doesNotMatch(lunch.html, /hemeroteca/i);
+assert.ok(lunch.html.indexOf('home-cta-nav') < lunch.html.indexOf('home-andalusia'), 'CTA group must appear before food');
+assert.ok(lunch.html.indexOf('home-cta-nav') < lunch.html.indexOf('historia-leon'), 'CTA group must appear before history');
 assert.ok(lunch.body.children.some(el => el.className === 'mobile-service-cta' && el.href === 'tel:+34958225143'));
 
 const afterHours = await renderHomepageAt('2026-05-25T18:30:00+02:00');
