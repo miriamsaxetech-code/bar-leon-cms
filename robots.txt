@@ -3,5 +3,8 @@ Allow: /
 
 Disallow: /admin/
 Disallow: /admin-quick/
+Disallow: /panel/
+Disallow: /api/
+Disallow: /print
 
 Sitemap: https://restaurantebarleon.com/sitemap.xml

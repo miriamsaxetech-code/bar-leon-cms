@@ -157,7 +157,7 @@ body {
 
 /* ─── LAYOUT ─── */
 .wrap {
-  max-width: 900px;
+  max-width: 500px;
   margin: 0 auto;
   padding: 0 36px;
 }
@@ -728,7 +728,7 @@ h2 {
   color: var(--muted);
   font-size: 0.88rem;
   line-height: 1.55;
-  max-width: 560px;
+  max-width: 500px;
 }
 
 @keyframes menuPanelIn {
@@ -1405,7 +1405,7 @@ h2 {
 
 
 .album-container {
-  max-width: 600px;
+  max-width: 500px;
   margin: 0 auto;
   padding: 12px;
 }
@@ -1499,7 +1499,7 @@ h2 {
   border: 1px dashed rgba(28, 26, 23, 0.25);
   padding: 10px 14px;
   margin: 16px auto 0;
-  max-width: 480px;
+  max-width: 500px;
   text-align: center;
   box-shadow: 1px 1px 3px rgba(0, 0, 0, 0.04);
   line-height: 1.45;
@@ -1584,7 +1584,7 @@ h2 {
 
 .edict-temporada-group {
   margin: 14px auto;
-  max-width: 480px;
+  max-width: 500px;
   text-align: center;
 }
 
@@ -1707,7 +1707,7 @@ h2 {
 
 .site-tile-frame {
   display: block;
-  max-width: 200px;
+  max-width: 500px;
   width: 100%;
   aspect-ratio: 3 / 2;
   border-radius: 3px;
@@ -1744,7 +1744,7 @@ h2 {
   }
 }
 
-@media (max-width: 540px) {
+@media (max-width: 500px) {
   .site-tile-container {
     margin-top: 0;
     margin-bottom: 16px;
@@ -1856,7 +1856,7 @@ h2 {
   width: 100%;
 }
 
-@media (max-width: 768px) {
+@media (max-width: 500px) {
   .location-grid {
     grid-template-columns: 1fr;
     gap: 16px;
@@ -1871,7 +1871,7 @@ h2 {
 }
 
 /* ─── RESPONSIVE ─── */
-@media (max-width: 540px) {
+@media (max-width: 500px) {
   .wrap { padding: 0 20px; }
   .site-name { line-height: 0.96; }
   .site-location {
@@ -2001,7 +2001,7 @@ h2 {
   }
 }
 
-@media (max-width: 420px) {
+@media (max-width: 500px) {
   .menu-switch {
     grid-template-columns: 1fr;
   }
@@ -2016,7 +2016,7 @@ h2 {
   }
 }
 
-@media (max-width: 380px) {
+@media (max-width: 500px) {
   .nav-primary { gap: 4px; }
   .nav-primary a { font-size: 0.7rem; }
 }
@@ -2276,34 +2276,43 @@ h2 {
 .mobile-service-cta {
   display: none;
   position: fixed;
-  right: 16px;
-  bottom: calc(14px + env(safe-area-inset-bottom));
+  bottom: 0;
+  left: 0;
+  right: 0;
   z-index: 140;
   background: var(--ink);
-  border: 1px solid rgba(246, 243, 236, 0.28);
-  color: var(--bg);
-  font-size: 0.72rem;
-  font-weight: 700;
-  letter-spacing: 0.13em;
-  line-height: 1;
-  padding: 13px 16px;
-  text-decoration: none;
+  padding-bottom: env(safe-area-inset-bottom);
+}
+.mobile-service-cta.is-visible {
+  display: flex;
+}
+.mobile-cta-btn {
+  flex: 1;
+  text-align: center;
+  padding: 14px 8px;
+  min-height: 48px;
+  color: #fff;
+  font-size: 0.85rem;
+  font-weight: 600;
+  letter-spacing: 0.03em;
   text-transform: uppercase;
-  box-shadow: 0 8px 24px rgba(28, 26, 23, 0.18);
+  text-decoration: none;
+  border-right: 1px solid rgba(255, 255, 255, 0.12);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+.mobile-cta-btn:last-child {
+  border-right: none;
+}
+.mobile-cta-btn--primary {
+  background: var(--azul);
 }
 @media (max-width: 767px) {
-  body { padding-bottom: 58px; }
-  .mobile-service-cta {
-    display: inline-flex;
-    align-items: center;
-    opacity: 0;
-    pointer-events: none;
-    transition: opacity 0.25s ease;
-  }
-  .mobile-service-cta.is-visible {
-    opacity: 1;
-    pointer-events: auto;
-  }
+  body { padding-bottom: 56px; }
+}
+@media (min-width: 768px) {
+  .mobile-service-cta { display: none !important; }
 }
 
 /* ─── CTA BUTTON SECONDARY ─── */
@@ -2311,7 +2320,7 @@ h2 {
 
 /* ─── CARIOCA SLOT ─── */
 .carioca-slot { margin: 2rem 0; display: flex; justify-content: center; }
-.carioca-slot__card { max-width: 440px; width: 100%; }
+.carioca-slot__card { max-width: 500px; width: 100%; }
 .carioca-slot__card img { width: 100%; border-radius: 6px; display: block; }
 .carioca-slot__card figcaption { font-size: 0.8rem; color: var(--muted); margin-top: 0.5rem; text-align: center; font-style: italic; }
 
@@ -2361,7 +2370,7 @@ h2 {
   margin: 72px 0;
 }
 
-@media (max-width: 540px) {
+@media (max-width: 500px) {
   .tile-bg-section {
     padding: 0;
     margin: 0;
@@ -2421,7 +2430,7 @@ h2 {
   text-align: center;
 }
 
-@media (max-width: 540px) {
+@media (max-width: 500px) {
   .editorial-snapshot {
     margin: 34px 0;
   }
@@ -2709,7 +2718,7 @@ h2 {
   text-align: right;
 }
 
-@media (max-width: 768px) {
+@media (max-width: 500px) {
   .chalkboard-menu {
     border-width: 10px;
   }
@@ -2733,7 +2742,7 @@ h2 {
   }
 }
 
-@media (max-width: 420px) {
+@media (max-width: 500px) {
   .chalkboard-menu {
     border-width: 7px;
   }
@@ -2894,7 +2903,7 @@ h2 {
   color: rgba(248, 244, 225, 0.95);
 }
 
-@media (max-width: 768px) {
+@media (max-width: 500px) {
   .pizarra-dia {
     margin: 34px 0;
   }
@@ -2913,7 +2922,7 @@ h2 {
   }
 }
 
-@media (max-width: 420px) {
+@media (max-width: 500px) {
   .pizarra-dia__wrap {
     padding: 22px 17px 18px;
   }
@@ -2944,6 +2953,38 @@ h2 {
 
 .historia-leon__text p + p {
   margin-top: 14px;
+}
+
+/* ─── DOCUMENTARY STRIP ─── */
+.doc-strip {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 10px;
+  margin-top: 28px;
+}
+
+.doc-strip__photo {
+  overflow: hidden;
+  border: 1px solid rgba(29, 77, 133, 0.18);
+  line-height: 0;
+}
+
+.doc-strip__photo img {
+  display: block;
+  width: 100%;
+  height: 160px;
+  object-fit: cover;
+  object-position: center;
+}
+
+@media (max-width: 500px) {
+  .doc-strip {
+    grid-template-columns: 1fr;
+  }
+
+  .doc-strip__photo img {
+    height: 200px;
+  }
 }
 
 /* ─── CÓMO SE PIDE AQUÍ ─── */
@@ -2995,7 +3036,7 @@ h2 {
   margin: 0;
 }
 
-@media (max-width: 480px) {
+@media (max-width: 500px) {
   .ordering-guide__list {
     grid-template-columns: 1fr;
   }
@@ -3106,7 +3147,7 @@ h2 {
   color: var(--azul);
 }
 
-@media (max-width: 600px) {
+@media (max-width: 500px) {
   .wine-editorial__cards {
     grid-template-columns: 1fr;
   }
@@ -3279,7 +3320,7 @@ h2 {
 }
 
 /* ─── MENU TAB BAR — scrollable on narrow mobile ─── */
-@media (max-width: 540px) {
+@media (max-width: 500px) {
   .menu-switch--five {
     display: flex;
     overflow-x: auto;
@@ -3300,7 +3341,7 @@ h2 {
 }
 
 /* ─── MOBILE QR-FIRST: compact hero, hidden editorial ≤540px ─── */
-@media (max-width: 540px) {
+@media (max-width: 500px) {
   /* Tighter homepage top padding */
   #homepage {
     padding-top: 4px;
@@ -3333,4 +3374,281 @@ h2 {
     font-size: 1.05rem;
   }
 
+}
+
+/* ═══════════════════════════════════════
+   2026-06-15 VISUAL STABILIZATION
+   Smallest safe patch — CSS only
+═══════════════════════════════════════ */
+
+/* 1. Carta: suppress the global lang-bar — carta-header already handles
+      language switching with back navigation included. Avoids two stacked
+      nav bars competing for attention at the top of the carta page. */
+body:has(#carta-header) .lang-bar {
+  display: none;
+}
+
+/* 2. Carta: make carta-header sticky so the back link and lang switcher
+      remain reachable as users scroll through a long menu. */
+#carta-header {
+  position: sticky;
+  top: 0;
+  z-index: 100;
+  background: var(--bg);
+}
+
+/* 3. Carta: reduce excessive top padding on mobile — 52px burns too much
+      of the viewport before the menu tabs appear. */
+@media (max-width: 500px) {
+  #carta-body {
+    padding-top: 28px;
+  }
+}
+
+/* 4. Tighten large vertical gaps on mobile — 72px dividers and 64px
+      section margins are desktop-calibrated; reduce for 360–430px. */
+@media (max-width: 500px) {
+  hr.divider,
+  .warm-divider {
+    margin: 40px 0;
+  }
+  .historia-leon {
+    margin-top: 36px;
+    padding-top: 28px;
+  }
+  .ordering-guide,
+  .wine-editorial,
+  .cana-editorial,
+  .mala-folla {
+    margin-top: 36px;
+    padding-top: 28px;
+  }
+}
+
+/* 5. Enlarge CTA touch targets on small screens to minimum 52px */
+@media (max-width: 500px) {
+  .home-cta-btn {
+    min-height: 52px;
+  }
+}
+
+/* ═══════════════════════════════════════
+   2026-06-15 HOMEPAGE COHERENCE PASS 2
+   Mobile-first visual hierarchy
+═══════════════════════════════════════ */
+
+/* ─── HERO: more breathing room, lion more prominent ─── */
+@media (max-width: 500px) {
+  .home-hero__masthead {
+    padding: 20px 20px 24px;
+  }
+  .home-hero__lion {
+    width: clamp(96px, 27vw, 112px);
+    margin-bottom: 16px;
+  }
+  .site-status-container {
+    margin-top: 12px;
+    margin-bottom: 6px;
+  }
+}
+
+/* ─── CTA NAV: primary carta is the clear dominant action ─── */
+.home-cta-btn--primary {
+  min-height: 56px;
+  font-size: 1rem;
+  margin-bottom: 10px;
+}
+.home-cta-btn--call {
+  min-height: 52px;
+}
+@media (max-width: 500px) {
+  .home-cta-nav {
+    margin: 14px 0 24px;
+  }
+  .home-cta-btn--secondary {
+    min-height: 44px;
+    font-size: 0.82rem;
+  }
+  .home-cta-btn--daily {
+    min-height: 42px;
+    font-size: 0.8rem;
+  }
+  .home-cta-btn--call {
+    margin-top: 10px;
+  }
+}
+
+/* ─── ANDALUSIA SECTION: reduce noise on mobile ─── */
+@media (max-width: 500px) {
+  .home-andalusia .pairing-chip,
+  .home-andalusia .beer-chip {
+    display: none;
+  }
+  .home-andalusia .section-label {
+    font-size: 0.64rem;
+  }
+  .home-section-head {
+    margin-bottom: 10px;
+  }
+}
+@media (max-width: 500px) {
+  .home-andalusia__item:nth-child(n + 5) {
+    display: none;
+  }
+}
+
+/* ─── PIZARRA: tighter internal padding ─── */
+@media (max-width: 500px) {
+  .pizarra-dia {
+    margin: 28px 0;
+  }
+}
+@media (max-width: 500px) {
+  .pizarra-dia__wrap {
+    padding: 18px 14px 16px;
+  }
+}
+
+/* ─── HISTORIA: consistent with section rhythm ─── */
+@media (max-width: 500px) {
+  .historia-leon {
+    margin-top: 32px;
+    padding-top: 24px;
+  }
+  .historia-leon__text {
+    font-size: 0.94rem;
+    line-height: 1.7;
+  }
+}
+
+/* ─── LOCATION: shorter map, tighter section ─── */
+@media (max-width: 500px) {
+  .location-section {
+    margin-top: 32px;
+    padding-top: 20px;
+  }
+  .location-map iframe {
+    height: 180px;
+  }
+}
+
+/* ─── FOOTER SEPARATOR: tighter on mobile ─── */
+@media (max-width: 500px) {
+  .footer-separator {
+    margin: 24px 0 8px;
+  }
+}
+
+/* ─── CARTA TABS: readable on 360-430px ─── */
+@media (max-width: 500px) {
+  .menu-switch-btn {
+    font-size: 0.84rem;
+    min-height: 48px;
+    padding: 10px 6px;
+  }
+}
+@media (max-width: 500px) {
+  .wrap {
+    padding: 0 16px;
+  }
+  .menu-switch-btn {
+    font-size: 0.78rem;
+    padding: 10px 4px;
+  }
+}
+
+/* ═══════════════════════════════════════
+   2026-06-15 CARTA COHERENCE PASS 3
+   Header fit + content hierarchy
+═══════════════════════════════════════ */
+
+/* ─── CARTA SPOTLIGHT: remove duplicate subtitle ─── */
+/* renderSpotlightAndalucia reuses LABELS.restaurantIntro as section-label,
+   which duplicates the same text shown in menu-panel-intro above it. */
+.spotlight-andalucia .home-section-head .section-label {
+  display: none;
+}
+
+/* ─── CARTA: hide scattered editorial photos on mobile ─── */
+/* They push menu content far down the screen on 360-430px viewports.
+   Desktop retains them for editorial character. */
+@media (max-width: 500px) {
+  #carta-body .editorial-snapshot {
+    display: none;
+  }
+}
+
+/* ─── CARTA HEADER: fit within 360px without overflow ─── */
+/* Lion logo in the header center adds ~28px with no nav value on narrow screens */
+@media (max-width: 500px) {
+  #carta-header .header-logo {
+    display: none;
+  }
+  /* Location CTA crowds the 360px header; address is in the page footer */
+  #carta-header .carta-location-btn {
+    display: none;
+  }
+}
+
+/* Reduce carta-bar-name slightly on mobile */
+@media (max-width: 500px) {
+  .carta-bar-name {
+    font-size: 0.9rem;
+  }
+  /* Reduce lang-selector touch padding in carta header — keeps 44px height
+     on the full carta-header row but saves ~30px total horizontal width */
+  .carta-lang-selector a,
+  .carta-lang-selector .lang-active {
+    padding: 10px 6px;
+  }
+  /* Slightly tighter center column */
+  .carta-header-center {
+    padding: 0 6px;
+  }
+}
+
+/* ═══════════════════════════════════════
+   2026-06-15 CARTA PASS 4
+   Narrow-mobile tab scroll + price clip
+═══════════════════════════════════════ */
+
+/* Tab strip: horizontal scroll on all mobile widths, not just ≤500px.
+   Overrides the ≤500px stack-to-single-column for --five variant. */
+@media (max-width: 768px) {
+  .menu-switch--five {
+    display: flex;
+    overflow-x: auto;
+    -webkit-overflow-scrolling: touch;
+    scroll-snap-type: x mandatory;
+    scrollbar-width: none;
+    border: 1px solid var(--ink);
+  }
+  .menu-switch--five::-webkit-scrollbar {
+    display: none;
+  }
+  .menu-switch--five .menu-switch-btn {
+    flex: 0 0 auto;
+    min-width: 82px;
+    border-right: 1px solid rgba(28, 26, 23, 0.22);
+    border-bottom: none;
+    scroll-snap-align: start;
+  }
+  .menu-switch--five .menu-switch-btn:last-child {
+    border-right: none;
+  }
+}
+
+/* Dish name in flex check-rows: prevent nowrap overflow that pushes price off-screen.
+   flex-shrink: 0 is the culprit — names like "Habas con jamón ibérico y huevo frito"
+   expand the flex row past the viewport at 360px. */
+@media (max-width: 540px) {
+  .check-row .check-name {
+    white-space: normal;
+    flex-shrink: 1;
+    min-width: 0;
+  }
+  /* Spotlight-card grid: allow name text to wrap rather than clip */
+  .spotlight-card .check-name {
+    white-space: normal;
+  }
 }

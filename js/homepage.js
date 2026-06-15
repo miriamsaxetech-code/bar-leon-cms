@@ -434,22 +434,33 @@
   // ─── MOBILE SERVICE CTA ───────────────────────────────────────────────────────
   function injectMobileServiceCTA(d, lang) {
     if (!d.contact) return;
-    const fab = document.createElement('a');
-    fab.className = 'mobile-service-cta';
-    fab.href = d.contact.phone_link;
-    fab.textContent = LABELS.call[lang];
-    document.body.appendChild(fab);
+    const LABELS_CTA = {
+      carta:      { es: 'Carta',       en: 'Menu',       fr: 'Carte'      },
+      call:       { es: 'Llamar',      en: 'Call',       fr: 'Appeler'    },
+      directions: { es: 'Cómo llegar', en: 'Directions', fr: 'Itinéraire' },
+    };
+    const cartaUrl  = CARTA_LINKS[lang];
+    const mapsUrl   = (d.social && d.social.google_maps) || '#';
+    const phoneLink = d.contact.phone_link;
 
-    // Show FAB only after the primary CTA block scrolls out of view.
+    const bar = document.createElement('nav');
+    bar.className = 'mobile-service-cta';
+    bar.setAttribute('aria-label', LABELS_CTA.carta[lang]);
+    bar.innerHTML =
+      `<a class="mobile-cta-btn" href="${cartaUrl}">${LABELS_CTA.carta[lang]}</a>` +
+      `<a class="mobile-cta-btn mobile-cta-btn--primary" href="${phoneLink}">${LABELS_CTA.call[lang]}</a>` +
+      `<a class="mobile-cta-btn" href="${mapsUrl}" target="_blank" rel="noopener noreferrer">${LABELS_CTA.directions[lang]}</a>`;
+    document.body.appendChild(bar);
+
     const anchor = document.querySelector('.home-cta-nav');
     if (anchor && 'IntersectionObserver' in window) {
       const obs = new IntersectionObserver(
-        function(entries) { fab.classList.toggle('is-visible', !entries[0].isIntersecting); },
+        function(entries) { bar.classList.toggle('is-visible', !entries[0].isIntersecting); },
         { threshold: 0 }
       );
       obs.observe(anchor);
     } else {
-      fab.classList.add('is-visible');
+      bar.classList.add('is-visible');
     }
   }
 
@@ -473,9 +484,25 @@
       ]
     }[lang] || [];
     const paragraphs = lines.map(function(p) { return `<p>${p}</p>`; }).join('');
+    const barraAlt  = { es: 'La barra del Bar León', en: 'Bar León counter', fr: 'Le comptoir du Bar León' }[lang];
+    const pinchAlt  = { es: 'Pinchos de tortilla en Bar León', en: 'Tortilla pinchos at Bar León', fr: 'Pinchos de tortilla au Bar León' }[lang];
     return `<section class="historia-leon" aria-labelledby="historia-title">
   <h2 id="historia-title" class="historia-year">${since}</h2>
   <div class="historia-leon__text">${paragraphs}</div>
+  <div class="doc-strip" aria-hidden="true">
+    <div class="doc-strip__photo">
+      <picture>
+        <source srcset="${WEB_IMAGE_BASE}leon-barra.webp" type="image/webp" />
+        <img src="${WEB_IMAGE_BASE}leon-barra.png" alt="${barraAlt}" width="654" height="490" loading="lazy" />
+      </picture>
+    </div>
+    <div class="doc-strip__photo">
+      <picture>
+        <source srcset="${WEB_IMAGE_BASE}leon-pinchodetortilla.webp" type="image/webp" />
+        <img src="${WEB_IMAGE_BASE}leon-pinchodetortilla.png" alt="${pinchAlt}" width="654" height="490" loading="lazy" />
+      </picture>
+    </div>
+  </div>
 </section>`;
   }
 
@@ -694,6 +721,14 @@
     }
 
     injectScript(schema, 'restaurant-jsonld');
+
+    injectScript({
+      '@context': 'https://schema.org',
+      '@type': 'WebSite',
+      name: 'Restaurante Bar León',
+      url: BASE,
+      inLanguage: lang === 'es' ? 'es-ES' : lang === 'fr' ? 'fr-FR' : 'en-GB',
+    }, 'website-jsonld');
 
     if (d.faq && d.faq.length) {
       const faqSchema = {

@@ -751,9 +751,9 @@
 </div>`;
 
     const subtitle = {
-      es: 'Albayz&iacute;n &middot; Granada',
-      en: 'Albayz&iacute;n &middot; Granada',
-      fr: 'Albayz&iacute;n &middot; Grenade',
+      es: 'Albaicín · Granada',
+      en: 'Albaicín · Granada',
+      fr: 'Albaicín · Grenade',
     }[lang];
 
     return `<div class="wrap">
