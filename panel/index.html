@@ -7,6 +7,7 @@
   <meta name="apple-mobile-web-app-capable" content="yes">
   <meta name="apple-mobile-web-app-status-bar-style" content="default">
   <title>Panel — Bar León</title>
+  <link rel="icon" href="/assets/images/lion-logo.svg" type="image/svg+xml">
   <link rel="stylesheet" href="/panel/panel.css">
 </head>
 <body>
@@ -14,7 +15,7 @@
   <!-- ═══ PANTALLA DE INICIO DE SESIÓN ═══ -->
   <div id="auth-screen" class="auth-screen" hidden>
     <div class="auth-card">
-      <div class="auth-logo">🦁</div>
+      <div class="auth-logo"><img src="/assets/images/lion-logo.svg" alt="Bar León" width="56" height="56"></div>
       <h1 class="auth-title">Panel de Control</h1>
       <p class="auth-subtitle">Bar León · Calle Pan, 1</p>
 
@@ -46,7 +47,10 @@
   <div id="panel" hidden>
 
     <header class="panel-header">
-      <span class="panel-header__title">Panel León</span>
+      <a href="/es/" class="panel-header__brand">
+        <img src="/assets/images/lion-logo.svg" class="panel-header__logo" alt="" width="32" height="32">
+        <span class="panel-header__title">Bar León CMS</span>
+      </a>
       <div class="panel-header__right">
         <span id="user-info" class="panel-header__user"></span>
         <button id="logout-btn" class="panel-header__logout">Salir</button>

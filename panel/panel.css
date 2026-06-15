@@ -136,9 +136,15 @@ body {
 }
 
 .auth-logo {
-  font-size: 3.5rem;
   line-height: 1;
   margin-bottom: 16px;
+}
+.auth-logo img {
+  display: block;
+  margin: 0 auto;
+  width: 56px;
+  height: 56px;
+  object-fit: contain;
 }
 
 .auth-title {
@@ -237,6 +243,24 @@ body {
   background: var(--accent);
   color: var(--white);
   box-shadow: 0 1px 4px rgba(0, 0, 0, 0.2);
+}
+
+.panel-header__brand {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  color: var(--white);
+  text-decoration: none;
+}
+.panel-header__brand:hover { opacity: 0.85; }
+
+.panel-header__logo {
+  display: block;
+  width: 32px;
+  height: 32px;
+  flex-shrink: 0;
+  filter: brightness(0) invert(1);
+  object-fit: contain;
 }
 
 .panel-header__title {
