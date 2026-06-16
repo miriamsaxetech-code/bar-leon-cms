@@ -1817,6 +1817,23 @@ h2 {
   display: block;
 }
 
+.map-address-fallback {
+  font-family: Georgia, serif;
+  font-size: 0.78rem;
+  color: var(--ink);
+  opacity: 0.72;
+  padding: 6px 10px;
+  margin: 0;
+  line-height: 1.4;
+  border-top: 1px solid rgba(29, 77, 133, 0.16);
+  background: #E8E3D3;
+}
+
+.map-address-fallback a {
+  color: var(--azul);
+  text-decoration: none;
+}
+
 .location-info {
   display: flex;
   flex-direction: column;

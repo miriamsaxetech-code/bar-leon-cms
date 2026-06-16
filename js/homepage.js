@@ -560,6 +560,7 @@
   <div class="location-grid">
     <div class="location-map">
       <iframe src="https://www.openstreetmap.org/export/embed.html?bbox=-3.5985%2C37.1755%2C-3.5945%2C37.1785&amp;layer=mapnik&amp;marker=37.17698%2C-3.59653" width="100%" height="250" style="border:0;" loading="lazy" aria-label="OpenStreetMap"></iframe>
+      <p class="map-address-fallback">${addr.street} &middot; ${addr.neighborhood} &middot; ${addr.city} — <a href="${mapsUrl}" target="_blank" rel="noopener">↗ ${directionsLabel}</a></p>
     </div>
     <div class="location-info">
       <p class="location-address">${addr.street} &middot; ${addr.neighborhood} &middot; ${addr.city}</p>
