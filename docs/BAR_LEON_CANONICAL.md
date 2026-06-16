@@ -12,7 +12,7 @@ Last consolidated: 2026-06-06
 
 **Name:** Restaurante Bar León
 
-**Tagline:** Desde 1959 · Albaicín, Granada
+**Tagline:** Desde 1959 · Albayzín, Granada
 
 **Description (short):**
 Bar de barrio en el centro de Granada. Calle Pan, junto a Plaza Nueva. Tres generaciones en la misma barra.
@@ -20,10 +20,10 @@ Bar de barrio en el centro de Granada. Calle Pan, junto a Plaza Nueva. Tres gene
 **Founding:** 1959. Founder: Antonio León.
 
 **Location:**
-- C. Pan, 1, Albaicín, 18010 Granada, España
+- C. Pan, 1, Albayzín, 18010 Granada, España
 - Junto a Plaza Nueva
 
-**Spelling rule:** Albaicín (RAE normative). Not "Albayzín."
+**Spelling rule:** Albayzín. Do not auto-correct it to "Albaicín".
 
 **Contact:**
 - Teléfono: (+34) 958 22 51 43 · tel link: +34958225143
@@ -161,7 +161,7 @@ The primary identity colour is **Azul Fajalauza** (`#1D4D85`), named after Grana
 **Hero:**
 - Azulejo visual
 - Desde 1959
-- Albaicín · Granada
+- Albayzín · Granada
 
 **Immediately below hero:**
 - Primary CTAs (see §7)

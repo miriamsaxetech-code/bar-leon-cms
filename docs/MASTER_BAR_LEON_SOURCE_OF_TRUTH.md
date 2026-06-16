@@ -9,7 +9,7 @@ Criterio: contenido confirmado en archivos JSON, MD y CSV. Sin invenciones.
 # HISTORIA VALIDADA
 
 - Fundado en 1959 por Antonio León.
-- Ubicación: Calle Pan, 1. Albaicín, 18010 Granada, España.
+- Ubicación: Calle Pan, 1. Albayzín, 18010 Granada, España.
 - Junto a Plaza Nueva.
 - Tres generaciones en la misma barra.
 - Bar de barrio en el centro de Granada.
@@ -20,7 +20,7 @@ Criterio: contenido confirmado en archivos JSON, MD y CSV. Sin invenciones.
 - Servicio de barra y mesa.
 
 **Textos confirmados (ES):**
-- "Fundado en 1959 en la calle Pan, en pleno Albaicín y a pocos pasos de Plaza Nueva, Restaurante Bar León forma parte de la historia viva de Granada. Generación tras generación, este bar familiar ha mantenido una cocina andaluza sólida y reconocible, con tapas clásicas, arroces y platos regionales servidos en un ambiente tradicional de azulejos y madera. Punto de encuentro habitual para vecinos, visitantes y cofrades, León combina memoria, cercanía y autenticidad."
+- "Fundado en 1959 en la calle Pan, en pleno Albayzín y a pocos pasos de Plaza Nueva, Restaurante Bar León forma parte de la historia viva de Granada. Generación tras generación, este bar familiar ha mantenido una cocina andaluza sólida y reconocible, con tapas clásicas, arroces y platos regionales servidos en un ambiente tradicional de azulejos y madera. Punto de encuentro habitual para vecinos, visitantes y cofrades, León combina memoria, cercanía y autenticidad."
 
 **Texto cofradía (ES):**
 - "Restaurante Bar León es parte del tejido cofrade de Granada. Cada Semana Santa, el bar se convierte en punto de encuentro para hermandades y visitantes que viven la tradición con fervor y cercanía. Aquí se comparte mesa, se cruzan historias y se celebra una Granada que sigue latiendo al ritmo de sus cofradías."
@@ -53,7 +53,7 @@ Criterio: contenido confirmado en archivos JSON, MD y CSV. Sin invenciones.
 - Precios como datos, no como argumento de venta.
 
 ## Contacto
-- Dirección: C. Pan, 1, Albaicín, 18010 Granada, España
+- Dirección: C. Pan, 1, Albayzín, 18010 Granada, España
 - Teléfono: (+34) 958 22 51 43
 - Tel link: +34958225143
 - Google Reviews: 4.1/5 (1.894 reseñas)

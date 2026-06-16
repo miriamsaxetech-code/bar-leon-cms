@@ -2,7 +2,7 @@
 
 - Nombre consolidado: **Restaurante Bar León**.
 - Posicionamiento consolidado: bar/restaurante tradicional de Granada, cocina andaluza, trayectoria familiar desde **1959**.
-- Ubicación consolidada: **C. Pan, 1, Albaicín, 18010 Granada** (junto a Plaza Nueva).
+- Ubicación consolidada: **C. Pan, 1, Albayzín, 18010 Granada** (junto a Plaza Nueva).
 - Idiomas disponibles en los repositorios: **ES, EN, FR**.
 - Lema recurrente consolidado: “Desde 1959 en Granada”.
 
@@ -183,7 +183,7 @@ Fuentes principales:
 # 9 Contact and logistics
 
 Datos de contacto consolidados para rebuild:
-- Dirección: **C. Pan, 1, Albaicín, 18010 Granada, España**.
+- Dirección: **C. Pan, 1, Albayzín, 18010 Granada, España**.
 - Teléfono base en datos históricos/proyecto: **(+34) 958 22 51 43**.
 - Horario consolidado: L-D con miércoles cerrado; tramos comida/cena según JSON.
 

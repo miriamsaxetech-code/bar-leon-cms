@@ -194,8 +194,7 @@ The following redundant files and conflicts exist in the repository and should b
    - `js/homepage.js` defines an `initStoriesAlbum` slider helper (lines 618-646) and lists positioning strings (`stories` / `storiesSub`).
    - However, the `.stories-archive` markup is not rendered in `js/homepage.js`'s final `render()` function. This code is currently dead weight.
 2. **Geographical Spelling Discrepancy**:
-   - [BAR_LEON_CANONICAL.md](file:///Users/kokonvt/Projects/bar-leon-cms/docs/BAR_LEON_CANONICAL.md) establishes: *"Spelling rule: Albaicín (RAE normative). Not 'Albayzín.'"*
-   - However, [venue.json](file:///Users/kokonvt/Projects/bar-leon-cms/data/venue.json) under `contact.address.neighborhood` lists `"Albayzín"`, violating the canonical rule.
+   - There is no active discrepancy in [venue.json](file:///Users/kokonvt/Projects/bar-leon-cms/data/venue.json) (which uses `"Albayzín"` correctly). However, some older code files and static page templates still use the spelling `"Albaicín"` instead of the unified `"Albayzín"`.
 3. **Historical Research Redundancies**:
    - The `/docs` folder contains various draft plans (`leon-display-v1-plan.md`, `consolidation_plan.md`, `MERGE_PLAN.md`) which refer to old folder structures (`restaurante-bar-leon/01_CONTENT/` etc.) that were deleted during final repository integration. They are useful for history but should be kept strictly read-only.
 
