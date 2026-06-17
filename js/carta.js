@@ -31,12 +31,12 @@
     daily:      { es: 'Plato del día',  en: 'Daily special', fr: 'Plat du jour' },
     desserts:   { es: 'Postre',         en: 'Dessert',       fr: 'Dessert'  },
     closed:     { es: 'Cerrado',        en: 'Closed',        fr: 'Fermé'    },
-    dailyMenu:  { es: 'Menú del Día',   en: 'Daily Menu',    fr: 'Menu du Jour' },
-    restaurant: { es: 'Carta Restaurante', en: 'Restaurant Menu', fr: 'Carte Restaurant' },
-    bar:        { es: 'Carta Barra',    en: 'Bar Menu',      fr: 'Carte Bar' },
+    dailyMenu:  { es: 'Menú del día',   en: 'Daily menu',    fr: 'Menu du jour' },
+    restaurant: { es: 'Carta restaurante', en: 'Restaurant menu', fr: 'Carte restaurant' },
+    bar:        { es: 'Carta barra',    en: 'Bar menu',      fr: 'Carte comptoir' },
     barIntro:   { es: 'Lo que sale de la barra. Sin ceremonia.', en: 'Straight from the bar. No fuss.', fr: 'Ce qui sort du comptoir. Sans cérémonie.' },
     beverages:  { es: 'Bebidas',        en: 'Drinks',        fr: 'Boissons' },
-    beveragesIntro: { es: 'Cervezas, refrescos y licores.', en: 'Beers, soft drinks and spirits.', fr: 'Bières, boissons et spiritueux.' },
+    beveragesIntro: { es: 'Cervezas, refrescos, licores y selección de vinos.', en: 'Beers, soft drinks, spirits and wine selection.', fr: 'Bières, boissons sans alcool, spiritueux et sélection de vins.' },
     restaurantIntro: { es: 'La carta de mesa, separada del menú del día.', en: 'The table menu, separate from the daily menu.', fr: 'La carte de table, séparée du menu du jour.' },
     wines:      { es: 'La Bodega',      en: 'The Cellar',    fr: 'La Cave' },
     winesIntro: { es: 'Nuestra selección de vinos. D.O. Granada por delante, acompañados de los grandes clásicos de la península.', en: 'Our wine selection. Local D.O. Granada first, alongside classic Spanish appellations.', fr: 'Notre sélection de vins. Les vins de Grenade en priorité, accompagnés des grands classiques espagnols.' },
@@ -727,13 +727,26 @@
     const cb = d.chalkboard;
     if (!cb || !cb.group1 || !cb.group2) return '';
 
-    const mediaLabel  = { es: 'media', en: 'half',   fr: 'demi'   }[lang] || 'media';
-    const racionLabel = { es: 'ración', en: 'full',   fr: 'ration' }[lang] || 'ración';
+    const mediaLabel  = { es: 'media (€)', en: 'half (€)',   fr: 'demi (€)'   }[lang] || 'media (€)';
+    const racionLabel = { es: 'ración (€)', en: 'full (€)',   fr: 'ration (€)' }[lang] || 'ración (€)';
+
+    function formatChalkboardPrice(val) {
+      if (!val || val === '—') return '—';
+      val = val.trim();
+      if (/^\d+([.,]\d+)?$/.test(val)) {
+        return val + ' €';
+      }
+      if (val.toLowerCase().includes('unid')) {
+        const num = val.replace(/[^\d,.]/g, '');
+        return num + ' €/ud';
+      }
+      return val;
+    }
 
     function rowHtml(item) {
       const name  = item[lang] || item.es || '';
-      const media = item.media  || '—';
-      const racion = item.racion || '—';
+      const media = formatChalkboardPrice(item.media);
+      const racion = formatChalkboardPrice(item.racion);
       return `<div class="chalkboard-row">
   <span class="chalkboard-name">${name}</span>
   <span class="chalkboard-media">${media}</span>
@@ -751,9 +764,9 @@
 </div>`;
 
     const subtitle = {
-      es: 'Albaicín · Granada',
-      en: 'Albaicín · Granada',
-      fr: 'Albaicín · Grenade',
+      es: 'Albayzín · Granada',
+      en: 'Albayzín · Granada',
+      fr: 'Albayzín · Grenade',
     }[lang];
 
     return `<div class="wrap">
@@ -779,11 +792,10 @@
 
   function renderMenuSections(d, nav, lang) {
     return `<div class="wrap menu-switch-wrap">
-  <div class="menu-switch menu-switch--five" role="tablist" aria-label="${t(nav.menu, lang)}">
+  <div class="menu-switch menu-switch--four" role="tablist" aria-label="${t(nav.menu, lang)}">
     <button type="button" class="menu-switch-btn is-active" role="tab" aria-selected="true" aria-controls="panel-restaurant" data-panel="restaurant">${LABELS.restaurant[lang]}</button>
     <button type="button" class="menu-switch-btn" role="tab" aria-selected="false" aria-controls="panel-bar" data-panel="bar">${LABELS.bar[lang]}</button>
     <button type="button" class="menu-switch-btn" role="tab" aria-selected="false" aria-controls="panel-beverages" data-panel="beverages">${LABELS.beverages[lang]}</button>
-    <button type="button" class="menu-switch-btn" role="tab" aria-selected="false" aria-controls="panel-wines" data-panel="wines">${LABELS.wines[lang]}</button>
     <button type="button" class="menu-switch-btn menu-switch-btn--secondary" role="tab" aria-selected="false" aria-controls="panel-daily" data-panel="daily">${LABELS.dailyMenu[lang]}</button>
   </div>
 </div>
@@ -810,14 +822,7 @@
     <p class="section-label">${LABELS.beverages[lang]}</p>
     <p class="menu-panel-copy">${LABELS.beveragesIntro[lang]}</p>
   </div>
-  ${renderWines(null, d.beverages, null, d.categories, d.allergens, lang, 'bar', 'wine', null)}
-</section>
-<section id="panel-wines" class="menu-panel" role="tabpanel" data-panel="wines" hidden>
-  <div class="wrap menu-panel-intro">
-    <p class="section-label">${LABELS.wines[lang]}</p>
-    <p class="menu-panel-copy">${LABELS.winesIntro[lang]}</p>
-  </div>
-  ${renderWines(d.wines, null, null, d.categories, d.allergens, lang, 'bar', null, 'wine')}
+  ${renderWines(d.wines, d.beverages, null, d.categories, d.allergens, lang, 'bar', null, null)}
 </section>
 <section id="panel-daily" class="menu-panel" role="tabpanel" data-panel="daily" hidden>
   <div class="wrap menu-panel-inner">${renderMenuDia(d.daily_menu, nav, lang)}</div>
@@ -889,8 +894,8 @@
   function scrollToWine(container, wineId) {
     if (!wineId) return;
 
-    const wineBtn = container.querySelector('.menu-switch-btn[data-panel="wines"]');
-    if (wineBtn) wineBtn.click();
+    const beveragesBtn = container.querySelector('.menu-switch-btn[data-panel="beverages"]');
+    if (beveragesBtn) beveragesBtn.click();
 
     setTimeout(function() {
       const wineEl = document.getElementById('wine-' + wineId);
@@ -1089,8 +1094,9 @@
       setTimeout(() => { loader.style.display = 'none'; }, 380);
 
       // Hash-based panel activation (e.g. /es/carta#restaurant)
-      const hashPanel = window.location.hash.replace('#', '');
+      let hashPanel = window.location.hash.replace('#', '');
       if (hashPanel && hashPanel !== 'hours') {
+        if (hashPanel === 'wines') hashPanel = 'beverages';
         const panelBtn = app.querySelector(`.menu-switch-btn[data-panel="${hashPanel}"]`);
         if (panelBtn) panelBtn.click();
       }

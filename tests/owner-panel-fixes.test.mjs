@@ -64,6 +64,9 @@ async function renderHomepageWithVenue(venue, lang = 'es') {
     getElementById(id) {
       return elements[id] || new ElementStub('div', id);
     },
+    querySelector() {
+      return null;
+    },
   };
 
   const source = await fs.readFile('js/homepage.js', 'utf8');

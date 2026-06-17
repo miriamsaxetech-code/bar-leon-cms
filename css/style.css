@@ -142,7 +142,7 @@ body {
   align-items: center;
   justify-content: center;
   z-index: 9999;
-  font-family: 'Playfair Display', Georgia, serif;
+  font-family: 'Leon Display', 'Playfair Display', Georgia, serif;
   font-size: 1.5rem;
   font-weight: 700;
   color: var(--ink);
@@ -172,7 +172,7 @@ hr.divider,
 
 /* ─── TYPOGRAPHY ─── */
 h2 {
-  font-family: 'Playfair Display', Georgia, serif;
+  font-family: 'Leon Display', 'Playfair Display', Georgia, serif;
   font-weight: 700;
   line-height: 1.1;
   font-size: 0.95rem;
@@ -218,7 +218,7 @@ h2 {
 
 /* ─── SITE NAME ─── */
 .site-name {
-  font-family: 'Playfair Display', Georgia, "Times New Roman", serif;
+  font-family: 'Leon Display', 'Playfair Display', Georgia, "Times New Roman", serif;
   font-weight: 400;
   line-height: 1.05;
   font-size: clamp(2.6rem, 8vw, 4.5rem);
@@ -254,7 +254,7 @@ h2 {
 }
 
 .home-hero__name {
-  font-family: 'Playfair Display', Georgia, serif;
+  font-family: 'Leon Display', 'Playfair Display', Georgia, serif;
   font-size: clamp(2rem, 6vw, 3rem);
   font-weight: 700;
   color: var(--ink);
@@ -394,7 +394,7 @@ h2 {
 
 .azulejo-frame blockquote,
 .tile-frame blockquote {
-  font-family: 'Playfair Display', Georgia, serif;
+  font-family: 'Leon Display', 'Playfair Display', Georgia, serif;
   font-size: 1.05rem;
   line-height: 1.6;
   color: var(--ink);
@@ -468,7 +468,7 @@ h2 {
   align-items: center;
   justify-content: center;
   line-height: 1;
-  font-family: 'Playfair Display', Georgia, serif;
+  font-family: 'Leon Display', 'Playfair Display', Georgia, serif;
   font-size: 1.2rem;
   font-weight: 700;
   color: var(--muted);
@@ -601,7 +601,7 @@ h2 {
 }
 
 .carta-bar-name {
-  font-family: 'Playfair Display', Georgia, "Times New Roman", serif;
+  font-family: 'Leon Display', 'Playfair Display', Georgia, "Times New Roman", serif;
   font-weight: 400;
   font-size: 1.05rem;
   line-height: 1;
@@ -764,7 +764,7 @@ h2 {
 }
 
 .edict-title {
-  font-family: 'Playfair Display', Georgia, serif;
+  font-family: 'Leon Display', 'Playfair Display', Georgia, serif;
   font-weight: 700;
   font-size: 1.3rem;
   line-height: 1.1;
@@ -841,7 +841,7 @@ h2 {
 }
 
 .categoria-head h2 {
-  font-family: 'Playfair Display', Georgia, "Times New Roman", serif;
+  font-family: 'Leon Display', 'Playfair Display', Georgia, "Times New Roman", serif;
   font-size: 1rem;
   font-weight: 400;
   letter-spacing: 0.08em;
@@ -1085,7 +1085,7 @@ h2 {
 }
 
 .hero-editorial-year {
-  font-family: 'Playfair Display', Georgia, serif;
+  font-family: 'Leon Display', 'Playfair Display', Georgia, serif;
   font-size: 0.8rem;
   text-transform: none;
   letter-spacing: 0.03em;
@@ -1153,7 +1153,7 @@ h2 {
 }
 
 .home-section-head h2 {
-  font-family: 'Playfair Display', Georgia, "Times New Roman", serif;
+  font-family: 'Leon Display', 'Playfair Display', Georgia, "Times New Roman", serif;
   font-size: clamp(1.6rem, 4.5vw, 2.4rem);
   font-weight: 400;
   line-height: 1.05;
@@ -1181,7 +1181,7 @@ h2 {
 }
 
 .home-daily-menu h2 {
-  font-family: 'Playfair Display', Georgia, serif;
+  font-family: 'Leon Display', 'Playfair Display', Georgia, serif;
   font-size: clamp(1.5rem, 5vw, 2rem);
   line-height: 1.05;
   letter-spacing: 0;
@@ -1322,7 +1322,7 @@ h2 {
 }
 
 .home-andalusia__main h3 {
-  font-family: 'Playfair Display', Georgia, serif;
+  font-family: 'Leon Display', 'Playfair Display', Georgia, serif;
   font-size: 1.22rem;
   line-height: 1.2;
   margin-top: 2px;
@@ -1341,7 +1341,7 @@ h2 {
 
 .home-andalusia__price {
   color: var(--granate);
-  font-family: 'Playfair Display', Georgia, serif;
+  font-family: 'Leon Display', 'Playfair Display', Georgia, serif;
   font-size: 1rem;
   font-weight: 700;
   white-space: nowrap;
@@ -1656,16 +1656,18 @@ h2 {
 
 .chalkboard-menu .edict-section-label {
   font-family: 'Caveat', cursive;
-  font-size: 0.88rem;
+  font-weight: 700;
+  font-size: 0.95rem;
   letter-spacing: 0.18em;
-  color: rgba(235, 228, 200, 0.55);
+  color: rgba(235, 228, 200, 0.85);
   text-transform: uppercase;
 }
 
 .chalkboard-menu .edict-platos li {
   font-family: 'Caveat', cursive;
-  font-size: clamp(1rem, 3vw, 1.1rem);
-  color: rgba(248, 244, 228, 0.94);
+  font-weight: 700;
+  font-size: clamp(1.05rem, 3vw, 1.25rem);
+  color: rgba(248, 244, 228, 0.98);
   padding: 4px 0;
   border-bottom: 1px solid rgba(238, 228, 200, 0.08);
 }
@@ -1675,13 +1677,15 @@ h2 {
 }
 
 .chalkboard-menu .edict-platos li strong {
-  color: rgba(248, 230, 160, 0.9);
+  color: rgba(248, 230, 160, 0.98);
+  font-weight: 700;
 }
 
 .chalkboard-menu .edict-temporada {
   font-family: 'Caveat', cursive;
-  font-size: 0.95rem;
-  color: rgba(235, 228, 200, 0.62);
+  font-weight: 700;
+  font-size: 1.05rem;
+  color: rgba(235, 228, 200, 0.85);
   font-style: italic;
 }
 
@@ -1689,9 +1693,10 @@ h2 {
   border-top: 1px solid rgba(238, 228, 195, 0.18);
   padding: 10px 32px;
   font-family: 'Caveat', cursive;
-  font-size: 0.82rem;
+  font-weight: 700;
+  font-size: 0.92rem;
   letter-spacing: 0.12em;
-  color: rgba(235, 228, 200, 0.45);
+  color: rgba(235, 228, 200, 0.8);
   position: relative;
   z-index: 2;
 }
@@ -2069,7 +2074,7 @@ h2 {
 }
 
 .spotlight-andalucia__title {
-  font-family: 'Playfair Display', Georgia, serif;
+  font-family: 'Leon Display', 'Playfair Display', Georgia, serif;
   font-size: clamp(1.25rem, 4vw, 1.9rem);
   font-weight: 700;
   letter-spacing: 0;
@@ -2238,7 +2243,7 @@ h2 {
   border-radius: 0;
 }
 .para-empezar__title {
-  font-family: 'Playfair Display', Georgia, serif;
+  font-family: 'Leon Display', 'Playfair Display', Georgia, serif;
   font-size: 1.1rem;
   margin-bottom: 0.2rem;
   color: var(--azul);
@@ -2436,7 +2441,7 @@ h2 {
 }
 
 .editorial-snapshot__caption {
-  font-family: 'Playfair Display', Georgia, serif;
+  font-family: 'Leon Display', 'Playfair Display', Georgia, serif;
   font-size: 0.8rem;
   font-style: italic;
   line-height: 1.5;
@@ -2685,10 +2690,11 @@ h2 {
 .chalkboard-col-header .chalkboard-racion {
   font-family: 'Caveat', cursive;
   font-style: normal;
-  font-size: 0.76rem;
+  font-weight: 700;
+  font-size: 0.82rem;
   text-transform: none;
   letter-spacing: 0.04em;
-  color: rgba(235, 228, 200, 0.5);
+  color: rgba(235, 228, 200, 0.85);
   padding-bottom: 8px;
   border-bottom: 1px solid rgba(238, 228, 200, 0.2);
   margin-bottom: 6px;
@@ -2701,8 +2707,9 @@ h2 {
   gap: 0 10px;
   font-family: 'Caveat', cursive;
   font-style: normal;
-  font-size: clamp(1rem, 2.6vw, 1.1rem);
-  color: rgba(248, 244, 228, 0.96);
+  font-weight: 700;
+  font-size: clamp(1.05rem, 2.8vw, 1.25rem);
+  color: rgba(248, 244, 228, 0.98);
   line-height: 1.85;
   border-bottom: 1px solid rgba(238, 228, 200, 0.08);
   text-shadow: 0 0 6px rgba(238, 234, 212, 0.06);
@@ -2724,8 +2731,9 @@ h2 {
 .chalkboard-racion {
   font-family: 'Caveat', cursive;
   font-style: normal;
-  font-size: clamp(1rem, 2.6vw, 1.08rem);
-  color: rgba(248, 238, 210, 0.92);
+  font-weight: 700;
+  font-size: clamp(1.05rem, 2.8vw, 1.25rem);
+  color: rgba(248, 238, 210, 0.98);
   white-space: nowrap;
   text-align: right;
   align-self: start;
@@ -2769,7 +2777,8 @@ h2 {
   .chalkboard-row {
     grid-template-columns: 1fr 56px 56px;
     gap: 0 8px;
-    font-size: 0.84rem;
+    font-size: 0.98rem;
+    font-weight: 700;
   }
   .chalkboard-title {
     font-size: 1.25rem;
@@ -2809,30 +2818,35 @@ h2 {
 
 .pizarra-dia .home-daily-menu__head .section-label {
   font-family: 'Caveat', cursive;
-  font-size: 0.9rem;
-  color: rgba(235, 228, 200, 0.5);
+  font-weight: 700;
+  font-size: 0.95rem;
+  color: rgba(235, 228, 200, 0.85);
   letter-spacing: 0.03em;
   text-transform: none;
 }
 
-.pizarra-dia .home-daily-menu h2 {
+.pizarra-dia h2 {
   font-family: 'Caveat', cursive;
-  color: rgba(248, 244, 225, 0.94);
+  font-weight: 700;
+  font-size: clamp(1.7rem, 5vw, 2.2rem);
+  color: rgba(248, 244, 225, 0.98);
   text-shadow: none;
 }
 
 .pizarra-dia .home-daily-menu__meta {
   font-family: 'Caveat', cursive;
-  font-size: 0.84rem;
-  color: rgba(235, 228, 200, 0.46);
+  font-weight: 700;
+  font-size: 0.9rem;
+  color: rgba(235, 228, 200, 0.8);
   letter-spacing: 0.01em;
   text-transform: none;
 }
 
 .pizarra-dia .home-daily-menu__price {
   font-family: 'Caveat', cursive;
-  font-weight: normal;
-  color: rgba(242, 222, 162, 0.92);
+  font-weight: 700;
+  font-size: clamp(2rem, 6vw, 2.6rem);
+  color: rgba(248, 230, 160, 0.98);
   text-shadow: none;
 }
 
@@ -2858,11 +2872,11 @@ h2 {
 /* Section labels — chalk-written, not SaaS caps */
 .pizarra-dia .dm-section-head span:first-child {
   font-family: 'Caveat', cursive;
-  font-size: 1rem;
-  font-weight: normal;
+  font-size: 1.15rem;
+  font-weight: 700;
   letter-spacing: 0.01em;
   text-transform: none;
-  color: rgba(242, 222, 162, 0.68);
+  color: rgba(242, 222, 162, 0.85);
 }
 
 .pizarra-dia .is-open .dm-section-head span:first-child {
@@ -2876,8 +2890,9 @@ h2 {
 
 .pizarra-dia .home-daily-menu__group-list li {
   font-family: 'Caveat', cursive;
-  font-size: clamp(0.96rem, 2.8vw, 1.04rem);
-  color: rgba(235, 228, 200, 0.82);
+  font-weight: 700;
+  font-size: clamp(1.05rem, 2.8vw, 1.18rem);
+  color: rgba(235, 228, 200, 0.95);
   border-bottom: 1px solid rgba(238, 228, 200, 0.07);
   padding: 7px 0;
   line-height: 1.6;
@@ -2886,13 +2901,14 @@ h2 {
 }
 
 .pizarra-dia .home-daily-menu__group-list li strong {
-  color: rgba(248, 244, 225, 0.92);
-  font-weight: normal;
+  color: rgba(248, 244, 225, 0.98);
+  font-weight: 700;
 }
 
 .pizarra-dia .home-daily-menu__group-list li em {
-  color: rgba(235, 228, 200, 0.5);
+  color: rgba(235, 228, 200, 0.75);
   font-style: italic;
+  font-weight: 700;
 }
 
 /* Footer */
@@ -2953,7 +2969,7 @@ h2 {
 }
 
 .historia-leon h2 {
-  font-family: 'Playfair Display', Georgia, serif;
+  font-family: 'Leon Display', 'Playfair Display', Georgia, serif;
   font-size: clamp(1.2rem, 3.5vw, 1.5rem);
   font-weight: 700;
   color: var(--ink);
@@ -3012,7 +3028,7 @@ h2 {
 }
 
 .ordering-guide h2 {
-  font-family: 'Playfair Display', Georgia, serif;
+  font-family: 'Leon Display', 'Playfair Display', Georgia, serif;
   font-size: clamp(1.15rem, 3.5vw, 1.4rem);
   font-weight: 700;
   color: var(--ink);
@@ -3080,7 +3096,7 @@ h2 {
 }
 
 .wine-editorial__head h2 {
-  font-family: 'Playfair Display', Georgia, serif;
+  font-family: 'Leon Display', 'Playfair Display', Georgia, serif;
   font-size: clamp(1.3rem, 4vw, 1.7rem);
   font-weight: 700;
   color: var(--ink);
@@ -3178,7 +3194,7 @@ h2 {
 }
 
 .cana-editorial h2 {
-  font-family: 'Playfair Display', Georgia, "Times New Roman", serif;
+  font-family: 'Leon Display', 'Playfair Display', Georgia, "Times New Roman", serif;
   font-size: clamp(1.6rem, 4.5vw, 2.4rem);
   font-weight: 400;
   color: var(--ink);
@@ -3272,7 +3288,7 @@ h2 {
 
 /* ─── HISTORIA SHORT YEAR ─── */
 .historia-year {
-  font-family: 'Playfair Display', Georgia, "Times New Roman", serif !important;
+  font-family: 'Leon Display', 'Playfair Display', Georgia, "Times New Roman", serif !important;
   font-size: clamp(1.4rem, 5vw, 2rem) !important;
   font-weight: 400;
   color: var(--muted);
@@ -3338,21 +3354,25 @@ h2 {
 
 /* ─── MENU TAB BAR — scrollable on narrow mobile ─── */
 @media (max-width: 500px) {
-  .menu-switch--five {
+  .menu-switch--five,
+  .menu-switch--four {
     display: flex;
     overflow-x: auto;
     -webkit-overflow-scrolling: touch;
     scrollbar-width: none;
   }
-  .menu-switch--five::-webkit-scrollbar {
+  .menu-switch--five::-webkit-scrollbar,
+  .menu-switch--four::-webkit-scrollbar {
     display: none;
   }
-  .menu-switch--five .menu-switch-btn {
+  .menu-switch--five .menu-switch-btn,
+  .menu-switch--four .menu-switch-btn {
     flex: 0 0 auto;
     min-width: 96px;
     border-right: 1px solid rgba(28, 26, 23, 0.22);
   }
-  .menu-switch--five .menu-switch-btn:last-child {
+  .menu-switch--five .menu-switch-btn:last-child,
+  .menu-switch--four .menu-switch-btn:last-child {
     border-right: none;
   }
 }
@@ -3632,7 +3652,8 @@ body:has(#carta-header) .lang-bar {
 /* Tab strip: horizontal scroll on all mobile widths, not just ≤500px.
    Overrides the ≤500px stack-to-single-column for --five variant. */
 @media (max-width: 768px) {
-  .menu-switch--five {
+  .menu-switch--five,
+  .menu-switch--four {
     display: flex;
     overflow-x: auto;
     -webkit-overflow-scrolling: touch;
@@ -3640,17 +3661,20 @@ body:has(#carta-header) .lang-bar {
     scrollbar-width: none;
     border: 1px solid var(--ink);
   }
-  .menu-switch--five::-webkit-scrollbar {
+  .menu-switch--five::-webkit-scrollbar,
+  .menu-switch--four::-webkit-scrollbar {
     display: none;
   }
-  .menu-switch--five .menu-switch-btn {
+  .menu-switch--five .menu-switch-btn,
+  .menu-switch--four .menu-switch-btn {
     flex: 0 0 auto;
     min-width: 82px;
     border-right: 1px solid rgba(28, 26, 23, 0.22);
     border-bottom: none;
     scroll-snap-align: start;
   }
-  .menu-switch--five .menu-switch-btn:last-child {
+  .menu-switch--five .menu-switch-btn:last-child,
+  .menu-switch--four .menu-switch-btn:last-child {
     border-right: none;
   }
 }

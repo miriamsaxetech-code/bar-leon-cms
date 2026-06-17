@@ -13,7 +13,7 @@ class ElementStub {
   constructor(tag = 'div', id = '') {
     this.tag = tag;
     this.id = id;
-    this.innerHTML = '';
+    this._innerHTML = '';
     this.textContent = '';
     this.href = '';
     this.className = '';
@@ -22,6 +22,21 @@ class ElementStub {
     this.style = {};
     this.children = [];
     this.classList = new ClassListStub();
+  }
+
+  set innerHTML(val) {
+    this._innerHTML = val;
+    // Simple regex to extract href attributes and simulate child elements
+    const matches = val.matchAll(/href="([^"]+)"/g);
+    for (const match of matches) {
+      const child = new ElementStub('a');
+      child.href = match[1];
+      this.children.push(child);
+    }
+  }
+
+  get innerHTML() {
+    return this._innerHTML;
   }
 
   setAttribute(name, value) {
@@ -128,10 +143,10 @@ assert.doesNotMatch(lunch.html, />\+34 958 22 51 43<\/a>/);
 assert.doesNotMatch(lunch.html, /hemeroteca/i);
 assert.ok(lunch.html.indexOf('home-cta-nav') < lunch.html.indexOf('home-andalusia'), 'CTA group must appear before food');
 assert.ok(lunch.html.indexOf('home-cta-nav') < lunch.html.indexOf('historia-leon'), 'CTA group must appear before history');
-assert.ok(lunch.body.children.some(el => el.className === 'mobile-service-cta' && el.href === 'tel:+34958225143'));
+assert.ok(lunch.body.children.some(el => el.className === 'mobile-service-cta' && el.children.some(child => child.href === 'tel:+34958225143')));
 
 const afterHours = await renderHomepageAt('2026-05-25T18:30:00+02:00');
-assert.ok(afterHours.body.children.some(el => el.className === 'mobile-service-cta' && el.href === 'tel:+34958225143'));
+assert.ok(afterHours.body.children.some(el => el.className === 'mobile-service-cta' && el.children.some(child => child.href === 'tel:+34958225143')));
 
 const withHomepageCarioca = await renderHomepageAt('2026-05-25T13:30:00+02:00', 'es');
 assert.doesNotMatch(withHomepageCarioca.html, /carioca-slot/);
