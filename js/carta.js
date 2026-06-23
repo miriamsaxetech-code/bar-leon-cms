@@ -31,9 +31,9 @@
     daily:      { es: 'Plato del día',  en: 'Daily special', fr: 'Plat du jour' },
     desserts:   { es: 'Postre',         en: 'Dessert',       fr: 'Dessert'  },
     closed:     { es: 'Cerrado',        en: 'Closed',        fr: 'Fermé'    },
-    dailyMenu:  { es: 'Menú del día',   en: 'Daily menu',    fr: 'Menu du jour' },
-    restaurant: { es: 'Carta restaurante', en: 'Restaurant menu', fr: 'Carte restaurant' },
-    bar:        { es: 'Carta barra',    en: 'Bar menu',      fr: 'Carte comptoir' },
+    dailyMenu:  { es: 'Menú del Día',   en: 'Daily menu',    fr: 'Menu du jour' },
+    restaurant: { es: 'Carta Restaurante', en: 'Restaurant menu', fr: 'Carte restaurant' },
+    bar:        { es: 'Carta Barra',    en: 'Bar menu',      fr: 'Carte comptoir' },
     barIntro:   { es: 'Lo que sale de la barra. Sin ceremonia.', en: 'Straight from the bar. No fuss.', fr: 'Ce qui sort du comptoir. Sans cérémonie.' },
     beverages:  { es: 'Bebidas',        en: 'Drinks',        fr: 'Boissons' },
     beveragesIntro: { es: 'Cervezas, refrescos, licores y selección de vinos.', en: 'Beers, soft drinks, spirits and wine selection.', fr: 'Bières, boissons sans alcool, spiritueux et sélection de vins.' },
@@ -458,7 +458,7 @@
     </div>
     <div class="carta-accent-images editorial-snapshot" style="margin: 20px 0;">
       <figure class="editorial-snapshot__figure" style="box-shadow:none;border-color:rgba(28,26,23,0.12);padding:8px;">
-        <img class="editorial-snapshot__img" src="${WEB_IMAGE_BASE}${image.src}" alt="${image.alt[lang]}" width="800" height="500" loading="lazy" decoding="async">
+        <img class="editorial-snapshot__img" src="${WEB_IMAGE_BASE}${image.src}" alt="${image.alt[lang]}" width="800" height="500" loading="lazy" decoding="async" onerror="this.closest('figure').classList.add('img--broken')">
         <figcaption class="editorial-snapshot__caption" style="font-size:0.75rem;margin-top:8px;padding-top:6px;">
           ${image.alt[lang]} &mdash; ${captionSuffix}
         </figcaption>
@@ -694,7 +694,7 @@
     }[lang];
     return `<div class="wrap editorial-snapshot" style="margin: 24px auto;">
   <figure class="editorial-snapshot__figure" style="box-shadow:none;border-color:rgba(28,26,23,0.12);padding:8px;">
-    <img class="editorial-snapshot__img" src="${WEB_IMAGE_BASE}bar-leon-plato-03.webp" alt="${altText}" width="800" height="500" loading="lazy" decoding="async">
+    <img class="editorial-snapshot__img" src="${WEB_IMAGE_BASE}bar-leon-plato-03.webp" alt="${altText}" width="800" height="500" loading="lazy" decoding="async" onerror="this.closest('figure').classList.add('img--broken')">
     <figcaption class="editorial-snapshot__caption" style="font-size:0.75rem;margin-top:8px;padding-top:6px;">
       ${caption}
     </figcaption>
@@ -715,7 +715,7 @@
     }[lang];
     return `<div class="wrap editorial-snapshot" style="margin: 32px auto;">
   <figure class="editorial-snapshot__figure" style="box-shadow:none;border-color:rgba(28,26,23,0.12);padding:8px;">
-    <img class="editorial-snapshot__img" src="${WEB_IMAGE_BASE}bar-leon-plato-04.webp" alt="${altText}" width="800" height="500" loading="lazy" decoding="async">
+    <img class="editorial-snapshot__img" src="${WEB_IMAGE_BASE}bar-leon-plato-04.webp" alt="${altText}" width="800" height="500" loading="lazy" decoding="async" onerror="this.closest('figure').classList.add('img--broken')">
     <figcaption class="editorial-snapshot__caption" style="font-size:0.75rem;margin-top:8px;padding-top:6px;">
       ${caption}
     </figcaption>
@@ -974,7 +974,7 @@
 
   function initReveal(root) {
     if (!window.IntersectionObserver) return;
-    const els = root.querySelectorAll('.editorial-snapshot, .caricature-block');
+    const els = root.querySelectorAll('.editorial-snapshot, .caricature-block, .categoria-head, .wine-region-block');
     const io = new IntersectionObserver(function(entries) {
       entries.forEach(function(e) {
         if (e.isIntersecting) {
@@ -983,7 +983,11 @@
         }
       });
     }, { threshold: 0.1, rootMargin: '0px 0px -40px 0px' });
-    els.forEach(function(el) { el.classList.add('reveal'); io.observe(el); });
+    els.forEach(function(el, i) {
+      el.classList.add('reveal');
+      el.style.setProperty('--reveal-delay', (Math.min(i, 5) * 0.08) + 's');
+      io.observe(el);
+    });
   }
 
   function getPublicBaseUrl(d) {
@@ -1049,6 +1053,10 @@
     const headerNav = document.getElementById('carta-nav');
     const app       = document.getElementById('carta-body');
 
+    if (loader) {
+      loader.textContent = { es: 'Cargando carta…', en: 'Loading menu…', fr: 'Chargement…' }[lang] || 'Cargando carta…';
+    }
+
     try {
       const res = await fetch('../data/venue.json');
       if (!res.ok) throw new Error('HTTP ' + res.status);
@@ -1111,11 +1119,11 @@
       }
     } catch (err) {
       const errMsg = {
-        es: 'Error al cargar. Por favor, recarga la p&aacute;gina.',
+        es: 'Error al cargar. Por favor, recarga la página.',
         en: 'Error loading page. Please reload.',
         fr: 'Erreur de chargement. Veuillez recharger la page.'
-      }[lang] || 'Error al cargar. Por favor, recarga la p&aacute;gina.';
-      loader.innerHTML = `<span style="color:#7A1C1C;font-family:Georgia,serif;font-size:0.9rem;padding:0 24px;text-align:center;display:block;">${errMsg}</span>`;
+      }[lang] || 'Error al cargar. Por favor, recarga la página.';
+      if (loader) { loader.classList.add('loader--error'); loader.textContent = errMsg; }
       console.error('Bar León:', err);
     }
   }

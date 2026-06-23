@@ -446,10 +446,13 @@
     const bar = document.createElement('nav');
     bar.className = 'mobile-service-cta';
     bar.setAttribute('aria-label', LABELS_CTA.carta[lang]);
+    const iconBook = '<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><path d="M4 19.5A2.5 2.5 0 0 1 6.5 17H20"/><path d="M6.5 2H20v20H6.5A2.5 2.5 0 0 1 4 19.5v-15A2.5 2.5 0 0 1 6.5 2z"/></svg>';
+    const iconPhone = '<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07A19.5 19.5 0 0 1 4.72 12a19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 3.63 1.18h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L7.91 8.82a16 16 0 0 0 6.29 6.29l.91-.91a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 16.92z"/></svg>';
+    const iconPin  = '<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"/><circle cx="12" cy="10" r="3"/></svg>';
     bar.innerHTML =
-      `<a class="mobile-cta-btn" href="${cartaUrl}">${LABELS_CTA.carta[lang]}</a>` +
-      `<a class="mobile-cta-btn mobile-cta-btn--primary" href="${phoneLink}">${LABELS_CTA.call[lang]}</a>` +
-      `<a class="mobile-cta-btn" href="${mapsUrl}" target="_blank" rel="noopener noreferrer">${LABELS_CTA.directions[lang]}</a>`;
+      `<a class="mobile-cta-btn" href="${cartaUrl}"><span class="mobile-cta-icon">${iconBook}</span><span>${LABELS_CTA.carta[lang]}</span></a>` +
+      `<a class="mobile-cta-btn mobile-cta-btn--primary" href="${phoneLink}"><span class="mobile-cta-icon">${iconPhone}</span><span>${LABELS_CTA.call[lang]}</span></a>` +
+      `<a class="mobile-cta-btn" href="${mapsUrl}" target="_blank" rel="noopener noreferrer"><span class="mobile-cta-icon">${iconPin}</span><span>${LABELS_CTA.directions[lang]}</span></a>`;
     document.body.appendChild(bar);
 
     const anchor = document.querySelector('.home-cta-nav');
@@ -648,7 +651,7 @@
   function initReveal(root) {
     if (!window.IntersectionObserver) return;
     const els = root.querySelectorAll(
-      '.editorial-snapshot, .hero-frame, .caricature-block, .location-section'
+      '.editorial-snapshot, .hero-frame, .caricature-block, .location-section, .tile-frame, .tile-card, .home-daily-menu__foot, .warm-divider'
     );
     const io = new IntersectionObserver(function(entries) {
       entries.forEach(function(e) {
@@ -658,7 +661,11 @@
         }
       });
     }, { threshold: 0.1, rootMargin: '0px 0px -40px 0px' });
-    els.forEach(function(el) { el.classList.add('reveal'); io.observe(el); });
+    els.forEach(function(el, i) {
+      el.classList.add('reveal');
+      el.style.setProperty('--reveal-delay', (Math.min(i, 5) * 0.08) + 's');
+      io.observe(el);
+    });
   }
 
   function buildOpeningHours(hours) {
@@ -768,11 +775,12 @@
       initReveal(app);
     } catch (err) {
       const errMsg = {
-        es: 'Error al cargar. Por favor, recarga la p&aacute;gina.',
+        es: 'Error al cargar. Por favor, recarga la página.',
         en: 'Error loading page. Please reload.',
         fr: 'Erreur de chargement. Veuillez recharger la page.'
-      }[lang] || 'Error al cargar. Por favor, recarga la p&aacute;gina.';
-      loader.innerHTML = `<span style="color:#1D4D85;font-family:Georgia,serif;font-size:0.9rem;padding:0 24px;text-align:center;display:block;">${errMsg}</span>`;
+      }[lang] || 'Error al cargar. Por favor, recarga la página.';
+      loader.classList.add('loader--error');
+      loader.textContent = errMsg;
       console.error('Bar León:', err);
     }
   }

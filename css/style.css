@@ -1729,10 +1729,10 @@ h2 {
 }
 
 .site-tile-frame:hover {
-  transform: scale(1.02) translateY(-1px);
+  transform: translateY(-2px);
   box-shadow:
-    0 6px 16px rgba(28, 26, 23, 0.16),
-    0 2px 6px rgba(28, 26, 23, 0.08);
+    0 10px 24px rgba(28, 26, 23, 0.18),
+    0 3px 8px rgba(28, 26, 23, 0.08);
 }
 
 .site-tile {
@@ -1740,6 +1740,11 @@ h2 {
   height: 100%;
   object-fit: cover;
   display: block;
+  transition: transform 0.45s cubic-bezier(0.22, 1, 0.36, 1);
+}
+
+.site-tile-frame:hover .site-tile {
+  transform: scale(1.04);
 }
 
 @keyframes tileFadeIn {
@@ -2153,7 +2158,8 @@ h2 {
 /* ─── DISH STATUS ─── */
 .dish--soldout { opacity: 0.5; }
 .dish--soldout .dish-price { display: none; }
-.dish-status { font-size: 0.72rem; color: #888; font-style: italic; }
+.dish--soldout .dish-name { text-decoration: line-through; }
+.dish-status { font-size: 0.72rem; color: var(--granate); opacity: 0.75; font-style: italic; }
 
 /* ─── PAIRING CHIPS ─── */
 .pairing-chip {
@@ -2296,7 +2302,7 @@ h2 {
 
 /* ─── MOBILE SERVICE CTA ─── */
 .mobile-service-cta {
-  display: none;
+  display: flex;
   position: fixed;
   bottom: 0;
   left: 0;
@@ -2304,9 +2310,15 @@ h2 {
   z-index: 140;
   background: var(--ink);
   padding-bottom: env(safe-area-inset-bottom);
+  opacity: 0;
+  transform: translateY(100%);
+  pointer-events: none;
+  transition: opacity 0.22s ease, transform 0.22s ease;
 }
 .mobile-service-cta.is-visible {
-  display: flex;
+  opacity: 1;
+  transform: translateY(0);
+  pointer-events: auto;
 }
 .mobile-cta-btn {
   flex: 1;
@@ -2323,12 +2335,22 @@ h2 {
   display: flex;
   align-items: center;
   justify-content: center;
+  gap: 5px;
 }
 .mobile-cta-btn:last-child {
   border-right: none;
 }
 .mobile-cta-btn--primary {
   background: var(--azul);
+}
+.mobile-cta-icon {
+  display: inline-flex;
+  align-items: center;
+  flex-shrink: 0;
+}
+.mobile-cta-icon svg {
+  width: 15px;
+  height: 15px;
 }
 @media (max-width: 767px) {
   body { padding-bottom: 56px; }
@@ -2421,6 +2443,7 @@ h2 {
   margin: 0;
   box-shadow: 0 4px 12px rgba(28, 26, 23, 0.03);
   overflow: hidden;
+  transition: transform 0.35s cubic-bezier(0.22, 1, 0.36, 1), box-shadow 0.35s ease;
 }
 
 .editorial-snapshot__figure img {
@@ -2432,11 +2455,17 @@ h2 {
   transition: transform 0.6s cubic-bezier(0.22, 1, 0.36, 1);
 }
 
+.editorial-snapshot__figure:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 10px 24px rgba(28, 26, 23, 0.12), 0 2px 6px rgba(28, 26, 23, 0.06);
+}
+
 .editorial-snapshot__figure:hover img {
   transform: scale(1.04);
 }
 
 @media (prefers-reduced-motion: reduce) {
+  .editorial-snapshot__figure { transition: none; }
   .editorial-snapshot__figure img { transition: none; }
 }
 
@@ -2480,6 +2509,7 @@ h2 {
 
 .reveal.is-visible {
   animation: revealUp 0.75s cubic-bezier(0.22, 1, 0.36, 1) forwards;
+  animation-delay: var(--reveal-delay, 0s);
 }
 
 @media (prefers-reduced-motion: reduce) {
@@ -2493,6 +2523,37 @@ h2 {
   opacity: 0.65;
   margin: 36px 0 12px;
   letter-spacing: 0.15em;
+}
+
+/* ─── LOADER ERROR STATE ─── */
+.loader--error {
+  color: var(--granate);
+  font-size: 0.88rem;
+  font-family: Georgia, serif;
+  padding: 0 24px;
+  text-align: center;
+  display: block;
+}
+
+/* ─── BROKEN IMAGE FALLBACK ─── */
+.img--broken {
+  background: var(--tile);
+  min-height: 160px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  position: relative;
+}
+.img--broken img {
+  display: none;
+}
+.img--broken::after {
+  content: '';
+  display: block;
+  width: 40px;
+  height: 2px;
+  background: rgba(28, 26, 23, 0.2);
+  border-radius: 1px;
 }
 
 /* ─── STATUS PILL ─── */
@@ -3692,4 +3753,17 @@ body:has(#carta-header) .lang-bar {
   .spotlight-card .check-name {
     white-space: normal;
   }
+}
+
+/* ─── PREFERS-REDUCED-MOTION — global UI polish overrides ─── */
+@media (prefers-reduced-motion: reduce) {
+  .site-tile { transition: none; }
+  .site-tile-frame { transition: none; }
+  .site-tile-frame:hover { transform: none; }
+  .site-tile-frame:hover .site-tile { transform: none; }
+  .editorial-snapshot__figure { transition: none; }
+  .editorial-snapshot__figure:hover { transform: none; }
+  .editorial-snapshot__figure img { transition: none; }
+  .editorial-snapshot__figure:hover img { transform: none; }
+  .mobile-service-cta { transition: none; }
 }
