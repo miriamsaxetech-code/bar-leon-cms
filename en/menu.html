@@ -26,19 +26,20 @@
   <link rel="alternate" hreflang="en" href="https://restaurantebarleon.com/en/menu" />
   <link rel="alternate" hreflang="fr" href="https://restaurantebarleon.com/fr/carte" />
   <link rel="alternate" hreflang="x-default" href="https://restaurantebarleon.com/es/carta" />
-  <link rel="preconnect" href="https://fonts.googleapis.com" />
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-  <link href="https://fonts.googleapis.com/css2?family=Caveat:wght@400;700&family=Playfair+Display:wght@700&family=Inter:wght@400;500;600&display=swap" rel="stylesheet" />
   <link rel="stylesheet" href="../css/style.css" />
   <script id="menu-jsonld" type="application/ld+json">
     {"@context":"https://schema.org","@graph":[{"@type":"Restaurant","name":"Restaurante Bar León","url":"https://restaurantebarleon.com","hasMenu":"https://restaurantebarleon.com/es/carta","telephone":"+34 958 22 51 43","address":{"@type":"PostalAddress","streetAddress":"C/ Pan, 1","addressLocality":"Granada","postalCode":"18010","addressRegion":"Andalucía","addressCountry":"ES"}},{"@type":"Menu","@id":"https://restaurantebarleon.com/es/carta","url":"https://restaurantebarleon.com/en/menu","name":"Menu","hasMenuSection":[{"@type":"MenuSection","name":"Bar Menu"},{"@type":"MenuSection","name":"Restaurant Menu"},{"@type":"MenuSection","name":"Drinks"},{"@type":"MenuSection","name":"Daily Menu"}]}]}
   </script>
 </head>
-<body>
+<body id="top">
   <div class="masthead-rule"></div>
-  <header id="carta-header" style="display:none">
-    <div class="wrap">
-      <div class="carta-header-inner" id="carta-nav"></div>
+  <header id="carta-header">
+    <div class="container--menu">
+      <div class="carta-header-inner" id="carta-nav">
+        <a href="/en/" class="carta-back">← Bar León</a>
+        <strong class="carta-header-title">Menu</strong>
+        <div class="carta-header-right"><div class="carta-lang-selector" aria-label="Language"><a href="/es/carta">ES</a><span class="sep"> · </span><span class="lang-active">EN</span><span class="sep"> · </span><a href="/fr/carte">FR</a></div></div>
+      </div>
     </div>
   </header>
   <div id="loader">Bar Le&oacute;n</div>

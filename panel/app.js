@@ -443,6 +443,59 @@ function createCartaAccordion(label, items, collection, categoryId) {
   return details;
 }
 
+function allergenSummaryText(item) {
+  const count = Array.isArray(item.allergens) ? item.allergens.length : 0;
+  if (!count) return 'Alérgenos — ninguno marcado';
+  const confirmed = item.allergen_status === 'confirmed';
+  return `Alérgenos (${count}) — ${confirmed ? 'confirmados, visibles en la carta' : 'sin confirmar, no se publican'}`;
+}
+
+function createAllergenPicker(item, allergenDefs) {
+  const selected = new Set(Array.isArray(item.allergens) ? item.allergens : []);
+
+  const wrap = document.createElement('details');
+  wrap.className = 'catalog-allergens';
+
+  const summary = document.createElement('summary');
+  summary.textContent = allergenSummaryText(item);
+  wrap.appendChild(summary);
+
+  const grid = document.createElement('div');
+  grid.className = 'catalog-allergens__grid';
+  allergenDefs.forEach(def => {
+    const optLabel = document.createElement('label');
+    optLabel.className = 'catalog-allergen-option';
+
+    const checkbox = document.createElement('input');
+    checkbox.type = 'checkbox';
+    checkbox.checked = selected.has(def.id);
+    checkbox.dataset.cartaAction = 'allergen';
+    checkbox.dataset.allergenId = def.id;
+    optLabel.appendChild(checkbox);
+
+    const optText = document.createElement('span');
+    optText.textContent = (def.label && def.label.es) || def.id;
+    optLabel.appendChild(optText);
+
+    grid.appendChild(optLabel);
+  });
+  wrap.appendChild(grid);
+
+  const confirmLabel = document.createElement('label');
+  confirmLabel.className = 'catalog-active';
+  const confirmSpan = document.createElement('span');
+  confirmSpan.textContent = 'Confirmar y publicar en la carta';
+  const confirmCheckbox = document.createElement('input');
+  confirmCheckbox.type = 'checkbox';
+  confirmCheckbox.checked = item.allergen_status === 'confirmed';
+  confirmCheckbox.dataset.cartaAction = 'allergen-confirm';
+  confirmLabel.appendChild(confirmSpan);
+  confirmLabel.appendChild(confirmCheckbox);
+  wrap.appendChild(confirmLabel);
+
+  return wrap;
+}
+
 function createCartaCard(item, collection) {
   const card = document.createElement('article');
   card.className = 'carta-card';
@@ -552,6 +605,13 @@ function createCartaCard(item, collection) {
     }
   }
 
+  // Allergens — 14 EU categories, marked by the owner then explicitly
+  // confirmed before they publish to the public carta (see js/carta.js).
+  const allergenDefs = state && Array.isArray(state.allergens) ? state.allergens : [];
+  if (allergenDefs.length) {
+    card.appendChild(createAllergenPicker(item, allergenDefs));
+  }
+
   // Validation slot
   const validation = document.createElement('p');
   validation.className = 'carta-card__validation';
@@ -653,6 +713,20 @@ function bindCartaEdit() {
       item.category_id = e.target.value;
       markDirty();
       renderCarta(document.getElementById('search-carta')?.value || '');
+    }
+
+    if (action === 'allergen') {
+      setPanelItemAllergen(state, collection, id, e.target.dataset.allergenId, e.target.checked);
+      markDirty();
+      const summary = card.querySelector('.catalog-allergens > summary');
+      if (summary) summary.textContent = allergenSummaryText(item);
+    }
+
+    if (action === 'allergen-confirm') {
+      setPanelItemAllergenConfirmed(state, collection, id, e.target.checked);
+      markDirty();
+      const summary = card.querySelector('.catalog-allergens > summary');
+      if (summary) summary.textContent = allergenSummaryText(item);
     }
   });
 
@@ -810,6 +884,8 @@ function createPanelItem(collection, values, existingIds) {
       price_bottle: parsePanelEuro(values.price_bottle || ''),
       price_status: 'pending',
       available: true,
+      allergen_status: 'pending',
+      allergens_confirmed: [],
       allergens: [],
     };
   }
@@ -822,6 +898,8 @@ function createPanelItem(collection, values, existingIds) {
       category_id: values.category_id || '',
       price_status: 'pending',
       available: true,
+      allergen_status: 'pending',
+      allergens_confirmed: [],
       allergens: [],
     };
   }
@@ -947,6 +1025,19 @@ function setPanelItemAllergen(panelState, collection, id, allergenId, present) {
   if (present) next.add(allergenId);
   else next.delete(allergenId);
   item.allergens = Array.from(next);
+  return true;
+}
+
+// Confirming publishes the marked allergens to the public carta (js/carta.js
+// only renders allergens when allergen_status === 'confirmed'). Un-confirming
+// hides them again without discarding the owner's markings.
+function setPanelItemAllergenConfirmed(panelState, collection, id, confirmed) {
+  const item = Array.isArray(panelState[collection])
+    ? panelState[collection].find(entry => entry.id === id)
+    : null;
+  if (!item) return false;
+  item.allergen_status = confirmed ? 'confirmed' : 'pending';
+  item.allergens_confirmed = confirmed ? Array.from(new Set(item.allergens || [])) : [];
   return true;
 }
 
@@ -2267,6 +2358,7 @@ if (typeof window !== 'undefined') {
     duplicatePanelItem,
     validateState,
     setPanelItemAllergen,
+    setPanelItemAllergenConfirmed,
     splitPanelListText,
     joinPanelListItems,
   };

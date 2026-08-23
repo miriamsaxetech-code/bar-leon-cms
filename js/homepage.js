@@ -51,6 +51,13 @@
     return (price || '').replace(/\s€/g, '&nbsp;€');
   }
 
+  function isPublicItem(item) {
+    return Boolean(item)
+      && item.available !== false
+      && item.deleted !== true
+      && item.price_status !== 'uncertain';
+  }
+
   function parseDishPrice(str, lang) {
     if (!str) return { type: 'simple', display: '' };
 
@@ -186,7 +193,7 @@
 
   function findWineForPairing(pairingText, wines, lang) {
     if (!pairingText) return null;
-    return (wines || []).filter(w => w.available !== false && w.deleted !== true).find(w => {
+    return (wines || []).filter(isPublicItem).find(w => {
       const wineName = typeof w.name === 'object' ? t(w.name, lang) : (w.name || '');
       return wineName && pairingText.toLowerCase().includes(wineName.toLowerCase());
     }) || null;
@@ -281,7 +288,7 @@
   function renderBeerPairingChip(dish, beverages, lang, cartaUrl) {
     const beerId = dish.beer_pairing;
     if (!beerId) return '';
-    const beer = (beverages || []).find(b => b.id === beerId && b.available !== false && b.deleted !== true);
+    const beer = (beverages || []).find(b => b.id === beerId && isPublicItem(b));
     if (!beer) return '';
     const beerName = typeof beer.name === 'object' ? t(beer.name, lang) : (beer.name || '');
     const label = { es: `Cerveza · ${beerName}`, en: `Beer · ${beerName}`, fr: `Bière · ${beerName}` }[lang] || beerName;
@@ -358,8 +365,8 @@
     });
     const seasonal = splitList(t(dm.seasonal, lang)).map(note => `<em>${note}</em>`);
 
-    return `<section class="chalkboard-menu pizarra-dia home-daily-menu" aria-labelledby="home-daily-title">
-  <div class="pizarra-dia__wrap">
+    return `<section class="home-daily-menu home-card container--reading" aria-labelledby="home-daily-title">
+  <div class="home-daily-menu__wrap">
     <div class="home-daily-menu__head">
       <p class="section-label">${kickerText}</p>
       <div>
@@ -383,50 +390,41 @@
   }
 
   function renderHomeAndalusia(d, lang, cartaUrl) {
-    var dishes;
-    if (d.home_featured_ids && d.home_featured_ids.length) {
-      var byId = {};
-      (d.dishes || []).forEach(function(dish) { byId[dish.id] = dish; });
-      dishes = d.home_featured_ids
-        .map(function(id) { return byId[id]; })
-        .filter(function(dish) { return dish && dish.available !== false && dish.deleted !== true; });
-    } else {
-      dishes = (d.dishes || [])
-        .filter(function(dish) { return dish.available !== false && dish.deleted !== true && dish.category_id === 'andalusian-specialities' && dish.featured; })
-        .sort(function(a, b) {
-          var rank = function(v) { return v === true || v === 'recommended' ? 0 : v === 'house' ? 1 : v === 'seasonal' ? 2 : 3; };
-          return rank(a.featured) - rank(b.featured);
-        })
-        .slice(0, 6);
-    }
+    const signature = [
+      { id: 'habas-jamon-iberico', image: 'bar-leon-habas.webp' },
+      { id: 'callos', image: 'bar-leon-callos.webp' },
+      { id: 'sesos', image: 'bar-leon-sesos.webp' },
+    ];
+    const byId = {};
+    (d.dishes || []).forEach(function(dish) { byId[dish.id] = dish; });
+    const dishes = signature
+      .map(function(entry) {
+        const dish = byId[entry.id];
+        return isPublicItem(dish) ? { dish: dish, image: entry.image } : null;
+      })
+      .filter(Boolean);
     if (!dishes.length) return '';
 
-    return `<section class="tile-bg-section home-andalusia" aria-labelledby="home-andalusia-title">
-  <div class="tile-card">
+    return `<section class="signature-dishes container--documentary" aria-labelledby="home-andalusia-title">
     <div class="home-section-head">
       <p class="section-label">${LABELS.andalusiaSub[lang]}</p>
       <h2 id="home-andalusia-title">${LABELS.andalusia[lang]}</h2>
     </div>
-    <div class="home-andalusia__list">
-      ${dishes.map(dish => {
+    <div class="signature-dishes__grid">
+      ${dishes.map(entry => {
+        const dish = entry.dish;
         const parsed = parseDishPrice(formatPrice(dish.price), lang);
-        const priceHtml = parsed.type === 'portions' ? '' : `<span class="home-andalusia__price">${parsed.display}</span>`;
-        const priceNoteHtml = parsed.type === 'portions' ? `<p class="price-note">${parsed.note}</p>` : '';
-        return `<article class="home-andalusia__item">
-          <div class="home-andalusia__main">
-            ${renderBadge(dish, lang)}
+        const price = parsed.type === 'portions' ? parsed.note : parsed.display;
+        return `<article class="signature-dish">
+          <img class="signature-dish__image" src="${WEB_IMAGE_BASE}${entry.image}" alt="${t(dish.name, lang)}" width="800" height="600" loading="lazy" decoding="async" />
+          <div class="signature-dish__body">
             <h3>${t(dish.name, lang)}</h3>
-            <p>${t(dish.description, lang)}</p>
-            ${renderPairingChip(dish, d.wines, lang, cartaUrl)}
-            ${renderBeerPairingChip(dish, d.beverages, lang, cartaUrl)}
-            ${priceNoteHtml}
+            <span class="signature-dish__price">${price}</span>
           </div>
-          ${priceHtml}
         </article>`;
       }).join('')}
     </div>
     <a class="home-text-link" href="${cartaUrl}">${LABELS.fullMenu[lang]}</a>
-  </div>
 </section>`;
   }
 
@@ -487,24 +485,20 @@
       ]
     }[lang] || [];
     const paragraphs = lines.map(function(p) { return `<p>${p}</p>`; }).join('');
-    const barraAlt  = { es: 'La barra del Bar León', en: 'Bar León counter', fr: 'Le comptoir du Bar León' }[lang];
-    const pinchAlt  = { es: 'Pinchos de tortilla en Bar León', en: 'Tortilla pinchos at Bar León', fr: 'Pinchos de tortilla au Bar León' }[lang];
-    return `<section class="historia-leon" aria-labelledby="historia-title">
-  <h2 id="historia-title" class="historia-year">${since}</h2>
-  <div class="historia-leon__text">${paragraphs}</div>
-  <div class="doc-strip" aria-hidden="true">
-    <div class="doc-strip__photo">
-      <picture>
-        <source srcset="${WEB_IMAGE_BASE}leon-barra.webp" type="image/webp" />
-        <img src="${WEB_IMAGE_BASE}leon-barra.png" alt="${barraAlt}" width="654" height="490" loading="lazy" />
-      </picture>
-    </div>
-    <div class="doc-strip__photo">
-      <picture>
-        <source srcset="${WEB_IMAGE_BASE}leon-pinchodetortilla.webp" type="image/webp" />
-        <img src="${WEB_IMAGE_BASE}leon-pinchodetortilla.png" alt="${pinchAlt}" width="654" height="490" loading="lazy" />
-      </picture>
-    </div>
+    const caricatureAlt = { es: 'Caricatura histórica conservada por Bar León', en: 'Historic caricature preserved by Bar León', fr: 'Caricature historique conservée par Bar León' }[lang];
+    const interiorAlt = { es: 'Interior histórico del Bar León con el retrato del fundador', en: 'Historic Bar León interior with the founder portrait', fr: "Intérieur historique du Bar León avec le portrait du fondateur" }[lang];
+    return `<section class="historia-leon container--documentary" aria-labelledby="historia-title">
+  <div class="historia-leon__copy container--reading">
+    <h2 id="historia-title" class="historia-year">${since}</h2>
+    <div class="historia-leon__text">${paragraphs}</div>
+  </div>
+  <div class="doc-strip">
+    <figure class="doc-strip__photo doc-strip__photo--square">
+      <img src="${WEB_IMAGE_BASE}bar-leon-archivo-caricatura.webp" alt="${caricatureAlt}" width="900" height="900" loading="lazy" decoding="async" />
+    </figure>
+    <figure class="doc-strip__photo doc-strip__photo--portrait">
+      <img src="${WEB_IMAGE_BASE}bar-leon-archivo-fundador.webp" alt="${interiorAlt}" width="900" height="1200" loading="lazy" decoding="async" />
+    </figure>
   </div>
 </section>`;
   }
@@ -513,36 +507,47 @@
   function renderHeroTile(d, lang, cartaUrl, inService) {
     const since    = { es: 'Desde 1959', en: 'Since 1959', fr: 'Depuis 1959' }[lang];
     const addr     = d.contact.address;
-    return `<div class="home-hero">
+    const heroAlt = {
+      es: 'Mural cerámico original del Restaurante Bar León en Granada',
+      en: 'Original ceramic mural of Restaurante Bar León in Granada',
+      fr: 'Fresque en céramique originale du Restaurante Bar León à Grenade',
+    }[lang];
+    return `<header class="site-header container--hero">
+  <a class="site-header__brand" href="${HOME_LINKS[lang]}">Bar León</a>
+  <div class="lang-selector" aria-label="Language / Idioma / Langue">${langSelector(lang, HOME_LINKS)}</div>
+</header>
+<section class="home-hero container--hero" aria-labelledby="home-title">
+  <figure class="home-hero__media">
+    <img src="${WEB_IMAGE_BASE}bar-leon-hero-fajalauza.webp" alt="${heroAlt}" width="1280" height="720" fetchpriority="high" decoding="async" />
+  </figure>
   <div class="home-hero__masthead">
-    <img class="home-hero__lion" src="../assets/images/lion-logo.svg" alt="Bar León"
-         width="140" height="215" fetchpriority="high" />
-    <h1 class="home-hero__name">Bar León</h1>
+    <p class="home-hero__eyebrow">Restaurante Bar León</p>
+    <h1 id="home-title" class="home-hero__name">Bar León</h1>
     <p class="home-hero__place">${since} &middot; ${addr.neighborhood} &middot; ${addr.city}</p>
-  </div>
-  <div class="site-status-container">
     <a href="${cartaUrl}#hours" class="status-pill ${inService ? 'status-pill--open' : 'status-pill--closed'}">
       <span class="status-pill__dot"></span>
       ${inService ? LABELS.statusOpen[lang] : LABELS.statusClosed[lang]}
     </a>
   </div>
-</div>`;
+</section>`;
   }
 
   function renderHomeCTA(lang, cartaUrl, phoneLink) {
     const quickAccess = { es: 'Acceso rápido', en: 'Quick access', fr: 'Accès rapide' }[lang];
-    const lblRestaurante = { es: 'Carta restaurante', en: 'Restaurant menu', fr: 'Carte restaurant' }[lang];
+    const primaryLabel = { es: 'Ver la carta', en: LABELS.fullMenu.en, fr: LABELS.fullMenu.fr }[lang];
+    const lblRestaurante = { es: 'Restaurante', en: 'Restaurant', fr: 'Restaurant' }[lang];
     const lblBarra       = { es: 'Carta barra',       en: 'Bar menu',        fr: 'Carte comptoir'   }[lang];
     const lblBebidas     = { es: 'Bebidas',            en: 'Drinks',          fr: 'Boissons'         }[lang];
     const lblDiario      = { es: 'Menú del día',       en: 'Daily menu',      fr: 'Menu du jour'     }[lang];
-    return `<nav class="home-cta-nav" aria-label="${quickAccess}">
-  <a href="${cartaUrl}#restaurant" class="home-cta-btn home-cta-btn--primary">${lblRestaurante}</a>
-  <div class="home-cta-row">
-    <a href="${cartaUrl}#bar"       class="home-cta-btn home-cta-btn--secondary">${lblBarra}</a>
-    <a href="${cartaUrl}#beverages" class="home-cta-btn home-cta-btn--secondary">${lblBebidas}</a>
+    return `<nav class="home-cta-nav container--reading" aria-label="${quickAccess}">
+  <a href="${cartaUrl}" class="home-cta-btn home-cta-btn--primary">${primaryLabel}</a>
+  <div class="home-quick-links">
+    <a href="${cartaUrl}#restaurant" class="home-quick-link">${lblRestaurante}</a>
+    <a href="${cartaUrl}#bar" class="home-quick-link">${lblBarra}</a>
+    <a href="${cartaUrl}#beverages" class="home-quick-link">${lblBebidas}</a>
+    <a href="${cartaUrl}#daily" class="home-quick-link">${lblDiario}</a>
+    <a href="${phoneLink}" class="home-quick-link home-quick-link--call">${LABELS.call[lang]}</a>
   </div>
-  <a href="${cartaUrl}#daily" class="home-cta-btn home-cta-btn--secondary home-cta-btn--daily">${lblDiario}</a>
-  <a href="${phoneLink}"      class="home-cta-btn home-cta-btn--call">${LABELS.call[lang]}</a>
 </nav>`;
   }
 
@@ -556,32 +561,42 @@
 
     const locationTitle   = { es: 'Dónde estamos', en: 'Where to find us', fr: 'Où nous trouver' }[lang];
     const directionsLabel = { es: 'Encuéntrenos en Plaza Nueva', en: 'Find us on Plaza Nueva', fr: 'Retrouvez-nous Plaza Nueva' }[lang];
+    const facadeAlt = {
+      es: 'Fachada del Restaurante Bar León y su panel cerámico',
+      en: 'Restaurante Bar León facade and ceramic sign',
+      fr: 'Façade du Restaurante Bar León et son panneau en céramique',
+    }[lang];
+    const dayKeys = ['sunday','monday','tuesday','wednesday','thursday','friday','saturday'];
+    const todayKey = dayKeys[new Date().getDay()];
+    const today = getHoursSchedule(d.hours).find(entry => entry.day === todayKey);
+    const todayHours = !today || today.status === 'closed' || !today.periods || !today.periods.length
+      ? LABELS.statusClosed[lang]
+      : today.periods.map(period => formatTimePeriod(period, lang)).join(' / ');
 
     const locationBlock = `
-<section class="location-section">
-  <p class="section-label">${locationTitle}</p>
+<section class="location-section container--documentary" aria-labelledby="location-title">
   <div class="location-grid">
-    <div class="location-map">
-      <iframe src="https://www.openstreetmap.org/export/embed.html?bbox=-3.5985%2C37.1755%2C-3.5945%2C37.1785&amp;layer=mapnik&amp;marker=37.17698%2C-3.59653" width="100%" height="250" style="border:0;" loading="lazy" aria-label="OpenStreetMap"></iframe>
-      <p class="map-address-fallback">${addr.street} &middot; ${addr.neighborhood} &middot; ${addr.city} — <a href="${mapsUrl}" target="_blank" rel="noopener">↗ ${directionsLabel}</a></p>
-    </div>
+    <figure class="location-photo">
+      <img src="${WEB_IMAGE_BASE}bar-leon-fachada.webp" alt="${facadeAlt}" width="800" height="1000" loading="lazy" decoding="async" />
+    </figure>
     <div class="location-info">
+      <p class="section-label">${locationTitle}</p>
+      <h2 id="location-title">${addr.neighborhood} &middot; ${addr.city}</h2>
       <p class="location-address">${addr.street} &middot; ${addr.neighborhood} &middot; ${addr.city}</p>
-      <a href="${mapsUrl}" target="_blank" rel="noopener" class="location-link">↗ ${directionsLabel}</a>
+      <p class="location-hours"><strong>${DAY_NAMES[todayKey][lang]}:</strong> ${todayHours}</p>
+      <a href="${mapsUrl}" target="_blank" rel="noopener noreferrer" class="location-link">${directionsLabel}</a>
     </div>
   </div>
 </section>`;
 
-    return `<div class="wrap">
-  ${renderHeroTile(d, lang, cartaUrl, inService)}
-  ${aviso}
+    return `${renderHeroTile(d, lang, cartaUrl, inService)}
+  ${aviso ? `<div class="container--reading">${aviso}</div>` : ''}
   ${renderHomeCTA(lang, cartaUrl, phoneLink)}
   ${renderHomeAndalusia(d, lang, cartaUrl)}
   ${renderHomeDailyMenu(d, lang, cartaUrl)}
   ${renderHistoria(lang)}
   ${locationBlock}
-  <div class="footer-separator">❖</div>
-  <div class="homepage-footer">
+  <footer class="homepage-footer container--hero">
     <div class="homepage-footer-inner">
       <p class="address">${addr.neighborhood} &middot; ${addr.city} &middot; ${addr.region}<br>${t(d.venue.cuisine_tag, lang)}</p>
       <div class="lang-selector" aria-label="Language">${langSelector(lang, HOME_LINKS)}</div>
@@ -589,8 +604,7 @@
     <div class="owner-access">
       <a href="/panel/" class="owner-link">Acceso propietario</a>
     </div>
-  </div>
-</div>`;
+  </footer>`;
   }
 
   function initDailyMenuAccordion(root) {
@@ -715,7 +729,7 @@
         addressCountry: d.contact.address.country,
       },
       openingHours: buildOpeningHours(d.hours),
-      image: BASE + '/assets/images/og.png',
+      image: BASE + '/assets/images/web/bar-leon-hero-fajalauza.webp',
       sameAs: [d.social && d.social.instagram, d.social && d.social.facebook].filter(Boolean),
     };
     if (d.social && d.social.google_maps) schema.hasMap = d.social.google_maps;
@@ -766,7 +780,6 @@
 
       injectRestaurantJsonLd(d, lang);
       app.innerHTML = render(d, lang);
-      injectLangBar(lang, HOME_LINKS);
       injectMobileServiceCTA(d, lang);
       initDailyMenuAccordion(app);
       app.style.display = 'block';

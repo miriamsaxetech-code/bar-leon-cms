@@ -8,3 +8,4 @@ node_modules/
 .superpowers/brainstorm/
 .dev.vars
 wrangler.toml
+.firecrawl/
