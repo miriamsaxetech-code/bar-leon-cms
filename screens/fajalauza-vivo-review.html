@@ -1,0 +1,138 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>Bar León — Revisión del prototipo Fajalauza Vivo</title>
+<style>
+  :root { --azul:#1D4D85; --profundo:#163A63; --verde:#2E6B5E; --granada:#A93226; --cobre:#B07830; --blanco:#FAF7EF; --crema:#F1EBDD; --ink:#1C1A17; --muted:#5C5752; }
+  body { font-family: Georgia, serif; background: var(--blanco); color: var(--ink); margin: 0; line-height: 1.6; }
+  header, section { max-width: 1100px; margin: 0 auto; padding: 32px 24px; }
+  h1, h2 { line-height: 1.15; }
+  h2 { border-bottom: 1px solid rgba(29,77,133,.2); padding-bottom: 8px; margin-top: 24px; }
+  .meta, td, th { font-family: Inter, system-ui, sans-serif; font-size: .9rem; }
+  .meta { color: var(--muted); }
+  .grid { display: grid; gap: 18px; grid-template-columns: repeat(auto-fit, minmax(240px, 1fr)); }
+  figure { margin: 0; border: 1px solid rgba(29,77,133,.2); background: #fff; padding: 8px; }
+  figure img { width: 100%; display: block; }
+  figcaption { font-family: Inter, system-ui, sans-serif; font-size: .78rem; color: var(--muted); padding-top: 6px; }
+  table { border-collapse: collapse; width: 100%; }
+  td, th { border: 1px solid rgba(29,77,133,.2); padding: 8px 10px; text-align: left; vertical-align: top; }
+  .swatch { display: inline-block; width: 14px; height: 14px; border-radius: 2px; vertical-align: -2px; margin-right: 6px; border: 1px solid rgba(0,0,0,.15); }
+  .warn { background: var(--crema); border-left: 3px solid var(--granada); padding: 10px 14px; }
+  a { color: var(--azul); }
+</style>
+</head>
+<body>
+<header>
+  <h1>Bar León — Prototipo «Fajalauza Vivo»</h1>
+  <p class="meta">Rama <code>design/fajalauza-vivo-prototype</code> · 2026-07-12 · rutas aisladas <code>/prototype/</code> · datos reales de <code>data/venue.json</code> (sin modificar) · sin despliegue, sin merge.</p>
+  <p class="warn">Capturas hechas en Chromium headless sin fuentes de Google (Inter/Caveat sustituidas por fuentes del sistema). León Display sí carga. Revisar también las páginas vivas: <a href="../prototype/index.html">prototype/index.html</a> · <a href="../prototype/carta.html">prototype/carta.html</a>.</p>
+</header>
+
+<section>
+  <h2>1 · Capturas</h2>
+  <h3>Portada</h3>
+  <div class="grid">
+    <figure><img src="fajalauza-vivo-prototype/home-390.png" alt="" /><figcaption>Portada · 390 px</figcaption></figure>
+    <figure><img src="fajalauza-vivo-prototype/home-768.png" alt="" /><figcaption>Portada · 768 px</figcaption></figure>
+    <figure><img src="fajalauza-vivo-prototype/home-1440.png" alt="" /><figcaption>Portada · 1440 px</figcaption></figure>
+  </div>
+  <h3>Carta</h3>
+  <div class="grid">
+    <figure><img src="fajalauza-vivo-prototype/carta-390.png" alt="" /><figcaption>Carta · 390 px</figcaption></figure>
+    <figure><img src="fajalauza-vivo-prototype/carta-768.png" alt="" /><figcaption>Carta · 768 px</figcaption></figure>
+    <figure><img src="fajalauza-vivo-prototype/carta-1440.png" alt="" /><figcaption>Carta · 1440 px</figcaption></figure>
+  </div>
+</section>
+
+<section>
+  <h2>2 · Origen de cada imagen principal (todas verificadas visualmente, ninguna IA)</h2>
+  <table>
+    <tr><th>Uso en el prototipo</th><th>Archivo</th><th>Origen</th></tr>
+    <tr><td>Hero — fachada Fajalauza con Cruz de Mayo</td><td>prototype/assets/fachada-cruz-mayo.webp</td><td>Restaurante-Leon-V2/public/images/hero/bar-leon-granada-fachada-terraza-01.webp (1440×1800)</td></tr>
+    <tr><td>Identidad — panel Fajalauza frontal</td><td>assets/fachada-panel-noche.jpg</td><td>V2 …/hemeroteca/bar-leon-granada-semana-santa-procesion-01.jpg (nombre engañoso; verificado: es el panel)</td></tr>
+    <tr><td>Identidad — terraza viva</td><td>assets/terraza-viva.jpg</td><td>V2 …/hemeroteca/bar-leon-granada-cruz-mayo-fachada-01.jpg (verificado: terraza con rodaje de TV)</td></tr>
+    <tr><td>Historia — caricatura</td><td>assets/caricatura-belda.jpg</td><td>V2 …/history/bar-leon-granada-caricatura-carlos-belda-01.jpg</td></tr>
+    <tr><td>Historia — fundador/interior</td><td>assets/interior-fundador.jpg</td><td>V2 …/hero/bar-leon-granada-fachada-azulejo-principal-01.jpg (nombre engañoso; verificado: interior con retrato)</td></tr>
+    <tr><td>Historia — reconocimiento</td><td>assets/reconocimiento-ayuntamiento.jpg</td><td>V2 …/hemeroteca/bar-leon-granada-ayuntamiento-reconocimiento-05.jpg</td></tr>
+    <tr><td>Plato — Tortilla del Sacromonte</td><td>assets/plato-tortilla.webp</td><td>bar-leon-cms/assets/images/web/leon-pinchodetortilla.webp</td></tr>
+    <tr><td>Plato — Sesos</td><td>assets/plato-sesos.jpg</td><td>restaurante-bar-leon/04_ASSETS/galeria/sesos-leon.jpg</td></tr>
+    <tr><td>Plato — Callos</td><td>assets/plato-callos.jpg</td><td>restaurante-bar-leon/04_ASSETS/galeria/callos-leon.jpg</td></tr>
+    <tr><td>Marca — león</td><td>../assets/images/lion-logo.svg</td><td>bar-leon-cms (producción, sin tocar)</td></tr>
+    <tr><td>Archivo — rótulo original (reserva, aún no colocado)</td><td>assets/logo-original-scan.jpg</td><td>Restaurante-Leon/Bar-leon-fotos/Logo.jpeg</td></tr>
+  </table>
+</section>
+
+<section>
+  <h2>3 · Paleta</h2>
+  <p>
+    <span class="swatch" style="background:#FAF7EF"></span>--blanco #FAF7EF &nbsp;·&nbsp;
+    <span class="swatch" style="background:#F1EBDD"></span>--crema #F1EBDD &nbsp;·&nbsp;
+    <span class="swatch" style="background:#1C1A17"></span>--ink #1C1A17 &nbsp;·&nbsp;
+    <span class="swatch" style="background:#1D4D85"></span>--azul #1D4D85 &nbsp;·&nbsp;
+    <span class="swatch" style="background:#163A63"></span>--azul-profundo #163A63 &nbsp;·&nbsp;
+    <span class="swatch" style="background:#2E6B5E"></span>--verde-faja #2E6B5E &nbsp;·&nbsp;
+    <span class="swatch" style="background:#A93226"></span>--granada #A93226 &nbsp;·&nbsp;
+    <span class="swatch" style="background:#B07830"></span>--cobre #B07830
+  </p>
+  <p class="meta">La pizarra del menú del día pasa de negro #202321 a azul-profundo #163A63. Los precios pasan a granada. Verde y cobre solo en motivos.</p>
+</section>
+
+<section>
+  <h2>4 · Tipografía</h2>
+  <table>
+    <tr><th>Rol</th><th>Fuente</th><th>Dónde</th></tr>
+    <tr><td>Rótulo</td><td>León Display (local)</td><td>H1/H2, marca, «1959», cabeceras de categoría — nunca por debajo de 1.4 rem</td></tr>
+    <tr><td>Editorial</td><td>Georgia</td><td>Nombres de plato, cuerpo, pies de foto (1.06 rem móvil)</td></tr>
+    <tr><td>UI</td><td>Inter</td><td>Botones, chips, metadatos, horario</td></tr>
+    <tr><td>Tiza</td><td>Caveat</td><td>Solo la etiqueta «de lunes a viernes» de la pizarra</td></tr>
+    <tr><td>Datos</td><td>Courier New</td><td>Solo precios</td></tr>
+  </table>
+</section>
+
+<section>
+  <h2>5 · Movimiento</h2>
+  <table>
+    <tr><th>Animación</th><th>Detalle</th></tr>
+    <tr><td>Entrada de secciones</td><td>fade-rise 12 px · 400 ms · ease-out · IO 15% · stagger 60 ms</td></tr>
+    <tr><td>Botones</td><td>cambio de color 150 ms</td></tr>
+    <tr><td>Imágenes</td><td>scale 1.02 · 500 ms al hover</td></tr>
+    <tr><td>Ramo + granada</td><td>trazo SVG (stroke-dashoffset) 800 ms al entrar la sección Historia — único «momento»</td></tr>
+    <tr><td>Barra móvil</td><td>entra tras 320 px de scroll · 200 ms</td></tr>
+    <tr><td>Categorías</td><td>scroll suave + chip activo por IntersectionObserver</td></tr>
+    <tr><td>Reducción de movimiento</td><td>todo desactivado con prefers-reduced-motion (solo opacidad 150 ms)</td></tr>
+  </table>
+  <p class="meta">Solo transform/opacity · sin bucles · sin librerías · sin autoplay · JS de movimiento &lt; 2 KB.</p>
+</section>
+
+<section>
+  <h2>6 · Comparación con producción</h2>
+  <table>
+    <tr><th>Producción actual</th><th>Prototipo</th></tr>
+    <tr><td>Columna de 500 px a todos los anchos</td><td>Medidas 680 / 880 / 1080 px</td></tr>
+    <tr><td>Pizarra casi negra #202321</td><td>Panel cerámico azul-profundo #163A63 con doble filete</td></tr>
+    <tr><td>Píldora verde «Estamos abiertos»</td><td>Nota tranquila con el horario de hoy</td></tr>
+    <tr><td>LLAMAR en barra negra</td><td>Botón del sistema azul; barra móvil blanca con iconos azules</td></tr>
+    <tr><td>León Display en nombres de plato y precios</td><td>Georgia para platos, Courier granada para precios; León Display solo rótulos</td></tr>
+    <tr><td>5 botones apilados en el hero</td><td>3 acciones: Ver la carta / Menú del día / Cómo llegar</td></tr>
+    <tr><td>Fachada Fajalauza ausente</td><td>Fachada real como hero + sección que explica el origen del lenguaje visual</td></tr>
+    <tr><td>Tabs rígidos con corte a 390 px</td><td>Chips desplazables de 44 px con estado activo azul</td></tr>
+    <tr><td>Sin alérgenos visibles</td><td>Chips de alérgenos donde hay datos confirmados + leyenda</td></tr>
+  </table>
+</section>
+
+<section>
+  <h2>7 · Decisiones pendientes (para Miriam)</h2>
+  <ol class="meta">
+    <li>Hero: ¿fachada con Cruz de Mayo (estacional, más color) o panel frontal «noche» (atemporal)? Ambas están en el prototipo (hero vs identidad) — se pueden intercambiar.</li>
+    <li>Cuarto plato estrella: «Papas a lo pobre» tiene foto pero no ficha en venue.json — hoy se muestran 3 platos. ¿Añadir la ficha (dato real) o quedarnos en 3?</li>
+    <li>El rótulo original escaneado (logo-original-scan.jpg) está reservado pero sin colocar — ¿entra en Historia?</li>
+    <li>Vinos y bebidas en la carta del prototipo usan filas simplificadas — ¿mantener la edición editorial de vinos de producción?</li>
+    <li>Tipografía editorial: ¿seguir con Georgia o autoalojar una serif editorial (decisión de dependencia)?</li>
+    <li>Cenefa del pie: dibujo geométrico provisional — trazar la cenefa real del panel de fachada cuando se haga el kit SVG.</li>
+    <li>EN/FR: el prototipo renderiza solo ES; los datos ya son trilingües, la maqueta es idéntica.</li>
+  </ol>
+</section>
+</body>
+</html>

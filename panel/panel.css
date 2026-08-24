@@ -525,6 +525,11 @@ body {
   flex-shrink: 0;
 }
 
+.catalog-allergens > .catalog-active {
+  justify-content: space-between;
+  padding: 0 10px 10px;
+}
+
 .catalog-active {
   display: inline-flex;
   align-items: center;

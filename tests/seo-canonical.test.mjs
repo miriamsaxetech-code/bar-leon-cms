@@ -114,6 +114,11 @@ assert.match(sitemap, new RegExp(`hreflang="x-default" href="${PUBLIC_BASE_URL}/
 
 const redirects = await read('_redirects');
 assert.doesNotMatch(redirects, /^\/\s+\/es\/\s+30[1278]$/m, 'root must not redirect to /es/');
+const publicRedirects = redirects
+  .split(/\r?\n/)
+  .map(line => line.trim())
+  .filter(line => line && !line.startsWith('#'));
+assert.deepEqual(publicRedirects, ['/carta /es/carta.html 302'], 'only the approved /carta alias may be declared');
 
 const venue = await read('data/venue.json');
 expectNoOldHosts('data/venue.json', venue);

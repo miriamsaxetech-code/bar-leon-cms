@@ -4,27 +4,6 @@
   const HOME_LINKS  = { es: '/es/', en: '/en/', fr: '/fr/' };
   const CARTA_LINKS = { es: '/es/carta', en: '/en/menu', fr: '/fr/carte' };
 
-  const SABORES_CATEGORY_ID = 'andalusian-specialities';
-  const WEB_IMAGE_BASE = '../assets/images/web/';
-  const CARTA_ACCENT_IMAGES = [
-    {
-      src: 'bar-leon-plato-05.webp',
-      alt: {
-        es: 'Tomate aliñao con aceite de oliva y orégano',
-        en: 'Seasoned tomato salad with olive oil and oregano',
-        fr: "Salade de tomates assaisonnée à l'huile d'olive et origan",
-      },
-    },
-    {
-      src: 'bar-leon-plato-06.webp',
-      alt: {
-        es: 'Cazuela de cocina tradicional servida en Bar León',
-        en: 'Traditional clay-pot dish served at Bar León',
-        fr: 'Cazuela traditionnelle servie au Bar León',
-      },
-    },
-  ];
-
   const LABELS = {
     starters:   { es: 'Primeros',       en: 'First course',  fr: 'Entrées'  },
     seconds:    { es: 'Segundos',       en: 'Second course', fr: 'Plats'    },
@@ -32,10 +11,10 @@
     desserts:   { es: 'Postre',         en: 'Dessert',       fr: 'Dessert'  },
     closed:     { es: 'Cerrado',        en: 'Closed',        fr: 'Fermé'    },
     dailyMenu:  { es: 'Menú del Día',   en: 'Daily menu',    fr: 'Menu du jour' },
-    restaurant: { es: 'Carta Restaurante', en: 'Restaurant menu', fr: 'Carte restaurant' },
-    bar:        { es: 'Carta Barra',    en: 'Bar menu',      fr: 'Carte comptoir' },
+    restaurant: { es: 'Restaurante', en: 'Restaurant menu', fr: 'Carte restaurant' },
+    bar:        { es: 'Barra y raciones', en: 'Bar menu', fr: 'Carte comptoir' },
     barIntro:   { es: 'Lo que sale de la barra. Sin ceremonia.', en: 'Straight from the bar. No fuss.', fr: 'Ce qui sort du comptoir. Sans cérémonie.' },
-    beverages:  { es: 'Bebidas',        en: 'Drinks',        fr: 'Boissons' },
+    beverages:  { es: 'Bebidas y vinos', en: 'Drinks', fr: 'Boissons' },
     beveragesIntro: { es: 'Cervezas, refrescos, licores y selección de vinos.', en: 'Beers, soft drinks, spirits and wine selection.', fr: 'Bières, boissons sans alcool, spiritueux et sélection de vins.' },
     restaurantIntro: { es: 'La carta de mesa, separada del menú del día.', en: 'The table menu, separate from the daily menu.', fr: 'La carte de table, séparée du menu du jour.' },
     wines:      { es: 'La Bodega',      en: 'The Cellar',    fr: 'La Cave' },
@@ -112,6 +91,13 @@
       return price.toFixed(2).replace('.', ',') + ' €';
     }
     return price || '';
+  }
+
+  function isPublicItem(item) {
+    return Boolean(item)
+      && item.available !== false
+      && item.deleted !== true
+      && item.price_status !== 'uncertain';
   }
 
   // Translates Spanish price annotation patterns into the current language.
@@ -327,7 +313,7 @@
   function renderPairingChip(dish, wines, lang) {
     const pairingText = t(dish.pairing, lang);
     if (!pairingText) return '';
-    const availableWines = (wines || []).filter(w => w.available !== false && w.deleted !== true);
+    const availableWines = (wines || []).filter(isPublicItem);
     const matched = availableWines.find(w => {
       const wineName = typeof w.name === 'object' ? t(w.name, lang) : (w.name || '');
       return pairingText.toLowerCase().includes(wineName.toLowerCase());
@@ -339,7 +325,11 @@
   }
 
   function renderAllergens(item, allergens, lang) {
-    const ids = Array.isArray(item && item.allergens) ? item.allergens : [];
+    if (!item || item.allergen_status !== 'confirmed') return '';
+    const confirmed = new Set(Array.isArray(item.allergens_confirmed) ? item.allergens_confirmed : []);
+    const ids = Array.isArray(item.allergens)
+      ? item.allergens.filter(id => confirmed.has(id))
+      : [];
     if (!ids.length || !Array.isArray(allergens)) return '';
     const labels = ids.map(id => {
       const def = allergens.find(a => a.id === id);
@@ -394,7 +384,7 @@
       ? ` · ${formatTimePeriod(dm.service_period, lang)}`
       : '';
 
-    return `<div class="chalkboard-menu edict">
+    return `<div class="edict home-card">
     <div class="edict-head">
       <h2>${t(nav.edict_header, lang)}</h2>
       <p class="edict-title">${t(nav.daily_menu, lang)}</p>
@@ -413,70 +403,11 @@
 </div>`;
   }
 
-  // ─── SPOTLIGHT: SABORES DE ANDALUCÍA ─────────────────────────────────────────
-  function renderSpotlightAndalucia(dishes, categories, wines, allergens, lang) {
-    const cat = (categories || []).find(c => c.id === SABORES_CATEGORY_ID);
-    if (!cat) return '';
-    const catName = t(cat.name, lang);
-    const spotlightDishes = (dishes || []).filter(d => d.available !== false && d.deleted !== true && d.category_id === SABORES_CATEGORY_ID);
-    if (!spotlightDishes.length) return '';
-
-    const cards = spotlightDishes.map(dish => {
-      const badge = renderBadge(dish, lang);
-      const statusHtml = renderDishStatus(dish, lang);
-      const descText = t(dish.description, lang);
-      const pairingChip = renderPairingChip(dish, wines, lang);
-      const allergensHtml = renderAllergens(dish, allergens, lang);
-      const parsed = parseDishPrice(formatPrice(dish.price), lang);
-      const priceHtml = dish.status === 'soldout' ? '' : `<span class="check-price dish-price">${parsed.label || parsed.display}</span>`;
-      const priceNote = (dish.status !== 'soldout' && parsed.type === 'portions')
-        ? `<p class="price-note">${parsed.note}</p>` : '';
-      return `<div class="spotlight-card${getDishStatusClass(dish)}">
-  ${badge}
-  <span class="check-name">${t(dish.name, lang)}</span>
-  ${descText ? `<p class="item-desc">${descText}</p>` : ''}
-  ${priceHtml}
-  ${priceNote}
-  ${statusHtml}
-  ${pairingChip}
-  ${allergensHtml}
-</div>`;
-    }).join('');
-
-    const image = CARTA_ACCENT_IMAGES[0]; // bar-leon-plato-05.webp
-    const captionSuffix = {
-      es: 'Tomate aliñao, un entrante fresco y tradicional en Bar León.',
-      en: 'Tomate aliñao, a fresh and traditional starter at Bar León.',
-      fr: 'Tomate aliñao, une entrée fraîche et traditionnelle au Bar León.'
-    }[lang];
-
-    return `<section class="tile-bg-section home-andalusia spotlight-andalucia" style="margin-top:0;">
-  <div class="tile-card">
-    <div class="home-section-head">
-      <p class="section-label">${LABELS.restaurantIntro[lang]}</p>
-      <h2 id="home-andalusia-title" class="spotlight-andalucia__title" style="border-bottom:none;padding-bottom:0;margin-bottom:0;">${catName}</h2>
-    </div>
-    <div class="carta-accent-images editorial-snapshot" style="margin: 20px 0;">
-      <figure class="editorial-snapshot__figure" style="box-shadow:none;border-color:rgba(28,26,23,0.12);padding:8px;">
-        <img class="editorial-snapshot__img" src="${WEB_IMAGE_BASE}${image.src}" alt="${image.alt[lang]}" width="800" height="500" loading="lazy" decoding="async" onerror="this.closest('figure').classList.add('img--broken')">
-        <figcaption class="editorial-snapshot__caption" style="font-size:0.75rem;margin-top:8px;padding-top:6px;">
-          ${image.alt[lang]} &mdash; ${captionSuffix}
-        </figcaption>
-      </figure>
-    </div>
-    <div class="spotlight-andalucia-inner" style="border-top:none;">
-      ${cards}
-    </div>
-  </div>
-</section>`;
-  }
-
   function renderCarta(dishes, categories, wines, allergens, lang, service) {
-    const available = (dishes || []).filter(i => i.available !== false && i.deleted !== true);
+    const available = (dishes || []).filter(isPublicItem);
     const catMap = {};
     (categories || [])
       .filter(c => (c.service || (c.type === 'food' ? 'restaurant' : 'bar')) === service)
-      .filter(c => c.id !== SABORES_CATEGORY_ID)
       .forEach(c => { catMap[c.id] = c; });
 
     const groups = {};
@@ -499,48 +430,46 @@
     const cats = order.map((catId, idx) => {
       const cat  = catMap[catId];
       const name = cat ? t(cat.name, lang) : catId;
+      const note = cat && cat.notes ? t(cat.notes, lang) : '';
       const list = groups[catId];
 
       const itemsHtml = list.map(item => {
         const badge = renderBadge(item, lang);
         const statusHtml = renderDishStatus(item, lang);
-        const pairingChip = renderPairingChip(item, wines, lang);
         const allergensHtml = renderAllergens(item, allergens, lang);
         const parsed = parseDishPrice(formatPrice(item.price), lang);
-        const priceCell = item.status === 'soldout' ? '' : `<span class="check-price dish-price">${parsed.label || parsed.display}</span>`;
+        const priceCell = item.status === 'soldout' ? '' : `<span class="check-price dish-price">${parsed.display || parsed.label}</span>`;
         const priceNote = (item.status !== 'soldout' && parsed.type === 'portions')
           ? `<p class="price-note">${parsed.note}</p>` : '';
         return `<article class="carta-item${getDishStatusClass(item)}">
   <div class="check-row">
-    ${badge ? `<div>${badge}</div>` : ''}
-    <span class="check-name">${t(item.name, lang)}</span>
-    <span class="check-leader" aria-hidden="true"></span>
+    <div class="check-copy">
+      <span class="check-name">${t(item.name, lang)}</span>
+      ${badge}
+    </div>
     ${priceCell}
   </div>
   ${priceNote}
   ${t(item.description, lang) ? `<p class="item-desc">${t(item.description, lang)}</p>` : ''}
   ${statusHtml}
-  ${pairingChip}
   ${allergensHtml}
 </article>`;
       }).join('');
 
-      return `<div class="accordion-item${idx === 0 ? ' is-open' : ''}">
-  <div class="categoria-head" role="button" tabindex="0" aria-expanded="${idx === 0 ? 'true' : 'false'}">
-    <h2>${name}</h2>
-    <span class="accordion-icon" aria-hidden="true"></span>
-  </div>
-  <div class="accordion-body">${itemsHtml}</div>
-</div>`;
+      return `<section class="menu-category" aria-labelledby="category-${catId}">
+  <h2 id="category-${catId}" class="categoria-head">${name}</h2>
+  ${note ? `<p class="category-note">${note}</p>` : ''}
+  <div class="menu-category__items">${itemsHtml}</div>
+</section>`;
     });
 
-    return `<div class="wrap carta-accordion">${cats.join('')}</div>`;
+    return `<div class="container--menu carta-list">${cats.join('')}</div>`;
   }
 
   // ─── PARA EMPEZAR BLOCK ───────────────────────────────────────────────────────
   function renderParaEmpezar(wines, beverages, lang) {
     const PARA_EMPEZAR_NAMES = ['fino', 'manzanilla', 'vermut', 'alhambra reserva'];
-    const allItems = [...(wines || []), ...(beverages || [])].filter(i => i.available !== false && i.deleted !== true);
+    const allItems = [...(wines || []), ...(beverages || [])].filter(isPublicItem);
     const matched = [];
     PARA_EMPEZAR_NAMES.forEach(function(needle) {
       if (matched.length >= 5) return;
@@ -596,7 +525,7 @@
 
     const groups = {};
     const order  = [];
-    [...(wines || []), ...(beverages || []), ...(dishes || [])].filter(w => w && w.available !== false && w.deleted !== true).forEach(item => {
+    [...(wines || []), ...(beverages || []), ...(dishes || [])].filter(isPublicItem).forEach(item => {
       if (!catMap[item.category_id]) return;
       if (!groups[item.category_id]) {
         groups[item.category_id] = [];
@@ -647,8 +576,7 @@
         const allergensHtml = renderAllergens(item, allergens, lang);
         return `<article class="carta-item" id="wine-${item.id}">
   <div class="check-row">
-    <span class="check-name">${nameStr}${producerHtml}${itemBadge ? ' ' + itemBadge : ''}</span>
-    <span class="check-leader" aria-hidden="true"></span>
+    <div class="check-copy"><span class="check-name">${nameStr}${producerHtml}</span>${itemBadge}</div>
     <span class="check-price">${priceStr}</span>
   </div>
   ${extraHtml}
@@ -666,61 +594,16 @@
         warningHtml = `<div class="bocadillos-warning">${warnings[lang]}</div>`;
       }
 
-      return `<div class="accordion-item${idx === 0 ? ' is-open' : ''}">
-  <div class="categoria-head" role="button" tabindex="0" aria-expanded="${idx === 0 ? 'true' : 'false'}">
-    <h2>${name}</h2>
-    <span class="accordion-icon" aria-hidden="true"></span>
-  </div>
-  <div class="accordion-body">
+      return `<section class="menu-category" aria-labelledby="category-${catId}">
+  <h2 id="category-${catId}" class="categoria-head">${name}</h2>
+  <div class="menu-category__items">
     ${warningHtml}
     ${itemsHtml}
   </div>
-</div>`;
+</section>`;
     });
 
-    return `<div class="wrap carta-accordion">${cats.join('')}</div>`;
-  }
-
-  function renderBarSnapshot(lang) {
-    const altText = {
-      es: 'Tapa de arroz de la casa con copa de vino oloroso Alfonso en la barra',
-      en: 'House rice tapa with a glass of Alfonso oloroso sherry at the bar',
-      fr: 'Tapa de riz maison avec un verre de xérès oloroso Alfonso au comptoir'
-    }[lang];
-    const caption = {
-      es: 'El rito de la barra: tapa de arroz con un oloroso Alfonso.',
-      en: 'The bar ritual: rice tapa paired with Alfonso oloroso sherry.',
-      fr: 'Le rituel du comptoir : tapa de riz accompagnée de xérès oloroso Alfonso.'
-    }[lang];
-    return `<div class="wrap editorial-snapshot" style="margin: 24px auto;">
-  <figure class="editorial-snapshot__figure" style="box-shadow:none;border-color:rgba(28,26,23,0.12);padding:8px;">
-    <img class="editorial-snapshot__img" src="${WEB_IMAGE_BASE}bar-leon-plato-03.webp" alt="${altText}" width="800" height="500" loading="lazy" decoding="async" onerror="this.closest('figure').classList.add('img--broken')">
-    <figcaption class="editorial-snapshot__caption" style="font-size:0.75rem;margin-top:8px;padding-top:6px;">
-      ${caption}
-    </figcaption>
-  </figure>
-</div>`;
-  }
-
-  function renderRestaurantSnapshot(lang) {
-    const altText = {
-      es: 'Habas con jamón ibérico y huevo frito, cocina granadina de temporada',
-      en: 'Broad beans with Iberian ham and fried egg, seasonal Granada cooking',
-      fr: 'Fèves au jambon ibérique et œuf au plat, cuisine grenadine de saison'
-    }[lang];
-    const caption = {
-      es: 'Habas con jamón y huevo frito, un clásico de la cocina granadina.',
-      en: 'Broad beans with ham and fried egg, a classic of Granada cuisine.',
-      fr: 'Fèves au jambon et œuf au plat, un classique de la cuisine de Grenade.'
-    }[lang];
-    return `<div class="wrap editorial-snapshot" style="margin: 32px auto;">
-  <figure class="editorial-snapshot__figure" style="box-shadow:none;border-color:rgba(28,26,23,0.12);padding:8px;">
-    <img class="editorial-snapshot__img" src="${WEB_IMAGE_BASE}bar-leon-plato-04.webp" alt="${altText}" width="800" height="500" loading="lazy" decoding="async" onerror="this.closest('figure').classList.add('img--broken')">
-    <figcaption class="editorial-snapshot__caption" style="font-size:0.75rem;margin-top:8px;padding-top:6px;">
-      ${caption}
-    </figcaption>
-  </figure>
-</div>`;
+    return `<div class="container--menu carta-list">${cats.join('')}</div>`;
   }
 
   function renderChalkboard(d, lang) {
@@ -769,8 +652,8 @@
       fr: 'Albayzín · Grenade',
     }[lang];
 
-    return `<div class="wrap">
-  <div class="barra-chalkboard chalkboard-menu">
+    return `<div class="container--menu">
+  <section class="barra-chalkboard home-card" aria-label="${LABELS.bar[lang]}">
     <div class="chalkboard-header">
       <div class="chalkboard-title">Bar Le&oacute;n &mdash; Desde 1959</div>
       <div class="chalkboard-subtitle">${subtitle}</div>
@@ -786,12 +669,13 @@
         ${g2}
       </div>
     </div>
-  </div>
+  </section>
 </div>`;
   }
 
   function renderMenuSections(d, nav, lang) {
-    return `<div class="wrap menu-switch-wrap">
+    return `<div class="carta-section-nav">
+  <div class="container--menu menu-switch-wrap">
   <div class="menu-switch menu-switch--four" role="tablist" aria-label="${t(nav.menu, lang)}">
     <button type="button" class="menu-switch-btn is-active" role="tab" aria-selected="true" aria-controls="panel-restaurant" data-panel="restaurant">${LABELS.restaurant[lang]}</button>
     <button type="button" class="menu-switch-btn" role="tab" aria-selected="false" aria-controls="panel-bar" data-panel="bar">${LABELS.bar[lang]}</button>
@@ -799,33 +683,31 @@
     <button type="button" class="menu-switch-btn menu-switch-btn--secondary" role="tab" aria-selected="false" aria-controls="panel-daily" data-panel="daily">${LABELS.dailyMenu[lang]}</button>
   </div>
 </div>
+</div>
 <section id="panel-restaurant" class="menu-panel is-active" role="tabpanel" data-panel="restaurant">
-  <div class="wrap menu-panel-intro">
+  <div class="container--menu menu-panel-intro">
     <p class="section-label">${LABELS.restaurant[lang]}</p>
     <p class="menu-panel-copy">${LABELS.restaurantIntro[lang]}</p>
   </div>
-  ${renderSpotlightAndalucia(d.dishes, d.categories, d.wines, d.allergens, lang)}
   ${renderCarta(d.dishes, d.categories, d.wines, d.allergens, lang, 'restaurant')}
-  ${renderRestaurantSnapshot(lang)}
 </section>
 <section id="panel-bar" class="menu-panel" role="tabpanel" data-panel="bar" hidden>
-  <div class="wrap menu-panel-intro">
+  <div class="container--menu menu-panel-intro">
     <p class="section-label">${LABELS.bar[lang]}</p>
     <p class="menu-panel-copy">${LABELS.barIntro[lang]}</p>
   </div>
   ${renderChalkboard(d, lang)}
-  <div class="wrap">${renderParaEmpezar(d.wines, d.beverages, lang)}</div>
-  ${renderBarSnapshot(lang)}
+  ${renderCarta(d.dishes, d.categories, d.wines, d.allergens, lang, 'bar')}
 </section>
 <section id="panel-beverages" class="menu-panel" role="tabpanel" data-panel="beverages" hidden>
-  <div class="wrap menu-panel-intro">
+  <div class="container--menu menu-panel-intro">
     <p class="section-label">${LABELS.beverages[lang]}</p>
     <p class="menu-panel-copy">${LABELS.beveragesIntro[lang]}</p>
   </div>
   ${renderWines(d.wines, d.beverages, null, d.categories, d.allergens, lang, 'bar', null, null)}
 </section>
 <section id="panel-daily" class="menu-panel" role="tabpanel" data-panel="daily" hidden>
-  <div class="wrap menu-panel-inner">${renderMenuDia(d.daily_menu, nav, lang)}</div>
+  <div class="container--reading menu-panel-inner">${renderMenuDia(d.daily_menu, nav, lang)}</div>
 </section>`;
   }
 
@@ -940,10 +822,10 @@
 <div class="h-det${cls}">${detail}</div>`;
     }).join('');
 
-    return `<div class="wrap" id="hours">
+    return `<section class="container--menu hours-section" id="hours">
   <p class="section-label">${t(nav.hours, lang)}</p>
   <div class="horarios-grid" role="table" aria-label="${t(nav.hours, lang)} Bar León">${cells}</div>
-</div>`;
+</section>`;
   }
 
   function renderFooter(d, nav, lang) {
@@ -951,11 +833,11 @@
     const ctaHtml = `<a href="${d.contact.phone_link}" class="cta-btn">${t(nav.call, lang) || 'Llamar'}</a>`;
 
     return `<footer class="carta-footer">
-  <div class="wrap">
+  <div class="container--menu">
     <p class="carta-footer-address">${addr.neighborhood} &middot; ${addr.city} &middot; ${addr.region}<br>${t(d.venue.cuisine_tag, lang)}</p>
   </div>
   ${ctaHtml}
-  <div class="wrap">
+  <div class="container--menu">
     <p class="carta-brand">${t(d.venue.name, lang)}</p>
     <a href="/panel/" class="owner-link">Acceso propietario</a>
   </div>
@@ -965,11 +847,17 @@
   // ─── MOBILE SERVICE CTA ───────────────────────────────────────────────────────
   function injectMobileServiceCTA(d, lang) {
     if (!d.contact) return;
-    const fab = document.createElement('a');
-    fab.className = 'mobile-service-cta';
-    fab.href = d.contact.phone_link;
-    fab.textContent = t(d.nav && d.nav.call, lang) || 'Llamar';
-    document.body.appendChild(fab);
+    const labels = {
+      hours: { es: 'Horario', en: 'Hours', fr: 'Horaires' },
+      top: { es: 'Arriba', en: 'Top', fr: 'Haut' },
+    };
+    const bar = document.createElement('nav');
+    bar.className = 'mobile-service-cta';
+    bar.setAttribute('aria-label', t(d.nav && d.nav.menu, lang) || 'Carta');
+    bar.innerHTML = `<a href="${d.contact.phone_link}">${t(d.nav && d.nav.call, lang) || 'Llamar'}</a>
+<a href="#hours">${labels.hours[lang]}</a>
+<a href="#top">${labels.top[lang]}</a>`;
+    document.body.appendChild(bar);
   }
 
   function initReveal(root) {
@@ -998,7 +886,7 @@
     const BASE = getPublicBaseUrl(d);
     const MENU_PATH = { es: '/es/carta', en: '/en/menu', fr: '/fr/carte' };
     const foodCats = (d.categories || []).filter(c => c.type === 'food');
-    const dishes   = (d.dishes || []).filter(dish => dish.available !== false && dish.deleted !== true);
+    const dishes   = (d.dishes || []).filter(isPublicItem);
 
     const menuSections = foodCats.map(cat => {
       const items = dishes
@@ -1064,37 +952,22 @@
 
       injectMenuJsonLd(d, lang);
       const nav = d.nav;
-      const inService = isNowServiceTime(d.hours);
 
-      const locationLabel = { es: '¿Cómo llegar?', en: 'How to find us', fr: 'Comment nous trouver' }[lang] || '¿Cómo llegar?';
-      const mapsUrl = (d.social && d.social.google_maps) ? d.social.google_maps : '#hours';
-
-      headerNav.innerHTML = `<div class="carta-header-left">
-  <a href="${HOME_LINKS[lang]}" class="carta-back">${t(nav.back, lang)}</a>
-</div>
-<div class="carta-header-center">
-  <div class="carta-header-name-row">
-    <img src="../assets/images/lion-logo.svg" class="header-logo" alt="" />
-    <span class="carta-bar-name">${t(d.venue.name, lang)}</span>
-  </div>
-  <a href="${mapsUrl}" class="carta-location-btn" target="_blank" rel="noopener">${locationLabel}</a>
-</div>
+      headerNav.innerHTML = `<a href="${HOME_LINKS[lang]}" class="carta-back">${t(nav.back, lang)}</a>
+<strong class="carta-header-title">${t(nav.menu, lang)}</strong>
 <div class="carta-header-right">
   <div class="carta-lang-selector" aria-label="Language">${langSelector(lang)}</div>
 </div>`;
 
       app.innerHTML = [
         renderMenuSections(d, nav, lang),
-        '<div class="wrap"><hr class="divider" /></div>',
+        '<div class="container--menu"><hr class="divider" /></div>',
         renderHorarios(d.hours, nav, lang),
         renderFooter(d, nav, lang),
       ].join('\n');
 
-      initAccordions(app);
       initMenuSwitch(app);
-      initPairingChips(app);
       initReveal(app);
-      injectLangBar(lang);
       injectMobileServiceCTA(d, lang);
       header.style.display = 'block';
       app.style.display = 'block';
@@ -1123,7 +996,12 @@
         en: 'Error loading page. Please reload.',
         fr: 'Erreur de chargement. Veuillez recharger la page.'
       }[lang] || 'Error al cargar. Por favor, recarga la página.';
-      if (loader) { loader.classList.add('loader--error'); loader.textContent = errMsg; }
+      if (loader) {
+        loader.classList.add('loader--error');
+        loader.textContent = errMsg;
+      }
+      if (header) header.style.display = 'block';
+      if (app) app.style.display = 'block';
       console.error('Bar León:', err);
     }
   }

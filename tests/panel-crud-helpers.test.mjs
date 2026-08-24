@@ -63,6 +63,26 @@ assert.equal(JSON.stringify(state.dishes[0].allergens), JSON.stringify(['gluten'
 api.setPanelItemAllergen(state, 'dishes', 'tapa-nueva-2', 'gluten', false);
 assert.equal(JSON.stringify(state.dishes[0].allergens), JSON.stringify(['milk']));
 
+api.setPanelItemAllergenConfirmed(state, 'dishes', 'tapa-nueva-2', true);
+assert.equal(state.dishes[0].allergen_status, 'confirmed');
+assert.equal(JSON.stringify(state.dishes[0].allergens_confirmed), JSON.stringify(['milk']));
+
+api.setPanelItemAllergen(state, 'dishes', 'tapa-nueva-2', 'sesame', true);
+assert.equal(
+  JSON.stringify(state.dishes[0].allergens_confirmed),
+  JSON.stringify(['milk']),
+  'marking a new allergen does not silently publish it — confirmation must be re-affirmed'
+);
+
+api.setPanelItemAllergenConfirmed(state, 'dishes', 'tapa-nueva-2', false);
+assert.equal(state.dishes[0].allergen_status, 'pending');
+assert.equal(JSON.stringify(state.dishes[0].allergens_confirmed), JSON.stringify([]));
+assert.equal(
+  JSON.stringify(state.dishes[0].allergens),
+  JSON.stringify(['milk', 'sesame']),
+  'un-confirming hides allergens from the public carta without discarding the owner\'s markings'
+);
+
 api.deletePanelItem(state, 'dishes', 'tapa-nueva-2');
 assert.equal(state.dishes.length, 0);
 

@@ -1,0 +1,93 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1440 1660" font-family="Helvetica, Arial, sans-serif">
+  <style>
+    .box { fill: #EDEDED; stroke: #999; stroke-width: 1; }
+    .img { fill: #D8D8D8; stroke: #999; stroke-width: 1; }
+    .bar { fill: #CFCFCF; stroke: #888; stroke-width: 1; }
+    .lbl { fill: #444; font-size: 16px; }
+    .sm  { fill: #777; font-size: 12px; }
+    .pct { fill: #999; font-size: 12px; text-anchor: end; }
+    .mline { stroke: #BBB; stroke-dasharray: 4 4; }
+  </style>
+  <rect width="1440" height="1660" fill="#FFFFFF" stroke="#666"/>
+  <text x="16" y="24" class="lbl">HOME · DESKTOP 1440 — measures: hero 1080 / grid 880 / prose 680</text>
+
+  <!-- measure guides -->
+  <line x1="180" y1="36" x2="180" y2="1640" class="mline"/>
+  <line x1="1260" y1="36" x2="1260" y2="1640" class="mline"/>
+  <text x="186" y="48" class="sm">1080 hero measure</text>
+
+  <!-- Header -->
+  <rect x="0" y="36" width="1440" height="60" class="bar"/>
+  <text x="190" y="72" class="lbl">lion · BAR LEÓN</text>
+  <text x="1180" y="72" class="sm">ES EN FR</text>
+  <text x="1430" y="56" class="pct">4%</text>
+
+  <!-- Hero: image left 60% / text right 40% inside 1080 -->
+  <rect x="180" y="120" width="640" height="460" class="img"/>
+  <text x="420" y="350" class="lbl">HERO PHOTO (4:5)</text>
+  <text x="1430" y="140" class="pct">28%</text>
+  <g>
+    <rect x="860" y="200" width="330" height="44" class="box"/>
+    <text x="900" y="228" class="lbl">H1 wordmark</text>
+    <text x="880" y="270" class="sm">Desde 1959 · Albayzín · Granada</text>
+    <text x="880" y="292" class="sm">status: today's hours</text>
+    <rect x="860" y="316" width="330" height="52" class="bar"/>
+    <text x="950" y="348" class="lbl">Ver la carta</text>
+    <rect x="860" y="380" width="160" height="44" class="box"/>
+    <rect x="1030" y="380" width="160" height="44" class="box"/>
+    <text x="884" y="407" class="sm">Menú del día</text>
+    <text x="1058" y="407" class="sm">Cómo llegar</text>
+  </g>
+
+  <!-- Signature dishes: 3 columns inside 880 -->
+  <text x="280" y="660" class="lbl">H2 · Sabores de Andalucía</text>
+  <text x="1430" y="660" class="pct">22%</text>
+  <g>
+    <rect x="280" y="680" width="280" height="200" class="img"/>
+    <rect x="580" y="680" width="280" height="200" class="img"/>
+    <rect x="880" y="680" width="280" height="200" class="img"/>
+    <text x="300" y="906" class="lbl" font-size="14">Dish name</text>
+    <text x="600" y="906" class="lbl" font-size="14">Dish name</text>
+    <text x="900" y="906" class="lbl" font-size="14">Dish name</text>
+    <text x="300" y="926" class="sm">description · price right-aligned</text>
+    <text x="600" y="926" class="sm">description · price</text>
+    <text x="900" y="926" class="sm">description · price</text>
+  </g>
+
+  <!-- Daily menu: centered card inside 680 -->
+  <text x="380" y="1000" class="lbl">H2 · Menú del día</text>
+  <text x="1430" y="1000" class="pct">14%</text>
+  <rect x="380" y="1016" width="680" height="180" class="box"/>
+  <text x="404" y="1048" class="lbl" font-size="15">12,50 € · Lunes–Viernes · 13:00–16:00</text>
+  <rect x="404" y="1066" width="632" height="32" class="bar"/>
+  <rect x="404" y="1106" width="632" height="32" class="bar"/>
+  <rect x="404" y="1146" width="632" height="32" class="bar"/>
+  <text x="420" y="1087" class="sm">▸ Primeros</text>
+  <text x="420" y="1127" class="sm">▸ Segundos</text>
+  <text x="420" y="1167" class="sm">▸ Postre</text>
+
+  <!-- History: text left, 2 photos right, inside 880 -->
+  <text x="280" y="1270" class="lbl">H2 · 1959 — La familia León</text>
+  <text x="1430" y="1270" class="pct">17%</text>
+  <g>
+    <rect x="280" y="1290" width="300" height="30" class="box"/>
+    <text x="290" y="1311" class="sm">"1959" display + 3 sentences (prose)</text>
+    <rect x="620" y="1290" width="260" height="190" class="img"/>
+    <rect x="900" y="1290" width="260" height="190" class="img"/>
+    <text x="660" y="1390" class="sm">caricatura + caption</text>
+    <text x="940" y="1390" class="sm">founder interior + caption</text>
+  </g>
+
+  <!-- Identity + Location combined band -->
+  <text x="280" y="1530" class="lbl">H2 · Granada / Fajalauza</text>
+  <text x="1430" y="1530" class="pct">10%</text>
+  <rect x="280" y="1544" width="420" height="80" class="img"/>
+  <text x="330" y="1588" class="sm">facade photo + origin caption</text>
+  <rect x="740" y="1544" width="420" height="80" class="box"/>
+  <text x="760" y="1576" class="sm">Location: address · hours · Maps button</text>
+
+  <!-- Footer -->
+  <rect x="0" y="1634" width="1440" height="26" class="bar"/>
+  <text x="190" y="1652" class="sm">footer: contact · ES EN FR · owner access</text>
+  <text x="1430" y="1652" class="pct">5%</text>
+</svg>

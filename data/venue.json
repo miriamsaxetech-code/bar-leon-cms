@@ -806,7 +806,12 @@
       },
       "type": "food",
       "service": "restaurant",
-      "order": 7
+      "order": 7,
+      "notes": {
+        "es": "Por encargo · Mínimo 2 raciones",
+        "en": "To order · Minimum 2 servings",
+        "fr": "Sur commande · 2 portions minimum"
+      }
     },
     {
       "id": "desserts",
@@ -1882,7 +1887,7 @@
         "fr": "Crevettes au pil-pil"
       },
       "description": {
-        "es": "Gambas salteadas con ajo, guindilla y aceite de oliva.",
+        "es": "Gambas en aceite de oliva bien caliente, con ajo y guindilla.",
         "en": "Prawns sizzling in olive oil with garlic, chilli and white wine.",
         "fr": "Crevettes servies avec ail, piment et huile d'olive bien chaude."
       },
@@ -2397,7 +2402,7 @@
       "id": "entrecot-a-la-pimienta",
       "category_id": "meats",
       "name": {
-        "es": "Entrecot a la pimienta",
+        "es": "Entrecote en salsa de pimienta",
         "en": "Beef Entrecôte in Pepper Sauce",
         "fr": "Entrecôte au poivre"
       },
@@ -2610,9 +2615,9 @@
         "fr": "Paella mixte"
       },
       "description": {
-        "es": "Arroz con pollo, marisco y verduras. Por encargo, mínimo 2 raciones.",
-        "en": "Traditional saffron rice dish cooked with chicken, pork and seafood (min. 2 servings).",
-        "fr": "Riz au safran traditionnel cuisiné avec poulet, porc et fruits de mer (min. 2 personnes)."
+        "es": "Arroz con pollo, marisco y verduras.",
+        "en": "Traditional saffron rice dish cooked with chicken, pork and seafood.",
+        "fr": "Riz au safran traditionnel cuisiné avec poulet, porc et fruits de mer."
       },
       "price": "14,00 € / ración",
       "pairing": {
@@ -2636,9 +2641,9 @@
         "fr": "Paella aux fruits de mer"
       },
       "description": {
-        "es": "Arroz con marisco y caldo de pescado. Por encargo, mínimo 2 raciones.",
-        "en": "Saffron rice cooked with squid, mussels, prawns and clams (min. 2 servings).",
-        "fr": "Riz au safran cuisiné avec calmars, moules, crevettes et palourdes (min. 2 personnes)."
+        "es": "Arroz con marisco y caldo de pescado.",
+        "en": "Saffron rice cooked with squid, mussels, prawns and clams.",
+        "fr": "Riz au safran cuisiné avec calmars, moules, crevettes et palourdes."
       },
       "price": "15,00 € / ración",
       "pairing": {
@@ -2662,9 +2667,9 @@
         "fr": "Paella aux légumes"
       },
       "description": {
-        "es": "Arroz con verduras de temporada. Por encargo, mínimo 2 raciones.",
-        "en": "Saffron rice loaded with seasonal vegetables and artichokes (min. 2 servings).",
-        "fr": "Riz au safran garni de légumes de saison et d'artichauts (min. 2 personnes)."
+        "es": "Arroz con verduras de temporada.",
+        "en": "Saffron rice loaded with seasonal vegetables and artichokes.",
+        "fr": "Riz au safran garni de légumes de saison et d'artichauts."
       },
       "price": "14,00 € / ración",
       "pairing": {
@@ -2922,7 +2927,7 @@
         "fr": "Sandwich de longe de porc avec jambon ou fromage"
       },
       "description": {
-        "es": "Lomo de cerdo a la plancha con jamón serrano o queso curado. Nota: No se sirven bocadillos en el comedor.",
+        "es": "Lomo de cerdo a la plancha con jamón serrano o queso curado.",
         "en": "Grilled pork loin with Serrano ham or cured cheese in a crusty bread roll.",
         "fr": "Longe de porc grillée avec jambon serrano ou fromage affiné dans un pain croustillant."
       },
@@ -2948,7 +2953,7 @@
         "fr": "Sandwich de longe de porc avec jambon et fromage"
       },
       "description": {
-        "es": "Lomo de cerdo a la plancha con jamón serrano y queso curado. Nota: No se sirven bocadillos en el comedor.",
+        "es": "Lomo de cerdo a la plancha con jamón serrano y queso curado.",
         "en": "Grilled pork loin with both Serrano ham and cheese in a crusty bread roll.",
         "fr": "Longe de porc grillée avec jambon serrano et fromage affiné dans un pain croustillant."
       },
@@ -2974,7 +2979,7 @@
         "fr": "Sandwich au jambon serrano ou fromage"
       },
       "description": {
-        "es": "Jamón serrano o queso curado de la casa. Nota: No se sirven bocadillos en el comedor.",
+        "es": "Jamón serrano o queso curado de la casa.",
         "en": "Serrano ham or cured cheese in a crusty bread roll.",
         "fr": "Jambon serrano ou fromage affiné dans un pain croustillant."
       },
@@ -3000,7 +3005,7 @@
         "fr": "Sandwich « Junior »"
       },
       "description": {
-        "es": "Lomo de cerdo a la plancha, jamón serrano, queso, lechuga y mayonesa. Nota: No se sirven bocadillos en el comedor.",
+        "es": "Lomo de cerdo a la plancha, jamón serrano, queso, lechuga y mayonesa.",
         "en": "Pork loin, Serrano ham, cheese, lettuce and mayonnaise in a crusty roll.",
         "fr": "Longe de porc, jambon serrano, fromage, laitue et mayonnaise."
       },
@@ -3026,7 +3031,7 @@
         "fr": "Sandwich aux calmars frits"
       },
       "description": {
-        "es": "Calamares fritos al estilo andaluz. Nota: No se sirven bocadillos en el comedor.",
+        "es": "Calamares fritos al estilo andaluz.",
         "en": "Battered and fried squid rings in a crusty bread roll.",
         "fr": "Calmars frits croustillants dans un pain chaud de type baguette."
       },
@@ -3052,7 +3057,7 @@
         "fr": "Sandwich « Trifásico »"
       },
       "description": {
-        "es": "Lomo de cerdo a la plancha, jamón serrano, queso, lechuga, mayonesa y huevo frito. Nota: No se sirven bocadillos en el comedor.",
+        "es": "Lomo de cerdo a la plancha, jamón serrano, queso, lechuga, mayonesa y huevo frito.",
         "en": "Pork loin, ham, cheese, lettuce, mayonnaise and a fried egg.",
         "fr": "Longe de porc, jambon, fromage, laitue, mayonnaise et œuf au plat."
       },
