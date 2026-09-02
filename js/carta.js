@@ -186,18 +186,6 @@
     ).join('<span class="sep"> · </span>');
   }
 
-  function injectLangBar(lang) {
-    const bar = document.createElement('div');
-    bar.className = 'lang-bar';
-    bar.setAttribute('aria-label', 'Language / Idioma / Langue');
-    bar.innerHTML = ['es', 'en', 'fr'].map(l =>
-      l === lang
-        ? `<span class="lang-bar__active">${l.toUpperCase()}</span>`
-        : `<a class="lang-bar__link" href="${CARTA_LINKS[l]}">${l.toUpperCase()}</a>`
-    ).join('<span class="lang-bar__sep">·</span>');
-    document.body.insertBefore(bar, document.body.firstChild);
-  }
-
   // ─── BADGE HELPER ─────────────────────────────────────────────────────────────
   function renderBadge(dish, lang) {
     const v = dish.featured;
@@ -992,13 +980,23 @@
       }
     } catch (err) {
       const errMsg = {
-        es: 'Error al cargar. Por favor, recarga la página.',
-        en: 'Error loading page. Please reload.',
-        fr: 'Erreur de chargement. Veuillez recharger la page.'
-      }[lang] || 'Error al cargar. Por favor, recarga la página.';
+        es: 'No se pudo cargar la carta actualizada.',
+        en: 'We could not load the current menu.',
+        fr: 'Impossible de charger la carte actuelle.'
+      }[lang] || 'No se pudo cargar la carta actualizada.';
+      const retryLabel = { es: 'Reintentar', en: 'Retry', fr: 'Réessayer' }[lang] || 'Reintentar';
       if (loader) {
         loader.classList.add('loader--error');
-        loader.textContent = errMsg;
+        loader.textContent = '';
+        const msg = document.createElement('span');
+        msg.textContent = errMsg;
+        const retryBtn = document.createElement('button');
+        retryBtn.type = 'button';
+        retryBtn.className = 'loader-retry';
+        retryBtn.textContent = retryLabel;
+        retryBtn.addEventListener('click', function () { window.location.reload(); });
+        loader.appendChild(msg);
+        loader.appendChild(retryBtn);
       }
       if (header) header.style.display = 'block';
       if (app) app.style.display = 'block';

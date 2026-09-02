@@ -16,8 +16,6 @@
     fullMenu:     { es: 'Consulte la carta completa', en: 'View full menu', fr: 'Consultez la carte' },
     andalusia:    { es: 'Sabores de Andalucía', en: 'Flavors of Andalusia', fr: "Saveurs d'Andalousie" },
     andalusiaSub: { es: 'Platos de casa, guiso y barra granadina.', en: 'House dishes, stews, and Granada bar classics.', fr: 'Plats maison, mijotés et comptoir grenadin.' },
-    stories:      { es: 'Historias del León', en: 'Stories of León', fr: 'Histoires du León' },
-    storiesSub:   { es: 'Archivo familiar y memoria de barra. Solo material real del León.', en: 'Family archive and bar memory. Only real León material.', fr: 'Archives familiales et mémoire du comptoir. Uniquement du matériel réel du León.' },
     call:         { es: 'Llamar', en: 'Call', fr: 'Appeler' },
     statusOpen:   { es: 'Estamos abiertos', en: 'We are open', fr: 'Nous sommes ouverts' },
     statusClosed: { es: 'Cerrado', en: 'Closed', fr: 'Fermé' },
@@ -176,20 +174,6 @@
         : `<a href="${links[l]}">${l.toUpperCase()}</a>`
     ).join('<span class="sep"> · </span>');
   }
-
-  function injectLangBar(lang, links) {
-    const bar = document.createElement('div');
-    bar.className = 'lang-bar';
-    bar.setAttribute('aria-label', 'Language / Idioma / Langue');
-    bar.innerHTML = ['es', 'en', 'fr'].map(l =>
-      l === lang
-        ? `<span class="lang-bar__active">${l.toUpperCase()}</span>`
-        : `<a class="lang-bar__link" href="${links[l]}">${l.toUpperCase()}</a>`
-    ).join('<span class="lang-bar__sep">·</span>');
-    document.body.insertBefore(bar, document.body.firstChild);
-  }
-
-  function renderBadge() { return ''; }
 
   function findWineForPairing(pairingText, wines, lang) {
     if (!pairingText) return null;
@@ -442,6 +426,7 @@
     const phoneLink = d.contact.phone_link;
 
     const bar = document.createElement('nav');
+    bar.id = 'home-mobile-cta';
     bar.className = 'mobile-service-cta';
     bar.setAttribute('aria-label', LABELS_CTA.carta[lang]);
     const iconBook = '<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><path d="M4 19.5A2.5 2.5 0 0 1 6.5 17H20"/><path d="M6.5 2H20v20H6.5A2.5 2.5 0 0 1 4 19.5v-15A2.5 2.5 0 0 1 6.5 2z"/></svg>';
@@ -633,35 +618,6 @@
     });
   }
 
-  function initStoriesAlbum(root) {
-    if (typeof root.querySelector !== 'function') return;
-    const container = root.querySelector('.stories-archive');
-    if (!container) return;
-
-    const slides = container.querySelectorAll('.album-slide');
-    const prevBtn = container.querySelector('.album-btn--prev');
-    const nextBtn = container.querySelector('.album-btn--next');
-    const currentCounter = container.querySelector('.album-counter__current');
-    if (!slides.length || !prevBtn || !nextBtn || !currentCounter) return;
-
-    let currentIndex = 0;
-
-    function showSlide(index) {
-      slides[currentIndex].classList.remove('is-active');
-      currentIndex = (index + slides.length) % slides.length;
-      slides[currentIndex].classList.add('is-active');
-      currentCounter.textContent = currentIndex + 1;
-    }
-
-    prevBtn.addEventListener('click', function() {
-      showSlide(currentIndex - 1);
-    });
-
-    nextBtn.addEventListener('click', function() {
-      showSlide(currentIndex + 1);
-    });
-  }
-
   function initReveal(root) {
     if (!window.IntersectionObserver) return;
     const els = root.querySelectorAll(
@@ -788,12 +744,22 @@
       initReveal(app);
     } catch (err) {
       const errMsg = {
-        es: 'Error al cargar. Por favor, recarga la página.',
-        en: 'Error loading page. Please reload.',
-        fr: 'Erreur de chargement. Veuillez recharger la page.'
-      }[lang] || 'Error al cargar. Por favor, recarga la página.';
+        es: 'No se pudo cargar la información actualizada.',
+        en: 'We could not load the latest information.',
+        fr: "Impossible de charger les informations actuelles."
+      }[lang] || 'No se pudo cargar la información actualizada.';
+      const retryLabel = { es: 'Reintentar', en: 'Retry', fr: 'Réessayer' }[lang] || 'Reintentar';
       loader.classList.add('loader--error');
-      loader.textContent = errMsg;
+      loader.textContent = '';
+      const msg = document.createElement('span');
+      msg.textContent = errMsg;
+      const retryBtn = document.createElement('button');
+      retryBtn.type = 'button';
+      retryBtn.className = 'loader-retry';
+      retryBtn.textContent = retryLabel;
+      retryBtn.addEventListener('click', function () { window.location.reload(); });
+      loader.appendChild(msg);
+      loader.appendChild(retryBtn);
       console.error('Bar León:', err);
     }
   }

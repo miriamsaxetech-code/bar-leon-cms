@@ -958,7 +958,10 @@
       "service_track": "both",
       "price_status": "pending",
       "allergen_status": "pending",
-      "allergens_confirmed": []
+      "allergens_confirmed": [],
+      "allergens": [
+        "eggs"
+      ]
     },
     {
       "id": "habas-jamon-iberico",
@@ -985,7 +988,10 @@
       "service_track": "both",
       "price_status": "pending",
       "allergen_status": "pending",
-      "allergens_confirmed": []
+      "allergens_confirmed": [],
+      "allergens": [
+        "eggs"
+      ]
     },
     {
       "id": "carne-de-monte",
@@ -1120,7 +1126,11 @@
       "service_track": "both",
       "price_status": "pending",
       "allergen_status": "pending",
-      "allergens_confirmed": []
+      "allergens_confirmed": [],
+      "allergens": [
+        "eggs",
+        "gluten"
+      ]
     },
     {
       "id": "sesos",
@@ -1147,7 +1157,11 @@
       "service_track": "both",
       "price_status": "pending",
       "allergen_status": "pending",
-      "allergens_confirmed": []
+      "allergens_confirmed": [],
+      "allergens": [
+        "eggs",
+        "gluten"
+      ]
     },
     {
       "id": "gazpacho-andaluz",
@@ -1225,7 +1239,10 @@
       "service_track": "both",
       "price_status": "pending",
       "allergen_status": "pending",
-      "allergens_confirmed": []
+      "allergens_confirmed": [],
+      "allergens": [
+        "eggs"
+      ]
     },
     {
       "id": "consome-al-jerez",
@@ -1277,7 +1294,10 @@
       "service_track": "both",
       "price_status": "pending",
       "allergen_status": "pending",
-      "allergens_confirmed": []
+      "allergens_confirmed": [],
+      "allergens": [
+        "eggs"
+      ]
     },
     {
       "id": "sopa-de-mariscos",
@@ -1303,7 +1323,12 @@
       "service_track": "both",
       "price_status": "pending",
       "allergen_status": "pending",
-      "allergens_confirmed": []
+      "allergens_confirmed": [],
+      "allergens": [
+        "crustaceans",
+        "fish",
+        "molluscs"
+      ]
     },
     {
       "id": "sopa-sevillana",
@@ -1329,7 +1354,12 @@
       "service_track": "both",
       "price_status": "pending",
       "allergen_status": "pending",
-      "allergens_confirmed": []
+      "allergens_confirmed": [],
+      "allergens": [
+        "crustaceans",
+        "eggs",
+        "fish"
+      ]
     },
     {
       "id": "tomate-alinao",
@@ -1381,7 +1411,11 @@
       "service_track": "both",
       "price_status": "pending",
       "allergen_status": "pending",
-      "allergens_confirmed": []
+      "allergens_confirmed": [],
+      "allergens": [
+        "crustaceans",
+        "eggs"
+      ]
     },
     {
       "id": "ensalada-de-la-casa",
@@ -1433,7 +1467,10 @@
       "service_track": "both",
       "price_status": "pending",
       "allergen_status": "pending",
-      "allergens_confirmed": []
+      "allergens_confirmed": [],
+      "allergens": [
+        "eggs"
+      ]
     },
     {
       "id": "surtido-de-ibericos",
@@ -1511,7 +1548,10 @@
       "service_track": "both",
       "price_status": "pending",
       "allergen_status": "pending",
-      "allergens_confirmed": []
+      "allergens_confirmed": [],
+      "allergens": [
+        "milk"
+      ]
     },
     {
       "id": "croquetas",
@@ -1537,7 +1577,11 @@
       "service_track": "both",
       "price_status": "pending",
       "allergen_status": "pending",
-      "allergens_confirmed": []
+      "allergens_confirmed": [],
+      "allergens": [
+        "gluten",
+        "milk"
+      ]
     },
     {
       "id": "champinon",
@@ -1590,7 +1634,10 @@
       "service_track": "both",
       "price_status": "pending",
       "allergen_status": "pending",
-      "allergens_confirmed": []
+      "allergens_confirmed": [],
+      "allergens": [
+        "crustaceans"
+      ]
     },
     {
       "id": "berenjenas-fritas",
@@ -1616,7 +1663,10 @@
       "service_track": "both",
       "price_status": "pending",
       "allergen_status": "pending",
-      "allergens_confirmed": []
+      "allergens_confirmed": [],
+      "allergens": [
+        "gluten"
+      ]
     },
     {
       "id": "pulpo-a-la-vinagreta",
@@ -1642,7 +1692,10 @@
       "service_track": "both",
       "price_status": "pending",
       "allergen_status": "pending",
-      "allergens_confirmed": []
+      "allergens_confirmed": [],
+      "allergens": [
+        "molluscs"
+      ]
     },
     {
       "id": "verduras-salteadas",
@@ -1720,7 +1773,12 @@
       "service_track": "both",
       "price_status": "pending",
       "allergen_status": "pending",
-      "allergens_confirmed": []
+      "allergens_confirmed": [],
+      "allergens": [
+        "eggs",
+        "gluten",
+        "molluscs"
+      ]
     },
     {
       "id": "filete-de-pescadilla",
@@ -1746,7 +1804,12 @@
       "service_track": "both",
       "price_status": "pending",
       "allergen_status": "pending",
-      "allergens_confirmed": []
+      "allergens_confirmed": [],
+      "allergens": [
+        "eggs",
+        "fish",
+        "gluten"
+      ]
     },
     {
       "id": "calamares-fritos",
@@ -1772,7 +1835,12 @@
       "service_track": "both",
       "price_status": "pending",
       "allergen_status": "pending",
-      "allergens_confirmed": []
+      "allergens_confirmed": [],
+      "allergens": [
+        "eggs",
+        "gluten",
+        "molluscs"
+      ]
     },
     {
       "id": "boquerones-fritos",
@@ -1798,7 +1866,12 @@
       "service_track": "both",
       "price_status": "pending",
       "allergen_status": "pending",
-      "allergens_confirmed": []
+      "allergens_confirmed": [],
+      "allergens": [
+        "eggs",
+        "fish",
+        "gluten"
+      ]
     },
     {
       "id": "cazon-frito-en-adobo",
@@ -1824,7 +1897,12 @@
       "service_track": "both",
       "price_status": "pending",
       "allergen_status": "pending",
-      "allergens_confirmed": []
+      "allergens_confirmed": [],
+      "allergens": [
+        "eggs",
+        "fish",
+        "gluten"
+      ]
     },
     {
       "id": "almejas",
@@ -1850,7 +1928,10 @@
       "service_track": "both",
       "price_status": "pending",
       "allergen_status": "pending",
-      "allergens_confirmed": []
+      "allergens_confirmed": [],
+      "allergens": [
+        "molluscs"
+      ]
     },
     {
       "id": "gambas-fritas",
@@ -1876,7 +1957,12 @@
       "service_track": "both",
       "price_status": "pending",
       "allergen_status": "pending",
-      "allergens_confirmed": []
+      "allergens_confirmed": [],
+      "allergens": [
+        "crustaceans",
+        "eggs",
+        "gluten"
+      ]
     },
     {
       "id": "gambas-al-pil-pil",
@@ -1902,7 +1988,10 @@
       "service_track": "both",
       "price_status": "pending",
       "allergen_status": "pending",
-      "allergens_confirmed": []
+      "allergens_confirmed": [],
+      "allergens": [
+        "crustaceans"
+      ]
     },
     {
       "id": "chopos-fritos",
@@ -1928,7 +2017,12 @@
       "service_track": "both",
       "price_status": "pending",
       "allergen_status": "pending",
-      "allergens_confirmed": []
+      "allergens_confirmed": [],
+      "allergens": [
+        "eggs",
+        "gluten",
+        "molluscs"
+      ]
     },
     {
       "id": "fritura-de-pescado-variado",
@@ -1954,7 +2048,12 @@
       "service_track": "both",
       "price_status": "pending",
       "allergen_status": "pending",
-      "allergens_confirmed": []
+      "allergens_confirmed": [],
+      "allergens": [
+        "eggs",
+        "fish",
+        "gluten"
+      ]
     },
     {
       "id": "bacalao-con-tomate",
@@ -1980,7 +2079,10 @@
       "service_track": "both",
       "price_status": "pending",
       "allergen_status": "pending",
-      "allergens_confirmed": []
+      "allergens_confirmed": [],
+      "allergens": [
+        "fish"
+      ]
     },
     {
       "id": "filete-pez-espada",
@@ -2006,7 +2108,10 @@
       "service_track": "both",
       "price_status": "pending",
       "allergen_status": "pending",
-      "allergens_confirmed": []
+      "allergens_confirmed": [],
+      "allergens": [
+        "fish"
+      ]
     },
     {
       "id": "calamares-a-la-plancha",
@@ -2032,7 +2137,10 @@
       "service_track": "both",
       "price_status": "pending",
       "allergen_status": "pending",
-      "allergens_confirmed": []
+      "allergens_confirmed": [],
+      "allergens": [
+        "molluscs"
+      ]
     },
     {
       "id": "pinchitos",
@@ -2136,7 +2244,11 @@
       "service_track": "both",
       "price_status": "pending",
       "allergen_status": "pending",
-      "allergens_confirmed": []
+      "allergens_confirmed": [],
+      "allergens": [
+        "eggs",
+        "gluten"
+      ]
     },
     {
       "id": "filete-de-cerdo",
@@ -2162,7 +2274,11 @@
       "service_track": "both",
       "price_status": "pending",
       "allergen_status": "pending",
-      "allergens_confirmed": []
+      "allergens_confirmed": [],
+      "allergens": [
+        "eggs",
+        "gluten"
+      ]
     },
     {
       "id": "secreto-de-cerdo",
@@ -2214,7 +2330,11 @@
       "service_track": "both",
       "price_status": "pending",
       "allergen_status": "pending",
-      "allergens_confirmed": []
+      "allergens_confirmed": [],
+      "allergens": [
+        "eggs",
+        "gluten"
+      ]
     },
     {
       "id": "ternera-estofada",
@@ -2318,7 +2438,12 @@
       "service_track": "both",
       "price_status": "pending",
       "allergen_status": "pending",
-      "allergens_confirmed": []
+      "allergens_confirmed": [],
+      "allergens": [
+        "eggs",
+        "gluten",
+        "milk"
+      ]
     },
     {
       "id": "solomillo-de-cerdo",
@@ -2448,7 +2573,10 @@
       "service_track": "both",
       "price_status": "pending",
       "allergen_status": "pending",
-      "allergens_confirmed": []
+      "allergens_confirmed": [],
+      "allergens": [
+        "eggs"
+      ]
     },
     {
       "id": "tortilla-de-jamon",
@@ -2474,7 +2602,10 @@
       "service_track": "both",
       "price_status": "pending",
       "allergen_status": "pending",
-      "allergens_confirmed": []
+      "allergens_confirmed": [],
+      "allergens": [
+        "eggs"
+      ]
     },
     {
       "id": "tortilla-de-patatas",
@@ -2500,7 +2631,10 @@
       "service_track": "both",
       "price_status": "pending",
       "allergen_status": "pending",
-      "allergens_confirmed": []
+      "allergens_confirmed": [],
+      "allergens": [
+        "eggs"
+      ]
     },
     {
       "id": "revuelto-de-esparragos",
@@ -2526,7 +2660,10 @@
       "service_track": "both",
       "price_status": "pending",
       "allergen_status": "pending",
-      "allergens_confirmed": []
+      "allergens_confirmed": [],
+      "allergens": [
+        "eggs"
+      ]
     },
     {
       "id": "revuelto-de-champinon",
@@ -2552,7 +2689,10 @@
       "service_track": "both",
       "price_status": "pending",
       "allergen_status": "pending",
-      "allergens_confirmed": []
+      "allergens_confirmed": [],
+      "allergens": [
+        "eggs"
+      ]
     },
     {
       "id": "revuelto-de-gambas",
@@ -2578,7 +2718,11 @@
       "service_track": "both",
       "price_status": "pending",
       "allergen_status": "pending",
-      "allergens_confirmed": []
+      "allergens_confirmed": [],
+      "allergens": [
+        "crustaceans",
+        "eggs"
+      ]
     },
     {
       "id": "huevos-fritos-con-jamon",
@@ -2604,7 +2748,10 @@
       "service_track": "both",
       "price_status": "pending",
       "allergen_status": "pending",
-      "allergens_confirmed": []
+      "allergens_confirmed": [],
+      "allergens": [
+        "eggs"
+      ]
     },
     {
       "id": "paella-mixta",
@@ -2630,7 +2777,11 @@
       "service_track": "both",
       "price_status": "pending",
       "allergen_status": "pending",
-      "allergens_confirmed": []
+      "allergens_confirmed": [],
+      "allergens": [
+        "crustaceans",
+        "molluscs"
+      ]
     },
     {
       "id": "paella-de-mariscos",
@@ -2656,7 +2807,12 @@
       "service_track": "both",
       "price_status": "pending",
       "allergen_status": "pending",
-      "allergens_confirmed": []
+      "allergens_confirmed": [],
+      "allergens": [
+        "crustaceans",
+        "fish",
+        "molluscs"
+      ]
     },
     {
       "id": "paella-de-verduras",
@@ -2734,7 +2890,11 @@
       "service_track": "both",
       "price_status": "pending",
       "allergen_status": "pending",
-      "allergens_confirmed": []
+      "allergens_confirmed": [],
+      "allergens": [
+        "eggs",
+        "milk"
+      ]
     },
     {
       "id": "natillas-de-la-casa",
@@ -2760,7 +2920,11 @@
       "service_track": "both",
       "price_status": "pending",
       "allergen_status": "pending",
-      "allergens_confirmed": []
+      "allergens_confirmed": [],
+      "allergens": [
+        "eggs",
+        "milk"
+      ]
     },
     {
       "id": "arroz-con-leche",
@@ -2786,7 +2950,10 @@
       "service_track": "both",
       "price_status": "pending",
       "allergen_status": "pending",
-      "allergens_confirmed": []
+      "allergens_confirmed": [],
+      "allergens": [
+        "milk"
+      ]
     },
     {
       "id": "sorbete-de-limon",
@@ -2864,7 +3031,10 @@
       "service_track": "both",
       "price_status": "pending",
       "allergen_status": "pending",
-      "allergens_confirmed": []
+      "allergens_confirmed": [],
+      "allergens": [
+        "milk"
+      ]
     },
     {
       "id": "brownie",
@@ -2916,7 +3086,10 @@
       "service_track": "both",
       "price_status": "pending",
       "allergen_status": "pending",
-      "allergens_confirmed": []
+      "allergens_confirmed": [],
+      "allergens": [
+        "milk"
+      ]
     },
     {
       "id": "bocadillo-lomo-jamon-queso",
@@ -2942,7 +3115,11 @@
       "service_track": "bar",
       "price_status": "pending",
       "allergen_status": "pending",
-      "allergens_confirmed": []
+      "allergens_confirmed": [],
+      "allergens": [
+        "gluten",
+        "milk"
+      ]
     },
     {
       "id": "bocadillo-lomo-jamon-queso-doble",
@@ -2968,7 +3145,11 @@
       "service_track": "bar",
       "price_status": "pending",
       "allergen_status": "pending",
-      "allergens_confirmed": []
+      "allergens_confirmed": [],
+      "allergens": [
+        "gluten",
+        "milk"
+      ]
     },
     {
       "id": "bocadillo-jamon-queso",
@@ -2994,7 +3175,11 @@
       "service_track": "bar",
       "price_status": "pending",
       "allergen_status": "pending",
-      "allergens_confirmed": []
+      "allergens_confirmed": [],
+      "allergens": [
+        "gluten",
+        "milk"
+      ]
     },
     {
       "id": "bocadillo-junior",
@@ -3020,7 +3205,12 @@
       "service_track": "bar",
       "price_status": "pending",
       "allergen_status": "pending",
-      "allergens_confirmed": []
+      "allergens_confirmed": [],
+      "allergens": [
+        "eggs",
+        "gluten",
+        "milk"
+      ]
     },
     {
       "id": "bocadillo-calamares",
@@ -3046,7 +3236,11 @@
       "service_track": "bar",
       "price_status": "pending",
       "allergen_status": "pending",
-      "allergens_confirmed": []
+      "allergens_confirmed": [],
+      "allergens": [
+        "gluten",
+        "molluscs"
+      ]
     },
     {
       "id": "bocadillo-trifasico",
@@ -3072,7 +3266,12 @@
       "service_track": "bar",
       "price_status": "pending",
       "allergen_status": "pending",
-      "allergens_confirmed": []
+      "allergens_confirmed": [],
+      "allergens": [
+        "eggs",
+        "gluten",
+        "milk"
+      ]
     }
   ],
   "wines": [
