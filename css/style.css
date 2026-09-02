@@ -9,7 +9,6 @@
 
 :root {
   --cream: #faf7ef;
-  --clay: #f2e4dc;
   --ink: #1c1a17;
   --muted: #686158;
   --cobalt: #1d4d85;
@@ -147,15 +146,33 @@ textarea:focus-visible {
 #loader.loader--error {
   position: static;
   min-height: 0;
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: space-between;
+  gap: 16px;
   padding: 18px;
   border-bottom: 1px solid var(--line-blue);
-  background: var(--clay);
+  background: var(--cream);
   font-family: Georgia, serif;
   font-size: 1rem;
 }
 
-.lang-bar {
-  display: none;
+.loader-retry {
+  min-height: 44px;
+  padding: 8px 18px;
+  border: 1px solid var(--cobalt);
+  border-radius: 2px;
+  background: transparent;
+  color: var(--cobalt);
+  font-family: Georgia, 'Times New Roman', serif;
+  font-weight: 700;
+  cursor: pointer;
+}
+
+.loader-retry:hover {
+  background: var(--cobalt);
+  color: white;
 }
 
 .lang-selector,
@@ -217,7 +234,7 @@ textarea:focus-visible {
 .home-card {
   border: 1px solid var(--line-blue);
   border-radius: 2px;
-  background: var(--clay);
+  background: var(--cream);
 }
 
 .aviso {
@@ -1162,6 +1179,19 @@ textarea:focus-visible {
 
   .mobile-service-cta {
     display: grid;
+  }
+
+  #home-mobile-cta {
+    opacity: 0;
+    visibility: hidden;
+    pointer-events: none;
+    transition: opacity 160ms ease, visibility 0s linear 160ms;
+  }
+
+  #home-mobile-cta.is-visible {
+    opacity: 1;
+    visibility: visible;
+    transition: opacity 160ms ease, visibility 0s linear;
   }
 
   .site-header {
